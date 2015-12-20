@@ -1,29 +1,15 @@
-﻿namespace WellFired.Guacamole
+﻿using WellFired.Guacamole;
+
+namespace WellFired.Guacamole
 {
 	public interface IApplication 
 	{
-		ViewBase MainContent
+		IWindow MainWindow 
 		{
 			get;
 			set;
 		}
 
-		UIRect Rect
-		{
-			get;
-			set;
-		}
-
-		UISize MinSize
-		{
-			get;
-			set;
-		}
-
-		UISize MaxSize
-		{
-			get;
-			set;
-		}
+		void Launch();
 	}
 }
