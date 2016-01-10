@@ -4,12 +4,14 @@ namespace WellFired.Guacamole
 {
 	public class Window : ViewBase
 	{
-		public void Layout()
+		private UIRect absolutePosition;
+		
+		public override void Layout(UIRect rect)
 		{
-			
+			base.Layout (rect);
 		}
 
-		public void Render()
+		public override void Render()
 		{
 
 		}

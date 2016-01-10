@@ -5,7 +5,6 @@
 		Window MainContent
 		{
 			get;
-			set;
 		}
 
 		string Title 
@@ -31,5 +30,7 @@
 			get;
 			set;
 		}
+
+		void Launch(IInitializationContext initializationContext);
 	}
 }

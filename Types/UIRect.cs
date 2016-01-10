@@ -1,6 +1,8 @@
-﻿namespace WellFired.Guacamole
+﻿using System;
+
+namespace WellFired.Guacamole
 {
-	public class UIRect
+	public class UIRect : Object
 	{
 		private int x;
 		private int y;
@@ -85,6 +87,31 @@
 		{
 			Location = location;
 			Size = size;
+		}
+
+		public override bool Equals(object obj)
+		{
+			var compareTo = obj as UIRect;
+			if (compareTo.X == X && compareTo.Y == Y && compareTo.Width == Width && compareTo.Height == Height)
+				return true;
+
+			return false;
+		}
+
+		public static bool operator==(UIRect a, UIRect b)
+		{
+			if(Object.ReferenceEquals(a, b))
+				return true;
+
+			if(((object)a == null) || ((object)b == null))
+				return false;
+
+			return a.Equals(b);
+		}
+
+		public static bool operator!=(UIRect a, UIRect b)
+		{
+			return !(a == b);
 		}
 	}
 }
