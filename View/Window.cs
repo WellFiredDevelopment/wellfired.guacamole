@@ -9,11 +9,17 @@ namespace WellFired.Guacamole
 		public override void Layout(UIRect rect)
 		{
 			absolutePosition = rect;
+
+			foreach(var child in Children)
+				child.Layout(parentRect : absolutePosition);
 		}
 
 		public override void Render()
 		{
 			NativeRenderer.Render(absolutePosition);
+
+			foreach(var child in Children)
+				child.Render();
 		}
 	}
 }

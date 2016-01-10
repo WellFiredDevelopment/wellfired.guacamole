@@ -89,13 +89,18 @@ namespace WellFired.Guacamole
 			Size = size;
 		}
 
-		public bool Equals(object obj)
+		public override bool Equals(object obj)
 		{
 			var compareTo = (UIRect)obj;
 			if (compareTo.X == X && compareTo.Y == Y && compareTo.Width == Width && compareTo.Height == Height)
 				return true;
 
 			return false;
+		}
+
+		public override int GetHashCode()
+		{
+			return X ^ Y ^ Width ^ Height;
 		}
 
 		public static bool operator==(UIRect a, UIRect b)

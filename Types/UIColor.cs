@@ -26,6 +26,11 @@ namespace WellFired.Guacamole
 			return false;
 		}
 
+		public override int GetHashCode()
+		{
+			return (int)(R * 255.0f) ^ (int)(G * 255.0f) ^ (int)(B * 255.0f);
+		}
+
 		public static bool operator==(UIColor a, UIColor b)
 		{
 			if(Object.ReferenceEquals(a, b))

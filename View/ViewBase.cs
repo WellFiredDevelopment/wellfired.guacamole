@@ -49,14 +49,16 @@ namespace WellFired.Guacamole
 			Children = new List<ViewBase>();
 		}
 
-		public virtual void Layout(UIRect rect)
+		public virtual void Layout(UIRect parentRect)
 		{
-			
+			foreach(var child in Children)
+				child.Layout(parentRect : parentRect);	
 		}
 
 		public virtual void Render()
 		{
-			
+			foreach(var child in Children)
+				child.Render();
 		}
 	}
 }

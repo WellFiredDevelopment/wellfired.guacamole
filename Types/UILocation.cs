@@ -17,13 +17,18 @@ namespace WellFired.Guacamole
 			Y = y;
 		}
 	
-		public bool Equals(object obj)
+		public override bool Equals(object obj)
 		{
 			var compareTo = (UILocation)obj;
 			if (compareTo.X == X && compareTo.Y == Y)
 				return true;
 	
 			return false;
+		}
+
+		public override int GetHashCode()
+		{
+			return X ^ Y;
 		}
 
 		public static bool operator==(UILocation a, UILocation b)

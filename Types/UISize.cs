@@ -21,13 +21,18 @@ namespace WellFired.Guacamole
 			Height = height;
 		}
 	
-		public bool Equals(object obj)
+		public override bool Equals(object obj)
 		{
 			var compareTo = (UISize)obj;
 			if (compareTo.Width == Width && compareTo.Height == Height)
 				return true;
 	
 			return false;
+		}
+
+		public override int GetHashCode()
+		{
+			return Width ^ Height;
 		}
 
 		public static bool operator==(UISize a, UISize b)
