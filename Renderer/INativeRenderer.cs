@@ -9,5 +9,7 @@ namespace WellFired.Guacamole
 			get;
 			set;
 		}
+
+		void Render(UIRect renderRect);
 	}
 }

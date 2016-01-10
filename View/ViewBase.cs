@@ -30,7 +30,7 @@ namespace WellFired.Guacamole
 			set;
 		}
 
-		private INativeRenderer NativeRenderer
+		protected INativeRenderer NativeRenderer
 		{
 			get 
 			{

@@ -2,10 +2,14 @@
 
 namespace WellFired.Guacamole
 {
-	public class UILocation : Object
+	public struct UILocation
 	{
 		public int X { get; set; }
 		public int Y { get; set; }
+
+		private static UILocation min = new UILocation(0, 0);
+
+		public static UILocation Min { get { return min; } }
 	
 		public UILocation(int x, int y)
 		{
@@ -13,9 +17,9 @@ namespace WellFired.Guacamole
 			Y = y;
 		}
 	
-		public override bool Equals(object obj)
+		public bool Equals(object obj)
 		{
-			var compareTo = obj as UILocation;
+			var compareTo = (UILocation)obj;
 			if (compareTo.X == X && compareTo.Y == Y)
 				return true;
 	

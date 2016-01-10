@@ -2,7 +2,7 @@
 
 namespace WellFired.Guacamole
 {
-	public class UIRect : Object
+	public struct UIRect
 	{
 		private int x;
 		private int y;
@@ -89,9 +89,9 @@ namespace WellFired.Guacamole
 			Size = size;
 		}
 
-		public override bool Equals(object obj)
+		public bool Equals(object obj)
 		{
-			var compareTo = obj as UIRect;
+			var compareTo = (UIRect)obj;
 			if (compareTo.X == X && compareTo.Y == Y && compareTo.Width == Width && compareTo.Height == Height)
 				return true;
 

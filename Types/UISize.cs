@@ -2,14 +2,18 @@
 
 namespace WellFired.Guacamole
 {
-	public class UISize : Object
+	public struct UISize
 	{
 		public int Width { get; set; }
 		public int Height { get; set; }
 	
-		public static UISize Min { get { return new UISize(0, 0); } }
-		public static UISize Max { get { return new UISize(int.MaxValue, int.MaxValue); } }
-		public static UISize One { get { return new UISize(1, 1); } }
+		private static UISize min = new UISize (0, 0);
+		private static UISize max = new UISize (int.MaxValue, int.MaxValue);
+		private static UISize one = new UISize (1, 1);
+
+		public static UISize Min { get { return min; } }
+		public static UISize Max { get { return max; } }
+		public static UISize One { get { return one; } }
 	
 		public UISize(int width, int height)
 		{
@@ -17,9 +21,9 @@ namespace WellFired.Guacamole
 			Height = height;
 		}
 	
-		public override bool Equals(object obj)
+		public bool Equals(object obj)
 		{
-			var compareTo = obj as UISize;
+			var compareTo = (UISize)obj;
 			if (compareTo.Width == Width && compareTo.Height == Height)
 				return true;
 	

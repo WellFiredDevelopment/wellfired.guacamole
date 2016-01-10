@@ -1,6 +1,6 @@
 ﻿namespace WellFired.Guacamole
 {
-	public partial class UIColor
+	public partial struct UIColor
 	{
 		public static UIColor MidnightBlue
 		{

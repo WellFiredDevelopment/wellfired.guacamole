@@ -19,25 +19,24 @@ namespace WellFired.Guacamole
 		{
 			if(TypeMap == null) 
 			{
-				TypeMap = new Dictionary<Type, ConstructorInfo> ();
-
 				var attributes = LaunchedAssembly
 					.GetCustomAttributes(typeof(CustomRendererAttribute), false)
 					.Cast<CustomRendererAttribute>();
 				
-				foreach (var attribute in attributes)
-					TypeMap [attribute.ControlType] = attribute.RendererType.GetConstructor (Type.EmptyTypes);
+				TypeMap = new Dictionary<Type, ConstructorInfo> ();
+				foreach(var attribute in attributes)
+					TypeMap[attribute.ControlType] = attribute.RendererType.GetConstructor(Type.EmptyTypes);
 			}
 
 			var checkType = controlType;
-			while (!TypeMap.ContainsKey (checkType)) {
+			while(!TypeMap.ContainsKey(checkType)) 
+			{
 				checkType = checkType.BaseType;
-
 				if (checkType == null)
 					break;
 			}
 
-			return TypeMap [checkType].Invoke (Type.EmptyTypes) as INativeRenderer;
+			return TypeMap[checkType].Invoke(Type.EmptyTypes) as INativeRenderer;
 		}
 	}
 }

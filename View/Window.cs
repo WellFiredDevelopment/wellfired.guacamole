@@ -8,12 +8,12 @@ namespace WellFired.Guacamole
 		
 		public override void Layout(UIRect rect)
 		{
-			base.Layout (rect);
+			absolutePosition = rect;
 		}
 
 		public override void Render()
 		{
-
+			NativeRenderer.Render(absolutePosition);
 		}
 	}
 }

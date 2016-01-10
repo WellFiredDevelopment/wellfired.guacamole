@@ -2,7 +2,7 @@
 
 namespace WellFired.Guacamole
 {
-	public partial class UIColor : Object
+	public partial struct UIColor
 	{
 		public float R { get; set; }
 		public float G { get; set; }
@@ -19,7 +19,7 @@ namespace WellFired.Guacamole
 
 		public override bool Equals(object obj)
 		{
-			var compareTo = obj as UIColor;
+			var compareTo = (UIColor)obj;
 			if (compareTo.R == R && compareTo.G == G && compareTo.B == B)
 				return true;
 
