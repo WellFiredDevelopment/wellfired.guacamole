@@ -1,33 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace WellFired.Guacamole
 {
 	public class ViewBase
 	{
 		private INativeRenderer nativeRenderer;
+		private bool invalidRectRequest = false;
+		private UIRect validRectRequest = new UIRect();
 
-		public IList<ViewBase> Children
-		{
-			get;
-			set;
-		}
+		public IList<ViewBase> Children { get; set; }
+		public LayoutOptions HorizontalLayout { get; set; }
+		public LayoutOptions VerticalLayout { get; set; }
+		public Padding Padding { get; set; }
+		public UIColor BackgroundColor { get; set; }
+		public UIRect FinalRenderedRect { get; set; }
 
-		public LayoutOptions HorizontalLayout 
+		public UIRect RectRequest
 		{
-			get;
-			set;
-		}
+			get 
+			{
+				if(!invalidRectRequest)
+					return validRectRequest;
 
-		public LayoutOptions VerticalLayout 
-		{
-			get;
-			set;
-		}
-
-		public UIColor BackgroundColor 
-		{
-			get;
-			set;
+				CalculateRect();
+				return validRectRequest;
+			}
 		}
 
 		protected INativeRenderer NativeRenderer
@@ -47,6 +45,7 @@ namespace WellFired.Guacamole
 		public ViewBase()
 		{
 			Children = new List<ViewBase>();
+			validRectRequest = UIRect.Min;
 		}
 
 		public virtual void Layout(UIRect parentRect)
@@ -59,6 +58,19 @@ namespace WellFired.Guacamole
 		{
 			foreach(var child in Children)
 				child.Render();
+		}
+
+		public void InvalidateRectRequest()
+		{
+			invalidRectRequest = true;
+			foreach(var child in Children) 
+				child.InvalidateRectRequest();
+		}
+
+		protected virtual UIRect CalculateRect()
+		{
+			invalidRectRequest = false;
+			return UIRect.Min;
 		}
 	}
 }

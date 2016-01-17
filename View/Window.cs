@@ -4,22 +4,20 @@ namespace WellFired.Guacamole
 {
 	public class Window : ViewBase
 	{
-		private UIRect absolutePosition;
+		public ViewBase Content { get; set; }
 		
 		public override void Layout(UIRect rect)
 		{
-			absolutePosition = rect;
+			Content.InvalidateRectRequest();
 
-			foreach(var child in Children)
-				child.Layout(parentRect : absolutePosition);
+			FinalRenderedRect = rect;
+			Content.Layout(parentRect : FinalRenderedRect);
 		}
 
 		public override void Render()
 		{
-			NativeRenderer.Render(absolutePosition);
-
-			foreach(var child in Children)
-				child.Render();
+			NativeRenderer.Render(renderRect : FinalRenderedRect);
+			Content.Render();
 		}
 	}
 }
