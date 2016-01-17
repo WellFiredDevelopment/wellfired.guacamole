@@ -11,6 +11,14 @@ namespace WellFired.Guacamole
 		public UILocation location;
 		public UISize size;
 
+		private static UIRect min = new UIRect (0, 0, 0, 0);
+		private static UIRect max = new UIRect (0, 0, int.MaxValue, int.MaxValue);
+		private static UIRect one = new UIRect (0, 0, 1, 1);
+
+		public static UIRect Min { get { return min; } }
+		public static UIRect Max { get { return max; } }
+		public static UIRect One { get { return one; } }
+
 		public int X 
 		{
 			get { return x; }
