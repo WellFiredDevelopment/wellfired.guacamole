@@ -2,7 +2,7 @@
 
 namespace WellFired.Guacamole
 {
-	[System.AttributeUsage(System.AttributeTargets.Assembly)]
+	[System.AttributeUsage(System.AttributeTargets.Assembly, AllowMultiple = true)]
 	public class CustomRendererAttribute : System.Attribute
 	{
 		public Type ControlType
