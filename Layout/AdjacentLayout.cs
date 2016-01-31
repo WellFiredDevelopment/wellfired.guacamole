@@ -28,8 +28,8 @@ namespace WellFired.Guacamole
 		{
 			base.Layout();
 
-			var x = 0;
-			var y = 0;
+			var x = Padding.Left;
+			var y = Padding.Top;
 			switch(Orientation) 
 			{
 			case OrientationOptions.Horizontal:
@@ -68,6 +68,17 @@ namespace WellFired.Guacamole
 					totalWidth = System.Math.Max(totalWidth, size.Width);
 					break;
 				}
+			}
+
+			// This is done seperately as a final step, since we could potentially have hundreds of elements in our layout
+			switch(Orientation) 
+			{
+			case OrientationOptions.Horizontal:
+				totalWidth -= Spacing;
+				break;
+			case OrientationOptions.Vertical:
+				totalHeight -= Spacing;
+				break;
 			}
 				
 			return new UIRect(0, 0, totalWidth, totalHeight);

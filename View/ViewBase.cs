@@ -8,11 +8,12 @@ namespace WellFired.Guacamole
 		private INativeRenderer nativeRenderer;
 		private bool invalidRectRequest = true;
 		private UIRect validRectRequest = new UIRect();
+		private UIRect finalRenderRect = new UIRect();
 
 		public IList<ViewBase> Children { get; set; }
 		public LayoutOptions HorizontalLayout { get; set; }
 		public LayoutOptions VerticalLayout { get; set; }
-		public Padding Padding { get; set; }
+		public UIPadding Padding { get; set; }
 		public UIColor BackgroundColor { get; set; }
 
 		public UIRect RectRequest
@@ -56,12 +57,17 @@ namespace WellFired.Guacamole
 				child.Layout();	
 		}
 
-		public virtual void Render()
+		public virtual void Render(UIRect parentRect)
 		{
-			NativeRenderer.Render(renderRect : RectRequest);
+			finalRenderRect.X = parentRect.X + RectRequest.X;
+			finalRenderRect.Y = parentRect.Y + RectRequest.Y;
+			finalRenderRect.Width = RectRequest.Width;
+			finalRenderRect.Height = RectRequest.Height;
+
+			NativeRenderer.Render(renderRect : finalRenderRect);
 
 			foreach(var child in Children)
-				child.Render();
+				child.Render(parentRect: finalRenderRect);
 		}
 
 		public void InvalidateRectRequest()
@@ -81,6 +87,7 @@ namespace WellFired.Guacamole
 			if(invalidRectRequest) 
 			{
 				validRectRequest = CalculateValidRectRequest();
+				validRectRequest += Padding;
 				invalidRectRequest = false;
 			}
 		}

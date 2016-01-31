@@ -15,10 +15,12 @@ namespace WellFired.Guacamole
 			Content.Layout();
 		}
 
-		public override void Render()
+		public override void Render(UIRect parentRect)
 		{
 			NativeRenderer.Render(renderRect : FinalRenderedRect);
-			Content.Render();
+
+			var relativeParentRect = new UIRect(0, 0, parentRect.Width, parentRect.Height);
+			Content.Render(parentRect: relativeParentRect);
 		}
 	}
 }
