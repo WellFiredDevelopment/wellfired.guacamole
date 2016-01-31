@@ -70,6 +70,17 @@ namespace WellFired.Guacamole
 				child.Render(parentRect: finalRenderRect);
 		}
 
+		public void AttemptToFullfillRequests(UIRect parentRect)
+		{
+			if (HorizontalLayout == LayoutOptions.Fill)
+				validRectRequest.Width = parentRect.Width;
+			if (VerticalLayout == LayoutOptions.Fill)
+				validRectRequest.Height = parentRect.Height;
+
+			foreach(var child in Children)
+				child.Render(parentRect: parentRect);
+		}
+
 		public void InvalidateRectRequest()
 		{
 			invalidRectRequest = true;
