@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WellFired.Guacamole
 {
@@ -70,15 +71,15 @@ namespace WellFired.Guacamole
 				child.Render(parentRect: finalRenderRect);
 		}
 
-		public void AttemptToFullfillRequests(UIRect parentRect)
+		public virtual void AttemptToFullfillRequests(UIRect availableSpace)
 		{
 			if (HorizontalLayout == LayoutOptions.Fill)
-				validRectRequest.Width = parentRect.Width;
+				validRectRequest.Width = availableSpace.Width;
 			if (VerticalLayout == LayoutOptions.Fill)
-				validRectRequest.Height = parentRect.Height;
+				validRectRequest.Height = availableSpace.Height;
 
 			foreach(var child in Children)
-				child.AttemptToFullfillRequests(parentRect: (parentRect - Padding));
+				child.AttemptToFullfillRequests(availableSpace: (availableSpace - Padding));
 		}
 
 		public void InvalidateRectRequest()
@@ -108,10 +109,16 @@ namespace WellFired.Guacamole
 			return UIRect.Min;
 		}
 
-		public void LayoutTo(int x, int y)
+		internal void LayoutTo(int x, int y)
 		{
 			validRectRequest.X = x;
 			validRectRequest.Y = y;
+		}
+
+		internal void ReAdjustTo(int width, int height)
+		{
+			validRectRequest.Width = width;
+			validRectRequest.Height = height;
 		}
 	}
 }
