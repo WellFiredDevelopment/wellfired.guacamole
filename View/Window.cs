@@ -4,14 +4,15 @@ namespace WellFired.Guacamole
 {
 	public class Window : ViewBase
 	{
+		private UIRect FinalRenderedRect { get; set; }
 		public ViewBase Content { get; set; }
 		
-		public override void Layout(UIRect rect)
+		public void Layout(UIRect rect)
 		{
-			Content.InvalidateRectRequest();
+			Content.CalculateRectRequest();
 
 			FinalRenderedRect = rect;
-			Content.Layout(parentRect : FinalRenderedRect);
+			Content.Layout();
 		}
 
 		public override void Render()

@@ -6,7 +6,7 @@ namespace WellFired.Guacamole
 	public class ViewBase
 	{
 		private INativeRenderer nativeRenderer;
-		private bool invalidRectRequest = false;
+		private bool invalidRectRequest = true;
 		private UIRect validRectRequest = new UIRect();
 
 		public IList<ViewBase> Children { get; set; }
@@ -14,16 +14,11 @@ namespace WellFired.Guacamole
 		public LayoutOptions VerticalLayout { get; set; }
 		public Padding Padding { get; set; }
 		public UIColor BackgroundColor { get; set; }
-		public UIRect FinalRenderedRect { get; set; }
 
 		public UIRect RectRequest
 		{
 			get 
 			{
-				if(!invalidRectRequest)
-					return validRectRequest;
-
-				CalculateRect();
 				return validRectRequest;
 			}
 		}
@@ -34,8 +29,15 @@ namespace WellFired.Guacamole
 			{
 				if (nativeRenderer == default(INativeRenderer)) 
 				{
-					nativeRenderer = NativeRendererHelper.CreateNativeRendererFor(this.GetType());
-					nativeRenderer.Control = this;
+					try
+					{
+						nativeRenderer = NativeRendererHelper.CreateNativeRendererFor(this.GetType());
+						nativeRenderer.Control = this;
+					}
+					catch(Exception) 
+					{
+						throw new NativeRendererCannotBeFound(forControl : this.GetType().ToString());
+					}
 				}
 
 				return nativeRenderer;
@@ -48,14 +50,16 @@ namespace WellFired.Guacamole
 			validRectRequest = UIRect.Min;
 		}
 
-		public virtual void Layout(UIRect parentRect)
+		public virtual void Layout()
 		{
 			foreach(var child in Children)
-				child.Layout(parentRect : parentRect);	
+				child.Layout();	
 		}
 
 		public virtual void Render()
 		{
+			NativeRenderer.Render(renderRect : RectRequest);
+
 			foreach(var child in Children)
 				child.Render();
 		}
@@ -67,10 +71,29 @@ namespace WellFired.Guacamole
 				child.InvalidateRectRequest();
 		}
 
-		protected virtual UIRect CalculateRect()
+		public void CalculateRectRequest()
 		{
-			invalidRectRequest = false;
+			// When calculating size, we want to recurse the whole structure, calculating the size of the Child
+			// components first of all.
+			foreach (var child in Children)
+				child.CalculateRectRequest();
+
+			if(invalidRectRequest) 
+			{
+				validRectRequest = CalculateValidRectRequest();
+				invalidRectRequest = false;
+			}
+		}
+
+		protected virtual UIRect CalculateValidRectRequest()
+		{
 			return UIRect.Min;
+		}
+
+		public void LayoutTo(int x, int y)
+		{
+			validRectRequest.X = x;
+			validRectRequest.Y = y;
 		}
 	}
 }
