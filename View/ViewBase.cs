@@ -78,7 +78,7 @@ namespace WellFired.Guacamole
 				validRectRequest.Height = parentRect.Height;
 
 			foreach(var child in Children)
-				child.Render(parentRect: parentRect);
+				child.AttemptToFullfillRequests(parentRect: parentRect);
 		}
 
 		public void InvalidateRectRequest()
