@@ -10,7 +10,7 @@ namespace WellFired.Guacamole
 		public void Layout(UIRect rect)
 		{
 			Content.CalculateRectRequest();
-			Content.AttemptToFullfillRequests(rect);
+			Content.AttemptToFullfillRequests(rect - Padding);
 
 			FinalRenderedRect = rect;
 			Content.Layout();

@@ -134,5 +134,13 @@ namespace WellFired.Guacamole
 				rect.Width + padding.Width, 
 				rect.Height + padding.Height);
 		}
+
+		public static UIRect operator-(UIRect rect, UIPadding padding)
+		{
+			return new UIRect(rect.X, 
+				rect.Y, 
+				rect.Width - padding.Width, 
+				rect.Height - padding.Height);
+		}
 	}
 }
