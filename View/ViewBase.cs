@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
+using System;
 
 namespace WellFired.Guacamole
 {
-	public class ViewBase
+	public class ViewBase : WellFired.Guacamole.Databinding.BindableObject
 	{
 		private INativeRenderer nativeRenderer;
 		private bool invalidRectRequest = true;
