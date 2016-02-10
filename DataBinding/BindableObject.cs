@@ -6,8 +6,13 @@ namespace WellFired.Guacamole.Databinding
 {
 	public class BindableObject
 	{
+		public static readonly BindableProperty BindingContextProperty = BindableProperty.Create<BindableObject, INotifyPropertyChanged>(
+			defaultValue: null,
+			bindingMode: BindingMode.OneWay,
+			getter: bindableObject => bindableObject.BindingContext
+		);
+		
 		private INotifyPropertyChanged bindingContext;
-
 		private Dictionary<string, WellFired.Guacamole.Databinding.BindableProperty> bindings = new Dictionary<string, WellFired.Guacamole.Databinding.BindableProperty>();
 		private Dictionary<WellFired.Guacamole.Databinding.BindableProperty, WellFired.Guacamole.Databinding.BindableContext> contexts = new Dictionary<WellFired.Guacamole.Databinding.BindableProperty, WellFired.Guacamole.Databinding.BindableContext>();
 
@@ -19,10 +24,21 @@ namespace WellFired.Guacamole.Databinding
 			}
 			set 
 			{
+				// Here we check for equality so we can avoid recursion.
+				if(bindingContext == value)
+					return;
+
 				if(bindingContext != null)
 					bindingContext.PropertyChanged -= PropertyChanged;
 				
 				bindingContext = value;
+				foreach(var bindingKVP in bindings) {
+					var bindableProperty = bindingKVP.Value;
+					contexts[bindableProperty].Object = bindingContext;
+					SetValue(bindableProperty, GetValue(bindableProperty));
+				}
+
+				PropertyChanged(this, new PropertyChangedEventArgs(BindingContextProperty.PropertyName));
 
 				bindingContext.PropertyChanged += PropertyChanged;
 			}
@@ -32,8 +48,13 @@ namespace WellFired.Guacamole.Databinding
 		{
 			if(bindings.ContainsKey(bindableProperty.PropertyName))
 				throw new BindingExistsException(forBinding: bindableProperty.PropertyName);
-
+			
 			bindings[bindableProperty.PropertyName] = bindableProperty;
+			var context = GetOrCreateBindableContext(bindableProperty);
+			context.Object = BindingContext;
+			context.TargetProperty = targetProperty;
+			var initialValue = context.GetInitialValue();
+			SetValue(bindableProperty, initialValue);
 		}
 
 		public object GetValue(WellFired.Guacamole.Databinding.BindableProperty bindableProperty)
@@ -69,13 +90,14 @@ namespace WellFired.Guacamole.Databinding
 			var bindablePropertyContext = new WellFired.Guacamole.Databinding.BindableContext {
 				Property = bindableProperty,
 				Value = bindableProperty.DefaultValue,
+				Object = bindingContext,
 			};
 
 			contexts[bindableProperty] = bindablePropertyContext;
 			return bindablePropertyContext;
 		}
 
-		public void PropertyChanged(object sender, PropertyChangedEventArgs e)
+		public virtual void PropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
 			if(!bindings.ContainsKey(e.PropertyName))
 				return;

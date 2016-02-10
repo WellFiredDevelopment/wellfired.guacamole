@@ -23,5 +23,13 @@ namespace WellFired.Guacamole
 			var relativeParentRect = new UIRect(0, 0, parentRect.Width, parentRect.Height);
 			Content.Render(parentRect: relativeParentRect);
 		}
+
+		public override void PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
+			base.PropertyChanged(sender, e);
+
+			if(e.PropertyName == BindingContextProperty.PropertyName)
+				Content.BindingContext = BindingContext;
+		}
 	}
 }

@@ -53,8 +53,14 @@ namespace WellFired.Guacamole
 
 		public virtual void Layout()
 		{
-			foreach(var child in Children)
-				child.Layout();	
+			foreach(var child in Children) 
+			{
+				// If something has set the binding context manually, we shouldn't override it. Otherwise, update it here.
+				if(child.BindingContext == null)
+					child.BindingContext = BindingContext;
+				
+				child.Layout();
+			}
 		}
 
 		public virtual void Render(UIRect parentRect)
@@ -118,6 +124,16 @@ namespace WellFired.Guacamole
 		{
 			validRectRequest.Width = width;
 			validRectRequest.Height = height;
+		}
+
+		public override void PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
+			base.PropertyChanged(sender, e);
+
+			if(e.PropertyName == BindingContextProperty.PropertyName) {
+				foreach(var child in Children)
+					child.BindingContext = BindingContext;
+			}
 		}
 	}
 }
