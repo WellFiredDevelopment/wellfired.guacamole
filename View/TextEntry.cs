@@ -10,10 +10,16 @@ namespace WellFired.Guacamole
 			getter: entry => entry.Text
 		);
 
+		public static readonly BindableProperty LabelProperty = BindableProperty.Create<TextEntry, string>(
+			defaultValue: string.Empty,
+			bindingMode: BindingMode.OneWay,
+			getter: entry => entry.Label
+		);
+
 		public string Label
 		{
-			get;
-			set;
+			get { return (string)GetValue(LabelProperty); }
+			set { SetValue(LabelProperty, value); }
 		}
 
 		public string Text
