@@ -21,6 +21,7 @@ namespace WellFired.Guacamole
 			NativeRenderer.Render(renderRect : FinalRenderedRect);
 
 			var relativeParentRect = new UIRect(0, 0, parentRect.Width, parentRect.Height);
+			relativeParentRect -= Padding;
 			Content.Render(parentRect: relativeParentRect);
 		}
 
