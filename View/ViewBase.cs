@@ -1,20 +1,27 @@
 ﻿using System.Collections.Generic;
 using System;
+using WellFired.Guacamole.Databinding;
 
 namespace WellFired.Guacamole
 {
-	public class ViewBase : WellFired.Guacamole.Databinding.BindableObject
+	public class ViewBase : BindableObject
 	{
 		private INativeRenderer nativeRenderer;
 		private bool invalidRectRequest = true;
-		private UIRect validRectRequest = new UIRect();
-		private UIRect finalRenderRect = new UIRect();
+		private UIRect validRectRequest;
+		private UIRect finalRenderRect;
 
 		public IList<ViewBase> Children { get; set; }
 		public LayoutOptions HorizontalLayout { get; set; }
 		public LayoutOptions VerticalLayout { get; set; }
 		public UIPadding Padding { get; set; }
 		public UIColor BackgroundColor { get; set; }
+
+		public static readonly BindableProperty BackgroundColorProperty = BindableProperty.Create<TextEntry, UIColor>(
+			defaultValue: UIColor.Aquamarine,
+			bindingMode: BindingMode.OneWay,
+			getter: entry => entry.BackgroundColor
+		);
 
 		public UIRect RectRequest
 		{
