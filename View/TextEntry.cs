@@ -10,12 +10,6 @@ namespace WellFired.Guacamole
 			getter: entry => entry.Text
 		);
 
-		public static readonly BindableProperty LabelProperty = BindableProperty.Create<TextEntry, string>(
-			defaultValue: string.Empty,
-			bindingMode: BindingMode.OneWay,
-			getter: entry => entry.Label
-		);
-
 		public static readonly BindableProperty TextColorProperty = BindableProperty.Create<TextEntry, UIColor>(
 			defaultValue: UIColor.Black,
 			bindingMode: BindingMode.OneWay,
@@ -27,12 +21,6 @@ namespace WellFired.Guacamole
 			bindingMode: BindingMode.OneWay,
 			getter: entry => entry.LabelColor
 		);
-
-		public string Label
-		{
-			get { return (string)GetValue(LabelProperty); }
-			set { SetValue(LabelProperty, value); }
-		}
 
 		public string Text
 		{
