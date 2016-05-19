@@ -91,12 +91,6 @@ namespace WellFired.Guacamole
 			this.size = new UISize(width, height);
 		}
 
-		public UIRect(UILocation location, UISize size)
-		{
-			Location = location;
-			Size = size;
-		}
-
 		public override bool Equals(object obj)
 		{
 			var compareTo = (UIRect)obj;
@@ -129,7 +123,8 @@ namespace WellFired.Guacamole
 
 		public static UIRect operator+(UIRect rect, UIPadding padding)
 		{
-			return new UIRect(rect.X, 
+			return new UIRect(
+				rect.X, 
 				rect.Y, 
 				rect.Width + padding.Width, 
 				rect.Height + padding.Height);
@@ -137,8 +132,9 @@ namespace WellFired.Guacamole
 
 		public static UIRect operator-(UIRect rect, UIPadding padding)
 		{
-			return new UIRect(rect.X, 
-				rect.Y, 
+			return new UIRect(
+				rect.X + padding.Left, 
+				rect.Y + padding.Top, 
 				rect.Width - padding.Width, 
 				rect.Height - padding.Height);
 		}
