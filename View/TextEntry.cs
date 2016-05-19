@@ -1,4 +1,5 @@
-﻿using WellFired.Guacamole.Databinding;
+﻿using UnityEngine;
+using WellFired.Guacamole.Databinding;
 
 namespace WellFired.Guacamole
 {
@@ -14,6 +15,18 @@ namespace WellFired.Guacamole
 			defaultValue: UIColor.Black,
 			bindingMode: BindingMode.OneWay,
 			getter: entry => entry.TextColor
+		);
+
+		public static readonly BindableProperty HorizontalTextAlignProperty = BindableProperty.Create<TextEntry, UITextAlign>(
+			defaultValue: UITextAlign.Start,
+			bindingMode: BindingMode.OneWay,
+			getter: entry => entry.HorizontalTextAlign
+		);
+
+		public static readonly BindableProperty VerticalTextAlignProperty = BindableProperty.Create<TextEntry, UITextAlign>(
+			defaultValue: UITextAlign.Start,
+			bindingMode: BindingMode.OneWay,
+			getter: entry => entry.VerticalTextAlign
 		);
 
 		public static readonly BindableProperty LabelColorProperty = BindableProperty.Create<TextEntry, UIColor>(
@@ -32,6 +45,18 @@ namespace WellFired.Guacamole
 		{
 			get { return (UIColor)GetValue(TextColorProperty); }
 			set { SetValue(TextColorProperty, value); }
+		}
+
+		public UITextAlign HorizontalTextAlign
+		{
+			get { return (UITextAlign)GetValue(HorizontalTextAlignProperty); }
+			set { SetValue(HorizontalTextAlignProperty, value); }
+		}
+
+		public UITextAlign VerticalTextAlign
+		{
+			get { return (UITextAlign)GetValue(VerticalTextAlignProperty); }
+			set { SetValue(VerticalTextAlignProperty, value); }
 		}
 
 		public UIColor LabelColor
