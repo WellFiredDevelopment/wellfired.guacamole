@@ -19,7 +19,7 @@ namespace WellFired.Guacamole
 
 		public static readonly BindableProperty BackgroundColorProperty = BindableProperty.Create<TextEntry, UIColor>(
 			defaultValue: UIColor.Aquamarine,
-			bindingMode: BindingMode.OneWay,
+			bindingMode: BindingMode.TwoWay,
 			getter: entry => entry.BackgroundColor
 		);
 

@@ -6,13 +6,13 @@ namespace WellFired.Guacamole
 	{
 		public static readonly BindableProperty NumberProperty = BindableProperty.Create<NumberEntry, float>(
 			defaultValue: 10.0f,
-			bindingMode: BindingMode.OneWay,
+			bindingMode: BindingMode.TwoWay,
 			getter: entry => entry.Number
 		);
 
 		public static readonly BindableProperty LabelProperty = BindableProperty.Create<NumberEntry, string>(
 			defaultValue: "Name",
-			bindingMode: BindingMode.OneWay,
+			bindingMode: BindingMode.TwoWay,
 			getter: entry => entry.Label
 		);
 

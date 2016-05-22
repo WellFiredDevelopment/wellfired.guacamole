@@ -7,31 +7,31 @@ namespace WellFired.Guacamole
 	{
 		public static readonly BindableProperty TextProperty = BindableProperty.Create<TextEntry, string>(
 			defaultValue: string.Empty,
-			bindingMode: BindingMode.OneWay,
+			bindingMode: BindingMode.TwoWay,
 			getter: entry => entry.Text
 		);
 
 		public static readonly BindableProperty TextColorProperty = BindableProperty.Create<TextEntry, UIColor>(
 			defaultValue: UIColor.Black,
-			bindingMode: BindingMode.OneWay,
+			bindingMode: BindingMode.TwoWay,
 			getter: entry => entry.TextColor
 		);
 
 		public static readonly BindableProperty HorizontalTextAlignProperty = BindableProperty.Create<TextEntry, UITextAlign>(
 			defaultValue: UITextAlign.Start,
-			bindingMode: BindingMode.OneWay,
+			bindingMode: BindingMode.TwoWay,
 			getter: entry => entry.HorizontalTextAlign
 		);
 
 		public static readonly BindableProperty VerticalTextAlignProperty = BindableProperty.Create<TextEntry, UITextAlign>(
 			defaultValue: UITextAlign.Start,
-			bindingMode: BindingMode.OneWay,
+			bindingMode: BindingMode.TwoWay,
 			getter: entry => entry.VerticalTextAlign
 		);
 
 		public static readonly BindableProperty LabelColorProperty = BindableProperty.Create<TextEntry, UIColor>(
 			defaultValue: UIColor.Black,
-			bindingMode: BindingMode.OneWay,
+			bindingMode: BindingMode.TwoWay,
 			getter: entry => entry.LabelColor
 		);
 
