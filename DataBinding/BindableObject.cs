@@ -32,8 +32,8 @@ namespace WellFired.Guacamole.Databinding
 					bindingContext.PropertyChanged -= PropertyChanged;
 				
 				bindingContext = value;
-				foreach(var bindingKVP in bindings) {
-					var bindableProperty = bindingKVP.Value;
+				foreach(var bindingKvp in bindings) {
+					var bindableProperty = bindingKvp.Value;
 					contexts[bindableProperty].Object = bindingContext;
 					SetValue(bindableProperty, GetValue(bindableProperty));
 				}
@@ -44,7 +44,7 @@ namespace WellFired.Guacamole.Databinding
 			}
 		}
 
-		public void Bind(WellFired.Guacamole.Databinding.BindableProperty bindableProperty, string targetProperty)
+		public void Bind(BindableProperty bindableProperty, string targetProperty, BindingMode bindingMode = BindingMode.OneWay)
 		{
 			if(bindings.ContainsKey(bindableProperty.PropertyName))
 				throw new BindingExistsException(forBinding: bindableProperty.PropertyName);
