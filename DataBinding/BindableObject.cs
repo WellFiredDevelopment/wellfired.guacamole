@@ -1,20 +1,16 @@
-﻿using System.ComponentModel;
-using System.Collections.Generic;
-using System;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace WellFired.Guacamole.Databinding
 {
 	public class BindableObject
 	{
-		public static readonly BindableProperty BindingContextProperty = BindableProperty.Create<BindableObject, INotifyPropertyChanged>(
-			defaultValue: null,
-			bindingMode: BindingMode.OneWay,
-			getter: bindableObject => bindableObject.BindingContext
+		public static readonly BindableProperty BindingContextProperty = BindableProperty.Create<BindableObject, INotifyPropertyChanged>(null, BindingMode.OneWay, bindableObject => bindableObject.BindingContext
 		);
 		
 		private INotifyPropertyChanged bindingContext;
-		private Dictionary<string, WellFired.Guacamole.Databinding.BindableProperty> bindings = new Dictionary<string, WellFired.Guacamole.Databinding.BindableProperty>();
-		private Dictionary<WellFired.Guacamole.Databinding.BindableProperty, WellFired.Guacamole.Databinding.BindableContext> contexts = new Dictionary<WellFired.Guacamole.Databinding.BindableProperty, WellFired.Guacamole.Databinding.BindableContext>();
+		private Dictionary<string, BindableProperty> bindings = new Dictionary<string, BindableProperty>();
+		private Dictionary<BindableProperty, BindableContext> contexts = new Dictionary<BindableProperty, BindableContext>();
 
 		public INotifyPropertyChanged BindingContext
 		{
@@ -47,8 +43,10 @@ namespace WellFired.Guacamole.Databinding
 		public void Bind(BindableProperty bindableProperty, string targetProperty, BindingMode bindingMode = BindingMode.OneWay)
 		{
 			if(bindings.ContainsKey(bindableProperty.PropertyName))
-				throw new BindingExistsException(forBinding: bindableProperty.PropertyName);
-			
+				throw new BindingExistsException(bindableProperty.PropertyName);
+
+			bindableProperty.BindingMode = bindingMode;
+
 			bindings[bindableProperty.PropertyName] = bindableProperty;
 			var context = GetOrCreateBindableContext(bindableProperty);
 			context.Object = BindingContext;
@@ -57,40 +55,41 @@ namespace WellFired.Guacamole.Databinding
 			SetValue(bindableProperty, initialValue);
 		}
 
-		public object GetValue(WellFired.Guacamole.Databinding.BindableProperty bindableProperty)
+		public object GetValue(BindableProperty bindableProperty)
 		{
 			return GetOrCreateBindableContext(bindableProperty).Value;
 		}
 
-		public void SetValue(WellFired.Guacamole.Databinding.BindableProperty bindableProperty, object value)
+		public void SetValue(BindableProperty bindableProperty, object value)
 		{
 			GetOrCreateBindableContext(bindableProperty).Value = value;
 		}
 
-		private WellFired.Guacamole.Databinding.BindableContext GetOrCreateBindableContext(WellFired.Guacamole.Databinding.BindableProperty bindableProperty)
+		private BindableContext GetOrCreateBindableContext(BindableProperty bindableProperty)
 		{
 			var bindablePropertyContext = GetContext(bindableProperty);
-			if(bindablePropertyContext == null) {
+			if(bindablePropertyContext == null)
 				bindablePropertyContext = CreateAndAddContext(bindableProperty);
-			}
 			return bindablePropertyContext;
 		}
 
-		private WellFired.Guacamole.Databinding.BindableContext GetContext(WellFired.Guacamole.Databinding.BindableProperty bindableProperty)
+		private BindableContext GetContext(BindableProperty bindableProperty)
 		{
 			try
 			{ return contexts[bindableProperty]; }
-			catch 
-			{}
+			catch
+			{
+				// ignored
+			}
 			return null;
 		}
 
-		private WellFired.Guacamole.Databinding.BindableContext CreateAndAddContext(WellFired.Guacamole.Databinding.BindableProperty bindableProperty)
+		private BindableContext CreateAndAddContext(BindableProperty bindableProperty)
 		{
-			var bindablePropertyContext = new WellFired.Guacamole.Databinding.BindableContext {
+			var bindablePropertyContext = new BindableContext {
 				Property = bindableProperty,
 				Value = bindableProperty.DefaultValue,
-				Object = bindingContext,
+				Object = bindingContext
 			};
 
 			contexts[bindableProperty] = bindablePropertyContext;
