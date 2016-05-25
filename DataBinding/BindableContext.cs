@@ -27,10 +27,10 @@ namespace WellFired.Guacamole.Databinding
 		{
 			set
 			{
-				if (this.value == value)
+				if (Equals(this.value, value))
 					return;
 
-				this.value = value;
+				this.value = BindableContextConverter.From(value, Property);
 
 				switch (Property.BindingMode)
 				{
@@ -76,10 +76,21 @@ namespace WellFired.Guacamole.Databinding
 
 		public object GetValue()
 		{
-			if (PropertyGetMethod != null)
-				return PropertyGetMethod.Invoke(bindableObject, null);
+			return PropertyGetMethod != null ? PropertyGetMethod.Invoke(bindableObject, null) : null;
+		}
+	}
 
-			return null;
+	public static class BindableContextConverter
+	{
+		public static object From(object value, BindableProperty property)
+		{
+			if(property.PropertyType == typeof(string))
+				return value.ToString();
+
+			if(value.GetType() == property.PropertyType)
+				return value;
+
+			throw new SystemException(string.Format("Cannot convert {0} to {1}", value, property.PropertyType));
 		}
 	}
 }

@@ -35,17 +35,17 @@ namespace WellFired.Guacamole
 		{
 			get 
 			{
-				if (nativeRenderer == default(INativeRenderer)) 
+				if (nativeRenderer != default(INativeRenderer))
+					return nativeRenderer;
+
+				try
 				{
-					try
-					{
-						nativeRenderer = NativeRendererHelper.CreateNativeRendererFor(this.GetType());
-						nativeRenderer.Control = this;
-					}
-					catch(Exception) 
-					{
-						throw new NativeRendererCannotBeFound(forControl : this.GetType().ToString());
-					}
+					nativeRenderer = NativeRendererHelper.CreateNativeRendererFor(GetType());
+					nativeRenderer.Control = this;
+				}
+				catch(Exception) 
+				{
+					throw new NativeRendererCannotBeFound(forControl : GetType().ToString());
 				}
 
 				return nativeRenderer;
@@ -133,9 +133,9 @@ namespace WellFired.Guacamole
 			validRectRequest.Height = height;
 		}
 
-		public override void PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		public override void OnPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
-			base.PropertyChanged(sender, e);
+			base.OnPropertyChanged(sender, e);
 
 			if(e.PropertyName == BindingContextProperty.PropertyName) {
 				foreach(var child in Children)

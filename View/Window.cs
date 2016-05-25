@@ -25,9 +25,9 @@ namespace WellFired.Guacamole
 			Content.Render(parentRect: relativeParentRect);
 		}
 
-		public override void PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		public override void OnPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
-			base.PropertyChanged(sender, e);
+			base.OnPropertyChanged(sender, e);
 
 			if(e.PropertyName == BindingContextProperty.PropertyName)
 				Content.BindingContext = BindingContext;

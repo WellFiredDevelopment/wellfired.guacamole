@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace WellFired.Guacamole.Databinding
 {
-	public class BindableObject
+	public class BindableObject : INotifyPropertyChanged
 	{
 		public static readonly BindableProperty BindingContextProperty = BindableProperty.Create<BindableObject, INotifyPropertyChanged>(null, BindingMode.OneWay, bindableObject => bindableObject.BindingContext
 		);
@@ -26,7 +26,7 @@ namespace WellFired.Guacamole.Databinding
 					return;
 
 				if(bindingContext != null)
-					bindingContext.PropertyChanged -= PropertyChanged;
+					bindingContext.PropertyChanged -= OnPropertyChanged;
 				
 				bindingContext = value;
 				foreach(var bindingKvp in bindings) {
@@ -35,9 +35,9 @@ namespace WellFired.Guacamole.Databinding
 					SetValue(bindableProperty, GetValue(bindableProperty));
 				}
 
-				PropertyChanged(this, new PropertyChangedEventArgs(BindingContextProperty.PropertyName));
+				OnPropertyChanged(this, new PropertyChangedEventArgs(BindingContextProperty.PropertyName));
 
-				bindingContext.PropertyChanged += PropertyChanged;
+				bindingContext.PropertyChanged += OnPropertyChanged;
 			}
 		}
 
@@ -64,7 +64,15 @@ namespace WellFired.Guacamole.Databinding
 
 		public void SetValue(BindableProperty bindableProperty, object value)
 		{
+			var previous = GetOrCreateBindableContext(bindableProperty).Value;
+
+			if(Equals(previous, value))
+				return;
+
 			GetOrCreateBindableContext(bindableProperty).Value = value;
+
+			if(PropertyChanged != null)
+				PropertyChanged(this, new PropertyChangedEventArgs(bindableProperty.PropertyName));
 		}
 
 		private BindableContext GetOrCreateBindableContext(BindableProperty bindableProperty)
@@ -98,7 +106,7 @@ namespace WellFired.Guacamole.Databinding
 			return bindablePropertyContext;
 		}
 
-		public virtual void PropertyChanged(object sender, PropertyChangedEventArgs e)
+		public virtual void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
 			if(!targetToContexts.ContainsKey(e.PropertyName))
 				return;
@@ -107,5 +115,7 @@ namespace WellFired.Guacamole.Databinding
 			var newValue = context.GetValue();
 			SetValue(context.Property, newValue);
 		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
 	}
 }
