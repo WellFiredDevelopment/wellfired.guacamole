@@ -11,6 +11,7 @@ namespace WellFired.Guacamole.Databinding
 		private INotifyPropertyChanged bindingContext;
 		private Dictionary<string, BindableProperty> bindings = new Dictionary<string, BindableProperty>();
 		private Dictionary<BindableProperty, BindableContext> contexts = new Dictionary<BindableProperty, BindableContext>();
+		private Dictionary<string, BindableContext> targetToContexts = new Dictionary<string, BindableContext>();
 
 		public INotifyPropertyChanged BindingContext
 		{
@@ -51,7 +52,8 @@ namespace WellFired.Guacamole.Databinding
 			var context = GetOrCreateBindableContext(bindableProperty);
 			context.Object = BindingContext;
 			context.TargetProperty = targetProperty;
-			var initialValue = context.GetInitialValue();
+			targetToContexts[targetProperty] = context;
+			var initialValue = context.GetValue();
 			SetValue(bindableProperty, initialValue);
 		}
 
@@ -98,12 +100,12 @@ namespace WellFired.Guacamole.Databinding
 
 		public virtual void PropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
-			if(!bindings.ContainsKey(e.PropertyName))
+			if(!targetToContexts.ContainsKey(e.PropertyName))
 				return;
 
-			var binding = bindings[e.PropertyName];
-			var newValue = GetValue(binding);
-			SetValue(binding, newValue);
+			var context = targetToContexts[e.PropertyName];
+			var newValue = context.GetValue();
+			SetValue(context.Property, newValue);
 		}
 	}
 }

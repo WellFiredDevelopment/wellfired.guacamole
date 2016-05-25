@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Reflection;
 
 namespace WellFired.Guacamole.Databinding
@@ -24,23 +25,33 @@ namespace WellFired.Guacamole.Databinding
 
 		public object Value
 		{
-			set 
+			set
 			{
+				if (this.value == value)
+					return;
+
 				this.value = value;
 
-				if(PropertySetMethod != null)
-					PropertySetMethod.Invoke(bindableObject, new [] { value });
+				switch (Property.BindingMode)
+				{
+					case BindingMode.OneWay:
+						return;
+					case BindingMode.TwoWay:
+						break;
+					default:
+						throw new ArgumentOutOfRangeException();
+				}
+
+				if (PropertySetMethod != null)
+					PropertySetMethod.Invoke(bindableObject, new[] {value});
 			}
-			get 
-			{
-				return this.value;
-			}
+			get { return this.value; }
 		}
 
 		public INotifyPropertyChanged Object
 		{
 			get { return bindableObject; }
-			set 
+			set
 			{
 				bindableObject = value;
 				ConfigureSet();
@@ -49,11 +60,11 @@ namespace WellFired.Guacamole.Databinding
 
 		private void ConfigureSet()
 		{
-			if(bindableObject == null || Property == null || TargetProperty == null) 
+			if (bindableObject == null || Property == null || TargetProperty == null)
 			{
 				PropertyInfo = null;
 				PropertySetMethod = null;
-			} 
+			}
 			else
 			{
 				var type = bindableObject.GetType();
@@ -63,9 +74,9 @@ namespace WellFired.Guacamole.Databinding
 			}
 		}
 
-		public object GetInitialValue()
+		public object GetValue()
 		{
-			if(PropertyGetMethod != null)
+			if (PropertyGetMethod != null)
 				return PropertyGetMethod.Invoke(bindableObject, null);
 
 			return null;
