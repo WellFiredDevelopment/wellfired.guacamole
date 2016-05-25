@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using WellFired.Guacamole.Databinding;
+﻿using WellFired.Guacamole.Databinding;
 
 namespace WellFired.Guacamole
 {
