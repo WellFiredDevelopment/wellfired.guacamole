@@ -26,5 +26,10 @@
 		{
 			get { return FromRGB(255, 255, 255); }
 		}
+
+		public static UIColor Clear
+		{
+			get { return FromRGBA(255, 255, 255, 0); }
+		}
 	}
 }
