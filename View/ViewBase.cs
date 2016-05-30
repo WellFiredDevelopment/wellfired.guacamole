@@ -40,7 +40,16 @@ namespace WellFired.Guacamole
 
 				try
 				{
-					nativeRenderer = NativeRendererHelper.CreateNativeRendererFor(GetType());
+					var newNativeRenderer = NativeRendererHelper.CreateNativeRendererFor(GetType());
+
+					if (nativeRenderer != null && newNativeRenderer != nativeRenderer)
+						PropertyChanged -= nativeRenderer.OnPropertyChanged;
+
+					nativeRenderer = newNativeRenderer;
+
+					if (nativeRenderer != null)
+						PropertyChanged += nativeRenderer.OnPropertyChanged;
+
 					nativeRenderer.Control = this;
 				}
 				catch(Exception) 

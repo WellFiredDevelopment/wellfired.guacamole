@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.ComponentModel;
 
 namespace WellFired.Guacamole
 {
@@ -11,5 +11,6 @@ namespace WellFired.Guacamole
 		}
 
 		void Render(UIRect renderRect);
+		void OnPropertyChanged(object sender, PropertyChangedEventArgs e);
 	}
 }
