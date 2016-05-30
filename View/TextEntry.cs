@@ -23,7 +23,7 @@ namespace WellFired.Guacamole
 		);
 
 		public static readonly BindableProperty VerticalTextAlignProperty = BindableProperty.Create<TextEntry, UITextAlign>(
-			defaultValue: UITextAlign.Start,
+			defaultValue: UITextAlign.Middle,
 			bindingMode: BindingMode.TwoWay,
 			getter: entry => entry.VerticalTextAlign
 		);
