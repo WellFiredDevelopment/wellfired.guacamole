@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using WellFired.Guacamole.Drawing.Shapes;
 
@@ -28,13 +29,18 @@ namespace WellFired.Guacamole.Drawing
 			_shapes.Add(new Line { StartPoint = startPoint, EndPoint = endPoint });
 		}
 
-		public UIColor[] Draw(int width, int height, UIColor color, UIColor outlineColor)
+		public UIColor[] Draw(int width, int height, UIColor backgroundColor, UIColor outlineColor)
 		{
 			var pixelData = new UIColor[width * height];
 			for (var i = 0; i < pixelData.Length; i++)
 				pixelData[i] = UIColor.Clear;
 
 			_shapes.ForEach(shape => shape.Calculate());
+
+			var localOutlineColor = outlineColor;
+
+			if(localOutlineColor == UIColor.Clear)
+				localOutlineColor = backgroundColor;
 
 			foreach(var point in Path)
 			{
@@ -56,12 +62,12 @@ namespace WellFired.Guacamole.Drawing
 				if (y >= height)
 					continue;
 
-				pixelData[width * (height - y - 1) + x] = outlineColor;
+				pixelData[width * (height - y - 1) + x] = localOutlineColor;
 			}
 
 			Action<Pixel, UIColor, UIColor> recursiveFlood = delegate {};
 			recursiveFlood = (pixel, targetColor, replacementColor) => {
-				if (targetColor == color)
+				if (targetColor == backgroundColor)
 					return;
 
 				var pixelColor = pixelData[width * (height - pixel.Y - 1) + pixel.X];
@@ -107,7 +113,7 @@ namespace WellFired.Guacamole.Drawing
 				Y = (int) (height*0.5)
 			};
 
-			recursiveFlood(initialPiece, UIColor.Clear, color);
+			recursiveFlood(initialPiece, UIColor.Clear, backgroundColor);
 
 			return pixelData;
 		}
