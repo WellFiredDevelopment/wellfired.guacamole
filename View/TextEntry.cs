@@ -28,12 +28,6 @@ namespace WellFired.Guacamole
 			getter: entry => entry.VerticalTextAlign
 		);
 
-		public static readonly BindableProperty LabelColorProperty = BindableProperty.Create<TextEntry, UIColor>(
-			defaultValue: UIColor.Black,
-			bindingMode: BindingMode.TwoWay,
-			getter: entry => entry.LabelColor
-		);
-
 		public string Text
 		{
 			get { return (string)GetValue(TextProperty); }
@@ -56,12 +50,6 @@ namespace WellFired.Guacamole
 		{
 			get { return (UITextAlign)GetValue(VerticalTextAlignProperty); }
 			set { SetValue(VerticalTextAlignProperty, value); }
-		}
-
-		public UIColor LabelColor
-		{
-			get { return (UIColor)GetValue(LabelColorProperty); }
-			set { SetValue(LabelColorProperty, value); }
 		}
 
 		protected override UIRect CalculateValidRectRequest()
