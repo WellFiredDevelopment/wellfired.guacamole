@@ -2,7 +2,7 @@
 {
 	public enum UITextAlign {
 		Start,
-		Midle,
+		Middle,
 		End
 	}
 }
