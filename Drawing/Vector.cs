@@ -119,16 +119,28 @@ namespace WellFired.Guacamole.Drawing
 
 		public void Normalize()
 		{
-			if (Math.Abs(Length) < 0.00001)
+			var length = Length;
+			if (Math.Abs(length) < 0.00001)
 				return;
 
-			X /= Length;
-			Y /= Length;
+			X /= length;
+			Y /= length;
+		}
+
+		public static Vector Normalize(Vector toEnd)
+		{
+			var length = toEnd.Length;
+			return Math.Abs(length) < 0.00001 ? Min : new Vector(toEnd.X / length, toEnd.Y /= length);
 		}
 
 		public void Negate()
 		{
-			this *= -1.0f;
+			this *= -1.0;
+		}
+
+		public static double Distance(Vector startPoint, Vector endPoint)
+		{
+			return (endPoint - startPoint).Length;
 		}
 	}
 }
