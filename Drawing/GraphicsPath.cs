@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using WellFired.Guacamole.Drawing.Shapes;
 
 namespace WellFired.Guacamole.Drawing
@@ -73,14 +71,55 @@ namespace WellFired.Guacamole.Drawing
 				pixelData[width * (height - y - 1) + x] = color;
 			}
 
-			Action<Pixel> recursiveFlood = pixel => {
-				if (pixel.Color == color)
+			Action<Pixel, UIColor, UIColor> recursiveFlood = delegate {};
+			recursiveFlood = (pixel, targetColor, replacementColor) => {
+				if (targetColor == color)
 					return;
+
+				var pixelColor = pixelData[width * (height - pixel.Y - 1) + pixel.X];
+				if (pixelColor != targetColor)
+					return;
+
+				if(pixel.X < 0 || pixel.Y < 0 || pixel.X >= width || pixel.Y >= height)
+					return;
+				
+				pixelData[width * (height - pixel.Y - 1) + pixel.X] = replacementColor;
+
+				var northPixel = new Pixel
+				{
+					X = pixel.X,
+					Y = pixel.Y + 1
+				};
+				var eastPixel = new Pixel
+				{
+					X = pixel.X + 1,
+					Y = pixel.Y
+				};
+				var southPixel = new Pixel
+				{
+					X = pixel.X,
+					Y = pixel.Y - 1
+				};
+				var westPixel = new Pixel
+				{
+					X = pixel.X - 1,
+					Y = pixel.Y
+				};
+				
+				recursiveFlood(northPixel, targetColor, replacementColor);
+				recursiveFlood(eastPixel, targetColor, replacementColor);
+				recursiveFlood(southPixel, targetColor, replacementColor);
+				recursiveFlood(westPixel, targetColor, replacementColor);
 			};
 			
 			// Perform a floodfill
-			var initialPiece = new Pixel((int)(width * 0.5), (int)(height * 0.5));
-			recursiveFlood(initialPiece);
+			var initialPiece = new Pixel
+			{
+				X = (int) (width*0.5),
+				Y = (int) (height*0.5)
+			};
+
+			recursiveFlood(initialPiece, UIColor.Clear, color);
 
 			return pixelData;
 		}
