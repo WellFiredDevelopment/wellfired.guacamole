@@ -10,10 +10,22 @@ namespace WellFired.Guacamole
 			getter: entry => entry.Number
 		);
 
-		public static readonly BindableProperty LabelProperty = BindableProperty.Create<NumberEntry, string>(
-			defaultValue: "Name",
+		public static readonly BindableProperty TextColorProperty = BindableProperty.Create<TextEntry, UIColor>(
+			defaultValue: UIColor.Black,
 			bindingMode: BindingMode.TwoWay,
-			getter: entry => entry.Label
+			getter: entry => entry.TextColor
+		);
+
+		public static readonly BindableProperty HorizontalTextAlignProperty = BindableProperty.Create<TextEntry, UITextAlign>(
+			defaultValue: UITextAlign.Start,
+			bindingMode: BindingMode.TwoWay,
+			getter: entry => entry.HorizontalTextAlign
+		);
+
+		public static readonly BindableProperty VerticalTextAlignProperty = BindableProperty.Create<TextEntry, UITextAlign>(
+			defaultValue: UITextAlign.Middle,
+			bindingMode: BindingMode.TwoWay,
+			getter: entry => entry.VerticalTextAlign
 		);
 
 		public float Number
@@ -22,15 +34,34 @@ namespace WellFired.Guacamole
 			set { SetValue(NumberProperty, value); }
 		}
 
-		public string Label
+		public UIColor TextColor
 		{
-			get { return (string)GetValue(LabelProperty); }
-			set { SetValue(LabelProperty, value); }
+			get { return (UIColor)GetValue(TextColorProperty); }
+			set { SetValue(TextColorProperty, value); }
+		}
+
+		public UITextAlign HorizontalTextAlign
+		{
+			get { return (UITextAlign)GetValue(HorizontalTextAlignProperty); }
+			set { SetValue(HorizontalTextAlignProperty, value); }
+		}
+
+		public UITextAlign VerticalTextAlign
+		{
+			get { return (UITextAlign)GetValue(VerticalTextAlignProperty); }
+			set { SetValue(VerticalTextAlignProperty, value); }
+		}
+
+		public NumberEntry()
+		{
+			BackgroundColor = UIColor.FromRGB(66, 66, 66);
+			OutlineColor = BackgroundColor;
+			TextColor = UIColor.White;
 		}
 
 		protected override UIRect CalculateValidRectRequest()
 		{
-			return new UIRect(0, 0, 250, 20);
+			return new UIRect(0, 0, 100, 20);
 		}
 	}
 }
