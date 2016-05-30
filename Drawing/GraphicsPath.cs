@@ -23,24 +23,12 @@ namespace WellFired.Guacamole.Drawing
 			});
 		}
 
-		public void Close()
+		public void AddLine(Vector startPoint, Vector endPoint)
 		{
-			for(var shapeIndex = _shapes.Count - 1; shapeIndex >= 0; shapeIndex--)
-			{
-				var shape = _shapes[shapeIndex];
-				if(shape is Line)
-					continue;
-
-				var prevShape = shapeIndex < 1 ? _shapes.Last() : _shapes[shapeIndex - 1];
-				
-				_shapes.Insert(shapeIndex, new Line {
-					StartPoint = shape.LastPoint(),
-					EndPoint = prevShape.FirstPoint()
-				});
-			}
+			_shapes.Add(new Line { StartPoint = startPoint, EndPoint = endPoint });
 		}
 
-		public UIColor[] Draw(int width, int height, UIColor color)
+		public UIColor[] Draw(int width, int height, UIColor color, UIColor outlineColor)
 		{
 			var pixelData = new UIColor[width * height];
 			for (var i = 0; i < pixelData.Length; i++)
@@ -68,7 +56,7 @@ namespace WellFired.Guacamole.Drawing
 				if (y >= height)
 					continue;
 
-				pixelData[width * (height - y - 1) + x] = color;
+				pixelData[width * (height - y - 1) + x] = outlineColor;
 			}
 
 			Action<Pixel, UIColor, UIColor> recursiveFlood = delegate {};
