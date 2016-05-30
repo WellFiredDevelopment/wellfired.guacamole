@@ -53,6 +53,14 @@ namespace WellFired.Guacamole.Drawing
 			}
 		}
 
+		public Vector Center
+		{
+			get
+			{
+				return new Vector(X + Width * 0.5f, Y + Height * 0.5f);
+			}
+		}
+
 		public Rect(double x, double y, double width, double height)
 		{
 			_x = x;
