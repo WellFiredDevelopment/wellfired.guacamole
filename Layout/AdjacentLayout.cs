@@ -19,6 +19,7 @@ namespace WellFired.Guacamole
 
 		public AdjacentLayout()
 		{
+			OutlineColor = UIColor.Clear;
 			Orientation = OrientationOptions.Vertical;
 			HorizontalLayout = LayoutOptions.Expand;
 			VerticalLayout = LayoutOptions.Expand;
