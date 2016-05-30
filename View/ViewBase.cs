@@ -15,20 +15,58 @@ namespace WellFired.Guacamole
 		public LayoutOptions HorizontalLayout { get; set; }
 		public LayoutOptions VerticalLayout { get; set; }
 		public UIPadding Padding { get; set; }
-		public UIColor BackgroundColor { get; set; }
 
-		public static readonly BindableProperty BackgroundColorProperty = BindableProperty.Create<TextEntry, UIColor>(
-			defaultValue: UIColor.Aquamarine,
+		public static readonly BindableProperty BackgroundColorProperty = BindableProperty.Create<ViewBase, UIColor>(
+			defaultValue: UIColor.White,
 			bindingMode: BindingMode.TwoWay,
-			getter: entry => entry.BackgroundColor
+			getter: view => view.BackgroundColor
 		);
+
+		public static readonly BindableProperty OutlineColorProperty = BindableProperty.Create<ViewBase, UIColor>(
+			defaultValue: UIColor.Black,
+			bindingMode: BindingMode.TwoWay,
+			getter: view => view.OutlineColor
+		);
+
+		public static readonly BindableProperty CornerRadiusProperty = BindableProperty.Create<TextEntry, double>(
+			defaultValue: 0.0,
+			bindingMode: BindingMode.TwoWay,
+			getter: entry => entry.CornerRadius
+		);
+
+		public static readonly BindableProperty CornerMaskProperty = BindableProperty.Create<TextEntry, CornerMask>(
+			defaultValue: CornerMask.All,
+			bindingMode: BindingMode.TwoWay,
+			getter: entry => entry.CornerMask
+		);
+
+		public UIColor BackgroundColor
+		{
+			get { return (UIColor)GetValue(BackgroundColorProperty); }
+			set { SetValue(BackgroundColorProperty, value); }
+		}
+
+		public UIColor OutlineColor
+		{
+			get { return (UIColor)GetValue(OutlineColorProperty); }
+			set { SetValue(OutlineColorProperty, value); }
+		}
+
+		public double CornerRadius
+		{
+			get { return (double)GetValue(CornerRadiusProperty); }
+			set { SetValue(CornerRadiusProperty, value); }
+		}
+
+		public CornerMask CornerMask
+		{
+			get { return (CornerMask)GetValue(CornerMaskProperty); }
+			set { SetValue(CornerMaskProperty, value); }
+		}
 
 		public UIRect RectRequest
 		{
-			get 
-			{
-				return validRectRequest;
-			}
+			get { return validRectRequest; }
 		}
 
 		protected INativeRenderer NativeRenderer
