@@ -6,17 +6,16 @@ namespace WellFired.Guacamole.Drawing
 	{
 		public int X;
 		public int Y;
-		public UIColor Color;
 
 		public override bool Equals(object obj)
 		{
 			var compareTo = (Pixel)obj;
-			return compareTo.X == X && compareTo.Y == Y && compareTo.Color == Color;
+			return compareTo.X == X && compareTo.Y == Y;
 		}
 
 		public override int GetHashCode()
 		{
-			return X ^ Y ^ Color.GetHashCode();
+			return X ^ Y;
 		}
 
 		public static bool operator ==(Pixel a, Pixel b)
