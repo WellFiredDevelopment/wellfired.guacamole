@@ -22,8 +22,20 @@ namespace WellFired.Guacamole
 			getter: view => view.BackgroundColor
 		);
 
+		public static readonly BindableProperty HoverBackgroundColorProperty = BindableProperty.Create<ViewBase, UIColor>(
+			defaultValue: default(UIColor),
+			bindingMode: BindingMode.TwoWay,
+			getter: view => view.HoverBackgroundColor
+		);
+
+		public static readonly BindableProperty ActiveBackgroundColorProperty = BindableProperty.Create<ViewBase, UIColor>(
+			defaultValue: default(UIColor),
+			bindingMode: BindingMode.TwoWay,
+			getter: view => view.ActiveBackgroundColor
+		);
+
 		public static readonly BindableProperty OutlineColorProperty = BindableProperty.Create<ViewBase, UIColor>(
-			defaultValue: UIColor.Black,
+			defaultValue: default(UIColor),
 			bindingMode: BindingMode.TwoWay,
 			getter: view => view.OutlineColor
 		);
@@ -44,6 +56,18 @@ namespace WellFired.Guacamole
 		{
 			get { return (UIColor)GetValue(BackgroundColorProperty); }
 			set { SetValue(BackgroundColorProperty, value); }
+		}
+
+		public UIColor HoverBackgroundColor
+		{
+			get { return (UIColor)GetValue(HoverBackgroundColorProperty); }
+			set { SetValue(HoverBackgroundColorProperty, value); }
+		}
+
+		public UIColor ActiveBackgroundColor
+		{
+			get { return (UIColor)GetValue(ActiveBackgroundColorProperty); }
+			set { SetValue(ActiveBackgroundColorProperty, value); }
 		}
 
 		public UIColor OutlineColor
