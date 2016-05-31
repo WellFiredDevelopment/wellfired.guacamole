@@ -55,6 +55,8 @@ namespace WellFired.Guacamole
 		public Button()
 		{
 			BackgroundColor = UIColor.FromRGB(125, 125, 125);
+			HoverBackgroundColor = UIColor.FromRGB(160, 160, 160);
+			ActiveBackgroundColor = UIColor.FromRGB(64, 124, 191);
 			OutlineColor = UIColor.FromRGB(125, 125, 125);
 			TextColor = UIColor.White;
 			CornerRadius = 8.0;
