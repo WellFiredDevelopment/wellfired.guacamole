@@ -1,0 +1,96 @@
+﻿using System;
+using System.ComponentModel;
+using System.Reflection;
+
+namespace WellFired.Guacamole.Databinding
+{
+	public class BindableContext
+	{
+		public BindableProperty Property;
+		private PropertyInfo _propertyInfo;
+		private MethodInfo _propertySetMethod;
+		private MethodInfo _propertyGetMethod;
+		private INotifyPropertyChanged _bindableObject;
+		private object _value;
+		private string _targetProperty;
+
+		public string TargetProperty 
+		{ 
+			get { return _targetProperty; }
+			set {
+				_targetProperty = value;
+				ConfigureSet();
+			}
+		}
+
+		public object Value
+		{
+			set
+			{
+				if (Equals(this._value, value))
+					return;
+
+				_value = BindableContextConverter.From(value, Property);
+
+				switch (Property.BindingMode)
+				{
+					case BindingMode.OneWay:
+						return;
+					case BindingMode.TwoWay:
+						break;
+					default:
+						throw new ArgumentOutOfRangeException();
+				}
+
+				if (_propertySetMethod != null)
+					_propertySetMethod.Invoke(_bindableObject, new[] {value});
+			}
+			get { return _value; }
+		}
+
+		public INotifyPropertyChanged Object
+		{
+			get { return _bindableObject; }
+			set
+			{
+				_bindableObject = value;
+				ConfigureSet();
+			}
+		}
+
+		private void ConfigureSet()
+		{
+			if (_bindableObject == null || Property == null || TargetProperty == null)
+			{
+				_propertyInfo = null;
+				_propertySetMethod = null;
+			}
+			else
+			{
+				var type = _bindableObject.GetType();
+				_propertyInfo = type.GetProperty(TargetProperty, BindingFlags.Public | BindingFlags.Instance);
+				_propertySetMethod = _propertyInfo.GetSetMethod();
+				_propertyGetMethod = _propertyInfo.GetGetMethod();
+			}
+		}
+
+		public object GetValue()
+		{
+			return _propertyGetMethod != null ? _propertyGetMethod.Invoke(_bindableObject, null) : null;
+		}
+	}
+
+	public static class BindableContextConverter
+	{
+		public static object From(object value, BindableProperty property)
+		{
+			if(property.PropertyType == typeof(string))
+				return value.ToString();
+
+			if(value.GetType() == property.PropertyType)
+				return value;
+
+			throw new SystemException(string.Format("Cannot convert {0} to {1}", value, property.PropertyType));
+		}
+	}
+}
