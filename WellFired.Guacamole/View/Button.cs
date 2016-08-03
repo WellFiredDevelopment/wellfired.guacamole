@@ -72,10 +72,5 @@ namespace WellFired.Guacamole.View
             HorizontalTextAlign = UITextAlign.Middle;
             VerticalTextAlign = UITextAlign.Middle;
         }
-
-        protected override UIRect CalculateValidRectRequest()
-        {
-            return new UIRect(0, 0, 100, 20);
-        }
     }
 }

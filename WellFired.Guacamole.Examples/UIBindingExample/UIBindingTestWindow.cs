@@ -11,13 +11,9 @@ namespace WellFired.Guacamole.Examples.UIBindingExample
         {
             Padding = new UIPadding(5);
 
-            var destinationElement = new TextEntry {
-                BackgroundColor = UIColor.White,
-                OutlineColor = UIColor.Black
-            };
+	        var destinationElement = new TextEntry();
 
             var sourceElement = new Slider {
-                BackgroundColor = UIColor.White,
                 MinValue = 0,
                 MaxValue = 32
             };

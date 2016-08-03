@@ -10,7 +10,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 {
 	public class WindowRenderer : BaseRenderer
 	{
-		public override void Render(UIRect renderRect)
+	    public override void Render(UIRect renderRect)
 		{
 			EditorGUI.DrawRect(renderRect.ToUnityRect(), Control.BackgroundColor.ToUnityColor());
 		}

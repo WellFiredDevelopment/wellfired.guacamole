@@ -10,7 +10,6 @@ namespace WellFired.Guacamole.Examples.ButtonExample
             Padding = new UIPadding(5);
 
             Content = new Button {
-                BackgroundColor = UIColor.White,
                 Text = "Press Me Please."
             };
         }

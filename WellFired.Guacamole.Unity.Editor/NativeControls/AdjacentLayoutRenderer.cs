@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using WellFired.Guacamole.Attributes;
 using WellFired.Guacamole.Layout;
 using WellFired.Guacamole.Types;
@@ -13,7 +14,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 	{
 		private GUIStyle Style { get; set; }
 
-		public override void Render(UIRect renderRect)
+        public override void Render(UIRect renderRect)
 		{
 			base.Render(renderRect);
 

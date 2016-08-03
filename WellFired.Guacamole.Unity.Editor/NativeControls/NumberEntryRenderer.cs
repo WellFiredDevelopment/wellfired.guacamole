@@ -1,5 +1,8 @@
-﻿using UnityEditor;
+﻿using System;
+using System.Globalization;
+using UnityEditor;
 using UnityEngine;
+using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Attributes;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Unity.Editor.Extensions;
@@ -14,10 +17,20 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 	{
 		private GUIStyle Style { get; set; }
 
-		public override void Render(UIRect renderRect)
+		public override UISize? NativeSize
 		{
-			base.Render(renderRect);
+			get
+			{
+				var numberEntry = Control as NumberEntry;
+				Debug.Assert(numberEntry != null, "numberEntry != null");
 
+				CreateStyleWith(numberEntry);
+				return Constrain(Style.CalcSize(new GUIContent(numberEntry.Number.ToString(CultureInfo.InvariantCulture))).ToUISize());
+			}
+		}
+
+		private void CreateStyleWith([NotNull] NumberEntry entry)
+		{
 			if (Style == null)
 				Style = new GUIStyle();
 
@@ -26,22 +39,25 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 			Style.hover.background = HoverBackgroundTexture;
 			Style.normal.background = BackgroundTexture;
 
-			var entry = Control as NumberEntry;
-
-		    Debug.Assert(entry != null, "entry != null");
-
-		    Style.alignment = UITextAlignExtensions.Combine(entry.HorizontalTextAlign, entry.VerticalTextAlign);
+			Style.alignment = UITextAlignExtensions.Combine(entry.HorizontalTextAlign, entry.VerticalTextAlign);
 
 			Style.focused.textColor = entry.TextColor.ToUnityColor();
 			Style.active.textColor = entry.TextColor.ToUnityColor();
 			Style.hover.textColor = entry.TextColor.ToUnityColor();
 			Style.normal.textColor = entry.TextColor.ToUnityColor();
 
-			var offset = (float)entry.CornerRadius;
-			var smallest = (int)(Mathf.Min(offset, Mathf.Min(renderRect.Width * 0.5f, renderRect.Height * 0.5f)) + 0.5f);
-			smallest = Mathf.Max(smallest, 2);
-			Style.border = new RectOffset(smallest, smallest, smallest, smallest);
-			Style.padding = new RectOffset(smallest, smallest, 0, 0);
+			Style.padding = entry.Padding.ToRectOffset();
+		}
+
+		public override void Render(UIRect renderRect)
+		{
+			base.Render(renderRect);
+
+			var entry = Control as NumberEntry;
+
+		    Debug.Assert(entry != null, "entry != null");
+
+			CreateStyleWith(entry);
 
 			var newNumber = EditorGUI.FloatField(renderRect.ToUnityRect(), entry.Number, Style);
 			if(Equals(newNumber, entry.Number))

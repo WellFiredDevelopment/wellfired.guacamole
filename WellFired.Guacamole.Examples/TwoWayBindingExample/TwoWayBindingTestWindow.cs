@@ -11,9 +11,7 @@ namespace WellFired.Guacamole.Examples.TwoWayBindingExample
         {
             Padding = new UIPadding(5);
 
-            var boundTextEntry = new TextEntry {
-                BackgroundColor = UIColor.White
-            };
+            var boundTextEntry = new TextEntry ();
 
             Content = boundTextEntry;
             BindingContext = persistantData;

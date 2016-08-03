@@ -61,16 +61,11 @@ namespace WellFired.Guacamole.View
             set { SetValue(VerticalTextAlignProperty, value); }
         }
 
-        public TextEntry()
+	    public TextEntry()
         {
             BackgroundColor = UIColor.FromRGB(66, 66, 66);
             OutlineColor = BackgroundColor;
             TextColor = UIColor.White;
-        }
-
-        protected override UIRect CalculateValidRectRequest()
-        {
-            return new UIRect(0, 0, 100, 20);
         }
     }
 }

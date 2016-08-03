@@ -9,6 +9,8 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 {
     public abstract class BaseRenderer : INativeRenderer
     {
+        public virtual UISize? NativeSize { get { return null;  } }
+
         protected Texture2D BackgroundTexture { get; private set; }
         protected Texture2D HoverBackgroundTexture { get; private set; }
         protected Texture2D ActiveBackgroundTexture { get; private set; }
@@ -82,6 +84,20 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
                 Control.OutlineColor == default(UIColor) ? backgroundColor : Control.OutlineColor,
                 Control.CornerRadius,
                 Control.CornerMask);
-        }
-    }
+		}
+
+		protected UISize Constrain(UISize requestedSize)
+		{
+			if (requestedSize.Width < Control.MinSize.Width)
+				requestedSize.Width = Control.MinSize.Width;
+			if (requestedSize.Height < Control.MinSize.Height)
+				requestedSize.Height = Control.MinSize.Height;
+			if (requestedSize.Width > Control.MaxSize.Width)
+				requestedSize.Width = Control.MaxSize.Width;
+			if (requestedSize.Height > Control.MaxSize.Height)
+				requestedSize.Height = Control.MaxSize.Height;
+
+			return requestedSize;
+		}
+	}
 }

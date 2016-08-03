@@ -1,4 +1,5 @@
-﻿using WellFired.Guacamole.Annotations;
+﻿using UnityEngine;
+using WellFired.Guacamole.Annotations;
 
 namespace WellFired.Guacamole.Types
 {
@@ -53,5 +54,5 @@ namespace WellFired.Guacamole.Types
 		{
 			return !(a == b);
 		}
-	}
+    }
 }

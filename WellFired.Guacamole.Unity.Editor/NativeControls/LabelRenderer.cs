@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Attributes;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Unity.Editor.Extensions;
@@ -13,10 +14,20 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 	{
 		private GUIStyle Style { get; set; }
 
-		public override void Render(UIRect renderRect)
+		public override UISize? NativeSize
 		{
-			base.Render(renderRect);
+			get
+			{
+				var label = Control as Label;
+				Debug.Assert(label != null, "numberEntry != null");
 
+				CreateStyleWith(label);
+				return Constrain(Style.CalcSize(new GUIContent(label.Text)).ToUISize());
+			}
+		}
+
+		private void CreateStyleWith([NotNull] Label label)
+		{
 			if (Style == null)
 				Style = new GUIStyle();
 
@@ -24,23 +35,26 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 			Style.active.background = ActiveBackgroundTexture;
 			Style.hover.background = HoverBackgroundTexture;
 			Style.normal.background = BackgroundTexture;
-			
-			var label = Control as Label;
 
-		    Debug.Assert(label != null, "label != null");
-
-		    Style.alignment = UITextAlignExtensions.Combine(label.HorizontalTextAlign, label.VerticalTextAlign);
+			Style.alignment = UITextAlignExtensions.Combine(label.HorizontalTextAlign, label.VerticalTextAlign);
 
 			Style.focused.textColor = label.TextColor.ToUnityColor();
 			Style.active.textColor = label.TextColor.ToUnityColor();
 			Style.hover.textColor = label.TextColor.ToUnityColor();
 			Style.normal.textColor = label.TextColor.ToUnityColor();
 
-			var offset = (float)label.CornerRadius;
-			var smallest = (int)(Mathf.Min(offset, Mathf.Min(renderRect.Width * 0.5f, renderRect.Height * 0.5f)) + 0.5f);
-			smallest = Mathf.Max(smallest, 2);
-			Style.border = new RectOffset(smallest, smallest, smallest, smallest);
-			Style.padding = new RectOffset(smallest, smallest, 0, 0);
+			Style.padding = label.Padding.ToRectOffset();
+		}
+
+		public override void Render(UIRect renderRect)
+		{
+			base.Render(renderRect);
+			
+			var label = Control as Label;
+
+		    Debug.Assert(label != null, "label != null");
+
+			CreateStyleWith(label);
 
 			UnityEditor.EditorGUI.LabelField(renderRect.ToUnityRect(), label.Text, Style);
 		}

@@ -47,10 +47,5 @@ namespace WellFired.Guacamole.View
 			get { return (double)GetValue(ValueProperty); }
 			set { SetValue(ValueProperty, value); }
 		}
-
-		protected override UIRect CalculateValidRectRequest()
-		{
-			return new UIRect(0, 0, 250, 20);
-		}
 	}
 }

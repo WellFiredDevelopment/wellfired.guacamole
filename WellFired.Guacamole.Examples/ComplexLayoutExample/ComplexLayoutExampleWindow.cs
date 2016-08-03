@@ -11,7 +11,6 @@ namespace WellFired.Guacamole.Examples.ComplexLayoutExample
 
         public ComplexLayoutExampleWindow()
         {
-            BackgroundColor = UIColor.FromRGB(70, 70, 70);
             Padding = new UIPadding(5, 5, 5, 5);
 
             var header = new AdjacentLayout {

@@ -10,9 +10,7 @@ namespace WellFired.Guacamole.Examples.OneWayBindingExample
         {
             Padding = new UIPadding(5);
 
-            var boundTextEntry = new TextEntry {
-                BackgroundColor = UIColor.White
-            };
+	        var boundTextEntry = new TextEntry();
 
             Content = boundTextEntry;
             

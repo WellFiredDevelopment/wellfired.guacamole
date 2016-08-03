@@ -142,5 +142,10 @@ namespace WellFired.Guacamole.Types
 				rect.Width - padding.Width, 
 				rect.Height - padding.Height);
 		}
+
+	    public override string ToString()
+	    {
+	        return string.Format("x: {0}, y: {1}, width: {2}, height: {3}", X, Y, Width, Height);
+	    }
 	}
 }

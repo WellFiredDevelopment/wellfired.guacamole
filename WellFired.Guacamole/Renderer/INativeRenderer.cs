@@ -7,8 +7,9 @@ namespace WellFired.Guacamole.Renderer
 	public interface INativeRenderer
 	{
 		ViewBase Control { set; }
+	    UISize? NativeSize { get; }
 
-		void Render(UIRect renderRect);
+	    void Render(UIRect renderRect);
 		void OnPropertyChanged(object sender, PropertyChangedEventArgs e);
 	}
 }

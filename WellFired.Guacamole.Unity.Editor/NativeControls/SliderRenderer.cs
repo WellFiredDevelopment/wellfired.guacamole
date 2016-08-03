@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using WellFired.Guacamole.Attributes;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Unity.Editor.Extensions;
@@ -9,8 +10,8 @@ using WellFired.Guacamole.View;
 namespace WellFired.Guacamole.Unity.Editor.NativeControls
 {
 	public class SliderRenderer : BaseRenderer
-	{
-		public override void Render(UIRect renderRect)
+    {
+        public override void Render(UIRect renderRect)
 		{
 			var slider = Control as Slider;
 

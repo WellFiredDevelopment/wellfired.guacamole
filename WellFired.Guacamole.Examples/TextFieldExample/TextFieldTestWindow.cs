@@ -7,12 +7,10 @@ namespace WellFired.Guacamole.Examples.TextFieldExample
     {
         public TextFieldTestWindow()
         {
-            BackgroundColor = UIColor.White;
             Padding = new UIPadding(5);
 
             Content = new TextEntry {
                 VerticalTextAlign = UITextAlign.Middle,
-                BackgroundColor = UIColor.Beige,
                 Text = "Test"
             };
         }

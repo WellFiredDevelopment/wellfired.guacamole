@@ -68,10 +68,5 @@ namespace WellFired.Guacamole.View
             OutlineColor = BackgroundColor;
             TextColor = UIColor.White;
         }
-
-        protected override UIRect CalculateValidRectRequest()
-        {
-            return new UIRect(0, 0, 100, 20);
-        }
     }
 }

@@ -53,7 +53,23 @@ namespace WellFired.Guacamole.View
                 getter: entry => entry.CornerMask
             );
 
-        private UIRect _finalRenderRect;
+		[PublicAPI]
+		public static readonly BindableProperty MinSizeProperty = BindableProperty
+			.Create<TextEntry, UISize>(
+				defaultValue: UISize.Min,
+				bindingMode: BindingMode.TwoWay,
+				getter: entry => entry.MinSize
+			);
+
+		[PublicAPI]
+		public static readonly BindableProperty MaxSizeProperty = BindableProperty
+			.Create<TextEntry, UISize>(
+				defaultValue: UISize.Max,
+				bindingMode: BindingMode.TwoWay,
+				getter: entry => entry.MaxSize
+			);
+
+		private UIRect _finalRenderRect;
         private bool _invalidRectRequest = true;
         private INativeRenderer _nativeRenderer;
         private UIRect _validRectRequest;
@@ -61,7 +77,7 @@ namespace WellFired.Guacamole.View
         public IList<ViewBase> Children { get; private set; }
         public LayoutOptions HorizontalLayout { get; protected set; }
         public LayoutOptions VerticalLayout { get; protected set; }
-        public UIPadding Padding { protected get; set; }
+        public UIPadding Padding { get; set; }
 
         [PublicAPI]
         public UIColor BackgroundColor
@@ -103,9 +119,23 @@ namespace WellFired.Guacamole.View
         {
             get { return (CornerMask)GetValue(CornerMaskProperty); }
             set { SetValue(CornerMaskProperty, value); }
-        }
+		}
 
-        public UIRect RectRequest
+		[PublicAPI]
+		public UISize MinSize
+		{
+			get { return (UISize)GetValue(MinSizeProperty); }
+			set { SetValue(MinSizeProperty, value); }
+		}
+
+		[PublicAPI]
+		public UISize MaxSize
+		{
+			get { return (UISize)GetValue(MaxSizeProperty); }
+			set { SetValue(MaxSizeProperty, value); }
+		}
+
+		public UIRect RectRequest
         {
             get { return _validRectRequest; }
         }
@@ -208,10 +238,12 @@ namespace WellFired.Guacamole.View
 
         protected virtual UIRect CalculateValidRectRequest()
         {
-            return UIRect.Min;
+	        var nativeSize = NativeRenderer.NativeSize;
+			// If the native renderer returns null, we simply use our own layoutting system.
+	        return nativeSize != null ? new UIRect(0, 0, nativeSize.Value.Width, nativeSize.Value.Height) : new UIRect(0, 0, 100, 10);
         }
 
-        internal void LayoutTo(int x, int y)
+	    internal void LayoutTo(int x, int y)
         {
             _validRectRequest.X = x;
             _validRectRequest.Y = y;
@@ -227,11 +259,11 @@ namespace WellFired.Guacamole.View
         {
             base.OnPropertyChanged(sender, e);
 
-            if(e.PropertyName == BindingContextProperty.PropertyName)
-            {
-                foreach(var child in Children)
-                    child.BindingContext = BindingContext;
-            }
+	        if(e.PropertyName != BindingContextProperty.PropertyName)
+				return;
+
+	        foreach(var child in Children)
+		        child.BindingContext = BindingContext;
         }
     }
 }
