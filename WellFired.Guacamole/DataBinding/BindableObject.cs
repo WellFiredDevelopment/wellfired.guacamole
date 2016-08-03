@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using WellFired.Guacamole.Annotations;
+using WellFired.Guacamole.DataBinding.Exceptions;
 
-namespace WellFired.Guacamole.Databinding
+namespace WellFired.Guacamole.DataBinding
 {
 	public class BindableObject : INotifyPropertyChanged
 	{
-		public static readonly BindableProperty BindingContextProperty = BindableProperty.Create<BindableObject, INotifyPropertyChanged>(null, BindingMode.OneWay, bindableObject => bindableObject.BindingContext
-		);
+        [PublicAPI]
+		public static readonly BindableProperty BindingContextProperty = BindableProperty.Create<BindableObject, INotifyPropertyChanged>(null, BindingMode.OneWay, bindableObject => bindableObject.BindingContext);
 		
 		private INotifyPropertyChanged _bindingContext;
 		private readonly Dictionary<string, BindableProperty> _bindings = new Dictionary<string, BindableProperty>();
@@ -57,12 +59,12 @@ namespace WellFired.Guacamole.Databinding
 			SetValue(bindableProperty, initialValue);
 		}
 
-		public object GetValue(BindableProperty bindableProperty)
+	    protected object GetValue(BindableProperty bindableProperty)
 		{
 			return GetOrCreateBindableContext(bindableProperty).Value;
 		}
 
-		public void SetValue(BindableProperty bindableProperty, object value)
+	    protected void SetValue(BindableProperty bindableProperty, object value)
 		{
 			var previous = GetOrCreateBindableContext(bindableProperty).Value;
 

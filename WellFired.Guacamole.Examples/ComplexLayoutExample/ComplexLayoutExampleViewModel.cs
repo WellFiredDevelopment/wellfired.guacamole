@@ -1,13 +1,14 @@
 ﻿using WellFired.Guacamole.Annotations;
-using WellFired.Guacamole.Databinding;
+using WellFired.Guacamole.DataBinding;
 
 namespace WellFired.Guacamole.Examples.ComplexLayoutExample
 {
 	[UsedImplicitly]
 	public class ComplexLayoutExampleViewModel : ObservableBase
 	{
-	    private ComplexLayoutExampleModel Model { get; set; }
+	    private ComplexLayoutExampleModel Model { get; [UsedImplicitly] set; }
 
+		[UsedImplicitly]
 		public float CurrentSequenceDuration
 		{
 			get { return Model.CurrentSequenceDuration; }
@@ -19,6 +20,7 @@ namespace WellFired.Guacamole.Examples.ComplexLayoutExample
 			}
 		}
 
+		[UsedImplicitly]
 		public string CurrentSequenceName
 		{
 			get { return Model.CurrentSequenceName; }

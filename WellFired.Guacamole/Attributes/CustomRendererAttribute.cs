@@ -1,20 +1,18 @@
 ﻿using System;
 
-namespace WellFired.Guacamole
+namespace WellFired.Guacamole.Attributes
 {
 	[AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
 	public class CustomRendererAttribute : Attribute
 	{
 		public Type ControlType
 		{
-			get;
-			set;
+			get; private set;
 		}
 
 		public Type RendererType
 		{
-			get;
-			set;
+			get; private set;
 		}
 	
 		public CustomRendererAttribute(Type controlType, Type rendererType)

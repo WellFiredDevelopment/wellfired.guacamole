@@ -1,8 +1,13 @@
-﻿namespace WellFired.Guacamole.Examples.TextField
+﻿using WellFired.Guacamole.Annotations;
+using WellFired.Guacamole.Types;
+
+namespace WellFired.Guacamole.Examples.TextFieldExample
 {
+	[UsedImplicitly]
 	public class TextFieldTestApplication
 	{
 		[UnityEditor.MenuItem("Window/guacamole/Test/TextField")]
+		[UsedImplicitly]
 		static void OpenWindow()
 		{
 			var application = new Unity.Editor.Application();

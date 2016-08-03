@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using WellFired.Guacamole.Types;
 
-namespace WellFired.Guacamole
+namespace WellFired.Guacamole.View
 {
 	public class Window : ViewBase
 	{
 		private UIRect FinalRenderedRect { get; set; }
-		public ViewBase Content { get; set; }
+	    protected ViewBase Content { private get; set; }
 		
 		public void Layout(UIRect rect)
 		{

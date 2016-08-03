@@ -1,36 +1,47 @@
-﻿namespace WellFired.Guacamole
+﻿using WellFired.Guacamole.Annotations;
+using WellFired.Guacamole.InitializationContext;
+using WellFired.Guacamole.Types;
+using WellFired.Guacamole.View;
+
+namespace WellFired.Guacamole
 {
 	public interface IWindow
-	{
-		Window MainContent
+    {
+        [PublicAPI]
+        Window MainContent
 		{
 			get;
 		}
 
-		string Title 
-		{
-			get;
-			set;
-		}
-
-		UIRect Rect
+        [PublicAPI]
+        string Title 
 		{
 			get;
 			set;
 		}
 
-		UISize MinSize
+        [PublicAPI]
+        UIRect Rect
 		{
 			get;
 			set;
 		}
 
-		UISize MaxSize
+        [PublicAPI]
+        UISize MinSize
 		{
 			get;
 			set;
 		}
 
-		void Launch(IInitializationContext initializationContext);
+        [PublicAPI]
+        UISize MaxSize
+		{
+			get;
+			set;
+		}
+
+        [PublicAPI]
+        void Launch(IInitializationContext initializationContext);
 	}
 }

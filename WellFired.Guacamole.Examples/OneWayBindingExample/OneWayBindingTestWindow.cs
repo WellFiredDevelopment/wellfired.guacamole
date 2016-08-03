@@ -1,32 +1,33 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using WellFired.Guacamole.Types;
+using WellFired.Guacamole.View;
 
-namespace WellFired.Guacamole.Examples.TwoWayBinding
+namespace WellFired.Guacamole.Examples.OneWayBindingExample
 {
-	public class OneWayBindingTestWindow : Window
-	{
-		public OneWayBindingTestWindow()
-		{
-			Padding = new UIPadding(5);
-			
-			var boundTextEntry = new TextEntry
-			{
-				BackgroundColor = UIColor.White
-			};
+    public class OneWayBindingTestWindow : Window
+    {
+        public OneWayBindingTestWindow()
+        {
+            Padding = new UIPadding(5);
 
-			Content = boundTextEntry;
+            var boundTextEntry = new TextEntry {
+                BackgroundColor = UIColor.White
+            };
 
-			const string assetPath = "Assets/guacamole-examples/OneWayBindingExample/Editor/WindowData.asset";
-			var windowData = AssetDatabase.LoadAssetAtPath<OneWayBindingTestModel>(assetPath);
-			if (windowData == null)
-			{
-				windowData = ScriptableObject.CreateInstance<OneWayBindingTestModel>();
-				AssetDatabase.CreateAsset(windowData, assetPath);
-			}
+            Content = boundTextEntry;
 
-			BindingContext = windowData;
+            const string assetPath = "Assets/guacamole-examples/OneWayBindingExample/Editor/WindowData.asset";
+            var windowData = AssetDatabase.LoadAssetAtPath<OneWayBindingTestModel>(assetPath);
+            if(windowData == null)
+            {
+                windowData = ScriptableObject.CreateInstance<OneWayBindingTestModel>();
+                AssetDatabase.CreateAsset(windowData, assetPath);
+            }
 
-			boundTextEntry.Bind(TextEntry.TextProperty, "BoundText");
-		}
-	}
+            BindingContext = windowData;
+
+            boundTextEntry.Bind(TextEntry.TextProperty, "BoundText");
+        }
+    }
 }

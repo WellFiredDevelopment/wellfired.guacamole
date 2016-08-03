@@ -1,37 +1,37 @@
-﻿namespace WellFired.Guacamole.Examples.UIBinding
+﻿using WellFired.Guacamole.Layout;
+using WellFired.Guacamole.Types;
+using WellFired.Guacamole.View;
+
+namespace WellFired.Guacamole.Examples.UIBindingExample
 {
     // ReSharper disable once InconsistentNaming
-	public class UIBindingTestWindow : Window
-	{
-		public UIBindingTestWindow()
-		{
-			Padding = new UIPadding(5);
-			
-			var destinationElement = new TextEntry
-			{
-				BackgroundColor = UIColor.White,
-				OutlineColor = UIColor.Black
-			};
+    public class UIBindingTestWindow : Window
+    {
+        public UIBindingTestWindow()
+        {
+            Padding = new UIPadding(5);
 
-			var sourceElement = new Slider
-			{
-				BackgroundColor = UIColor.White,
-				MinValue = 0,
-				MaxValue = 32
-			};
+            var destinationElement = new TextEntry {
+                BackgroundColor = UIColor.White,
+                OutlineColor = UIColor.Black
+            };
 
-			Content = new AdjacentLayout
-			{
-				Children =
-				{
-					destinationElement,
-					sourceElement
-				}
-			};
+            var sourceElement = new Slider {
+                BackgroundColor = UIColor.White,
+                MinValue = 0,
+                MaxValue = 32
+            };
 
-			destinationElement.BindingContext = sourceElement;
+            Content = new AdjacentLayout {
+                Children = {
+                    destinationElement,
+                    sourceElement
+                }
+            };
 
-			destinationElement.Bind(CornerRadiusProperty, "Value");
-		}
-	}
+            destinationElement.BindingContext = sourceElement;
+
+            destinationElement.Bind(CornerRadiusProperty, "Value");
+        }
+    }
 }

@@ -9,12 +9,11 @@ namespace WellFired.Guacamole.Drawing.Shapes
 		public double SweepAngle;
 		public Rect ArcRect;
 		
-		private List<Vector> _path = new List<Vector>();
+		private readonly List<Vector> _path = new List<Vector>();
 
 		public List<Vector> Path
 		{
 			get { return _path; }
-			set { _path = value; }
 		}
 
 		private double Radius

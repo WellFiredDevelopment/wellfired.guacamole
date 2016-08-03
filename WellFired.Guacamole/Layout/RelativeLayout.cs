@@ -1,6 +1,10 @@
-﻿namespace WellFired.Guacamole
+﻿using WellFired.Guacamole.Annotations;
+using WellFired.Guacamole.View;
+
+namespace WellFired.Guacamole.Layout
 {
-	public class RelativeLayout : ViewBase 
+    [PublicAPI]
+    public class RelativeLayout : ViewBase 
 	{
 
 	}

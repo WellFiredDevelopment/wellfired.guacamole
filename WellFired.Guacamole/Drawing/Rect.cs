@@ -1,4 +1,5 @@
 ﻿using System;
+using WellFired.Guacamole.Annotations;
 
 namespace WellFired.Guacamole.Drawing
 {
@@ -16,11 +17,12 @@ namespace WellFired.Guacamole.Drawing
 	    // ReSharper disable once InconsistentNaming
 		private static readonly Rect _one = new Rect(0, 0, 1, 1);
 
-		public static Rect Min { get { return _min; } }
-		public static Rect Max { get { return _max; } }
-		public static Rect One { get { return _one; } }
+        [PublicAPI] public static Rect Min { get { return _min; } }
+        [PublicAPI] public static Rect Max { get { return _max; } }
+        [PublicAPI] public static Rect One { get { return _one; } }
 
-		public double X
+        [PublicAPI]
+        public double X
 		{
 			get { return _x; }
 			set
@@ -29,7 +31,8 @@ namespace WellFired.Guacamole.Drawing
 			}
 		}
 
-		public double Y
+        [PublicAPI]
+        public double Y
 		{
 			get { return _y; }
 			set
@@ -38,7 +41,8 @@ namespace WellFired.Guacamole.Drawing
 			}
 		}
 
-		public double Width
+        [PublicAPI]
+        public double Width
 		{
 			get { return _width; }
 			set
@@ -47,7 +51,8 @@ namespace WellFired.Guacamole.Drawing
 			}
 		}
 
-		public double Height
+        [PublicAPI]
+        public double Height
 		{
 			get { return _height; }
 			set
@@ -56,7 +61,8 @@ namespace WellFired.Guacamole.Drawing
 			}
 		}
 
-		public Vector Center
+        [PublicAPI]
+        public Vector Center
 		{
 			get
 			{
@@ -92,10 +98,9 @@ namespace WellFired.Guacamole.Drawing
 
 		public override int GetHashCode()
 		{
-			unchecked // Overflow is fine, just wrap
+			unchecked
 			{
 				var hash = 17;
-				// Suitable nullity checks etc, of course :)
 				hash = hash * 23 + X.GetHashCode();
 				hash = hash * 23 + Y.GetHashCode();
 				hash = hash * 23 + Width.GetHashCode();
@@ -106,13 +111,7 @@ namespace WellFired.Guacamole.Drawing
 
 		public static bool operator ==(Rect a, Rect b)
 		{
-			if (Object.ReferenceEquals(a, b))
-				return true;
-
-			if (((object)a == null) || ((object)b == null))
-				return false;
-
-			return a.Equals(b);
+		    return a.Equals(b);
 		}
 
 		public static bool operator !=(Rect a, Rect b)

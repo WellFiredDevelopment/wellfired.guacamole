@@ -1,8 +1,13 @@
-﻿namespace WellFired.Guacamole.Examples.TwoWayBinding
+﻿using WellFired.Guacamole.Annotations;
+using WellFired.Guacamole.Types;
+
+namespace WellFired.Guacamole.Examples.OneWayBindingExample
 {
+	[UsedImplicitly]
 	public class OneWayBindingTestApplication
 	{
 		[UnityEditor.MenuItem("Window/guacamole/Test/OneWayBindingTest")]
+		[UsedImplicitly]
 		static void OpenWindow()
 		{
 			var application = new Unity.Editor.Application();

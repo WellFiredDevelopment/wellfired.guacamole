@@ -1,4 +1,4 @@
-﻿namespace WellFired.Guacamole
+﻿namespace WellFired.Guacamole.InitializationContext
 {
 	public interface IInitializationContext
 	{

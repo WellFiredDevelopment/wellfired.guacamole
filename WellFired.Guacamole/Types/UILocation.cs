@@ -1,6 +1,6 @@
-﻿using System;
+﻿using WellFired.Guacamole.Annotations;
 
-namespace WellFired.Guacamole
+namespace WellFired.Guacamole.Types
 {
     // ReSharper disable once InconsistentNaming
 	public struct UILocation
@@ -8,10 +8,11 @@ namespace WellFired.Guacamole
 		public int X { get; set; }
 		public int Y { get; set; }
 
-	    // ReSharper disable once InconsistentNaming
-	    private static readonly UILocation min;
+        // ReSharper disable once InconsistentNaming
+        private static readonly UILocation _min = new UILocation(0, 0);
 
-		public static UILocation Min { get { return min; } }
+        [PublicAPI]
+        public static UILocation Min { get { return _min; } }
 	
 		public UILocation(int x, int y) : this()
 		{
@@ -22,10 +23,7 @@ namespace WellFired.Guacamole
 	    public override bool Equals(object obj)
 		{
 			var compareTo = (UILocation)obj;
-			if (compareTo.X == X && compareTo.Y == Y)
-				return true;
-	
-			return false;
+			return compareTo.X == X && compareTo.Y == Y;
 		}
 
 		public override int GetHashCode()
@@ -35,12 +33,6 @@ namespace WellFired.Guacamole
 
 		public static bool operator==(UILocation a, UILocation b)
 		{
-			if(Object.ReferenceEquals(a, b))
-				return true;
-
-			if(((object)a == null) || ((object)b == null))
-				return false;
-
 			return a.Equals(b);
 		}
 

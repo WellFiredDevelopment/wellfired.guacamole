@@ -1,16 +1,16 @@
-﻿using System;
+﻿using WellFired.Guacamole.Annotations;
 
-namespace WellFired.Guacamole
+namespace WellFired.Guacamole.Types
 {
     // ReSharper disable once InconsistentNaming
 	public struct UIPadding
-	{
-		public int Left { get; set; }
-		public int Top { get; set; }
-		public int Right { get; set; }
-		public int Bottom { get; set; }
-		public int Width { get { return Left + Right; } }
-		public int Height { get { return Top + Bottom; } }
+    {
+        [PublicAPI] public int Left { get; private set; }
+        [PublicAPI] public int Top { get; private set; }
+        [PublicAPI] public int Right { get; private set; }
+        [PublicAPI] public int Bottom { get; private set; }
+        [PublicAPI] public int Width { get { return Left + Right; } }
+        [PublicAPI] public int Height { get { return Top + Bottom; } }
 
 		public UIPadding(int equalPadding) : this()
 		{
@@ -46,12 +46,6 @@ namespace WellFired.Guacamole
 
 		public static bool operator==(UIPadding a, UIPadding b)
 		{
-			if(Object.ReferenceEquals(a, b))
-				return true;
-
-			if(((object)a == null) || ((object)b == null))
-				return false;
-
 			return a.Equals(b);
 		}
 

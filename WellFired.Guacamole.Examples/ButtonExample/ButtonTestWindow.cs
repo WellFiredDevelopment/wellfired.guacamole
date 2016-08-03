@@ -1,16 +1,18 @@
-﻿namespace WellFired.Guacamole.Examples.TextField
-{
-	public class ButtonTestWindow : Window
-	{
-		public ButtonTestWindow()
-		{
-			Padding = new UIPadding(5);
+﻿using WellFired.Guacamole.Types;
+using WellFired.Guacamole.View;
 
-			Content = new Button
-			{
-				BackgroundColor = UIColor.White,
-				Text = "Press Me Please."
-			};
-		}
-	}
+namespace WellFired.Guacamole.Examples.ButtonExample
+{
+    public class ButtonTestWindow : Window
+    {
+        public ButtonTestWindow()
+        {
+            Padding = new UIPadding(5);
+
+            Content = new Button {
+                BackgroundColor = UIColor.White,
+                Text = "Press Me Please."
+            };
+        }
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using WellFired.Guacamole.Annotations;
 
 namespace WellFired.Guacamole.Drawing
 {
@@ -12,33 +13,29 @@ namespace WellFired.Guacamole.Drawing
 	    // ReSharper disable once InconsistentNaming
 		private static readonly Vector _one = new Vector(1.0, 1.0);
 
-		public static Vector Min { get { return _min; } }
-		public static Vector One { get { return _one; } }
+        [PublicAPI]
+        public static Vector Min { get { return _min; } }
+        [PublicAPI]
+        public static Vector One { get { return _one; } }
 
-		public double X
+        [PublicAPI]
+        public double X
 		{
 			get { return _x; }
-			set
-			{
-				_x = value;
-			}
+			set { _x = value; }
 		}
 
-		public double Y
+        [PublicAPI]
+        public double Y
 		{
 			get { return _y; }
-			set
-			{
-				_y = value;
-			}
+			set { _y = value; }
 		}
 
-		public double Length
+        [PublicAPI]
+        public double Length
 		{
-			get
-			{
-				return Math.Sqrt(X * X + Y * Y);
-			}
+			get { return Math.Sqrt(X * X + Y * Y); }
 		}
 
 		public Vector(double x, double y)
@@ -67,12 +64,6 @@ namespace WellFired.Guacamole.Drawing
 
 		public static bool operator ==(Vector a, Vector b)
 		{
-			if (Object.ReferenceEquals(a, b))
-				return true;
-
-			if (((object)a == null) || ((object)b == null))
-				return false;
-
 			return a.Equals(b);
 		}
 
@@ -111,7 +102,8 @@ namespace WellFired.Guacamole.Drawing
 			return new Vector(a.X / b, a.Y / b);
 		}
 
-		public static double AngleBetween(Vector v1, Vector v2)
+        [PublicAPI]
+        public static double AngleBetween(Vector v1, Vector v2)
 		{
 			var angle = Math.Atan2(v2._y, v2._x) - Math.Atan2(v1._y, v1._x);
 			if (angle < 0.0)
@@ -119,7 +111,8 @@ namespace WellFired.Guacamole.Drawing
 			return angle;
 		}
 
-		public void Normalize()
+        [PublicAPI]
+        public void Normalize()
 		{
 			var length = Length;
 			if (Math.Abs(length) < 0.00001)
@@ -129,18 +122,21 @@ namespace WellFired.Guacamole.Drawing
 			Y /= length;
 		}
 
-		public static Vector Normalize(Vector toEnd)
+        [PublicAPI]
+        public static Vector Normalize(Vector toEnd)
 		{
 			var length = toEnd.Length;
 			return Math.Abs(length) < 0.00001 ? Min : new Vector(toEnd.X / length, toEnd.Y /= length);
 		}
 
-		public void Negate()
+        [PublicAPI]
+        public void Negate()
 		{
 			this *= -1.0;
 		}
 
-		public static double Distance(Vector startPoint, Vector endPoint)
+        [PublicAPI]
+        public static double Distance(Vector startPoint, Vector endPoint)
 		{
 			return (endPoint - startPoint).Length;
 		}

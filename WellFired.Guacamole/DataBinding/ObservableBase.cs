@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
-using System;
 
-namespace WellFired.Guacamole.Databinding
+namespace WellFired.Guacamole.DataBinding
 {
 	public class ObservableBase : INotifyPropertyChanged
 	{
@@ -16,8 +15,8 @@ namespace WellFired.Guacamole.Databinding
 			OnPropertyChanged (propertyName);
 			return true;
 		}
-	
-		protected void OnPropertyChanged(string propertyName)
+
+	    private void OnPropertyChanged(string propertyName)
 		{
 			var handler = PropertyChanged;
 			if (handler == null)

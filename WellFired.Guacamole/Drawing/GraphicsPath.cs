@@ -9,7 +9,7 @@ namespace WellFired.Guacamole.Drawing
 	{
 		private readonly List<IShape> _shapes = new List<IShape>();
 
-		public IEnumerable<Vector> Path
+	    private IEnumerable<Vector> Path
 		{
 			get { return _shapes.SelectMany(shape => shape.Path); }
 		}
@@ -28,17 +28,17 @@ namespace WellFired.Guacamole.Drawing
 			_shapes.Add(new Line { StartPoint = startPoint, EndPoint = endPoint });
 		}
 
-		public UIColor[] Draw(int width, int height, UIColor backgroundColor, UIColor outlineColor)
+		public Types.UIColor[] Draw(int width, int height, Types.UIColor backgroundColor, Types.UIColor outlineColor)
 		{
-			var pixelData = new UIColor[width * height];
+			var pixelData = new Types.UIColor[width * height];
 			for (var i = 0; i < pixelData.Length; i++)
-				pixelData[i] = UIColor.Clear;
+				pixelData[i] = Types.UIColor.Clear;
 
 			_shapes.ForEach(shape => shape.Calculate());
 
 			var localOutlineColor = outlineColor;
 
-			if(localOutlineColor == UIColor.Clear)
+			if(localOutlineColor == Types.UIColor.Clear)
 				localOutlineColor = backgroundColor;
 
 			foreach(var point in Path)
@@ -64,7 +64,7 @@ namespace WellFired.Guacamole.Drawing
 				pixelData[width * (height - y - 1) + x] = localOutlineColor;
 			}
 
-			Action<Pixel, UIColor, UIColor> recursiveFlood = delegate {};
+			Action<Pixel, Types.UIColor, Types.UIColor> recursiveFlood = delegate {};
 			recursiveFlood = (pixel, targetColor, replacementColor) => {
 				if (targetColor == backgroundColor)
 					return;
@@ -99,9 +99,13 @@ namespace WellFired.Guacamole.Drawing
 					Y = pixel.Y
 				};
 				
+			    // ReSharper disable once AccessToModifiedClosure
 				recursiveFlood(northPixel, targetColor, replacementColor);
+			    // ReSharper disable once AccessToModifiedClosure
 				recursiveFlood(eastPixel, targetColor, replacementColor);
+			    // ReSharper disable once AccessToModifiedClosure
 				recursiveFlood(southPixel, targetColor, replacementColor);
+			    // ReSharper disable once AccessToModifiedClosure
 				recursiveFlood(westPixel, targetColor, replacementColor);
 			};
 			
@@ -112,7 +116,7 @@ namespace WellFired.Guacamole.Drawing
 				Y = (int) (height*0.5)
 			};
 
-			recursiveFlood(initialPiece, UIColor.Clear, backgroundColor);
+			recursiveFlood(initialPiece, Types.UIColor.Clear, backgroundColor);
 
 			return pixelData;
 		}

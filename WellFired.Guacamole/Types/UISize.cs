@@ -1,6 +1,6 @@
-﻿using System;
+﻿using WellFired.Guacamole.Annotations;
 
-namespace WellFired.Guacamole
+namespace WellFired.Guacamole.Types
 {
     // ReSharper disable once InconsistentNaming
 	public struct UISize
@@ -15,9 +15,12 @@ namespace WellFired.Guacamole
 	    // ReSharper disable once InconsistentNaming
 		private static readonly UISize _one = new UISize (1, 1);
 
-		public static UISize Min { get { return _min; } }
-		public static UISize Max { get { return _max; } }
-		public static UISize One { get { return _one; } }
+        [PublicAPI]
+        public static UISize Min { get { return _min; } }
+        [PublicAPI]
+        public static UISize Max { get { return _max; } }
+        [PublicAPI]
+        public static UISize One { get { return _one; } }
 	
 		public UISize(int width, int height) : this()
 		{
@@ -38,12 +41,6 @@ namespace WellFired.Guacamole
 
 		public static bool operator==(UISize a, UISize b)
 		{
-			if(Object.ReferenceEquals(a, b))
-				return true;
-			
-			if(((object)a == null) || ((object)b == null))
-				return false;
-			
 			return a.Equals(b);
 		}
 

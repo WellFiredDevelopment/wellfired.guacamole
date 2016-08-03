@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using WellFired.Guacamole.Annotations;
-using WellFired.Guacamole.Databinding.Unity.Runtime;
+using WellFired.Guacamole.Unity.Editor.DataBinding;
 
-namespace WellFired.Guacamole.Examples.TwoWayBinding
+namespace WellFired.Guacamole.Examples.TwoWayBindingExample
 {
 	public class TwoWayBindingTestModel : ObservableScriptableObject
 	{

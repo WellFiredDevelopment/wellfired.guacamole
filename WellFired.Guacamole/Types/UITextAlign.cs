@@ -1,4 +1,4 @@
-﻿namespace WellFired.Guacamole
+﻿namespace WellFired.Guacamole.Types
 {
     // ReSharper disable once InconsistentNaming
 	public enum UITextAlign {

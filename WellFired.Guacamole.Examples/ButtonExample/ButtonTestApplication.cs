@@ -1,8 +1,13 @@
-﻿namespace WellFired.Guacamole.Examples.TextField
+﻿using WellFired.Guacamole.Annotations;
+using WellFired.Guacamole.Types;
+
+namespace WellFired.Guacamole.Examples.ButtonExample
 {
+	[UsedImplicitly]
 	public class ButtonTestApplication
 	{
 		[UnityEditor.MenuItem("Window/guacamole/Test/Button Test")]
+		[UsedImplicitly]
 		static void OpenWindow()
 		{
 			var application = new Unity.Editor.Application();

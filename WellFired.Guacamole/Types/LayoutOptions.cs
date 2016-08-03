@@ -1,4 +1,4 @@
-﻿namespace WellFired.Guacamole
+﻿namespace WellFired.Guacamole.Types
 {
 	public enum LayoutOptions
     {

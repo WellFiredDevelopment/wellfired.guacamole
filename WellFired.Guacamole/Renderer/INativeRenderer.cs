@@ -1,14 +1,12 @@
 ﻿using System.ComponentModel;
+using WellFired.Guacamole.Types;
+using WellFired.Guacamole.View;
 
-namespace WellFired.Guacamole
+namespace WellFired.Guacamole.Renderer
 {
 	public interface INativeRenderer
 	{
-		ViewBase Control
-		{
-			get;
-			set;
-		}
+		ViewBase Control { set; }
 
 		void Render(UIRect renderRect);
 		void OnPropertyChanged(object sender, PropertyChangedEventArgs e);

@@ -6,8 +6,5 @@ namespace WellFired.Guacamole.Annotations
     public enum ImplicitUseTargetFlags
     {
         Default = 1,
-        Itself = Default,
-        Members = 2,
-        WithMembers = Members | Itself,
     }
 }

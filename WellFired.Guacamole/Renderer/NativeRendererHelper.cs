@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Linq;
+using System.Reflection;
+using WellFired.Guacamole.Attributes;
 
-namespace WellFired.Guacamole
+namespace WellFired.Guacamole.Renderer
 {
 	public static class NativeRendererHelper
 	{
 		public static Assembly LaunchedAssembly 
-		{
-			get;
+		{ private get;
 			set;
 		}
 		
@@ -36,6 +36,8 @@ namespace WellFired.Guacamole
 					break;
 			}
 
+		    // ReSharper disable once CoVariantArrayConversion
+		    // ReSharper disable once AssignNullToNotNullAttribute
 			return _typeMap[checkType].Invoke(Type.EmptyTypes) as INativeRenderer;
 		}
 	}

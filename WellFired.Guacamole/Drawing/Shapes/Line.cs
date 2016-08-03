@@ -8,7 +8,7 @@ namespace WellFired.Guacamole.Drawing.Shapes
 		public Vector StartPoint;
 		public Vector EndPoint;
 
-		public List<Vector> Path { get; set; }
+		public List<Vector> Path { get; private set; }
 
 		public Side Contains(double x, double y)
 		{

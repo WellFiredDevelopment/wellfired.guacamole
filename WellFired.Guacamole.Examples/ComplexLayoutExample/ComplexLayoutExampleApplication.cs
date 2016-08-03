@@ -1,8 +1,13 @@
-﻿namespace WellFired.Guacamole.Examples.ComplexLayoutExample
+﻿using WellFired.Guacamole.Annotations;
+using WellFired.Guacamole.Types;
+
+namespace WellFired.Guacamole.Examples.ComplexLayoutExample
 {
+	[UsedImplicitly]
 	public class ComplexLayoutExampleApplication
 	{
 		[UnityEditor.MenuItem ("Window/guacamole/Test/ComplexLayout")]
+		[UsedImplicitly]
 		static void TestWindow () 
 		{
 			var application = new Unity.Editor.Application();

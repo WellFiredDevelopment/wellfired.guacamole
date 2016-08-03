@@ -1,6 +1,6 @@
-﻿using System;
+﻿using WellFired.Guacamole.Annotations;
 
-namespace WellFired.Guacamole
+namespace WellFired.Guacamole.Types
 {
     // ReSharper disable once InconsistentNaming
 	public struct UIRect
@@ -19,11 +19,15 @@ namespace WellFired.Guacamole
 	    // ReSharper disable once InconsistentNaming
 		private static readonly UIRect one = new UIRect (0, 0, 1, 1);
 
-		public static UIRect Min { get { return min; } }
-		public static UIRect Max { get { return max; } }
-		public static UIRect One { get { return one; } }
+        [PublicAPI]
+        public static UIRect Min { get { return min; } }
+        [PublicAPI]
+        public static UIRect Max { get { return max; } }
+        [PublicAPI]
+        public static UIRect One { get { return one; } }
 
-		public int X 
+        [PublicAPI]
+        public int X 
 		{
 			get { return _x; }
 			set 
@@ -33,7 +37,8 @@ namespace WellFired.Guacamole
 			}
 		}
 
-		public int Y 
+        [PublicAPI]
+        public int Y 
 		{
 			get { return _y; }
 			set 
@@ -43,7 +48,8 @@ namespace WellFired.Guacamole
 			}
 		}
 
-		public int Width 
+        [PublicAPI]
+        public int Width 
 		{
 			get { return _width; }
 			set 
@@ -53,7 +59,8 @@ namespace WellFired.Guacamole
 			}
 		}
 
-		public int Height 
+        [PublicAPI]
+        public int Height 
 		{
 			get { return _height; }
 			set 
@@ -63,7 +70,8 @@ namespace WellFired.Guacamole
 			}
 		}
 
-		public UILocation Location
+        [PublicAPI]
+        public UILocation Location
 		{
 			get { return _location; }
 			set 
@@ -74,7 +82,8 @@ namespace WellFired.Guacamole
 			}
 		}
 
-		public UISize Size
+        [PublicAPI]
+        public UISize Size
 		{
 			get { return _size; }
 			set 
@@ -87,21 +96,18 @@ namespace WellFired.Guacamole
 
 		public UIRect(int x, int y, int width, int height)
 		{
-			this._x = x;
-			this._y = y;
-			this._width = width;
-			this._height = height;
-			this._location = new UILocation(x, y);
-			this._size = new UISize(width, height);
+			_x = x;
+			_y = y;
+			_width = width;
+			_height = height;
+			_location = new UILocation(x, y);
+			_size = new UISize(width, height);
 		}
 
 		public override bool Equals(object obj)
 		{
 			var compareTo = (UIRect)obj;
-			if (compareTo.X == X && compareTo.Y == Y && compareTo.Width == Width && compareTo.Height == Height)
-				return true;
-
-			return false;
+			return compareTo.X == X && compareTo.Y == Y && compareTo.Width == Width && compareTo.Height == Height;
 		}
 
 		public override int GetHashCode()
@@ -111,12 +117,6 @@ namespace WellFired.Guacamole
 
 		public static bool operator==(UIRect a, UIRect b)
 		{
-			if(Object.ReferenceEquals(a, b))
-				return true;
-
-			if(((object)a == null) || ((object)b == null))
-				return false;
-
 			return a.Equals(b);
 		}
 

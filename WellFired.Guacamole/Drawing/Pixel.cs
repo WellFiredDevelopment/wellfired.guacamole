@@ -2,7 +2,7 @@
 
 namespace WellFired.Guacamole.Drawing
 {
-	public struct Pixel
+	public struct Pixel : IEquatable<Pixel>
 	{
 		public int X;
 		public int Y;
@@ -13,20 +13,22 @@ namespace WellFired.Guacamole.Drawing
 			return compareTo.X == X && compareTo.Y == Y;
 		}
 
-		public override int GetHashCode()
+	    public bool Equals(Pixel other)
+	    {
+	        return X == other.X && Y == other.Y;
+	    }
+
+	    public override int GetHashCode()
+	    {
+	        unchecked
+	        {
+	            return (X * 397) ^ Y;
+	        }
+	    }
+
+	    public static bool operator ==(Pixel a, Pixel b)
 		{
-			return X ^ Y;
-		}
-
-		public static bool operator ==(Pixel a, Pixel b)
-		{
-			if (Object.ReferenceEquals(a, b))
-				return true;
-
-			if (((object)a == null) || ((object)b == null))
-				return false;
-
-			return a.Equals(b);
+	        return a.Equals(b);
 		}
 
 		public static bool operator !=(Pixel a, Pixel b)

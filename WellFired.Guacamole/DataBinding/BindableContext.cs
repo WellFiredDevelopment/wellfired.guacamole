@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Reflection;
 
-namespace WellFired.Guacamole.Databinding
+namespace WellFired.Guacamole.DataBinding
 {
 	public class BindableContext
 	{
@@ -15,8 +15,8 @@ namespace WellFired.Guacamole.Databinding
 		private string _targetProperty;
 
 		public string TargetProperty 
-		{ 
-			get { return _targetProperty; }
+		{
+		    private get { return _targetProperty; }
 			set {
 				_targetProperty = value;
 				ConfigureSet();
@@ -27,7 +27,7 @@ namespace WellFired.Guacamole.Databinding
 		{
 			set
 			{
-				if (Equals(this._value, value))
+				if (Equals(_value, value))
 					return;
 
 				_value = BindableContextConverter.From(value, Property);
@@ -43,14 +43,14 @@ namespace WellFired.Guacamole.Databinding
 				}
 
 				if (_propertySetMethod != null)
-					_propertySetMethod.Invoke(_bindableObject, new[] {value});
+					_propertySetMethod.Invoke(Object, new[] {value});
 			}
 			get { return _value; }
 		}
 
 		public INotifyPropertyChanged Object
 		{
-			get { return _bindableObject; }
+		    private get { return _bindableObject; }
 			set
 			{
 				_bindableObject = value;
@@ -60,14 +60,14 @@ namespace WellFired.Guacamole.Databinding
 
 		private void ConfigureSet()
 		{
-			if (_bindableObject == null || Property == null || TargetProperty == null)
+			if (Object == null || Property == null || TargetProperty == null)
 			{
 				_propertyInfo = null;
 				_propertySetMethod = null;
 			}
 			else
 			{
-				var type = _bindableObject.GetType();
+				var type = Object.GetType();
 				_propertyInfo = type.GetProperty(TargetProperty, BindingFlags.Public | BindingFlags.Instance);
 				_propertySetMethod = _propertyInfo.GetSetMethod();
 				_propertyGetMethod = _propertyInfo.GetGetMethod();
@@ -76,7 +76,7 @@ namespace WellFired.Guacamole.Databinding
 
 		public object GetValue()
 		{
-			return _propertyGetMethod != null ? _propertyGetMethod.Invoke(_bindableObject, null) : null;
+			return _propertyGetMethod != null ? _propertyGetMethod.Invoke(Object, null) : null;
 		}
 	}
 

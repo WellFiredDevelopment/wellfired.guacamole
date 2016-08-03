@@ -1,40 +1,48 @@
-﻿using WellFired.Guacamole.Databinding;
+﻿using WellFired.Guacamole.Annotations;
+using WellFired.Guacamole.DataBinding;
+using WellFired.Guacamole.Types;
 
-namespace WellFired.Guacamole
+namespace WellFired.Guacamole.View
 {
 	public class Slider : ViewBase
-	{
-		public static readonly BindableProperty MinValueProperty = BindableProperty.Create<Slider, double>(
+    {
+        [PublicAPI]
+        public static readonly BindableProperty MinValueProperty = BindableProperty.Create<Slider, double>(
 			defaultValue: 0.0,
 			bindingMode: BindingMode.TwoWay,
 			getter: slider => slider.MinValue
 		);
 
-		public static readonly BindableProperty MaxValueProperty = BindableProperty.Create<Slider, double>(
+        [PublicAPI]
+        public static readonly BindableProperty MaxValueProperty = BindableProperty.Create<Slider, double>(
 			defaultValue: 1.0,
 			bindingMode: BindingMode.TwoWay,
 			getter: slider => slider.MaxValue
 		);
 
-		public static readonly BindableProperty ValueProperty = BindableProperty.Create<Slider, double>(
+        [PublicAPI]
+        public static readonly BindableProperty ValueProperty = BindableProperty.Create<Slider, double>(
 			defaultValue: 0.0,
 			bindingMode: BindingMode.TwoWay,
 			getter: slider => slider.Value
 		);
 
-		public double MinValue
+        [PublicAPI]
+        public double MinValue
 		{
 			get { return (double)GetValue(MinValueProperty); }
 			set { SetValue(MinValueProperty, value); }
 		}
 
-		public double MaxValue
+        [PublicAPI]
+        public double MaxValue
 		{
 			get { return (double)GetValue(MaxValueProperty); }
 			set { SetValue(MaxValueProperty, value); }
 		}
 
-		public double Value
+        [PublicAPI]
+        public double Value
 		{
 			get { return (double)GetValue(ValueProperty); }
 			set { SetValue(ValueProperty, value); }

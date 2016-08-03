@@ -1,9 +1,10 @@
 ﻿using System;
+using WellFired.Guacamole.Annotations;
 
-namespace WellFired.Guacamole
+namespace WellFired.Guacamole.Types
 {
 	[Flags]
-	public enum CornerMask
+    public enum CornerMask
 	{
 		TopLeft = 1 << 0,
 		TopRight = 1 << 1,
@@ -13,7 +14,7 @@ namespace WellFired.Guacamole
 		All = TopLeft | TopRight | BottomLeft | BottomRight,
 		Right = TopRight | BottomRight,
 		Left = TopLeft | BottomLeft,
-		Top = TopLeft | TopRight,
-		Bottom = BottomLeft | BottomRight
+		[UsedImplicitly] Top = TopLeft | TopRight,
+		[UsedImplicitly] Bottom = BottomLeft | BottomRight
 	}
 }

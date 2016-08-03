@@ -1,6 +1,7 @@
 ﻿using WellFired.Guacamole.Annotations;
+using WellFired.Guacamole.Types;
 
-namespace WellFired.Guacamole.Examples.UIBinding
+namespace WellFired.Guacamole.Examples.UIBindingExample
 {
     // ReSharper disable once InconsistentNaming
 	public static class UIBindingTestApplication

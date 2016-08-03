@@ -2,32 +2,23 @@
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace WellFired.Guacamole.Databinding
+namespace WellFired.Guacamole.DataBinding
 {
 	public class BindableProperty
 	{
 		public string PropertyName
 		{
-			get;
-			set;
+			get; private set;
 		}
-	
-		public System.Func<object, object> Getter 
+
+	    public object DefaultValue 
 		{
-			set;
-			get;
-		}
-	
-		public object DefaultValue 
-		{
-			get;
-			set;
+			get; private set;
 		}
 
 		public Type PropertyType
 		{
-			get;
-			set;
+			get; private set;
 		}
 	
 		public BindingMode BindingMode 
@@ -35,12 +26,7 @@ namespace WellFired.Guacamole.Databinding
 			get;
 			set;
 		}
-
-		/// <summary>
-		/// Creates a BindableProperty on an object of Type A, binding to a property of Type B
-		/// For example..... BindableProperty<NumberEntry, float> Will create a bindable property on 
-		/// a NumberEntry, binding to float Property.
-		/// </summary>
+        
 		public static BindableProperty Create<TA, TB>(TB defaultValue, BindingMode bindingMode, Expression<Func<TA,TB>> getter)
 		{
 			var expression = getter.Body;

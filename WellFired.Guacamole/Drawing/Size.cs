@@ -1,4 +1,5 @@
 ﻿using System;
+using WellFired.Guacamole.Annotations;
 
 namespace WellFired.Guacamole.Drawing
 {
@@ -12,10 +13,11 @@ namespace WellFired.Guacamole.Drawing
 	    // ReSharper disable once InconsistentNaming
 		private static readonly Size _one = new Size(1.0, 1.0);
 
-		public static Size Min { get { return _min; } }
-		public static Size One { get { return _one; } }
+        [PublicAPI] public static Size Min { get { return _min; } }
+        [PublicAPI] public static Size One { get { return _one; } }
 
-		public double Width
+        [PublicAPI]
+        public double Width
 		{
 			get { return _width; }
 			set
@@ -24,7 +26,8 @@ namespace WellFired.Guacamole.Drawing
 			}
 		}
 
-		public double Height
+        [PublicAPI]
+        public double Height
 		{
 			get { return _height; }
 			set
@@ -33,7 +36,7 @@ namespace WellFired.Guacamole.Drawing
 			}
 		}
 
-		public Size(double width, double height)
+	    private Size(double width, double height)
 		{
 			_width = width;
 			_height = height;
@@ -47,10 +50,9 @@ namespace WellFired.Guacamole.Drawing
 
 		public override int GetHashCode()
 		{
-			unchecked // Overflow is fine, just wrap
+			unchecked
 			{
-				int hash = 17;
-				// Suitable nullity checks etc, of course :)
+				var hash = 17;
 				hash = hash * 23 + Width.GetHashCode();
 				hash = hash * 23 + Height.GetHashCode();
 				return hash;
@@ -59,13 +61,7 @@ namespace WellFired.Guacamole.Drawing
 
 		public static bool operator ==(Size a, Size b)
 		{
-			if (Object.ReferenceEquals(a, b))
-				return true;
-
-			if (((object)a == null) || ((object)b == null))
-				return false;
-
-			return a.Equals(b);
+		    return a.Equals(b);
 		}
 
 		public static bool operator !=(Size a, Size b)

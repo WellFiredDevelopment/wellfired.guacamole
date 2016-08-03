@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Linq;
+using WellFired.Guacamole.Types;
+using WellFired.Guacamole.View;
 
-namespace WellFired.Guacamole
+namespace WellFired.Guacamole.Layout
 {
     public class AdjacentLayout : ViewBase
     {
-        public OrientationOptions Orientation { get; set; }
-
-        public int Spacing { get; set; }
+        public OrientationOptions Orientation { private get; set; }
+        public int Spacing { private get; set; }
 
         public AdjacentLayout()
         {
@@ -83,15 +84,23 @@ namespace WellFired.Guacamole
 
         public override void AttemptToFullfillRequests(UIRect availableSpace)
         {
-            ReAdjustTo(HorizontalLayout == LayoutOptions.Fill ? availableSpace.Width : RectRequest.Width, VerticalLayout == LayoutOptions.Fill ? availableSpace.Height : RectRequest.Height);
+            ReAdjustTo(
+                HorizontalLayout == LayoutOptions.Fill ? availableSpace.Width : RectRequest.Width,
+                VerticalLayout == LayoutOptions.Fill ? availableSpace.Height : RectRequest.Height);
 
             switch(Orientation)
             {
                 case OrientationOptions.Horizontal:
-                    var horizontalDynamicChildren = Children.Where(child => child.HorizontalLayout == LayoutOptions.Fill);
-                    var horizontalStaticChildren = Children.Except(horizontalDynamicChildren);
-                    var staticWidth = horizontalStaticChildren.Sum(child => child.RectRequest.Width);
-                    var sharedWidth = horizontalDynamicChildren.Count() == 0 ? 0 : (availableSpace.Width - staticWidth - Padding.Width - Spacing * (Children.Count - 1)) / horizontalDynamicChildren.Count();
+                    var horizontalDynamicChildren = Children.Where(
+                        child => child.HorizontalLayout == LayoutOptions.Fill);
+                    var dynamicChildren = horizontalDynamicChildren as ViewBase[] ?? horizontalDynamicChildren.ToArray();
+                    var horizontalStaticChildren = Children.Except(dynamicChildren);
+                    var staticChildren = horizontalStaticChildren as ViewBase[] ?? horizontalStaticChildren.ToArray();
+                    var staticWidth = staticChildren.Sum(child => child.RectRequest.Width);
+                    var sharedWidth = !dynamicChildren.Any()
+                                          ? 0
+                                          : (availableSpace.Width - staticWidth - Padding.Width -
+                                             Spacing * (Children.Count - 1)) / dynamicChildren.Length;
 
                     // This is just to stop the UI from looking weird as hell if the user shrinks the UI too much.
                     if(sharedWidth < 0)
@@ -101,22 +110,35 @@ namespace WellFired.Guacamole
                     if(VerticalLayout == LayoutOptions.Fill)
                         newHeight = availableSpace.Height - Padding.Height;
 
-                    foreach(var child in horizontalDynamicChildren)
+                    foreach(var child in dynamicChildren)
                     {
-                        var sharedAvailableSpace = new UIRect(availableSpace.X, availableSpace.Y, sharedWidth, newHeight);
+                        var sharedAvailableSpace = new UIRect(
+                            availableSpace.X,
+                            availableSpace.Y,
+                            sharedWidth,
+                            newHeight);
                         child.AttemptToFullfillRequests(availableSpace: sharedAvailableSpace);
                     }
-                    foreach(var child in horizontalStaticChildren)
+                    foreach(var child in staticChildren)
                     {
-                        var staticAvailableSpace = new UIRect(availableSpace.X, availableSpace.Y, child.RectRequest.Width, newHeight);
+                        var staticAvailableSpace = new UIRect(
+                            availableSpace.X,
+                            availableSpace.Y,
+                            child.RectRequest.Width,
+                            newHeight);
                         child.AttemptToFullfillRequests(availableSpace: staticAvailableSpace);
                     }
                     break;
                 case OrientationOptions.Vertical:
                     var verticalDynamicChildren = Children.Where(child => child.VerticalLayout == LayoutOptions.Fill);
-                    var verticalStaticChildren = Children.Except(verticalDynamicChildren);
-                    var staticHeight = verticalStaticChildren.Sum(child => child.RectRequest.Height);
-                    var sharedHeight = verticalDynamicChildren.Count() == 0 ? 0 : (availableSpace.Height - Padding.Height - Spacing * (Children.Count - 1) - staticHeight) / verticalDynamicChildren.Count();
+                    var viewBases = verticalDynamicChildren as ViewBase[] ?? verticalDynamicChildren.ToArray();
+                    var verticalStaticChildren = Children.Except(viewBases);
+                    var enumerable = verticalStaticChildren as ViewBase[] ?? verticalStaticChildren.ToArray();
+                    var staticHeight = enumerable.Sum(child => child.RectRequest.Height);
+                    var sharedHeight = !viewBases.Any()
+                                           ? 0
+                                           : (availableSpace.Height - Padding.Height - Spacing * (Children.Count - 1) -
+                                              staticHeight) / viewBases.Length;
 
                     // This is just to stop the UI from looking weird as hell if the user shrinks the UI too much.
                     if(sharedHeight < 0)
@@ -126,14 +148,22 @@ namespace WellFired.Guacamole
                     if(HorizontalLayout == LayoutOptions.Fill)
                         newWidth = availableSpace.Width - Padding.Width;
 
-                    foreach(var child in verticalDynamicChildren)
+                    foreach(var child in viewBases)
                     {
-                        var sharedAvailableSpace = new UIRect(availableSpace.X, availableSpace.Y, newWidth, sharedHeight);
+                        var sharedAvailableSpace = new UIRect(
+                            availableSpace.X,
+                            availableSpace.Y,
+                            newWidth,
+                            sharedHeight);
                         child.AttemptToFullfillRequests(availableSpace: sharedAvailableSpace);
                     }
-                    foreach(var child in verticalStaticChildren)
+                    foreach(var child in enumerable)
                     {
-                        var staticAvailableSpace = new UIRect(availableSpace.X, availableSpace.Y, newWidth, child.RectRequest.Height);
+                        var staticAvailableSpace = new UIRect(
+                            availableSpace.X,
+                            availableSpace.Y,
+                            newWidth,
+                            child.RectRequest.Height);
                         child.AttemptToFullfillRequests(availableSpace: staticAvailableSpace);
                     }
                     break;

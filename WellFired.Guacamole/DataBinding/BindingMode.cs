@@ -1,4 +1,4 @@
-﻿namespace WellFired.Guacamole.Databinding
+﻿namespace WellFired.Guacamole.DataBinding
 {
 	public enum BindingMode
 	{

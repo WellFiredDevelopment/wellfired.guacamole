@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WellFired.Guacamole
+namespace WellFired.Guacamole.DataBinding.Exceptions
 {
 	public class BindingExistsException : Exception 
 	{
