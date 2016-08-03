@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using System.ComponentModel;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.View;
@@ -8,7 +7,7 @@ namespace WellFired.Guacamole.Examples.TwoWayBindingExample
 {
     public class TwoWayBindingTestWindow : Window
     {
-        public TwoWayBindingTestWindow()
+        public TwoWayBindingTestWindow(INotifyPropertyChanged persistantData)
         {
             Padding = new UIPadding(5);
 
@@ -17,16 +16,7 @@ namespace WellFired.Guacamole.Examples.TwoWayBindingExample
             };
 
             Content = boundTextEntry;
-
-            const string assetPath = "Assets/guacamole-examples/TwoWayBindingExample/Editor/WindowData.asset";
-            var windowData = AssetDatabase.LoadAssetAtPath<TwoWayBindingTestModel>(assetPath);
-            if(windowData == null)
-            {
-                windowData = ScriptableObject.CreateInstance<TwoWayBindingTestModel>();
-                AssetDatabase.CreateAsset(windowData, assetPath);
-            }
-
-            BindingContext = windowData;
+            BindingContext = persistantData;
 
             boundTextEntry.Bind(TextEntry.TextProperty, "BoundText", BindingMode.TwoWay);
         }

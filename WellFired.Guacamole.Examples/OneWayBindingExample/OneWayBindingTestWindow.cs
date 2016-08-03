@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using System.ComponentModel;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.View;
 
@@ -7,7 +6,7 @@ namespace WellFired.Guacamole.Examples.OneWayBindingExample
 {
     public class OneWayBindingTestWindow : Window
     {
-        public OneWayBindingTestWindow()
+        public OneWayBindingTestWindow(INotifyPropertyChanged persistantData) : base(persistantData)
         {
             Padding = new UIPadding(5);
 
@@ -16,17 +15,8 @@ namespace WellFired.Guacamole.Examples.OneWayBindingExample
             };
 
             Content = boundTextEntry;
-
-            const string assetPath = "Assets/guacamole-examples/OneWayBindingExample/Editor/WindowData.asset";
-            var windowData = AssetDatabase.LoadAssetAtPath<OneWayBindingTestModel>(assetPath);
-            if(windowData == null)
-            {
-                windowData = ScriptableObject.CreateInstance<OneWayBindingTestModel>();
-                AssetDatabase.CreateAsset(windowData, assetPath);
-            }
-
-            BindingContext = windowData;
-
+            
+            BindingContext = persistantData;
             boundTextEntry.Bind(TextEntry.TextProperty, "BoundText");
         }
     }

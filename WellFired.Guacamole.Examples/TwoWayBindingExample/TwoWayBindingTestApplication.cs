@@ -20,7 +20,7 @@ namespace WellFired.Guacamole.Examples.TwoWayBindingExample
 				Title = "TwoWayBindingTest"
 			};
 
-			application.Launch(context);
+			application.Launch<TwoWayBindingTestModel>(context);
 		}
 	}
 }

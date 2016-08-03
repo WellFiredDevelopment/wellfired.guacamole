@@ -5,6 +5,7 @@ using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Exceptions;
 using WellFired.Guacamole.InitializationContext;
 using WellFired.Guacamole.Types;
+using WellFired.Guacamole.Unity.Editor.DataBinding;
 
 namespace WellFired.Guacamole.Unity.Editor
 {
@@ -57,7 +58,15 @@ namespace WellFired.Guacamole.Unity.Editor
 		{
 			get { return _title; }
 			set { _title = value; }
-		}
+        }
+
+	    [SerializeField]
+        private ObservableScriptableObject _persistantData;
+	    public ObservableScriptableObject PersistantData
+        {
+            get { return _persistantData; }
+            set { _persistantData = value; }
+        }
 
         [UsedImplicitly, Obfuscation(Feature = "renaming")]
         public void OnEnable() { hideFlags = HideFlags.HideAndDontSave; }
@@ -65,7 +74,6 @@ namespace WellFired.Guacamole.Unity.Editor
 		#region IInitializationContext implementation
 		public void ValidateSetup()
         {
-            Debug.Log("1.5");
             if (MainContent == null)
 				throw new InitializationContextInvalid();
 		}
@@ -108,9 +116,16 @@ namespace WellFired.Guacamole.Unity.Editor
 		{
 			get { return ScriptableObject.Title; }
 			set { ScriptableObject.Title = value; }
-		}
-		
-		internal ApplicationInitializationContextScriptableObject ScriptableObject
+        }
+
+        [PublicAPI]
+        public ObservableScriptableObject PersistantData
+        {
+            get { return ScriptableObject.PersistantData; }
+            set { ScriptableObject.PersistantData = value; }
+        }
+
+        internal ApplicationInitializationContextScriptableObject ScriptableObject
 		{
 			get; private set;
 		}

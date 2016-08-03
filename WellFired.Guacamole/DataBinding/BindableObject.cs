@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.DataBinding.Exceptions;
 
@@ -23,8 +24,10 @@ namespace WellFired.Guacamole.DataBinding
 			}
 			set 
 			{
-				// Here we check for equality so we can avoid recursion.
-				if(_bindingContext == value)
+			    Debug.Assert(_bindingContext != null, "_bindingContext != null");
+
+                // Here we check for equality so we can avoid recursion.
+                if (_bindingContext == value)
 					return;
 
 				if(_bindingContext != null)

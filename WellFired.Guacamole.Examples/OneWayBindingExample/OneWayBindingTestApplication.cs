@@ -1,4 +1,5 @@
-﻿using WellFired.Guacamole.Annotations;
+﻿using UnityEditor;
+using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Examples.OneWayBindingExample
@@ -6,7 +7,7 @@ namespace WellFired.Guacamole.Examples.OneWayBindingExample
 	[UsedImplicitly]
 	public class OneWayBindingTestApplication
 	{
-		[UnityEditor.MenuItem("Window/guacamole/Test/OneWayBindingTest")]
+		[MenuItem("Window/guacamole/Test/OneWayBindingTest")]
 		[UsedImplicitly]
 		static void OpenWindow()
 		{
@@ -20,7 +21,7 @@ namespace WellFired.Guacamole.Examples.OneWayBindingExample
 				Title = "OneWayBindingTest"
 			};
 
-			application.Launch(context);
+			application.Launch<OneWayBindingTestModel>(context);
 		}
 	}
 }
