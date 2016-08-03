@@ -75,9 +75,15 @@ namespace WellFired.Guacamole.View
         private UIRect _validRectRequest;
 
         public IList<ViewBase> Children { get; private set; }
-        public LayoutOptions HorizontalLayout { get; protected set; }
-        public LayoutOptions VerticalLayout { get; protected set; }
-        public UIPadding Padding { get; set; }
+
+		[PublicAPI]
+		public LayoutOptions HorizontalLayout { get; set; }
+
+		[PublicAPI]
+        public LayoutOptions VerticalLayout { get; set; }
+
+		[PublicAPI]
+		public UIPadding Padding { get; set; }
 
         [PublicAPI]
         public UIColor BackgroundColor

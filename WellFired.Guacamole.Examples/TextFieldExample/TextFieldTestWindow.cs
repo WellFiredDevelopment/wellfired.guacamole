@@ -10,7 +10,6 @@ namespace WellFired.Guacamole.Examples.TextFieldExample
             Padding = new UIPadding(5);
 
             Content = new TextEntry {
-                VerticalTextAlign = UITextAlign.Middle,
                 Text = "Test"
             };
         }

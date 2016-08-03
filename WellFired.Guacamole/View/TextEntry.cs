@@ -63,9 +63,14 @@ namespace WellFired.Guacamole.View
 
 	    public TextEntry()
         {
+			// Set some nice defaults
             BackgroundColor = UIColor.FromRGB(66, 66, 66);
             OutlineColor = BackgroundColor;
             TextColor = UIColor.White;
+		    HorizontalLayout = LayoutOptions.Fill;
+			CornerRadius = 8;
+			Padding = new UIPadding(5, 5, 5, 5);
+		    VerticalTextAlign = UITextAlign.Middle;
         }
     }
 }

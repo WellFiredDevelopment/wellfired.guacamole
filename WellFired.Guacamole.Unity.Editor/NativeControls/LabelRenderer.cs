@@ -56,6 +56,11 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 
 			CreateStyleWith(label);
 
+			var offset = (float)Control.CornerRadius;
+			var smallest = (int)(Mathf.Min(offset, Mathf.Min(renderRect.Width * 0.5f, renderRect.Height * 0.5f)) + 0.5f);
+			smallest = Mathf.Max(smallest, 2);
+			Style.border = new RectOffset(smallest, smallest, smallest, smallest);
+
 			UnityEditor.EditorGUI.LabelField(renderRect.ToUnityRect(), label.Text, Style);
 		}
 	}
