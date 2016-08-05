@@ -147,34 +147,23 @@ namespace WellFired.Guacamole.Unity.Editor.DataBinding
         private class PropertyField
         {
             private readonly MethodInfo _getter;
-            private readonly PropertyInfo _info;
             private readonly object _obj;
             private readonly MethodInfo _setter;
-            private readonly SerializedPropertyType _type;
 
-            public PropertyInfo Info
-            {
-                get { return _info; }
-            }
+            public PropertyInfo Info { get; }
 
-            public SerializedPropertyType Type
-            {
-                get { return _type; }
-            }
+            public SerializedPropertyType Type { get; }
 
-            public string Name
-            {
-                get { return ObjectNames.NicifyVariableName(_info.Name); }
-            }
+            public string Name => ObjectNames.NicifyVariableName(Info.Name);
 
             public PropertyField(object obj, PropertyInfo info, SerializedPropertyType type)
             {
                 _obj = obj;
-                _info = info;
-                _type = type;
+                Info = info;
+                Type = type;
 
-                _getter = _info.GetGetMethod();
-                _setter = _info.GetSetMethod();
+                _getter = Info.GetGetMethod();
+                _setter = Info.GetSetMethod();
             }
 
             public object GetValue()

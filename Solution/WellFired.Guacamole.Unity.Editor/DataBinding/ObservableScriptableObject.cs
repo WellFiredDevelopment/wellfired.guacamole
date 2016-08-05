@@ -24,10 +24,7 @@ namespace WellFired.Guacamole.Unity.Editor.DataBinding
 	    private void OnPropertyChanged(string propertyName)
 		{
 			var handler = PropertyChanged;
-			if (handler == null)
-				return;
-
-			handler(this, new PropertyChangedEventArgs(propertyName));
+	        handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 }

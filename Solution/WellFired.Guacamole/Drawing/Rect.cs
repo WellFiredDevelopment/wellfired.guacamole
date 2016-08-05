@@ -5,85 +5,39 @@ namespace WellFired.Guacamole.Drawing
 {
 	public struct Rect
 	{
-		private double _x;
-		private double _y;
-		private double _width;
-		private double _height;
+	    [PublicAPI] public static Rect Min { get; } = new Rect(0, 0, 0, 0);
+	    [PublicAPI] public static Rect Max { get; } = new Rect(0, 0, int.MaxValue, int.MaxValue);
+	    [PublicAPI] public static Rect One { get; } = new Rect(0, 0, 1, 1);
 
-	    // ReSharper disable once InconsistentNaming
-		private static readonly Rect _min = new Rect(0, 0, 0, 0);
-	    // ReSharper disable once InconsistentNaming
-		private static readonly Rect _max = new Rect(0, 0, int.MaxValue, int.MaxValue);
-	    // ReSharper disable once InconsistentNaming
-		private static readonly Rect _one = new Rect(0, 0, 1, 1);
+	    [PublicAPI]
+        public double X { get; set; }
 
-        [PublicAPI] public static Rect Min { get { return _min; } }
-        [PublicAPI] public static Rect Max { get { return _max; } }
-        [PublicAPI] public static Rect One { get { return _one; } }
+	    [PublicAPI]
+        public double Y { get; set; }
 
-        [PublicAPI]
-        public double X
+	    [PublicAPI]
+        public double Width { get; set; }
+
+	    [PublicAPI]
+        public double Height { get; set; }
+
+	    [PublicAPI]
+        public Vector Center => new Vector(X + Width * 0.5f, Y + Height * 0.5f);
+
+	    public Rect(double x, double y, double width, double height)
 		{
-			get { return _x; }
-			set
-			{
-				_x = value;
-			}
-		}
-
-        [PublicAPI]
-        public double Y
-		{
-			get { return _y; }
-			set
-			{
-				_y = value;
-			}
-		}
-
-        [PublicAPI]
-        public double Width
-		{
-			get { return _width; }
-			set
-			{
-				_width = value;
-			}
-		}
-
-        [PublicAPI]
-        public double Height
-		{
-			get { return _height; }
-			set
-			{
-				_height = value;
-			}
-		}
-
-        [PublicAPI]
-        public Vector Center
-		{
-			get
-			{
-				return new Vector(X + Width * 0.5f, Y + Height * 0.5f);
-			}
-		}
-
-		public Rect(double x, double y, double width, double height)
-		{
-			_x = x;
-			_y = y;
-			_width = width;
-			_height = height;
+			X = x;
+			Y = y;
+			Width = width;
+			Height = height;
 		}
 
 		public Rect(double x, double y, Size size)
 		{
-			_x = x;
-			_y = y;
-			_width = size.Width;
-			_height = size.Height;
+			X = x;
+			Y = y;
+			Width = size.Width;
+			Height = size.Height;
 		}
 
 		public override bool Equals(object obj)

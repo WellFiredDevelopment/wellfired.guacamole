@@ -7,22 +7,17 @@ namespace WellFired.Guacamole.Types
 	{
 		public int Width { get; set; }
 		public int Height { get; set; }
-	
-	    // ReSharper disable once InconsistentNaming
-		private static readonly UISize _min = new UISize (0, 0);
-	    // ReSharper disable once InconsistentNaming
-		private static readonly UISize _max = new UISize (int.MaxValue, int.MaxValue);
-	    // ReSharper disable once InconsistentNaming
-		private static readonly UISize _one = new UISize (1, 1);
 
-        [PublicAPI]
-        public static UISize Min { get { return _min; } }
-        [PublicAPI]
-        public static UISize Max { get { return _max; } }
-        [PublicAPI]
-        public static UISize One { get { return _one; } }
-	
-		public UISize(int width, int height) : this()
+	    [PublicAPI]
+        public static UISize Min { get; } = new UISize (0, 0);
+
+	    [PublicAPI]
+        public static UISize Max { get; } = new UISize (int.MaxValue, int.MaxValue);
+
+	    [PublicAPI]
+        public static UISize One { get; } = new UISize (1, 1);
+
+	    public UISize(int width, int height) : this()
 		{
 			Width = width;
 			Height = height;
@@ -34,12 +29,21 @@ namespace WellFired.Guacamole.Types
 			return compareTo.Width == Width && compareTo.Height == Height;
 		}
 
-		public override int GetHashCode()
-		{
-			return Width ^ Height;
-		}
+        [PublicAPI]
+        public bool Equals(UISize other)
+	    {
+	        return Width == other.Width && Height == other.Height;
+	    }
 
-		public static bool operator==(UISize a, UISize b)
+	    public override int GetHashCode()
+	    {
+	        unchecked
+	        {
+	            return (Width*397) ^ Height;
+	        }
+	    }
+
+	    public static bool operator==(UISize a, UISize b)
 		{
 			return a.Equals(b);
 		}

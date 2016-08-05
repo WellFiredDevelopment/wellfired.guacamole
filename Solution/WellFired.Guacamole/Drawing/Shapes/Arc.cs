@@ -8,20 +8,12 @@ namespace WellFired.Guacamole.Drawing.Shapes
 		public double StartAngle;
 		public double SweepAngle;
 		public Rect ArcRect;
-		
-		private readonly List<Vector> _path = new List<Vector>();
 
-		public List<Vector> Path
-		{
-			get { return _path; }
-		}
+	    public List<Vector> Path { get; } = new List<Vector>();
 
-		private double Radius
-		{
-			get { return ArcRect.Width * 0.5f; }
-		}
+	    private double Radius => ArcRect.Width * 0.5f;
 
-		public Side Contains(double x, double y)
+	    public Side Contains(double x, double y)
 		{
 			return Side.Outside;
 		}

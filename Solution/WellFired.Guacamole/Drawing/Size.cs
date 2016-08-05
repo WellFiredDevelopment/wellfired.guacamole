@@ -5,41 +5,19 @@ namespace WellFired.Guacamole.Drawing
 {
 	public struct Size
 	{
-		private double _width;
-		private double _height;
+	    [PublicAPI] public static Size Min { get; } = new Size(0.0, 0.0);
+	    [PublicAPI] public static Size One { get; } = new Size(1.0, 1.0);
 
-	    // ReSharper disable once InconsistentNaming
-		private static readonly Size _min = new Size(0.0, 0.0);
-	    // ReSharper disable once InconsistentNaming
-		private static readonly Size _one = new Size(1.0, 1.0);
+	    [PublicAPI]
+        public double Width { get; set; }
 
-        [PublicAPI] public static Size Min { get { return _min; } }
-        [PublicAPI] public static Size One { get { return _one; } }
-
-        [PublicAPI]
-        public double Width
-		{
-			get { return _width; }
-			set
-			{
-				_width = value;
-			}
-		}
-
-        [PublicAPI]
-        public double Height
-		{
-			get { return _height; }
-			set
-			{
-				_height = value;
-			}
-		}
+	    [PublicAPI]
+        public double Height { get; set; }
 
 	    private Size(double width, double height)
 		{
-			_width = width;
-			_height = height;
+			Width = width;
+			Height = height;
 		}
 
 		public override bool Equals(object obj)

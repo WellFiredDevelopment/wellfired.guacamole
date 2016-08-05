@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using UnityEditor;
 using UnityEngine;
 using WellFired.Guacamole.Annotations;

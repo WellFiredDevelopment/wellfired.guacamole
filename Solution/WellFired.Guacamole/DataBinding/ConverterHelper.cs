@@ -12,7 +12,7 @@ namespace WellFired.Guacamole.DataBinding
         }
 
         [PublicAPI]
-        public static object ConvertTo(Type desiredType, object paramater)
+        private static object ConvertTo(Type desiredType, object paramater)
         {
             if(paramater == null)
                 return null;

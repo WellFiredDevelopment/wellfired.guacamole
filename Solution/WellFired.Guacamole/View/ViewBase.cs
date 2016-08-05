@@ -74,7 +74,7 @@ namespace WellFired.Guacamole.View
         private INativeRenderer _nativeRenderer;
         private UIRect _validRectRequest;
 
-        public IList<ViewBase> Children { get; private set; }
+        public IList<ViewBase> Children { get; }
 
 		[PublicAPI]
 		public LayoutOptions HorizontalLayout { get; set; }
@@ -141,10 +141,7 @@ namespace WellFired.Guacamole.View
 			set { SetValue(MaxSizeProperty, value); }
 		}
 
-		public UIRect RectRequest
-        {
-            get { return _validRectRequest; }
-        }
+		public UIRect RectRequest => _validRectRequest;
 
         protected INativeRenderer NativeRenderer
         {

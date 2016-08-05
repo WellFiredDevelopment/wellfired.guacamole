@@ -49,9 +49,22 @@ namespace WellFired.Guacamole.Types
                    Math.Abs(compareTo.B - B) < 0.01f && Math.Abs(compareTo.A - A) < 0.01f;
         }
 
+        [PublicAPI]
+        public bool Equals(UIColor other)
+        {
+            return R.Equals(other.R) && G.Equals(other.G) && B.Equals(other.B) && A.Equals(other.A);
+        }
+
         public override int GetHashCode()
         {
-            return (int)(R * 255.0f) ^ (int)(G * 255.0f) ^ (int)(B * 255.0f) ^ (int)(A * 255.0f);
+            unchecked
+            {
+                var hashCode = R.GetHashCode();
+                hashCode = (hashCode*397) ^ G.GetHashCode();
+                hashCode = (hashCode*397) ^ B.GetHashCode();
+                hashCode = (hashCode*397) ^ A.GetHashCode();
+                return hashCode;
+            }
         }
 
         public static bool operator ==(UIColor a, UIColor b)

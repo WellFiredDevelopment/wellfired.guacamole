@@ -4,18 +4,9 @@ namespace WellFired.Guacamole.Exceptions
 {
 	public class NativeRendererCannotBeFound : Exception 
 	{
-		private string ForControl {
-			set;
-			get;
-		}
+		private string ForControl { get; }
 
-		public override string Message 
-		{
-			get 
-			{
-				return string.Format("NativeRenderer Cannot be found for : {0}", ForControl);
-			}
-		}
+		public override string Message => $"NativeRenderer Cannot be found for : {ForControl}";
 
 	    public NativeRendererCannotBeFound(string forControl) 
 		{

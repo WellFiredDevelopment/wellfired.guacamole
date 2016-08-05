@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using WellFired.Guacamole.Attributes;
 using WellFired.Guacamole.Layout;
 using WellFired.Guacamole.Types;

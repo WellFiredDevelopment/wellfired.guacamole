@@ -12,21 +12,16 @@ namespace WellFired.Guacamole.Types
 	    private UILocation _location;
 	    private UISize _size;
 
-	    // ReSharper disable once InconsistentNaming
-		private static readonly UIRect min = new UIRect (0, 0, 0, 0);
-	    // ReSharper disable once InconsistentNaming
-		private static readonly UIRect max = new UIRect (0, 0, int.MaxValue, int.MaxValue);
-	    // ReSharper disable once InconsistentNaming
-		private static readonly UIRect one = new UIRect (0, 0, 1, 1);
+	    [PublicAPI]
+        public static UIRect Min { get; } = new UIRect (0, 0, 0, 0);
 
-        [PublicAPI]
-        public static UIRect Min { get { return min; } }
-        [PublicAPI]
-        public static UIRect Max { get { return max; } }
-        [PublicAPI]
-        public static UIRect One { get { return one; } }
+	    [PublicAPI]
+        public static UIRect Max { get; } = new UIRect (0, 0, int.MaxValue, int.MaxValue);
 
-        [PublicAPI]
+	    [PublicAPI]
+        public static UIRect One { get; } = new UIRect (0, 0, 1, 1);
+
+	    [PublicAPI]
         public int X 
 		{
 			get { return _x; }
@@ -145,7 +140,7 @@ namespace WellFired.Guacamole.Types
 
 	    public override string ToString()
 	    {
-	        return string.Format("x: {0}, y: {1}, width: {2}, height: {3}", X, Y, Width, Height);
+	        return $"x: {X}, y: {Y}, width: {Width}, height: {Height}";
 	    }
 	}
 }

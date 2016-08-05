@@ -8,7 +8,7 @@ namespace WellFired.Guacamole.DataBinding
 {
     public class ReflectionCache
     {
-        public MemberInfo[] Members { get; private set; }
+        public MemberInfo[] Members { get; }
 
         private ReflectionCache(Type t)
         {
@@ -55,7 +55,7 @@ namespace WellFired.Guacamole.DataBinding
         public static T GetAttribute<T>(this object m, string memberName) where T : Attribute
         {
             var member = ReflectionCache.Get<T>().GetMember(memberName);
-            return member == null ? null : member.GetAttribute<T>();
+            return member?.GetAttribute<T>();
         }
 
         [UsedImplicitly]
@@ -79,7 +79,7 @@ namespace WellFired.Guacamole.DataBinding
             if (methodInfo != null)
             {
                 var p = methodInfo.GetParameters().FirstOrDefault();
-                return p == null ? null : p.ParameterType;
+                return p?.ParameterType;
             }
 
             var propertyInfo = member as PropertyInfo;
@@ -87,7 +87,7 @@ namespace WellFired.Guacamole.DataBinding
                 return propertyInfo.PropertyType;
 
             var memberInfo = member as FieldInfo;
-            return memberInfo != null ? memberInfo.FieldType : null;
+            return memberInfo?.FieldType;
         }
 
         [UsedImplicitly]

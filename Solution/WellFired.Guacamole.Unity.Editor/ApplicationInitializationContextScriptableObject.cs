@@ -126,9 +126,7 @@ namespace WellFired.Guacamole.Unity.Editor
         }
 
         internal ApplicationInitializationContextScriptableObject ScriptableObject
-		{
-			get; private set;
-		}
+		{ get; }
 
 	    public ApplicationInitializationContext()
 		{

@@ -9,10 +9,10 @@ namespace WellFired.Guacamole.Types
         [PublicAPI] public int Top { get; private set; }
         [PublicAPI] public int Right { get; private set; }
         [PublicAPI] public int Bottom { get; private set; }
-        [PublicAPI] public int Width { get { return Left + Right; } }
-        [PublicAPI] public int Height { get { return Top + Bottom; } }
+        [PublicAPI] public int Width => Left + Right;
+	    [PublicAPI] public int Height => Top + Bottom;
 
-		public UIPadding(int equalPadding) : this()
+	    public UIPadding(int equalPadding) : this()
 		{
 			Left = equalPadding;
 			Top = equalPadding;
@@ -39,12 +39,25 @@ namespace WellFired.Guacamole.Types
 			return compareTo.Left == Left && compareTo.Top == Top && compareTo.Right == Right && compareTo.Bottom == Bottom;
 		}
 
-		public override int GetHashCode()
-		{
-			return ((Left * 300) ^ (Top * 300) ^ (Right * 300) ^ (Bottom * 300));
-		}
+        [PublicAPI]
+        public bool Equals(UIPadding other)
+	    {
+	        return Left == other.Left && Top == other.Top && Right == other.Right && Bottom == other.Bottom;
+	    }
 
-		public static bool operator==(UIPadding a, UIPadding b)
+	    public override int GetHashCode()
+	    {
+	        unchecked
+	        {
+	            var hashCode = Left;
+	            hashCode = (hashCode*397) ^ Top;
+	            hashCode = (hashCode*397) ^ Right;
+	            hashCode = (hashCode*397) ^ Bottom;
+	            return hashCode;
+	        }
+	    }
+
+	    public static bool operator==(UIPadding a, UIPadding b)
 		{
 			return a.Equals(b);
 		}

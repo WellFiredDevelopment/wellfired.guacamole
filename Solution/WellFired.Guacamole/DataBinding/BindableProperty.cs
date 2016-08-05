@@ -37,7 +37,7 @@ namespace WellFired.Guacamole.DataBinding
 
 			var memberExpression = expression as MemberExpression;
 			if(memberExpression == null)
-				throw new ArgumentException("getter must be a MemberExpression", "getter");
+				throw new ArgumentException("getter must be a MemberExpression", nameof(getter));
 
 			var propertyInfo = (PropertyInfo)memberExpression.Member;
 			

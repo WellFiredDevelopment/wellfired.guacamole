@@ -8,13 +8,10 @@ namespace WellFired.Guacamole.Types
 		public int X { get; set; }
 		public int Y { get; set; }
 
-        // ReSharper disable once InconsistentNaming
-        private static readonly UILocation _min = new UILocation(0, 0);
+	    [PublicAPI]
+        public static UILocation Min { get; } = new UILocation(0, 0);
 
-        [PublicAPI]
-        public static UILocation Min { get { return _min; } }
-	
-		public UILocation(int x, int y) : this()
+	    public UILocation(int x, int y) : this()
 		{
 			X = x;
 			Y = y;
@@ -26,12 +23,21 @@ namespace WellFired.Guacamole.Types
 			return compareTo.X == X && compareTo.Y == Y;
 		}
 
-		public override int GetHashCode()
-		{
-			return X ^ Y;
-		}
+        [PublicAPI]
+	    public bool Equals(UILocation other)
+	    {
+	        return X == other.X && Y == other.Y;
+	    }
 
-		public static bool operator==(UILocation a, UILocation b)
+	    public override int GetHashCode()
+	    {
+	        unchecked
+	        {
+	            return (X*397) ^ Y;
+	        }
+	    }
+
+	    public static bool operator==(UILocation a, UILocation b)
 		{
 			return a.Equals(b);
 		}

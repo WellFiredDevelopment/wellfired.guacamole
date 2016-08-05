@@ -42,8 +42,7 @@ namespace WellFired.Guacamole.DataBinding
 						throw new ArgumentOutOfRangeException();
 				}
 
-				if (_propertySetMethod != null)
-					_propertySetMethod.Invoke(Object, new[] {value});
+			    _propertySetMethod?.Invoke(Object, new[] {value});
 			}
 			get { return _value; }
 		}
@@ -76,7 +75,7 @@ namespace WellFired.Guacamole.DataBinding
 
 		public object GetValue()
 		{
-			return _propertyGetMethod != null ? _propertyGetMethod.Invoke(Object, null) : null;
+			return _propertyGetMethod?.Invoke(Object, null);
 		}
 	}
 
@@ -90,7 +89,7 @@ namespace WellFired.Guacamole.DataBinding
 			if(value.GetType() == property.PropertyType)
 				return value;
 
-			throw new SystemException(string.Format("Cannot convert {0} to {1}", value, property.PropertyType));
+			throw new SystemException($"Cannot convert {value} to {property.PropertyType}");
 		}
 	}
 }

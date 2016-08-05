@@ -7,26 +7,9 @@ namespace WellFired.Guacamole.Annotations
     [AttributeUsage(AttributeTargets.Class)]
     public sealed class MeansImplicitUseAttribute : Attribute
     {
-        [UsedImplicitly]
-        public ImplicitUseKindFlags UseKindFlags { get; private set; }
-
-        [UsedImplicitly]
-        public ImplicitUseTargetFlags TargetFlags { get; private set; }
-
+        [PublicAPI]
         public MeansImplicitUseAttribute()
-          : this(ImplicitUseKindFlags.Default)
         {
-        }
-
-        public MeansImplicitUseAttribute(ImplicitUseTargetFlags targetFlags)
-          : this(ImplicitUseKindFlags.Default, targetFlags)
-        {
-        }
-
-        public MeansImplicitUseAttribute(ImplicitUseKindFlags useKindFlags, ImplicitUseTargetFlags targetFlags = ImplicitUseTargetFlags.Default)
-        {
-            UseKindFlags = useKindFlags;
-            TargetFlags = targetFlags;
         }
     }
 }

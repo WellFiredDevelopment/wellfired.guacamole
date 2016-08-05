@@ -5,43 +5,28 @@ namespace WellFired.Guacamole.Drawing
 {
 	public struct Vector
 	{
-		private double _x;
-		private double _y;
-
 	    // ReSharper disable once InconsistentNaming
-		private static readonly Vector _min = new Vector(0.0, 0.0);
 	    // ReSharper disable once InconsistentNaming
-		private static readonly Vector _one = new Vector(1.0, 1.0);
 
-        [PublicAPI]
-        public static Vector Min { get { return _min; } }
-        [PublicAPI]
-        public static Vector One { get { return _one; } }
+	    [PublicAPI]
+        public static Vector Min { get; } = new Vector(0.0, 0.0);
 
-        [PublicAPI]
-        public double X
+	    [PublicAPI]
+        public static Vector One { get; } = new Vector(1.0, 1.0);
+
+	    [PublicAPI]
+        public double X { get; set; }
+
+	    [PublicAPI]
+        public double Y { get; set; }
+
+	    [PublicAPI]
+        public double Length => Math.Sqrt(X * X + Y * Y);
+
+	    public Vector(double x, double y)
 		{
-			get { return _x; }
-			set { _x = value; }
-		}
-
-        [PublicAPI]
-        public double Y
-		{
-			get { return _y; }
-			set { _y = value; }
-		}
-
-        [PublicAPI]
-        public double Length
-		{
-			get { return Math.Sqrt(X * X + Y * Y); }
-		}
-
-		public Vector(double x, double y)
-		{
-			_x = x;
-			_y = y;
+			X = x;
+			Y = y;
 		}
 
 		public override bool Equals(object obj)
@@ -105,7 +90,7 @@ namespace WellFired.Guacamole.Drawing
         [PublicAPI]
         public static double AngleBetween(Vector v1, Vector v2)
 		{
-			var angle = Math.Atan2(v2._y, v2._x) - Math.Atan2(v1._y, v1._x);
+			var angle = Math.Atan2(v2.Y, v2.X) - Math.Atan2(v1.Y, v1.X);
 			if (angle < 0.0)
 				angle += 2 * Math.PI;
 			return angle;

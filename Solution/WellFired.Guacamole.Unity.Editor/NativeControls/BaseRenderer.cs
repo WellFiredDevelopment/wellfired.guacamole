@@ -9,7 +9,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 {
     public abstract class BaseRenderer : INativeRenderer
     {
-        public virtual UISize? NativeSize { get { return null;  } }
+        public virtual UISize? NativeSize => null;
 
         protected Texture2D BackgroundTexture { get; private set; }
         protected Texture2D HoverBackgroundTexture { get; private set; }
