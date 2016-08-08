@@ -10,6 +10,7 @@ using WellFired.Guacamole.Renderer;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.View;
+using Logger = WellFired.Guacamole.Diagnostics.Logger;
 
 namespace WellFired.Guacamole.Unity.Editor
 {
@@ -83,20 +84,27 @@ namespace WellFired.Guacamole.Unity.Editor
         [UsedImplicitly, Obfuscation(Feature = "renaming")]
         public void OnEnable()
         {
-            Guacamole.Diagnostics.Logger.RegisterLogger(Diagnostics.Logger.UnityLogger);
+            Logger.RegisterLogger(Diagnostics.Logger.UnityLogger);
+            EditorApplication.update += Update;
         }
 
         [UsedImplicitly, Obfuscation(Feature = "renaming")]
         public void OnDisable()
         {
-            Guacamole.Diagnostics.Logger.UnregisterLogger(Diagnostics.Logger.UnityLogger);
+            Logger.UnregisterLogger(Diagnostics.Logger.UnityLogger);
+            EditorApplication.update -= Update;
+        }
+
+        private void Update()
+        {
+            Repaint();
         }
 
         [UsedImplicitly, Obfuscation(Feature = "renaming")]
         // ReSharper disable once InconsistentNaming
         public void OnGUI()
         {
-            if(Event.current.type == EventType.Layout)
+            if (Event.current.type == EventType.Layout)
             {
                 try
                 {
@@ -104,19 +112,24 @@ namespace WellFired.Guacamole.Unity.Editor
                     layoutRect.Location = UILocation.Min;
                     MainContent.Layout(layoutRect);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     Debug.Log("Exception was thrown whilst performing Layout : " + e);
                 }
             }
 
-            try
+            MainContent.ProcessInput(Event.current.mousePosition.ToUILocation());
+
+            if (Event.current.type == EventType.Repaint)
             {
-                MainContent.Render(Rect);
-            }
-            catch(Exception e)
-            {
-                Debug.Log("Exception was thrown whilst performing Repaint : " + e);
+                try
+                {
+                    MainContent.Render(Rect);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log("Exception was thrown whilst performing Repaint : " + e);
+                }
             }
         }
 

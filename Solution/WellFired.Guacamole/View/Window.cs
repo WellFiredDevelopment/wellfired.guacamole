@@ -25,9 +25,14 @@ namespace WellFired.Guacamole.View
 			var relativeParentRect = new UIRect(0, 0, parentRect.Width, parentRect.Height);
 			relativeParentRect -= Padding;
 			Content.Render(parentRect: relativeParentRect);
-		}
+        }
 
-	    protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        public void ProcessInput(UILocation location)
+        {
+
+        }
+
+        protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
 			base.OnPropertyChanged(sender, e);
 
