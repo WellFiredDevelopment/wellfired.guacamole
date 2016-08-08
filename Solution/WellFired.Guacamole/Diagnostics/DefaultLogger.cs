@@ -1,5 +1,8 @@
-﻿namespace WellFired.Guacamole.Diagnostics
+﻿using WellFired.Guacamole.Annotations;
+
+namespace WellFired.Guacamole.Diagnostics
 {
+    [PublicAPI]
     public class DefaultLogger : ILogger
     {
         public void LogMessage(string message)

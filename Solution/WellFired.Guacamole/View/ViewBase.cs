@@ -73,6 +73,7 @@ namespace WellFired.Guacamole.View
         private bool _invalidRectRequest = true;
         private INativeRenderer _nativeRenderer;
         private UIRect _validRectRequest;
+        private Style _style;
 
         public IList<ViewBase> Children { get; }
 
@@ -84,6 +85,18 @@ namespace WellFired.Guacamole.View
 
 		[PublicAPI]
 		public UIPadding Padding { get; set; }
+
+        public Style Style
+        {
+            set
+            {
+                if (_style == value)
+                    return;
+
+                _style = value;
+                UpdateFromStyle(_style);
+            }
+        }
 
         [PublicAPI]
         public UIColor BackgroundColor
@@ -267,6 +280,12 @@ namespace WellFired.Guacamole.View
 
 	        foreach(var child in Children)
 		        child.BindingContext = BindingContext;
+        }
+
+        private void UpdateFromStyle(Style style)
+        {
+            foreach (var setter in style.Setters)
+                SetValue(setter.Property, setter.Value);
         }
     }
 }

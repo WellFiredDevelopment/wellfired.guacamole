@@ -1,8 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Reflection;
-using WellFired.Guacamole.Diagnostics;
 
 namespace WellFired.Guacamole.DataBinding
 {

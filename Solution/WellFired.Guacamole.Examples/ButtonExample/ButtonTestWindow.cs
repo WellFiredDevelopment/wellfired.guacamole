@@ -15,8 +15,20 @@ namespace WellFired.Guacamole.Examples.ButtonExample
                 ButtonPressed = new Command
                 {
                     ExecuteAction = () => { UnityEngine.Debug.Log("Sausages"); }
+                },
+                Style = new Style
+                {
+                    Setters =
+                    {
+                        new Setter
+                        {
+                            Property = Button.TextColorProperty,
+                            Value = UIColor.Black
+                        }
+                    }
                 }
             };
+
 
             Content = button;
         }

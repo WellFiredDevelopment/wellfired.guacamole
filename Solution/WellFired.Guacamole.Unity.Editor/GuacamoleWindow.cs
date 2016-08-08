@@ -92,6 +92,7 @@ namespace WellFired.Guacamole.Unity.Editor
         public void OnDisable()
         {
             Logger.UnregisterLogger(Diagnostics.Logger.UnityLogger);
+            // ReSharper disable once DelegateSubtraction
             EditorApplication.update -= Update;
         }
 
