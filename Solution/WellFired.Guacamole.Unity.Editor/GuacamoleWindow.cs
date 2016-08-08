@@ -80,18 +80,15 @@ namespace WellFired.Guacamole.Unity.Editor
             ResetForSomeReason();
         }
 
-
         [UsedImplicitly, Obfuscation(Feature = "renaming")]
         public void OnEnable()
         {
-            UnityEngine.Debug.Log("Enable");
             Guacamole.Diagnostics.Logger.RegisterLogger(Diagnostics.Logger.UnityLogger);
         }
 
         [UsedImplicitly, Obfuscation(Feature = "renaming")]
         public void OnDisable()
         {
-            UnityEngine.Debug.Log("Disable");
             Guacamole.Diagnostics.Logger.UnregisterLogger(Diagnostics.Logger.UnityLogger);
         }
 
