@@ -27,11 +27,6 @@ namespace WellFired.Guacamole.View
 			Content.Render(parentRect: relativeParentRect);
         }
 
-        public void ProcessInput(UILocation location)
-        {
-
-        }
-
         protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
 			base.OnPropertyChanged(sender, e);
