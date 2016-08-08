@@ -1,4 +1,5 @@
-﻿using WellFired.Guacamole.Types;
+﻿using WellFired.Guacamole.Diagnostics;
+using WellFired.Guacamole.Types;
 using WellFired.Guacamole.View;
 
 namespace WellFired.Guacamole.Examples.ButtonExample
@@ -12,13 +13,43 @@ namespace WellFired.Guacamole.Examples.ButtonExample
             var button = new Button
             {
                 Text = "Press Me Please.",
-                ButtonPressed = new Command
-                {
-                    ExecuteAction = () => { UnityEngine.Debug.Log("Sausages"); },
-                    CanExecuteAction = () => false
+                Style = new Style {
+                    Triggers = {
+                        new Trigger {
+                            Property = Button.EnabledProperty,
+                            Value = false,
+                            Setters = {
+                                new Setter {
+                                    Property = BackgroundColorProperty,
+                                    Value = UIColor.Aquamarine
+                                }
+                            }
+                        },
+                        new Trigger {
+                            Property = Button.EnabledProperty,
+                            Value = true,
+                            Setters = {
+                                new Setter {
+                                    Property = BackgroundColorProperty,
+                                    Value = UIColor.Purple
+                                }
+                            }
+                        }
+                    }
                 }
             };
 
+            var buttonPressed = new Command
+            {
+                ExecuteAction = () =>
+                {
+                    button.Enabled = !button.Enabled;
+                },
+                CanExecuteAction = () => true
+            };
+
+            button.Command = buttonPressed;
+            button.Enabled = true;
 
             Content = button;
         }

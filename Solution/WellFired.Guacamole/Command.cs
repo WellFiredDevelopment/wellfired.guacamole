@@ -17,6 +17,6 @@ namespace WellFired.Guacamole
         }
 
         public Action ExecuteAction { private get; set; }
-        public CanExecuteDelegate CanExecuteAction { get; set; }
+        public CanExecuteDelegate CanExecuteAction { private get; set; }
     }
 }

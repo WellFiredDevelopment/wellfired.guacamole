@@ -67,8 +67,8 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 		    if (!GUI.Button(renderRect.ToUnityRect(), button.Text, Style))
                 return;
 
-            if (button.ButtonPressed.CanExecute())
-		        button.ButtonPressed.Execute();
+            if (button.Command.CanExecute())
+		        button.Command.Execute();
 		}
 	}
 }

@@ -86,15 +86,18 @@ namespace WellFired.Guacamole.View
 		[PublicAPI]
 		public UIPadding Padding { get; set; }
 
+        [PublicAPI]
         public Style Style
         {
+            private get { return _style; }
             set
             {
                 if (_style == value)
                     return;
-
+                
                 _style = value;
-                UpdateFromStyle(_style);
+                if (_style != null)
+                    UpdateNewStyle(_style);
             }
         }
 
@@ -167,14 +170,18 @@ namespace WellFired.Guacamole.View
                 {
                     var newNativeRenderer = NativeRendererHelper.CreateNativeRendererFor(GetType());
 
-                    if(_nativeRenderer != null && newNativeRenderer != _nativeRenderer)
+                    if (_nativeRenderer != null && newNativeRenderer != _nativeRenderer)
+                    {
+                        PropertyChanged -= OnPropertyChanged;
                         PropertyChanged -= _nativeRenderer.OnPropertyChanged;
+                    }
 
                     _nativeRenderer = newNativeRenderer;
 
                     if(_nativeRenderer != null)
                     {
                         PropertyChanged += _nativeRenderer.OnPropertyChanged;
+                        PropertyChanged += OnPropertyChanged;
                         _nativeRenderer.Control = this;
                     }
                 }
@@ -275,17 +282,35 @@ namespace WellFired.Guacamole.View
         {
             base.OnPropertyChanged(sender, e);
 
-	        if(e.PropertyName != BindingContextProperty.PropertyName)
+            ProcessTriggers(e.PropertyName);
+
+            if (e.PropertyName != BindingContextProperty.PropertyName)
 				return;
 
 	        foreach(var child in Children)
 		        child.BindingContext = BindingContext;
         }
 
-        private void UpdateFromStyle(Style style)
+        private void UpdateNewStyle(Style style)
         {
             foreach (var setter in style.Setters)
                 SetValue(setter.Property, setter.Value);
+        }
+
+        private void ProcessTriggers(string propertyName)
+        {
+            foreach (var trigger in Style.Triggers)
+            {
+                if (trigger.Property.PropertyName != propertyName)
+                    continue;
+
+                var value = GetValue(trigger.Property);
+                if (!value.Equals(trigger.Value))
+                    continue;
+
+                foreach(var setter in trigger.Setters)
+                    SetValue(setter.Property, setter.Value);
+            }
         }
     }
 }

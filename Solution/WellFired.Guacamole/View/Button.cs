@@ -6,40 +6,55 @@ namespace WellFired.Guacamole.View
 {
     public class Button : ViewBase
     {
+        [PublicAPI]
+        public static readonly BindableProperty EnabledProperty = BindableProperty.Create<
+            Button, bool>(
+                defaultValue: true,
+                bindingMode: BindingMode.TwoWay,
+                getter: button => button.Enabled
+            );
+
         [PublicAPI] public static readonly BindableProperty TextProperty = BindableProperty.Create<
             Button, string>(
                 defaultValue: string.Empty,
                 bindingMode: BindingMode.TwoWay,
-                getter: entry => entry.Text
+                getter: button => button.Text
             );
 
         [PublicAPI] public static readonly BindableProperty TextColorProperty = BindableProperty
             .Create<Button, UIColor>(
                 defaultValue: UIColor.Black,
                 bindingMode: BindingMode.TwoWay,
-                getter: entry => entry.TextColor
+                getter: button => button.TextColor
             );
 
         [PublicAPI] public static readonly BindableProperty HorizontalTextAlignProperty = BindableProperty
             .Create<Button, UITextAlign>(
                 defaultValue: UITextAlign.Start,
                 bindingMode: BindingMode.TwoWay,
-                getter: entry => entry.HorizontalTextAlign
+                getter: button => button.HorizontalTextAlign
             );
 
         [PublicAPI] public static readonly BindableProperty VerticalTextAlignProperty = BindableProperty
             .Create<Button, UITextAlign>(
                 defaultValue: UITextAlign.Middle,
                 bindingMode: BindingMode.TwoWay,
-                getter: entry => entry.VerticalTextAlign
+                getter: button => button.VerticalTextAlign
             );
 
         [PublicAPI] public static readonly BindableProperty ButtonPressedProperty = BindableProperty
             .Create<Button, ICommand>(
                 defaultValue: new Command(), 
                 bindingMode: BindingMode.TwoWay,
-                getter: entry => entry.ButtonPressed
+                getter: button => button.Command
             );
+
+        [PublicAPI]
+        public bool Enabled
+        {
+            get { return (bool)GetValue(EnabledProperty); }
+            set { SetValue(EnabledProperty, value); }
+        }
 
         [PublicAPI]
         public string Text
@@ -70,7 +85,7 @@ namespace WellFired.Guacamole.View
         }
 
         [PublicAPI]
-        public ICommand ButtonPressed
+        public ICommand Command
         {
             get { return (ICommand)GetValue(ButtonPressedProperty); }
             set { SetValue(ButtonPressedProperty, value); }
