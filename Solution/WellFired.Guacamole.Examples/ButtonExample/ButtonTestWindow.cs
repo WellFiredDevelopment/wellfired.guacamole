@@ -9,9 +9,16 @@ namespace WellFired.Guacamole.Examples.ButtonExample
         {
             Padding = new UIPadding(5);
 
-            Content = new Button {
-                Text = "Press Me Please."
+            var button = new Button
+            {
+                Text = "Press Me Please.",
+                ButtonPressed = new Command
+                {
+                    ExecuteAction = () => { UnityEngine.Debug.Log("Sausages"); }
+                }
             };
+
+            Content = button;
         }
     }
 }

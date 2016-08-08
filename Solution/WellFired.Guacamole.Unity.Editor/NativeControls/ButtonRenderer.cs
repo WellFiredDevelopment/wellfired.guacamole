@@ -64,7 +64,11 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 			smallest = Mathf.Max(smallest, 2);
 			Style.border = new RectOffset(smallest, smallest, smallest, smallest);
 
-			GUI.Button(renderRect.ToUnityRect(), button.Text, Style);
+		    if (!GUI.Button(renderRect.ToUnityRect(), button.Text, Style))
+                return;
+
+            if (button.ButtonPressed.CanExecute())
+		        button.ButtonPressed.Execute();
 		}
 	}
 }

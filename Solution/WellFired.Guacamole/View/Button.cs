@@ -6,31 +6,39 @@ namespace WellFired.Guacamole.View
 {
     public class Button : ViewBase
     {
-        [PublicAPI] public static readonly BindableProperty TextProperty = BindableProperty.Create<TextEntry, string>(
-            defaultValue: string.Empty,
-            bindingMode: BindingMode.TwoWay,
-            getter: entry => entry.Text
+        [PublicAPI] public static readonly BindableProperty TextProperty = BindableProperty.Create<
+            Button, string>(
+                defaultValue: string.Empty,
+                bindingMode: BindingMode.TwoWay,
+                getter: entry => entry.Text
             );
 
         [PublicAPI] public static readonly BindableProperty TextColorProperty = BindableProperty
-            .Create<TextEntry, UIColor>(
+            .Create<Button, UIColor>(
                 defaultValue: UIColor.Black,
                 bindingMode: BindingMode.TwoWay,
                 getter: entry => entry.TextColor
             );
 
         [PublicAPI] public static readonly BindableProperty HorizontalTextAlignProperty = BindableProperty
-            .Create<TextEntry, UITextAlign>(
+            .Create<Button, UITextAlign>(
                 defaultValue: UITextAlign.Start,
                 bindingMode: BindingMode.TwoWay,
                 getter: entry => entry.HorizontalTextAlign
             );
 
         [PublicAPI] public static readonly BindableProperty VerticalTextAlignProperty = BindableProperty
-            .Create<TextEntry, UITextAlign>(
+            .Create<Button, UITextAlign>(
                 defaultValue: UITextAlign.Middle,
                 bindingMode: BindingMode.TwoWay,
                 getter: entry => entry.VerticalTextAlign
+            );
+
+        [PublicAPI] public static readonly BindableProperty ButtonPressedProperty = BindableProperty
+            .Create<Button, ICommand>(
+                defaultValue: new Command(), 
+                bindingMode: BindingMode.TwoWay,
+                getter: entry => entry.ButtonPressed
             );
 
         [PublicAPI]
@@ -59,6 +67,13 @@ namespace WellFired.Guacamole.View
         {
             get { return (UITextAlign)GetValue(VerticalTextAlignProperty); }
             set { SetValue(VerticalTextAlignProperty, value); }
+        }
+
+        [PublicAPI]
+        public ICommand ButtonPressed
+        {
+            get { return (ICommand)GetValue(ButtonPressedProperty); }
+            set { SetValue(ButtonPressedProperty, value); }
         }
 
         public Button()

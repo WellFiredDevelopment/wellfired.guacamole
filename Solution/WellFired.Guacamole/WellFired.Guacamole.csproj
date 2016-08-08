@@ -43,6 +43,7 @@
     <Compile Include="Annotations\PublicAPIAttribute.cs" />
     <Compile Include="Annotations\UsedImplicityAttribute.cs" />
     <Compile Include="Attributes\CustomRendererAttribute.cs" />
+    <Compile Include="Command.cs" />
     <Compile Include="DataBinding\BindableContext.cs" />
     <Compile Include="DataBinding\BindableObject.cs" />
     <Compile Include="DataBinding\BindableProperty.cs" />
@@ -51,6 +52,9 @@
     <Compile Include="DataBinding\Exceptions\BindingExistsException.cs" />
     <Compile Include="DataBinding\ObservableBase.cs" />
     <Compile Include="DataBinding\ReflectExt.cs" />
+    <Compile Include="Diagnostics\DefaultLogger.cs" />
+    <Compile Include="Diagnostics\ILogger.cs" />
+    <Compile Include="Diagnostics\Logger.cs" />
     <Compile Include="Drawing\GraphicsPath.cs" />
     <Compile Include="Drawing\Pixel.cs" />
     <Compile Include="Drawing\Rect.cs" />
@@ -65,6 +69,7 @@
     <Compile Include="Exceptions\InitializationContextNull.cs" />
     <Compile Include="Exceptions\NativeRendererCannotBeFound.cs" />
     <Compile Include="IApplication.cs" />
+    <Compile Include="ICommand.cs" />
     <Compile Include="InitializationContext\IInitializationContext.cs" />
     <Compile Include="IWindow.cs" />
     <Compile Include="Layout\AdjacentLayout.cs" />
@@ -97,6 +102,7 @@
     <Compile Include="View\ViewBase.cs" />
     <Compile Include="View\Window.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

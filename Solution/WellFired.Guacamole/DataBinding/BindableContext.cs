@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
+using WellFired.Guacamole.Diagnostics;
 
 namespace WellFired.Guacamole.DataBinding
 {
@@ -89,7 +91,10 @@ namespace WellFired.Guacamole.DataBinding
 			if(value.GetType() == property.PropertyType)
 				return value;
 
-			throw new SystemException($"Cannot convert {value} to {property.PropertyType}");
+            if (property.PropertyType.IsInstanceOfType(value))
+                return value;
+
+            throw new SystemException($"Cannot convert {value} to {property.PropertyType}");
 		}
 	}
 }
