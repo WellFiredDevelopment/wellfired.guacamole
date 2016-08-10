@@ -34,12 +34,12 @@
   <ItemGroup>
     <Reference Include="AsyncBridge.Net35, Version=0.0.0.0, Culture=neutral, PublicKeyToken=b3b1c0202c0d6a87, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>V:\guacamole\Solution\Assemblies\AsyncBridge.Net35.dll</HintPath>
+      <HintPath>..\Assemblies\AsyncBridge.Net35.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Threading, Version=1.0.2856.102, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>V:\guacamole\Solution\Assemblies\System.Threading.dll</HintPath>
+      <HintPath>..\Assemblies\System.Threading.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
