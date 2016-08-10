@@ -5,70 +5,13 @@ using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Exceptions;
 using WellFired.Guacamole.Renderer;
+using WellFired.Guacamole.Styling;
 using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.View
 {
-    public class ViewBase : BindableObject
-    {
-        [PublicAPI] public static readonly BindableProperty BackgroundColorProperty = BindableProperty
-            .Create<ViewBase, UIColor>(
-                defaultValue: UIColor.White,
-                bindingMode: BindingMode.TwoWay,
-                getter: view => view.BackgroundColor
-            );
-
-        [PublicAPI] public static readonly BindableProperty HoverBackgroundColorProperty = BindableProperty
-            .Create<ViewBase, UIColor>(
-                default(UIColor),
-                bindingMode: BindingMode.TwoWay,
-                getter: view => view.HoverBackgroundColor
-            );
-
-        [PublicAPI] public static readonly BindableProperty ActiveBackgroundColorProperty = BindableProperty
-            .Create<ViewBase, UIColor>(
-                default(UIColor),
-                bindingMode: BindingMode.TwoWay,
-                getter: view => view.ActiveBackgroundColor
-            );
-
-        [PublicAPI] public static readonly BindableProperty OutlineColorProperty = BindableProperty
-            .Create<ViewBase, UIColor>(
-                default(UIColor),
-                bindingMode: BindingMode.TwoWay,
-                getter: view => view.OutlineColor
-            );
-
-        [PublicAPI] public static readonly BindableProperty CornerRadiusProperty = BindableProperty
-            .Create<TextEntry, double>(
-                defaultValue: 0.0,
-                bindingMode: BindingMode.TwoWay,
-                getter: entry => entry.CornerRadius
-            );
-
-        [PublicAPI] public static readonly BindableProperty CornerMaskProperty = BindableProperty
-            .Create<TextEntry, CornerMask>(
-                defaultValue: CornerMask.All,
-                bindingMode: BindingMode.TwoWay,
-                getter: entry => entry.CornerMask
-            );
-
-		[PublicAPI]
-		public static readonly BindableProperty MinSizeProperty = BindableProperty
-			.Create<TextEntry, UISize>(
-				defaultValue: UISize.Min,
-				bindingMode: BindingMode.TwoWay,
-				getter: entry => entry.MinSize
-			);
-
-		[PublicAPI]
-		public static readonly BindableProperty MaxSizeProperty = BindableProperty
-			.Create<TextEntry, UISize>(
-				defaultValue: UISize.Max,
-				bindingMode: BindingMode.TwoWay,
-				getter: entry => entry.MaxSize
-			);
-
+    public partial class ViewBase : BindableObject
+	{
 		private UIRect _finalRenderRect;
         private bool _invalidRectRequest = true;
         private INativeRenderer _nativeRenderer;
@@ -76,86 +19,6 @@ namespace WellFired.Guacamole.View
         private Style _style;
 
         public IList<ViewBase> Children { get; }
-
-		[PublicAPI]
-		public LayoutOptions HorizontalLayout { get; set; }
-
-		[PublicAPI]
-        public LayoutOptions VerticalLayout { get; set; }
-
-		[PublicAPI]
-		public UIPadding Padding { get; set; }
-
-        [PublicAPI]
-        public Style Style
-        {
-            private get { return _style; }
-            set
-            {
-                if (_style == value)
-                    return;
-                
-                _style = value;
-                if (_style != null)
-                    UpdateNewStyle(_style);
-            }
-        }
-
-        [PublicAPI]
-        public UIColor BackgroundColor
-        {
-            get { return (UIColor)GetValue(BackgroundColorProperty); }
-            set { SetValue(BackgroundColorProperty, value); }
-        }
-
-        [PublicAPI]
-        public UIColor HoverBackgroundColor
-        {
-            get { return (UIColor)GetValue(HoverBackgroundColorProperty); }
-            set { SetValue(HoverBackgroundColorProperty, value); }
-        }
-
-        [PublicAPI]
-        public UIColor ActiveBackgroundColor
-        {
-            get { return (UIColor)GetValue(ActiveBackgroundColorProperty); }
-            set { SetValue(ActiveBackgroundColorProperty, value); }
-        }
-
-        [PublicAPI]
-        public UIColor OutlineColor
-        {
-            get { return (UIColor)GetValue(OutlineColorProperty); }
-            set { SetValue(OutlineColorProperty, value); }
-        }
-
-        [PublicAPI]
-        public double CornerRadius
-        {
-            get { return (double)GetValue(CornerRadiusProperty); }
-            set { SetValue(CornerRadiusProperty, value); }
-        }
-
-        [PublicAPI]
-        public CornerMask CornerMask
-        {
-            get { return (CornerMask)GetValue(CornerMaskProperty); }
-            set { SetValue(CornerMaskProperty, value); }
-		}
-
-		[PublicAPI]
-		public UISize MinSize
-		{
-			get { return (UISize)GetValue(MinSizeProperty); }
-			set { SetValue(MinSizeProperty, value); }
-		}
-
-		[PublicAPI]
-		public UISize MaxSize
-		{
-			get { return (UISize)GetValue(MaxSizeProperty); }
-			set { SetValue(MaxSizeProperty, value); }
-		}
 
 		public UIRect RectRequest => _validRectRequest;
 
@@ -183,6 +46,7 @@ namespace WellFired.Guacamole.View
                         PropertyChanged += _nativeRenderer.OnPropertyChanged;
                         PropertyChanged += OnPropertyChanged;
                         _nativeRenderer.Control = this;
+						_nativeRenderer.Create();
                     }
                 }
                 catch(Exception)
@@ -194,7 +58,7 @@ namespace WellFired.Guacamole.View
             }
         }
 
-        public ViewBase()
+	    public ViewBase()
         {
             Children = new List<ViewBase>();
             _validRectRequest = UIRect.Min;
@@ -251,12 +115,12 @@ namespace WellFired.Guacamole.View
             foreach(var child in Children)
                 child.CalculateRectRequest();
 
-            if(_invalidRectRequest)
-            {
-                _validRectRequest = CalculateValidRectRequest();
-                _validRectRequest += Padding;
-                _invalidRectRequest = false;
-            }
+	        if (!_invalidRectRequest)
+				return;
+
+	        _validRectRequest = CalculateValidRectRequest();
+	        _validRectRequest += Padding;
+	        _invalidRectRequest = false;
         }
 
         protected virtual UIRect CalculateValidRectRequest()
@@ -300,11 +164,11 @@ namespace WellFired.Guacamole.View
         private void ProcessTriggers(string propertyName)
         {
             foreach (var trigger in Style.Triggers)
-            {
-                if (trigger.Property.PropertyName != propertyName)
+			{
+				if (trigger.Property.PropertyName != propertyName)
                     continue;
 
-                var value = GetValue(trigger.Property);
+				var value = GetValue(trigger.Property);
                 if (!value.Equals(trigger.Value))
                     continue;
 

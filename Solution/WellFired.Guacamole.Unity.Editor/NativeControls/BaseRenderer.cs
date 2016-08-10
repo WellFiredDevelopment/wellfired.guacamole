@@ -12,92 +12,65 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
         public virtual UISize? NativeSize => null;
 
         protected Texture2D BackgroundTexture { get; private set; }
-        protected Texture2D HoverBackgroundTexture { get; private set; }
-        protected Texture2D ActiveBackgroundTexture { get; private set; }
 
-        public ViewBase Control { protected get; set; }
+		public ViewBase Control { protected get; set; }
 
-        public virtual void Render(UIRect renderRect)
-        {
-            if(BackgroundTexture == null)
-                CreateBackgroundTexture();
-            if(HoverBackgroundTexture == null)
-                CreateHoverBackgroundTexture();
-            if(ActiveBackgroundTexture == null)
-                CreateActiveBackgroundTexture();
-        }
+		public virtual void Create()
+		{
+			Control.ControlState = Control.Enabled ? ControlState.Normal : ControlState.Disabled;
+		}
 
-        public virtual void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if(e.PropertyName == ViewBase.CornerRadiusProperty.PropertyName ||
-               e.PropertyName == ViewBase.OutlineColorProperty.PropertyName)
-            {
-                CreateBackgroundTexture();
-                CreateHoverBackgroundTexture();
-                CreateActiveBackgroundTexture();
-            }
+	    public virtual void Render(UIRect renderRect)
+	    {
+		    if (Control.ControlState != ControlState.Disabled)
+		    {
+			    if (Control.ControlState != ControlState.Active)
+			    {
+				    if (Event.current.type == EventType.MouseDown)
+					    Control.ControlState = ControlState.Active;
+				    else if (renderRect.ToUnityRect().Contains(Event.current.mousePosition))
+					    Control.ControlState = ControlState.Hover;
+				    else
+					    Control.ControlState = ControlState.Normal;
+			    }
 
-            if(e.PropertyName == ViewBase.BackgroundColorProperty.PropertyName)
-                CreateBackgroundTexture();
+			    if (Event.current.rawType == EventType.MouseUp)
+				    Control.ControlState = ControlState.Normal;
+		    }
 
-            if(e.PropertyName == ViewBase.HoverBackgroundColorProperty.PropertyName)
-                CreateHoverBackgroundTexture();
+		    if (BackgroundTexture == null)
+			    CreateBackgroundTexture();
+		}
 
-            if(e.PropertyName == ViewBase.ActiveBackgroundColorProperty.PropertyName)
-                CreateHoverBackgroundTexture();
-        }
+	    public virtual void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+	    {
+		    if (e.PropertyName == ViewBase.CornerRadiusProperty.PropertyName || 
+				e.PropertyName == ViewBase.OutlineColorProperty.PropertyName ||
+				e.PropertyName == ViewBase.BackgroundColorProperty.PropertyName ||
+				e.PropertyName == ViewBase.ControlStateProperty.PropertyName)
+				CreateBackgroundTexture();
 
-        private void CreateBackgroundTexture()
-        {
-            BackgroundTexture = Texture2DExtensions.CreateRoundedTexture(
-                64,
-                64,
-                Control.BackgroundColor,
-                Control.OutlineColor,
-                Control.CornerRadius,
-                Control.CornerMask);
-        }
+			if(e.PropertyName == ViewBase.EnabledProperty.PropertyName)
+				Control.ControlState = Control.Enabled ? ControlState.Normal : ControlState.Disabled;
+	    }
 
-        private void CreateHoverBackgroundTexture()
-        {
-            var backgroundColor = Control.HoverBackgroundColor == default(UIColor)
-                                      ? Control.BackgroundColor
-                                      : Control.HoverBackgroundColor;
-            HoverBackgroundTexture = Texture2DExtensions.CreateRoundedTexture(
-                64,
-                64,
-                backgroundColor,
-                Control.OutlineColor == default(UIColor) ? backgroundColor : Control.OutlineColor,
-                Control.CornerRadius,
-                Control.CornerMask);
-        }
-
-        private void CreateActiveBackgroundTexture()
-        {
-            var backgroundColor = Control.ActiveBackgroundColor == default(UIColor)
-                                      ? Control.BackgroundColor
-                                      : Control.ActiveBackgroundColor;
-            ActiveBackgroundTexture = Texture2DExtensions.CreateRoundedTexture(
-                64,
-                64,
-                backgroundColor,
-                Control.OutlineColor == default(UIColor) ? backgroundColor : Control.OutlineColor,
-                Control.CornerRadius,
-                Control.CornerMask);
+	    private void CreateBackgroundTexture()
+		{
+			BackgroundTexture = Texture2DExtensions.CreateRoundedTexture(64, 64, Control.BackgroundColor, Control.OutlineColor, Control.CornerRadius, Control.CornerMask);
 		}
 
 		protected UISize Constrain(UISize requestedSize)
-		{
-			if (requestedSize.Width < Control.MinSize.Width)
-				requestedSize.Width = Control.MinSize.Width;
-			if (requestedSize.Height < Control.MinSize.Height)
-				requestedSize.Height = Control.MinSize.Height;
-			if (requestedSize.Width > Control.MaxSize.Width)
-				requestedSize.Width = Control.MaxSize.Width;
-			if (requestedSize.Height > Control.MaxSize.Height)
-				requestedSize.Height = Control.MaxSize.Height;
+	    {
+		    if (requestedSize.Width < Control.MinSize.Width)
+			    requestedSize.Width = Control.MinSize.Width;
+		    if (requestedSize.Height < Control.MinSize.Height)
+			    requestedSize.Height = Control.MinSize.Height;
+		    if (requestedSize.Width > Control.MaxSize.Width)
+			    requestedSize.Width = Control.MaxSize.Width;
+		    if (requestedSize.Height > Control.MaxSize.Height)
+			    requestedSize.Height = Control.MaxSize.Height;
 
-			return requestedSize;
-		}
-	}
+		    return requestedSize;
+	    }
+    }
 }

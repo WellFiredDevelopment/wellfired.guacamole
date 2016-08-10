@@ -32,7 +32,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AsyncBridge.Net35, Version=0.0.0.0, Culture=neutral, PublicKeyToken=b3b1c0202c0d6a87, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>V:\guacamole\Solution\Assemblies\AsyncBridge.Net35.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Threading, Version=1.0.2856.102, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>V:\guacamole\Solution\Assemblies\System.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Annotations\CanBeNull.cs" />
@@ -44,14 +53,17 @@
     <Compile Include="Annotations\UsedImplicityAttribute.cs" />
     <Compile Include="Attributes\CustomRendererAttribute.cs" />
     <Compile Include="Command.cs" />
+    <Compile Include="Converters\UIPaddingConverter.cs" />
     <Compile Include="DataBinding\BindableContext.cs" />
     <Compile Include="DataBinding\BindableObject.cs" />
     <Compile Include="DataBinding\BindableProperty.cs" />
     <Compile Include="DataBinding\BindingMode.cs" />
     <Compile Include="DataBinding\ConverterHelper.cs" />
     <Compile Include="DataBinding\Exceptions\BindingExistsException.cs" />
+    <Compile Include="DataBinding\NotifyBase.cs" />
     <Compile Include="DataBinding\ObservableBase.cs" />
     <Compile Include="DataBinding\ReflectExt.cs" />
+    <Compile Include="Device.cs" />
     <Compile Include="Diagnostics\DefaultLogger.cs" />
     <Compile Include="Diagnostics\ILogger.cs" />
     <Compile Include="Diagnostics\Logger.cs" />
@@ -77,7 +89,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer\INativeRenderer.cs" />
     <Compile Include="Renderer\NativeRendererHelper.cs" />
-    <Compile Include="Style.cs" />
+    <Compile Include="Styling\Style.cs" />
+    <Compile Include="Styling\Styles\Button.cs" />
     <Compile Include="Types\CornerMask.cs" />
     <Compile Include="Types\LayoutOptions.cs" />
     <Compile Include="Types\OrientationOptions.cs" />
@@ -96,11 +109,13 @@
     <Compile Include="Types\UISize.cs" />
     <Compile Include="Types\UITextAlign.cs" />
     <Compile Include="View\Button.cs" />
+    <Compile Include="View\ControlState.cs" />
     <Compile Include="View\Label.cs" />
     <Compile Include="View\NumberEntry.cs" />
     <Compile Include="View\Slider.cs" />
     <Compile Include="View\TextEntry.cs" />
     <Compile Include="View\ViewBase.cs" />
+    <Compile Include="View\ViewBaseBindableProperties.cs" />
     <Compile Include="View\Window.cs" />
   </ItemGroup>
   <ItemGroup />

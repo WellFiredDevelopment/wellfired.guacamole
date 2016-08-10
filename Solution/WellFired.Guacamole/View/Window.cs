@@ -6,6 +6,7 @@ namespace WellFired.Guacamole.View
 {
 	public class Window : ViewBase
 	{
+		private readonly Device _device = new Device();
 	    private UIRect FinalRenderedRect { get; set; }
 	    protected ViewBase Content { private get; set; }
 		
@@ -20,6 +21,7 @@ namespace WellFired.Guacamole.View
 
 		public override void Render(UIRect parentRect)
 		{
+			_device.ProcessActions();
 			NativeRenderer.Render(renderRect : FinalRenderedRect);
 
 			var relativeParentRect = new UIRect(0, 0, parentRect.Width, parentRect.Height);

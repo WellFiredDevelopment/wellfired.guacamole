@@ -20,8 +20,8 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 				Style = new GUIStyle();
 
 			Style.focused.background = BackgroundTexture;
-			Style.active.background = ActiveBackgroundTexture;
-			Style.hover.background = HoverBackgroundTexture;
+			Style.active.background = BackgroundTexture;
+			Style.hover.background = BackgroundTexture;
 			Style.normal.background = BackgroundTexture;
 
 			Style.padding = entry.Padding.ToRectOffset();

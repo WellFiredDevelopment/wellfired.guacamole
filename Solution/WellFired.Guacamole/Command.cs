@@ -1,20 +1,34 @@
 ﻿using System;
+using WellFired.Guacamole.DataBinding;
 
 namespace WellFired.Guacamole
 {
-    public class Command : ICommand
+    public class Command : NotifyBase, ICommand
     {
         public delegate bool CanExecuteDelegate();
+	    private bool? _canExecute;
 
         public void Execute()
         {
             ExecuteAction?.Invoke();
         }
 
-        public bool CanExecute()
-        {
-            return CanExecuteAction?.Invoke() ?? true; // We invoke automatically if we didn't provide an CanExecuteDelegate.
-        }
+	    public bool CanExecute
+	    {
+		    get
+		    {
+			    var ce = CanExecuteAction?.Invoke() ?? true;
+
+			    var existingValue = _canExecute ?? !ce;
+			    var newValue = ce;
+				_canExecute = ce;
+
+				SetProperty(ref existingValue, newValue, nameof(CanExecute));
+
+				return _canExecute.Value;
+		    }
+		    set { _canExecute = value; }
+	    }
 
         public Action ExecuteAction { private get; set; }
         public CanExecuteDelegate CanExecuteAction { private get; set; }

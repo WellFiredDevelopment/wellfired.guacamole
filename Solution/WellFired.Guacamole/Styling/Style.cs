@@ -2,7 +2,7 @@
 using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.DataBinding;
 
-namespace WellFired.Guacamole
+namespace WellFired.Guacamole.Styling
 {
     [PublicAPI]
     public class Setter

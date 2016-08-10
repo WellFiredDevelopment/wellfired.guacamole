@@ -1,14 +1,15 @@
-﻿using WellFired.Guacamole.Annotations;
+﻿using System.ComponentModel;
+using WellFired.Guacamole.Annotations;
 
 namespace WellFired.Guacamole
 {
     [PublicAPI]
-    public interface ICommand
+    public interface ICommand : INotifyPropertyChanged
     {
         [PublicAPI]
         void Execute();
 
         [PublicAPI]
-        bool CanExecute();
+        bool CanExecute { get; set; }
     }
 }

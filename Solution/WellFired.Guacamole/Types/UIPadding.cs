@@ -1,11 +1,14 @@
-﻿using WellFired.Guacamole.Annotations;
+﻿using System.ComponentModel;
+using WellFired.Guacamole.Annotations;
+using WellFired.Guacamole.Converters;
 
 namespace WellFired.Guacamole.Types
 {
-    // ReSharper disable once InconsistentNaming
+	// ReSharper disable once InconsistentNaming
+	[TypeConverter(typeof(UIPaddingConverter))]
 	public struct UIPadding
     {
-        [PublicAPI] public int Left { get; private set; }
+		[PublicAPI] public int Left { get; private set; }
         [PublicAPI] public int Top { get; private set; }
         [PublicAPI] public int Right { get; private set; }
         [PublicAPI] public int Bottom { get; private set; }
@@ -35,15 +38,24 @@ namespace WellFired.Guacamole.Types
 
 		public override bool Equals(object obj)
 		{
-			var compareTo = (UIPadding)obj;
-			return compareTo.Left == Left && compareTo.Top == Top && compareTo.Right == Right && compareTo.Bottom == Bottom;
+			if (ReferenceEquals(null, obj))
+				return false;
+
+			var paddingValue = new UIPadding();
+			if (obj is int)
+				paddingValue = (int)obj;
+			else if (obj is UIPadding)
+				paddingValue = (UIPadding) obj;
+
+			return Equals(paddingValue);
 		}
 
-        [PublicAPI]
+		[PublicAPI]
         public bool Equals(UIPadding other)
-	    {
-	        return Left == other.Left && Top == other.Top && Right == other.Right && Bottom == other.Bottom;
-	    }
+		{
+			var result = Left == other.Left && Top == other.Top && Right == other.Right && Bottom == other.Bottom;
+			return result;
+		}
 
 	    public override int GetHashCode()
 	    {

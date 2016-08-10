@@ -1,19 +1,12 @@
-﻿using WellFired.Guacamole.Annotations;
+﻿using System.ComponentModel;
+using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.View
 {
     public class Button : ViewBase
-    {
-        [PublicAPI]
-        public static readonly BindableProperty EnabledProperty = BindableProperty.Create<
-            Button, bool>(
-                defaultValue: true,
-                bindingMode: BindingMode.TwoWay,
-                getter: button => button.Enabled
-            );
-
+	{
         [PublicAPI] public static readonly BindableProperty TextProperty = BindableProperty.Create<
             Button, string>(
                 defaultValue: string.Empty,
@@ -50,13 +43,6 @@ namespace WellFired.Guacamole.View
             );
 
         [PublicAPI]
-        public bool Enabled
-        {
-            get { return (bool)GetValue(EnabledProperty); }
-            set { SetValue(EnabledProperty, value); }
-        }
-
-        [PublicAPI]
         public string Text
         {
             get { return (string)GetValue(TextProperty); }
@@ -88,22 +74,33 @@ namespace WellFired.Guacamole.View
         public ICommand Command
         {
             get { return (ICommand)GetValue(ButtonPressedProperty); }
-            set { SetValue(ButtonPressedProperty, value); }
+	        set
+	        {
+		        var previousValue = Command;
+		        var newValue = value;
+				
+		        if (!SetValue(ButtonPressedProperty, value))
+					return;
+
+		        if (previousValue != null)
+			        previousValue.PropertyChanged -= CommandChanged;
+
+		        if (newValue != null)
+			        newValue.PropertyChanged += CommandChanged;
+				
+				Enabled = Command.CanExecute;
+			}
         }
 
-        public Button()
-		{
-			// Set some nice defaults
-			BackgroundColor = UIColor.FromRGB(66, 66, 66);
-            HoverBackgroundColor = UIColor.FromRGB(160, 160, 160);
-            ActiveBackgroundColor = UIColor.FromRGB(64, 124, 191);
-            OutlineColor = UIColor.FromRGB(125, 125, 125);
-	        HorizontalLayout = LayoutOptions.Fill;
-	        Padding = 5;
-            TextColor = UIColor.White;
-            CornerRadius = 8;
-            HorizontalTextAlign = UITextAlign.Middle;
-            VerticalTextAlign = UITextAlign.Middle;
-        }
+	    private void CommandChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+	    {
+			if(propertyChangedEventArgs.PropertyName == nameof(ICommand.CanExecute))
+			    Enabled = Command.CanExecute;
+	    }
+
+	    public Button()
+	    {
+		    Style = Styling.Styles.Button.Style;
+	    }
     }
 }

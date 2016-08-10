@@ -32,8 +32,8 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 				Style = new GUIStyle();
 
 			Style.focused.background = BackgroundTexture;
-			Style.active.background = ActiveBackgroundTexture;
-			Style.hover.background = HoverBackgroundTexture;
+			Style.active.background = BackgroundTexture;
+			Style.hover.background = BackgroundTexture;
 			Style.normal.background = BackgroundTexture;
 
 			Style.alignment = UITextAlignExtensions.Combine(entry.HorizontalTextAlign, entry.VerticalTextAlign);
@@ -63,12 +63,15 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 			var smallest = (int)(Mathf.Min(offset, Mathf.Min(renderRect.Width * 0.5f, renderRect.Height * 0.5f)) + 0.5f);
 			smallest = Mathf.Max(smallest, 2);
 			Style.border = new RectOffset(smallest, smallest, smallest, smallest);
+			
+			if (!GUI.Button(renderRect.ToUnityRect(), button.Text, Style))
+				return;
 
-		    if (!GUI.Button(renderRect.ToUnityRect(), button.Text, Style))
-                return;
+			if (!Control.Enabled)
+				return;
 
-            if (button.Command.CanExecute())
-		        button.Command.Execute();
+			if (button.Command.CanExecute)
+				button.Command.Execute();
 		}
 	}
 }

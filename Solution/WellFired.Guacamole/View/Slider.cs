@@ -52,8 +52,6 @@ namespace WellFired.Guacamole.View
 		{
 			// Set some nice defaults
 			BackgroundColor = UIColor.FromRGB(66, 66, 66);
-			HoverBackgroundColor = UIColor.FromRGB(160, 160, 160);
-			ActiveBackgroundColor = UIColor.FromRGB(64, 124, 191);
 			OutlineColor = UIColor.FromRGB(125, 125, 125);
 			HorizontalLayout = LayoutOptions.Fill;
 			Padding = 5;

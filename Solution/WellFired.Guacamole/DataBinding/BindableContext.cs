@@ -92,7 +92,11 @@ namespace WellFired.Guacamole.DataBinding
             if (property.PropertyType.IsInstanceOfType(value))
                 return value;
 
-            throw new SystemException($"Cannot convert {value} to {property.PropertyType}");
+			var converter = TypeDescriptor.GetConverter(property.PropertyType);
+			if (converter.CanConvertFrom(value.GetType()))
+				return converter.ConvertFrom(value);
+
+			throw new SystemException($"Cannot convert {value} to {property.PropertyType}");
 		}
 	}
 }
