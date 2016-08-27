@@ -13,7 +13,9 @@ namespace WellFired.Guacamole.Styling.Styles
 				new Setter { Property = ViewBase.OutlineColorProperty, Value = UIColor.FromRGB(88, 88, 88) },
 
 				new Setter { Property = ViewBase.HorizontalLayoutProperty, Value = LayoutOptions.Fill },
-				new Setter { Property = ViewBase.PaddingProperty, Value = 5 },
+                new Setter { Property = ViewBase.VerticalLayoutProperty, Value = LayoutOptions.Expand },
+
+                new Setter { Property = ViewBase.PaddingProperty, Value = 5 },
 				new Setter { Property = View.Button.TextColorProperty, Value = UIColor.White },
 				new Setter { Property = ViewBase.CornerRadiusProperty, Value = 8.0 },
 				new Setter { Property = View.Button.HorizontalTextAlignProperty, Value = UITextAlign.Middle },
