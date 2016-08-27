@@ -6,6 +6,6 @@ namespace WellFired.Guacamole.Annotations
     // ReSharper disable once UnusedMember.Global
     public enum ImplicitUseKindFlags
     {
-
+        
     }
 }

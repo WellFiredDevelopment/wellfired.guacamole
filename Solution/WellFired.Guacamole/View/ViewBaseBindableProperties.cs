@@ -82,7 +82,7 @@ namespace WellFired.Guacamole.View
 		[PublicAPI]
 		public static readonly BindableProperty VerticalLayoutProperty = BindableProperty
 			.Create<TextEntry, LayoutOptions>(
-				defaultValue: LayoutOptions.Fill,
+				defaultValue: LayoutOptions.Expand,
 				bindingMode: BindingMode.TwoWay,
 				getter: viewBase => viewBase.VerticalLayout
 			);

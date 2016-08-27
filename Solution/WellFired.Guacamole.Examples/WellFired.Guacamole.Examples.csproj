@@ -53,6 +53,8 @@
   <ItemGroup>
     <Compile Include="AdjacentLayoutExample\AdjacentLayoutTestApplication.cs" />
     <Compile Include="AdjacentLayoutExample\AdjacentLayoutTestWindow.cs" />
+    <Compile Include="StylingExample\StylingExampleApplication.cs" />
+    <Compile Include="StylingExample\StylingExampleWindow.cs" />
     <Compile Include="ButtonExample\ButtonTestApplication.cs" />
     <Compile Include="ButtonExample\ButtonTestWindow.cs" />
     <Compile Include="ComplexLayoutExample\ComplexLayoutExampleApplication.cs" />

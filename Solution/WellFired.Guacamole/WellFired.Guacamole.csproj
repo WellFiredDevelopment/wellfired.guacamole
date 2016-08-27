@@ -52,6 +52,7 @@
     <Compile Include="Annotations\PublicAPIAttribute.cs" />
     <Compile Include="Annotations\UsedImplicityAttribute.cs" />
     <Compile Include="Attributes\CustomRendererAttribute.cs" />
+    <Compile Include="AutoAction.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="Converters\UIPaddingConverter.cs" />
     <Compile Include="DataBinding\BindableContext.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Diagnostics\DefaultLogger.cs" />
     <Compile Include="Diagnostics\ILogger.cs" />
     <Compile Include="Diagnostics\Logger.cs" />
+    <Compile Include="Disposable.cs" />
     <Compile Include="Drawing\GraphicsPath.cs" />
     <Compile Include="Drawing\Pixel.cs" />
     <Compile Include="Drawing\Rect.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="Exceptions\InitializationContextInvalid.cs" />
     <Compile Include="Exceptions\InitializationContextNull.cs" />
     <Compile Include="Exceptions\NativeRendererCannotBeFound.cs" />
+    <Compile Include="Extensions\DelegateExtensions.cs" />
     <Compile Include="IApplication.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="InitializationContext\IInitializationContext.cs" />
@@ -91,6 +94,7 @@
     <Compile Include="Renderer\NativeRendererHelper.cs" />
     <Compile Include="Styling\Style.cs" />
     <Compile Include="Styling\Styles\Button.cs" />
+    <Compile Include="Styling\Styles\Slider.cs" />
     <Compile Include="Types\CornerMask.cs" />
     <Compile Include="Types\LayoutOptions.cs" />
     <Compile Include="Types\OrientationOptions.cs" />
