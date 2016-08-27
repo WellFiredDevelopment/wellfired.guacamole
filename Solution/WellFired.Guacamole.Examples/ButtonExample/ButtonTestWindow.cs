@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using WellFired.Guacamole.Diagnostics;
+﻿using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.View;
 
