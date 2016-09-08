@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Application.cs" />
     <Compile Include="ApplicationInitializationContextScriptableObject.cs" />
+    <Compile Include="Assembly.cs" />
     <Compile Include="DataBinding\ExposePropertyAttribute.cs" />
     <Compile Include="DataBinding\ObservableScriptableObject.cs" />
     <Compile Include="DataBinding\ObservableScriptableObjectEditor.cs" />
