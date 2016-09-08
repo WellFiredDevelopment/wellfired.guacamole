@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using WellFired.Guacamole.Drawing.Shapes;
+using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Drawing
 {
@@ -28,17 +30,17 @@ namespace WellFired.Guacamole.Drawing
 			_shapes.Add(new Line { StartPoint = startPoint, EndPoint = endPoint });
 		}
 
-		public Types.UIColor[] Draw(int width, int height, Types.UIColor backgroundColor, Types.UIColor outlineColor)
+		public UIColor[] Draw(int width, int height, UIColor backgroundColor, UIColor outlineColor)
 		{
-			var pixelData = new Types.UIColor[width * height];
-			for (var i = 0; i < pixelData.Length; i++)
-				pixelData[i] = Types.UIColor.Clear;
+			var image = new UIImageRaw { Data = new UIColor[width * height], Width = width, Height = height };
+			for (var i = 0; i < image.Length; i++)
+				image[i] = UIColor.Clear;
 
 			_shapes.ForEach(shape => shape.Calculate());
 
 			var localOutlineColor = outlineColor;
 
-			if(localOutlineColor == Types.UIColor.Clear)
+			if(localOutlineColor == UIColor.Clear)
 				localOutlineColor = backgroundColor;
 
 			foreach(var point in Path)
@@ -61,64 +63,17 @@ namespace WellFired.Guacamole.Drawing
 				if (y >= height)
 					continue;
 
-				pixelData[width * (height - y - 1) + x] = localOutlineColor;
+				image[width * (height - y - 1) + x] = localOutlineColor;
 			}
 
-			Action<Pixel, Types.UIColor, Types.UIColor> recursiveFlood = delegate {};
-			recursiveFlood = (pixel, targetColor, replacementColor) => {
-				if (targetColor == backgroundColor)
-					return;
-
-				var pixelColor = pixelData[width * (height - pixel.Y - 1) + pixel.X];
-				if (pixelColor != targetColor)
-					return;
-
-				if(pixel.X < 0 || pixel.Y < 0 || pixel.X >= width || pixel.Y >= height)
-					return;
-				
-				pixelData[width * (height - pixel.Y - 1) + pixel.X] = replacementColor;
-
-				var northPixel = new Pixel
-				{
-					X = pixel.X,
-					Y = pixel.Y + 1
-				};
-				var eastPixel = new Pixel
-				{
-					X = pixel.X + 1,
-					Y = pixel.Y
-				};
-				var southPixel = new Pixel
-				{
-					X = pixel.X,
-					Y = pixel.Y - 1
-				};
-				var westPixel = new Pixel
-				{
-					X = pixel.X - 1,
-					Y = pixel.Y
-				};
-				
-			    // ReSharper disable once AccessToModifiedClosure
-				recursiveFlood(northPixel, targetColor, replacementColor);
-			    // ReSharper disable once AccessToModifiedClosure
-				recursiveFlood(eastPixel, targetColor, replacementColor);
-			    // ReSharper disable once AccessToModifiedClosure
-				recursiveFlood(southPixel, targetColor, replacementColor);
-			    // ReSharper disable once AccessToModifiedClosure
-				recursiveFlood(westPixel, targetColor, replacementColor);
-			};
-			
-			// Perform a floodfill
-			var initialPiece = new Pixel
-			{
-				X = (int) (width*0.5),
-				Y = (int) (height*0.5)
+			var startingPixel = new Pixel {
+				X = (int)(width * 0.5),
+				Y = (int)(height * 0.5)
 			};
 
-			recursiveFlood(initialPiece, Types.UIColor.Clear, backgroundColor);
+			new ImageFill().Fill(image, startingPixel, backgroundColor, ImageFill.FillStyle.Linear);
 
-			return pixelData;
+			return image.Data;
 		}
 	}
 }

@@ -26,7 +26,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 		    {
 			    if (Control.ControlState != ControlState.Active)
 			    {
-				    if (Event.current.type == EventType.MouseDown)
+				    if (Event.current.type == EventType.MouseDown && renderRect.ToUnityRect().Contains(Event.current.mousePosition))
 					    Control.ControlState = ControlState.Active;
 				    else if (renderRect.ToUnityRect().Contains(Event.current.mousePosition))
 					    Control.ControlState = ControlState.Hover;

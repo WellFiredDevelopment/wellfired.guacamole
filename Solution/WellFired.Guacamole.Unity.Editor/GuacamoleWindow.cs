@@ -14,12 +14,15 @@ using Logger = WellFired.Guacamole.Diagnostics.Logger;
 
 namespace WellFired.Guacamole.Unity.Editor
 {
+    [UsedImplicitly]
     public class GuacamoleWindow : EditorWindow, IWindow
     {
         [SerializeField] private ApplicationInitializationContextScriptableObject _applicationInitializationContextScriptableObject;
         [SerializeField] private Window _window;
+		
+	    private Exception _exception;
 
-        private ApplicationInitializationContextScriptableObject ApplicationInitializationContextScriptableObject
+	    private ApplicationInitializationContextScriptableObject ApplicationInitializationContextScriptableObject
         {
             get { return _applicationInitializationContextScriptableObject; }
             set { _applicationInitializationContextScriptableObject = value; }
@@ -105,6 +108,9 @@ namespace WellFired.Guacamole.Unity.Editor
         // ReSharper disable once InconsistentNaming
         public void OnGUI()
         {
+	        if (_exception != null)
+		        return;
+
             if (Event.current.type == EventType.Layout)
             {
                 try
@@ -115,7 +121,12 @@ namespace WellFired.Guacamole.Unity.Editor
                 }
                 catch (Exception e)
                 {
-                    Debug.Log("Exception was thrown whilst performing Layout : " + e);
+	                _exception = e;
+					EditorUtility.DisplayDialog(
+						"Exception was thrown",
+						$"The window has thrown an exception, the error is \n\n {_exception.Message} \n\n callstack was \n\n {_exception.StackTrace}",
+						"Close");
+					Close();
                 }
             }
             
@@ -124,9 +135,14 @@ namespace WellFired.Guacamole.Unity.Editor
                 MainContent.Render(Rect);
             }
             catch (Exception e)
-            {
-                Debug.Log("Exception was thrown whilst performing Repaint : " + e);
-            }
+			{
+				_exception = e;
+				EditorUtility.DisplayDialog(
+					"Exception was thrown",
+					$"The window has thrown an exception, the error is \n\n {_exception.Message} \n\n callstack was \n\n {_exception.StackTrace}", 
+					"Close");
+				Close();
+			}
         }
 
         private void ResetForSomeReason()

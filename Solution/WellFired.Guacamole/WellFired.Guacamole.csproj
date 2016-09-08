@@ -71,12 +71,14 @@
     <Compile Include="Disposable.cs" />
     <Compile Include="Drawing\GraphicsPath.cs" />
     <Compile Include="Drawing\Pixel.cs" />
+    <Compile Include="Drawing\ImageFill.cs" />
     <Compile Include="Drawing\Rect.cs" />
     <Compile Include="Drawing\Shapes\Arc.cs" />
     <Compile Include="Drawing\Shapes\IShape.cs" />
     <Compile Include="Drawing\Shapes\Line.cs" />
     <Compile Include="Drawing\Shapes\Side.cs" />
     <Compile Include="Drawing\Size.cs" />
+    <Compile Include="Drawing\UIImageRaw.cs" />
     <Compile Include="Drawing\Vector.cs" />
     <Compile Include="Exceptions\GuacamoleWindowCantBeCreated.cs" />
     <Compile Include="Exceptions\InitializationContextInvalid.cs" />
