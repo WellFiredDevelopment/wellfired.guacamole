@@ -25,6 +25,38 @@ namespace WellFired.Guacamole.View
 			);
 
 		[PublicAPI]
+		public static readonly BindableProperty ThumbBackgroundColorProperty = BindableProperty
+			.Create<ViewBase, UIColor>(
+				defaultValue: UIColor.White,
+				bindingMode: BindingMode.TwoWay,
+				getter: viewBase => viewBase.BackgroundColor
+			);
+
+		[PublicAPI]
+		public static readonly BindableProperty ThumbOutlineColorProperty = BindableProperty
+			.Create<ViewBase, UIColor>(
+				default(UIColor),
+				bindingMode: BindingMode.TwoWay,
+				getter: viewBase => viewBase.OutlineColor
+			);
+
+		[PublicAPI]
+		public static readonly BindableProperty ThumbCornerRadiusProperty = BindableProperty
+			.Create<TextEntry, double>(
+				defaultValue: 0.0,
+				bindingMode: BindingMode.TwoWay,
+				getter: viewBase => viewBase.CornerRadius
+			);
+
+		[PublicAPI]
+		public static readonly BindableProperty ThumbCornerMaskProperty = BindableProperty
+			.Create<TextEntry, CornerMask>(
+				defaultValue: CornerMask.All,
+				bindingMode: BindingMode.TwoWay,
+				getter: viewBase => viewBase.CornerMask
+			);
+
+		[PublicAPI]
 		public double MinValue
 		{
 			get { return (double) GetValue(MinValueProperty); }
@@ -43,6 +75,30 @@ namespace WellFired.Guacamole.View
 		{
 			get { return (double) GetValue(ValueProperty); }
 			set { SetValue(ValueProperty, value); }
+		}
+
+		public UIColor ThumbBackgroundColor
+		{
+			get { return (UIColor)GetValue(ThumbBackgroundColorProperty); }
+			set { SetValue(ThumbBackgroundColorProperty, value); }
+		}
+
+		public UIColor ThumbOutlineColor
+		{
+			get { return (UIColor)GetValue(ThumbOutlineColorProperty); }
+			set { SetValue(ThumbOutlineColorProperty, value); }
+		}
+
+		public double ThumbCornerRadius
+		{
+			get { return (double)GetValue(ThumbCornerRadiusProperty); }
+			set { SetValue(ThumbCornerRadiusProperty, value); }
+		}
+
+		public CornerMask ThumbCornerMask
+		{
+			get { return (CornerMask)GetValue(ThumbCornerMaskProperty); }
+			set { SetValue(ThumbCornerMaskProperty, value); }
 		}
 
 		public Slider()
