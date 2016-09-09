@@ -62,11 +62,7 @@ namespace WellFired.Guacamole.View
 
         public Label()
         {
-            BackgroundColor = UIColor.FromRGB(84, 84, 84);
-            OutlineColor = BackgroundColor;
-            TextColor = UIColor.White;
-            HorizontalTextAlign = UITextAlign.Middle;
-            VerticalTextAlign = UITextAlign.Middle;
+	        Style = Styling.Styles.Label.Style;
         }
     }
 }
