@@ -63,9 +63,10 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 			smallest = Mathf.Max(smallest, 2);
 			Style.border = new RectOffset(smallest, smallest, smallest, smallest);
 
-			GUI.Box(renderRect.ToUnityRect(), "", Style);
+			var newValue = GUI.HorizontalSlider(renderRect.ToUnityRect(), (float)slider.Value, (float)slider.MinValue, (float)slider.MaxValue, Style, ThumbStyle);
 
-			slider.Value = GUI.HorizontalSlider(renderRect.ToUnityRect(), (float)slider.Value, (float)slider.MinValue, (float)slider.MaxValue, Style, ThumbStyle);
+			if (Control.Enabled)
+				slider.Value = newValue;
 		}
 
 		public override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -74,7 +75,8 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 
 			if (e.PropertyName == Slider.ThumbCornerRadiusProperty.PropertyName ||
 				e.PropertyName == Slider.ThumbOutlineColorProperty.PropertyName ||
-				e.PropertyName == Slider.ThumbBackgroundColorProperty.PropertyName)
+				e.PropertyName == Slider.ThumbBackgroundColorProperty.PropertyName ||
+				e.PropertyName == ViewBase.ControlStateProperty.PropertyName)
 				CreateThumbBackgroundTexture();
 		}
 
