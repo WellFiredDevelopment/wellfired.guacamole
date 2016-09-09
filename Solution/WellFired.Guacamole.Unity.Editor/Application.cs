@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.IO;
+using UnityEditor;
 using UnityEngine;
 using WellFired.Guacamole.Exceptions;
 using WellFired.Guacamole.Unity.Editor.DataBinding;
@@ -12,11 +13,14 @@ namespace WellFired.Guacamole.Unity.Editor
 			if(initializationContext == null)
 				throw new InitializationContextNull();
             
-            const string assetPath = "Assets/PersistantData.asset";
+            const string assetPath = "Assets/Editor/PersistantData.asset";
             var persistantData = AssetDatabase.LoadAssetAtPath<TPersistantData>(assetPath);
             if (persistantData == null)
             {
                 persistantData = ScriptableObject.CreateInstance<TPersistantData>();
+	            Directory.CreateDirectory("Assets/Editor");
+
+	            AssetDatabase.DeleteAsset(assetPath);
                 AssetDatabase.CreateAsset(persistantData, assetPath);
                 EditorUtility.SetDirty(persistantData);
                 AssetDatabase.SaveAssets();
