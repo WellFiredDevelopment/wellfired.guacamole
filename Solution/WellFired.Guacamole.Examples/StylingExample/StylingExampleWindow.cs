@@ -21,13 +21,21 @@ namespace WellFired.Guacamole.Examples.StylingExample
 				Enabled = false
 			};
 
-			var enabledSlider = new Slider
-			{
-
-			};
+			var enabledSlider = new Slider();
 
 			var disabledSlider = new Slider
 			{
+				Enabled = false
+			};
+
+			var enabledLabel = new Label
+			{
+				Text = "Enabled"
+			};
+
+			var disabledLabel = new Label
+			{
+				Text = "Disabled",
 				Enabled = false
 			};
 
@@ -40,7 +48,9 @@ namespace WellFired.Guacamole.Examples.StylingExample
 					enabledButton,
 					disabledButton,
 					enabledSlider,
-					disabledSlider
+					disabledSlider,
+					enabledLabel,
+					disabledLabel
 				}
 			};
 		}

@@ -16,7 +16,7 @@ namespace WellFired.Guacamole.Examples.StylingExample
 			{
 				MainContent = typeof(StylingExampleWindow),
 				UIRect = new UIRect(50, 50, 600, 200),
-				MinSize = new UISize(260, 150),
+				MinSize = new UISize(260, 300),
 				Title = "Style Test"
 			};
 

@@ -95,6 +95,7 @@
     <Compile Include="Renderer\INativeRenderer.cs" />
     <Compile Include="Renderer\NativeRendererHelper.cs" />
     <Compile Include="Styling\Style.cs" />
+    <Compile Include="Styling\Styles\Label.cs" />
     <Compile Include="Styling\Styles\Button.cs" />
     <Compile Include="Styling\Styles\Slider.cs" />
     <Compile Include="Types\CornerMask.cs" />
