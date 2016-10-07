@@ -1,31 +1,31 @@
 ﻿using NUnit.Framework;
 using WellFired.Guacamole.DataBinding;
 
-namespace WellFired.Guacamole.Test.Bindable.Basic
+namespace WellFired.Guacamole.Test.Unit.Bindable
 {
 	[TestFixture]
-	public class DoubleBindableObjectTests
+	public class BooleanBindableObjectTests
 	{
 		private class BindableTestObject : BindableObject
 		{
-			public static readonly BindableProperty DoubleProperty = BindableProperty.Create<BindableTestObject, double>(
-					defaultValue: 0.0,
+			public static readonly BindableProperty BooleanProperty = BindableProperty.Create<BindableTestObject, bool>(
+					defaultValue: false,
 					bindingMode: BindingMode.TwoWay,
 					getter: testObject => testObject.Value
 				);
 
-			public double Value
+			public bool Value
 			{
-				get { return (double)GetValue(DoubleProperty); }
-				set { SetValue(DoubleProperty, value); }
+				get { return (bool)GetValue(BooleanProperty); }
+				set { SetValue(BooleanProperty, value); }
 			}
 		}
 
 		private class ContextObject : NotifyBase
 		{
-			private double _currentValue = 0.0;
+			private bool _currentValue;
 
-			public double Value
+			public bool Value
 			{
 				get { return _currentValue; }
 				set { SetProperty(ref _currentValue, value, nameof(Value)); }
@@ -38,8 +38,8 @@ namespace WellFired.Guacamole.Test.Bindable.Basic
 			var source = new BindableTestObject();
 			var bindingContext = new ContextObject();
 			source.BindingContext = bindingContext;
-			source.Bind(BindableTestObject.DoubleProperty, nameof(ContextObject.Value));
-			bindingContext.Value = 10.0;
+			source.Bind(BindableTestObject.BooleanProperty, nameof(ContextObject.Value));
+			bindingContext.Value = true;
 
 			Assert.AreEqual(source.Value, bindingContext.Value);
 		}
@@ -50,12 +50,12 @@ namespace WellFired.Guacamole.Test.Bindable.Basic
 			var source = new BindableTestObject();
 			var bindingContext = new ContextObject();
 			source.BindingContext = bindingContext;
-			source.Bind(BindableTestObject.DoubleProperty, nameof(ContextObject.Value));
-			bindingContext.Value = 10.0;
+			source.Bind(BindableTestObject.BooleanProperty, nameof(ContextObject.Value));
+			bindingContext.Value = true;
 
 			Assert.AreEqual(source.Value, bindingContext.Value);
 
-			source.Value = 15.0;
+			source.Value = false;
 
 			Assert.AreNotEqual(bindingContext.Value, source.Value);
 		}
@@ -66,12 +66,12 @@ namespace WellFired.Guacamole.Test.Bindable.Basic
 			var source = new BindableTestObject();
 			var bindingContext = new ContextObject();
 			source.BindingContext = bindingContext;
-			source.Bind(BindableTestObject.DoubleProperty, nameof(ContextObject.Value), BindingMode.TwoWay);
-			bindingContext.Value = 10.0;
+			source.Bind(BindableTestObject.BooleanProperty, nameof(ContextObject.Value), BindingMode.TwoWay);
+			bindingContext.Value = true;
 
 			Assert.AreEqual(source.Value, bindingContext.Value);
 
-			source.Value = 15.0;
+			source.Value = false;
 
 			Assert.AreEqual(bindingContext.Value, source.Value);
 		}

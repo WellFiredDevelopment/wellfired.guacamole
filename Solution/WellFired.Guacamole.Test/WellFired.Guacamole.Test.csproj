@@ -50,23 +50,23 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Bindable\Basic\DoubleBindableObjectTests.cs" />
-    <Compile Include="Bindable\Basic\IntBindableObjectTests.cs" />
-    <Compile Include="Bindable\Basic\FloatBindableObjectTests.cs" />
-    <Compile Include="Bindable\Basic\BooleanBindableObjectTests.cs" />
-    <Compile Include="Bindable\Basic\StringBindableObjectTests.cs" />
-    <Compile Include="Bindable\UI\ViewBase\ViewBasePaddingTests.cs" />
-    <Compile Include="Bindable\UI\ViewBase\ViewBaseVerticalLayoutTests.cs" />
-    <Compile Include="Bindable\UI\ViewBase\ViewBaseHorizontalLayoutTests.cs" />
-    <Compile Include="Bindable\UI\ViewBase\ViewBaseCornerMaskTests.cs" />
-    <Compile Include="Bindable\UI\ViewBase\ViewBaseMaxSizeTests.cs" />
-    <Compile Include="Bindable\UI\ViewBase\ViewBaseMinSizeTests.cs" />
-    <Compile Include="Bindable\UI\ViewBase\ViewBaseCornerRadiusTests.cs" />
-    <Compile Include="Bindable\UI\ViewBase\ViewBaseOutlineColorTests.cs" />
-    <Compile Include="Bindable\UI\ViewBase\ViewBaseContextObject.cs" />
-    <Compile Include="Bindable\UI\ViewBase\ViewBaseControlStateTests.cs" />
-    <Compile Include="Bindable\UI\ViewBase\ViewBaseBackgroundColorTests.cs" />
-    <Compile Include="Bindable\UI\ViewBase\ViewBaseEnabledTests.cs" />
+    <Compile Include="Unit\Bindable\DoubleBindableObjectTests.cs" />
+    <Compile Include="Unit\Bindable\IntBindableObjectTests.cs" />
+    <Compile Include="Unit\Bindable\FloatBindableObjectTests.cs" />
+    <Compile Include="Unit\Bindable\BooleanBindableObjectTests.cs" />
+    <Compile Include="Unit\Bindable\StringBindableObjectTests.cs" />
+    <Compile Include="Acceptance\UI\ViewBase\Bindable\ViewBasePaddingTests.cs" />
+    <Compile Include="Acceptance\UI\ViewBase\Bindable\ViewBaseVerticalLayoutTests.cs" />
+    <Compile Include="Acceptance\UI\ViewBase\Bindable\ViewBaseHorizontalLayoutTests.cs" />
+    <Compile Include="Acceptance\UI\ViewBase\Bindable\ViewBaseCornerMaskTests.cs" />
+    <Compile Include="Acceptance\UI\ViewBase\Bindable\ViewBaseMaxSizeTests.cs" />
+    <Compile Include="Acceptance\UI\ViewBase\Bindable\ViewBaseMinSizeTests.cs" />
+    <Compile Include="Acceptance\UI\ViewBase\Bindable\ViewBaseCornerRadiusTests.cs" />
+    <Compile Include="Acceptance\UI\ViewBase\Bindable\ViewBaseOutlineColorTests.cs" />
+    <Compile Include="Acceptance\UI\ViewBase\Bindable\ViewBaseContextObject.cs" />
+    <Compile Include="Acceptance\UI\ViewBase\Bindable\ViewBaseControlStateTests.cs" />
+    <Compile Include="Acceptance\UI\ViewBase\Bindable\ViewBaseBackgroundColorTests.cs" />
+    <Compile Include="Acceptance\UI\ViewBase\Bindable\ViewBaseEnabledTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

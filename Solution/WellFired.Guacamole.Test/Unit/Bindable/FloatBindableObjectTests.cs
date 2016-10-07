@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using WellFired.Guacamole.DataBinding;
 
-namespace WellFired.Guacamole.Test.Bindable.Basic
+namespace WellFired.Guacamole.Test.Unit.Bindable
 {
 	[TestFixture]
 	public class FloatBindableObjectTests
