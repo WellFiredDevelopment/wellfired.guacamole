@@ -56,8 +56,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnityTest.cs" />
+    <Compile Include="Bindable\Basic\DoubleBindableObjectTests.cs" />
+    <Compile Include="Bindable\Basic\IntBindableObjectTests.cs" />
+    <Compile Include="Bindable\Basic\FloatBindableObjectTests.cs" />
+    <Compile Include="Bindable\Basic\BooleanBindableObjectTests.cs" />
+    <Compile Include="Bindable\Basic\StringBindableObjectTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WellFired.Guacamole\WellFired.Guacamole.csproj">
+      <Project>{9804DE8D-6D30-4FD7-ADFE-4EC24A7ADB6E}</Project>
+      <Name>WellFired.Guacamole</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
