@@ -52,3 +52,4 @@ sysinfo.txt
 *.DS_Store
 
 /.vs/
+/.idea.Solution/
