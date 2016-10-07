@@ -1,9 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using WellFired.Guacamole.DataBinding;
 
 namespace WellFired.Guacamole.Test.Bindable.Basic
 {
-	[TestClass]
+	[TestFixture]
 	public class IntBindableObjectTests
 	{
 		private class BindableTestObject : BindableObject
@@ -32,7 +32,7 @@ namespace WellFired.Guacamole.Test.Bindable.Basic
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void OneWayBindingTest()
 		{
 			var source = new BindableTestObject();
@@ -44,7 +44,7 @@ namespace WellFired.Guacamole.Test.Bindable.Basic
 			Assert.AreEqual(source.Value, bindingContext.Value);
 		}
 
-		[TestMethod]
+		[Test]
 		public void OneWayBindingInverseTest()
 		{
 			var source = new BindableTestObject();
@@ -60,7 +60,7 @@ namespace WellFired.Guacamole.Test.Bindable.Basic
 			Assert.AreNotEqual(bindingContext.Value, source.Value);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TwoWayBindingTest()
 		{
 			var source = new BindableTestObject();
