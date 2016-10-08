@@ -35,11 +35,11 @@ namespace WellFired.Guacamole.View
                 getter: button => button.VerticalTextAlign
             );
 
-        [PublicAPI] public static readonly BindableProperty ButtonPressedProperty = BindableProperty
+        [PublicAPI] public static readonly BindableProperty ButtonPressedCommandProperty = BindableProperty
             .Create<Button, ICommand>(
                 defaultValue: new Command(), 
                 bindingMode: BindingMode.TwoWay,
-                getter: button => button.Command
+                getter: button => button.ButtonPressedCommand
             );
 
         [PublicAPI]
@@ -71,15 +71,15 @@ namespace WellFired.Guacamole.View
         }
 
         [PublicAPI]
-        public ICommand Command
+        public ICommand ButtonPressedCommand
         {
-            get { return (ICommand)GetValue(ButtonPressedProperty); }
+            get { return (ICommand)GetValue(ButtonPressedCommandProperty); }
 	        set
 	        {
-		        var previousValue = Command;
+		        var previousValue = ButtonPressedCommand;
 		        var newValue = value;
 				
-		        if (!SetValue(ButtonPressedProperty, value))
+		        if (!SetValue(ButtonPressedCommandProperty, value))
 					return;
 
 		        if (previousValue != null)
@@ -88,14 +88,14 @@ namespace WellFired.Guacamole.View
 		        if (newValue != null)
 			        newValue.PropertyChanged += CommandChanged;
 				
-				Enabled = Command.CanExecute;
+				Enabled = ButtonPressedCommand.CanExecute;
 			}
         }
 
 	    private void CommandChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
 	    {
 			if(propertyChangedEventArgs.PropertyName == nameof(ICommand.CanExecute))
-			    Enabled = Command.CanExecute;
+			    Enabled = ButtonPressedCommand.CanExecute;
 	    }
 
 	    public Button()

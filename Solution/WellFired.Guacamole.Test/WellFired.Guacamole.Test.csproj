@@ -50,12 +50,35 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Acceptance\View\Button\Bindable\ButtonHorizontalTextAlignTests.cs" />
     <Compile Include="Acceptance\View\Button\Bindable\ButtonTextTests.cs" />
+    <Compile Include="Acceptance\View\Label\Bindable\LabelVerticalTextAlignTests.cs" />
+    <Compile Include="Acceptance\View\Label\Bindable\LabelHorizontalTextAlignTests.cs" />
+    <Compile Include="Acceptance\View\Label\Bindable\LabelTextTests.cs" />
+    <Compile Include="Acceptance\View\Button\Bindable\ButtonVerticalTextAlignTests.cs" />
+    <Compile Include="Acceptance\View\Button\Bindable\ButtonButtonPressedTests.cs" />
+    <Compile Include="Acceptance\View\Button\Bindable\ButtonTextColorTests.cs" />
+    <Compile Include="Acceptance\View\Label\Bindable\LabelTextColorTests.cs" />
     <Compile Include="Acceptance\View\Label\Bindable\LabelContextObject.cs" />
+    <Compile Include="Acceptance\View\NumberEntry\Bindable\NumberEntryHorizontalTextAlignTests.cs" />
+    <Compile Include="Acceptance\View\NumberEntry\Bindable\NumberEntryNumberTests.cs" />
+    <Compile Include="Acceptance\View\NumberEntry\Bindable\NumberEntryTextColorTests.cs" />
+    <Compile Include="Acceptance\View\NumberEntry\Bindable\NumberEntryVerticalTextAlignTests.cs" />
     <Compile Include="Acceptance\View\Slider\Bindable\SliderContextObject.cs" />
     <Compile Include="Acceptance\View\NumberEntry\Bindable\NumberEntryContextObject.cs" />
+    <Compile Include="Acceptance\View\Slider\Bindable\SliderMaxValueTests.cs" />
+    <Compile Include="Acceptance\View\Slider\Bindable\SliderMinValueTests.cs" />
+    <Compile Include="Acceptance\View\Slider\Bindable\SliderThumbCornerMaskTests.cs" />
+    <Compile Include="Acceptance\View\Slider\Bindable\SliderThumbCornerRadiusTests.cs" />
+    <Compile Include="Acceptance\View\Slider\Bindable\SliderThumbBackgroundColorTests.cs" />
+    <Compile Include="Acceptance\View\Slider\Bindable\SliderThumbOutlineColorTests.cs" />
+    <Compile Include="Acceptance\View\Slider\Bindable\SliderValueTests.cs" />
+    <Compile Include="Acceptance\View\TextEntry\Bindable\TestEntryTextColorTests.cs" />
     <Compile Include="Acceptance\View\TextEntry\Bindable\TextEntryContextObject.cs" />
     <Compile Include="Acceptance\View\Button\Bindable\ButtonContextObject.cs" />
+    <Compile Include="Acceptance\View\TextEntry\Bindable\TextEntryHorizontalTextAlignTests.cs" />
+    <Compile Include="Acceptance\View\TextEntry\Bindable\TextEntryTextTests.cs" />
+    <Compile Include="Acceptance\View\TextEntry\Bindable\TextEntryVerticalTextAlignTests.cs" />
     <Compile Include="Unit\Bindable\DoubleBindableObjectTests.cs" />
     <Compile Include="Unit\Bindable\IntBindableObjectTests.cs" />
     <Compile Include="Unit\Bindable\FloatBindableObjectTests.cs" />

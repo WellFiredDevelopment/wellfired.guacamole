@@ -24,7 +24,7 @@ namespace WellFired.Guacamole.Examples.ButtonExample
                 CanExecuteAction = () => true
 			};
 
-            button.Command = buttonPressed;
+            button.ButtonPressedCommand = buttonPressed;
 
 			Content = button;
 		}

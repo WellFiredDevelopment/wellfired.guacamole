@@ -9,7 +9,7 @@ namespace WellFired.Guacamole.Test.Acceptance.View.Button.Bindable
 		private UIColor _textColor;
 		private UITextAlign _horizontalTextAlign;
 		private UITextAlign _verticalTextAlign;
-		private ICommand _buttonPressed;
+		private ICommand _buttonPressedCommand;
 
 		public string Text
 		{
@@ -35,10 +35,10 @@ namespace WellFired.Guacamole.Test.Acceptance.View.Button.Bindable
 			set { SetProperty(ref _verticalTextAlign, value, nameof(VerticalTextAlign)); }
 		}
 
-		public ICommand ButtonPressed
+		public ICommand ButtonPressedCommand
 		{
-			get { return _buttonPressed; }
-			set { SetProperty(ref _buttonPressed, value, nameof(ButtonPressed)); }
+			get { return _buttonPressedCommand; }
+			set { SetProperty(ref _buttonPressedCommand, value, nameof(ButtonPressedCommand)); }
 		}
 	}
 }

@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using WellFired.Guacamole.DataBinding;
 
 namespace WellFired.Guacamole.Test.Acceptance.View.Button.Bindable
 {
@@ -18,44 +17,15 @@ namespace WellFired.Guacamole.Test.Acceptance.View.Button.Bindable
 		}
 
 		[Test]
-		public void OnBindTextIsAutomaticallyUpdatedToTheValueOfBindingContextText()
+		public void IsBindable()
 		{
 			_buttonView.Text = "a";
 			_buttonContext.Text = "b";
 			Assert.That(_buttonContext.Text != _buttonView.Text);
 			_buttonView.Bind(Guacamole.View.Button.TextProperty, nameof(_buttonContext.Text));
 			Assert.That(_buttonContext.Text == _buttonView.Text);
-		}
-
-		[Test]
-		public void TextTextBindingWorksInOneWay()
-		{
-			_buttonView.Bind(Guacamole.View.Button.TextProperty, nameof(_buttonContext.Text));
+			_buttonContext.Text = "c";
 			Assert.That(_buttonContext.Text == _buttonView.Text);
-			_buttonContext.Text = "a";
-			Assert.That(_buttonContext.Text == _buttonView.Text);
-		}
-
-		[Test]
-		public void TextTextBindingWorksInTwoWay()
-		{
-			_buttonView.Bind(Guacamole.View.Button.TextProperty, nameof(_buttonContext.Text), BindingMode.TwoWay);
-			Assert.That(_buttonContext.Text == _buttonView.Text);
-			_buttonContext.Text = "a";
-			Assert.That(_buttonContext.Text == _buttonView.Text);
-			_buttonView.Text = "b";
-			Assert.That(_buttonContext.Text == _buttonView.Text);
-		}
-
-		[Test]
-		public void TextTextBindingDoesntWorkInTwoWayWithOneWayMode()
-		{
-			_buttonView.Bind(Guacamole.View.Button.TextProperty, nameof(_buttonContext.Text));
-			Assert.That(_buttonContext.Text == _buttonView.Text);
-			_buttonContext.Text = "a";
-			Assert.That(_buttonContext.Text == _buttonView.Text);
-			_buttonView.Text = "b";
-			Assert.That(_buttonContext.Text != _buttonView.Text);
 		}
 	}
 }
