@@ -84,7 +84,7 @@ namespace WellFired.Guacamole.DataBinding
 		public static object From(object value, BindableProperty property)
 		{
 			if(property.PropertyType == typeof(string))
-				return value.ToString();
+				return value?.ToString();
 
 			if(value.GetType() == property.PropertyType)
 				return value;
