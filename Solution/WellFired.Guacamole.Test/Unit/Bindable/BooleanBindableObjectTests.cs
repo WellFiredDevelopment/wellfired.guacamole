@@ -9,14 +9,14 @@ namespace WellFired.Guacamole.Test.Unit.Bindable
 		private class BindableTestObject : BindableObject
 		{
 			public static readonly BindableProperty BooleanProperty = BindableProperty.Create<BindableTestObject, bool>(
-					defaultValue: false,
-					bindingMode: BindingMode.TwoWay,
-					getter: testObject => testObject.Value
-				);
+				false,
+				BindingMode.TwoWay,
+				testObject => testObject.Value
+			);
 
 			public bool Value
 			{
-				get { return (bool)GetValue(BooleanProperty); }
+				get { return (bool) GetValue(BooleanProperty); }
 				set { SetValue(BooleanProperty, value); }
 			}
 		}
@@ -33,18 +33,6 @@ namespace WellFired.Guacamole.Test.Unit.Bindable
 		}
 
 		[Test]
-		public void OneWayBindingTest()
-		{
-			var source = new BindableTestObject();
-			var bindingContext = new ContextObject();
-			source.BindingContext = bindingContext;
-			source.Bind(BindableTestObject.BooleanProperty, nameof(ContextObject.Value));
-			bindingContext.Value = true;
-
-			Assert.AreEqual(source.Value, bindingContext.Value);
-		}
-
-		[Test]
 		public void OneWayBindingInverseTest()
 		{
 			var source = new BindableTestObject();
@@ -58,6 +46,18 @@ namespace WellFired.Guacamole.Test.Unit.Bindable
 			source.Value = false;
 
 			Assert.AreNotEqual(bindingContext.Value, source.Value);
+		}
+
+		[Test]
+		public void OneWayBindingTest()
+		{
+			var source = new BindableTestObject();
+			var bindingContext = new ContextObject();
+			source.BindingContext = bindingContext;
+			source.Bind(BindableTestObject.BooleanProperty, nameof(ContextObject.Value));
+			bindingContext.Value = true;
+
+			Assert.AreEqual(source.Value, bindingContext.Value);
 		}
 
 		[Test]

@@ -1,18 +1,20 @@
-﻿using WellFired.Guacamole.Annotations;
+﻿using UnityEditor;
+using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Types;
+using WellFired.Guacamole.Unity.Editor;
 
 namespace WellFired.Guacamole.Examples.ButtonExample
 {
 	[UsedImplicitly]
 	public class ButtonTestApplication
 	{
-		[UnityEditor.MenuItem("Window/guacamole/Test/Button Test")]
+		[MenuItem("Window/guacamole/Test/Button Test")]
 		[UsedImplicitly]
-		static void OpenWindow()
+		private static void OpenWindow()
 		{
-			var application = new Unity.Editor.Application();
+			var application = new Application();
 
-			var context = new Unity.Editor.ApplicationInitializationContext
+			var context = new ApplicationInitializationContext
 			{
 				MainContent = typeof(ButtonTestWindow),
 				UIRect = new UIRect(50, 50, 600, 200),

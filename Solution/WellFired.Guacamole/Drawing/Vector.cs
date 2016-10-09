@@ -5,25 +5,25 @@ namespace WellFired.Guacamole.Drawing
 {
 	public struct Vector
 	{
-	    // ReSharper disable once InconsistentNaming
-	    // ReSharper disable once InconsistentNaming
+		// ReSharper disable once InconsistentNaming
+		// ReSharper disable once InconsistentNaming
 
-	    [PublicAPI]
-        public static Vector Min { get; } = new Vector(0.0, 0.0);
+		[PublicAPI]
+		public static Vector Min { get; } = new Vector(0.0, 0.0);
 
-	    [PublicAPI]
-        public static Vector One { get; } = new Vector(1.0, 1.0);
+		[PublicAPI]
+		public static Vector One { get; } = new Vector(1.0, 1.0);
 
-	    [PublicAPI]
-        public double X { get; set; }
+		[PublicAPI]
+		public double X { get; set; }
 
-	    [PublicAPI]
-        public double Y { get; set; }
+		[PublicAPI]
+		public double Y { get; set; }
 
-	    [PublicAPI]
-        public double Length => Math.Sqrt(X * X + Y * Y);
+		[PublicAPI]
+		public double Length => Math.Sqrt(X*X + Y*Y);
 
-	    public Vector(double x, double y)
+		public Vector(double x, double y)
 		{
 			X = x;
 			Y = y;
@@ -31,8 +31,8 @@ namespace WellFired.Guacamole.Drawing
 
 		public override bool Equals(object obj)
 		{
-			var compareTo = (Vector)obj;
-			return Math.Abs(compareTo.X - X) < 0.01f && Math.Abs(compareTo.Y - Y) < 0.01f;
+			var compareTo = (Vector) obj;
+			return (Math.Abs(compareTo.X - X) < 0.01f) && (Math.Abs(compareTo.Y - Y) < 0.01f);
 		}
 
 		public override int GetHashCode()
@@ -41,8 +41,8 @@ namespace WellFired.Guacamole.Drawing
 			{
 				var hash = 17;
 				// Suitable nullity checks etc, of course :)
-				hash = hash * 23 + X.GetHashCode();
-				hash = hash * 23 + Y.GetHashCode();
+				hash = hash*23 + X.GetHashCode();
+				hash = hash*23 + Y.GetHashCode();
 				return hash;
 			}
 		}
@@ -69,35 +69,35 @@ namespace WellFired.Guacamole.Drawing
 
 		public static Vector operator *(Vector a, Vector b)
 		{
-			return new Vector(a.X * b.X, a.Y * b.Y);
+			return new Vector(a.X*b.X, a.Y*b.Y);
 		}
 
 		public static Vector operator /(Vector a, Vector b)
 		{
-			return new Vector(a.X / b.X, a.Y / b.Y);
+			return new Vector(a.X/b.X, a.Y/b.Y);
 		}
 
 		public static Vector operator *(Vector a, double b)
 		{
-			return new Vector(a.X * b, a.Y * b);
+			return new Vector(a.X*b, a.Y*b);
 		}
 
 		public static Vector operator /(Vector a, double b)
 		{
-			return new Vector(a.X / b, a.Y / b);
+			return new Vector(a.X/b, a.Y/b);
 		}
 
-        [PublicAPI]
-        public static double AngleBetween(Vector v1, Vector v2)
+		[PublicAPI]
+		public static double AngleBetween(Vector v1, Vector v2)
 		{
 			var angle = Math.Atan2(v2.Y, v2.X) - Math.Atan2(v1.Y, v1.X);
 			if (angle < 0.0)
-				angle += 2 * Math.PI;
+				angle += 2*Math.PI;
 			return angle;
 		}
 
-        [PublicAPI]
-        public void Normalize()
+		[PublicAPI]
+		public void Normalize()
 		{
 			var length = Length;
 			if (Math.Abs(length) < 0.00001)
@@ -107,21 +107,21 @@ namespace WellFired.Guacamole.Drawing
 			Y /= length;
 		}
 
-        [PublicAPI]
-        public static Vector Normalize(Vector toEnd)
+		[PublicAPI]
+		public static Vector Normalize(Vector toEnd)
 		{
 			var length = toEnd.Length;
-			return Math.Abs(length) < 0.00001 ? Min : new Vector(toEnd.X / length, toEnd.Y /= length);
+			return Math.Abs(length) < 0.00001 ? Min : new Vector(toEnd.X/length, toEnd.Y /= length);
 		}
 
-        [PublicAPI]
-        public void Negate()
+		[PublicAPI]
+		public void Negate()
 		{
 			this *= -1.0;
 		}
 
-        [PublicAPI]
-        public static double Distance(Vector startPoint, Vector endPoint)
+		[PublicAPI]
+		public static double Distance(Vector startPoint, Vector endPoint)
 		{
 			return (endPoint - startPoint).Length;
 		}

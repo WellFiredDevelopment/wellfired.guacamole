@@ -18,7 +18,7 @@ namespace WellFired.Guacamole.Drawing
 		{
 			var color = rawImage[sourcePoint.X, sourcePoint.Y];
 			_pixelsChecked = new bool[rawImage.Width + 1, rawImage.Height + 1];
-			
+
 			switch (fillStyle)
 			{
 				case FillStyle.Linear:
@@ -45,9 +45,9 @@ namespace WellFired.Guacamole.Drawing
 				_pixelsChecked[localMinX, y] = true;
 				localMinX--;
 
-				if (localMinX < 0 || 
-					rawImage[localMinX, y] != startingColor ||
-					_pixelsChecked[localMinX, y])
+				if ((localMinX < 0) ||
+				    (rawImage[localMinX, y] != startingColor) ||
+				    _pixelsChecked[localMinX, y])
 					break;
 			}
 			localMinX++;
@@ -60,34 +60,33 @@ namespace WellFired.Guacamole.Drawing
 				_pixelsChecked[localMaxX, y] = true;
 				localMaxX++;
 
-				if (localMaxX > rawImage.Width || 
-					rawImage[localMaxX, y] != startingColor ||
-					_pixelsChecked[localMaxX, y])
+				if ((localMaxX > rawImage.Width) ||
+				    (rawImage[localMaxX, y] != startingColor) ||
+				    _pixelsChecked[localMaxX, y])
 					break;
 			}
 			localMaxX--;
 
 			// Loop up and down           
-			for(var currentX = localMinX; currentX <= localMaxX; currentX++)
+			for (var currentX = localMinX; currentX <= localMaxX; currentX++)
 			{
 				// Loop up.
-				if(y > 0 && rawImage[currentX, y - 1] == startingColor && _pixelsChecked[currentX, y - 1] == false)
+				if ((y > 0) && (rawImage[currentX, y - 1] == startingColor) && (_pixelsChecked[currentX, y - 1] == false))
 					LinearFloodFill4(rawImage, currentX, y - 1, fillColor, startingColor);
 
 				// Loop down.
-				if (y < rawImage.Height && rawImage[currentX, y + 1] == startingColor && _pixelsChecked[currentX, y + 1] == false)
+				if ((y < rawImage.Height) && (rawImage[currentX, y + 1] == startingColor) &&
+				    (_pixelsChecked[currentX, y + 1] == false))
 					LinearFloodFill4(rawImage, currentX, y + 1, fillColor, startingColor);
 			}
 		}
 
 		private static void QueueFloodFill(UIImageRaw rawImage, int i, int i1, UIColor fillColor, UIColor color)
 		{
-
 		}
 
 		private static void RecursiveFloodFill4(UIImageRaw rawImage, int i, int i1, UIColor fillColor, UIColor color)
 		{
-
 		}
 
 		/*

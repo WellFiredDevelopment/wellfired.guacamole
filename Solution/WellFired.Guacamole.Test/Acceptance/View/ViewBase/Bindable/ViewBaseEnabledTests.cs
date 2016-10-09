@@ -6,9 +6,6 @@ namespace WellFired.Guacamole.Test.Acceptance.View.ViewBase.Bindable
 	[TestFixture]
 	public class ViewBaseEnabledTests
 	{
-		private Guacamole.View.ViewBase _viewBase;
-		private ViewBaseContextObject _viewBaseContext;
-
 		[SetUp]
 		public void OneTimeSetup()
 		{
@@ -16,6 +13,9 @@ namespace WellFired.Guacamole.Test.Acceptance.View.ViewBase.Bindable
 			_viewBaseContext = new ViewBaseContextObject();
 			_viewBase.BindingContext = _viewBaseContext;
 		}
+
+		private Guacamole.View.ViewBase _viewBase;
+		private ViewBaseContextObject _viewBaseContext;
 
 		[Test]
 		public void OnBindViewBaseIsAutomaticallyUpdatedToTheValueOfBindingContextEnabled()
@@ -25,6 +25,17 @@ namespace WellFired.Guacamole.Test.Acceptance.View.ViewBase.Bindable
 			Assert.That(_viewBaseContext.Enabled != _viewBase.Enabled);
 			_viewBase.Bind(Guacamole.View.ViewBase.EnabledProperty, nameof(_viewBaseContext.Enabled));
 			Assert.That(_viewBaseContext.Enabled == _viewBase.Enabled);
+		}
+
+		[Test]
+		public void ViewBaseEnabledBindingDoesntWorkInTwoWayWithOneWayMode()
+		{
+			_viewBase.Bind(Guacamole.View.ViewBase.EnabledProperty, nameof(_viewBaseContext.Enabled), BindingMode.OneWay);
+			Assert.That(_viewBaseContext.Enabled == _viewBase.Enabled);
+			_viewBaseContext.Enabled = !_viewBaseContext.Enabled;
+			Assert.That(_viewBaseContext.Enabled == _viewBase.Enabled);
+			_viewBase.Enabled = !_viewBase.Enabled;
+			Assert.That(_viewBaseContext.Enabled != _viewBase.Enabled);
 		}
 
 		[Test]
@@ -45,17 +56,6 @@ namespace WellFired.Guacamole.Test.Acceptance.View.ViewBase.Bindable
 			Assert.That(_viewBaseContext.Enabled == _viewBase.Enabled);
 			_viewBase.Enabled = !_viewBase.Enabled;
 			Assert.That(_viewBaseContext.Enabled == _viewBase.Enabled);
-		}
-
-		[Test]
-		public void ViewBaseEnabledBindingDoesntWorkInTwoWayWithOneWayMode()
-		{
-			_viewBase.Bind(Guacamole.View.ViewBase.EnabledProperty, nameof(_viewBaseContext.Enabled), BindingMode.OneWay);
-			Assert.That(_viewBaseContext.Enabled == _viewBase.Enabled);
-			_viewBaseContext.Enabled = !_viewBaseContext.Enabled;
-			Assert.That(_viewBaseContext.Enabled == _viewBase.Enabled);
-			_viewBase.Enabled = !_viewBase.Enabled;
-			Assert.That(_viewBaseContext.Enabled != _viewBase.Enabled);
 		}
 	}
 }

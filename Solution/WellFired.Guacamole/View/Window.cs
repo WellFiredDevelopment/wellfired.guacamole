@@ -7,9 +7,20 @@ namespace WellFired.Guacamole.View
 	public class Window : ViewBase
 	{
 		private readonly Device _device = new Device();
-	    private UIRect FinalRenderedRect { get; set; }
-	    protected ViewBase Content { private get; set; }
-		
+
+		[PublicAPI]
+		public Window(INotifyPropertyChanged persistantData)
+		{
+		}
+
+		[PublicAPI]
+		public Window()
+		{
+		}
+
+		private UIRect FinalRenderedRect { get; set; }
+		protected ViewBase Content { private get; set; }
+
 		public void Layout(UIRect rect)
 		{
 			Content.CalculateRectRequest();
@@ -22,31 +33,19 @@ namespace WellFired.Guacamole.View
 		public override void Render(UIRect parentRect)
 		{
 			_device.ProcessActions();
-			NativeRenderer.Render(renderRect : FinalRenderedRect);
+			NativeRenderer.Render(FinalRenderedRect);
 
 			var relativeParentRect = new UIRect(0, 0, parentRect.Width, parentRect.Height);
 			relativeParentRect -= Padding;
-			Content.Render(parentRect: relativeParentRect);
-        }
+			Content.Render(relativeParentRect);
+		}
 
-        protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+		protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
 			base.OnPropertyChanged(sender, e);
 
-			if(e.PropertyName == BindingContextProperty.PropertyName)
+			if (e.PropertyName == BindingContextProperty.PropertyName)
 				Content.BindingContext = BindingContext;
 		}
-
-        [PublicAPI]
-	    public Window(INotifyPropertyChanged persistantData)
-	    {
-	        
-	    }
-
-        [PublicAPI]
-        public Window()
-	    {
-	        
-	    }
 	}
 }

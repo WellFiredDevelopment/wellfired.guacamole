@@ -6,9 +6,6 @@ namespace WellFired.Guacamole.Test.Acceptance.View.NumberEntry.Bindable
 	[TestFixture]
 	public class NumberEntryHorizontalTextAlignTests
 	{
-		private Guacamole.View.NumberEntry _numberEntryView;
-		private NumberEntryContextObject _numberEntryContext;
-
 		[SetUp]
 		public void OneTimeSetup()
 		{
@@ -17,13 +14,17 @@ namespace WellFired.Guacamole.Test.Acceptance.View.NumberEntry.Bindable
 			_numberEntryView.BindingContext = _numberEntryContext;
 		}
 
+		private Guacamole.View.NumberEntry _numberEntryView;
+		private NumberEntryContextObject _numberEntryContext;
+
 		[Test]
 		public void IsBindable()
 		{
 			_numberEntryView.HorizontalTextAlign = UITextAlign.End;
 			_numberEntryContext.HorizontalTextAlign = UITextAlign.Middle;
 			Assert.That(_numberEntryContext.HorizontalTextAlign != _numberEntryView.HorizontalTextAlign);
-			_numberEntryView.Bind(Guacamole.View.NumberEntry.HorizontalTextAlignProperty, nameof(_numberEntryContext.HorizontalTextAlign));
+			_numberEntryView.Bind(Guacamole.View.NumberEntry.HorizontalTextAlignProperty,
+				nameof(_numberEntryContext.HorizontalTextAlign));
 			Assert.That(_numberEntryContext.HorizontalTextAlign == _numberEntryView.HorizontalTextAlign);
 			_numberEntryContext.HorizontalTextAlign = UITextAlign.Start;
 			Assert.That(_numberEntryContext.HorizontalTextAlign == _numberEntryView.HorizontalTextAlign);

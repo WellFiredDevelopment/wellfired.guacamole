@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using UnityEditor;
 using UnityEngine;
 using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Attributes;
@@ -9,7 +8,8 @@ using WellFired.Guacamole.Unity.Editor.NativeControls;
 using WellFired.Guacamole.View;
 using Debug = System.Diagnostics.Debug;
 
-[assembly : CustomRenderer(typeof(Slider), typeof(SliderRenderer))]
+[assembly: CustomRenderer(typeof(Slider), typeof(SliderRenderer))]
+
 namespace WellFired.Guacamole.Unity.Editor.NativeControls
 {
 	public class SliderRenderer : BaseRenderer
@@ -58,12 +58,13 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 			CreateStyleWith(slider);
 			CreateThumbStyleWith(slider);
 
-			var offset = (float)Control.CornerRadius;
-			var smallest = (int)(Mathf.Min(offset, Mathf.Min(renderRect.Width * 0.5f, renderRect.Height * 0.5f)) + 0.5f);
+			var offset = (float) Control.CornerRadius;
+			var smallest = (int) (Mathf.Min(offset, Mathf.Min(renderRect.Width*0.5f, renderRect.Height*0.5f)) + 0.5f);
 			smallest = Mathf.Max(smallest, 2);
 			Style.border = new RectOffset(smallest, smallest, smallest, smallest);
 
-			var newValue = GUI.HorizontalSlider(renderRect.ToUnityRect(), (float)slider.Value, (float)slider.MinValue, (float)slider.MaxValue, Style, ThumbStyle);
+			var newValue = GUI.HorizontalSlider(renderRect.ToUnityRect(), (float) slider.Value, (float) slider.MinValue,
+				(float) slider.MaxValue, Style, ThumbStyle);
 
 			if (Control.Enabled)
 				slider.Value = newValue;
@@ -73,10 +74,10 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 		{
 			base.OnPropertyChanged(sender, e);
 
-			if (e.PropertyName == Slider.ThumbCornerRadiusProperty.PropertyName ||
-				e.PropertyName == Slider.ThumbOutlineColorProperty.PropertyName ||
-				e.PropertyName == Slider.ThumbBackgroundColorProperty.PropertyName ||
-				e.PropertyName == ViewBase.ControlStateProperty.PropertyName)
+			if ((e.PropertyName == Slider.ThumbCornerRadiusProperty.PropertyName) ||
+			    (e.PropertyName == Slider.ThumbOutlineColorProperty.PropertyName) ||
+			    (e.PropertyName == Slider.ThumbBackgroundColorProperty.PropertyName) ||
+			    (e.PropertyName == ViewBase.ControlStateProperty.PropertyName))
 				CreateThumbBackgroundTexture();
 		}
 
@@ -90,7 +91,8 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 		{
 			var slider = Control as Slider;
 			Debug.Assert(slider != null, "slider != null");
-			ThumbBackgroundTexture = Texture2DExtensions.CreateRoundedTexture(32, 32, slider.ThumbBackgroundColor, slider.ThumbOutlineColor, slider.ThumbCornerRadius, slider.ThumbCornerMask);
+			ThumbBackgroundTexture = Texture2DExtensions.CreateRoundedTexture(32, 32, slider.ThumbBackgroundColor,
+				slider.ThumbOutlineColor, slider.ThumbCornerRadius, slider.ThumbCornerMask);
 		}
 	}
 }

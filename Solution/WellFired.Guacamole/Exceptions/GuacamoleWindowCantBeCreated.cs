@@ -2,8 +2,7 @@
 
 namespace WellFired.Guacamole.Exceptions
 {
-	public class GuacamoleWindowCantBeCreated : Exception 
+	public class GuacamoleWindowCantBeCreated : Exception
 	{
-
 	}
 }

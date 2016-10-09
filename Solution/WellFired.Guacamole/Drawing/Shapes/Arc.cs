@@ -5,15 +5,15 @@ namespace WellFired.Guacamole.Drawing.Shapes
 {
 	public class Arc : IShape
 	{
+		public Rect ArcRect;
 		public double StartAngle;
 		public double SweepAngle;
-		public Rect ArcRect;
 
-	    public List<Vector> Path { get; } = new List<Vector>();
+		private double Radius => ArcRect.Width*0.5f;
 
-	    private double Radius => ArcRect.Width * 0.5f;
+		public List<Vector> Path { get; } = new List<Vector>();
 
-	    public Side Contains(double x, double y)
+		public Side Contains(double x, double y)
 		{
 			return Side.Outside;
 		}
@@ -30,15 +30,15 @@ namespace WellFired.Guacamole.Drawing.Shapes
 
 		public void Calculate()
 		{
-			for(var currentSweep = 0; currentSweep <= SweepAngle; currentSweep++)
+			for (var currentSweep = 0; currentSweep <= SweepAngle; currentSweep++)
 				Path.Add(VectorAtAngle(currentSweep));
 		}
 
 		private Vector VectorAtAngle(double sweepAngle)
 		{
-			var currentSweepAngleInRadians = Math.PI / 180 * (sweepAngle + StartAngle);
-			var x = ArcRect.Center.X + Radius * Math.Sin(currentSweepAngleInRadians);
-			var y = ArcRect.Center.Y + Radius * Math.Cos(currentSweepAngleInRadians);
+			var currentSweepAngleInRadians = Math.PI/180*(sweepAngle + StartAngle);
+			var x = ArcRect.Center.X + Radius*Math.Sin(currentSweepAngleInRadians);
+			var y = ArcRect.Center.Y + Radius*Math.Cos(currentSweepAngleInRadians);
 			return new Vector(x, y);
 		}
 	}

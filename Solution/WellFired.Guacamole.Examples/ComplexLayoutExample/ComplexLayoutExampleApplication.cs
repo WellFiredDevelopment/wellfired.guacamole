@@ -1,20 +1,22 @@
-﻿using WellFired.Guacamole.Annotations;
+﻿using UnityEditor;
+using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Types;
+using WellFired.Guacamole.Unity.Editor;
 
 namespace WellFired.Guacamole.Examples.ComplexLayoutExample
 {
 	[UsedImplicitly]
 	public class ComplexLayoutExampleApplication
 	{
-		[UnityEditor.MenuItem ("Window/guacamole/Test/ComplexLayout")]
+		[MenuItem("Window/guacamole/Test/ComplexLayout")]
 		[UsedImplicitly]
-		static void TestWindow () 
+		private static void TestWindow()
 		{
-			var application = new Unity.Editor.Application();
+			var application = new Application();
 
-			var context = new Unity.Editor.ApplicationInitializationContext
+			var context = new ApplicationInitializationContext
 			{
-				MainContent = typeof (ComplexLayoutExampleWindow),
+				MainContent = typeof(ComplexLayoutExampleWindow),
 				UIRect = new UIRect(50, 50, 600, 200),
 				MinSize = new UISize(200, 50),
 				Title = "Complex Layout"

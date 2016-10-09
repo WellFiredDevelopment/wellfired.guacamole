@@ -5,9 +5,9 @@ namespace WellFired.Guacamole.Test.Acceptance.View.NumberEntry.Bindable
 {
 	public class NumberEntryContextObject : NotifyBase
 	{
+		private UITextAlign _horizontalTextAlign;
 		private float _number;
 		private UIColor _textColor;
-		private UITextAlign _horizontalTextAlign;
 		private UITextAlign _verticalTextAlign;
 
 		public float Number
@@ -35,4 +35,3 @@ namespace WellFired.Guacamole.Test.Acceptance.View.NumberEntry.Bindable
 		}
 	}
 }
- 

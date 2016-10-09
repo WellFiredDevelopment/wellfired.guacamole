@@ -3,13 +3,13 @@ using WellFired.Guacamole.Annotations;
 
 namespace WellFired.Guacamole
 {
-    [PublicAPI]
-    public interface ICommand : INotifyPropertyChanged
-    {
-        [PublicAPI]
-        void Execute();
+	[PublicAPI]
+	public interface ICommand : INotifyPropertyChanged
+	{
+		[PublicAPI]
+		bool CanExecute { get; set; }
 
-        [PublicAPI]
-        bool CanExecute { get; set; }
-    }
+		[PublicAPI]
+		void Execute();
+	}
 }

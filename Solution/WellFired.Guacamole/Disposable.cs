@@ -37,7 +37,7 @@ namespace WellFired.Guacamole
 			var l = _onDisposed.ToArray();
 
 			_onDisposed.Clear();
-			
+
 			foreach (var a in l)
 				a?.Invoke();
 		}

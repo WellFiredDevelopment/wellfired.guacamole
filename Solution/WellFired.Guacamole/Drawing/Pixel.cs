@@ -9,26 +9,26 @@ namespace WellFired.Guacamole.Drawing
 
 		public override bool Equals(object obj)
 		{
-			var compareTo = (Pixel)obj;
-			return compareTo.X == X && compareTo.Y == Y;
+			var compareTo = (Pixel) obj;
+			return (compareTo.X == X) && (compareTo.Y == Y);
 		}
 
-	    public bool Equals(Pixel other)
-	    {
-	        return X == other.X && Y == other.Y;
-	    }
-
-	    public override int GetHashCode()
-	    {
-	        unchecked
-	        {
-	            return (X * 397) ^ Y;
-	        }
-	    }
-
-	    public static bool operator ==(Pixel a, Pixel b)
+		public bool Equals(Pixel other)
 		{
-	        return a.Equals(b);
+			return (X == other.X) && (Y == other.Y);
+		}
+
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				return (X*397) ^ Y;
+			}
+		}
+
+		public static bool operator ==(Pixel a, Pixel b)
+		{
+			return a.Equals(b);
 		}
 
 		public static bool operator !=(Pixel a, Pixel b)

@@ -5,13 +5,13 @@ namespace WellFired.Guacamole.Test.Acceptance.View.Slider.Bindable
 {
 	public class SliderContextObject : NotifyBase
 	{
-		private double _minValue;
 		private double _maxValue;
-		private double _value;
+		private double _minValue;
 		private UIColor _thumbBackgroundColor;
-		private UIColor _thumbOutlineColor;
-		private double _thumbCornerRadius;
 		private CornerMask _thumbCornerMask;
+		private double _thumbCornerRadius;
+		private UIColor _thumbOutlineColor;
+		private double _value;
 
 		public double MinValue
 		{

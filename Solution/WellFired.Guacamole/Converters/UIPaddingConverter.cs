@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Converters
@@ -12,10 +13,11 @@ namespace WellFired.Guacamole.Converters
 			return sourceType == typeof(int);
 		}
 
-		public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+		public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture,
+			object value)
 		{
 			if (value is int)
-				return new UIPadding((int)value);
+				return new UIPadding((int) value);
 
 			return base.ConvertFrom(context, culture, value);
 		}

@@ -5,9 +5,6 @@ namespace WellFired.Guacamole.Test.Acceptance.View.Button.Bindable
 	[TestFixture]
 	public class ButtonButtonPressedTests
 	{
-		private Guacamole.View.Button _buttonView;
-		private ButtonContextObject _labelContext;
-
 		[SetUp]
 		public void OneTimeSetup()
 		{
@@ -15,6 +12,9 @@ namespace WellFired.Guacamole.Test.Acceptance.View.Button.Bindable
 			_labelContext = new ButtonContextObject();
 			_buttonView.BindingContext = _labelContext;
 		}
+
+		private Guacamole.View.Button _buttonView;
+		private ButtonContextObject _labelContext;
 
 		[Test]
 		public void IsBindable()

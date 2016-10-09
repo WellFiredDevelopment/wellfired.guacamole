@@ -6,18 +6,19 @@ namespace WellFired.Guacamole.DataBinding
 {
 	public class BindableContext
 	{
-		public BindableProperty Property;
+		private INotifyPropertyChanged _bindableObject;
+		private MethodInfo _propertyGetMethod;
 		private PropertyInfo _propertyInfo;
 		private MethodInfo _propertySetMethod;
-		private MethodInfo _propertyGetMethod;
-		private INotifyPropertyChanged _bindableObject;
-		private object _value;
 		private string _targetProperty;
+		private object _value;
+		public BindableProperty Property;
 
-		public string TargetProperty 
+		public string TargetProperty
 		{
-		    private get { return _targetProperty; }
-			set {
+			private get { return _targetProperty; }
+			set
+			{
 				_targetProperty = value;
 				ConfigureSet();
 			}
@@ -42,14 +43,14 @@ namespace WellFired.Guacamole.DataBinding
 						throw new ArgumentOutOfRangeException();
 				}
 
-			    _propertySetMethod?.Invoke(Object, new[] {value});
+				_propertySetMethod?.Invoke(Object, new[] {value});
 			}
 			get { return _value; }
 		}
 
 		public INotifyPropertyChanged Object
 		{
-		    private get { return _bindableObject; }
+			private get { return _bindableObject; }
 			set
 			{
 				_bindableObject = value;
@@ -59,7 +60,7 @@ namespace WellFired.Guacamole.DataBinding
 
 		private void ConfigureSet()
 		{
-			if (Object == null || Property == null || TargetProperty == null)
+			if ((Object == null) || (Property == null) || (TargetProperty == null))
 			{
 				_propertyInfo = null;
 				_propertySetMethod = null;
@@ -83,14 +84,14 @@ namespace WellFired.Guacamole.DataBinding
 	{
 		public static object From(object value, BindableProperty property)
 		{
-			if(property.PropertyType == typeof(string))
+			if (property.PropertyType == typeof(string))
 				return value?.ToString();
 
-			if(value.GetType() == property.PropertyType)
+			if (value.GetType() == property.PropertyType)
 				return value;
 
-            if (property.PropertyType.IsInstanceOfType(value))
-                return value;
+			if (property.PropertyType.IsInstanceOfType(value))
+				return value;
 
 			var converter = TypeDescriptor.GetConverter(property.PropertyType);
 			if (converter.CanConvertFrom(value.GetType()))

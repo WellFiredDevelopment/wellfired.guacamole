@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
 using WellFired.Guacamole.Drawing.Shapes;
 using WellFired.Guacamole.Types;
 
@@ -11,14 +9,15 @@ namespace WellFired.Guacamole.Drawing
 	{
 		private readonly List<IShape> _shapes = new List<IShape>();
 
-	    private IEnumerable<Vector> Path
+		private IEnumerable<Vector> Path
 		{
 			get { return _shapes.SelectMany(shape => shape.Path); }
 		}
 
 		public void AddArc(Rect arcRect, double startAngle, double sweepAngle)
 		{
-			_shapes.Add(new Arc {
+			_shapes.Add(new Arc
+			{
 				ArcRect = arcRect,
 				StartAngle = startAngle,
 				SweepAngle = sweepAngle
@@ -27,12 +26,12 @@ namespace WellFired.Guacamole.Drawing
 
 		public void AddLine(Vector startPoint, Vector endPoint)
 		{
-			_shapes.Add(new Line { StartPoint = startPoint, EndPoint = endPoint });
+			_shapes.Add(new Line {StartPoint = startPoint, EndPoint = endPoint});
 		}
 
 		public UIColor[] Draw(int width, int height, UIColor backgroundColor, UIColor outlineColor)
 		{
-			var image = new UIImageRaw { Data = new UIColor[width * height], Width = width, Height = height };
+			var image = new UIImageRaw {Data = new UIColor[width*height], Width = width, Height = height};
 			for (var i = 0; i < image.Length; i++)
 				image[i] = UIColor.Clear;
 
@@ -40,13 +39,13 @@ namespace WellFired.Guacamole.Drawing
 
 			var localOutlineColor = outlineColor;
 
-			if(localOutlineColor == UIColor.Clear)
+			if (localOutlineColor == UIColor.Clear)
 				localOutlineColor = backgroundColor;
 
-			foreach(var point in Path)
+			foreach (var point in Path)
 			{
-				var x = (int)point.X;
-				var y = (int)point.Y;
+				var x = (int) point.X;
+				var y = (int) point.Y;
 
 				if (x < 0)
 					continue;
@@ -63,12 +62,13 @@ namespace WellFired.Guacamole.Drawing
 				if (y >= height)
 					continue;
 
-				image[width * (height - y - 1) + x] = localOutlineColor;
+				image[width*(height - y - 1) + x] = localOutlineColor;
 			}
 
-			var startingPixel = new Pixel {
-				X = (int)(width * 0.5),
-				Y = (int)(height * 0.5)
+			var startingPixel = new Pixel
+			{
+				X = (int) (width*0.5),
+				Y = (int) (height*0.5)
 			};
 
 			new ImageFill().Fill(image, startingPixel, backgroundColor, ImageFill.FillStyle.Linear);

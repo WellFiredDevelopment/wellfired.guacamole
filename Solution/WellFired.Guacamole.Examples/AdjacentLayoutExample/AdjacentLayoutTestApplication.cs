@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Types;
+using WellFired.Guacamole.Unity.Editor;
 
 namespace WellFired.Guacamole.Examples.AdjacentLayoutExample
 {
@@ -9,11 +10,11 @@ namespace WellFired.Guacamole.Examples.AdjacentLayoutExample
 	{
 		[MenuItem("Window/guacamole/Test/AdjacentLayoutTest")]
 		[UsedImplicitly]
-		static void OpenWindow()
+		private static void OpenWindow()
 		{
-			var application = new Unity.Editor.Application();
+			var application = new Application();
 
-			var context = new Unity.Editor.ApplicationInitializationContext
+			var context = new ApplicationInitializationContext
 			{
 				MainContent = typeof(AdjacentLayoutTestWindow),
 				UIRect = new UIRect(50, 50, 600, 200),

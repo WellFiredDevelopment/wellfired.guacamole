@@ -5,8 +5,8 @@ namespace WellFired.Guacamole.Drawing.Shapes
 {
 	public class Line : IShape
 	{
-		public Vector StartPoint;
 		public Vector EndPoint;
+		public Vector StartPoint;
 
 		public List<Vector> Path { get; private set; }
 
@@ -33,7 +33,7 @@ namespace WellFired.Guacamole.Drawing.Shapes
 			var direction = Vector.Normalize(toEnd);
 			var absDistance = Math.Abs(toEnd.Length);
 
-			for(var distanceStep = 0.0; distanceStep < absDistance; distanceStep += 0.5)
+			for (var distanceStep = 0.0; distanceStep < absDistance; distanceStep += 0.5)
 			{
 				var newPathPoint = StartPoint + direction*distanceStep;
 				Path.Add(newPathPoint);

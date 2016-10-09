@@ -6,16 +6,16 @@ namespace WellFired.Guacamole.Examples.ComplexLayoutExample
 	[UsedImplicitly]
 	public class ComplexLayoutExampleViewModel : ObservableBase
 	{
-	    private ComplexLayoutExampleModel Model { get; [UsedImplicitly] set; }
+		private ComplexLayoutExampleModel Model { get; [UsedImplicitly] set; }
 
 		[UsedImplicitly]
 		public float CurrentSequenceDuration
 		{
 			get { return Model.CurrentSequenceDuration; }
-			set 
-			{ 
+			set
+			{
 				var data = Model.CurrentSequenceDuration;
-				if(SetProperty (ref data, value, "CurrentSequenceDuration"))
+				if (SetProperty(ref data, value, "CurrentSequenceDuration"))
 					Model.CurrentSequenceDuration = data;
 			}
 		}
@@ -24,10 +24,10 @@ namespace WellFired.Guacamole.Examples.ComplexLayoutExample
 		public string CurrentSequenceName
 		{
 			get { return Model.CurrentSequenceName; }
-			set 
-			{ 
+			set
+			{
 				var data = Model.CurrentSequenceName;
-				if(SetProperty (ref data, value, "CurrentSequenceName"))
+				if (SetProperty(ref data, value, "CurrentSequenceName"))
 					Model.CurrentSequenceName = data;
 			}
 		}

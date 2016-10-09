@@ -5,9 +5,6 @@ namespace WellFired.Guacamole.Test.Acceptance.View.TextEntry.Bindable
 	[TestFixture]
 	public class TextEntryTextTests
 	{
-		private Guacamole.View.TextEntry _textEntryView;
-		private TextEntryContextObject _textEntryContext;
-
 		[SetUp]
 		public void OneTimeSetup()
 		{
@@ -15,6 +12,9 @@ namespace WellFired.Guacamole.Test.Acceptance.View.TextEntry.Bindable
 			_textEntryContext = new TextEntryContextObject();
 			_textEntryView.BindingContext = _textEntryContext;
 		}
+
+		private Guacamole.View.TextEntry _textEntryView;
+		private TextEntryContextObject _textEntryContext;
 
 		[Test]
 		public void IsBindable()

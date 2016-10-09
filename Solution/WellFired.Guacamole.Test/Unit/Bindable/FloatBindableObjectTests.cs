@@ -9,39 +9,27 @@ namespace WellFired.Guacamole.Test.Unit.Bindable
 		private class BindableTestObject : BindableObject
 		{
 			public static readonly BindableProperty FloatProperty = BindableProperty.Create<BindableTestObject, float>(
-					defaultValue: 0.0f,
-					bindingMode: BindingMode.TwoWay,
-					getter: testObject => testObject.Value
-				);
+				0.0f,
+				BindingMode.TwoWay,
+				testObject => testObject.Value
+			);
 
 			public float Value
 			{
-				get { return (float)GetValue(FloatProperty); }
+				get { return (float) GetValue(FloatProperty); }
 				set { SetValue(FloatProperty, value); }
 			}
 		}
 
 		private class ContextObject : NotifyBase
 		{
-			private float _currentValue = 0.0f;
+			private float _currentValue;
 
 			public float Value
 			{
 				get { return _currentValue; }
 				set { SetProperty(ref _currentValue, value, nameof(Value)); }
 			}
-		}
-
-		[Test]
-		public void OneWayBindingTest()
-		{
-			var source = new BindableTestObject();
-			var bindingContext = new ContextObject();
-			source.BindingContext = bindingContext;
-			source.Bind(BindableTestObject.FloatProperty, nameof(ContextObject.Value));
-			bindingContext.Value = 10.0f;
-
-			Assert.AreEqual(source.Value, bindingContext.Value);
 		}
 
 		[Test]
@@ -58,6 +46,18 @@ namespace WellFired.Guacamole.Test.Unit.Bindable
 			source.Value = 15.0f;
 
 			Assert.AreNotEqual(bindingContext.Value, source.Value);
+		}
+
+		[Test]
+		public void OneWayBindingTest()
+		{
+			var source = new BindableTestObject();
+			var bindingContext = new ContextObject();
+			source.BindingContext = bindingContext;
+			source.Bind(BindableTestObject.FloatProperty, nameof(ContextObject.Value));
+			bindingContext.Value = 10.0f;
+
+			Assert.AreEqual(source.Value, bindingContext.Value);
 		}
 
 		[Test]

@@ -4,30 +4,33 @@ using WellFired.Guacamole.View;
 
 namespace WellFired.Guacamole.Examples.UIBindingExample
 {
-    // ReSharper disable once InconsistentNaming
-    public class UIBindingTestWindow : Window
-    {
-        public UIBindingTestWindow()
-        {
-            Padding = new UIPadding(5);
+	// ReSharper disable once InconsistentNaming
+	public class UIBindingTestWindow : Window
+	{
+		public UIBindingTestWindow()
+		{
+			Padding = new UIPadding(5);
 
-	        var destinationElement = new TextEntry();
+			var destinationElement = new TextEntry();
 
-            var sourceElement = new Slider {
-                MinValue = 0,
-                MaxValue = 32
-            };
+			var sourceElement = new Slider
+			{
+				MinValue = 0,
+				MaxValue = 32
+			};
 
-            Content = new AdjacentLayout {
-                Children = {
-                    destinationElement,
-                    sourceElement
-                }
-            };
+			Content = new AdjacentLayout
+			{
+				Children =
+				{
+					destinationElement,
+					sourceElement
+				}
+			};
 
-            destinationElement.BindingContext = sourceElement;
+			destinationElement.BindingContext = sourceElement;
 
-            destinationElement.Bind(CornerRadiusProperty, "Value");
-        }
-    }
+			destinationElement.Bind(CornerRadiusProperty, "Value");
+		}
+	}
 }

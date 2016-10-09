@@ -7,9 +7,6 @@ namespace WellFired.Guacamole.Test.Acceptance.View.ViewBase.Bindable
 	[TestFixture]
 	public class ViewBaseCornerMaskTests
 	{
-		private Guacamole.View.ViewBase _viewBase;
-		private ViewBaseContextObject _viewBaseContext;
-
 		[SetUp]
 		public void OneTimeSetup()
 		{
@@ -17,6 +14,9 @@ namespace WellFired.Guacamole.Test.Acceptance.View.ViewBase.Bindable
 			_viewBaseContext = new ViewBaseContextObject();
 			_viewBase.BindingContext = _viewBaseContext;
 		}
+
+		private Guacamole.View.ViewBase _viewBase;
+		private ViewBaseContextObject _viewBaseContext;
 
 		[Test]
 		public void OnBindViewBaseIsAutomaticallyUpdatedToTheValueOfBindingContextCornerMask()
@@ -26,6 +26,17 @@ namespace WellFired.Guacamole.Test.Acceptance.View.ViewBase.Bindable
 			Assert.That(_viewBaseContext.CornerMask != _viewBase.CornerMask);
 			_viewBase.Bind(Guacamole.View.ViewBase.CornerMaskProperty, nameof(_viewBaseContext.CornerMask));
 			Assert.That(_viewBaseContext.CornerMask == _viewBase.CornerMask);
+		}
+
+		[Test]
+		public void ViewBaseCornerMaskBindingDoesntWorkInTwoWayWithOneWayMode()
+		{
+			_viewBase.Bind(Guacamole.View.ViewBase.CornerMaskProperty, nameof(_viewBaseContext.CornerMask), BindingMode.OneWay);
+			Assert.That(_viewBaseContext.CornerMask == _viewBase.CornerMask);
+			_viewBaseContext.CornerMask = CornerMask.Bottom;
+			Assert.That(_viewBaseContext.CornerMask == _viewBase.CornerMask);
+			_viewBase.CornerMask = CornerMask.BottomLeft;
+			Assert.That(_viewBaseContext.CornerMask != _viewBase.CornerMask);
 		}
 
 		[Test]
@@ -46,17 +57,6 @@ namespace WellFired.Guacamole.Test.Acceptance.View.ViewBase.Bindable
 			Assert.That(_viewBaseContext.CornerMask == _viewBase.CornerMask);
 			_viewBase.CornerMask = CornerMask.BottomLeft;
 			Assert.That(_viewBaseContext.CornerMask == _viewBase.CornerMask);
-		}
-
-		[Test]
-		public void ViewBaseCornerMaskBindingDoesntWorkInTwoWayWithOneWayMode()
-		{
-			_viewBase.Bind(Guacamole.View.ViewBase.CornerMaskProperty, nameof(_viewBaseContext.CornerMask), BindingMode.OneWay);
-			Assert.That(_viewBaseContext.CornerMask == _viewBase.CornerMask);
-			_viewBaseContext.CornerMask = CornerMask.Bottom;
-			Assert.That(_viewBaseContext.CornerMask == _viewBase.CornerMask);
-			_viewBase.CornerMask = CornerMask.BottomLeft;
-			Assert.That(_viewBaseContext.CornerMask != _viewBase.CornerMask);
 		}
 	}
 }
