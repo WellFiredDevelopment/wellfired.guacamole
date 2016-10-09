@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using WellFired.Guacamole.Annotations;
+using WellFired.Guacamole.Event;
 using WellFired.Guacamole.Exceptions;
 using WellFired.Guacamole.InitializationContext;
 using WellFired.Guacamole.Renderer;
@@ -110,13 +112,12 @@ namespace WellFired.Guacamole.Unity.Editor
 
 		[UsedImplicitly]
 		[Obfuscation(Feature = "renaming")]
-		// ReSharper disable once InconsistentNaming
 		public void OnGUI()
 		{
 			if (_exception != null)
 				return;
 
-			if (Event.current.type == EventType.Layout)
+			if (UnityEngine.Event.current.type == EventType.Layout)
 				try
 				{
 					var layoutRect = Rect;
@@ -167,6 +168,11 @@ namespace WellFired.Guacamole.Unity.Editor
 
 			if (_window == null)
 				throw new GuacamoleWindowCantBeCreated();
+		}
+
+		public void RaiseEventFor(string controlId, IEvent raisedEvent)
+		{
+			MainContent.RaiseEventFor(controlId, raisedEvent);
 		}
 	}
 }

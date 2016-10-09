@@ -1,10 +1,11 @@
-﻿using WellFired.Guacamole.Annotations;
+﻿using System;
+using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.View
 {
-	public class NumberEntry : ViewBase
+	public class NumberEntry : ViewBase, ITypeable
 	{
 		[PublicAPI] public static readonly BindableProperty NumberProperty = BindableProperty.Create<NumberEntry, float>
 		(
@@ -67,6 +68,11 @@ namespace WellFired.Guacamole.View
 		{
 			get { return (UITextAlign) GetValue(VerticalTextAlignProperty); }
 			set { SetValue(VerticalTextAlignProperty, value); }
+		}
+
+		public void Type(char key)
+		{
+			Number = (float)char.GetNumericValue(key);
 		}
 	}
 }

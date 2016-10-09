@@ -1,5 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using WellFired.Guacamole.Annotations;
+using WellFired.Guacamole.Event;
 using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.View
@@ -46,6 +48,31 @@ namespace WellFired.Guacamole.View
 
 			if (e.PropertyName == BindingContextProperty.PropertyName)
 				Content.BindingContext = BindingContext;
+		}
+
+		public void RaiseEventFor(string controlId, IEvent raisedEvent)
+		{
+			if (Content.Id == controlId)
+			{
+				Content.RaiseEvent(raisedEvent);
+				return;
+			}
+
+			RaiseEventFor(Content.Children, controlId, raisedEvent);
+		}
+
+		private static void RaiseEventFor(IEnumerable<ViewBase> children, string controlId, IEvent raisedEvent)
+		{
+			foreach (var child in children)
+			{
+				if (child.Id == controlId)
+				{
+					child.RaiseEvent(raisedEvent);
+					return;
+				}
+
+				RaiseEventFor(child.Children, controlId, raisedEvent);
+			}
 		}
 	}
 }

@@ -24,19 +24,21 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 			if (Control.ControlState != ControlState.Disabled)
 			{
 				if (Control.ControlState != ControlState.Active)
-					if ((Event.current.type == EventType.MouseDown) && renderRect.ToUnityRect().Contains(Event.current.mousePosition))
+					if ((UnityEngine.Event.current.type == EventType.MouseDown) && renderRect.ToUnityRect().Contains(UnityEngine.Event.current.mousePosition))
 						Control.ControlState = ControlState.Active;
-					else if (renderRect.ToUnityRect().Contains(Event.current.mousePosition))
+					else if (renderRect.ToUnityRect().Contains(UnityEngine.Event.current.mousePosition))
 						Control.ControlState = ControlState.Hover;
 					else
 						Control.ControlState = ControlState.Normal;
 
-				if (Event.current.rawType == EventType.MouseUp)
+				if (UnityEngine.Event.current.rawType == EventType.MouseUp)
 					Control.ControlState = ControlState.Normal;
 			}
 
 			if (BackgroundTexture == null)
 				CreateBackgroundTexture();
+
+			GUI.SetNextControlName(Control.Id);
 		}
 
 		public virtual void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -49,6 +51,11 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 
 			if (e.PropertyName == ViewBase.EnabledProperty.PropertyName)
 				Control.ControlState = Control.Enabled ? ControlState.Normal : ControlState.Disabled;
+		}
+
+		public void FocusControl()
+		{
+			GUI.FocusControl(Control.Id);
 		}
 
 		private void CreateBackgroundTexture()

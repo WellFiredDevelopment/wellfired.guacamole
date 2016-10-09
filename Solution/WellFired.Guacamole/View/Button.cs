@@ -5,7 +5,7 @@ using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.View
 {
-	public class Button : ViewBase
+	public class Button : ViewBase, IClickable
 	{
 		[PublicAPI] public static readonly BindableProperty TextProperty = BindableProperty.Create<
 			Button, string>(
@@ -101,6 +101,17 @@ namespace WellFired.Guacamole.View
 		{
 			if (propertyChangedEventArgs.PropertyName == nameof(ICommand.CanExecute))
 				Enabled = ButtonPressedCommand.CanExecute;
+		}
+
+		public void Click(int button)
+		{
+			FocusControl();
+
+			if (!Enabled)
+				return;
+
+			if (ButtonPressedCommand.CanExecute)
+				ButtonPressedCommand.Execute();
 		}
 	}
 }

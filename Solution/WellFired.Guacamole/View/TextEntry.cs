@@ -4,7 +4,7 @@ using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.View
 {
-	public class TextEntry : ViewBase
+	public class TextEntry : ViewBase, ITypeable
 	{
 		[PublicAPI] public static readonly BindableProperty TextProperty = BindableProperty.Create<TextEntry, string>(
 			string.Empty,
@@ -71,6 +71,11 @@ namespace WellFired.Guacamole.View
 		{
 			get { return (UITextAlign) GetValue(VerticalTextAlignProperty); }
 			set { SetValue(VerticalTextAlignProperty, value); }
+		}
+
+		public void Type(char key)
+		{
+			Text += key;
 		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using WellFired.Guacamole.Annotations;
+using WellFired.Guacamole.Event;
 using WellFired.Guacamole.InitializationContext;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.View;
@@ -24,5 +25,8 @@ namespace WellFired.Guacamole
 
 		[PublicAPI]
 		void Launch(IInitializationContext initializationContext);
+
+		[PublicAPI]
+		void RaiseEventFor(string controlId, IEvent raisedEvent);
 	}
 }

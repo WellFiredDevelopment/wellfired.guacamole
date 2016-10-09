@@ -80,6 +80,8 @@
     <Compile Include="Drawing\Size.cs" />
     <Compile Include="Drawing\UIImageRaw.cs" />
     <Compile Include="Drawing\Vector.cs" />
+    <Compile Include="Event\ClickEvent.cs" />
+    <Compile Include="Event\TypeEvent.cs" />
     <Compile Include="Exceptions\GuacamoleWindowCantBeCreated.cs" />
     <Compile Include="Exceptions\InitializationContextInvalid.cs" />
     <Compile Include="Exceptions\InitializationContextNull.cs" />
@@ -87,7 +89,9 @@
     <Compile Include="Extensions\DelegateExtensions.cs" />
     <Compile Include="IApplication.cs" />
     <Compile Include="ICommand.cs" />
+    <Compile Include="Event\IEvent.cs" />
     <Compile Include="InitializationContext\IInitializationContext.cs" />
+    <Compile Include="IView.cs" />
     <Compile Include="IWindow.cs" />
     <Compile Include="Layout\AdjacentLayout.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -116,6 +120,8 @@
     <Compile Include="Types\UITextAlign.cs" />
     <Compile Include="View\Button.cs" />
     <Compile Include="View\ControlState.cs" />
+    <Compile Include="View\IClickable.cs" />
+    <Compile Include="View\ITypeable.cs" />
     <Compile Include="View\Label.cs" />
     <Compile Include="View\NumberEntry.cs" />
     <Compile Include="View\Slider.cs" />

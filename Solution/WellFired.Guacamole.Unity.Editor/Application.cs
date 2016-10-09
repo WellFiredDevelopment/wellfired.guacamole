@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using UnityEditor;
 using UnityEngine;
+using WellFired.Guacamole.Event;
 using WellFired.Guacamole.Exceptions;
 using WellFired.Guacamole.Unity.Editor.DataBinding;
 
@@ -48,6 +49,16 @@ namespace WellFired.Guacamole.Unity.Editor
 		public void Teardown()
 		{
 			_mainWindow.Close();
+		}
+
+		public void RaiseEventFor(string controlId, IEvent raisedEvent)
+		{
+			_mainWindow.RaiseEventFor(controlId, raisedEvent);
+		}
+
+		public void Update()
+		{
+			_mainWindow.Repaint();
 		}
 	}
 }

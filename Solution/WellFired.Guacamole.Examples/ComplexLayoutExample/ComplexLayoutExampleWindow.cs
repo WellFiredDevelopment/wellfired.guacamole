@@ -74,7 +74,7 @@ namespace WellFired.Guacamole.Examples.ComplexLayoutExample
 								{
 									new Label
 									{
-										Text = "Name",
+										Text = "Id",
 										CornerRadius = 8.0,
 										CornerMask = CornerMask.Left
 									},

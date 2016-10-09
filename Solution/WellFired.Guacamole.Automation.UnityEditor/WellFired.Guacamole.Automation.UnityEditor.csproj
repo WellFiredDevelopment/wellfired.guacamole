@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{76422BF7-16C8-4938-8713-99FD1B845C53}</ProjectGuid>
+    <ProjectGuid>{F46EB31B-104D-4BC6-B1E8-5DDF0E9D5183}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WellFired.Guacamole.Unity.Editor.Test</RootNamespace>
-    <AssemblyName>WellFired.Guacamole.Unity.Editor.Test</AssemblyName>
+    <RootNamespace>WellFired.Guacamole.Automation.UnityEditor</RootNamespace>
+    <AssemblyName>WellFired.Guacamole.Automation.UnityEditor</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\Unity\Assets\Test\Editor\</OutputPath>
+    <OutputPath>..\..\Unity\Assets\Test\Automation\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -28,7 +28,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\Unity\Assets\Test\Editor\</OutputPath>
+    <OutputPath>..\..\Unity\Assets\Test\Automation\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -37,34 +37,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AsyncBridge.Net35">
-      <HintPath>..\Assemblies\AsyncBridge.Net35.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Threading">
-      <HintPath>..\Assemblies\System.Threading.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
+    <Compile Include="Automation.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Acceptance\Window\BasicWindowTests.cs" />
-    <Compile Include="Applications\Empty\EmptyApplication.cs" />
-    <Compile Include="Applications\Empty\EmptyWindow.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Unit\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WellFired.Guacamole.Automation.UnityEditor\WellFired.Guacamole.Automation.UnityEditor.csproj">
-      <Project>{f46eb31b-104d-4bc6-b1e8-5ddf0e9d5183}</Project>
-      <Name>WellFired.Guacamole.Automation.UnityEditor</Name>
-      <Private>False</Private>
-    </ProjectReference>
     <ProjectReference Include="..\WellFired.Guacamole.Automation\WellFired.Guacamole.Automation.csproj">
       <Project>{ced6ae62-ab35-4d9f-8599-2d1359a814f8}</Project>
       <Name>WellFired.Guacamole.Automation</Name>
@@ -82,7 +57,22 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <Reference Include="AsyncBridge.Net35">
+      <HintPath>..\Assemblies\AsyncBridge.Net35.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading">
+      <HintPath>..\Assemblies\System.Threading.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>..\Assemblies\UnityEditor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\Assemblies\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
