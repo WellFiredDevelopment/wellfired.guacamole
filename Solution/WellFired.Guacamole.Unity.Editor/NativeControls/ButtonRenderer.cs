@@ -20,7 +20,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 			get
 			{
 				var button = Control as Button;
-				Debug.Assert(button != null, "button != null");
+				Debug.Assert(button != null, $"{nameof(button)} != null");
 
 				CreateStyleWith(button);
 				return Style.CalcSize(new GUIContent(button.Text)).ToUISize();

@@ -28,7 +28,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 
 			var layout = Control as AdjacentLayout;
 
-			Debug.Assert(layout != null, "layout != null");
+			Debug.Assert(layout != null, $"{nameof(layout)} != null");
 
 			var offset = (float) layout.CornerRadius;
 			var smallest = (int) (Mathf.Min(offset, Mathf.Min(renderRect.Width*0.5f, renderRect.Height*0.5f)) + 0.5f);

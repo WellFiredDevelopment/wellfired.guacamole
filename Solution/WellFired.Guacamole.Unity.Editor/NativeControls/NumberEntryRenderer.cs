@@ -22,7 +22,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 			get
 			{
 				var numberEntry = Control as NumberEntry;
-				Debug.Assert(numberEntry != null, "numberEntry != null");
+				Debug.Assert(numberEntry != null, $"{nameof(numberEntry)} != null");
 
 				CreateStyleWith(numberEntry);
 				return Style.CalcSize(new GUIContent(numberEntry.Number.ToString(CultureInfo.InvariantCulture))).ToUISize();

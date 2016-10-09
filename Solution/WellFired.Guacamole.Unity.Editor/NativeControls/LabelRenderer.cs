@@ -21,7 +21,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 			get
 			{
 				var label = Control as Label;
-				Debug.Assert(label != null, "numberEntry != null");
+				Debug.Assert(label != null, $"{nameof(label)} != null");
 
 				CreateStyleWith(label);
 				return Style.CalcSize(new GUIContent(label.Text)).ToUISize();

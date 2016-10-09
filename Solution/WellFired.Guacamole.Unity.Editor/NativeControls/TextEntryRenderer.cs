@@ -21,7 +21,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 			get
 			{
 				var entry = Control as TextEntry;
-				Debug.Assert(entry != null, "entry != null");
+				Debug.Assert(entry != null, $"{nameof(entry)} != null");
 
 				CreateStyleWith(entry);
 				return Style.CalcSize(new GUIContent(entry.Text)).ToUISize();
