@@ -23,7 +23,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 				Debug.Assert(button != null, "button != null");
 
 				CreateStyleWith(button);
-				return Constrain(Style.CalcSize(new GUIContent(button.Text)).ToUISize());
+				return Style.CalcSize(new GUIContent(button.Text)).ToUISize();
 			}
 		}
 

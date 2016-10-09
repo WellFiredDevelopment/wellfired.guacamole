@@ -25,8 +25,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 				Debug.Assert(numberEntry != null, "numberEntry != null");
 
 				CreateStyleWith(numberEntry);
-				return
-					Constrain(Style.CalcSize(new GUIContent(numberEntry.Number.ToString(CultureInfo.InvariantCulture))).ToUISize());
+				return Style.CalcSize(new GUIContent(numberEntry.Number.ToString(CultureInfo.InvariantCulture))).ToUISize();
 			}
 		}
 

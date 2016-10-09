@@ -56,19 +56,5 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 			BackgroundTexture = Texture2DExtensions.CreateRoundedTexture(64, 64, Control.BackgroundColor, Control.OutlineColor,
 				Control.CornerRadius, Control.CornerMask);
 		}
-
-		protected UISize Constrain(UISize requestedSize)
-		{
-			if (requestedSize.Width < Control.MinSize.Width)
-				requestedSize.Width = Control.MinSize.Width;
-			if (requestedSize.Height < Control.MinSize.Height)
-				requestedSize.Height = Control.MinSize.Height;
-			if (requestedSize.Width > Control.MaxSize.Width)
-				requestedSize.Width = Control.MaxSize.Width;
-			if (requestedSize.Height > Control.MaxSize.Height)
-				requestedSize.Height = Control.MaxSize.Height;
-
-			return requestedSize;
-		}
 	}
 }
