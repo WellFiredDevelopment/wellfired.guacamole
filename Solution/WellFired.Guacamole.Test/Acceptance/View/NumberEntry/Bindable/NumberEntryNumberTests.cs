@@ -7,7 +7,7 @@ namespace WellFired.Guacamole.Test.Acceptance.View.NumberEntry.Bindable
 	public class NumberEntryNumberTests
 	{
 		[SetUp]
-		public void OneTimeSetup()
+		public void Setup()
 		{
 			_numberEntryView = new Guacamole.View.NumberEntry();
 			_numberEntryContext = new NumberEntryContextObject();

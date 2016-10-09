@@ -63,6 +63,8 @@ namespace WellFired.Guacamole.Layout
 						totalHeight += size.Y + size.Height + Spacing;
 						totalWidth = Math.Max(totalWidth, size.Width);
 						break;
+					default:
+						throw new ArgumentOutOfRangeException();
 				}
 			}
 

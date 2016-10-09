@@ -6,7 +6,7 @@ namespace WellFired.Guacamole.Test.Acceptance.View.Button.Bindable
 	public class ButtonButtonPressedTests
 	{
 		[SetUp]
-		public void OneTimeSetup()
+		public void Setup()
 		{
 			_buttonView = new Guacamole.View.Button();
 			_labelContext = new ButtonContextObject();

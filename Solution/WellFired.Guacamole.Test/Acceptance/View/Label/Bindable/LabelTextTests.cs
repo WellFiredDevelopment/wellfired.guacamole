@@ -6,7 +6,7 @@ namespace WellFired.Guacamole.Test.Acceptance.View.Label.Bindable
 	public class LabelTextTests
 	{
 		[SetUp]
-		public void OneTimeSetup()
+		public void Setup()
 		{
 			_labelView = new Guacamole.View.Label();
 			_labelContext = new LabelContextObject();

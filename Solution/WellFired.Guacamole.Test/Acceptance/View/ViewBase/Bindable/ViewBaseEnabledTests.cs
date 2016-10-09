@@ -7,7 +7,7 @@ namespace WellFired.Guacamole.Test.Acceptance.View.ViewBase.Bindable
 	public class ViewBaseEnabledTests
 	{
 		[SetUp]
-		public void OneTimeSetup()
+		public void Setup()
 		{
 			_viewBase = new Guacamole.View.ViewBase();
 			_viewBaseContext = new ViewBaseContextObject();

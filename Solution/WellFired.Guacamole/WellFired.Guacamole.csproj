@@ -90,7 +90,6 @@
     <Compile Include="InitializationContext\IInitializationContext.cs" />
     <Compile Include="IWindow.cs" />
     <Compile Include="Layout\AdjacentLayout.cs" />
-    <Compile Include="Layout\RelativeLayout.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer\INativeRenderer.cs" />
     <Compile Include="Renderer\NativeRendererHelper.cs" />

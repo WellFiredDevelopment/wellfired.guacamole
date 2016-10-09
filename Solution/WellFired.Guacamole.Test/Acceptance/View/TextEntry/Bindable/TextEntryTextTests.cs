@@ -6,7 +6,7 @@ namespace WellFired.Guacamole.Test.Acceptance.View.TextEntry.Bindable
 	public class TextEntryTextTests
 	{
 		[SetUp]
-		public void OneTimeSetup()
+		public void Setup()
 		{
 			_textEntryView = new Guacamole.View.TextEntry();
 			_textEntryContext = new TextEntryContextObject();

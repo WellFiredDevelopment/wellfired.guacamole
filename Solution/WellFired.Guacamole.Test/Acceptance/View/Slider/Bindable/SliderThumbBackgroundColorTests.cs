@@ -7,7 +7,7 @@ namespace WellFired.Guacamole.Test.Acceptance.View.Slider.Bindable
 	public class SliderThumbBackgroundColorTests
 	{
 		[SetUp]
-		public void OneTimeSetup()
+		public void Setup()
 		{
 			_sliderView = new Guacamole.View.Slider();
 			_sliderContext = new SliderContextObject();
