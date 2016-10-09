@@ -8,6 +8,9 @@ namespace WellFired.Guacamole.Unity.Editor
 {
 	public class Application : IApplication
 	{
+		private GuacamoleWindow _mainWindow;
+		public bool IsRunning => _mainWindow != null;
+
 		public void Launch<TPersistantData>(ApplicationInitializationContext initializationContext)
 			where TPersistantData : ObservableScriptableObject
 		{
@@ -29,8 +32,8 @@ namespace WellFired.Guacamole.Unity.Editor
 
 			initializationContext.PersistantData = persistantData;
 
-			var mainWindow = EditorWindow.GetWindow<GuacamoleWindow>();
-			mainWindow.Launch(initializationContext.ScriptableObject);
+			_mainWindow = EditorWindow.GetWindow<GuacamoleWindow>();
+			_mainWindow.Launch(initializationContext.ScriptableObject);
 		}
 
 		public void Launch(ApplicationInitializationContext initializationContext)
@@ -38,8 +41,13 @@ namespace WellFired.Guacamole.Unity.Editor
 			if (initializationContext == null)
 				throw new InitializationContextNull();
 
-			var mainWindow = EditorWindow.GetWindow<GuacamoleWindow>();
-			mainWindow.Launch(initializationContext.ScriptableObject);
+			_mainWindow = EditorWindow.GetWindow<GuacamoleWindow>();
+			_mainWindow.Launch(initializationContext.ScriptableObject);
+		}
+
+		public void Teardown()
+		{
+			_mainWindow.Close();
 		}
 	}
 }
