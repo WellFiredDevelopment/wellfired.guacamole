@@ -6,23 +6,16 @@ using WellFired.Guacamole.Unity.Editor;
 namespace WellFired.Guacamole.Examples.ComplexLayoutExample
 {
 	[UsedImplicitly]
-	public class ComplexLayoutExampleApplication
+	public class ComplexLayoutExampleApplication: LaunchableApplication
 	{
 		[MenuItem("Window/guacamole/Test/ComplexLayout")]
 		[UsedImplicitly]
-		private static void TestWindow()
+		private static void Launch()
 		{
-			var application = new Application();
-
-			var context = new ApplicationInitializationContext
-			{
-				MainContent = typeof(ComplexLayoutExampleWindow),
-				UIRect = new UIRect(50, 50, 600, 200),
-				MinSize = new UISize(200, 50),
-				Title = "Complex Layout"
-			};
-
-			application.Launch(context);
+			Launch<ComplexLayoutExampleWindow>(
+				uiRect: new UIRect(50, 50, 600, 200),
+				minSize: new UISize(200, 50),
+				title: "Complex Layout");
 		}
 	}
 }

@@ -6,23 +6,16 @@ using WellFired.Guacamole.Unity.Editor;
 namespace WellFired.Guacamole.Examples.TwoWayBindingExample
 {
 	[UsedImplicitly]
-	public class TwoWayBindingTestApplication
+	public class TwoWayBindingTestApplication : LaunchableApplication
 	{
 		[MenuItem("Window/guacamole/Test/TwoWayBindingTest")]
 		[UsedImplicitly]
 		private static void OpenWindow()
 		{
-			var application = new Application();
-
-			var context = new ApplicationInitializationContext
-			{
-				MainContent = typeof(TwoWayBindingTestWindow),
-				UIRect = new UIRect(50, 50, 600, 200),
-				MinSize = new UISize(260, 30),
-				Title = "TwoWayBindingTest"
-			};
-
-			application.Launch<TwoWayBindingTestModel>(context);
+			Launch<TwoWayBindingTestWindow>(
+				uiRect: new UIRect(50, 50, 600, 200),
+				minSize: new UISize(260, 30),
+				title: "TwoWayBindingTest Test");
 		}
 	}
 }

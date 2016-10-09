@@ -6,23 +6,16 @@ using WellFired.Guacamole.Unity.Editor;
 namespace WellFired.Guacamole.Examples.OneWayBindingExample
 {
 	[UsedImplicitly]
-	public class OneWayBindingTestApplication
+	public class OneWayBindingTestApplication : LaunchableApplication
 	{
 		[MenuItem("Window/guacamole/Test/OneWayBindingTest")]
 		[UsedImplicitly]
-		private static void OpenWindow()
+		private static void Launch()
 		{
-			var application = new Application();
-
-			var context = new ApplicationInitializationContext
-			{
-				MainContent = typeof(OneWayBindingTestWindow),
-				UIRect = new UIRect(50, 50, 600, 200),
-				MinSize = new UISize(260, 30),
-				Title = "OneWayBindingTest"
-			};
-
-			application.Launch<OneWayBindingTestModel>(context);
+			Launch<OneWayBindingTestWindow>(
+				uiRect: new UIRect(50, 50, 600, 200),
+				minSize: new UISize(200, 50),
+				title: "OneWayBindingTest");
 		}
 	}
 }
