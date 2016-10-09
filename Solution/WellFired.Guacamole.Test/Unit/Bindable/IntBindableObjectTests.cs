@@ -9,14 +9,14 @@ namespace WellFired.Guacamole.Test.Unit.Bindable
 		private class BindableTestObject : BindableObject
 		{
 			public static readonly BindableProperty IntProperty = BindableProperty.Create<BindableTestObject, int>(
-					defaultValue: 0,
-					bindingMode: BindingMode.TwoWay,
-					getter: testObject => testObject.Value
-				);
+				0,
+				BindingMode.TwoWay,
+				testObject => testObject.Value
+			);
 
 			public int Value
 			{
-				get { return (int)GetValue(IntProperty); }
+				get { return (int) GetValue(IntProperty); }
 				set { SetValue(IntProperty, value); }
 			}
 		}
@@ -33,18 +33,6 @@ namespace WellFired.Guacamole.Test.Unit.Bindable
 		}
 
 		[Test]
-		public void OneWayBindingTest()
-		{
-			var source = new BindableTestObject();
-			var bindingContext = new ContextObject();
-			source.BindingContext = bindingContext;
-			source.Bind(BindableTestObject.IntProperty, nameof(ContextObject.Value));
-			bindingContext.Value = 10;
-
-			Assert.AreEqual(source.Value, bindingContext.Value);
-		}
-
-		[Test]
 		public void OneWayBindingInverseTest()
 		{
 			var source = new BindableTestObject();
@@ -58,6 +46,18 @@ namespace WellFired.Guacamole.Test.Unit.Bindable
 			source.Value = 15;
 
 			Assert.AreNotEqual(bindingContext.Value, source.Value);
+		}
+
+		[Test]
+		public void OneWayBindingTest()
+		{
+			var source = new BindableTestObject();
+			var bindingContext = new ContextObject();
+			source.BindingContext = bindingContext;
+			source.Bind(BindableTestObject.IntProperty, nameof(ContextObject.Value));
+			bindingContext.Value = 10;
+
+			Assert.AreEqual(source.Value, bindingContext.Value);
 		}
 
 		[Test]

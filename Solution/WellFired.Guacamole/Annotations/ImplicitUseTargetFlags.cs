@@ -2,10 +2,9 @@
 
 namespace WellFired.Guacamole.Annotations
 {
-    [Flags]
-    // ReSharper disable once UnusedMember.Global
-    public enum ImplicitUseTargetFlags
-    {
-
-    }
+	[Flags]
+	// ReSharper disable once UnusedMember.Global
+	public enum ImplicitUseTargetFlags
+	{
+	}
 }

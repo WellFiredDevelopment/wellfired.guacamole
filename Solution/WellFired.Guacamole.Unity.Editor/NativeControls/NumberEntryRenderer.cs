@@ -9,7 +9,8 @@ using WellFired.Guacamole.Unity.Editor.NativeControls;
 using WellFired.Guacamole.View;
 using Debug = System.Diagnostics.Debug;
 
-[assembly : CustomRenderer(typeof(NumberEntry), typeof(NumberEntryRenderer))]
+[assembly: CustomRenderer(typeof(NumberEntry), typeof(NumberEntryRenderer))]
+
 namespace WellFired.Guacamole.Unity.Editor.NativeControls
 {
 	public class NumberEntryRenderer : BaseRenderer
@@ -24,7 +25,8 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 				Debug.Assert(numberEntry != null, "numberEntry != null");
 
 				CreateStyleWith(numberEntry);
-				return Constrain(Style.CalcSize(new GUIContent(numberEntry.Number.ToString(CultureInfo.InvariantCulture))).ToUISize());
+				return
+					Constrain(Style.CalcSize(new GUIContent(numberEntry.Number.ToString(CultureInfo.InvariantCulture))).ToUISize());
 			}
 		}
 
@@ -54,17 +56,17 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 
 			var entry = Control as NumberEntry;
 
-		    Debug.Assert(entry != null, "entry != null");
+			Debug.Assert(entry != null, "entry != null");
 
 			CreateStyleWith(entry);
 
-			var offset = (float)Control.CornerRadius;
-			var smallest = (int)(Mathf.Min(offset, Mathf.Min(renderRect.Width * 0.5f, renderRect.Height * 0.5f)) + 0.5f);
+			var offset = (float) Control.CornerRadius;
+			var smallest = (int) (Mathf.Min(offset, Mathf.Min(renderRect.Width*0.5f, renderRect.Height*0.5f)) + 0.5f);
 			smallest = Mathf.Max(smallest, 2);
 			Style.border = new RectOffset(smallest, smallest, smallest, smallest);
 
 			var newNumber = EditorGUI.FloatField(renderRect.ToUnityRect(), entry.Number, Style);
-			if(Equals(newNumber, entry.Number))
+			if (Equals(newNumber, entry.Number))
 				entry.Number = newNumber;
 		}
 	}

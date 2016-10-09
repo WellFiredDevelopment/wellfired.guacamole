@@ -9,18 +9,15 @@ namespace WellFired.Guacamole.Styling.Styles
 		{
 			Setters =
 			{
-				new Setter { Property = ViewBase.BackgroundColorProperty, Value = UIColor.FromRGB(125, 125, 125) },
-				new Setter { Property = ViewBase.OutlineColorProperty, Value = UIColor.FromRGB(0, 0, 0) },
-
-				new Setter { Property = ViewBase.HorizontalLayoutProperty, Value = LayoutOptions.Fill },
-				new Setter { Property = ViewBase.VerticalLayoutProperty, Value = LayoutOptions.Expand },
-
-				new Setter { Property = ViewBase.PaddingProperty, Value = 5 },
-				new Setter { Property = ViewBase.CornerRadiusProperty, Value = 6.0 },
-
-				new Setter { Property = View.Slider.ThumbBackgroundColorProperty, Value = UIColor.FromRGB(64, 124, 191) },
-				new Setter { Property = View.Slider.ThumbOutlineColorProperty, Value = UIColor.FromRGB(0, 0, 0) },
-				new Setter { Property = View.Slider.ThumbCornerRadiusProperty, Value = 0.0 }
+				new Setter {Property = ViewBase.BackgroundColorProperty, Value = UIColor.FromRGB(125, 125, 125)},
+				new Setter {Property = ViewBase.OutlineColorProperty, Value = UIColor.FromRGB(0, 0, 0)},
+				new Setter {Property = ViewBase.HorizontalLayoutProperty, Value = LayoutOptions.Fill},
+				new Setter {Property = ViewBase.VerticalLayoutProperty, Value = LayoutOptions.Expand},
+				new Setter {Property = ViewBase.PaddingProperty, Value = 5},
+				new Setter {Property = ViewBase.CornerRadiusProperty, Value = 6.0},
+				new Setter {Property = View.Slider.ThumbBackgroundColorProperty, Value = UIColor.FromRGB(64, 124, 191)},
+				new Setter {Property = View.Slider.ThumbOutlineColorProperty, Value = UIColor.FromRGB(0, 0, 0)},
+				new Setter {Property = View.Slider.ThumbCornerRadiusProperty, Value = 0.0}
 			},
 			Triggers =
 			{
@@ -30,8 +27,8 @@ namespace WellFired.Guacamole.Styling.Styles
 					Value = ControlState.Normal,
 					Setters =
 					{
-						new Setter { Property = ViewBase.BackgroundColorProperty, Value = UIColor.FromRGB(125, 125, 125) },
-						new Setter { Property = View.Slider.ThumbBackgroundColorProperty, Value = UIColor.FromRGB(125, 125, 125) }
+						new Setter {Property = ViewBase.BackgroundColorProperty, Value = UIColor.FromRGB(125, 125, 125)},
+						new Setter {Property = View.Slider.ThumbBackgroundColorProperty, Value = UIColor.FromRGB(125, 125, 125)}
 					}
 				},
 				new Trigger
@@ -40,8 +37,8 @@ namespace WellFired.Guacamole.Styling.Styles
 					Value = ControlState.Hover,
 					Setters =
 					{
-						new Setter { Property = ViewBase.BackgroundColorProperty, Value = UIColor.FromRGB(158, 158, 158) },
-						new Setter { Property = View.Slider.ThumbBackgroundColorProperty, Value = UIColor.FromRGB(158, 158, 158) }
+						new Setter {Property = ViewBase.BackgroundColorProperty, Value = UIColor.FromRGB(158, 158, 158)},
+						new Setter {Property = View.Slider.ThumbBackgroundColorProperty, Value = UIColor.FromRGB(158, 158, 158)}
 					}
 				},
 				new Trigger
@@ -50,8 +47,8 @@ namespace WellFired.Guacamole.Styling.Styles
 					Value = ControlState.Active,
 					Setters =
 					{
-						new Setter { Property = ViewBase.BackgroundColorProperty, Value = UIColor.FromRGB(64, 124, 191) },
-						new Setter { Property = View.Slider.ThumbBackgroundColorProperty, Value = UIColor.FromRGB(64, 124, 191) }
+						new Setter {Property = ViewBase.BackgroundColorProperty, Value = UIColor.FromRGB(64, 124, 191)},
+						new Setter {Property = View.Slider.ThumbBackgroundColorProperty, Value = UIColor.FromRGB(64, 124, 191)}
 					}
 				},
 				new Trigger
@@ -60,8 +57,8 @@ namespace WellFired.Guacamole.Styling.Styles
 					Value = ControlState.Disabled,
 					Setters =
 					{
-						new Setter { Property = ViewBase.BackgroundColorProperty, Value = UIColor.FromRGB(100, 100, 100) },
-						new Setter { Property = View.Slider.ThumbBackgroundColorProperty, Value = UIColor.FromRGB(100, 100, 100) }
+						new Setter {Property = ViewBase.BackgroundColorProperty, Value = UIColor.FromRGB(100, 100, 100)},
+						new Setter {Property = View.Slider.ThumbBackgroundColorProperty, Value = UIColor.FromRGB(100, 100, 100)}
 					}
 				}
 			}

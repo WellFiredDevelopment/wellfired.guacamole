@@ -8,6 +8,7 @@ namespace WellFired.Guacamole
 	{
 		[PublicAPI]
 		void Add(IDisposable disposable, Action action);
+
 		[PublicAPI]
 		void Remove(Action action);
 	}
@@ -20,7 +21,6 @@ namespace WellFired.Guacamole
 
 		public AutoAction()
 		{
-
 		}
 
 		public AutoAction(Action onAddFirst = null, Action onRemoveLast = null)
@@ -31,7 +31,7 @@ namespace WellFired.Guacamole
 
 		public void Add(IDisposable disposable, Action action)
 		{
-			if (_handlers != null && _handlers.AlreadyHasSubscriber(action))
+			if ((_handlers != null) && _handlers.AlreadyHasSubscriber(action))
 				return;
 
 			disposable.AddDisposedCallback(() => Remove(action));
@@ -45,6 +45,20 @@ namespace WellFired.Guacamole
 		}
 
 		[PublicAPI]
+		public void Remove(Action action)
+		{
+			var length = _handlers?.GetInvocationList().Length ?? 0;
+
+			_handlers -= action;
+
+			if ((length <= 0) || ((_handlers != null) && (_handlers.GetInvocationList().Length != 0)))
+				return;
+
+			_handlers = null;
+			_onRemoveLast?.Invoke();
+		}
+
+		[PublicAPI]
 		public void Clear()
 		{
 			_handlers = null;
@@ -55,20 +69,6 @@ namespace WellFired.Guacamole
 		public void Invoke()
 		{
 			_handlers?.Invoke();
-		}
-
-		[PublicAPI]
-		public void Remove(Action action)
-		{
-			var length = _handlers?.GetInvocationList().Length ?? 0;
-
-			_handlers -= action;
-
-			if (length <= 0 || (_handlers != null && _handlers.GetInvocationList().Length != 0))
-				return;
-
-			_handlers = null;
-			_onRemoveLast?.Invoke();
 		}
 	}
 }

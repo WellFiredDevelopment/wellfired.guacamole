@@ -4,49 +4,49 @@ using WellFired.Guacamole.Annotations;
 
 namespace WellFired.Guacamole.Unity.Runtime
 {
-    public abstract class DispsableMonoBehaviour : MonoBehaviour, IDisposable
-    {
-        private bool _disposed;
-        private Disposable _disposable;
+	public abstract class DispsableMonoBehaviour : MonoBehaviour, IDisposable
+	{
+		private Disposable _disposable;
+		private bool _disposed;
 
-        [UsedImplicitly]
-        public virtual void Awake()
-        {
-            _disposable = new Disposable();
-        }
+		[PublicAPI]
+		public void Dispose()
+		{
+			if (_disposed)
+				return;
 
-        [PublicAPI]
-        public void Dispose()
-        {
-            if (_disposed)
-                return;
+			_disposed = true;
+			_disposable.Dispose();
+			OnDispose();
+			Destroy(gameObject);
+		}
 
-            _disposed = true;
-	        _disposable.Dispose();
-            OnDispose();
-            Destroy(gameObject);
-        }
+		void IDisposable.AddDisposedCallback(Action action)
+		{
+			_disposable.AddDisposedCallback(action);
+		}
 
-        [UsedImplicitly]
-        public void OnDestroy()
-        {
-            Dispose();
-        }
+		[UsedImplicitly]
+		public virtual void Awake()
+		{
+			_disposable = new Disposable();
+		}
 
-        protected virtual void OnDispose()
-        {
-        }
+		[UsedImplicitly]
+		public void OnDestroy()
+		{
+			Dispose();
+		}
 
-        void IDisposable.AddDisposedCallback(Action action)
-        {
-            _disposable.AddDisposedCallback(action);
-        }
+		protected virtual void OnDispose()
+		{
+		}
 
-        [PublicAPI]
-        protected void DisposeOf(params System.IDisposable[] disposables)
-        {
-            foreach (var disposable in disposables)
-                disposable?.Dispose();
-        }
-    }
+		[PublicAPI]
+		protected void DisposeOf(params System.IDisposable[] disposables)
+		{
+			foreach (var disposable in disposables)
+				disposable?.Dispose();
+		}
+	}
 }

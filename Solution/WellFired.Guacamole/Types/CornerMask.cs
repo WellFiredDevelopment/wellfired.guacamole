@@ -4,7 +4,7 @@ using WellFired.Guacamole.Annotations;
 namespace WellFired.Guacamole.Types
 {
 	[Flags]
-    public enum CornerMask
+	public enum CornerMask
 	{
 		TopLeft = 1 << 0,
 		TopRight = 1 << 1,

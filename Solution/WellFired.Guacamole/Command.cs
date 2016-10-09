@@ -3,34 +3,35 @@ using WellFired.Guacamole.DataBinding;
 
 namespace WellFired.Guacamole
 {
-    public class Command : NotifyBase, ICommand
-    {
-        public delegate bool CanExecuteDelegate();
-	    private bool? _canExecute;
+	public class Command : NotifyBase, ICommand
+	{
+		public delegate bool CanExecuteDelegate();
 
-        public void Execute()
-        {
-            ExecuteAction?.Invoke();
-        }
+		private bool? _canExecute;
 
-	    public bool CanExecute
-	    {
-		    get
-		    {
-			    var ce = CanExecuteAction?.Invoke() ?? true;
+		public Action ExecuteAction { private get; set; }
+		public CanExecuteDelegate CanExecuteAction { private get; set; }
 
-			    var existingValue = _canExecute ?? !ce;
-			    var newValue = ce;
+		public void Execute()
+		{
+			ExecuteAction?.Invoke();
+		}
+
+		public bool CanExecute
+		{
+			get
+			{
+				var ce = CanExecuteAction?.Invoke() ?? true;
+
+				var existingValue = _canExecute ?? !ce;
+				var newValue = ce;
 				_canExecute = ce;
 
 				SetProperty(ref existingValue, newValue, nameof(CanExecute));
 
 				return _canExecute.Value;
-		    }
-		    set { _canExecute = value; }
-	    }
-
-        public Action ExecuteAction { private get; set; }
-        public CanExecuteDelegate CanExecuteAction { private get; set; }
-    }
+			}
+			set { _canExecute = value; }
+		}
+	}
 }

@@ -6,9 +6,6 @@ namespace WellFired.Guacamole.Test.Acceptance.View.NumberEntry.Bindable
 	[TestFixture]
 	public class NumberEntryTextColorTests
 	{
-		private Guacamole.View.NumberEntry _numberEntryView;
-		private NumberEntryContextObject _numberEntryContext;
-
 		[SetUp]
 		public void OneTimeSetup()
 		{
@@ -16,6 +13,9 @@ namespace WellFired.Guacamole.Test.Acceptance.View.NumberEntry.Bindable
 			_numberEntryContext = new NumberEntryContextObject();
 			_numberEntryView.BindingContext = _numberEntryContext;
 		}
+
+		private Guacamole.View.NumberEntry _numberEntryView;
+		private NumberEntryContextObject _numberEntryContext;
 
 		[Test]
 		public void IsBindable()

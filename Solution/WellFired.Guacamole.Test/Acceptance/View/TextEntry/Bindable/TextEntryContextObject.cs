@@ -5,9 +5,9 @@ namespace WellFired.Guacamole.Test.Acceptance.View.TextEntry.Bindable
 {
 	public class TextEntryContextObject : NotifyBase
 	{
+		private UITextAlign _horizontalTextAlign;
 		private string _text;
 		private UIColor _textColor;
-		private UITextAlign _horizontalTextAlign;
 		private UITextAlign _verticalTextAlign;
 
 		public string Text

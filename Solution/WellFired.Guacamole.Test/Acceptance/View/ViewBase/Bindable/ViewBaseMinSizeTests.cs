@@ -7,9 +7,6 @@ namespace WellFired.Guacamole.Test.Acceptance.View.ViewBase.Bindable
 	[TestFixture]
 	public class ViewBaseMinSizeTests
 	{
-		private Guacamole.View.ViewBase _viewBase;
-		private ViewBaseContextObject _viewBaseContext;
-
 		[SetUp]
 		public void OneTimeSetup()
 		{
@@ -17,6 +14,9 @@ namespace WellFired.Guacamole.Test.Acceptance.View.ViewBase.Bindable
 			_viewBaseContext = new ViewBaseContextObject();
 			_viewBase.BindingContext = _viewBaseContext;
 		}
+
+		private Guacamole.View.ViewBase _viewBase;
+		private ViewBaseContextObject _viewBaseContext;
 
 		[Test]
 		public void OnBindViewBaseIsAutomaticallyUpdatedToTheValueOfBindingContextMinSize()
@@ -26,6 +26,17 @@ namespace WellFired.Guacamole.Test.Acceptance.View.ViewBase.Bindable
 			Assert.That(_viewBaseContext.MinSize != _viewBase.MinSize);
 			_viewBase.Bind(Guacamole.View.ViewBase.MinSizeProperty, nameof(_viewBaseContext.MinSize));
 			Assert.That(_viewBaseContext.MinSize == _viewBase.MinSize);
+		}
+
+		[Test]
+		public void ViewBaseMinSizeBindingDoesntWorkInTwoWayWithOneWayMode()
+		{
+			_viewBase.Bind(Guacamole.View.ViewBase.MinSizeProperty, nameof(_viewBaseContext.MinSize));
+			Assert.That(_viewBaseContext.MinSize == _viewBase.MinSize);
+			_viewBaseContext.MinSize = UISize.One;
+			Assert.That(_viewBaseContext.MinSize == _viewBase.MinSize);
+			_viewBase.MinSize = UISize.Min;
+			Assert.That(_viewBaseContext.MinSize != _viewBase.MinSize);
 		}
 
 		[Test]
@@ -46,17 +57,6 @@ namespace WellFired.Guacamole.Test.Acceptance.View.ViewBase.Bindable
 			Assert.That(_viewBaseContext.MinSize == _viewBase.MinSize);
 			_viewBase.MinSize = UISize.Min;
 			Assert.That(_viewBaseContext.MinSize == _viewBase.MinSize);
-		}
-
-		[Test]
-		public void ViewBaseMinSizeBindingDoesntWorkInTwoWayWithOneWayMode()
-		{
-			_viewBase.Bind(Guacamole.View.ViewBase.MinSizeProperty, nameof(_viewBaseContext.MinSize));
-			Assert.That(_viewBaseContext.MinSize == _viewBase.MinSize);
-			_viewBaseContext.MinSize = UISize.One;
-			Assert.That(_viewBaseContext.MinSize == _viewBase.MinSize);
-			_viewBase.MinSize = UISize.Min;
-			Assert.That(_viewBaseContext.MinSize != _viewBase.MinSize);
 		}
 	}
 }

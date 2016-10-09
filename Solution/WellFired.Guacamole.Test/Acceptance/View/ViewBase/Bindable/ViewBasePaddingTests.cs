@@ -7,9 +7,6 @@ namespace WellFired.Guacamole.Test.Acceptance.View.ViewBase.Bindable
 	[TestFixture]
 	public class ViewBasePaddingTests
 	{
-		private Guacamole.View.ViewBase _viewBase;
-		private ViewBaseContextObject _viewBaseContext;
-
 		[SetUp]
 		public void OneTimeSetup()
 		{
@@ -17,6 +14,9 @@ namespace WellFired.Guacamole.Test.Acceptance.View.ViewBase.Bindable
 			_viewBaseContext = new ViewBaseContextObject();
 			_viewBase.BindingContext = _viewBaseContext;
 		}
+
+		private Guacamole.View.ViewBase _viewBase;
+		private ViewBaseContextObject _viewBaseContext;
 
 		[Test]
 		public void OnBindViewBaseIsAutomaticallyUpdatedToTheValueOfBindingContextPadding()
@@ -26,6 +26,17 @@ namespace WellFired.Guacamole.Test.Acceptance.View.ViewBase.Bindable
 			Assert.That(_viewBaseContext.Padding != _viewBase.Padding);
 			_viewBase.Bind(Guacamole.View.ViewBase.PaddingProperty, nameof(_viewBaseContext.Padding));
 			Assert.That(_viewBaseContext.Padding == _viewBase.Padding);
+		}
+
+		[Test]
+		public void ViewBasePaddingBindingDoesntWorkInTwoWayWithOneWayMode()
+		{
+			_viewBase.Bind(Guacamole.View.ViewBase.PaddingProperty, nameof(_viewBaseContext.Padding));
+			Assert.That(_viewBaseContext.Padding == _viewBase.Padding);
+			_viewBaseContext.Padding = new UIPadding(0);
+			Assert.That(_viewBaseContext.Padding == _viewBase.Padding);
+			_viewBase.Padding = new UIPadding(1);
+			Assert.That(_viewBaseContext.Padding != _viewBase.Padding);
 		}
 
 		[Test]
@@ -46,17 +57,6 @@ namespace WellFired.Guacamole.Test.Acceptance.View.ViewBase.Bindable
 			Assert.That(_viewBaseContext.Padding == _viewBase.Padding);
 			_viewBase.Padding = new UIPadding(1);
 			Assert.That(_viewBaseContext.Padding == _viewBase.Padding);
-		}
-
-		[Test]
-		public void ViewBasePaddingBindingDoesntWorkInTwoWayWithOneWayMode()
-		{
-			_viewBase.Bind(Guacamole.View.ViewBase.PaddingProperty, nameof(_viewBaseContext.Padding));
-			Assert.That(_viewBaseContext.Padding == _viewBase.Padding);
-			_viewBaseContext.Padding = new UIPadding(0);
-			Assert.That(_viewBaseContext.Padding == _viewBase.Padding);
-			_viewBase.Padding = new UIPadding(1);
-			Assert.That(_viewBaseContext.Padding != _viewBase.Padding);
 		}
 	}
 }

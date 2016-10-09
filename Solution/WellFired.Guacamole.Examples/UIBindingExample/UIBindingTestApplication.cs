@@ -1,18 +1,20 @@
-﻿using WellFired.Guacamole.Annotations;
+﻿using UnityEditor;
+using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Types;
+using WellFired.Guacamole.Unity.Editor;
 
 namespace WellFired.Guacamole.Examples.UIBindingExample
 {
-    // ReSharper disable once InconsistentNaming
+	// ReSharper disable once InconsistentNaming
 	public static class UIBindingTestApplication
 	{
-		[UnityEditor.MenuItem("Window/guacamole/Test/UIBindingTest")]
+		[MenuItem("Window/guacamole/Test/UIBindingTest")]
 		[UsedImplicitly]
 		private static void OpenWindow()
 		{
-			var application = new Unity.Editor.Application();
+			var application = new Application();
 
-			var context = new Unity.Editor.ApplicationInitializationContext
+			var context = new ApplicationInitializationContext
 			{
 				MainContent = typeof(UIBindingTestWindow),
 				UIRect = new UIRect(50, 50, 600, 200),

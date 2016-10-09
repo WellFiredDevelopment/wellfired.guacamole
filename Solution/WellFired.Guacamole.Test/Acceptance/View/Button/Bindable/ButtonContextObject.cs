@@ -5,11 +5,11 @@ namespace WellFired.Guacamole.Test.Acceptance.View.Button.Bindable
 {
 	public class ButtonContextObject : NotifyBase
 	{
+		private ICommand _buttonPressedCommand;
+		private UITextAlign _horizontalTextAlign;
 		private string _text;
 		private UIColor _textColor;
-		private UITextAlign _horizontalTextAlign;
 		private UITextAlign _verticalTextAlign;
-		private ICommand _buttonPressedCommand;
 
 		public string Text
 		{

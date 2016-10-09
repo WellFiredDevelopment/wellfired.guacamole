@@ -7,54 +7,55 @@ namespace WellFired.Guacamole.View
 	public class Slider : ViewBase
 	{
 		[PublicAPI] public static readonly BindableProperty MinValueProperty = BindableProperty.Create<Slider, double>(
-			defaultValue: 0.0,
-			bindingMode: BindingMode.TwoWay,
-			getter: slider => slider.MinValue
-			);
+			0.0,
+			BindingMode.TwoWay,
+			slider => slider.MinValue
+		);
 
 		[PublicAPI] public static readonly BindableProperty MaxValueProperty = BindableProperty.Create<Slider, double>(
-			defaultValue: 1.0,
-			bindingMode: BindingMode.TwoWay,
-			getter: slider => slider.MaxValue
-			);
+			1.0,
+			BindingMode.TwoWay,
+			slider => slider.MaxValue
+		);
 
 		[PublicAPI] public static readonly BindableProperty ValueProperty = BindableProperty.Create<Slider, double>(
-			defaultValue: 0.0,
-			bindingMode: BindingMode.TwoWay,
-			getter: slider => slider.Value
-			);
+			0.0,
+			BindingMode.TwoWay,
+			slider => slider.Value
+		);
 
-		[PublicAPI]
-		public static readonly BindableProperty ThumbBackgroundColorProperty = BindableProperty
+		[PublicAPI] public static readonly BindableProperty ThumbBackgroundColorProperty = BindableProperty
 			.Create<ViewBase, UIColor>(
-				defaultValue: UIColor.White,
-				bindingMode: BindingMode.TwoWay,
-				getter: viewBase => viewBase.BackgroundColor
+				UIColor.White,
+				BindingMode.TwoWay,
+				viewBase => viewBase.BackgroundColor
 			);
 
-		[PublicAPI]
-		public static readonly BindableProperty ThumbOutlineColorProperty = BindableProperty
+		[PublicAPI] public static readonly BindableProperty ThumbOutlineColorProperty = BindableProperty
 			.Create<ViewBase, UIColor>(
 				default(UIColor),
-				bindingMode: BindingMode.TwoWay,
-				getter: viewBase => viewBase.OutlineColor
+				BindingMode.TwoWay,
+				viewBase => viewBase.OutlineColor
 			);
 
-		[PublicAPI]
-		public static readonly BindableProperty ThumbCornerRadiusProperty = BindableProperty
+		[PublicAPI] public static readonly BindableProperty ThumbCornerRadiusProperty = BindableProperty
 			.Create<TextEntry, double>(
-				defaultValue: 0.0,
-				bindingMode: BindingMode.TwoWay,
-				getter: viewBase => viewBase.CornerRadius
+				0.0,
+				BindingMode.TwoWay,
+				viewBase => viewBase.CornerRadius
 			);
 
-		[PublicAPI]
-		public static readonly BindableProperty ThumbCornerMaskProperty = BindableProperty
+		[PublicAPI] public static readonly BindableProperty ThumbCornerMaskProperty = BindableProperty
 			.Create<TextEntry, CornerMask>(
-				defaultValue: CornerMask.All,
-				bindingMode: BindingMode.TwoWay,
-				getter: viewBase => viewBase.CornerMask
+				CornerMask.All,
+				BindingMode.TwoWay,
+				viewBase => viewBase.CornerMask
 			);
+
+		public Slider()
+		{
+			Style = Styling.Styles.Slider.Style;
+		}
 
 		[PublicAPI]
 		public double MinValue
@@ -79,31 +80,26 @@ namespace WellFired.Guacamole.View
 
 		public UIColor ThumbBackgroundColor
 		{
-			get { return (UIColor)GetValue(ThumbBackgroundColorProperty); }
+			get { return (UIColor) GetValue(ThumbBackgroundColorProperty); }
 			set { SetValue(ThumbBackgroundColorProperty, value); }
 		}
 
 		public UIColor ThumbOutlineColor
 		{
-			get { return (UIColor)GetValue(ThumbOutlineColorProperty); }
+			get { return (UIColor) GetValue(ThumbOutlineColorProperty); }
 			set { SetValue(ThumbOutlineColorProperty, value); }
 		}
 
 		public double ThumbCornerRadius
 		{
-			get { return (double)GetValue(ThumbCornerRadiusProperty); }
+			get { return (double) GetValue(ThumbCornerRadiusProperty); }
 			set { SetValue(ThumbCornerRadiusProperty, value); }
 		}
 
 		public CornerMask ThumbCornerMask
 		{
-			get { return (CornerMask)GetValue(ThumbCornerMaskProperty); }
+			get { return (CornerMask) GetValue(ThumbCornerMaskProperty); }
 			set { SetValue(ThumbCornerMaskProperty, value); }
-		}
-
-		public Slider()
-		{
-			Style = Styling.Styles.Slider.Style;
 		}
 	}
 }

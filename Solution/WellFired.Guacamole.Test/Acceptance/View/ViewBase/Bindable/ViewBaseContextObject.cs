@@ -6,17 +6,17 @@ namespace WellFired.Guacamole.Test.Acceptance.View.ViewBase.Bindable
 {
 	public class ViewBaseContextObject : NotifyBase
 	{
-		private bool _enabled;
-		private ControlState _controlState;
 		private UIColor _backgroundColor;
-		private UIColor _outlineColor;
-		private double _cornerRadius;
+		private ControlState _controlState;
 		private CornerMask _cornerMask;
-		private UISize _minSize;
-		private UISize _maxSize;
+		private double _cornerRadius;
+		private bool _enabled;
 		private LayoutOptions _horizontalLayoutOptions;
-		private LayoutOptions _verticalLayoutOptions;
+		private UISize _maxSize;
+		private UISize _minSize;
+		private UIColor _outlineColor;
 		private UIPadding _padding;
+		private LayoutOptions _verticalLayoutOptions;
 
 		public bool Enabled
 		{

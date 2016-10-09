@@ -1,7 +1,6 @@
 ﻿namespace WellFired.Guacamole
 {
-	public interface IApplication 
+	public interface IApplication
 	{
-		
 	}
 }

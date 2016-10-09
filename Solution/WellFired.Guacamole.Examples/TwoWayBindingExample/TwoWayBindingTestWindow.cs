@@ -5,18 +5,18 @@ using WellFired.Guacamole.View;
 
 namespace WellFired.Guacamole.Examples.TwoWayBindingExample
 {
-    public class TwoWayBindingTestWindow : Window
-    {
-        public TwoWayBindingTestWindow(INotifyPropertyChanged persistantData)
-        {
-            Padding = new UIPadding(5);
+	public class TwoWayBindingTestWindow : Window
+	{
+		public TwoWayBindingTestWindow(INotifyPropertyChanged persistantData)
+		{
+			Padding = new UIPadding(5);
 
-            var boundTextEntry = new TextEntry ();
+			var boundTextEntry = new TextEntry();
 
-            Content = boundTextEntry;
-            BindingContext = persistantData;
+			Content = boundTextEntry;
+			BindingContext = persistantData;
 
-            boundTextEntry.Bind(TextEntry.TextProperty, "BoundText", BindingMode.TwoWay);
-        }
-    }
+			boundTextEntry.Bind(TextEntry.TextProperty, "BoundText", BindingMode.TwoWay);
+		}
+	}
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Attributes;
 using WellFired.Guacamole.Types;
@@ -7,7 +8,8 @@ using WellFired.Guacamole.Unity.Editor.NativeControls;
 using WellFired.Guacamole.View;
 using Debug = System.Diagnostics.Debug;
 
-[assembly : CustomRenderer(typeof(Label), typeof(LabelRenderer))]
+[assembly: CustomRenderer(typeof(Label), typeof(LabelRenderer))]
+
 namespace WellFired.Guacamole.Unity.Editor.NativeControls
 {
 	public class LabelRenderer : BaseRenderer
@@ -49,19 +51,19 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 		public override void Render(UIRect renderRect)
 		{
 			base.Render(renderRect);
-			
+
 			var label = Control as Label;
 
-		    Debug.Assert(label != null, "label != null");
+			Debug.Assert(label != null, "label != null");
 
 			CreateStyleWith(label);
 
-			var offset = (float)Control.CornerRadius;
-			var smallest = (int)(Mathf.Min(offset, Mathf.Min(renderRect.Width * 0.5f, renderRect.Height * 0.5f)) + 0.5f);
+			var offset = (float) Control.CornerRadius;
+			var smallest = (int) (Mathf.Min(offset, Mathf.Min(renderRect.Width*0.5f, renderRect.Height*0.5f)) + 0.5f);
 			smallest = Mathf.Max(smallest, 2);
 			Style.border = new RectOffset(smallest, smallest, smallest, smallest);
 
-			UnityEditor.EditorGUI.LabelField(renderRect.ToUnityRect(), label.Text, Style);
+			EditorGUI.LabelField(renderRect.ToUnityRect(), label.Text, Style);
 		}
 	}
 }

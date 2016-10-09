@@ -44,7 +44,8 @@ namespace WellFired.Guacamole.Examples.StylingExample
 				Spacing = 5,
 				HorizontalLayout = LayoutOptions.Fill,
 				VerticalLayout = LayoutOptions.Expand,
-				Children = {
+				Children =
+				{
 					enabledButton,
 					disabledButton,
 					enabledSlider,

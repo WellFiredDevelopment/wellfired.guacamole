@@ -6,9 +6,6 @@ namespace WellFired.Guacamole.Test.Acceptance.View.Slider.Bindable
 	[TestFixture]
 	public class SliderValueTests
 	{
-		private Guacamole.View.Slider _sliderView;
-		private SliderContextObject _sliderContext;
-
 		[SetUp]
 		public void OneTimeSetup()
 		{
@@ -16,6 +13,9 @@ namespace WellFired.Guacamole.Test.Acceptance.View.Slider.Bindable
 			_sliderContext = new SliderContextObject();
 			_sliderView.BindingContext = _sliderContext;
 		}
+
+		private Guacamole.View.Slider _sliderView;
+		private SliderContextObject _sliderContext;
 
 		[Test]
 		public void IsBindable()

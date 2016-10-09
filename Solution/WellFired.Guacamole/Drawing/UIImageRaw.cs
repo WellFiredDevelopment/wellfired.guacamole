@@ -9,7 +9,7 @@ namespace WellFired.Guacamole.Drawing
 		public int Height { get; set; }
 
 		public int Length => Data.Length;
-		
+
 		public UIColor this[int i]
 		{
 			get { return Data[i]; }
@@ -18,14 +18,8 @@ namespace WellFired.Guacamole.Drawing
 
 		public UIColor this[int x, int y]
 		{
-			get
-			{
-				return Data[Width * (Height - y - 1) + x];
-			}
-			set
-			{
-				Data[Width * (Height - y - 1) + x] = value;
-			}
+			get { return Data[Width*(Height - y - 1) + x]; }
+			set { Data[Width*(Height - y - 1) + x] = value; }
 		}
 	}
 }

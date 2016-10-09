@@ -2,8 +2,7 @@
 
 namespace WellFired.Guacamole.Exceptions
 {
-	public class InitializationContextNull : Exception 
+	public class InitializationContextNull : Exception
 	{
-		
 	}
 }

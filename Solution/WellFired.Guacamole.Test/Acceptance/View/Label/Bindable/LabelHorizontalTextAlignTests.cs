@@ -6,9 +6,6 @@ namespace WellFired.Guacamole.Test.Acceptance.View.Label.Bindable
 	[TestFixture]
 	public class LabelHorizontalTextAlignTests
 	{
-		private Guacamole.View.Label _labelView;
-		private LabelContextObject _labelContext;
-
 		[SetUp]
 		public void OneTimeSetup()
 		{
@@ -16,6 +13,9 @@ namespace WellFired.Guacamole.Test.Acceptance.View.Label.Bindable
 			_labelContext = new LabelContextObject();
 			_labelView.BindingContext = _labelContext;
 		}
+
+		private Guacamole.View.Label _labelView;
+		private LabelContextObject _labelContext;
 
 		[Test]
 		public void IsBindable()
