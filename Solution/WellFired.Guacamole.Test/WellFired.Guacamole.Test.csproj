@@ -51,7 +51,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Acceptance\Layout\Adjacent\AdjacentLayoutTests.cs" />
+    <Compile Include="Acceptance\Layout\Adjacent\VerticalTests.cs" />
+    <Compile Include="Acceptance\Layout\Adjacent\HorizontalTests.cs" />
     <Compile Include="Acceptance\View\Button\Bindable\ButtonHorizontalTextAlignTests.cs" />
     <Compile Include="Acceptance\View\Button\Bindable\ButtonTextTests.cs" />
     <Compile Include="Acceptance\View\Label\Bindable\LabelVerticalTextAlignTests.cs" />

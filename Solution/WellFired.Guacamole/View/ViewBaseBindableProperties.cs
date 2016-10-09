@@ -8,14 +8,14 @@ namespace WellFired.Guacamole.View
 	public partial class ViewBase
 	{
 		[PublicAPI] public static readonly BindableProperty EnabledProperty = BindableProperty.Create<
-			Button, bool>(
+			ViewBase, bool>(
 			true,
 			BindingMode.TwoWay,
 			viewBase => viewBase.Enabled
 		);
 
 		[PublicAPI] public static readonly BindableProperty ControlStateProperty = BindableProperty.Create<
-			Button, ControlState>(
+			ViewBase, ControlState>(
 			ControlState.Normal,
 			BindingMode.TwoWay,
 			viewBase => viewBase.ControlState
@@ -36,49 +36,49 @@ namespace WellFired.Guacamole.View
 			);
 
 		[PublicAPI] public static readonly BindableProperty CornerRadiusProperty = BindableProperty
-			.Create<TextEntry, double>(
+			.Create<ViewBase, double>(
 				0.0,
 				BindingMode.TwoWay,
 				viewBase => viewBase.CornerRadius
 			);
 
 		[PublicAPI] public static readonly BindableProperty CornerMaskProperty = BindableProperty
-			.Create<TextEntry, CornerMask>(
+			.Create<ViewBase, CornerMask>(
 				CornerMask.All,
 				BindingMode.TwoWay,
 				viewBase => viewBase.CornerMask
 			);
 
 		[PublicAPI] public static readonly BindableProperty MinSizeProperty = BindableProperty
-			.Create<TextEntry, UISize>(
+			.Create<ViewBase, UISize>(
 				UISize.Min,
 				BindingMode.TwoWay,
 				viewBase => viewBase.MinSize
 			);
 
 		[PublicAPI] public static readonly BindableProperty MaxSizeProperty = BindableProperty
-			.Create<TextEntry, UISize>(
+			.Create<ViewBase, UISize>(
 				UISize.Max,
 				BindingMode.TwoWay,
 				viewBase => viewBase.MaxSize
 			);
 
 		[PublicAPI] public static readonly BindableProperty HorizontalLayoutProperty = BindableProperty
-			.Create<TextEntry, LayoutOptions>(
+			.Create<ViewBase, LayoutOptions>(
 				LayoutOptions.Fill,
 				BindingMode.TwoWay,
 				viewBase => viewBase.HorizontalLayout
 			);
 
 		[PublicAPI] public static readonly BindableProperty VerticalLayoutProperty = BindableProperty
-			.Create<TextEntry, LayoutOptions>(
+			.Create<ViewBase, LayoutOptions>(
 				LayoutOptions.Expand,
 				BindingMode.TwoWay,
 				viewBase => viewBase.VerticalLayout
 			);
 
 		[PublicAPI] public static readonly BindableProperty PaddingProperty = BindableProperty
-			.Create<TextEntry, UIPadding>(
+			.Create<ViewBase, UIPadding>(
 				0,
 				BindingMode.TwoWay,
 				viewBase => viewBase.Padding
