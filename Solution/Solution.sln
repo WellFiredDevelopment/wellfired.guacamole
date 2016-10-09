@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Unity.R
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Test", "WellFired.Guacamole.Test\WellFired.Guacamole.Test.csproj", "{BB8952BF-3212-4478-9E84-47158D53E12B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Runtimes", "Runtimes", "{E9D38105-170F-4368-B04D-D3542F57B69F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{C2567451-ABD5-42BD-A45F-3425B34AE783}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +46,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9566C64D-A98F-4202-BC77-01DF9AF1AEF2} = {C2567451-ABD5-42BD-A45F-3425B34AE783}
+		{9F8C3651-0571-4A3B-A75A-2C7F2F08BDA7} = {E9D38105-170F-4368-B04D-D3542F57B69F}
+		{E0DD069B-D631-40B6-9F5E-F515D9AEECCD} = {E9D38105-170F-4368-B04D-D3542F57B69F}
 	EndGlobalSection
 EndGlobal
