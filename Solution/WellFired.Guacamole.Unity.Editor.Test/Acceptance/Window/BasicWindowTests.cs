@@ -21,7 +21,7 @@ namespace WellFired.Guacamole.Unity.Editor.Test.Acceptance.Window
 		[TearDown]
 		public void Teardown()
 		{
-			//_application.Teardown();
+			_application.Teardown();
 		}
 
 		[Test]
@@ -31,7 +31,7 @@ namespace WellFired.Guacamole.Unity.Editor.Test.Acceptance.Window
 		}
 
 		[Test]
-		public async Task SimpleButtonPressed()
+		public async Task TypingSomething()
 		{
 			await _automation.Click("AcceptanceLabel");
 			await _automation.Type("AcceptanceLabel", 'D');
