@@ -9,8 +9,8 @@ global.config = {
     unityAssets:    'Unity/Assets',
     unityBin:       'Unity/Assets/Code',
     unityEditorBin: 'Unity/Assets/Code/Editor',
-    integrationDlls:'Solution/Test/*/bin/Debug/*.Integration.dll'
-    testDlls:       'Solution/Test/*/bin/Debug/*.Tests.dll'
+    integrationDlls:'Solution/WellFired.Guacamole.Test/*/bin/Debug/*.Integration.dll'
+    testDlls:       'Solution/WellFired.Guacamole.Test/*/bin/Debug/*.Tests.dll'
 }
 
 global.yask = ->
