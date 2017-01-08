@@ -7,7 +7,7 @@ namespace WellFired.Guacamole.Examples.Taskist.View
     {
         public Inspector()
         {
-            HorizontalLayout = LayoutOptions.Fill;
+            MinSize = new UISize(300, 0);
             VerticalLayout = LayoutOptions.Fill;
             BackgroundColor = UIColor.FromRGB(250, 250, 250);
         }
