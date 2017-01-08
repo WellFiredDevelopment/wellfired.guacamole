@@ -81,7 +81,7 @@ namespace WellFired.Guacamole.Layout
 					throw new ArgumentOutOfRangeException();
 			}
 
-			return new UIRect(0, 0, totalWidth, totalHeight);
+			return new UIRect(0, 0, Math.Max(totalWidth, MinSize.Width), Math.Max(totalHeight, MinSize.Height));
 		}
 
 		public override void AttemptToFullfillRequests(UIRect availableSpace)
