@@ -1,0 +1,91 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole", "WellFired.Guacamole\WellFired.Guacamole.csproj", "{9804DE8D-6D30-4FD7-ADFE-4EC24A7ADB6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Examples", "WellFired.Guacamole.Examples\WellFired.Guacamole.Examples.csproj", "{9566C64D-A98F-4202-BC77-01DF9AF1AEF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Unity.Editor", "WellFired.Guacamole.Unity.Editor\WellFired.Guacamole.Unity.Editor.csproj", "{9F8C3651-0571-4A3B-A75A-2C7F2F08BDA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Unity.Runtime", "WellFired.Guacamole.Unity.Runtime\WellFired.Guacamole.Unity.Runtime.csproj", "{E0DD069B-D631-40B6-9F5E-F515D9AEECCD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{C2567451-ABD5-42BD-A45F-3425B34AE783}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{5FEBF2E9-9B8B-4378-87B9-B3E7F1043D91}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7436DA95-14F8-4B8F-9D04-E0EFEF0F2EFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Tests", "WellFired.Guacamole.Test\WellFired.Guacamole.Tests\WellFired.Guacamole.Tests.csproj", "{BB8952BF-3212-4478-9E84-47158D53E12B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Runtime", "Runtime", "{8EE2433B-7CDD-47C7-8160-3FCA5B9DB8C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Unity.Editor.Tests", "WellFired.Guacamole.Test\WellFired.Guacamole.Unity.Editor.Tests\WellFired.Guacamole.Unity.Editor.Tests.csproj", "{76422BF7-16C8-4938-8713-99FD1B845C53}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Automation", "Automation", "{4536A5F4-FF9A-4AAB-8464-8470B25E42A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Automation", "WellFired.Guacamole.Automation\Automation\WellFired.Guacamole.Automation.csproj", "{CED6AE62-AB35-4D9F-8599-2D1359A814F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Automation.UnityEditor", "WellFired.Guacamole.Automation\Automation.UnityEditor\WellFired.Guacamole.Automation.UnityEditor.csproj", "{F46EB31B-104D-4BC6-B1E8-5DDF0E9D5183}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Integration", "WellFired.Guacamole.Test\WellFired.Guacamole.Integration\WellFired.Guacamole.Integration.csproj", "{BAB03372-0CE8-4693-93B7-5BFFB29466B8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9804DE8D-6D30-4FD7-ADFE-4EC24A7ADB6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9804DE8D-6D30-4FD7-ADFE-4EC24A7ADB6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9804DE8D-6D30-4FD7-ADFE-4EC24A7ADB6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9804DE8D-6D30-4FD7-ADFE-4EC24A7ADB6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9566C64D-A98F-4202-BC77-01DF9AF1AEF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9566C64D-A98F-4202-BC77-01DF9AF1AEF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9566C64D-A98F-4202-BC77-01DF9AF1AEF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9566C64D-A98F-4202-BC77-01DF9AF1AEF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F8C3651-0571-4A3B-A75A-2C7F2F08BDA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F8C3651-0571-4A3B-A75A-2C7F2F08BDA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F8C3651-0571-4A3B-A75A-2C7F2F08BDA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F8C3651-0571-4A3B-A75A-2C7F2F08BDA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0DD069B-D631-40B6-9F5E-F515D9AEECCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0DD069B-D631-40B6-9F5E-F515D9AEECCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0DD069B-D631-40B6-9F5E-F515D9AEECCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0DD069B-D631-40B6-9F5E-F515D9AEECCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB8952BF-3212-4478-9E84-47158D53E12B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB8952BF-3212-4478-9E84-47158D53E12B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB8952BF-3212-4478-9E84-47158D53E12B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB8952BF-3212-4478-9E84-47158D53E12B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76422BF7-16C8-4938-8713-99FD1B845C53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76422BF7-16C8-4938-8713-99FD1B845C53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76422BF7-16C8-4938-8713-99FD1B845C53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76422BF7-16C8-4938-8713-99FD1B845C53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CED6AE62-AB35-4D9F-8599-2D1359A814F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CED6AE62-AB35-4D9F-8599-2D1359A814F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CED6AE62-AB35-4D9F-8599-2D1359A814F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CED6AE62-AB35-4D9F-8599-2D1359A814F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F46EB31B-104D-4BC6-B1E8-5DDF0E9D5183}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F46EB31B-104D-4BC6-B1E8-5DDF0E9D5183}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F46EB31B-104D-4BC6-B1E8-5DDF0E9D5183}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F46EB31B-104D-4BC6-B1E8-5DDF0E9D5183}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAB03372-0CE8-4693-93B7-5BFFB29466B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAB03372-0CE8-4693-93B7-5BFFB29466B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAB03372-0CE8-4693-93B7-5BFFB29466B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAB03372-0CE8-4693-93B7-5BFFB29466B8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9566C64D-A98F-4202-BC77-01DF9AF1AEF2} = {C2567451-ABD5-42BD-A45F-3425B34AE783}
+		{7436DA95-14F8-4B8F-9D04-E0EFEF0F2EFC} = {5FEBF2E9-9B8B-4378-87B9-B3E7F1043D91}
+		{BB8952BF-3212-4478-9E84-47158D53E12B} = {7436DA95-14F8-4B8F-9D04-E0EFEF0F2EFC}
+		{8EE2433B-7CDD-47C7-8160-3FCA5B9DB8C0} = {5FEBF2E9-9B8B-4378-87B9-B3E7F1043D91}
+		{76422BF7-16C8-4938-8713-99FD1B845C53} = {8EE2433B-7CDD-47C7-8160-3FCA5B9DB8C0}
+		{4536A5F4-FF9A-4AAB-8464-8470B25E42A8} = {5FEBF2E9-9B8B-4378-87B9-B3E7F1043D91}
+		{CED6AE62-AB35-4D9F-8599-2D1359A814F8} = {4536A5F4-FF9A-4AAB-8464-8470B25E42A8}
+		{F46EB31B-104D-4BC6-B1E8-5DDF0E9D5183} = {4536A5F4-FF9A-4AAB-8464-8470B25E42A8}
+		{BAB03372-0CE8-4693-93B7-5BFFB29466B8} = {7436DA95-14F8-4B8F-9D04-E0EFEF0F2EFC}
+	EndGlobalSection
+EndGlobal

@@ -124,6 +124,7 @@
     <Compile Include="View\ITypeable.cs" />
     <Compile Include="View\Label.cs" />
     <Compile Include="View\NumberEntry.cs" />
+    <Compile Include="View\Page.cs" />
     <Compile Include="View\Slider.cs" />
     <Compile Include="View\TextEntry.cs" />
     <Compile Include="View\ViewBase.cs" />

@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BAB03372-0CE8-4693-93B7-5BFFB29466B8}</ProjectGuid>
+    <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WellFired.Guacamole.Tests.Integration</RootNamespace>
+    <AssemblyName>WellFired.Guacamole.Tests.Integration</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Layout\Adjacent\HorizontalTests.cs" />
+    <Compile Include="Layout\Adjacent\VerticalTests.cs" />
+    <Compile Include="View\Button\Bindable\ButtonButtonPressedTests.cs" />
+    <Compile Include="View\Button\Bindable\ButtonContextObject.cs" />
+    <Compile Include="View\Button\Bindable\ButtonHorizontalTextAlignTests.cs" />
+    <Compile Include="View\Button\Bindable\ButtonTextColorTests.cs" />
+    <Compile Include="View\Button\Bindable\ButtonTextTests.cs" />
+    <Compile Include="View\Button\Bindable\ButtonVerticalTextAlignTests.cs" />
+    <Compile Include="View\Label\Bindable\LabelContextObject.cs" />
+    <Compile Include="View\Label\Bindable\LabelHorizontalTextAlignTests.cs" />
+    <Compile Include="View\Label\Bindable\LabelTextColorTests.cs" />
+    <Compile Include="View\Label\Bindable\LabelTextTests.cs" />
+    <Compile Include="View\Label\Bindable\LabelVerticalTextAlignTests.cs" />
+    <Compile Include="View\NumberEntry\Bindable\NumberEntryContextObject.cs" />
+    <Compile Include="View\NumberEntry\Bindable\NumberEntryHorizontalTextAlignTests.cs" />
+    <Compile Include="View\NumberEntry\Bindable\NumberEntryNumberTests.cs" />
+    <Compile Include="View\NumberEntry\Bindable\NumberEntryTextColorTests.cs" />
+    <Compile Include="View\NumberEntry\Bindable\NumberEntryVerticalTextAlignTests.cs" />
+    <Compile Include="View\Slider\Bindable\SliderContextObject.cs" />
+    <Compile Include="View\Slider\Bindable\SliderMaxValueTests.cs" />
+    <Compile Include="View\Slider\Bindable\SliderMinValueTests.cs" />
+    <Compile Include="View\Slider\Bindable\SliderThumbBackgroundColorTests.cs" />
+    <Compile Include="View\Slider\Bindable\SliderThumbCornerMaskTests.cs" />
+    <Compile Include="View\Slider\Bindable\SliderThumbCornerRadiusTests.cs" />
+    <Compile Include="View\Slider\Bindable\SliderThumbOutlineColorTests.cs" />
+    <Compile Include="View\Slider\Bindable\SliderValueTests.cs" />
+    <Compile Include="View\TextEntry\Bindable\TestEntryTextColorTests.cs" />
+    <Compile Include="View\TextEntry\Bindable\TextEntryContextObject.cs" />
+    <Compile Include="View\TextEntry\Bindable\TextEntryHorizontalTextAlignTests.cs" />
+    <Compile Include="View\TextEntry\Bindable\TextEntryTextTests.cs" />
+    <Compile Include="View\TextEntry\Bindable\TextEntryVerticalTextAlignTests.cs" />
+    <Compile Include="View\ViewBase\Bindable\ViewBaseBackgroundColorTests.cs" />
+    <Compile Include="View\ViewBase\Bindable\ViewBaseContextObject.cs" />
+    <Compile Include="View\ViewBase\Bindable\ViewBaseControlStateTests.cs" />
+    <Compile Include="View\ViewBase\Bindable\ViewBaseCornerMaskTests.cs" />
+    <Compile Include="View\ViewBase\Bindable\ViewBaseCornerRadiusTests.cs" />
+    <Compile Include="View\ViewBase\Bindable\ViewBaseEnabledTests.cs" />
+    <Compile Include="View\ViewBase\Bindable\ViewBaseHorizontalLayoutTests.cs" />
+    <Compile Include="View\ViewBase\Bindable\ViewBaseMaxSizeTests.cs" />
+    <Compile Include="View\ViewBase\Bindable\ViewBaseMinSizeTests.cs" />
+    <Compile Include="View\ViewBase\Bindable\ViewBaseOutlineColorTests.cs" />
+    <Compile Include="View\ViewBase\Bindable\ViewBasePaddingTests.cs" />
+    <Compile Include="View\ViewBase\Bindable\ViewBaseVerticalLayoutTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\WellFired.Guacamole\WellFired.Guacamole.csproj">
+      <Project>{9804DE8D-6D30-4FD7-ADFE-4EC24A7ADB6E}</Project>
+      <Name>WellFired.Guacamole</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework, Version=3.5.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb">
+      <HintPath>..\..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

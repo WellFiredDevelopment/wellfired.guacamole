@@ -66,6 +66,7 @@
     <Compile Include="NativeControls\ButtonRenderer.cs" />
     <Compile Include="NativeControls\LabelRenderer.cs" />
     <Compile Include="NativeControls\NumberEntryRenderer.cs" />
+    <Compile Include="NativeControls\PageRenderer.cs" />
     <Compile Include="NativeControls\SliderRenderer.cs" />
     <Compile Include="NativeControls\TextEntryRenderer.cs" />
     <Compile Include="NativeControls\WindowRenderer.cs" />
