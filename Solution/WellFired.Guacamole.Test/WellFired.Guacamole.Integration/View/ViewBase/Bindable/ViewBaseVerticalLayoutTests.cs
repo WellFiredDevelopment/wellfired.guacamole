@@ -10,54 +10,54 @@ namespace WellFired.Guacamole.Tests.Integration.View.ViewBase.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_viewBase = new Guacamole.View.ViewBase();
+			_view = new Views.View();
 			_viewBaseContext = new ViewBaseContextObject();
-			_viewBase.BindingContext = _viewBaseContext;
+			_view.BindingContext = _viewBaseContext;
 		}
 
-		private Guacamole.View.ViewBase _viewBase;
+		private Views.View _view;
 		private ViewBaseContextObject _viewBaseContext;
 
 		[Test]
 		public void OnBindViewBaseIsAutomaticallyUpdatedToTheValueOfBindingContextVerticalLayoutOptions()
 		{
-			_viewBase.VerticalLayout = LayoutOptions.Expand;
+			_view.VerticalLayout = LayoutOptions.Expand;
 			_viewBaseContext.VerticalLayoutOptions = LayoutOptions.Fill;
-			Assert.That(_viewBaseContext.VerticalLayoutOptions != _viewBase.VerticalLayout);
-			_viewBase.Bind(Guacamole.View.ViewBase.VerticalLayoutProperty, nameof(_viewBaseContext.VerticalLayoutOptions));
-			Assert.That(_viewBaseContext.VerticalLayoutOptions == _viewBase.VerticalLayout);
+			Assert.That(_viewBaseContext.VerticalLayoutOptions != _view.VerticalLayout);
+			_view.Bind(Views.View.VerticalLayoutProperty, nameof(_viewBaseContext.VerticalLayoutOptions));
+			Assert.That(_viewBaseContext.VerticalLayoutOptions == _view.VerticalLayout);
 		}
 
 		[Test]
 		public void ViewBaseVerticalLayoutOptionsBindingDoesntWorkInTwoWayWithOneWayMode()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.VerticalLayoutProperty, nameof(_viewBaseContext.VerticalLayoutOptions));
-			Assert.That(_viewBaseContext.VerticalLayoutOptions == _viewBase.VerticalLayout);
+			_view.Bind(Views.View.VerticalLayoutProperty, nameof(_viewBaseContext.VerticalLayoutOptions));
+			Assert.That(_viewBaseContext.VerticalLayoutOptions == _view.VerticalLayout);
 			_viewBaseContext.VerticalLayoutOptions = LayoutOptions.Fill;
-			Assert.That(_viewBaseContext.VerticalLayoutOptions == _viewBase.VerticalLayout);
-			_viewBase.VerticalLayout = LayoutOptions.Expand;
-			Assert.That(_viewBaseContext.VerticalLayoutOptions != _viewBase.VerticalLayout);
+			Assert.That(_viewBaseContext.VerticalLayoutOptions == _view.VerticalLayout);
+			_view.VerticalLayout = LayoutOptions.Expand;
+			Assert.That(_viewBaseContext.VerticalLayoutOptions != _view.VerticalLayout);
 		}
 
 		[Test]
 		public void ViewBaseVerticalLayoutOptionsBindingWorksInOneWay()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.VerticalLayoutProperty, nameof(_viewBaseContext.VerticalLayoutOptions));
-			Assert.That(_viewBaseContext.VerticalLayoutOptions == _viewBase.VerticalLayout);
-			_viewBase.VerticalLayout = LayoutOptions.Expand;
-			Assert.That(_viewBaseContext.VerticalLayoutOptions == _viewBase.VerticalLayout);
+			_view.Bind(Views.View.VerticalLayoutProperty, nameof(_viewBaseContext.VerticalLayoutOptions));
+			Assert.That(_viewBaseContext.VerticalLayoutOptions == _view.VerticalLayout);
+			_view.VerticalLayout = LayoutOptions.Expand;
+			Assert.That(_viewBaseContext.VerticalLayoutOptions == _view.VerticalLayout);
 		}
 
 		[Test]
 		public void ViewBaseVerticalLayoutOptionsBindingWorksInTwoWay()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.VerticalLayoutProperty, nameof(_viewBaseContext.VerticalLayoutOptions),
+			_view.Bind(Views.View.VerticalLayoutProperty, nameof(_viewBaseContext.VerticalLayoutOptions),
 				BindingMode.TwoWay);
-			Assert.That(_viewBaseContext.VerticalLayoutOptions == _viewBase.VerticalLayout);
+			Assert.That(_viewBaseContext.VerticalLayoutOptions == _view.VerticalLayout);
 			_viewBaseContext.VerticalLayoutOptions = LayoutOptions.Fill;
-			Assert.That(_viewBaseContext.VerticalLayoutOptions == _viewBase.VerticalLayout);
-			_viewBase.VerticalLayout = LayoutOptions.Expand;
-			Assert.That(_viewBaseContext.VerticalLayoutOptions == _viewBase.VerticalLayout);
+			Assert.That(_viewBaseContext.VerticalLayoutOptions == _view.VerticalLayout);
+			_view.VerticalLayout = LayoutOptions.Expand;
+			Assert.That(_viewBaseContext.VerticalLayoutOptions == _view.VerticalLayout);
 		}
 	}
 }

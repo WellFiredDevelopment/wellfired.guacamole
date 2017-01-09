@@ -9,12 +9,12 @@ namespace WellFired.Guacamole.Tests.Integration.View.NumberEntry.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_numberEntryView = new Guacamole.View.NumberEntry();
+			_numberEntryView = new Views.NumberEntry();
 			_numberEntryContext = new NumberEntryContextObject();
 			_numberEntryView.BindingContext = _numberEntryContext;
 		}
 
-		private Guacamole.View.NumberEntry _numberEntryView;
+		private Views.NumberEntry _numberEntryView;
 		private NumberEntryContextObject _numberEntryContext;
 
 		[Test]
@@ -23,7 +23,7 @@ namespace WellFired.Guacamole.Tests.Integration.View.NumberEntry.Bindable
 			_numberEntryView.Number = 0.0f;
 			_numberEntryContext.Number = 1.0f;
 			Assert.That(Math.Abs(_numberEntryContext.Number - _numberEntryView.Number) > 0.001f);
-			_numberEntryView.Bind(Guacamole.View.NumberEntry.NumberProperty, nameof(_numberEntryContext.Number));
+			_numberEntryView.Bind(Views.NumberEntry.NumberProperty, nameof(_numberEntryContext.Number));
 			Assert.That(Math.Abs(_numberEntryContext.Number - _numberEntryView.Number) < 0.001f);
 			_numberEntryContext.Number = 2.0f;
 			Assert.That(Math.Abs(_numberEntryContext.Number - _numberEntryView.Number) < 0.001f);

@@ -9,53 +9,53 @@ namespace WellFired.Guacamole.Tests.Integration.View.ViewBase.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_viewBase = new Guacamole.View.ViewBase();
+			_view = new Views.View();
 			_viewBaseContext = new ViewBaseContextObject();
-			_viewBase.BindingContext = _viewBaseContext;
+			_view.BindingContext = _viewBaseContext;
 		}
 
-		private Guacamole.View.ViewBase _viewBase;
+		private Views.View _view;
 		private ViewBaseContextObject _viewBaseContext;
 
 		[Test]
 		public void OnBindViewBaseIsAutomaticallyUpdatedToTheValueOfBindingContextEnabled()
 		{
-			_viewBase.Enabled = false;
-			_viewBaseContext.Enabled = !_viewBase.Enabled;
-			Assert.That(_viewBaseContext.Enabled != _viewBase.Enabled);
-			_viewBase.Bind(Guacamole.View.ViewBase.EnabledProperty, nameof(_viewBaseContext.Enabled));
-			Assert.That(_viewBaseContext.Enabled == _viewBase.Enabled);
+			_view.Enabled = false;
+			_viewBaseContext.Enabled = !_view.Enabled;
+			Assert.That(_viewBaseContext.Enabled != _view.Enabled);
+			_view.Bind(Views.View.EnabledProperty, nameof(_viewBaseContext.Enabled));
+			Assert.That(_viewBaseContext.Enabled == _view.Enabled);
 		}
 
 		[Test]
 		public void ViewBaseEnabledBindingDoesntWorkInTwoWayWithOneWayMode()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.EnabledProperty, nameof(_viewBaseContext.Enabled), BindingMode.OneWay);
-			Assert.That(_viewBaseContext.Enabled == _viewBase.Enabled);
+			_view.Bind(Views.View.EnabledProperty, nameof(_viewBaseContext.Enabled), BindingMode.OneWay);
+			Assert.That(_viewBaseContext.Enabled == _view.Enabled);
 			_viewBaseContext.Enabled = !_viewBaseContext.Enabled;
-			Assert.That(_viewBaseContext.Enabled == _viewBase.Enabled);
-			_viewBase.Enabled = !_viewBase.Enabled;
-			Assert.That(_viewBaseContext.Enabled != _viewBase.Enabled);
+			Assert.That(_viewBaseContext.Enabled == _view.Enabled);
+			_view.Enabled = !_view.Enabled;
+			Assert.That(_viewBaseContext.Enabled != _view.Enabled);
 		}
 
 		[Test]
 		public void ViewBaseEnabledBindingWorksInOneWay()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.EnabledProperty, nameof(_viewBaseContext.Enabled));
-			Assert.That(_viewBaseContext.Enabled == _viewBase.Enabled);
+			_view.Bind(Views.View.EnabledProperty, nameof(_viewBaseContext.Enabled));
+			Assert.That(_viewBaseContext.Enabled == _view.Enabled);
 			_viewBaseContext.Enabled = !_viewBaseContext.Enabled;
-			Assert.That(_viewBaseContext.Enabled == _viewBase.Enabled);
+			Assert.That(_viewBaseContext.Enabled == _view.Enabled);
 		}
 
 		[Test]
 		public void ViewBaseEnabledBindingWorksInTwoWay()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.EnabledProperty, nameof(_viewBaseContext.Enabled), BindingMode.TwoWay);
-			Assert.That(_viewBaseContext.Enabled == _viewBase.Enabled);
+			_view.Bind(Views.View.EnabledProperty, nameof(_viewBaseContext.Enabled), BindingMode.TwoWay);
+			Assert.That(_viewBaseContext.Enabled == _view.Enabled);
 			_viewBaseContext.Enabled = !_viewBaseContext.Enabled;
-			Assert.That(_viewBaseContext.Enabled == _viewBase.Enabled);
-			_viewBase.Enabled = !_viewBase.Enabled;
-			Assert.That(_viewBaseContext.Enabled == _viewBase.Enabled);
+			Assert.That(_viewBaseContext.Enabled == _view.Enabled);
+			_view.Enabled = !_view.Enabled;
+			Assert.That(_viewBaseContext.Enabled == _view.Enabled);
 		}
 	}
 }

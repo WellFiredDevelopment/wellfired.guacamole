@@ -10,54 +10,54 @@ namespace WellFired.Guacamole.Tests.Integration.View.ViewBase.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_viewBase = new Guacamole.View.ViewBase();
+			_view = new Views.View();
 			_viewBaseContext = new ViewBaseContextObject();
-			_viewBase.BindingContext = _viewBaseContext;
+			_view.BindingContext = _viewBaseContext;
 		}
 
-		private Guacamole.View.ViewBase _viewBase;
+		private Views.View _view;
 		private ViewBaseContextObject _viewBaseContext;
 
 		[Test]
 		public void OnBindViewBaseIsAutomaticallyUpdatedToTheValueOfBindingContextCornerRadius()
 		{
-			_viewBase.CornerRadius = 0.0f;
+			_view.CornerRadius = 0.0f;
 			_viewBaseContext.CornerRadius = 1.0f;
-			Assert.That(Math.Abs(_viewBaseContext.CornerRadius - _viewBase.CornerRadius) > 0.01f);
-			_viewBase.Bind(Guacamole.View.ViewBase.CornerRadiusProperty, nameof(_viewBaseContext.CornerRadius));
-			Assert.That(Math.Abs(_viewBaseContext.CornerRadius - _viewBase.CornerRadius) < 0.01f);
+			Assert.That(Math.Abs(_viewBaseContext.CornerRadius - _view.CornerRadius) > 0.01f);
+			_view.Bind(Views.View.CornerRadiusProperty, nameof(_viewBaseContext.CornerRadius));
+			Assert.That(Math.Abs(_viewBaseContext.CornerRadius - _view.CornerRadius) < 0.01f);
 		}
 
 		[Test]
 		public void ViewBaseCornerRadiusBindingDoesntWorkInTwoWayWithOneWayMode()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.CornerRadiusProperty, nameof(_viewBaseContext.CornerRadius));
-			Assert.That(Math.Abs(_viewBaseContext.CornerRadius - _viewBase.CornerRadius) < 0.01f);
+			_view.Bind(Views.View.CornerRadiusProperty, nameof(_viewBaseContext.CornerRadius));
+			Assert.That(Math.Abs(_viewBaseContext.CornerRadius - _view.CornerRadius) < 0.01f);
 			_viewBaseContext.CornerRadius = 2.0f;
-			Assert.That(Math.Abs(_viewBaseContext.CornerRadius - _viewBase.CornerRadius) < 0.01f);
-			_viewBase.CornerRadius = 3.0f;
-			Assert.That(Math.Abs(_viewBaseContext.CornerRadius - _viewBase.CornerRadius) > 0.01f);
+			Assert.That(Math.Abs(_viewBaseContext.CornerRadius - _view.CornerRadius) < 0.01f);
+			_view.CornerRadius = 3.0f;
+			Assert.That(Math.Abs(_viewBaseContext.CornerRadius - _view.CornerRadius) > 0.01f);
 		}
 
 		[Test]
 		public void ViewBaseCornerRadiusBindingWorksInOneWay()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.CornerRadiusProperty, nameof(_viewBaseContext.CornerRadius));
-			Assert.That(Math.Abs(_viewBaseContext.CornerRadius - _viewBase.CornerRadius) < 0.01f);
+			_view.Bind(Views.View.CornerRadiusProperty, nameof(_viewBaseContext.CornerRadius));
+			Assert.That(Math.Abs(_viewBaseContext.CornerRadius - _view.CornerRadius) < 0.01f);
 			_viewBaseContext.CornerRadius = 2.0f;
-			Assert.That(Math.Abs(_viewBaseContext.CornerRadius - _viewBase.CornerRadius) < 0.01f);
+			Assert.That(Math.Abs(_viewBaseContext.CornerRadius - _view.CornerRadius) < 0.01f);
 		}
 
 		[Test]
 		public void ViewBaseCornerRadiusBindingWorksInTwoWay()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.CornerRadiusProperty, nameof(_viewBaseContext.CornerRadius),
+			_view.Bind(Views.View.CornerRadiusProperty, nameof(_viewBaseContext.CornerRadius),
 				BindingMode.TwoWay);
-			Assert.That(Math.Abs(_viewBaseContext.CornerRadius - _viewBase.CornerRadius) < 0.01f);
+			Assert.That(Math.Abs(_viewBaseContext.CornerRadius - _view.CornerRadius) < 0.01f);
 			_viewBaseContext.CornerRadius = 2.0f;
-			Assert.That(Math.Abs(_viewBaseContext.CornerRadius - _viewBase.CornerRadius) < 0.01f);
-			_viewBase.CornerRadius = 3.0f;
-			Assert.That(Math.Abs(_viewBaseContext.CornerRadius - _viewBase.CornerRadius) < 0.01f);
+			Assert.That(Math.Abs(_viewBaseContext.CornerRadius - _view.CornerRadius) < 0.01f);
+			_view.CornerRadius = 3.0f;
+			Assert.That(Math.Abs(_viewBaseContext.CornerRadius - _view.CornerRadius) < 0.01f);
 		}
 	}
 }

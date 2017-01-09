@@ -9,12 +9,12 @@ namespace WellFired.Guacamole.Tests.Integration.View.Button.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_buttonView = new Guacamole.View.Button();
+			_buttonView = new Views.Button();
 			_buttonContext = new ButtonContextObject();
 			_buttonView.BindingContext = _buttonContext;
 		}
 
-		private Guacamole.View.Button _buttonView;
+		private Views.Button _buttonView;
 		private ButtonContextObject _buttonContext;
 
 		[Test]
@@ -23,7 +23,7 @@ namespace WellFired.Guacamole.Tests.Integration.View.Button.Bindable
 			_buttonView.HorizontalTextAlign = UITextAlign.End;
 			_buttonContext.HorizontalTextAlign = UITextAlign.Middle;
 			Assert.That(_buttonContext.HorizontalTextAlign != _buttonView.HorizontalTextAlign);
-			_buttonView.Bind(Guacamole.View.Button.HorizontalTextAlignProperty, nameof(_buttonContext.HorizontalTextAlign));
+			_buttonView.Bind(Views.Button.HorizontalTextAlignProperty, nameof(_buttonContext.HorizontalTextAlign));
 			Assert.That(_buttonContext.HorizontalTextAlign == _buttonView.HorizontalTextAlign);
 			_buttonContext.HorizontalTextAlign = UITextAlign.Start;
 			Assert.That(_buttonContext.HorizontalTextAlign == _buttonView.HorizontalTextAlign);

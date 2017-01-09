@@ -9,12 +9,12 @@ namespace WellFired.Guacamole.Tests.Integration.View.Label.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_labelView = new Guacamole.View.Label();
+			_labelView = new Views.Label();
 			_labelContext = new LabelContextObject();
 			_labelView.BindingContext = _labelContext;
 		}
 
-		private Guacamole.View.Label _labelView;
+		private Views.Label _labelView;
 		private LabelContextObject _labelContext;
 
 		[Test]
@@ -23,7 +23,7 @@ namespace WellFired.Guacamole.Tests.Integration.View.Label.Bindable
 			_labelView.VerticalTextAlign = UITextAlign.End;
 			_labelContext.VerticalTextAlign = UITextAlign.Middle;
 			Assert.That(_labelContext.VerticalTextAlign != _labelView.VerticalTextAlign);
-			_labelView.Bind(Guacamole.View.Label.VerticalTextAlignProperty, nameof(_labelContext.VerticalTextAlign));
+			_labelView.Bind(Views.Label.VerticalTextAlignProperty, nameof(_labelContext.VerticalTextAlign));
 			Assert.That(_labelContext.VerticalTextAlign == _labelView.VerticalTextAlign);
 			_labelContext.VerticalTextAlign = UITextAlign.Start;
 			Assert.That(_labelContext.VerticalTextAlign == _labelView.VerticalTextAlign);

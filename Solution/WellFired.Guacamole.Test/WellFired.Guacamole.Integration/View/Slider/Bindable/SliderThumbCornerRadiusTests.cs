@@ -9,12 +9,12 @@ namespace WellFired.Guacamole.Tests.Integration.View.Slider.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_sliderView = new Guacamole.View.Slider();
+			_sliderView = new Views.Slider();
 			_sliderContext = new SliderContextObject();
 			_sliderView.BindingContext = _sliderContext;
 		}
 
-		private Guacamole.View.Slider _sliderView;
+		private Views.Slider _sliderView;
 		private SliderContextObject _sliderContext;
 
 		[Test]
@@ -23,7 +23,7 @@ namespace WellFired.Guacamole.Tests.Integration.View.Slider.Bindable
 			_sliderView.ThumbCornerRadius = 0.0;
 			_sliderContext.ThumbCornerRadius = 1.0;
 			Assert.That(Math.Abs(_sliderContext.ThumbCornerRadius - _sliderView.ThumbCornerRadius) > 0.001);
-			_sliderView.Bind(Guacamole.View.Slider.ThumbCornerRadiusProperty, nameof(_sliderContext.ThumbCornerRadius));
+			_sliderView.Bind(Views.Slider.ThumbCornerRadiusProperty, nameof(_sliderContext.ThumbCornerRadius));
 			Assert.That(Math.Abs(_sliderContext.ThumbCornerRadius - _sliderView.ThumbCornerRadius) < 0.001);
 			_sliderContext.ThumbCornerRadius = 2.0;
 			Assert.That(Math.Abs(_sliderContext.ThumbCornerRadius - _sliderView.ThumbCornerRadius) < 0.001);

@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
-using WellFired.Guacamole.Layout;
+using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Types;
-using WellFired.Guacamole.View;
+using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Tests.Integration.Layout.Adjacent
 {
@@ -24,7 +24,7 @@ namespace WellFired.Guacamole.Tests.Integration.Layout.Adjacent
 
 			adjacentLayout.CalculateRectRequest();
 			adjacentLayout.AttemptToFullfillRequests(new UIRect(0, 0, 100, 100));
-			adjacentLayout.Layout();
+			adjacentLayout.UpdateContextIfNeeded();
 
 			var rectRequest0 = adjacentLayout.Children[0].RectRequest;
 			Assert.That(rectRequest0.X == 0);
@@ -55,7 +55,7 @@ namespace WellFired.Guacamole.Tests.Integration.Layout.Adjacent
 
 			adjacentLayout.CalculateRectRequest();
 			adjacentLayout.AttemptToFullfillRequests(new UIRect(0, 0, 150, 150));
-			adjacentLayout.Layout();
+			adjacentLayout.UpdateContextIfNeeded();
 
 			var rectRequest0 = adjacentLayout.Children[0].RectRequest;
 			Assert.That(rectRequest0.X == 0);

@@ -11,7 +11,7 @@ using WellFired.Guacamole.InitializationContext;
 using WellFired.Guacamole.Renderer;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Unity.Editor.Extensions;
-using WellFired.Guacamole.View;
+using WellFired.Guacamole.Views;
 using Logger = WellFired.Guacamole.Diagnostics.Logger;
 
 namespace WellFired.Guacamole.Unity.Editor

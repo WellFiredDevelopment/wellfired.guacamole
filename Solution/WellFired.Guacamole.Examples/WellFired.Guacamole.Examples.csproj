@@ -41,6 +41,7 @@
       <HintPath>..\Assemblies\System.Threading.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="UnityEditor">
       <HintPath>..\Assemblies\UnityEditor.dll</HintPath>
       <Private>False</Private>

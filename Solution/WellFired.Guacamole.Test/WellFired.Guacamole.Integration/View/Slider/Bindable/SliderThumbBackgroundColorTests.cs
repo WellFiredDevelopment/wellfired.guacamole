@@ -9,12 +9,12 @@ namespace WellFired.Guacamole.Tests.Integration.View.Slider.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_sliderView = new Guacamole.View.Slider();
+			_sliderView = new Views.Slider();
 			_sliderContext = new SliderContextObject();
 			_sliderView.BindingContext = _sliderContext;
 		}
 
-		private Guacamole.View.Slider _sliderView;
+		private Views.Slider _sliderView;
 		private SliderContextObject _sliderContext;
 
 		[Test]
@@ -23,7 +23,7 @@ namespace WellFired.Guacamole.Tests.Integration.View.Slider.Bindable
 			_sliderView.ThumbBackgroundColor = UIColor.Aquamarine;
 			_sliderContext.ThumbBackgroundColor = UIColor.Beige;
 			Assert.That(_sliderContext.ThumbBackgroundColor != _sliderView.ThumbBackgroundColor);
-			_sliderView.Bind(Guacamole.View.Slider.ThumbBackgroundColorProperty, nameof(_sliderContext.ThumbBackgroundColor));
+			_sliderView.Bind(Views.Slider.ThumbBackgroundColorProperty, nameof(_sliderContext.ThumbBackgroundColor));
 			Assert.That(_sliderContext.ThumbBackgroundColor == _sliderView.ThumbBackgroundColor);
 			_sliderContext.ThumbBackgroundColor = UIColor.Blue;
 			Assert.That(_sliderContext.ThumbBackgroundColor == _sliderView.ThumbBackgroundColor);

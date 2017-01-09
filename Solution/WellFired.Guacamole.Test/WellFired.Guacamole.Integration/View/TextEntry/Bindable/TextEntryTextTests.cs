@@ -8,12 +8,12 @@ namespace WellFired.Guacamole.Tests.Integration.View.TextEntry.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_textEntryView = new Guacamole.View.TextEntry();
+			_textEntryView = new Views.TextEntry();
 			_textEntryContext = new TextEntryContextObject();
 			_textEntryView.BindingContext = _textEntryContext;
 		}
 
-		private Guacamole.View.TextEntry _textEntryView;
+		private Views.TextEntry _textEntryView;
 		private TextEntryContextObject _textEntryContext;
 
 		[Test]
@@ -22,7 +22,7 @@ namespace WellFired.Guacamole.Tests.Integration.View.TextEntry.Bindable
 			_textEntryView.Text = "a";
 			_textEntryContext.Text = "b";
 			Assert.That(_textEntryContext.Text != _textEntryView.Text);
-			_textEntryView.Bind(Guacamole.View.TextEntry.TextProperty, nameof(_textEntryContext.Text));
+			_textEntryView.Bind(Views.TextEntry.TextProperty, nameof(_textEntryContext.Text));
 			Assert.That(_textEntryContext.Text == _textEntryView.Text);
 			_textEntryContext.Text = "c";
 			Assert.That(_textEntryContext.Text == _textEntryView.Text);

@@ -9,12 +9,12 @@ namespace WellFired.Guacamole.Tests.Integration.View.Label.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_labelView = new Guacamole.View.Label();
+			_labelView = new Views.Label();
 			_labelContext = new LabelContextObject();
 			_labelView.BindingContext = _labelContext;
 		}
 
-		private Guacamole.View.Label _labelView;
+		private Views.Label _labelView;
 		private LabelContextObject _labelContext;
 
 		[Test]
@@ -23,7 +23,7 @@ namespace WellFired.Guacamole.Tests.Integration.View.Label.Bindable
 			_labelView.TextColor = UIColor.Aquamarine;
 			_labelContext.TextColor = UIColor.Beige;
 			Assert.That(_labelContext.TextColor != _labelView.TextColor);
-			_labelView.Bind(Guacamole.View.Label.TextColorProperty, nameof(_labelContext.TextColor));
+			_labelView.Bind(Views.Label.TextColorProperty, nameof(_labelContext.TextColor));
 			Assert.That(_labelContext.TextColor == _labelView.TextColor);
 			_labelContext.TextColor = UIColor.Blue;
 			Assert.That(_labelContext.TextColor == _labelView.TextColor);

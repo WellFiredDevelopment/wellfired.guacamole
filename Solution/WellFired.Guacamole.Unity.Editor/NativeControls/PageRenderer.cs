@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using WellFired.Guacamole.Attributes;
-using WellFired.Guacamole.Layout;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls;
-using WellFired.Guacamole.View;
+using WellFired.Guacamole.Views;
 using Debug = System.Diagnostics.Debug;
 
 [assembly: CustomRenderer(typeof(Page), typeof(PageRenderer))]

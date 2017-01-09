@@ -10,53 +10,53 @@ namespace WellFired.Guacamole.Tests.Integration.View.ViewBase.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_viewBase = new Guacamole.View.ViewBase();
+			_view = new Views.View();
 			_viewBaseContext = new ViewBaseContextObject();
-			_viewBase.BindingContext = _viewBaseContext;
+			_view.BindingContext = _viewBaseContext;
 		}
 
-		private Guacamole.View.ViewBase _viewBase;
+		private Views.View _view;
 		private ViewBaseContextObject _viewBaseContext;
 
 		[Test]
 		public void OnBindViewBaseIsAutomaticallyUpdatedToTheValueOfBindingContextPadding()
 		{
-			_viewBase.Padding = new UIPadding(0);
+			_view.Padding = new UIPadding(0);
 			_viewBaseContext.Padding = new UIPadding(1);
-			Assert.That(_viewBaseContext.Padding != _viewBase.Padding);
-			_viewBase.Bind(Guacamole.View.ViewBase.PaddingProperty, nameof(_viewBaseContext.Padding));
-			Assert.That(_viewBaseContext.Padding == _viewBase.Padding);
+			Assert.That(_viewBaseContext.Padding != _view.Padding);
+			_view.Bind(Views.View.PaddingProperty, nameof(_viewBaseContext.Padding));
+			Assert.That(_viewBaseContext.Padding == _view.Padding);
 		}
 
 		[Test]
 		public void ViewBasePaddingBindingDoesntWorkInTwoWayWithOneWayMode()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.PaddingProperty, nameof(_viewBaseContext.Padding));
-			Assert.That(_viewBaseContext.Padding == _viewBase.Padding);
+			_view.Bind(Views.View.PaddingProperty, nameof(_viewBaseContext.Padding));
+			Assert.That(_viewBaseContext.Padding == _view.Padding);
 			_viewBaseContext.Padding = new UIPadding(0);
-			Assert.That(_viewBaseContext.Padding == _viewBase.Padding);
-			_viewBase.Padding = new UIPadding(1);
-			Assert.That(_viewBaseContext.Padding != _viewBase.Padding);
+			Assert.That(_viewBaseContext.Padding == _view.Padding);
+			_view.Padding = new UIPadding(1);
+			Assert.That(_viewBaseContext.Padding != _view.Padding);
 		}
 
 		[Test]
 		public void ViewBasePaddingBindingWorksInOneWay()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.PaddingProperty, nameof(_viewBaseContext.Padding));
-			Assert.That(_viewBaseContext.Padding == _viewBase.Padding);
-			_viewBase.Padding = new UIPadding(0);
-			Assert.That(_viewBaseContext.Padding == _viewBase.Padding);
+			_view.Bind(Views.View.PaddingProperty, nameof(_viewBaseContext.Padding));
+			Assert.That(_viewBaseContext.Padding == _view.Padding);
+			_view.Padding = new UIPadding(0);
+			Assert.That(_viewBaseContext.Padding == _view.Padding);
 		}
 
 		[Test]
 		public void ViewBasePaddingBindingWorksInTwoWay()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.PaddingProperty, nameof(_viewBaseContext.Padding), BindingMode.TwoWay);
-			Assert.That(_viewBaseContext.Padding == _viewBase.Padding);
+			_view.Bind(Views.View.PaddingProperty, nameof(_viewBaseContext.Padding), BindingMode.TwoWay);
+			Assert.That(_viewBaseContext.Padding == _view.Padding);
 			_viewBaseContext.Padding = new UIPadding(0);
-			Assert.That(_viewBaseContext.Padding == _viewBase.Padding);
-			_viewBase.Padding = new UIPadding(1);
-			Assert.That(_viewBaseContext.Padding == _viewBase.Padding);
+			Assert.That(_viewBaseContext.Padding == _view.Padding);
+			_view.Padding = new UIPadding(1);
+			Assert.That(_viewBaseContext.Padding == _view.Padding);
 		}
 	}
 }

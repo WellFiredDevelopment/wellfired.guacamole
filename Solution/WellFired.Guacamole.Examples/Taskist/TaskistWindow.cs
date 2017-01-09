@@ -1,5 +1,5 @@
 ﻿using WellFired.Guacamole.Examples.Taskist.View;
-using WellFired.Guacamole.View;
+using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.Taskist
 {

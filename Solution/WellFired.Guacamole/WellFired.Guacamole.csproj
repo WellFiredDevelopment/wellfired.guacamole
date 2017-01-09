@@ -41,7 +41,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Assemblies\System.Threading.dll</HintPath>
     </Reference>
-    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Annotations\CanBeNull.cs" />
@@ -93,7 +92,9 @@
     <Compile Include="InitializationContext\IInitializationContext.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="IWindow.cs" />
-    <Compile Include="Layout\AdjacentLayout.cs" />
+    <Compile Include="Layouts\AdjacentLayout.cs" />
+    <Compile Include="Layouts\ICanLayout.cs" />
+    <Compile Include="Layouts\Layout.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer\INativeRenderer.cs" />
     <Compile Include="Renderer\NativeRendererHelper.cs" />
@@ -118,20 +119,19 @@
     <Compile Include="Types\UIRect.cs" />
     <Compile Include="Types\UISize.cs" />
     <Compile Include="Types\UITextAlign.cs" />
-    <Compile Include="View\Button.cs" />
-    <Compile Include="View\ControlState.cs" />
-    <Compile Include="View\IClickable.cs" />
-    <Compile Include="View\ITypeable.cs" />
-    <Compile Include="View\Label.cs" />
-    <Compile Include="View\NumberEntry.cs" />
-    <Compile Include="View\Page.cs" />
-    <Compile Include="View\Slider.cs" />
-    <Compile Include="View\TextEntry.cs" />
-    <Compile Include="View\ViewBase.cs" />
-    <Compile Include="View\ViewBaseBindableProperties.cs" />
-    <Compile Include="View\Window.cs" />
+    <Compile Include="Views\Button.cs" />
+    <Compile Include="Views\ControlState.cs" />
+    <Compile Include="Views\IClickable.cs" />
+    <Compile Include="Views\ITypeable.cs" />
+    <Compile Include="Views\Label.cs" />
+    <Compile Include="Views\NumberEntry.cs" />
+    <Compile Include="Views\Page.cs" />
+    <Compile Include="Views\Slider.cs" />
+    <Compile Include="Views\TextEntry.cs" />
+    <Compile Include="Views\View.cs" />
+    <Compile Include="Views\ViewBaseBindableProperties.cs" />
+    <Compile Include="Views\Window.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

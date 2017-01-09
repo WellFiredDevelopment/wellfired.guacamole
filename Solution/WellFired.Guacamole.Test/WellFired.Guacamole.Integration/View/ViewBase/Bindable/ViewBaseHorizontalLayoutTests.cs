@@ -10,54 +10,54 @@ namespace WellFired.Guacamole.Tests.Integration.View.ViewBase.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_viewBase = new Guacamole.View.ViewBase();
+			_view = new Views.View();
 			_viewBaseContext = new ViewBaseContextObject();
-			_viewBase.BindingContext = _viewBaseContext;
+			_view.BindingContext = _viewBaseContext;
 		}
 
-		private Guacamole.View.ViewBase _viewBase;
+		private Views.View _view;
 		private ViewBaseContextObject _viewBaseContext;
 
 		[Test]
 		public void OnBindViewBaseIsAutomaticallyUpdatedToTheValueOfBindingContextHorizontalLayoutOptions()
 		{
-			_viewBase.HorizontalLayout = LayoutOptions.Expand;
+			_view.HorizontalLayout = LayoutOptions.Expand;
 			_viewBaseContext.HorizontalLayoutOptions = LayoutOptions.Fill;
-			Assert.That(_viewBaseContext.HorizontalLayoutOptions != _viewBase.HorizontalLayout);
-			_viewBase.Bind(Guacamole.View.ViewBase.HorizontalLayoutProperty, nameof(_viewBaseContext.HorizontalLayoutOptions));
-			Assert.That(_viewBaseContext.HorizontalLayoutOptions == _viewBase.HorizontalLayout);
+			Assert.That(_viewBaseContext.HorizontalLayoutOptions != _view.HorizontalLayout);
+			_view.Bind(Views.View.HorizontalLayoutProperty, nameof(_viewBaseContext.HorizontalLayoutOptions));
+			Assert.That(_viewBaseContext.HorizontalLayoutOptions == _view.HorizontalLayout);
 		}
 
 		[Test]
 		public void ViewBaseHorizontalLayoutOptionsBindingDoesntWorkInTwoWayWithOneWayMode()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.HorizontalLayoutProperty, nameof(_viewBaseContext.HorizontalLayoutOptions));
-			Assert.That(_viewBaseContext.HorizontalLayoutOptions == _viewBase.HorizontalLayout);
+			_view.Bind(Views.View.HorizontalLayoutProperty, nameof(_viewBaseContext.HorizontalLayoutOptions));
+			Assert.That(_viewBaseContext.HorizontalLayoutOptions == _view.HorizontalLayout);
 			_viewBaseContext.HorizontalLayoutOptions = LayoutOptions.Fill;
-			Assert.That(_viewBaseContext.HorizontalLayoutOptions == _viewBase.HorizontalLayout);
-			_viewBase.HorizontalLayout = LayoutOptions.Expand;
-			Assert.That(_viewBaseContext.HorizontalLayoutOptions != _viewBase.HorizontalLayout);
+			Assert.That(_viewBaseContext.HorizontalLayoutOptions == _view.HorizontalLayout);
+			_view.HorizontalLayout = LayoutOptions.Expand;
+			Assert.That(_viewBaseContext.HorizontalLayoutOptions != _view.HorizontalLayout);
 		}
 
 		[Test]
 		public void ViewBaseHorizontalLayoutOptionsBindingWorksInOneWay()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.HorizontalLayoutProperty, nameof(_viewBaseContext.HorizontalLayoutOptions));
-			Assert.That(_viewBaseContext.HorizontalLayoutOptions == _viewBase.HorizontalLayout);
-			_viewBase.HorizontalLayout = LayoutOptions.Expand;
-			Assert.That(_viewBaseContext.HorizontalLayoutOptions == _viewBase.HorizontalLayout);
+			_view.Bind(Views.View.HorizontalLayoutProperty, nameof(_viewBaseContext.HorizontalLayoutOptions));
+			Assert.That(_viewBaseContext.HorizontalLayoutOptions == _view.HorizontalLayout);
+			_view.HorizontalLayout = LayoutOptions.Expand;
+			Assert.That(_viewBaseContext.HorizontalLayoutOptions == _view.HorizontalLayout);
 		}
 
 		[Test]
 		public void ViewBaseHorizontalLayoutOptionsBindingWorksInTwoWay()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.HorizontalLayoutProperty, nameof(_viewBaseContext.HorizontalLayoutOptions),
+			_view.Bind(Views.View.HorizontalLayoutProperty, nameof(_viewBaseContext.HorizontalLayoutOptions),
 				BindingMode.TwoWay);
-			Assert.That(_viewBaseContext.HorizontalLayoutOptions == _viewBase.HorizontalLayout);
+			Assert.That(_viewBaseContext.HorizontalLayoutOptions == _view.HorizontalLayout);
 			_viewBaseContext.HorizontalLayoutOptions = LayoutOptions.Fill;
-			Assert.That(_viewBaseContext.HorizontalLayoutOptions == _viewBase.HorizontalLayout);
-			_viewBase.HorizontalLayout = LayoutOptions.Expand;
-			Assert.That(_viewBaseContext.HorizontalLayoutOptions == _viewBase.HorizontalLayout);
+			Assert.That(_viewBaseContext.HorizontalLayoutOptions == _view.HorizontalLayout);
+			_view.HorizontalLayout = LayoutOptions.Expand;
+			Assert.That(_viewBaseContext.HorizontalLayoutOptions == _view.HorizontalLayout);
 		}
 	}
 }

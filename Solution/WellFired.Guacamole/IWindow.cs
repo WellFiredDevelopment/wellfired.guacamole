@@ -2,7 +2,7 @@
 using WellFired.Guacamole.Event;
 using WellFired.Guacamole.InitializationContext;
 using WellFired.Guacamole.Types;
-using WellFired.Guacamole.View;
+using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole
 {

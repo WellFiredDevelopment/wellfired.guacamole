@@ -1,6 +1,6 @@
 ﻿using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Types;
-using WellFired.Guacamole.View;
+using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.ButtonExample
 {

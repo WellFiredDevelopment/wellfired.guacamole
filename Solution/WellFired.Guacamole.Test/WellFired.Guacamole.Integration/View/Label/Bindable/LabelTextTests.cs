@@ -8,12 +8,12 @@ namespace WellFired.Guacamole.Tests.Integration.View.Label.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_labelView = new Guacamole.View.Label();
+			_labelView = new Views.Label();
 			_labelContext = new LabelContextObject();
 			_labelView.BindingContext = _labelContext;
 		}
 
-		private Guacamole.View.Label _labelView;
+		private Views.Label _labelView;
 		private LabelContextObject _labelContext;
 
 		[Test]
@@ -22,7 +22,7 @@ namespace WellFired.Guacamole.Tests.Integration.View.Label.Bindable
 			_labelView.Text = "a";
 			_labelContext.Text = "b";
 			Assert.That(_labelContext.Text != _labelView.Text);
-			_labelView.Bind(Guacamole.View.Label.TextProperty, nameof(_labelContext.Text));
+			_labelView.Bind(Views.Label.TextProperty, nameof(_labelContext.Text));
 			Assert.That(_labelContext.Text == _labelView.Text);
 			_labelContext.Text = "c";
 			Assert.That(_labelContext.Text == _labelView.Text);

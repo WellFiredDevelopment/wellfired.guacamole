@@ -10,53 +10,53 @@ namespace WellFired.Guacamole.Tests.Integration.View.ViewBase.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_viewBase = new Guacamole.View.ViewBase();
+			_view = new Views.View();
 			_viewBaseContext = new ViewBaseContextObject();
-			_viewBase.BindingContext = _viewBaseContext;
+			_view.BindingContext = _viewBaseContext;
 		}
 
-		private Guacamole.View.ViewBase _viewBase;
+		private Views.View _view;
 		private ViewBaseContextObject _viewBaseContext;
 
 		[Test]
 		public void OnBindViewBaseIsAutomaticallyUpdatedToTheValueOfBindingContextMaxSize()
 		{
-			_viewBase.MaxSize = UISize.One;
+			_view.MaxSize = UISize.One;
 			_viewBaseContext.MaxSize = UISize.Min;
-			Assert.That(_viewBaseContext.MaxSize != _viewBase.MaxSize);
-			_viewBase.Bind(Guacamole.View.ViewBase.MaxSizeProperty, nameof(_viewBaseContext.MaxSize));
-			Assert.That(_viewBaseContext.MaxSize == _viewBase.MaxSize);
+			Assert.That(_viewBaseContext.MaxSize != _view.MaxSize);
+			_view.Bind(Views.View.MaxSizeProperty, nameof(_viewBaseContext.MaxSize));
+			Assert.That(_viewBaseContext.MaxSize == _view.MaxSize);
 		}
 
 		[Test]
 		public void ViewBaseMaxSizeBindingDoesntWorkInTwoWayWithOneWayMode()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.MaxSizeProperty, nameof(_viewBaseContext.MaxSize));
-			Assert.That(_viewBaseContext.MaxSize == _viewBase.MaxSize);
+			_view.Bind(Views.View.MaxSizeProperty, nameof(_viewBaseContext.MaxSize));
+			Assert.That(_viewBaseContext.MaxSize == _view.MaxSize);
 			_viewBaseContext.MaxSize = UISize.One;
-			Assert.That(_viewBaseContext.MaxSize == _viewBase.MaxSize);
-			_viewBase.MaxSize = UISize.Min;
-			Assert.That(_viewBaseContext.MaxSize != _viewBase.MaxSize);
+			Assert.That(_viewBaseContext.MaxSize == _view.MaxSize);
+			_view.MaxSize = UISize.Min;
+			Assert.That(_viewBaseContext.MaxSize != _view.MaxSize);
 		}
 
 		[Test]
 		public void ViewBaseMaxSizeBindingWorksInOneWay()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.MaxSizeProperty, nameof(_viewBaseContext.MaxSize));
-			Assert.That(_viewBaseContext.MaxSize == _viewBase.MaxSize);
+			_view.Bind(Views.View.MaxSizeProperty, nameof(_viewBaseContext.MaxSize));
+			Assert.That(_viewBaseContext.MaxSize == _view.MaxSize);
 			_viewBaseContext.MaxSize = UISize.One;
-			Assert.That(_viewBaseContext.MaxSize == _viewBase.MaxSize);
+			Assert.That(_viewBaseContext.MaxSize == _view.MaxSize);
 		}
 
 		[Test]
 		public void ViewBaseMaxSizeBindingWorksInTwoWay()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.MaxSizeProperty, nameof(_viewBaseContext.MaxSize), BindingMode.TwoWay);
-			Assert.That(_viewBaseContext.MaxSize == _viewBase.MaxSize);
+			_view.Bind(Views.View.MaxSizeProperty, nameof(_viewBaseContext.MaxSize), BindingMode.TwoWay);
+			Assert.That(_viewBaseContext.MaxSize == _view.MaxSize);
 			_viewBaseContext.MaxSize = UISize.One;
-			Assert.That(_viewBaseContext.MaxSize == _viewBase.MaxSize);
-			_viewBase.MaxSize = UISize.Min;
-			Assert.That(_viewBaseContext.MaxSize == _viewBase.MaxSize);
+			Assert.That(_viewBaseContext.MaxSize == _view.MaxSize);
+			_view.MaxSize = UISize.Min;
+			Assert.That(_viewBaseContext.MaxSize == _view.MaxSize);
 		}
 	}
 }

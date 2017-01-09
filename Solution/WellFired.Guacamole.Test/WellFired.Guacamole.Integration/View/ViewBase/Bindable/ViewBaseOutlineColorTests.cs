@@ -10,54 +10,54 @@ namespace WellFired.Guacamole.Tests.Integration.View.ViewBase.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_viewBase = new Guacamole.View.ViewBase();
+			_view = new Views.View();
 			_viewBaseContext = new ViewBaseContextObject();
-			_viewBase.BindingContext = _viewBaseContext;
+			_view.BindingContext = _viewBaseContext;
 		}
 
-		private Guacamole.View.ViewBase _viewBase;
+		private Views.View _view;
 		private ViewBaseContextObject _viewBaseContext;
 
 		[Test]
 		public void OnBindViewBaseIsAutomaticallyUpdatedToTheValueOfBindingContextOutlineColor()
 		{
-			_viewBase.OutlineColor = UIColor.Blue;
+			_view.OutlineColor = UIColor.Blue;
 			_viewBaseContext.OutlineColor = UIColor.Red;
-			Assert.That(_viewBaseContext.OutlineColor != _viewBase.OutlineColor);
-			_viewBase.Bind(Guacamole.View.ViewBase.OutlineColorProperty, nameof(_viewBaseContext.OutlineColor));
-			Assert.That(_viewBaseContext.OutlineColor == _viewBase.OutlineColor);
+			Assert.That(_viewBaseContext.OutlineColor != _view.OutlineColor);
+			_view.Bind(Views.View.OutlineColorProperty, nameof(_viewBaseContext.OutlineColor));
+			Assert.That(_viewBaseContext.OutlineColor == _view.OutlineColor);
 		}
 
 		[Test]
 		public void ViewBaseOutlineColorBindingDoesntWorkInTwoWayWithOneWayMode()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.OutlineColorProperty, nameof(_viewBaseContext.OutlineColor));
-			Assert.That(_viewBaseContext.OutlineColor == _viewBase.OutlineColor);
+			_view.Bind(Views.View.OutlineColorProperty, nameof(_viewBaseContext.OutlineColor));
+			Assert.That(_viewBaseContext.OutlineColor == _view.OutlineColor);
 			_viewBaseContext.OutlineColor = UIColor.Blue;
-			Assert.That(_viewBaseContext.OutlineColor == _viewBase.OutlineColor);
-			_viewBase.OutlineColor = UIColor.Red;
-			Assert.That(_viewBaseContext.OutlineColor != _viewBase.OutlineColor);
+			Assert.That(_viewBaseContext.OutlineColor == _view.OutlineColor);
+			_view.OutlineColor = UIColor.Red;
+			Assert.That(_viewBaseContext.OutlineColor != _view.OutlineColor);
 		}
 
 		[Test]
 		public void ViewBaseOutlineColorBindingWorksInOneWay()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.OutlineColorProperty, nameof(_viewBaseContext.OutlineColor));
-			Assert.That(_viewBaseContext.OutlineColor == _viewBase.OutlineColor);
+			_view.Bind(Views.View.OutlineColorProperty, nameof(_viewBaseContext.OutlineColor));
+			Assert.That(_viewBaseContext.OutlineColor == _view.OutlineColor);
 			_viewBaseContext.OutlineColor = UIColor.Brown;
-			Assert.That(_viewBaseContext.OutlineColor == _viewBase.OutlineColor);
+			Assert.That(_viewBaseContext.OutlineColor == _view.OutlineColor);
 		}
 
 		[Test]
 		public void ViewBaseOutlineColorBindingWorksInTwoWay()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.OutlineColorProperty, nameof(_viewBaseContext.OutlineColor),
+			_view.Bind(Views.View.OutlineColorProperty, nameof(_viewBaseContext.OutlineColor),
 				BindingMode.TwoWay);
-			Assert.That(_viewBaseContext.OutlineColor == _viewBase.OutlineColor);
+			Assert.That(_viewBaseContext.OutlineColor == _view.OutlineColor);
 			_viewBaseContext.OutlineColor = UIColor.Blue;
-			Assert.That(_viewBaseContext.OutlineColor == _viewBase.OutlineColor);
-			_viewBase.OutlineColor = UIColor.Red;
-			Assert.That(_viewBaseContext.OutlineColor == _viewBase.OutlineColor);
+			Assert.That(_viewBaseContext.OutlineColor == _view.OutlineColor);
+			_view.OutlineColor = UIColor.Red;
+			Assert.That(_viewBaseContext.OutlineColor == _view.OutlineColor);
 		}
 	}
 }

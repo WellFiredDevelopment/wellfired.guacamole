@@ -10,54 +10,54 @@ namespace WellFired.Guacamole.Tests.Integration.View.ViewBase.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_viewBase = new Guacamole.View.ViewBase();
+			_view = new Views.View();
 			_viewBaseContext = new ViewBaseContextObject();
-			_viewBase.BindingContext = _viewBaseContext;
+			_view.BindingContext = _viewBaseContext;
 		}
 
-		private Guacamole.View.ViewBase _viewBase;
+		private Views.View _view;
 		private ViewBaseContextObject _viewBaseContext;
 
 		[Test]
 		public void OnBindViewBaseIsAutomaticallyUpdatedToTheValueOfBindingContextBackgroundColor()
 		{
-			_viewBase.BackgroundColor = UIColor.Blue;
+			_view.BackgroundColor = UIColor.Blue;
 			_viewBaseContext.BackgroundColor = UIColor.Red;
-			Assert.That(_viewBaseContext.BackgroundColor != _viewBase.BackgroundColor);
-			_viewBase.Bind(Guacamole.View.ViewBase.BackgroundColorProperty, nameof(_viewBaseContext.BackgroundColor));
-			Assert.That(_viewBaseContext.BackgroundColor == _viewBase.BackgroundColor);
+			Assert.That(_viewBaseContext.BackgroundColor != _view.BackgroundColor);
+			_view.Bind(Views.View.BackgroundColorProperty, nameof(_viewBaseContext.BackgroundColor));
+			Assert.That(_viewBaseContext.BackgroundColor == _view.BackgroundColor);
 		}
 
 		[Test]
 		public void ViewBaseBackgroundColorBindingDoesntWorkInTwoWayWithOneWayMode()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.BackgroundColorProperty, nameof(_viewBaseContext.BackgroundColor));
-			Assert.That(_viewBaseContext.BackgroundColor == _viewBase.BackgroundColor);
+			_view.Bind(Views.View.BackgroundColorProperty, nameof(_viewBaseContext.BackgroundColor));
+			Assert.That(_viewBaseContext.BackgroundColor == _view.BackgroundColor);
 			_viewBaseContext.BackgroundColor = UIColor.Blue;
-			Assert.That(_viewBaseContext.BackgroundColor == _viewBase.BackgroundColor);
-			_viewBase.BackgroundColor = UIColor.Red;
-			Assert.That(_viewBaseContext.BackgroundColor != _viewBase.BackgroundColor);
+			Assert.That(_viewBaseContext.BackgroundColor == _view.BackgroundColor);
+			_view.BackgroundColor = UIColor.Red;
+			Assert.That(_viewBaseContext.BackgroundColor != _view.BackgroundColor);
 		}
 
 		[Test]
 		public void ViewBaseBackgroundColorBindingWorksInOneWay()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.BackgroundColorProperty, nameof(_viewBaseContext.BackgroundColor));
-			Assert.That(_viewBaseContext.BackgroundColor == _viewBase.BackgroundColor);
+			_view.Bind(Views.View.BackgroundColorProperty, nameof(_viewBaseContext.BackgroundColor));
+			Assert.That(_viewBaseContext.BackgroundColor == _view.BackgroundColor);
 			_viewBaseContext.BackgroundColor = UIColor.Brown;
-			Assert.That(_viewBaseContext.BackgroundColor == _viewBase.BackgroundColor);
+			Assert.That(_viewBaseContext.BackgroundColor == _view.BackgroundColor);
 		}
 
 		[Test]
 		public void ViewBaseBackgroundColorBindingWorksInTwoWay()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.BackgroundColorProperty, nameof(_viewBaseContext.BackgroundColor),
+			_view.Bind(Views.View.BackgroundColorProperty, nameof(_viewBaseContext.BackgroundColor),
 				BindingMode.TwoWay);
-			Assert.That(_viewBaseContext.BackgroundColor == _viewBase.BackgroundColor);
+			Assert.That(_viewBaseContext.BackgroundColor == _view.BackgroundColor);
 			_viewBaseContext.BackgroundColor = UIColor.Blue;
-			Assert.That(_viewBaseContext.BackgroundColor == _viewBase.BackgroundColor);
-			_viewBase.BackgroundColor = UIColor.Red;
-			Assert.That(_viewBaseContext.BackgroundColor == _viewBase.BackgroundColor);
+			Assert.That(_viewBaseContext.BackgroundColor == _view.BackgroundColor);
+			_view.BackgroundColor = UIColor.Red;
+			Assert.That(_viewBaseContext.BackgroundColor == _view.BackgroundColor);
 		}
 	}
 }

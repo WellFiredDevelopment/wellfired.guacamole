@@ -8,12 +8,12 @@ namespace WellFired.Guacamole.Tests.Integration.View.Button.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_buttonView = new Guacamole.View.Button();
+			_buttonView = new Views.Button();
 			_labelContext = new ButtonContextObject();
 			_buttonView.BindingContext = _labelContext;
 		}
 
-		private Guacamole.View.Button _buttonView;
+		private Views.Button _buttonView;
 		private ButtonContextObject _labelContext;
 
 		[Test]
@@ -25,7 +25,7 @@ namespace WellFired.Guacamole.Tests.Integration.View.Button.Bindable
 			_buttonView.ButtonPressedCommand = buttonPressed1;
 			_labelContext.ButtonPressedCommand = buttonPressed2;
 			Assert.That(_labelContext.ButtonPressedCommand != _buttonView.ButtonPressedCommand);
-			_buttonView.Bind(Guacamole.View.Button.ButtonPressedCommandProperty, nameof(_labelContext.ButtonPressedCommand));
+			_buttonView.Bind(Views.Button.ButtonPressedCommandProperty, nameof(_labelContext.ButtonPressedCommand));
 			Assert.That(_labelContext.ButtonPressedCommand == _buttonView.ButtonPressedCommand);
 			_labelContext.ButtonPressedCommand = buttonPressed3;
 			Assert.That(_labelContext.ButtonPressedCommand == _buttonView.ButtonPressedCommand);

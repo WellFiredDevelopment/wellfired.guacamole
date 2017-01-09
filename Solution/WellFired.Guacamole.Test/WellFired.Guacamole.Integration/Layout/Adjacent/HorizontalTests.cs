@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
-using WellFired.Guacamole.Layout;
+using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Types;
-using WellFired.Guacamole.View;
+using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Tests.Integration.Layout.Adjacent
 {
@@ -24,18 +24,18 @@ namespace WellFired.Guacamole.Tests.Integration.Layout.Adjacent
 
 			adjacentLayout.CalculateRectRequest();
 			adjacentLayout.AttemptToFullfillRequests(new UIRect(0, 0, 100, 100));
-			adjacentLayout.Layout();
+			adjacentLayout.UpdateContextIfNeeded();
 
 			var rectRequest0 = adjacentLayout.Children[0].RectRequest;
-			Assert.That(rectRequest0.X == 0);
-			Assert.That(rectRequest0.Y == 0);
-			Assert.That(rectRequest0.Width == 50);
-			Assert.That(rectRequest0.Height == 50);
+			Assert.That(rectRequest0.X, Is.EqualTo(0));
+			Assert.That(rectRequest0.Y, Is.EqualTo(0));
+			Assert.That(rectRequest0.Width, Is.EqualTo(50));
+			Assert.That(rectRequest0.Height, Is.EqualTo(50));
 			var rectRequest1 = adjacentLayout.Children[1].RectRequest;
-			Assert.That(rectRequest1.X == 50);
-			Assert.That(rectRequest1.Y == 0);
-			Assert.That(rectRequest1.Width == 50);
-			Assert.That(rectRequest1.Height == 50);
+			Assert.That(rectRequest1.X, Is.EqualTo(50));
+			Assert.That(rectRequest1.Y, Is.EqualTo(0));
+			Assert.That(rectRequest1.Width, Is.EqualTo(50));
+			Assert.That(rectRequest1.Height, Is.EqualTo(50));
 		}
 
 		[Test]
@@ -55,23 +55,23 @@ namespace WellFired.Guacamole.Tests.Integration.Layout.Adjacent
 
 			adjacentLayout.CalculateRectRequest();
 			adjacentLayout.AttemptToFullfillRequests(new UIRect(0, 0, 150, 150));
-			adjacentLayout.Layout();
+			adjacentLayout.UpdateContextIfNeeded();
 
 			var rectRequest0 = adjacentLayout.Children[0].RectRequest;
-			Assert.That(rectRequest0.X == 0);
-			Assert.That(rectRequest0.Y == 0);
-			Assert.That(rectRequest0.Width == 50);
-			Assert.That(rectRequest0.Height == 50);
+			Assert.That(rectRequest0.X, Is.EqualTo(0));
+			Assert.That(rectRequest0.Y, Is.EqualTo(0));
+			Assert.That(rectRequest0.Width, Is.EqualTo(50));
+			Assert.That(rectRequest0.Height, Is.EqualTo(50));
 			var rectRequest1 = adjacentLayout.Children[1].RectRequest;
-			Assert.That(rectRequest1.X == 50);
-			Assert.That(rectRequest1.Y == 0);
-			Assert.That(rectRequest1.Width == 50);
-			Assert.That(rectRequest1.Height == 50);
+			Assert.That(rectRequest1.X, Is.EqualTo(50));
+			Assert.That(rectRequest1.Y, Is.EqualTo(0));
+			Assert.That(rectRequest1.Width, Is.EqualTo(50));
+			Assert.That(rectRequest1.Height, Is.EqualTo(50));
 			var rectRequest2 = adjacentLayout.Children[2].RectRequest;
-			Assert.That(rectRequest2.X == 100);
-			Assert.That(rectRequest2.Y == 0);
-			Assert.That(rectRequest2.Width == 50);
-			Assert.That(rectRequest2.Height == 50);
+			Assert.That(rectRequest2.X, Is.EqualTo(100));
+			Assert.That(rectRequest2.Y, Is.EqualTo(0));
+			Assert.That(rectRequest2.Width, Is.EqualTo(50));
+			Assert.That(rectRequest2.Height, Is.EqualTo(50));
 		}
 	}
 }

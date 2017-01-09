@@ -15,7 +15,7 @@ namespace WellFired.Guacamole.Examples.ComplexLayoutExample
 			Launch<ComplexLayoutExampleWindow>(
 				uiRect: new UIRect(50, 50, 600, 200),
 				minSize: new UISize(200, 50),
-				title: "Complex Layout");
+				title: "Complex UpdateContextIfNeeded");
 		}
 	}
 }

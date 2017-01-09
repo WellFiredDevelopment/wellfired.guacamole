@@ -69,6 +69,7 @@
     <Compile Include="NativeControls\PageRenderer.cs" />
     <Compile Include="NativeControls\SliderRenderer.cs" />
     <Compile Include="NativeControls\TextEntryRenderer.cs" />
+    <Compile Include="NativeControls\ViewRenderer.cs" />
     <Compile Include="NativeControls\WindowRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

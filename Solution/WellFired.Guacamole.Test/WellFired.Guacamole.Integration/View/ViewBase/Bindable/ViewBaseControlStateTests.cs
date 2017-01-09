@@ -1,6 +1,6 @@
 using NUnit.Framework;
 using WellFired.Guacamole.DataBinding;
-using WellFired.Guacamole.View;
+using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Tests.Integration.View.ViewBase.Bindable
 {
@@ -10,55 +10,55 @@ namespace WellFired.Guacamole.Tests.Integration.View.ViewBase.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_viewBase = new Guacamole.View.ViewBase();
+			_view = new Views.View();
 			_viewBaseContext = new ViewBaseContextObject();
-			_viewBase.BindingContext = _viewBaseContext;
+			_view.BindingContext = _viewBaseContext;
 		}
 
-		private Guacamole.View.ViewBase _viewBase;
+		private Views.View _view;
 		private ViewBaseContextObject _viewBaseContext;
 
 		[Test]
 		public void OnBindViewBaseIsAutomaticallyUpdatedToTheValueOfBindingContextControlState()
 		{
-			_viewBase.ControlState = ControlState.Active;
+			_view.ControlState = ControlState.Active;
 			_viewBaseContext.ControlState = ControlState.Disabled;
-			Assert.That(_viewBaseContext.ControlState != _viewBase.ControlState);
-			_viewBase.Bind(Guacamole.View.ViewBase.ControlStateProperty, nameof(_viewBaseContext.ControlState));
-			Assert.That(_viewBaseContext.ControlState == _viewBase.ControlState);
+			Assert.That(_viewBaseContext.ControlState != _view.ControlState);
+			_view.Bind(Views.View.ControlStateProperty, nameof(_viewBaseContext.ControlState));
+			Assert.That(_viewBaseContext.ControlState == _view.ControlState);
 		}
 
 		[Test]
 		public void ViewBaseControlStateBindingDoesntWorkInTwoWayWithOneWayMode()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.ControlStateProperty, nameof(_viewBaseContext.ControlState),
+			_view.Bind(Views.View.ControlStateProperty, nameof(_viewBaseContext.ControlState),
 				BindingMode.OneWay);
-			Assert.That(_viewBaseContext.ControlState == _viewBase.ControlState);
+			Assert.That(_viewBaseContext.ControlState == _view.ControlState);
 			_viewBaseContext.ControlState = ControlState.Disabled;
-			Assert.That(_viewBaseContext.ControlState == _viewBase.ControlState);
-			_viewBase.ControlState = ControlState.Hover;
-			Assert.That(_viewBaseContext.ControlState != _viewBase.ControlState);
+			Assert.That(_viewBaseContext.ControlState == _view.ControlState);
+			_view.ControlState = ControlState.Hover;
+			Assert.That(_viewBaseContext.ControlState != _view.ControlState);
 		}
 
 		[Test]
 		public void ViewBaseControlStateBindingWorksInOneWay()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.ControlStateProperty, nameof(_viewBaseContext.ControlState));
-			Assert.That(_viewBaseContext.ControlState == _viewBase.ControlState);
+			_view.Bind(Views.View.ControlStateProperty, nameof(_viewBaseContext.ControlState));
+			Assert.That(_viewBaseContext.ControlState == _view.ControlState);
 			_viewBaseContext.ControlState = ControlState.Disabled;
-			Assert.That(_viewBaseContext.ControlState == _viewBase.ControlState);
+			Assert.That(_viewBaseContext.ControlState == _view.ControlState);
 		}
 
 		[Test]
 		public void ViewBaseControlStateBindingWorksInTwoWay()
 		{
-			_viewBase.Bind(Guacamole.View.ViewBase.ControlStateProperty, nameof(_viewBaseContext.ControlState),
+			_view.Bind(Views.View.ControlStateProperty, nameof(_viewBaseContext.ControlState),
 				BindingMode.TwoWay);
-			Assert.That(_viewBaseContext.ControlState == _viewBase.ControlState);
+			Assert.That(_viewBaseContext.ControlState == _view.ControlState);
 			_viewBaseContext.ControlState = ControlState.Disabled;
-			Assert.That(_viewBaseContext.ControlState == _viewBase.ControlState);
-			_viewBase.ControlState = ControlState.Hover;
-			Assert.That(_viewBaseContext.ControlState == _viewBase.ControlState);
+			Assert.That(_viewBaseContext.ControlState == _view.ControlState);
+			_view.ControlState = ControlState.Hover;
+			Assert.That(_viewBaseContext.ControlState == _view.ControlState);
 		}
 	}
 }

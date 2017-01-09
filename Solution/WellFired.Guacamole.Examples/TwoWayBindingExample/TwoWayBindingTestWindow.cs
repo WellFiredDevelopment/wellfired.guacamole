@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Types;
-using WellFired.Guacamole.View;
+using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.TwoWayBindingExample
 {

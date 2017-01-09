@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
-using WellFired.Guacamole.Layout;
+using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Types;
-using WellFired.Guacamole.View;
+using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Tests.Integration.Layout.Adjacent
 {
@@ -18,7 +18,7 @@ namespace WellFired.Guacamole.Tests.Integration.Layout.Adjacent
 
             adjacentLayout.CalculateRectRequest();
             adjacentLayout.AttemptToFullfillRequests(new UIRect(0, 0, 500, 500));
-            adjacentLayout.Layout();
+            adjacentLayout.UpdateContextIfNeeded();
 
             Assert.That(adjacentLayout.RectRequest.Width, Is.EqualTo(100));
             Assert.That(adjacentLayout.RectRequest.Height, Is.EqualTo(100));
@@ -38,7 +38,7 @@ namespace WellFired.Guacamole.Tests.Integration.Layout.Adjacent
 
             adjacentLayout.CalculateRectRequest();
             adjacentLayout.AttemptToFullfillRequests(new UIRect(0, 0, 500, 500));
-            adjacentLayout.Layout();
+            adjacentLayout.UpdateContextIfNeeded();
 
             Assert.That(adjacentLayout.RectRequest.Width, Is.EqualTo(100));
             Assert.That(adjacentLayout.RectRequest.Height, Is.EqualTo(100));
@@ -62,7 +62,7 @@ namespace WellFired.Guacamole.Tests.Integration.Layout.Adjacent
 
             adjacentLayout.CalculateRectRequest();
             adjacentLayout.AttemptToFullfillRequests(new UIRect(0, 0, 500, 500));
-            adjacentLayout.Layout();
+            adjacentLayout.UpdateContextIfNeeded();
 
             Assert.That(adjacentLayout.RectRequest.Width, Is.EqualTo(150));
             Assert.That(adjacentLayout.RectRequest.Height, Is.EqualTo(100));
@@ -85,7 +85,7 @@ namespace WellFired.Guacamole.Tests.Integration.Layout.Adjacent
 
             adjacentLayout.CalculateRectRequest();
             adjacentLayout.AttemptToFullfillRequests(new UIRect(0, 0, 500, 500));
-            adjacentLayout.Layout();
+            adjacentLayout.UpdateContextIfNeeded();
 
             Assert.That(adjacentLayout.RectRequest.Width, Is.EqualTo(100));
             Assert.That(adjacentLayout.RectRequest.Height, Is.EqualTo(150));

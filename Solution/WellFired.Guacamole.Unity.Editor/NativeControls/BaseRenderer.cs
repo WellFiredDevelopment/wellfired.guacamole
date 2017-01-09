@@ -3,7 +3,7 @@ using UnityEngine;
 using WellFired.Guacamole.Renderer;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Unity.Editor.Extensions;
-using WellFired.Guacamole.View;
+using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Unity.Editor.NativeControls
 {
@@ -12,7 +12,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 		protected Texture2D BackgroundTexture { get; private set; }
 		public virtual UISize? NativeSize => null;
 
-		public ViewBase Control { protected get; set; }
+		public View Control { protected get; set; }
 
 		public virtual void Create()
 		{
@@ -43,13 +43,13 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 
 		public virtual void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
-			if ((e.PropertyName == ViewBase.CornerRadiusProperty.PropertyName) ||
-			    (e.PropertyName == ViewBase.OutlineColorProperty.PropertyName) ||
-			    (e.PropertyName == ViewBase.BackgroundColorProperty.PropertyName) ||
-			    (e.PropertyName == ViewBase.ControlStateProperty.PropertyName))
+			if ((e.PropertyName == View.CornerRadiusProperty.PropertyName) ||
+			    (e.PropertyName == View.OutlineColorProperty.PropertyName) ||
+			    (e.PropertyName == View.BackgroundColorProperty.PropertyName) ||
+			    (e.PropertyName == View.ControlStateProperty.PropertyName))
 				CreateBackgroundTexture();
 
-			if (e.PropertyName == ViewBase.EnabledProperty.PropertyName)
+			if (e.PropertyName == View.EnabledProperty.PropertyName)
 				Control.ControlState = Control.Enabled ? ControlState.Normal : ControlState.Disabled;
 		}
 
