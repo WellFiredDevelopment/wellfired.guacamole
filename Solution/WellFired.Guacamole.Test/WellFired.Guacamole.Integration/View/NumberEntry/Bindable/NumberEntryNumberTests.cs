@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 
-namespace WellFired.Guacamole.Tests.Integration.View.NumberEntry.Bindable
+namespace WellFired.Guacamole.Integration.View.NumberEntry.Bindable
 {
 	[TestFixture]
 	public class NumberEntryNumberTests

@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using WellFired.Guacamole.Attributes;
-using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls;
+using WellFired.Guacamole.Views;
 using Debug = System.Diagnostics.Debug;
 
-[assembly: CustomRenderer(typeof(AdjacentLayout), typeof(AdjacentLayoutRenderer))]
+[assembly: CustomRenderer(typeof(LayoutView), typeof(AdjacentLayoutRenderer))]
 
 namespace WellFired.Guacamole.Unity.Editor.NativeControls
 {
@@ -26,7 +26,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 			Style.hover.background = BackgroundTexture;
 			Style.normal.background = BackgroundTexture;
 
-			var layout = Control as AdjacentLayout;
+			var layout = Control as LayoutView;
 
 			Debug.Assert(layout != null, $"{nameof(layout)} != null");
 

@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using WellFired.Guacamole.Types;
 
-namespace WellFired.Guacamole.Tests.Integration.View.Slider.Bindable
+namespace WellFired.Guacamole.Integration.View.Slider.Bindable
 {
 	[TestFixture]
 	public class SliderThumbCornerMaskTests

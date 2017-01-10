@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace WellFired.Guacamole.Tests.Integration.View.Button.Bindable
+namespace WellFired.Guacamole.Integration.View.Button.Bindable
 {
 	[TestFixture]
 	public class ButtonButtonPressedTests

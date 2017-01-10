@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 
-namespace WellFired.Guacamole.Tests.Integration.View.Slider.Bindable
+namespace WellFired.Guacamole.Integration.View.Slider.Bindable
 {
 	[TestFixture]
 	public class SliderMaxValueTests

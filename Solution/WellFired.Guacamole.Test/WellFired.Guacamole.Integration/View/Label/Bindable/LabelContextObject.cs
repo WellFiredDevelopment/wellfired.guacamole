@@ -1,7 +1,7 @@
 ﻿using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Types;
 
-namespace WellFired.Guacamole.Tests.Integration.View.Label.Bindable
+namespace WellFired.Guacamole.Integration.View.Label.Bindable
 {
 	public class LabelContextObject : NotifyBase
 	{

@@ -1,26 +1,24 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Types;
-using WellFired.Guacamole.Views;
 
-namespace WellFired.Guacamole.Layouts
+namespace WellFired.Guacamole.Views
 {
 	public abstract class Layout : View, ICanLayout
 	{
-	    public IList<View> Children { get; set; }
+	    public IList<ILayoutable> Children { get; set; }
 
 	    public abstract void DoLayout();
 
 	    protected Layout()
 		{
-		    Children = new List<View>();
+		    Children = new List<ILayoutable>();
 		    OutlineColor = UIColor.Clear;
-			Orientation = OrientationOptions.Vertical;
 			HorizontalLayout = LayoutOptions.Expand;
 			VerticalLayout = LayoutOptions.Expand;
 		}
 
-		public OrientationOptions Orientation { protected get; set; }
 		public int Spacing { protected get; set; }
 
 	    public override void Render(UIRect parentRect)
@@ -28,7 +26,7 @@ namespace WellFired.Guacamole.Layouts
 	        base.Render(parentRect);
 
 	        foreach (var child in Children)
-	            child.Render(FinalRenderRect);
+	            (child as View)?.Render(FinalRenderRect);
 	    }
 
 	    public override void InvalidateRectRequest()
@@ -36,7 +34,7 @@ namespace WellFired.Guacamole.Layouts
 	        base.InvalidateRectRequest();
 
 	        foreach (var child in Children)
-	            child.InvalidateRectRequest();
+	            (child as View)?.InvalidateRectRequest();
 	    }
 
 	    public override void CalculateRectRequest()
@@ -44,7 +42,7 @@ namespace WellFired.Guacamole.Layouts
 	        // When calculating size, we want to recurse the whole structure, calculating the size of the Child
 	        // components first of all.
 	        foreach (var child in Children)
-	            child.CalculateRectRequest();
+	            (child as View)?.CalculateRectRequest();
 
 	        base.CalculateRectRequest();
 	    }
@@ -57,7 +55,19 @@ namespace WellFired.Guacamole.Layouts
 	            return;
 
 	        foreach (var child in Children)
-	            child.BindingContext = BindingContext;
+	        {
+	            var view = child as View;
+	            if (view != null)
+	                view.BindingContext = BindingContext;
+	        }
+	    }
+
+	    public override void UpdateContextIfNeeded()
+	    {
+	        base.UpdateContextIfNeeded();
+
+	        foreach(var child in Children)
+	            (child as View)?.UpdateContextIfNeeded();
 	    }
 	}
 }

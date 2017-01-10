@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using WellFired.Guacamole.Types;
 
-namespace WellFired.Guacamole.Tests.Integration.View.Label.Bindable
+namespace WellFired.Guacamole.Integration.View.Label.Bindable
 {
 	[TestFixture]
 	public class LabelVerticalTextAlignTests

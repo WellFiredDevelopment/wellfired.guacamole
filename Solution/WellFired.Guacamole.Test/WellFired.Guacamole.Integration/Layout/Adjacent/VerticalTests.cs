@@ -3,7 +3,7 @@ using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
-namespace WellFired.Guacamole.Tests.Integration.Layout.Adjacent
+namespace WellFired.Guacamole.Integration.Layout.Adjacent
 {
 	[TestFixture]
 	public class VerticalTests
@@ -11,10 +11,10 @@ namespace WellFired.Guacamole.Tests.Integration.Layout.Adjacent
 		[Test]
 		public void LayoutWithNoSpacingTwoElements()
 		{
-			var adjacentLayout = new AdjacentLayout
+			var adjacentLayout = new LayoutView
 			{
-				Orientation = OrientationOptions.Vertical,
-				Spacing = 0,
+			    Layout = new AdjacentLayout { Orientation = OrientationOptions.Vertical },
+			    Spacing = 0,
 				Children =
 				{
 					new Label {MinSize = new UISize(50, 50)},
@@ -41,10 +41,10 @@ namespace WellFired.Guacamole.Tests.Integration.Layout.Adjacent
 		[Test]
 		public void LayoutWithNoSpacingThreeElements()
 		{
-			var adjacentLayout = new AdjacentLayout
+			var adjacentLayout = new LayoutView
 			{
-				Orientation = OrientationOptions.Vertical,
-				Spacing = 0,
+			    Layout = new AdjacentLayout { Orientation = OrientationOptions.Vertical },
+			    Spacing = 0,
 				Children =
 				{
 					new Label {MinSize = new UISize(50, 50)},

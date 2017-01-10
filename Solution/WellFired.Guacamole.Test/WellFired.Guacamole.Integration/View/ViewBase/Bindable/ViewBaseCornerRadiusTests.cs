@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using WellFired.Guacamole.DataBinding;
 
-namespace WellFired.Guacamole.Tests.Integration.View.ViewBase.Bindable
+namespace WellFired.Guacamole.Integration.View.ViewBase.Bindable
 {
 	[TestFixture]
 	public class ViewBaseCornerRadiusTests

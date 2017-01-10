@@ -3,7 +3,7 @@ using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
-namespace WellFired.Guacamole.Tests.Integration.Layout.Adjacent
+namespace WellFired.Guacamole.Integration.Layout.Adjacent
 {
     [TestFixture]
     public class MinMaxFullfillment
@@ -11,8 +11,10 @@ namespace WellFired.Guacamole.Tests.Integration.Layout.Adjacent
         [Test]
         public void LayoutWithNoChildrenAndMinSize()
         {
-            var adjacentLayout = new AdjacentLayout
+            var adjacentLayout = new LayoutView
             {
+                Layout = new AdjacentLayout { Orientation = OrientationOptions.Horizontal },
+                Spacing = 0,
                 MinSize = new UISize(100, 100)
             };
 
@@ -27,8 +29,10 @@ namespace WellFired.Guacamole.Tests.Integration.Layout.Adjacent
         [Test]
         public void LayoutWithOneChildAndMinSizeNoOverflow()
         {
-            var adjacentLayout = new AdjacentLayout
+            var adjacentLayout = new LayoutView
             {
+                Layout = new AdjacentLayout { Orientation = OrientationOptions.Horizontal },
+                Spacing = 0,
                 MinSize = new UISize(100, 100),
                 Children =
                 {
@@ -47,9 +51,9 @@ namespace WellFired.Guacamole.Tests.Integration.Layout.Adjacent
         [Test]
         public void HorizontalLayoutWithMultipleChildrenAndMinSizeOverflow()
         {
-            var adjacentLayout = new AdjacentLayout
+            var adjacentLayout = new LayoutView
             {
-                Orientation = OrientationOptions.Horizontal,
+                Layout = new AdjacentLayout { Orientation = OrientationOptions.Horizontal },
                 MinSize = new UISize(100, 100),
                 Spacing = 0,
                 Children =
@@ -71,9 +75,9 @@ namespace WellFired.Guacamole.Tests.Integration.Layout.Adjacent
         [Test]
         public void VerticalLayoutWithMultipleChildrenAndMinSizeOverflow()
         {
-            var adjacentLayout = new AdjacentLayout
+            var adjacentLayout = new LayoutView
             {
-                Orientation = OrientationOptions.Vertical,
+                Layout = new AdjacentLayout { Orientation = OrientationOptions.Vertical },
                 MinSize = new UISize(100, 100),
                 Children =
                 {

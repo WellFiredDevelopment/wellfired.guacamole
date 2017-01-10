@@ -1,7 +1,7 @@
 ﻿using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Types;
 
-namespace WellFired.Guacamole.Tests.Integration.View.Button.Bindable
+namespace WellFired.Guacamole.Integration.View.Button.Bindable
 {
 	public class ButtonContextObject : NotifyBase
 	{

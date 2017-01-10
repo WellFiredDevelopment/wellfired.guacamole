@@ -1,4 +1,7 @@
-﻿using WellFired.Guacamole.Types;
+﻿using System.Collections.ObjectModel;
+using WellFired.Guacamole.DataBinding;
+using WellFired.Guacamole.Types;
+using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.Taskist.View
 {
@@ -10,6 +13,13 @@ namespace WellFired.Guacamole.Examples.Taskist.View
             MinSize = new UISize(300, 0);
             VerticalLayout = LayoutOptions.Fill;
             BackgroundColor = UIColor.FromRGB(250, 250, 250);
+
+            var collection = new ObservableCollection<string> { "One", "Two", "Three" };
+
+            Content = new List {
+                ItemTemplate = new DataTemplate(typeof(Label)),
+                ItemSource = collection
+            };
         }
     }
 }

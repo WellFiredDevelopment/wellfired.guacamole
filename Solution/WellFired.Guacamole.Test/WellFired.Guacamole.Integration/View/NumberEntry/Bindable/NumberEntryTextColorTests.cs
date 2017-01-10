@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using WellFired.Guacamole.Types;
 
-namespace WellFired.Guacamole.Tests.Integration.View.NumberEntry.Bindable
+namespace WellFired.Guacamole.Integration.View.NumberEntry.Bindable
 {
 	[TestFixture]
 	public class NumberEntryTextColorTests

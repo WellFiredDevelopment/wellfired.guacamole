@@ -19,9 +19,10 @@ namespace WellFired.Guacamole.Examples.UIBindingExample
 				MaxValue = 32
 			};
 
-			Content = new AdjacentLayout
+			Content = new LayoutView
 			{
-				Children =
+			    Layout = new AdjacentLayout { Orientation = OrientationOptions.Horizontal },
+			    Children =
 				{
 					destinationElement,
 					sourceElement

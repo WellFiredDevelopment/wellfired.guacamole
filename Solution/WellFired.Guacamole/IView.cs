@@ -4,7 +4,8 @@ namespace WellFired.Guacamole
 {
 	public interface IView
 	{
-		UIRect RectRequest { get; }
+	    UIPadding Padding { get; }
+	    UIRect RectRequest { get; }
 		string Id { get; set; }
 	}
 }

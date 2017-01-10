@@ -1,7 +1,7 @@
 ﻿using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Types;
 
-namespace WellFired.Guacamole.Tests.Integration.View.TextEntry.Bindable
+namespace WellFired.Guacamole.Integration.View.TextEntry.Bindable
 {
 	public class TextEntryContextObject : NotifyBase
 	{

@@ -13,27 +13,27 @@ namespace WellFired.Guacamole.Examples.ComplexLayoutExample
 		{
 			Padding = new UIPadding(5, 5, 5, 5);
 
-			var header = new AdjacentLayout
+			var header = new LayoutView
 			{
 				BackgroundColor = UIColor.Clear,
 				Spacing = 5,
-				Orientation = OrientationOptions.Horizontal,
-				Children =
+			    Layout = new AdjacentLayout { Orientation = OrientationOptions.Horizontal },
+			    Children =
 				{
-					new AdjacentLayout
+					new LayoutView
 					{
 						BackgroundColor = DarkerBackgroundColor,
-						Orientation = OrientationOptions.Horizontal,
-						Spacing = 5,
+					    Layout = new AdjacentLayout { Orientation = OrientationOptions.Horizontal },
+					    Spacing = 5,
 						Padding = 4,
 						CornerRadius = 8.0,
 						Children =
 						{
-							new AdjacentLayout
+							new LayoutView
 							{
 								BackgroundColor = ButtonBorder,
-								Orientation = OrientationOptions.Horizontal,
-								Padding = 2,
+							    Layout = new AdjacentLayout { Orientation = OrientationOptions.Horizontal },
+							    Padding = 2,
 								Spacing = 3,
 								CornerRadius = 8.0,
 								Children =
@@ -54,20 +54,20 @@ namespace WellFired.Guacamole.Examples.ComplexLayoutExample
 							}
 						}
 					},
-					new AdjacentLayout
+					new LayoutView
 					{
 						BackgroundColor = DarkerBackgroundColor,
-						Orientation = OrientationOptions.Horizontal,
-						Spacing = 5,
+					    Layout = new AdjacentLayout { Orientation = OrientationOptions.Horizontal },
+					    Spacing = 5,
 						Padding = 4,
 						CornerRadius = 8.0,
 						Children =
 						{
-							new AdjacentLayout
+							new LayoutView
 							{
 								BackgroundColor = ButtonBorder,
-								Orientation = OrientationOptions.Horizontal,
-								Padding = 2,
+							    Layout = new AdjacentLayout { Orientation = OrientationOptions.Horizontal },
+							    Padding = 2,
 								Spacing = 3,
 								CornerRadius = 8.0,
 								Children =
@@ -86,11 +86,11 @@ namespace WellFired.Guacamole.Examples.ComplexLayoutExample
 									}
 								}
 							},
-							new AdjacentLayout
+							new LayoutView
 							{
 								BackgroundColor = ButtonBorder,
-								Orientation = OrientationOptions.Horizontal,
-								Padding = 2,
+							    Layout = new AdjacentLayout { Orientation = OrientationOptions.Horizontal },
+							    Padding = 2,
 								Spacing = 3,
 								CornerRadius = 8.0,
 								Children =
@@ -109,11 +109,11 @@ namespace WellFired.Guacamole.Examples.ComplexLayoutExample
 									}
 								}
 							},
-							new AdjacentLayout
+							new LayoutView
 							{
 								BackgroundColor = ButtonBorder,
-								Orientation = OrientationOptions.Horizontal,
-								Padding = 2,
+							    Layout = new AdjacentLayout { Orientation = OrientationOptions.Horizontal },
+							    Padding = 2,
 								Spacing = 3,
 								CornerRadius = 8.0,
 								Children =

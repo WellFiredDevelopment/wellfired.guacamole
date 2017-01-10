@@ -36,6 +36,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NSubstitute, Version=1.8.2.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca">
+      <HintPath>..\..\packages\NSubstitute.1.8.2.0\lib\net45\NSubstitute.dll</HintPath>
+    </Reference>
+    <Reference Include="NSubstituteAutoMocker, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\NSubstituteAutoMocker.1.1.0.0\lib\net45\NSubstituteAutoMocker.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=3.5.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
@@ -56,6 +62,14 @@
     <Compile Include="Bindable\FloatBindableObjectTests.cs" />
     <Compile Include="Bindable\IntBindableObjectTests.cs" />
     <Compile Include="Bindable\StringBindableObjectTests.cs" />
+    <Compile Include="Layout\Horizontal\AdjacentLayoutNoPaddingNoSpacing.cs" />
+    <Compile Include="Layout\Horizontal\AdjacentLayoutNoPaddingSpacing.cs" />
+    <Compile Include="Layout\Horizontal\AdjacentLayoutPaddingNoSpacing.cs" />
+    <Compile Include="Layout\Horizontal\AdjacentLayoutPaddingSpacing.cs" />
+    <Compile Include="Layout\Vertical\AdjacentLayoutNoPaddingNoSpacing.cs" />
+    <Compile Include="Layout\Vertical\AdjacentLayoutNoPaddingSpacing.cs" />
+    <Compile Include="Layout\Vertical\AdjacentLayoutPaddingNoSpacing.cs" />
+    <Compile Include="Layout\Vertical\AdjacentLayoutPaddingSpacing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

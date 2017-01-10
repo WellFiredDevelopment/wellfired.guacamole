@@ -2,7 +2,7 @@
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
-namespace WellFired.Guacamole.Tests.Integration.View.ViewBase.Bindable
+namespace WellFired.Guacamole.Integration.View.ViewBase.Bindable
 {
 	public class ViewBaseContextObject : NotifyBase
 	{

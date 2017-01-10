@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace WellFired.Guacamole.Tests.Integration.View.TextEntry.Bindable
+namespace WellFired.Guacamole.Integration.View.TextEntry.Bindable
 {
 	[TestFixture]
 	public class TextEntryTextTests

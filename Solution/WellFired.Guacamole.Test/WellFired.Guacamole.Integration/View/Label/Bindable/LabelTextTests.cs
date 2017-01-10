@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace WellFired.Guacamole.Tests.Integration.View.Label.Bindable
+namespace WellFired.Guacamole.Integration.View.Label.Bindable
 {
 	[TestFixture]
 	public class LabelTextTests

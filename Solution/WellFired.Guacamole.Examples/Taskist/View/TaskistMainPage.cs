@@ -8,16 +8,17 @@ namespace WellFired.Guacamole.Examples.Taskist.View
     {
         public TaskistMainPage()
         {
-            Content = new AdjacentLayout
+            Content = new LayoutView
             {
+                Layout = new AdjacentLayout { Orientation = OrientationOptions.Vertical },
                 HorizontalLayout = LayoutOptions.Fill,
                 VerticalLayout = LayoutOptions.Fill,
                 Children =
                 {
                     new TaskistTopBar(),
-                    new AdjacentLayout
+                    new LayoutView
                     {
-                        Orientation = OrientationOptions.Horizontal,
+                        Layout = new AdjacentLayout { Orientation = OrientationOptions.Horizontal },
                         HorizontalLayout = LayoutOptions.Fill,
                         VerticalLayout = LayoutOptions.Fill,
                         Children =

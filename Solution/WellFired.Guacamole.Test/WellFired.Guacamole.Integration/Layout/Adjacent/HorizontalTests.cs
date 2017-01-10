@@ -3,7 +3,7 @@ using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
-namespace WellFired.Guacamole.Tests.Integration.Layout.Adjacent
+namespace WellFired.Guacamole.Integration.Layout.Adjacent
 {
 	[TestFixture]
 	public class HorizontalTests
@@ -11,10 +11,10 @@ namespace WellFired.Guacamole.Tests.Integration.Layout.Adjacent
 		[Test]
 		public void LayoutWithNoSpacingTwoElement()
 		{
-			var adjacentLayout = new AdjacentLayout
+			var adjacentLayout = new LayoutView
 			{
-				Orientation = OrientationOptions.Horizontal,
-				Spacing = 0,
+			    Layout = new AdjacentLayout { Orientation = OrientationOptions.Horizontal },
+			    Spacing = 0,
 				Children =
 				{
 					new Label { MinSize = new UISize(50, 50) },
@@ -41,9 +41,9 @@ namespace WellFired.Guacamole.Tests.Integration.Layout.Adjacent
 		[Test]
 		public void LayoutWithNoSpacingThreeElements()
 		{
-			var adjacentLayout = new AdjacentLayout
+			var adjacentLayout = new LayoutView
 			{
-				Orientation = OrientationOptions.Horizontal,
+			    Layout = new AdjacentLayout { Orientation = OrientationOptions.Horizontal },
 				Spacing = 0,
 				Children =
 				{
