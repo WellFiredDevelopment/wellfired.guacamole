@@ -6,11 +6,11 @@ using WellFired.Guacamole.Unity.Editor.NativeControls;
 using WellFired.Guacamole.Views;
 using Debug = System.Diagnostics.Debug;
 
-[assembly: CustomRenderer(typeof(LayoutView), typeof(AdjacentLayoutRenderer))]
+[assembly: CustomRenderer(typeof(LayoutView), typeof(LayoutViewRenderer))]
 
 namespace WellFired.Guacamole.Unity.Editor.NativeControls
 {
-	public class AdjacentLayoutRenderer : BaseRenderer
+	public class LayoutViewRenderer : BaseRenderer
 	{
 		private GUIStyle Style { get; set; }
 

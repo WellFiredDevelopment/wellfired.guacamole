@@ -61,7 +61,7 @@
     <Compile Include="Extensions\UnityVector2Extensions.cs" />
     <Compile Include="GuacamoleWindow.cs" />
     <Compile Include="LaunchableApplication.cs" />
-    <Compile Include="NativeControls\AdjacentLayoutRenderer.cs" />
+    <Compile Include="NativeControls\LayoutViewRenderer.cs" />
     <Compile Include="NativeControls\BaseRenderer.cs" />
     <Compile Include="NativeControls\ButtonRenderer.cs" />
     <Compile Include="NativeControls\LabelRenderer.cs" />
