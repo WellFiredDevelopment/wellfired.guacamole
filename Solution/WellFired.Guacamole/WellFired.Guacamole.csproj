@@ -52,6 +52,9 @@
     <Compile Include="Annotations\UsedImplicityAttribute.cs" />
     <Compile Include="Attributes\CustomRendererAttribute.cs" />
     <Compile Include="AutoAction.cs" />
+    <Compile Include="Cells\ICell.cs" />
+    <Compile Include="Cells\LabelCell.BindableProperties.cs" />
+    <Compile Include="Cells\LabelCell.cs" />
     <Compile Include="Collection\ObservableCollection.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="Converters\UIPaddingConverter.cs" />
@@ -104,6 +107,7 @@
     <Compile Include="Styling\Style.cs" />
     <Compile Include="Styling\Styles\Label.cs" />
     <Compile Include="Styling\Styles\Button.cs" />
+    <Compile Include="Styling\Styles\LabelCell.cs" />
     <Compile Include="Styling\Styles\Slider.cs" />
     <Compile Include="Types\CornerMask.cs" />
     <Compile Include="Types\LayoutOptions.cs" />

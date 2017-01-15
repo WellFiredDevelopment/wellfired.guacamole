@@ -5,7 +5,7 @@ using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Views;
 
-namespace WellFired.Guacamole.Unity.Editor.NativeControls
+namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 {
 	public abstract class BaseRenderer : INativeRenderer
 	{

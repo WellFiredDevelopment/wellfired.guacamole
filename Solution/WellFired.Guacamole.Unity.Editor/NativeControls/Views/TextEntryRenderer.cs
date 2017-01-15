@@ -4,13 +4,13 @@ using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Attributes;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Unity.Editor.Extensions;
-using WellFired.Guacamole.Unity.Editor.NativeControls;
+using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
 using Debug = System.Diagnostics.Debug;
 
 [assembly: CustomRenderer(typeof(TextEntry), typeof(TextEntryRenderer))]
 
-namespace WellFired.Guacamole.Unity.Editor.NativeControls
+namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 {
 	public class TextEntryRenderer : BaseRenderer
 	{

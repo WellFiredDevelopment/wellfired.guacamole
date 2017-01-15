@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using WellFired.Guacamole.Types;
+using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Layouts
 {
     public class AdjacentLayout : ILayoutChildren
     {
-        public OrientationOptions Orientation { get; set; }
-        public int Spacing { get; set; }
+        public OrientationOptions Orientation { private get; set; }
+        public int Spacing { private get; set; }
 
         public void Layout(IEnumerable<ILayoutable> layoutables, UIPadding containerPadding, LayoutOptions containerHorizontalLayoutOptions, LayoutOptions containerVerticalLayoutOptions)
         {
@@ -73,6 +75,90 @@ namespace WellFired.Guacamole.Layouts
             }
 
             return new UIRect(0, 0, Math.Max(totalWidth, minSize.Width), Math.Max(totalHeight, minSize.Height));
+        }
+
+        public void AttemptToFullfillRequests(IList<ILayoutable> children, UIRect availableSpace, UIPadding containerPadding, LayoutOptions horizontalLayout, LayoutOptions verticalLayout)
+        {
+
+            switch (Orientation)
+            {
+                case OrientationOptions.Horizontal:
+                    var horizontalDynamicChildren = children.Where(child => (child as View).HorizontalLayout == LayoutOptions.Fill);
+                    var dynamicChildren = horizontalDynamicChildren as View[] ?? horizontalDynamicChildren.ToArray();
+                    var horizontalStaticChildren = children.Except(dynamicChildren);
+                    var staticChildren = horizontalStaticChildren as View[] ?? horizontalStaticChildren.ToArray();
+                    var staticWidth = staticChildren.Sum(child => child.RectRequest.Width);
+                    var sharedWidth = !dynamicChildren.Any()
+                        ? 0
+                        : (availableSpace.Width - staticWidth - containerPadding.Width - Spacing*(children.Count - 1))/dynamicChildren.Length;
+
+                    // This is just to stop the UI from looking weird as hell if the user shrinks the UI too much.
+                    if (sharedWidth < 0)
+                        sharedWidth = 0;
+
+                    var newHeight = availableSpace.Height;
+                    if (verticalLayout == LayoutOptions.Fill)
+                        newHeight = availableSpace.Height - containerPadding.Height;
+
+                    foreach (var child in dynamicChildren)
+                    {
+                        var sharedAvailableSpace = new UIRect(
+                            availableSpace.X,
+                            availableSpace.Y,
+                            sharedWidth,
+                            newHeight);
+                        child.AttemptToFullfillRequests(sharedAvailableSpace);
+                    }
+                    foreach (var child in staticChildren)
+                    {
+                        var staticAvailableSpace = new UIRect(
+                            availableSpace.X,
+                            availableSpace.Y,
+                            child.RectRequest.Width,
+                            newHeight);
+                        child.AttemptToFullfillRequests(staticAvailableSpace);
+                    }
+                    break;
+                case OrientationOptions.Vertical:
+                    var verticalDynamicChildren = children.Where(child => (child as View).VerticalLayout == LayoutOptions.Fill);
+                    var viewBases = verticalDynamicChildren as View[] ?? verticalDynamicChildren.ToArray();
+                    var verticalStaticChildren = children.Except(viewBases);
+                    var enumerable = verticalStaticChildren as View[] ?? verticalStaticChildren.ToArray();
+                    var staticHeight = enumerable.Sum(child => child.RectRequest.Height);
+                    var sharedHeight = !viewBases.Any()
+                        ? 0
+                        : (availableSpace.Height - containerPadding.Height - Spacing*(children.Count - 1) - staticHeight)/viewBases.Length;
+
+                    // This is just to stop the UI from looking weird as hell if the user shrinks the UI too much.
+                    if (sharedHeight < 0)
+                        sharedHeight = 0;
+
+                    var newWidth = availableSpace.Width;
+                    if (horizontalLayout == LayoutOptions.Fill)
+                        newWidth = availableSpace.Width - containerPadding.Width;
+
+                    foreach (var child in viewBases)
+                    {
+                        var sharedAvailableSpace = new UIRect(
+                            availableSpace.X,
+                            availableSpace.Y,
+                            newWidth,
+                            sharedHeight);
+                        child.AttemptToFullfillRequests(sharedAvailableSpace);
+                    }
+                    foreach (var child in enumerable)
+                    {
+                        var staticAvailableSpace = new UIRect(
+                            availableSpace.X,
+                            availableSpace.Y,
+                            newWidth,
+                            child.RectRequest.Height);
+                        child.AttemptToFullfillRequests(staticAvailableSpace);
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

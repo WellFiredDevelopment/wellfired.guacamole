@@ -61,16 +61,17 @@
     <Compile Include="Extensions\UnityVector2Extensions.cs" />
     <Compile Include="GuacamoleWindow.cs" />
     <Compile Include="LaunchableApplication.cs" />
-    <Compile Include="NativeControls\LayoutViewRenderer.cs" />
-    <Compile Include="NativeControls\BaseRenderer.cs" />
-    <Compile Include="NativeControls\ButtonRenderer.cs" />
-    <Compile Include="NativeControls\LabelRenderer.cs" />
-    <Compile Include="NativeControls\NumberEntryRenderer.cs" />
-    <Compile Include="NativeControls\PageRenderer.cs" />
-    <Compile Include="NativeControls\SliderRenderer.cs" />
-    <Compile Include="NativeControls\TextEntryRenderer.cs" />
-    <Compile Include="NativeControls\ViewRenderer.cs" />
-    <Compile Include="NativeControls\WindowRenderer.cs" />
+    <Compile Include="NativeControls\Cells\TextCellRenderer.cs" />
+    <Compile Include="NativeControls\Layouts\LayoutViewRenderer.cs" />
+    <Compile Include="NativeControls\Views\BaseRenderer.cs" />
+    <Compile Include="NativeControls\Views\ButtonRenderer.cs" />
+    <Compile Include="NativeControls\Views\LabelRenderer.cs" />
+    <Compile Include="NativeControls\Views\NumberEntryRenderer.cs" />
+    <Compile Include="NativeControls\Views\PageRenderer.cs" />
+    <Compile Include="NativeControls\Views\SliderRenderer.cs" />
+    <Compile Include="NativeControls\Views\TextEntryRenderer.cs" />
+    <Compile Include="NativeControls\Views\ViewRenderer.cs" />
+    <Compile Include="NativeControls\Views\WindowRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

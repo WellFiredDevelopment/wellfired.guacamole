@@ -1,17 +1,15 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using WellFired.Guacamole.Attributes;
-using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Unity.Editor.Extensions;
-using WellFired.Guacamole.Unity.Editor.NativeControls;
+using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
+using Debug = System.Diagnostics.Debug;
 
-[assembly: CustomRenderer(typeof(View), typeof(ViewRenderer))]
-
-namespace WellFired.Guacamole.Unity.Editor.NativeControls
+[assembly: CustomRenderer(typeof(Page), typeof(PageRenderer))]
+namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 {
-    public class ViewRenderer : BaseRenderer
+    public class PageRenderer : BaseRenderer
     {
         private GUIStyle Style { get; set; }
 
@@ -27,9 +25,12 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
             Style.hover.background = BackgroundTexture;
             Style.normal.background = BackgroundTexture;
 
-            var offset = (float) Control.CornerRadius;
-            var smallest =
-                (int) (Mathf.Min(offset, Mathf.Min(renderRect.Width * 0.5f, renderRect.Height * 0.5f)) + 0.5f);
+            var page = Control as Page;
+
+            Debug.Assert(page != null, $"{nameof(page)} != null");
+
+            var offset = (float) page.CornerRadius;
+            var smallest = (int) (Mathf.Min(offset, Mathf.Min(renderRect.Width*0.5f, renderRect.Height*0.5f)) + 0.5f);
             smallest = Mathf.Max(smallest, 2);
             Style.border = new RectOffset(smallest, smallest, smallest, smallest);
             Style.padding = new RectOffset(smallest, smallest, 0, 0);

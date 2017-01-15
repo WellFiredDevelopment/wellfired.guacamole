@@ -1,19 +1,17 @@
-﻿using System.Globalization;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Attributes;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Unity.Editor.Extensions;
-using WellFired.Guacamole.Unity.Editor.NativeControls;
+using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
 using Debug = System.Diagnostics.Debug;
 
-[assembly: CustomRenderer(typeof(NumberEntry), typeof(NumberEntryRenderer))]
+[assembly: CustomRenderer(typeof(Button), typeof(ButtonRenderer))]
 
-namespace WellFired.Guacamole.Unity.Editor.NativeControls
+namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 {
-	public class NumberEntryRenderer : BaseRenderer
+	public class ButtonRenderer : BaseRenderer
 	{
 		private GUIStyle Style { get; set; }
 
@@ -21,15 +19,15 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 		{
 			get
 			{
-				var numberEntry = Control as NumberEntry;
-				Debug.Assert(numberEntry != null, $"{nameof(numberEntry)} != null");
+				var button = Control as Button;
+				Debug.Assert(button != null, $"{nameof(button)} != null");
 
-				CreateStyleWith(numberEntry);
-				return Style.CalcSize(new GUIContent(numberEntry.Number.ToString(CultureInfo.InvariantCulture))).ToUISize();
+				CreateStyleWith(button);
+				return Style.CalcSize(new GUIContent(button.Text)).ToUISize();
 			}
 		}
 
-		private void CreateStyleWith([NotNull] NumberEntry entry)
+		private void CreateStyleWith([NotNull] Button entry)
 		{
 			if (Style == null)
 				Style = new GUIStyle();
@@ -53,20 +51,24 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls
 		{
 			base.Render(renderRect);
 
-			var entry = Control as NumberEntry;
+			if (Style == null)
+				Style = new GUIStyle();
 
-			Debug.Assert(entry != null, "entry != null");
+			var button = Control as Button;
 
-			CreateStyleWith(entry);
+			Debug.Assert(button != null, "button != null");
 
-			var offset = (float) Control.CornerRadius;
+			CreateStyleWith(button);
+
+			var offset = (float) button.CornerRadius;
 			var smallest = (int) (Mathf.Min(offset, Mathf.Min(renderRect.Width*0.5f, renderRect.Height*0.5f)) + 0.5f);
 			smallest = Mathf.Max(smallest, 2);
 			Style.border = new RectOffset(smallest, smallest, smallest, smallest);
 
-			var newNumber = EditorGUI.FloatField(renderRect.ToUnityRect(), entry.Number, Style);
-			if (Equals(newNumber, entry.Number))
-				entry.Number = newNumber;
+			if (!GUI.Button(renderRect.ToUnityRect(), button.Text, Style))
+				return;
+			
+			button.Click(0);
 		}
 	}
 }

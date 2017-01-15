@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Layouts
 {

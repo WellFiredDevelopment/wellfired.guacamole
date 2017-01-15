@@ -14,10 +14,9 @@ namespace WellFired.Guacamole.Examples.Taskist.View
             VerticalLayout = LayoutOptions.Fill;
             BackgroundColor = UIColor.FromRGB(250, 250, 250);
 
-            var collection = new ObservableCollection<string> { "One", "Two", "Three" };
+            var collection = new ObservableCollection<string> { "One", "Two", "Three", "Four", "Five", "Six", "Seven" };
 
             Content = new List {
-                ItemTemplate = new DataTemplate(typeof(Label)),
                 ItemSource = collection
             };
         }

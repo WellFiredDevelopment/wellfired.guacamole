@@ -5,7 +5,7 @@ namespace WellFired.Guacamole.Views
 {
     public class LayoutView : Layout
     {
-        public ILayoutChildren Layout { get; set; }
+        public ILayoutChildren Layout { private get; set; }
 
         public override void DoLayout()
         {
@@ -15,6 +15,12 @@ namespace WellFired.Guacamole.Views
         protected override UIRect CalculateValidRectRequest()
         {
             return Layout.CalculateValidRextRequest(Children, MinSize);
+        }
+
+        public override void AttemptToFullfillRequests(UIRect availableSpace)
+        {
+            base.AttemptToFullfillRequests(availableSpace);
+            Layout.AttemptToFullfillRequests(Children, RectRequest, Padding, HorizontalLayout, VerticalLayout);
         }
     }
 }
