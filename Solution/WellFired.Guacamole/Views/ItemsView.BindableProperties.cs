@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Runtime.CompilerServices;
 using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.DataBinding;
-using WellFired.Guacamole.Diagnostics;
 
 namespace WellFired.Guacamole.Views
 {
@@ -43,9 +44,29 @@ namespace WellFired.Guacamole.Views
             }
         }
 
-        private static void NotifyCollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        private void NotifyCollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyEvent)
         {
-            Logger.LogMessage($"CollectionChanged {notifyCollectionChangedEventArgs.NewItems[0]}");
+            switch (notifyEvent.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    AddCollection(notifyEvent.NewItems, notifyEvent.NewStartingIndex);
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    RemoveCollection(notifyEvent.OldItems);
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    ReplaceCollection(notifyEvent.OldItems, notifyEvent.NewItems, notifyEvent.OldStartingIndex);
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    RemoveCollection(notifyEvent.OldItems);
+                    AddCollection(notifyEvent.OldItems, notifyEvent.OldStartingIndex);
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    ResetCollection();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         [PublicAPI]

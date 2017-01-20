@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 

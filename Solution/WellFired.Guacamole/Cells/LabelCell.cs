@@ -1,6 +1,6 @@
 ﻿namespace WellFired.Guacamole.Cells
 {
-    public partial class LabelCell : Views.View, ICell
+    public partial class LabelCell : Cell
     {
         public LabelCell()
         {

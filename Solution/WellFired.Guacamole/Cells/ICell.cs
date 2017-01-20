@@ -1,6 +1,6 @@
 ﻿namespace WellFired.Guacamole.Cells
 {
-    public interface ICell
+    public interface ICell : IView
     {
 
     }
