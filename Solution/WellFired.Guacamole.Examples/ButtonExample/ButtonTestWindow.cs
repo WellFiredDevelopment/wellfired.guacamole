@@ -8,7 +8,7 @@ namespace WellFired.Guacamole.Examples.ButtonExample
 	{
 		public ButtonTestWindow()
 		{
-			Padding = new UIPadding(5);
+			Padding = UIPadding.Of(5);
 
 			var button = new Button
 			{

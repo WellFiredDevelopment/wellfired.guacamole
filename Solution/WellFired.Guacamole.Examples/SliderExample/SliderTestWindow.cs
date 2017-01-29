@@ -7,7 +7,7 @@ namespace WellFired.Guacamole.Examples.SliderExample
 	{
 		public SliderTestWindow()
 		{
-			Padding = new UIPadding(5);
+			Padding = UIPadding.Of(5);
 
 			Content = new Slider
 			{

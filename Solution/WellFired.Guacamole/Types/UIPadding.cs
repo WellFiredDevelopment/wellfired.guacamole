@@ -26,7 +26,10 @@ namespace WellFired.Guacamole.Types
 		[PublicAPI]
 		public int Height => Top + Bottom;
 
-		public UIPadding(int equalPadding) : this()
+	    public static UIPadding Zero => Of(0);
+	    public static UIPadding One => Of(1);
+
+	    public UIPadding(int equalPadding) : this()
 		{
 			Left = equalPadding;
 			Top = equalPadding;
@@ -44,7 +47,7 @@ namespace WellFired.Guacamole.Types
 
 		public static implicit operator UIPadding(int value)
 		{
-			return new UIPadding(value);
+			return Of(value);
 		}
 
 		public override bool Equals(object obj)
@@ -89,5 +92,10 @@ namespace WellFired.Guacamole.Types
 		{
 			return !(a == b);
 		}
+
+	    public static UIPadding Of(int i)
+	    {
+	        return new UIPadding(i);
+	    }
 	}
 }

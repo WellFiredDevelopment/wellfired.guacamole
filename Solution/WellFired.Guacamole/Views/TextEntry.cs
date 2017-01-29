@@ -41,7 +41,7 @@ namespace WellFired.Guacamole.Views
 			TextColor = UIColor.White;
 			HorizontalLayout = LayoutOptions.Fill;
 			CornerRadius = 8;
-			Padding = new UIPadding(5, 5, 5, 5);
+			Padding = UIPadding.Of(5);
 			VerticalTextAlign = UITextAlign.Middle;
 		}
 

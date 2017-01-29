@@ -83,7 +83,7 @@ namespace WellFired.Guacamole.Unity.Editor
 			MaxSize = ApplicationInitializationContextScriptableObject.MaxSize;
 
 			if (MaxSize == UISize.Min)
-				MaxSize = new UISize(100000, 100000);
+				MaxSize = UISize.Of(100000);
 
 			ResetForSomeReason();
 		}

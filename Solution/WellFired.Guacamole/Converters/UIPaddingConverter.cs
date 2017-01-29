@@ -17,7 +17,7 @@ namespace WellFired.Guacamole.Converters
 			object value)
 		{
 			if (value is int)
-				return new UIPadding((int) value);
+				return UIPadding.Of((int) value);
 
 			return base.ConvertFrom(context, culture, value);
 		}

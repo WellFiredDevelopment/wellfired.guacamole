@@ -13,8 +13,8 @@ namespace WellFired.Guacamole.Examples.TwoWayBindingExample
 		private static void OpenWindow()
 		{
 			Launch<TwoWayBindingTestWindow>(
-				uiRect: new UIRect(50, 50, 600, 200),
-				minSize: new UISize(260, 30),
+				uiRect: UIRect.With(50, 50, 600, 200),
+				minSize: UISize.Of(260, 30),
 				title: "TwoWayBindingTest Test");
 		}
 	}

@@ -9,9 +9,9 @@ namespace WellFired.Guacamole.Types
 		public int Y { get; set; }
 
 		[PublicAPI]
-		public static UILocation Min { get; } = new UILocation(0, 0);
+		public static UILocation Min { get; } = Of(0);
 
-		public UILocation(int x, int y) : this()
+	    public UILocation(int x, int y) : this()
 		{
 			X = x;
 			Y = y;
@@ -46,5 +46,15 @@ namespace WellFired.Guacamole.Types
 		{
 			return !(a == b);
 		}
+
+	    public static UILocation Of(int x, int y)
+	    {
+	        return new UILocation(x, y);
+	    }
+
+	    private static UILocation Of(int xAndy)
+	    {
+	        return Of(xAndy, xAndy);
+	    }
 	}
 }

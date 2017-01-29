@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Runtime.CompilerServices;
 using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.DataBinding;
 
@@ -44,6 +43,13 @@ namespace WellFired.Guacamole.Views
             }
         }
 
+        [PublicAPI]
+        public DataTemplate ItemTemplate
+        {
+            get { return (DataTemplate) GetValue(ItemTemplateProperty); }
+            set { SetValue(ItemTemplateProperty, value); }
+        }
+
         private void NotifyCollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyEvent)
         {
             switch (notifyEvent.Action)
@@ -67,13 +73,6 @@ namespace WellFired.Guacamole.Views
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
-
-        [PublicAPI]
-        public DataTemplate ItemTemplate
-        {
-            get { return (DataTemplate) GetValue(ItemTemplateProperty); }
-            set { SetValue(ItemTemplateProperty, value); }
         }
     }
 }

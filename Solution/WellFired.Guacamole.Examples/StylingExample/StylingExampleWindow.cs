@@ -8,7 +8,7 @@ namespace WellFired.Guacamole.Examples.StylingExample
 	{
 		public StylingExampleWindow()
 		{
-			Padding = new UIPadding(5);
+			Padding = UIPadding.Of(5);
 
 			var enabledButton = new Button
 			{

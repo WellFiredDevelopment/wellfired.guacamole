@@ -13,8 +13,8 @@ namespace WellFired.Guacamole.Examples.OneWayBindingExample
 		private static void Launch()
 		{
 			Launch<OneWayBindingTestWindow>(
-				uiRect: new UIRect(50, 50, 600, 200),
-				minSize: new UISize(200, 50),
+				uiRect: UIRect.With(50, 50, 600, 200),
+				minSize: UISize.Of(200, 50),
 				title: "OneWayBindingTest");
 		}
 	}

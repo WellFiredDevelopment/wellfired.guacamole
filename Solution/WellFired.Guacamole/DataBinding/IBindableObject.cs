@@ -4,9 +4,6 @@ namespace WellFired.Guacamole.DataBinding
 {
     public interface IBindableObject
     {
-        INotifyPropertyChanged BindingContext
-        {
-            set;
-        }
+        INotifyPropertyChanged BindingContext { get; set; }
     }
 }

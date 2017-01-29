@@ -13,13 +13,13 @@ namespace WellFired.Guacamole.Types
 		private UISize _size;
 
 		[PublicAPI]
-		public static UIRect Min { get; } = new UIRect(0, 0, 0, 0);
+		public static UIRect Min { get; } = With(0, 0, 0, 0);
 
 		[PublicAPI]
-		public static UIRect Max { get; } = new UIRect(0, 0, int.MaxValue, int.MaxValue);
+		public static UIRect Max { get; } = With(0, 0, int.MaxValue, int.MaxValue);
 
 		[PublicAPI]
-		public static UIRect One { get; } = new UIRect(0, 0, 1, 1);
+		public static UIRect One { get; } = With(0, 0, 1, 1);
 
 		[PublicAPI]
 		public int X
@@ -95,8 +95,8 @@ namespace WellFired.Guacamole.Types
 			_y = y;
 			_width = width;
 			_height = height;
-			_location = new UILocation(x, y);
-			_size = new UISize(width, height);
+			_location = UILocation.Of(x, y);
+			_size = UISize.Of(width, height);
 		}
 
 		public override bool Equals(object obj)
@@ -122,16 +122,16 @@ namespace WellFired.Guacamole.Types
 
 		public static UIRect operator +(UIRect rect, UIPadding padding)
 		{
-			return new UIRect(
-				rect.X,
-				rect.Y,
-				rect.Width + padding.Width,
+			return With(
+			    rect.X - padding.Left,
+			    rect.Y - padding.Top,
+			    rect.Width + padding.Width,
 				rect.Height + padding.Height);
 		}
 
 		public static UIRect operator -(UIRect rect, UIPadding padding)
 		{
-			return new UIRect(
+			return With(
 				rect.X + padding.Left,
 				rect.Y + padding.Top,
 				rect.Width - padding.Width,
@@ -142,5 +142,20 @@ namespace WellFired.Guacamole.Types
 		{
 			return $"x: {X}, y: {Y}, width: {Width}, height: {Height}";
 		}
+
+	    public static UIRect With(int x, int y, int width, int height)
+	    {
+	        return new UIRect(x, y, width, height);
+	    }
+
+	    public static UIRect With(int width, int height)
+	    {
+	        return new UIRect(0, 0, width, height);
+	    }
+
+	    public static UIRect From(UISize size)
+	    {
+	        return With(size.Width, size.Height);
+	    }
 	}
 }

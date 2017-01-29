@@ -10,14 +10,14 @@ namespace WellFired.Guacamole.Unity.Editor.Extensions
 		[PublicAPI]
 		public static UISize ToUISize(this Vector2 source)
 		{
-			return new UISize((int) source.x, (int) source.y);
+			return UISize.Of((int) source.x, (int) source.y);
 		}
 
 		// ReSharper disable once InconsistentNaming
 		[PublicAPI]
 		public static UILocation ToUILocation(this Vector2 source)
 		{
-			return new UILocation((int) source.x, (int) source.y);
+			return UILocation.Of((int) source.x, (int) source.y);
 		}
 	}
 }

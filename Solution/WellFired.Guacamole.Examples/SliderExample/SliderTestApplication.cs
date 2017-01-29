@@ -13,8 +13,8 @@ namespace WellFired.Guacamole.Examples.SliderExample
 		private static void OpenWindow()
 		{
 			Launch<SliderTestWindow>(
-				uiRect: new UIRect(50, 50, 600, 200),
-				minSize: new UISize(260, 30),
+				uiRect: UIRect.With(50, 50, 600, 200),
+				minSize: UISize.Of(260, 30),
 				title: "SliderTest");
 		}
 	}

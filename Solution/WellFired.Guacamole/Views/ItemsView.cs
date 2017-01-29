@@ -5,7 +5,7 @@ using WellFired.Guacamole.Layouts;
 
 namespace WellFired.Guacamole.Views
 {
-    public abstract partial class ItemsView : Layout
+    public abstract partial class ItemsView : LayoutView, IItemsView
     {
         private readonly Dictionary<object, ILayoutable> _container = new Dictionary<object, ILayoutable>();
 

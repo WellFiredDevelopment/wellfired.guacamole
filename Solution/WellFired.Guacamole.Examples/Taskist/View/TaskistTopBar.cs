@@ -9,7 +9,7 @@ namespace WellFired.Guacamole.Examples.Taskist.View
             OutlineColor = UIColor.Black;
             HorizontalLayout = LayoutOptions.Fill;
             BackgroundColor = UIColor.FromRGB(203, 85, 72);
-            Padding = new UIPadding(0, 20, 0, 20);
+            MinSize = UISize.Of(0, 40);
         }
     }
 }

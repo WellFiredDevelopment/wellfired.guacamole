@@ -9,7 +9,7 @@ namespace WellFired.Guacamole.Unity.Editor.Tests.Applications.Empty
 		[UsedImplicitly]
 		public static IApplication Launch()
 		{
-			return Launch<EmptyWindow>(new UIRect(50, 50, 600, 300), new UISize(260, 60));
+			return Launch<EmptyWindow>(UIRect.With(50, 50, 600, 300), UISize.Of(260, 60));
 		}
 	}
 }

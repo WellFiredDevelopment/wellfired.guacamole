@@ -13,8 +13,8 @@ namespace WellFired.Guacamole.Examples.Taskist
         private static void OpenWindow()
         {
             Launch<TaskistWindow>(
-                uiRect: new UIRect(400, 200, 800, 650),
-                minSize: new UISize(800, 650),
+                uiRect: UIRect.With(400, 200, 800, 650),
+                minSize: UISize.Of(800, 650),
                 title: "Taskist");
         }
     }

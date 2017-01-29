@@ -9,7 +9,7 @@ namespace WellFired.Guacamole.Examples.UIBindingExample
 	{
 		public UIBindingTestWindow()
 		{
-			Padding = new UIPadding(5);
+			Padding = UIPadding.Of(5);
 
 			var destinationElement = new TextEntry();
 

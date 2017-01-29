@@ -112,6 +112,7 @@
     <Compile Include="Styling\Styles\LabelCell.cs" />
     <Compile Include="Styling\Styles\Slider.cs" />
     <Compile Include="Types\CornerMask.cs" />
+    <Compile Include="Types\ItemSource.cs" />
     <Compile Include="Types\LayoutOptions.cs" />
     <Compile Include="Types\OrientationOptions.cs" />
     <Compile Include="Types\UIColor.cs" />
@@ -131,13 +132,13 @@
     <Compile Include="Views\Button.cs" />
     <Compile Include="Views\ControlState.cs" />
     <Compile Include="Views\IClickable.cs" />
+    <Compile Include="Views\IItemsView.cs" />
     <Compile Include="Views\ItemsView.BindableProperties.cs" />
     <Compile Include="Views\ItemsView.cs" />
     <Compile Include="Views\ITypeable.cs" />
     <Compile Include="Views\Label.cs" />
     <Compile Include="Views\Layout.cs" />
-    <Compile Include="Views\LayoutView.cs" />
-    <Compile Include="Views\List.cs" />
+    <Compile Include="Views\ListView.cs" />
     <Compile Include="Views\NumberEntry.cs" />
     <Compile Include="Views\Page.cs" />
     <Compile Include="Views\Slider.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="Views\View.cs" />
     <Compile Include="Views\View.BindableProperties.cs" />
     <Compile Include="Views\View.ILayoutable.cs" />
+    <Compile Include="Views\ViewSizingExtensions.cs" />
     <Compile Include="Views\Window.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

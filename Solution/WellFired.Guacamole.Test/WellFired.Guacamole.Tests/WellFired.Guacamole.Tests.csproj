@@ -62,14 +62,19 @@
     <Compile Include="Bindable\FloatBindableObjectTests.cs" />
     <Compile Include="Bindable\IntBindableObjectTests.cs" />
     <Compile Include="Bindable\StringBindableObjectTests.cs" />
-    <Compile Include="Layout\Horizontal\AdjacentLayoutNoPaddingNoSpacing.cs" />
-    <Compile Include="Layout\Horizontal\AdjacentLayoutNoPaddingSpacing.cs" />
-    <Compile Include="Layout\Horizontal\AdjacentLayoutPaddingNoSpacing.cs" />
-    <Compile Include="Layout\Horizontal\AdjacentLayoutPaddingSpacing.cs" />
-    <Compile Include="Layout\Vertical\AdjacentLayoutNoPaddingNoSpacing.cs" />
-    <Compile Include="Layout\Vertical\AdjacentLayoutNoPaddingSpacing.cs" />
-    <Compile Include="Layout\Vertical\AdjacentLayoutPaddingNoSpacing.cs" />
+    <Compile Include="Layout\Horizontal\Given_AnAdjacentLayoutWithNoPadding_And_NoSpacing.cs" />
+    <Compile Include="Layout\Horizontal\Given_AnAdjacentLayoutWithNoPadding.cs" />
+    <Compile Include="Layout\Horizontal\Given_AnAdjacentLayoutWithNoSpacing.cs" />
+    <Compile Include="Layout\Horizontal\Given_AnAdjacentLayout.cs" />
+    <Compile Include="Layout\Horizontal\Given_AViewWithAdjacentLayoutContentAndNoPadding.cs" />
+    <Compile Include="Layout\Horizontal\Given_AViewWithAdjacentLayoutContentAndPadding.cs" />
+    <Compile Include="Layout\Vertical\Given_AnAdjacentLayoutWithNoPadding_And_NoSpacing.cs" />
+    <Compile Include="Layout\Vertical\Given_AnAdjacentLayoutWithNoPadding.cs" />
+    <Compile Include="Layout\Vertical\Given_AnAdjacentLayoutWithNoSpacing.cs" />
     <Compile Include="Layout\Vertical\AdjacentLayoutPaddingSpacing.cs" />
+    <Compile Include="Layout\View\Given_AView.cs" />
+    <Compile Include="Layout\View\Given_AViewWithPaddingAndContent.cs" />
+    <Compile Include="Layout\View\Given_AViewWithNoPaddingAndWithContent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

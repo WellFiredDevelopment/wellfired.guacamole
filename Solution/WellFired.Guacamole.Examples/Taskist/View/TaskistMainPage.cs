@@ -10,6 +10,7 @@ namespace WellFired.Guacamole.Examples.Taskist.View
         {
             Content = new LayoutView
             {
+                BackgroundColor = UIColor.Aquamarine,
                 Layout = new AdjacentLayout { Orientation = OrientationOptions.Vertical },
                 HorizontalLayout = LayoutOptions.Fill,
                 VerticalLayout = LayoutOptions.Fill,

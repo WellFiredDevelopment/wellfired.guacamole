@@ -9,7 +9,7 @@ namespace WellFired.Guacamole.Unity.Editor.Tests.Applications.Empty
 	{
 		public EmptyWindow()
 		{
-			Padding = new UIPadding(5);
+			Padding = UIPadding.Of(5);
 			Content = new TextEntry { Id = "AcceptanceLabel" };
 		}
 	}

@@ -13,8 +13,8 @@ namespace WellFired.Guacamole.Examples.StylingExample
 		private static void Launch()
 		{
 			Launch<StylingExampleWindow>(
-				uiRect: new UIRect(50, 50, 600, 200),
-				minSize: new UISize(260, 30),
+				uiRect: UIRect.With(50, 50, 600, 200),
+				minSize: UISize.Of(260, 30),
 				title: "Style Test");
 		}
 	}

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics;
 using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Event;
 using WellFired.Guacamole.Types;
@@ -23,29 +24,35 @@ namespace WellFired.Guacamole.Views
 
 		public void Layout(UIRect rect)
 		{
-			(Content as View).CalculateRectRequest();
-		    (Content as View).AttemptToFullfillRequests(rect - Padding);
+		    var view = (Content as View);
+		    Debug.Assert(view != null, "view != null");
 
+		    ViewSizingExtensions.DosizingAndLayout(view, rect - Padding);
 			FinalRenderedRect = rect;
-		    (Content as View).UpdateContextIfNeeded();
+		    ViewSizingExtensions.UpdateContextIfNeeded(view);
 		}
 
 		public override void Render(UIRect parentRect)
 		{
-			_device.ProcessActions();
+		    var view = (Content as View);
+		    Debug.Assert(view != null, "view != null");
+
+		    _device.ProcessActions();
 			NativeRenderer.Render(FinalRenderedRect);
 
-			var relativeParentRect = new UIRect(0, 0, parentRect.Width, parentRect.Height);
-			relativeParentRect -= Padding;
-		    (Content as View).Render(relativeParentRect);
+			var relativeParentRect = UIRect.With(0, 0, parentRect.Width, parentRect.Height);
+		    view.Render(relativeParentRect);
 		}
 
 		protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
 			base.OnPropertyChanged(sender, e);
 
-			if (e.PropertyName == BindingContextProperty.PropertyName)
-			    (Content as View).BindingContext = BindingContext;
+		    var view = (Content as View);
+		    Debug.Assert(view != null, "view != null");
+
+		    if (e.PropertyName == BindingContextProperty.PropertyName)
+			    view.BindingContext = BindingContext;
 		}
 
 	    public void RaiseEventFor(string controlId, IEvent raisedEvent)

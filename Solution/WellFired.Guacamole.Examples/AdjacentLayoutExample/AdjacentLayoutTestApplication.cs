@@ -13,8 +13,8 @@ namespace WellFired.Guacamole.Examples.AdjacentLayoutExample
 		private static void Launch()
 		{
 			Launch<AdjacentLayoutTestWindow>(
-				uiRect: new UIRect(50, 50, 600, 200),
-				minSize: new UISize(260, 230),
+				uiRect: UIRect.With(50, 50, 600, 200),
+				minSize: UISize.Of(260, 230),
 				title: "AdjacentLayoutTest");
 		}
 	}

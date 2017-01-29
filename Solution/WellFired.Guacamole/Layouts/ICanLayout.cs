@@ -2,9 +2,9 @@
 
 namespace WellFired.Guacamole.Layouts
 {
-    public interface ICanLayout
+    public interface ICanLayout : IView
     {
-        IList<ILayoutable> Children { get; set; }
-        void DoLayout();
+        IList<ILayoutable> Children { get; }
+        ILayoutChildren Layout { get; set; }
     }
 }

@@ -9,13 +9,13 @@ namespace WellFired.Guacamole.Types
 		public int Height { get; set; }
 
 		[PublicAPI]
-		public static UISize Min { get; } = new UISize(0, 0);
+		public static UISize Min { get; } = Of(0);
 
 		[PublicAPI]
-		public static UISize Max { get; } = new UISize(int.MaxValue, int.MaxValue);
+		public static UISize Max { get; } = Of(int.MaxValue, int.MaxValue);
 
 		[PublicAPI]
-		public static UISize One { get; } = new UISize(1, 1);
+		public static UISize One { get; } = Of(1);
 
 		public UISize(int width, int height) : this()
 		{
@@ -52,5 +52,20 @@ namespace WellFired.Guacamole.Types
 		{
 			return !(a == b);
 		}
+
+	    public override string ToString()
+	    {
+	        return $"{nameof(Width)}: {Width} {nameof(Height)}: {Height}";
+	    }
+
+	    public static UISize Of(int width, int height)
+	    {
+	        return new UISize(width, height);
+	    }
+
+	    public static UISize Of(int size)
+	    {
+	        return new UISize(size, size);
+	    }
 	}
 }

@@ -1,25 +1,24 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Views
 {
-	public abstract class Layout : View, ICanLayout
+	public class LayoutView : View, ICanLayout
 	{
-	    public IList<ILayoutable> Children { get; set; }
+	    public IList<ILayoutable> Children { get; protected set; }
+	    public int Spacing { [PublicAPI] get; set; }
+	    public ILayoutChildren Layout { get; set; }
 
-	    public abstract void DoLayout();
-
-	    protected Layout()
+	    public LayoutView()
 		{
 		    Children = new List<ILayoutable>();
 		    OutlineColor = UIColor.Clear;
 			HorizontalLayout = LayoutOptions.Expand;
 			VerticalLayout = LayoutOptions.Expand;
 		}
-
-		public int Spacing { protected get; set; }
 
 	    public override void Render(UIRect parentRect)
 	    {
@@ -37,16 +36,6 @@ namespace WellFired.Guacamole.Views
 	            (child as View)?.InvalidateRectRequest();
 	    }
 
-	    public override void CalculateRectRequest()
-	    {
-	        // When calculating size, we want to recurse the whole structure, calculating the size of the Child
-	        // components first of all.
-	        foreach (var child in Children)
-	            (child as View)?.CalculateRectRequest();
-
-	        base.CalculateRectRequest();
-	    }
-
 	    protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
 	    {
 	        base.OnPropertyChanged(sender, e);
@@ -60,14 +49,6 @@ namespace WellFired.Guacamole.Views
 	            if (view != null)
 	                view.BindingContext = BindingContext;
 	        }
-	    }
-
-	    public override void UpdateContextIfNeeded()
-	    {
-	        base.UpdateContextIfNeeded();
-
-	        foreach(var child in Children)
-	            (child as View)?.UpdateContextIfNeeded();
 	    }
 	}
 }

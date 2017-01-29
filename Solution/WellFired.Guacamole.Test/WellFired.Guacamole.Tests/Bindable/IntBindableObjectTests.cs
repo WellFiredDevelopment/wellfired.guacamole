@@ -41,11 +41,11 @@ namespace WellFired.Guacamole.Tests.Bindable
 			source.Bind(BindableTestObject.IntProperty, nameof(ContextObject.Value));
 			bindingContext.Value = 10;
 
-			Assert.AreEqual(source.Value, bindingContext.Value);
+			Assert.That(source.Value, Is.EqualTo(bindingContext.Value));
 
 			source.Value = 15;
 
-			Assert.AreNotEqual(bindingContext.Value, source.Value);
+			Assert.That(bindingContext.Value, Is.Not.EqualTo(source.Value));
 		}
 
 		[Test]
@@ -57,7 +57,7 @@ namespace WellFired.Guacamole.Tests.Bindable
 			source.Bind(BindableTestObject.IntProperty, nameof(ContextObject.Value));
 			bindingContext.Value = 10;
 
-			Assert.AreEqual(source.Value, bindingContext.Value);
+			Assert.That(source.Value, Is.EqualTo(bindingContext.Value));
 		}
 
 		[Test]
@@ -69,11 +69,11 @@ namespace WellFired.Guacamole.Tests.Bindable
 			source.Bind(BindableTestObject.IntProperty, nameof(ContextObject.Value), BindingMode.TwoWay);
 			bindingContext.Value = 10;
 
-			Assert.AreEqual(source.Value, bindingContext.Value);
+			Assert.That(source.Value, Is.EqualTo(bindingContext.Value));
 
 			source.Value = 5;
 
-			Assert.AreEqual(bindingContext.Value, source.Value);
+			Assert.That(bindingContext.Value, Is.EqualTo(source.Value));
 		}
 	}
 }

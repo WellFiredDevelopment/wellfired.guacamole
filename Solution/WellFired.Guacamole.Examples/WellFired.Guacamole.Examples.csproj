@@ -54,14 +54,14 @@
   <ItemGroup>
     <Compile Include="AdjacentLayoutExample\AdjacentLayoutTestApplication.cs" />
     <Compile Include="AdjacentLayoutExample\AdjacentLayoutTestWindow.cs" />
+    <Compile Include="LabelExample\LabelTestApplication.cs" />
+    <Compile Include="LabelExample\LabelTestWindow.cs" />
+    <Compile Include="ListViewExample\ListViewTestApplication.cs" />
+    <Compile Include="ListViewExample\ListViewTestWindow.cs" />
     <Compile Include="StylingExample\StylingExampleApplication.cs" />
     <Compile Include="StylingExample\StylingExampleWindow.cs" />
     <Compile Include="ButtonExample\ButtonTestApplication.cs" />
     <Compile Include="ButtonExample\ButtonTestWindow.cs" />
-    <Compile Include="ComplexLayoutExample\ComplexLayoutExampleApplication.cs" />
-    <Compile Include="ComplexLayoutExample\ComplexLayoutExampleModel.cs" />
-    <Compile Include="ComplexLayoutExample\ComplexLayoutExampleViewModel.cs" />
-    <Compile Include="ComplexLayoutExample\ComplexLayoutExampleWindow.cs" />
     <Compile Include="OneWayBindingExample\OneWayBindingTestApplication.cs" />
     <Compile Include="OneWayBindingExample\OneWayBindingTestModel.cs" />
     <Compile Include="OneWayBindingExample\OneWayBindingTestWindow.cs" />

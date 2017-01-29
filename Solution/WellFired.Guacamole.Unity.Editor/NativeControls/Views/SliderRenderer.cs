@@ -18,7 +18,19 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		private GUIStyle ThumbStyle { get; set; }
 		private Texture2D ThumbBackgroundTexture { get; set; }
 
-		private void CreateStyleWith([NotNull] View slider)
+	    public override UISize? NativeSize
+	    {
+	        get
+	        {
+	            var slider = Control as Slider;
+	            Debug.Assert(slider != null, $"{nameof(slider)} != null");
+
+	            CreateStyleWith(slider);
+	            return Style.CalcSize(new GUIContent()).ToUISize();
+	        }
+	    }
+
+	    private void CreateStyleWith([NotNull] IView slider)
 		{
 			if (Style == null)
 				Style = new GUIStyle();
@@ -31,7 +43,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			Style.padding = slider.Padding.ToRectOffset();
 		}
 
-		private void CreateThumbStyleWith([NotNull] View slider)
+		private void CreateThumbStyleWith()
 		{
 			if (ThumbStyle == null)
 				ThumbStyle = new GUIStyle();
@@ -56,7 +68,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			Debug.Assert(slider != null, "slider != null");
 
 			CreateStyleWith(slider);
-			CreateThumbStyleWith(slider);
+			CreateThumbStyleWith();
 
 			var offset = (float) Control.CornerRadius;
 			var smallest = (int) (Mathf.Min(offset, Mathf.Min(renderRect.Width*0.5f, renderRect.Height*0.5f)) + 0.5f);

@@ -74,7 +74,7 @@ namespace WellFired.Guacamole.Layouts
                     throw new ArgumentOutOfRangeException();
             }
 
-            return new UIRect(0, 0, Math.Max(totalWidth, minSize.Width), Math.Max(totalHeight, minSize.Height));
+            return UIRect.With(0, 0, Math.Max(totalWidth, minSize.Width), Math.Max(totalHeight, minSize.Height));
         }
 
         public void AttemptToFullfillRequests(IList<ILayoutable> children, UIRect availableSpace, UIPadding containerPadding, LayoutOptions horizontalLayout, LayoutOptions verticalLayout)
@@ -102,21 +102,21 @@ namespace WellFired.Guacamole.Layouts
 
                     foreach (var child in dynamicChildren)
                     {
-                        var sharedAvailableSpace = new UIRect(
+                        var sharedAvailableSpace = UIRect.With(
                             availableSpace.X,
                             availableSpace.Y,
                             sharedWidth,
                             newHeight);
-                        child.AttemptToFullfillRequests(sharedAvailableSpace);
+                        ViewSizingExtensions.AttemptToFullfillRequests(child as IView, sharedAvailableSpace);
                     }
                     foreach (var child in staticChildren)
                     {
-                        var staticAvailableSpace = new UIRect(
+                        var staticAvailableSpace = UIRect.With(
                             availableSpace.X,
                             availableSpace.Y,
                             child.RectRequest.Width,
                             newHeight);
-                        child.AttemptToFullfillRequests(staticAvailableSpace);
+                        ViewSizingExtensions.AttemptToFullfillRequests(child as IView, staticAvailableSpace);
                     }
                     break;
                 case OrientationOptions.Vertical:
@@ -139,26 +139,31 @@ namespace WellFired.Guacamole.Layouts
 
                     foreach (var child in viewBases)
                     {
-                        var sharedAvailableSpace = new UIRect(
+                        var sharedAvailableSpace = UIRect.With(
                             availableSpace.X,
                             availableSpace.Y,
                             newWidth,
                             sharedHeight);
-                        child.AttemptToFullfillRequests(sharedAvailableSpace);
+                        ViewSizingExtensions.AttemptToFullfillRequests(child as IView, sharedAvailableSpace);
                     }
                     foreach (var child in enumerable)
                     {
-                        var staticAvailableSpace = new UIRect(
+                        var staticAvailableSpace = UIRect.With(
                             availableSpace.X,
                             availableSpace.Y,
                             newWidth,
                             child.RectRequest.Height);
-                        child.AttemptToFullfillRequests(staticAvailableSpace);
+                        ViewSizingExtensions.AttemptToFullfillRequests(child as IView, staticAvailableSpace);
                     }
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        public static ILayoutChildren Of(OrientationOptions orientation)
+        {
+            return new AdjacentLayout { Orientation = orientation };
         }
     }
 }

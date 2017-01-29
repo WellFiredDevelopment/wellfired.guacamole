@@ -12,6 +12,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		protected Texture2D BackgroundTexture { get; private set; }
 		public virtual UISize? NativeSize => null;
 
+
 		public View Control { protected get; set; }
 
 		public virtual void Create()

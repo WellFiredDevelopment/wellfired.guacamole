@@ -12,7 +12,6 @@ namespace 'core', ->
     yask 'rebuild', { async: true }, (c) ->
         build(c, 'rebuild')
 
-
     build = (c, t) ->
 
         config = utils.getConfig(c, 'debug', 'release')
