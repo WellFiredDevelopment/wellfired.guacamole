@@ -1,4 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using WellFired.Guacamole.DataBinding;
+using WellFired.Guacamole.Examples.Taskist.View.Cells;
+using WellFired.Guacamole.Examples.Taskist.ViewModel;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
@@ -14,12 +17,18 @@ namespace WellFired.Guacamole.Examples.Taskist.View
             VerticalLayout = LayoutOptions.Fill;
             HorizontalLayout = LayoutOptions.Fill;
 
-            var collection = new ObservableCollection<string> { "One", "Two", "Three", "Four", "Five", "Six", "Seven" };
+            var collection = new ObservableCollection<Filter>
+            {
+                new Filter {FilterName = "Filter 0"},
+                new Filter {FilterName = "Filter 1"}
+            };
 
-            Content = new ListView {
+            Content = new ListView
+            {
                 BackgroundColor = UIColor.Blue,
                 HorizontalLayout = LayoutOptions.Center,
                 VerticalLayout = LayoutOptions.Center,
+                ItemTemplate = DataTemplate.Of(typeof(FilterCell)),
                 ItemSource = collection
             };
         }

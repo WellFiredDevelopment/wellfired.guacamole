@@ -13,7 +13,6 @@ namespace WellFired.Guacamole.Styling.Styles
                 new Setter {Property = View.OutlineColorProperty, Value = UIColor.FromRGB(88, 88, 88)},
                 new Setter {Property = View.HorizontalLayoutProperty, Value = LayoutOptions.Expand},
                 new Setter {Property = View.VerticalLayoutProperty, Value = LayoutOptions.Expand},
-                new Setter {Property = View.MinSizeProperty, Value = UISize.Of(50, 20) },
                 new Setter {Property = Views.Label.TextColorProperty, Value = UIColor.White},
                 new Setter {Property = Views.Label.HorizontalTextAlignProperty, Value = UITextAlign.Middle},
                 new Setter {Property = Views.Label.VerticalTextAlignProperty, Value = UITextAlign.Middle}

@@ -8,7 +8,7 @@ namespace WellFired.Guacamole.Views
 {
 	public class LayoutView : View, ICanLayout
 	{
-	    public IList<ILayoutable> Children { get; protected set; }
+	    public IList<ILayoutable> Children { get; set; }
 	    public int Spacing { [PublicAPI] get; set; }
 	    public ILayoutChildren Layout { get; set; }
 

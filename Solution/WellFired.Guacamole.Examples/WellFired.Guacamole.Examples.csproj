@@ -70,6 +70,8 @@
     <Compile Include="SliderExample\SliderTestWindow.cs" />
     <Compile Include="Taskist\TaskistApplication.cs" />
     <Compile Include="Taskist\TaskistWindow.cs" />
+    <Compile Include="Taskist\ViewModel\Filter.cs" />
+    <Compile Include="Taskist\View\Cells\FilterCell.cs" />
     <Compile Include="Taskist\View\Inspector.cs" />
     <Compile Include="Taskist\View\Overview.cs" />
     <Compile Include="Taskist\View\TaskistMainPage.cs" />

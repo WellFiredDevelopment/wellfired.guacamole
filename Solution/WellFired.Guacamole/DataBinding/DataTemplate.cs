@@ -4,11 +4,16 @@ namespace WellFired.Guacamole.DataBinding
 {
     public class DataTemplate
     {
-        public DataTemplate(Type type)
+        private DataTemplate(Type type)
         {
             Type = type;
         }
 
-        public Type Type { get; set; }
+        public Type Type { get; private set; }
+
+        public static DataTemplate Of(Type type)
+        {
+            return new DataTemplate(type);
+        }
     }
 }
