@@ -11,7 +11,9 @@ namespace WellFired.Guacamole.Examples.Taskist.View.Cells
         public FilterCell()
         {
             var filterColor = new Button();
-            var filterName = new Label {Text = "Filter"};
+            var filterName = new Label();
+
+            filterName.Bind(Label.TextProperty, "FilterName");
 
             Content = new LayoutView
             {

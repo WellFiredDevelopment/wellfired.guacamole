@@ -3,7 +3,7 @@ using NUnit.Framework;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
-namespace WellFired.Guacamole.Integration.Layouts.CenterAlign
+namespace WellFired.Guacamole.Tests.Layout.CenterAlign
 {
     [TestFixture]
     public class Given_AViewWithVerticalCenterAlign
@@ -20,7 +20,7 @@ namespace WellFired.Guacamole.Integration.Layouts.CenterAlign
             parentView.MinSize.Returns(UISize.Of(80, 80));
             parentView.Content.Returns(child);
 
-            ViewSizingExtensions.DosizingAndLayout(parentView, UIRect.With(0, 0, 80, 80));
+            ViewSizingExtensions.DoSizingAndLayout(parentView, UIRect.With(0, 0, 80, 80));
 
             Assert.That(child.RectRequest, Is.EqualTo(UIRect.With(00, 20, 40, 40)));
         }

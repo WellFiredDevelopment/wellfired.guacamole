@@ -45,10 +45,10 @@ namespace WellFired.Guacamole.Integration.Layout.Simple
                 Content = view
             };
 
-            ViewSizingExtensions.DosizingAndLayout(window, UIRect.With(0, 0, 500, 500));
+            ViewSizingExtensions.DoSizingAndLayout(window, UIRect.With(0, 0, 500, 500));
             Assert.That(view.RectRequest, Is.EqualTo(UIRect.With(0, 0, 500, 10)));
 
-            ViewSizingExtensions.DosizingAndLayout(window, UIRect.With(0, 0, 500, 500));
+            ViewSizingExtensions.DoSizingAndLayout(window, UIRect.With(0, 0, 500, 500));
             Assert.That(view.RectRequest, Is.EqualTo(UIRect.With(0, 0, 500, 10)));
         }
     }

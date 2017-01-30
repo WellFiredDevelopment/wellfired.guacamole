@@ -35,7 +35,7 @@ namespace WellFired.Guacamole.Tests.Layout.Horizontal
             parentView.Padding.Returns(UIPadding.Of(0));
             parentView.Content.Returns(layout);
 
-            ViewSizingExtensions.DosizingAndLayout(parentView, availableSize);
+            ViewSizingExtensions.DoSizingAndLayout(parentView, availableSize);
 
             Assert.That(parentView.RectRequest.X, Is.EqualTo(0));
             Assert.That(parentView.RectRequest.Y, Is.EqualTo(0));

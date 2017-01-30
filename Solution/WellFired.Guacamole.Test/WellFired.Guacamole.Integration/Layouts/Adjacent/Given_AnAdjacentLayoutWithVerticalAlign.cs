@@ -30,7 +30,7 @@ namespace WellFired.Guacamole.Integration.Layout.Adjacent
 	            Content = adjacentLayout
 	        };
 
-	        ViewSizingExtensions.DosizingAndLayout(view, UIRect.With(500, 500));
+	        ViewSizingExtensions.DoSizingAndLayout(view, UIRect.With(500, 500));
 
 	        var viewRect = view.RectRequest;
 	        Assert.That(viewRect, Is.EqualTo(UIRect.With(500, 500)));
@@ -57,7 +57,7 @@ namespace WellFired.Guacamole.Integration.Layout.Adjacent
 				}
 			};
 
-		    ViewSizingExtensions.DosizingAndLayout(adjacentLayout, UIRect.With(0, 0, 500, 500));
+		    ViewSizingExtensions.DoSizingAndLayout(adjacentLayout, UIRect.With(0, 0, 500, 500));
 
 			var rectRequest0 = adjacentLayout.Children[0].RectRequest;
 		    Assert.That(rectRequest0, Is.EqualTo(UIRect.With(0, 0, 50, 50)));
@@ -80,7 +80,7 @@ namespace WellFired.Guacamole.Integration.Layout.Adjacent
 				}
 			};
 
-		    ViewSizingExtensions.DosizingAndLayout(adjacentLayout, UIRect.With(0, 0, 500, 500));
+		    ViewSizingExtensions.DoSizingAndLayout(adjacentLayout, UIRect.With(0, 0, 500, 500));
 
 		    var rectRequest0 = adjacentLayout.Children[0].RectRequest;
 		    Assert.That(rectRequest0, Is.EqualTo(UIRect.With(0, 0, 50, 50)));

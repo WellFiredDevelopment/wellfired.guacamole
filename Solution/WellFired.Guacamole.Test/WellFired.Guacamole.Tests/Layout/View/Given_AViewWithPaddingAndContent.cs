@@ -23,7 +23,7 @@ namespace WellFired.Guacamole.Tests.Layout.View
 
             Assert.That(content, Is.Not.EqualTo(parentView));
 
-            ViewSizingExtensions.DosizingAndLayout(parentView, UIRect.With(0, 0, 100, 100));
+            ViewSizingExtensions.DoSizingAndLayout(parentView, UIRect.With(0, 0, 100, 100));
 
             Assert.That(parentView.RectRequest.X, Is.EqualTo(0));
             Assert.That(parentView.RectRequest.Y, Is.EqualTo(0));
@@ -57,7 +57,7 @@ namespace WellFired.Guacamole.Tests.Layout.View
 
             Assert.That(content, Is.Not.EqualTo(parentView));
 
-            ViewSizingExtensions.DosizingAndLayout(parentView, UIRect.With(0, 0, 100, 100));
+            ViewSizingExtensions.DoSizingAndLayout(parentView, UIRect.With(0, 0, 100, 100));
 
             Assert.That(parentView.RectRequest.X, Is.EqualTo(0));
             Assert.That(parentView.RectRequest.Y, Is.EqualTo(0));
@@ -97,7 +97,7 @@ namespace WellFired.Guacamole.Tests.Layout.View
 
             Assert.That(content, Is.Not.EqualTo(parentView));
 
-            ViewSizingExtensions.DosizingAndLayout(parentView, UIRect.With(0, 0, 100, 100));
+            ViewSizingExtensions.DoSizingAndLayout(parentView, UIRect.With(0, 0, 100, 100));
 
             Assert.That(parentView.RectRequest.X, Is.EqualTo(0));
             Assert.That(parentView.RectRequest.Y, Is.EqualTo(0));

@@ -20,12 +20,12 @@ namespace WellFired.Guacamole.Integration.Layout.Simple
                 Content = view
             };
 
-            ViewSizingExtensions.DosizingAndLayout(page, UIRect.With(100, 100));
+            ViewSizingExtensions.DoSizingAndLayout(page, UIRect.With(100, 100));
 
             Assert.That(page.RectRequest, Is.EqualTo(UIRect.With(100, 100)));
             Assert.That(view.RectRequest, Is.EqualTo(UIRect.With(100, 100)));
 
-            ViewSizingExtensions.DosizingAndLayout(page, UIRect.With(100, 100));
+            ViewSizingExtensions.DoSizingAndLayout(page, UIRect.With(100, 100));
 
             Assert.That(page.RectRequest, Is.EqualTo(UIRect.With(100, 100)));
             Assert.That(view.RectRequest, Is.EqualTo(UIRect.With(100, 100)));
@@ -46,12 +46,12 @@ namespace WellFired.Guacamole.Integration.Layout.Simple
                 Content = view
             };
 
-            ViewSizingExtensions.DosizingAndLayout(page, UIRect.With(500, 500));
+            ViewSizingExtensions.DoSizingAndLayout(page, UIRect.With(500, 500));
 
             Assert.That(page.RectRequest, Is.EqualTo(UIRect.With(500, 500)));
             Assert.That(view.RectRequest, Is.EqualTo(UIRect.With(50, 10)));
 
-            ViewSizingExtensions.DosizingAndLayout(page, UIRect.With(500, 500));
+            ViewSizingExtensions.DoSizingAndLayout(page, UIRect.With(500, 500));
 
             Assert.That(page.RectRequest, Is.EqualTo(UIRect.With(500, 500)));
             Assert.That(view.RectRequest, Is.EqualTo(UIRect.With(50, 10)));

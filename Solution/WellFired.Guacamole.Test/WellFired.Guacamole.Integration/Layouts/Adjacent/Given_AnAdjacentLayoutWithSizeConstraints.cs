@@ -18,7 +18,7 @@ namespace WellFired.Guacamole.Integration.Layout.Adjacent
                 MinSize = UISize.Of(100)
             };
 
-            ViewSizingExtensions.DosizingAndLayout(adjacentLayout, UIRect.With(500, 500));
+            ViewSizingExtensions.DoSizingAndLayout(adjacentLayout, UIRect.With(500, 500));
 
             Assert.That(adjacentLayout.RectRequest.Width, Is.EqualTo(100));
             Assert.That(adjacentLayout.RectRequest.Height, Is.EqualTo(100));
@@ -38,7 +38,7 @@ namespace WellFired.Guacamole.Integration.Layout.Adjacent
                 }
             };
 
-            ViewSizingExtensions.DosizingAndLayout(adjacentLayout, UIRect.With(500, 500));
+            ViewSizingExtensions.DoSizingAndLayout(adjacentLayout, UIRect.With(500, 500));
 
             Assert.That(adjacentLayout.RectRequest.Width, Is.EqualTo(100));
             Assert.That(adjacentLayout.RectRequest.Height, Is.EqualTo(100));
@@ -60,7 +60,7 @@ namespace WellFired.Guacamole.Integration.Layout.Adjacent
                 }
             };
 
-            ViewSizingExtensions.DosizingAndLayout(adjacentLayout, UIRect.With(500, 500));
+            ViewSizingExtensions.DoSizingAndLayout(adjacentLayout, UIRect.With(500, 500));
 
             Assert.That(adjacentLayout.RectRequest.Width, Is.EqualTo(150));
             Assert.That(adjacentLayout.RectRequest.Height, Is.EqualTo(100));

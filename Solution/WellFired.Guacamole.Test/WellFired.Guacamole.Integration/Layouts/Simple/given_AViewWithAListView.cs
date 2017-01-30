@@ -22,7 +22,7 @@ namespace WellFired.Guacamole.Integration.Layout.Simple
                 Content = listView
             };
 
-            ViewSizingExtensions.DosizingAndLayout(parentView, UIRect.With(100, 100));
+            ViewSizingExtensions.DoSizingAndLayout(parentView, UIRect.With(100, 100));
 
             Assert.That(parentView.RectRequest, Is.EqualTo(UIRect.With(100, 100)));
             Assert.That(listView.RectRequest, Is.EqualTo(UIRect.With(10, 10, 80, 80)));

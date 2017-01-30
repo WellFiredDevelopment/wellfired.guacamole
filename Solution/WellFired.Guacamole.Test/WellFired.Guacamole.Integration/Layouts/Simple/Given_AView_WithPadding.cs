@@ -15,10 +15,10 @@ namespace WellFired.Guacamole.Integration.Layout.Simple
                 VerticalLayout = LayoutOptions.Fill,
             };
 
-            ViewSizingExtensions.DosizingAndLayout(view, UIRect.With(0, 0, 100, 100));
+            ViewSizingExtensions.DoSizingAndLayout(view, UIRect.With(0, 0, 100, 100));
             Assert.That(view.RectRequest, Is.EqualTo(UIRect.With(0, 0, 100, 100)));
 
-            ViewSizingExtensions.DosizingAndLayout(view, UIRect.With(0, 0, 100, 100));
+            ViewSizingExtensions.DoSizingAndLayout(view, UIRect.With(0, 0, 100, 100));
             Assert.That(view.RectRequest, Is.EqualTo(UIRect.With(0, 0, 100, 100)));
         }
 
@@ -32,10 +32,10 @@ namespace WellFired.Guacamole.Integration.Layout.Simple
                 VerticalLayout = LayoutOptions.Expand,
             };
 
-            ViewSizingExtensions.DosizingAndLayout(view, UIRect.With(0, 0, 500, 500));
+            ViewSizingExtensions.DoSizingAndLayout(view, UIRect.With(0, 0, 500, 500));
             Assert.That(view.RectRequest, Is.EqualTo(UIRect.With(0, 0, 50, 10)));
 
-            ViewSizingExtensions.DosizingAndLayout(view, UIRect.With(0, 0, 500, 100));
+            ViewSizingExtensions.DoSizingAndLayout(view, UIRect.With(0, 0, 500, 100));
             Assert.That(view.RectRequest, Is.EqualTo(UIRect.With(0, 0, 50, 10)));
         }
     }

@@ -12,8 +12,8 @@ namespace WellFired.Guacamole.Examples.ListViewExample
         private static void OpenWindow()
         {
             Launch<ListViewTestWindow>(
-                uiRect: UIRect.With(50, 50, 600, 200),
-                minSize: UISize.Of(260, 30),
+                uiRect: UIRect.With(50, 50, 200, 600),
+                minSize: UISize.Of(200, 600),
                 title: "ListViewTest");
         }
     }

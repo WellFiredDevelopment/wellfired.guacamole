@@ -39,7 +39,7 @@ namespace WellFired.Guacamole.Integration.Layout.Complex
                 }
             };
 
-            ViewSizingExtensions.DosizingAndLayout(verticalLayout, UIRect.With(500, 500));
+            ViewSizingExtensions.DoSizingAndLayout(verticalLayout, UIRect.With(500, 500));
 
             var verticalRequest = verticalLayout.RectRequest;
             Assert.That(verticalRequest, Is.EqualTo(UIRect.With(0, 0, 500, 500)));

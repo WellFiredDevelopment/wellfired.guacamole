@@ -27,7 +27,7 @@ namespace WellFired.Guacamole.Views
 		    var view = (Content as View);
 		    Debug.Assert(view != null, "view != null");
 
-		    ViewSizingExtensions.DosizingAndLayout(view, rect - Padding);
+		    ViewSizingExtensions.DoSizingAndLayout(view, rect - Padding);
 			FinalRenderedRect = rect;
 		    ViewSizingExtensions.UpdateContextIfNeeded(view);
 		}
