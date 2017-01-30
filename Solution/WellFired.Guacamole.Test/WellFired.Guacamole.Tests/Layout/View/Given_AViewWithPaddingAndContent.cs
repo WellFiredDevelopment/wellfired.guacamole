@@ -69,8 +69,8 @@ namespace WellFired.Guacamole.Tests.Layout.View
             Assert.That(content.RectRequest.Width, Is.EqualTo(80));
             Assert.That(content.RectRequest.Height, Is.EqualTo(80));
 
-            Assert.That(contentContent.RectRequest.X, Is.EqualTo(10));
-            Assert.That(contentContent.RectRequest.Y, Is.EqualTo(10));
+            Assert.That(contentContent.RectRequest.X, Is.EqualTo(0));
+            Assert.That(contentContent.RectRequest.Y, Is.EqualTo(0));
             Assert.That(contentContent.RectRequest.Width, Is.EqualTo(80));
             Assert.That(contentContent.RectRequest.Height, Is.EqualTo(80));
         }
@@ -109,8 +109,8 @@ namespace WellFired.Guacamole.Tests.Layout.View
             Assert.That(content.RectRequest.Width, Is.EqualTo(80));
             Assert.That(content.RectRequest.Height, Is.EqualTo(80));
 
-            Assert.That(contentContent.RectRequest.X, Is.EqualTo(20));
-            Assert.That(contentContent.RectRequest.Y, Is.EqualTo(20));
+            Assert.That(contentContent.RectRequest.X, Is.EqualTo(10));
+            Assert.That(contentContent.RectRequest.Y, Is.EqualTo(10));
             Assert.That(contentContent.RectRequest.Width, Is.EqualTo(60));
             Assert.That(contentContent.RectRequest.Height, Is.EqualTo(60));
         }
