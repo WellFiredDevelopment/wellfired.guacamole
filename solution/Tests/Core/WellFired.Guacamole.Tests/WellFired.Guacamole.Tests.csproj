@@ -81,13 +81,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\WellFired.Guacamole\WellFired.Guacamole.csproj">
-      <Project>{9804DE8D-6D30-4FD7-ADFE-4EC24A7ADB6E}</Project>
-      <Name>WellFired.Guacamole</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\..\..\WellFired.Guacamole\WellFired.Guacamole.csproj">
+      <Project>{9804de8d-6d30-4fd7-adfe-4ec24a7adb6e}</Project>
+      <Name>WellFired.Guacamole</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
