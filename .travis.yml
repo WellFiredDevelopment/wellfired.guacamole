@@ -7,5 +7,5 @@ install:
   - nuget install NUnit.Runners -Version 3.4.1 -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Release Solution/Guacamole.sln
-  - mono ./testrunner/NUnit.ConsoleRunner.3.4.1/tools/nunit3-console.exe ./Solution/WellFired.Guacamole.Test/WellFired.Guacamole.Tests/bin/Release/WellFired.Guacamole.Tests.dll
-  - mono ./testrunner/NUnit.ConsoleRunner.3.4.1/tools/nunit3-console.exe ./Solution/WellFired.Guacamole.Test/WellFired.Guacamole.Integration/bin/Release/WellFired.Guacamole.Integration.dll
+  - mono ./testrunner/NUnit.ConsoleRunner.3.4.1/tools/nunit3-console.exe ./Solution/Tests/Core/WellFired.Guacamole.Tests/bin/Release/WellFired.Guacamole.Tests.dll
+  - mono ./testrunner/NUnit.ConsoleRunner.3.4.1/tools/nunit3-console.exe ./Solution/Tests/Core/WellFired.Guacamole.Integration/bin/Release/WellFired.Guacamole.Integration.dll
