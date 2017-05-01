@@ -1,5 +1,6 @@
-chalk = require('chalk')
-argv  = require('yargs').argv
+chalk           = require('chalk')
+argv            = require('yargs').argv
+stringformat    = require('string-format')
 
 class WellFired
 

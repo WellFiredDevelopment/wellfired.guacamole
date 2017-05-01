@@ -1,37 +1,32 @@
 EventEmitter = require('events').EventEmitter
 spawn = require('child_process').spawn
 
-class nunit
+
+class nugetRestore
 
     emitter = new EventEmitter
 
-    constructor: (@path, @where) ->
+    constructor: (@slnPath, @nugetConfig) ->
 
-    run: ->
-
-        args = ['--debug', 'solution/packages/NUnit.ConsoleRunner.3.6.0/tools/nunit3-console.exe']
-
-        args.push @path
-
-        if @where?
-            args.push @where
+    restore: ->
+        args = ['restore', @slnPath, '-ConfigFile', @nugetConfig]
 
         opts = { stdio: 'inherit' }
 
         # Using spawn as it allows us to retain the coloured output from nunit.
         # I couldn't get execfile doesn't retain colour info
-        exec = spawn 'mono', args, opts
+        exec = spawn 'nuget', args, opts
 
         exec.on 'close', (code) ->
 
             if code == 0
                 emitter.emit 'success'
             else
-                emitter.emit 'fail'
+                emitter.emit 'error'
 
             emitter.emit 'done'
 
     on: (name, cb) ->
         emitter.on name, cb
 
-module.exports = nunit
+module.exports = nugetRestore

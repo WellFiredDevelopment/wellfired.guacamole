@@ -1,11 +1,14 @@
 dgram  = require('dgram');
 utils = require('./modules/utils')
+unitypackage = require('./modules/unitypackage')
+stringformat = require('string-format')
+wtask = require('./modules/globals').wtask
 
 
 namespace 'unity', ->
 
     desc 'Upgrades the Unity dependencies. Requires version argument, eg. [5.3.1f1]'
-    yask 'upgrade', (ver) ->
+    wtask 'upgrade', (ver) ->
 
         if !ver?
             WellFired.error('Requires version to be provided, eg. [5.3.1f1]')
@@ -23,7 +26,7 @@ namespace 'unity', ->
 
 
     desc 'Switches provided Unity binaries between platform specific Unity binaries. Requires platform argument, eg. [windows], [macos]'
-    yask 'switch-dev-platform', (platform) ->
+    wtask 'switch-dev-platform', (platform) ->
 
         if !platform?
             WellFired.error('Requires platform to be provided, eg. [windows], [macos]')
@@ -34,10 +37,43 @@ namespace 'unity', ->
         utils.copy "WellFired.Platformer.Solution/Assemblies/Unity/#{platform}/UnityEngine.UI.dll",     'WellFired.Platformer.Solution/Assemblies/UnityEngine.UI.dll',      { clean: true }
 
 
+    namespace 'package', ->
+    
+        desc 'Extracts the given .unitypackage to the given directory. Requires an inFile and an outDir, eg. [a/file.unitypackage,out]'
+        wtask 'extract', { async: true }, (inFile, outDir) ->
+            uPackage = new unitypackage
+
+            uPackage.on 'data', (data) ->
+                WellFired.info data
+
+            uPackage.on 'error', (data) ->
+                WellFired.error data
+
+            uPackage.on 'success', (stdout) ->
+                complete()
+
+            uPackage.extract inFile, outDir
+
+        desc 'Builds the given directory into a .unitypackage. Requires an inDir and an outFile, eg [in,a/file/unitypackage]'
+        wtask 'build', { async: true }, (inDir, outFile) ->
+            uPackage = new unitypackage
+
+            uPackage.on 'data', (data) ->
+                WellFired.info data
+
+            uPackage.on 'error', (data) ->
+                WellFired.error data
+
+            uPackage.on 'success', (stdout) ->
+                complete()
+
+            uPackage.build inDir, outFile
+
+
     namespace 'editor', ->
 
         desc 'Sends the BUILD command to the Unity editor. Requires platform and config, eg. platform=macos config=release'
-        yask 'build', { async: true }, ->
+        wtask 'build', { async: true }, ->
 
             config   = process.env.config || 'release'
             mode     = process.env.mode
@@ -54,31 +90,31 @@ namespace 'unity', ->
 
 
         desc 'Sends the PROFILER SAMPLE command to the Unity runtime'
-        yask 'profile-sample', { async: true },  ->
+        wtask 'profile-sample', { async: true },  ->
             sendCommand('profile-sample')
 
         desc 'Sends the PLAY command to the Unity editor'
-        yask 'play', { async: true },  ->
+        wtask 'play', { async: true },  ->
             sendCommand('play')
         
 
         desc 'Sends the REFRESH command to the Unity editor and waits for it to finish'
-        yask 'refresh', { async: true },  ->
+        wtask 'refresh', { async: true },  ->
             sendSyncCommand('refresh', complete)
 
 
         desc 'Sends the REFRESH-PLAY command to the Unity editor'
-        yask 'refresh-play', { async: true },  ->
+        wtask 'refresh-play', { async: true },  ->
             sendCommand('refresh-play')
         
 
         desc 'Sends the STOP command to the Unity editor'
-        yask 'stop', { async: true },  ->
+        wtask 'stop', { async: true },  ->
             sendCommand('stop')
 
 
         desc 'Sends the TOGGLE-PAUSE command to the Unity editor'
-        yask 'toggle-pause', { async: true },  ->
+        wtask 'toggle-pause', { async: true },  ->
             sendCommand('toggle-pause')        
 
 

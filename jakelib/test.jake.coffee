@@ -1,13 +1,15 @@
 nunit = require('./modules/nunit')
 utils = require('./modules/utils')
+globals = require('./modules/globals')
+wtask = require('./modules/globals').wtask
 
 namespace 'test', ->
 
     desc 'Runs all tests'
-    yask 'all', {async: true}, ->
+    wtask 'all', {async: true}, ->
 
-        files = utils.find('', { matching: [WellFired.config.testDlls] })
-        files.concat utils.find('', { matching: [WellFired.config.integrationDlls] })
+        files = utils.find('', { matching: [globals.config().testDlls] })
+        files.concat utils.find('', { matching: [globals.config().integrationDlls] })
 
         if files.length == 0
             WellFired.error('No tests to run')
@@ -17,9 +19,9 @@ namespace 'test', ->
 
 
     desc 'Runs all unit tests'
-    yask 'unit', {async: true}, ->
+    wtask 'unit', {async: true}, ->
 
-        files = utils.find('', { matching: [WellFired.config.testDlls] })
+        files = utils.find('', { matching: [globals.config().testDlls] })
 
         if files.length == 0
             WellFired.error('No unit tests to run')
@@ -29,9 +31,9 @@ namespace 'test', ->
 
 
     desc 'Runs all integration tests'
-    yask 'integration', {async: true}, ->
+    wtask 'integration', {async: true}, ->
 
-        files = utils.find('', { matching: [WellFired.config.integrationDlls] })
+        files = utils.find('', { matching: [globals.config().integrationDlls] })
 
         if files.length == 0
             WellFired.error('No Integration tests to run')

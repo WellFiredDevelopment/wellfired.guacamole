@@ -7,22 +7,15 @@
     "type": "git",
     "url": "git@bitbucket.org/TerryDrever/wellfired.platformer.git"
   },
-  "devDependencies": {
-    "jake": "8.0.15",
-    "coffee-script": "1.12.2",
-    "string-format": "^0.2.1",
-    "underscore": "^1.8.3",
-    "fs-jetpack": "^0.7.1",
-    "touch": "^1.0.0",
-    "yargs": "^3.31.0"
-  },
   "dependencies": {
     "coffee-script": "^1.12.2",
-    "jake": "^8.0.15",
-    "string-format": "^0.2.1",
-    "underscore": "^1.8.3",
     "fs-jetpack": "^0.7.1",
+    "jake": "^8.0.15",
+    "md5-node": "^1.0.1",
+    "string-format": "^0.2.1",
+    "targz": "^1.0.1",
     "touch": "^1.0.0",
+    "underscore": "^1.8.3",
     "yargs": "^3.31.0"
   }
 }

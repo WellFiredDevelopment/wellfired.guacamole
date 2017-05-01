@@ -13,7 +13,7 @@ class shell
         opts = {
           cwd:       @cwd,
           timeout:   0,
-          maxBuffer: 1024 * 1024,
+          maxBuffer: 1024 * 1024,  # we were exceeding the default buffer size
         }
 
         exec = execFile @path, @args, opts, (error, stdout, stderr) ->

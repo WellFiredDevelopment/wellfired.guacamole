@@ -43,6 +43,9 @@ module.exports = {
     find: (path, opts) ->
         jetpack.find(path, opts)
 
+    createDir: (path, opts) ->
+        jetpack.dir(path, opts)
+
     getConfig: (c, debug, release) ->
         envConfig = process.env.config
 
@@ -60,6 +63,9 @@ module.exports = {
     readJson: (path) ->
         jetpack.read path, 'json'
 
+    read: (path) ->
+        jetpack.read path
+
     replace: (path, pattern, replacement) ->
         contents = jetpack.read(path)
         contents = contents.replace pattern, replacement
@@ -71,4 +77,50 @@ module.exports = {
     writeJson: (path, json) ->
         jetpack.write path, json
 
+    write: (path, text) ->
+        jetpack.write path, text
+
+    startsWith: (st, c) ->
+        st.slice(0, c.length) == c
+
+    removeFirstCharacter: (st) ->
+        return st.slice(1, st.length);
+
+    endsWith: (st, c) ->
+        c == '' or st.slice(-c.length) == c
+
+    inspectTree: (path, opts) ->
+        return jetpack.inspectTree path, opts
+
+    inspect: (path, opts) ->
+        return jetpack.inspect path, opts
+
+    flattenChildren: (obj, array) ->
+        array.push obj
+
+        if(!obj.children?)
+            return array
+
+        for child in obj.children
+            do (child) ->
+                module.exports.flattenChildren child, array
+        
+        if(obj.children)
+            delete obj.children
+
+    replaceGuid: (content, newGuid) ->
+        indexOfGuidText = content.indexOf('guid')
+        indexOfNextNewline = content.indexOf('\n', indexOfGuidText)
+        pt1 = content.slice(0, indexOfGuidText)
+        pt2 = content.slice(indexOfNextNewline + 1, content.length)
+        return pt1 + "guid: " + newGuid + "\n" + pt2
+
+    getTopDir: (dir) ->
+        results = dir.split('/');
+        return results[results.length - 1];
+
+    removeTopDir: (dir) ->
+        top = module.exports.getTopDir dir
+        lastIndexOf = dir.lastIndexOf top
+        return dir.slice 0, lastIndexOf
 }

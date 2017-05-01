@@ -1,7 +1,7 @@
 EventEmitter = require('events').EventEmitter
 execFile     = require('child_process').execFile
 jetpack      = require('fs-jetpack')
-
+stringformat = require('string-format')
 
 class xbuild
 
