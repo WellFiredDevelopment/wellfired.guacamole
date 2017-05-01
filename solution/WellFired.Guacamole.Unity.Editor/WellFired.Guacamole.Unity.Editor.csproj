@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9F8C3651-0571-4A3B-A75A-2C7F2F08BDA7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WellFired.Guacamole.Unity.Editor</RootNamespace>
+    <AssemblyName>WellFired.Guacamole.Unity.Editor</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Unity\Assets\Code\Editor\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Unity\Assets\Code\Editor\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="UnityEditor">
+      <HintPath>..\Assemblies\UnityEditor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\Assemblies\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Application.cs" />
+    <Compile Include="ApplicationInitializationContextScriptableObject.cs" />
+    <Compile Include="Assembly.cs" />
+    <Compile Include="DataBinding\ExposePropertyAttribute.cs" />
+    <Compile Include="DataBinding\ObservableScriptableObject.cs" />
+    <Compile Include="DataBinding\ObservableScriptableObjectEditor.cs" />
+    <Compile Include="Diagnostics\Logger.cs" />
+    <Compile Include="Extensions\UIColorExtensions.cs" />
+    <Compile Include="Extensions\UIPaddingExtensions.cs" />
+    <Compile Include="Extensions\UIRectExtensions.cs" />
+    <Compile Include="Extensions\UISizeExtensions.cs" />
+    <Compile Include="Extensions\UITextAlignExtensions.cs" />
+    <Compile Include="Extensions\UITextureExtensions.cs" />
+    <Compile Include="Extensions\UnityColorExtensions.cs" />
+    <Compile Include="Extensions\UnityRectExtensions.cs" />
+    <Compile Include="Extensions\UnityVector2Extensions.cs" />
+    <Compile Include="GuacamoleWindow.cs" />
+    <Compile Include="LaunchableApplication.cs" />
+    <Compile Include="NativeControls\Cells\TextCellRenderer.cs" />
+    <Compile Include="NativeControls\Layouts\LayoutViewRenderer.cs" />
+    <Compile Include="NativeControls\Views\BaseRenderer.cs" />
+    <Compile Include="NativeControls\Views\ButtonRenderer.cs" />
+    <Compile Include="NativeControls\Views\LabelRenderer.cs" />
+    <Compile Include="NativeControls\Views\NumberEntryRenderer.cs" />
+    <Compile Include="NativeControls\Views\PageRenderer.cs" />
+    <Compile Include="NativeControls\Views\SliderRenderer.cs" />
+    <Compile Include="NativeControls\Views\TextEntryRenderer.cs" />
+    <Compile Include="NativeControls\Views\ViewRenderer.cs" />
+    <Compile Include="NativeControls\Views\WindowRenderer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WellFired.Guacamole\WellFired.Guacamole.csproj">
+      <Project>{9804de8d-6d30-4fd7-adfe-4ec24a7adb6e}</Project>
+      <Name>WellFired.Guacamole</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

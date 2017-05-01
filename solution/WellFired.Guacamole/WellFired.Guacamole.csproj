@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9804DE8D-6D30-4FD7-ADFE-4EC24A7ADB6E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WellFired.Guacamole</RootNamespace>
+    <AssemblyName>WellFired.Guacamole</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Unity\Assets\Code\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Unity\Assets\Code\Editor\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AsyncBridge.Net35, Version=0.0.0.0, Culture=neutral, PublicKeyToken=b3b1c0202c0d6a87, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assemblies\AsyncBridge.Net35.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Threading, Version=1.0.2856.102, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assemblies\System.Threading.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Annotations\CanBeNull.cs" />
+    <Compile Include="Annotations\ImplicitUseKindFlags.cs" />
+    <Compile Include="Annotations\ImplicitUseTargetFlags.cs" />
+    <Compile Include="Annotations\MeansImplicitUse.cs" />
+    <Compile Include="Annotations\NotNull.cs" />
+    <Compile Include="Annotations\PublicAPIAttribute.cs" />
+    <Compile Include="Annotations\UsedImplicityAttribute.cs" />
+    <Compile Include="Attributes\CustomRendererAttribute.cs" />
+    <Compile Include="AutoAction.cs" />
+    <Compile Include="Cells\Cell.cs" />
+    <Compile Include="Cells\ICell.cs" />
+    <Compile Include="Cells\LabelCell.BindableProperties.cs" />
+    <Compile Include="Cells\LabelCell.cs" />
+    <Compile Include="Collection\ObservableCollection.cs" />
+    <Compile Include="Command.cs" />
+    <Compile Include="Converters\UIPaddingConverter.cs" />
+    <Compile Include="DataBinding\BindableContext.cs" />
+    <Compile Include="DataBinding\BindableObject.cs" />
+    <Compile Include="DataBinding\BindableProperty.cs" />
+    <Compile Include="DataBinding\BindingMode.cs" />
+    <Compile Include="DataBinding\ConverterHelper.cs" />
+    <Compile Include="DataBinding\DataTemplate.cs" />
+    <Compile Include="DataBinding\Exceptions\BindingExistsException.cs" />
+    <Compile Include="DataBinding\IBindableObject.cs" />
+    <Compile Include="DataBinding\NotifyBase.cs" />
+    <Compile Include="DataBinding\ObservableBase.cs" />
+    <Compile Include="DataBinding\ReflectExt.cs" />
+    <Compile Include="Device.cs" />
+    <Compile Include="Diagnostics\DefaultLogger.cs" />
+    <Compile Include="Diagnostics\ILogger.cs" />
+    <Compile Include="Diagnostics\Logger.cs" />
+    <Compile Include="Disposable.cs" />
+    <Compile Include="Drawing\GraphicsPath.cs" />
+    <Compile Include="Drawing\Pixel.cs" />
+    <Compile Include="Drawing\ImageFill.cs" />
+    <Compile Include="Drawing\Rect.cs" />
+    <Compile Include="Drawing\Shapes\Arc.cs" />
+    <Compile Include="Drawing\Shapes\IShape.cs" />
+    <Compile Include="Drawing\Shapes\Line.cs" />
+    <Compile Include="Drawing\Shapes\Side.cs" />
+    <Compile Include="Drawing\Size.cs" />
+    <Compile Include="Drawing\UIImageRaw.cs" />
+    <Compile Include="Drawing\Vector.cs" />
+    <Compile Include="Event\ClickEvent.cs" />
+    <Compile Include="Event\TypeEvent.cs" />
+    <Compile Include="Exceptions\GuacamoleWindowCantBeCreated.cs" />
+    <Compile Include="Exceptions\InitializationContextInvalid.cs" />
+    <Compile Include="Exceptions\InitializationContextNull.cs" />
+    <Compile Include="Exceptions\NativeRendererCannotBeFound.cs" />
+    <Compile Include="Extensions\DelegateExtensions.cs" />
+    <Compile Include="IApplication.cs" />
+    <Compile Include="ICommand.cs" />
+    <Compile Include="Event\IEvent.cs" />
+    <Compile Include="InitializationContext\IInitializationContext.cs" />
+    <Compile Include="IView.cs" />
+    <Compile Include="IWindow.cs" />
+    <Compile Include="Layouts\AdjacentLayout.cs" />
+    <Compile Include="Layouts\ICanLayout.cs" />
+    <Compile Include="Layouts\ILayoutable.cs" />
+    <Compile Include="Layouts\ILayoutChildren.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderer\INativeRenderer.cs" />
+    <Compile Include="Renderer\NativeRendererHelper.cs" />
+    <Compile Include="Styling\Style.cs" />
+    <Compile Include="Styling\Styles\Label.cs" />
+    <Compile Include="Styling\Styles\Button.cs" />
+    <Compile Include="Styling\Styles\LabelCell.cs" />
+    <Compile Include="Styling\Styles\Slider.cs" />
+    <Compile Include="Types\CornerMask.cs" />
+    <Compile Include="Types\ItemSource.cs" />
+    <Compile Include="Types\LayoutOptions.cs" />
+    <Compile Include="Types\OrientationOptions.cs" />
+    <Compile Include="Types\UIColor.cs" />
+    <Compile Include="Types\UIColorBlues.cs" />
+    <Compile Include="Types\UIColorBrowns.cs" />
+    <Compile Include="Types\UIColorGreens.cs" />
+    <Compile Include="Types\UIColorGreys.cs" />
+    <Compile Include="Types\UIColorOranges.cs" />
+    <Compile Include="Types\UIColorPinks.cs" />
+    <Compile Include="Types\UIColorWhites.cs" />
+    <Compile Include="Types\UIColorYellows.cs" />
+    <Compile Include="Types\UILocation.cs" />
+    <Compile Include="Types\UIPadding.cs" />
+    <Compile Include="Types\UIRect.cs" />
+    <Compile Include="Types\UISize.cs" />
+    <Compile Include="Types\UITextAlign.cs" />
+    <Compile Include="Views\Button.cs" />
+    <Compile Include="Views\ControlState.cs" />
+    <Compile Include="Views\IClickable.cs" />
+    <Compile Include="Views\IItemsView.cs" />
+    <Compile Include="Views\ItemsView.BindableProperties.cs" />
+    <Compile Include="Views\ItemsView.cs" />
+    <Compile Include="Views\ITypeable.cs" />
+    <Compile Include="Views\Label.cs" />
+    <Compile Include="Views\Layout.cs" />
+    <Compile Include="Views\ListView.cs" />
+    <Compile Include="Views\NumberEntry.cs" />
+    <Compile Include="Views\Page.cs" />
+    <Compile Include="Views\Slider.cs" />
+    <Compile Include="Views\TextEntry.cs" />
+    <Compile Include="Views\View.cs" />
+    <Compile Include="Views\View.BindableProperties.cs" />
+    <Compile Include="Views\View.ILayoutable.cs" />
+    <Compile Include="Views\ViewSizingExtensions.cs" />
+    <Compile Include="Views\Window.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
