@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Collections.Specialized;
 
-namespace System.Collections.ObjectModel
+namespace WellFired.Guacamole.Collection
 {
     [Serializable]
     public class ObservableCollection<T> : Collection<T>, INotifyCollectionChanged, INotifyPropertyChanged
@@ -64,7 +65,7 @@ namespace System.Collections.ObjectModel
             }
         }
 
-        protected IDisposable BlockReentrancy()
+        protected System.IDisposable BlockReentrancy()
         {
             _monitor.Enter();
             return _monitor;
@@ -173,7 +174,7 @@ namespace System.Collections.ObjectModel
 
         // Nested Types
         [Serializable]
-        private class SimpleMonitor : IDisposable
+        private class SimpleMonitor : System.IDisposable
         {
             // Fields
             private int _busyCount;
@@ -455,9 +456,7 @@ namespace System.Collections.ObjectModel
 
         public int OldStartingIndex { get; private set; }
     }
-}
-namespace System.Collections.Specialized
-{
+
     public delegate void NotifyCollectionChangedEventHandler(object sender, NotifyCollectionChangedEventArgs e);
     public interface INotifyCollectionChanged
     {

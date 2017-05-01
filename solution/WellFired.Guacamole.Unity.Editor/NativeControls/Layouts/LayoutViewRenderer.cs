@@ -2,13 +2,14 @@
 using WellFired.Guacamole.Attributes;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Unity.Editor.Extensions;
+using WellFired.Guacamole.Unity.Editor.NativeControls.Layouts;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
 using Debug = System.Diagnostics.Debug;
 
 [assembly: CustomRenderer(typeof(LayoutView), typeof(LayoutViewRenderer))]
 
-namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
+namespace WellFired.Guacamole.Unity.Editor.NativeControls.Layouts
 {
 	public class LayoutViewRenderer : BaseRenderer
 	{

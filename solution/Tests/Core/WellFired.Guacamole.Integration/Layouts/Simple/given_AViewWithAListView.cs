@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
-namespace WellFired.Guacamole.Integration.Layout.Simple
+namespace WellFired.Guacamole.Integration.Layouts.Simple
 {
     [TestFixture]
     public class Given_AViewWithAListView

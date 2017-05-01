@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using WellFired.Guacamole.Collection;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Examples.Taskist.View.Cells;
 using WellFired.Guacamole.Examples.Taskist.ViewModel;

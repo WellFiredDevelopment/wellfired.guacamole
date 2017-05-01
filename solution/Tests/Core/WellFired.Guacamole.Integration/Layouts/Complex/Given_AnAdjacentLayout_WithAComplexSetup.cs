@@ -3,7 +3,7 @@ using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
-namespace WellFired.Guacamole.Integration.Layout.Complex
+namespace WellFired.Guacamole.Integration.Layouts.Complex
 {
     [TestFixture]
     public class Given_AnAdjacentLayout_WithAComplexSetup

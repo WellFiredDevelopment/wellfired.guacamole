@@ -2,7 +2,7 @@
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
-namespace WellFired.Guacamole.Integration.Layout.Simple
+namespace WellFired.Guacamole.Integration.Layouts.Simple
 {
     [TestFixture]
     public class Given_AListView_With_Content

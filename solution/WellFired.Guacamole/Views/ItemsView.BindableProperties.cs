@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using WellFired.Guacamole.Annotations;
+using WellFired.Guacamole.Collection;
 using WellFired.Guacamole.DataBinding;
 
 namespace WellFired.Guacamole.Views

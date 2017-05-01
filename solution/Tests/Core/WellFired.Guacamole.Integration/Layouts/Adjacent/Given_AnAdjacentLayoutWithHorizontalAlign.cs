@@ -3,7 +3,7 @@ using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
-namespace WellFired.Guacamole.Integration.Layout.Adjacent
+namespace WellFired.Guacamole.Integration.Layouts.Adjacent
 {
 	[TestFixture]
 	public class Given_AnAdjacentLayoutWithHorizontalAlign
