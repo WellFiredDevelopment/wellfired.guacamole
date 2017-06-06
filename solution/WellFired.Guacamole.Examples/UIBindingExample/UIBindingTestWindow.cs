@@ -22,6 +22,7 @@ namespace WellFired.Guacamole.Examples.UIBindingExample
 			Content = new LayoutView
 			{
 			    Layout = new AdjacentLayout { Orientation = OrientationOptions.Horizontal },
+				HorizontalLayout = LayoutOptions.Fill,
 			    Children =
 				{
 					destinationElement,
