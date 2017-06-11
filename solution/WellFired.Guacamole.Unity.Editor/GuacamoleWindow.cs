@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 using UnityEditor;
@@ -107,6 +106,16 @@ namespace WellFired.Guacamole.Unity.Editor
 
 		private void Update()
 		{
+			if (_exception != null)
+			{
+				Close();
+				EditorUtility.DisplayDialog(
+					"Exception was thrown",
+					$"The window has thrown an exception, the error is \n\n {_exception.Message} \n\n callstack was \n\n {_exception.StackTrace}",
+					"Close");
+				return;
+			}
+			
 			Repaint();
 		}
 
@@ -127,11 +136,6 @@ namespace WellFired.Guacamole.Unity.Editor
 				catch (Exception e)
 				{
 					_exception = e;
-					EditorUtility.DisplayDialog(
-						"Exception was thrown",
-						$"The window has thrown an exception, the error is \n\n {_exception.Message} \n\n callstack was \n\n {_exception.StackTrace}",
-						"Close");
-					Close();
 				}
 
 			try
@@ -141,11 +145,6 @@ namespace WellFired.Guacamole.Unity.Editor
 			catch (Exception e)
 			{
 				_exception = e;
-				EditorUtility.DisplayDialog(
-					"Exception was thrown",
-					$"The window has thrown an exception, the error is \n\n {_exception.Message} \n\n callstack was \n\n {_exception.StackTrace}",
-					"Close");
-				Close();
 			}
 		}
 
