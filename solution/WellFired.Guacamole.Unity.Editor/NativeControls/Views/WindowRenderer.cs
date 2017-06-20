@@ -15,5 +15,10 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			EditorGUI.DrawRect(renderRect.ToUnityRect(), Control.BackgroundColor.ToUnityColor());
 		}
+
+		public override void ResetStyle()
+		{
+			
+		}
 	}
 }

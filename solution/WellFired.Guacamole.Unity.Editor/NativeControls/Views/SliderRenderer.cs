@@ -106,5 +106,10 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			ThumbBackgroundTexture = Texture2DExtensions.CreateRoundedTexture(32, 32, slider.ThumbBackgroundColor,
 				slider.ThumbOutlineColor, slider.ThumbCornerRadius, slider.ThumbCornerMask);
 		}
+
+		public override void ResetStyle()
+		{
+			Style = null;
+		}
 	}
 }

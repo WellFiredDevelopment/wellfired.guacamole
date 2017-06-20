@@ -2,7 +2,6 @@
 
 namespace WellFired.Guacamole.Types
 {
-	// ReSharper disable once InconsistentNaming
 	public partial struct UIColor
 	{
 		[PublicAPI]

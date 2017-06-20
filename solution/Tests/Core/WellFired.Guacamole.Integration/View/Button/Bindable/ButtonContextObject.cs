@@ -14,31 +14,31 @@ namespace WellFired.Guacamole.Integration.View.Button.Bindable
 		public string Text
 		{
 			get { return _text; }
-			set { SetProperty(ref _text, value, nameof(Text)); }
+			set { SetProperty(ref _text, value); }
 		}
 
 		public UIColor TextColor
 		{
 			get { return _textColor; }
-			set { SetProperty(ref _textColor, value, nameof(TextColor)); }
+			set { SetProperty(ref _textColor, value); }
 		}
 
 		public UITextAlign HorizontalTextAlign
 		{
 			get { return _horizontalTextAlign; }
-			set { SetProperty(ref _horizontalTextAlign, value, nameof(HorizontalTextAlign)); }
+			set { SetProperty(ref _horizontalTextAlign, value); }
 		}
 
 		public UITextAlign VerticalTextAlign
 		{
 			get { return _verticalTextAlign; }
-			set { SetProperty(ref _verticalTextAlign, value, nameof(VerticalTextAlign)); }
+			set { SetProperty(ref _verticalTextAlign, value); }
 		}
 
 		public ICommand ButtonPressedCommand
 		{
 			get { return _buttonPressedCommand; }
-			set { SetProperty(ref _buttonPressedCommand, value, nameof(ButtonPressedCommand)); }
+			set { SetProperty(ref _buttonPressedCommand, value); }
 		}
 	}
 }

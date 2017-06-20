@@ -68,5 +68,10 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			if (Equals(newNumber, entry.Number))
 				entry.Number = newNumber;
 		}
+
+		public override void ResetStyle()
+		{
+			Style = null;
+		}
 	}
 }

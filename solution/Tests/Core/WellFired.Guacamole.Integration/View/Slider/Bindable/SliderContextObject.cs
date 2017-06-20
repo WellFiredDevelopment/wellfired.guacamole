@@ -16,43 +16,43 @@ namespace WellFired.Guacamole.Integration.View.Slider.Bindable
 		public double MinValue
 		{
 			get { return _minValue; }
-			set { SetProperty(ref _minValue, value, nameof(MinValue)); }
+			set { SetProperty(ref _minValue, value); }
 		}
 
 		public double MaxValue
 		{
 			get { return _maxValue; }
-			set { SetProperty(ref _maxValue, value, nameof(MaxValue)); }
+			set { SetProperty(ref _maxValue, value); }
 		}
 
 		public double Value
 		{
 			get { return _value; }
-			set { SetProperty(ref _value, value, nameof(Value)); }
+			set { SetProperty(ref _value, value); }
 		}
 
 		public UIColor ThumbBackgroundColor
 		{
 			get { return _thumbBackgroundColor; }
-			set { SetProperty(ref _thumbBackgroundColor, value, nameof(ThumbBackgroundColor)); }
+			set { SetProperty(ref _thumbBackgroundColor, value); }
 		}
 
 		public UIColor ThumbOutlineColor
 		{
 			get { return _thumbOutlineColor; }
-			set { SetProperty(ref _thumbOutlineColor, value, nameof(ThumbOutlineColor)); }
+			set { SetProperty(ref _thumbOutlineColor, value); }
 		}
 
 		public double ThumbCornerRadius
 		{
 			get { return _thumbCornerRadius; }
-			set { SetProperty(ref _thumbCornerRadius, value, nameof(ThumbCornerRadius)); }
+			set { SetProperty(ref _thumbCornerRadius, value); }
 		}
 
 		public CornerMask ThumbCornerMask
 		{
 			get { return _thumbCornerMask; }
-			set { SetProperty(ref _thumbCornerMask, value, nameof(ThumbCornerMask)); }
+			set { SetProperty(ref _thumbCornerMask, value); }
 		}
 	}
 }

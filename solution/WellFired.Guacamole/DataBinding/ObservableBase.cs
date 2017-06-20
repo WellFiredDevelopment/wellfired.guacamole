@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace WellFired.Guacamole.DataBinding
 {
@@ -6,7 +7,7 @@ namespace WellFired.Guacamole.DataBinding
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		protected bool SetProperty<T>(ref T storage, T value, string propertyName)
+		protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = @"")
 		{
 			if (Equals(storage, value))
 				return false;

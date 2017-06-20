@@ -76,7 +76,7 @@ namespace WellFired.Guacamole.DataBinding
 
 		public object GetValue()
 		{
-			return _propertyGetMethod?.Invoke(Object, null);
+			return _propertyGetMethod == null ? Value : _propertyGetMethod?.Invoke(Object, null);
 		}
 	}
 

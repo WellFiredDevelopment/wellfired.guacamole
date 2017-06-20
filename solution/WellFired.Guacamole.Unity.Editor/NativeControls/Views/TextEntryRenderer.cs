@@ -65,5 +65,10 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 
 			entry.Text = EditorGUI.TextField(renderRect.ToUnityRect(), entry.Text, Style);
 		}
+
+		public override void ResetStyle()
+		{
+			Style = null;
+		}
 	}
 }

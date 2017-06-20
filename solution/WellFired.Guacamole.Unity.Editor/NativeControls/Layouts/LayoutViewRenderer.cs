@@ -39,5 +39,10 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Layouts
 
 			GUI.Box(renderRect.ToUnityRect(), "", Style);
 		}
+
+		public override void ResetStyle()
+		{
+			Style = null;
+		}
 	}
 }

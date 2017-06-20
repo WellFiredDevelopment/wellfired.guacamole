@@ -27,7 +27,7 @@ namespace WellFired.Guacamole
 				var newValue = ce;
 				_canExecute = ce;
 
-				SetProperty(ref existingValue, newValue, nameof(CanExecute));
+				SetProperty(ref existingValue, newValue);
 
 				return _canExecute.Value;
 			}

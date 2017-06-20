@@ -27,7 +27,7 @@ namespace WellFired.Guacamole.Types
 				R = red/255.0f,
 				G = green/255.0f,
 				B = blue/255.0f,
-				A = 255.0f
+				A = 1.0f
 			};
 		}
 
@@ -77,6 +77,11 @@ namespace WellFired.Guacamole.Types
 		public static bool operator !=(UIColor a, UIColor b)
 		{
 			return !(a == b);
+		}
+
+		public override string ToString()
+		{
+			return $"R: {R} G: {G} B: {B}";
 		}
 	}
 }

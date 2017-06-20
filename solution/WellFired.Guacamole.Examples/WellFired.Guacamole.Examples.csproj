@@ -54,6 +54,17 @@
   <ItemGroup>
     <Compile Include="AdjacentLayoutExample\AdjacentLayoutTestApplication.cs" />
     <Compile Include="AdjacentLayoutExample\AdjacentLayoutTestWindow.cs" />
+    <Compile Include="DotPeek\DotPeekApplication.cs" />
+    <Compile Include="DotPeek\DotPeekPage.cs" />
+    <Compile Include="DotPeek\DotPeekWindow.cs" />
+    <Compile Include="DotPeek\Layout\LayoutFactory.cs" />
+    <Compile Include="DotPeek\Model\BuildOverview.cs" />
+    <Compile Include="DotPeek\Model\BuildReport.cs" />
+    <Compile Include="DotPeek\Model\BuildReportDiff.cs" />
+    <Compile Include="DotPeek\Model\FileSize.cs" />
+    <Compile Include="DotPeek\Styles\Label.cs" />
+    <Compile Include="DotPeek\UIElementFactory\DotPeekLabelFactory.cs" />
+    <Compile Include="DotPeek\ViewModel\BuildReportDiffViewModel.cs" />
     <Compile Include="LabelExample\LabelTestApplication.cs" />
     <Compile Include="LabelExample\LabelTestWindow.cs" />
     <Compile Include="ListViewExample\ListViewTestApplication.cs" />
@@ -91,14 +102,17 @@
     <ProjectReference Include="..\WellFired.Guacamole.Unity.Editor\WellFired.Guacamole.Unity.Editor.csproj">
       <Project>{9f8c3651-0571-4a3b-a75a-2c7f2f08bda7}</Project>
       <Name>WellFired.Guacamole.Unity.Editor</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\WellFired.Guacamole.Unity.Runtime\WellFired.Guacamole.Unity.Runtime.csproj">
       <Project>{e0dd069b-d631-40b6-9f5e-f515d9aeeccd}</Project>
       <Name>WellFired.Guacamole.Unity.Runtime</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\WellFired.Guacamole\WellFired.Guacamole.csproj">
       <Project>{9804de8d-6d30-4fd7-adfe-4ec24a7adb6e}</Project>
       <Name>WellFired.Guacamole</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

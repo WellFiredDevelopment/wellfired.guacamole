@@ -21,67 +21,67 @@ namespace WellFired.Guacamole.Integration.View.View.Bindable
 		public bool Enabled
 		{
 			get { return _enabled; }
-			set { SetProperty(ref _enabled, value, nameof(Enabled)); }
+			set { SetProperty(ref _enabled, value); }
 		}
 
 		public ControlState ControlState
 		{
 			get { return _controlState; }
-			set { SetProperty(ref _controlState, value, nameof(ControlState)); }
+			set { SetProperty(ref _controlState, value); }
 		}
 
 		public UIColor BackgroundColor
 		{
 			get { return _backgroundColor; }
-			set { SetProperty(ref _backgroundColor, value, nameof(BackgroundColor)); }
+			set { SetProperty(ref _backgroundColor, value); }
 		}
 
 		public UIColor OutlineColor
 		{
 			get { return _outlineColor; }
-			set { SetProperty(ref _outlineColor, value, nameof(OutlineColor)); }
+			set { SetProperty(ref _outlineColor, value); }
 		}
 
 		public double CornerRadius
 		{
 			get { return _cornerRadius; }
-			set { SetProperty(ref _cornerRadius, value, nameof(CornerRadius)); }
+			set { SetProperty(ref _cornerRadius, value); }
 		}
 
 		public CornerMask CornerMask
 		{
 			get { return _cornerMask; }
-			set { SetProperty(ref _cornerMask, value, nameof(CornerMask)); }
+			set { SetProperty(ref _cornerMask, value); }
 		}
 
 		public UISize MinSize
 		{
 			get { return _minSize; }
-			set { SetProperty(ref _minSize, value, nameof(MinSize)); }
+			set { SetProperty(ref _minSize, value); }
 		}
 
 		public UISize MaxSize
 		{
 			get { return _maxSize; }
-			set { SetProperty(ref _maxSize, value, nameof(MaxSize)); }
+			set { SetProperty(ref _maxSize, value); }
 		}
 
 		public LayoutOptions HorizontalLayoutOptions
 		{
 			get { return _horizontalLayoutOptions; }
-			set { SetProperty(ref _horizontalLayoutOptions, value, nameof(HorizontalLayoutOptions)); }
+			set { SetProperty(ref _horizontalLayoutOptions, value); }
 		}
 
 		public LayoutOptions VerticalLayoutOptions
 		{
 			get { return _verticalLayoutOptions; }
-			set { SetProperty(ref _verticalLayoutOptions, value, nameof(VerticalLayoutOptions)); }
+			set { SetProperty(ref _verticalLayoutOptions, value); }
 		}
 
 		public UIPadding Padding
 		{
 			get { return _padding; }
-			set { SetProperty(ref _padding, value, nameof(Padding)); }
+			set { SetProperty(ref _padding, value); }
 		}
 	}
 }

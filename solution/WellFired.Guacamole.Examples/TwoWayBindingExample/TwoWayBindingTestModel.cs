@@ -13,7 +13,7 @@ namespace WellFired.Guacamole.Examples.TwoWayBindingExample
 		public string BoundText
 		{
 			get { return _boundText; }
-			set { SetProperty(ref _boundText, value, "BoundText"); }
+			set { SetProperty(ref _boundText, value); }
 		}
 	}
 }

@@ -70,5 +70,10 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			
 			button.Click(0);
 		}
+
+		public override void ResetStyle()
+		{
+			Style = null;
+		}
 	}
 }

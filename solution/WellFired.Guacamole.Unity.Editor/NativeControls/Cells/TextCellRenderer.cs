@@ -66,5 +66,10 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Cells
 
             EditorGUI.LabelField(renderRect.ToUnityRect(), textCell.Text, Style);
         }
+
+        public override void ResetStyle()
+        {
+            Style = null;
+        }
     }
 }

@@ -28,7 +28,7 @@ namespace WellFired.Guacamole.Tests.Bindable
 			public double Value
 			{
 				get { return _currentValue; }
-				set { SetProperty(ref _currentValue, value, nameof(Value)); }
+				set { SetProperty(ref _currentValue, value); }
 			}
 		}
 

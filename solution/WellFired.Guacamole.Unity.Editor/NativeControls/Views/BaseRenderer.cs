@@ -12,7 +12,6 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		protected Texture2D BackgroundTexture { get; private set; }
 		public virtual UISize? NativeSize => null;
 
-
 		public View Control { protected get; set; }
 
 		public virtual void Create()
@@ -48,11 +47,19 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			    (e.PropertyName == View.OutlineColorProperty.PropertyName) ||
 			    (e.PropertyName == View.BackgroundColorProperty.PropertyName) ||
 			    (e.PropertyName == View.ControlStateProperty.PropertyName))
+			{
 				CreateBackgroundTexture();
+				ResetStyle();
+			}
 
 			if (e.PropertyName == View.EnabledProperty.PropertyName)
+			{
 				Control.ControlState = Control.Enabled ? ControlState.Normal : ControlState.Disabled;
+				ResetStyle();
+			}
 		}
+
+		public abstract void ResetStyle();
 
 		public void FocusControl()
 		{
@@ -61,8 +68,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 
 		private void CreateBackgroundTexture()
 		{
-			BackgroundTexture = Texture2DExtensions.CreateRoundedTexture(64, 64, Control.BackgroundColor, Control.OutlineColor,
-				Control.CornerRadius, Control.CornerMask);
+			BackgroundTexture = Texture2DExtensions.CreateRoundedTexture(64, 64, Control.BackgroundColor, Control.OutlineColor, Control.CornerRadius, Control.CornerMask);
 		}
 	}
 }
