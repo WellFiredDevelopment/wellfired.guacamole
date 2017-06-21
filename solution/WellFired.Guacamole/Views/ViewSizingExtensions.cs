@@ -50,8 +50,17 @@ namespace WellFired.Guacamole.Views
             if (canLayout != null)
                 return canLayout.Layout.CalculateValidRectRequest(canLayout.Children, view.MinSize);
 
+            var defaultSize = UISize.Of(view.MinSize.Width, view.MinSize.Height);
+            
+            var content = view.Content;
+            if (content != null)
+                defaultSize = content.RectRequest.Size;
+
+            defaultSize.Width += view.Padding.Width;
+            defaultSize.Height += view.Padding.Height;
+
             // If the native renderer returns null, we simply use our own layoutting system.
-            var nativeSize = view?.NativeRenderer?.NativeSize ?? UISize.Of(view.MinSize.Width, view.MinSize.Height);
+            var nativeSize = view?.NativeRenderer?.NativeSize ?? defaultSize;
 
             // Constrain
             nativeSize = Constrain(nativeSize, view.MinSize);
