@@ -10,23 +10,40 @@ namespace WellFired.Guacamole.Layouts
     {
         public OrientationOptions Orientation { private get; set; }
         public int Spacing { private get; set; }
+        public LayoutOptions VerticalLayout { get; set; }
+        public LayoutOptions HorizontalLayout { get; set; }
 
-        public void Layout(IEnumerable<ILayoutable> layoutables, UIPadding containerPadding, LayoutOptions containerHorizontalLayoutOptions, LayoutOptions containerVerticalLayoutOptions)
+        public void Layout(IEnumerable<ILayoutable> layoutables, UIRect availableSpace, UIPadding containerPadding)
         {
             var x = containerPadding.Left;
             var y = containerPadding.Top;
+
+            var layoutablesArray = layoutables as ILayoutable[] ?? layoutables.ToArray();
+            if (HorizontalLayout == LayoutOptions.Center)
+            {
+                var totalWidth = layoutablesArray.Sum(o => o.RectRequest.Width) / 2;
+                var totalWidthWithSpacing = totalWidth + (layoutablesArray.Length - 1) * Spacing / 2;
+                x = availableSpace.Width / 2 - totalWidthWithSpacing;
+            }
+            if (VerticalLayout == LayoutOptions.Center)
+            {
+                var totalHeight = layoutablesArray.Sum(o => o.RectRequest.Height) / 2;
+                var totalHeightWithSpacing = totalHeight + (layoutablesArray.Length - 1) * Spacing / 2;
+                y = availableSpace.Height / 2 - totalHeightWithSpacing;
+            }
+                            
             switch (Orientation)
             {
                 case OrientationOptions.Horizontal:
-                    foreach (var layoutable in layoutables)
-                    {
+                    foreach (var layoutable in layoutablesArray)
+                    {   
                         layoutable.X = x;
                         layoutable.Y = y;
                         x += layoutable.RectRequest.Width + Spacing;
                     }
                     break;
                 case OrientationOptions.Vertical:
-                    foreach (var layoutable in layoutables)
+                    foreach (var layoutable in layoutablesArray)
                     {
                         layoutable.X = x;
                         layoutable.Y = y;
@@ -164,6 +181,11 @@ namespace WellFired.Guacamole.Layouts
         public static ILayoutChildren Of(OrientationOptions orientation)
         {
             return new AdjacentLayout { Orientation = orientation };
+        }
+
+        public static ILayoutChildren Of(OrientationOptions orientation, int spacing, LayoutOptions horizontalLayoutOptions, LayoutOptions verticalLayoutOptions)
+        {
+            return new AdjacentLayout { Orientation = orientation, Spacing = spacing, HorizontalLayout = horizontalLayoutOptions, VerticalLayout = verticalLayoutOptions };
         }
     }
 }

@@ -34,6 +34,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Layouts\Adjacent\Given_AnAdjacentLayoutWithHorizontalAlign.cs" />
+    <Compile Include="Layouts\Adjacent\Given_AnAdjacentLayoutWithMultipleChildrenWithCenterAlign.cs" />
+    <Compile Include="Layouts\Adjacent\Given_AnAdjacentLayoutWithOneChildWithCenterAlign.cs" />
     <Compile Include="Layouts\Adjacent\Given_AnAdjacentLayoutWithSizeConstraints.cs" />
     <Compile Include="Layouts\Adjacent\Given_AnAdjacentLayoutWithVerticalAlign.cs" />
     <Compile Include="Layouts\Complex\Given_AnAdjacentLayout_WithAComplexSetup.cs" />

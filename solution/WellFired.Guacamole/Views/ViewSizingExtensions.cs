@@ -126,7 +126,7 @@ namespace WellFired.Guacamole.Views
                 return;
 
             var layout = view as ICanLayout;
-            layout?.Layout.Layout(layout.Children, view.Padding, view.HorizontalLayout, view.VerticalLayout);
+            layout?.Layout.Layout(layout.Children, view.RectRequest, view.Padding);
 
             if(view.Content != null)
                 DoLayout(view.Content);

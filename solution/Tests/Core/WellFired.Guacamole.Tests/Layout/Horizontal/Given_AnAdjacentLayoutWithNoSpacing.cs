@@ -17,7 +17,7 @@ namespace WellFired.Guacamole.Tests.Layout.Horizontal
             child.RectRequest.Returns(UIRect.With(0, 0, 50, 50));
 
             var layout = new AdjacentLayout { Orientation = OrientationOptions.Horizontal, Spacing = 0 };
-            layout.Layout(new [] { child }, UIPadding.Of(10), LayoutOptions.Expand, LayoutOptions.Expand);
+            layout.Layout(new [] { child }, UIRect.Max, UIPadding.Of(10));
 
             Assert.That(child.X, Is.EqualTo(10));
             Assert.That(child.Y, Is.EqualTo(10));
@@ -37,7 +37,7 @@ namespace WellFired.Guacamole.Tests.Layout.Horizontal
             child2.RectRequest.Returns(UIRect.With(0, 0, 50, 50));
 
             var layout = new AdjacentLayout { Orientation = OrientationOptions.Horizontal, Spacing = 0};
-            layout.Layout(new [] { child, child2 }, UIPadding.Of(10), LayoutOptions.Expand, LayoutOptions.Expand);
+            layout.Layout(new [] { child, child2 }, UIRect.Max, UIPadding.Of(10));
 
             Assert.That(child.X, Is.EqualTo(10));
             Assert.That(child.Y, Is.EqualTo(10));
@@ -64,7 +64,7 @@ namespace WellFired.Guacamole.Tests.Layout.Horizontal
             child3.RectRequest.Returns(UIRect.With(0, 0, 50, 50));
 
             var layout = new AdjacentLayout { Orientation = OrientationOptions.Horizontal, Spacing = 0};
-            layout.Layout(new [] { child, child2, child3 }, UIPadding.Of(10), LayoutOptions.Expand, LayoutOptions.Expand);
+            layout.Layout(new [] { child, child2, child3 }, UIRect.Max, UIPadding.Of(10));
 
             Assert.That(child.X, Is.EqualTo(10));
             Assert.That(child.Y, Is.EqualTo(10));
