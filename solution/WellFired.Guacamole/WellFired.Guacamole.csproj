@@ -146,6 +146,7 @@
     <Compile Include="Views\View.cs" />
     <Compile Include="Views\View.BindableProperties.cs" />
     <Compile Include="Views\View.ILayoutable.cs" />
+    <Compile Include="Views\ViewContainer.cs" />
     <Compile Include="Views\ViewSizingExtensions.cs" />
     <Compile Include="Views\Window.cs" />
   </ItemGroup>
