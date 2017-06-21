@@ -38,7 +38,7 @@ namespace WellFired.Guacamole.Layouts
             }
         }
 
-        public UIRect CalculateValidRextRequest(IEnumerable<ILayoutable> layoutables, UISize minSize)
+        public UIRect CalculateValidRectRequest(IEnumerable<ILayoutable> layoutables, UISize minSize)
         {
             var totalWidth = 0;
             var totalHeight = 0;
