@@ -107,7 +107,8 @@ namespace WellFired.Guacamole.Layouts
                     var staticWidth = staticChildren.Sum(child => child.RectRequest.Width);
                     var sharedWidth = !dynamicChildren.Any()
                         ? 0
-                        : (availableSpace.Width - staticWidth - containerPadding.Width - Spacing*(children.Count - 1))/dynamicChildren.Length;
+                        : (int) Math.Ceiling((double) (availableSpace.Width - staticWidth - containerPadding.Width - Spacing*(children.Count - 1))
+                          /dynamicChildren.Length);
 
                     // This is just to stop the UI from looking weird as hell if the user shrinks the UI too much.
                     if (sharedWidth < 0)
@@ -144,7 +145,7 @@ namespace WellFired.Guacamole.Layouts
                     var staticHeight = enumerable.Sum(child => child.RectRequest.Height);
                     var sharedHeight = !viewBases.Any()
                         ? 0
-                        : (availableSpace.Height - containerPadding.Height - Spacing*(children.Count - 1) - staticHeight)/viewBases.Length;
+                        : (int) Math.Ceiling((double) (availableSpace.Height - containerPadding.Height - Spacing*(children.Count - 1) - staticHeight)/viewBases.Length);
 
                     // This is just to stop the UI from looking weird as hell if the user shrinks the UI too much.
                     if (sharedHeight < 0)
