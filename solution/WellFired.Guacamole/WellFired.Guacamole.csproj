@@ -137,7 +137,7 @@
     <Compile Include="Views\ItemsView.cs" />
     <Compile Include="Views\ITypeable.cs" />
     <Compile Include="Views\Label.cs" />
-    <Compile Include="Views\Layout.cs" />
+    <Compile Include="Views\LayoutView.cs" />
     <Compile Include="Views\ListView.cs" />
     <Compile Include="Views\NumberEntry.cs" />
     <Compile Include="Views\Page.cs" />

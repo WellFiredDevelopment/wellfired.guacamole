@@ -95,7 +95,7 @@ namespace WellFired.Guacamole.Views
                     rectRequest.Height = availableSpace.Height;
                     break;
                 case LayoutOptions.Center:
-                    rectRequest.Y = (availableSpace.Width - rectRequest.Height) / 2;
+                    rectRequest.Y = (availableSpace.Height - rectRequest.Height) / 2;
                     break;
                 case LayoutOptions.Expand:
                     break;
