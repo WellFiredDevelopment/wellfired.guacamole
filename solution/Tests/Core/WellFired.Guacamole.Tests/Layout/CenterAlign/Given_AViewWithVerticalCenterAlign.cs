@@ -17,12 +17,12 @@ namespace WellFired.Guacamole.Tests.Layout.CenterAlign
             child.Content.Returns(default(IView));
 
             var parentView = Substitute.For<IView>();
-            parentView.MinSize.Returns(UISize.Of(80, 80));
+            parentView.MinSize.Returns(UISize.Of(80, 100));
             parentView.Content.Returns(child);
 
-            ViewSizingExtensions.DoSizingAndLayout(parentView, UIRect.With(0, 0, 80, 80));
+            ViewSizingExtensions.DoSizingAndLayout(parentView, UIRect.With(0, 0, 80, 100));
 
-            Assert.That(child.RectRequest, Is.EqualTo(UIRect.With(00, 20, 40, 40)));
+            Assert.That(child.RectRequest, Is.EqualTo(UIRect.With(00, 30, 40, 40)));
         }
     }
 }
