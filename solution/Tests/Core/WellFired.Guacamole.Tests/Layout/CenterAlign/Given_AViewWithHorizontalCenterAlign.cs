@@ -9,7 +9,7 @@ namespace WellFired.Guacamole.Tests.Layout.CenterAlign
     public class Given_AViewWithHorizontalCenterAlign
     {
         [Test]
-        public void When_Layout_Then_LayoutIsCorrect()
+        public void When_Layout_InSquareParentView_Then_LayoutIsCorrect()
         {
             var child = Substitute.For<IView>();
             child.HorizontalLayout.Returns(LayoutOptions.Center);
@@ -23,6 +23,40 @@ namespace WellFired.Guacamole.Tests.Layout.CenterAlign
             ViewSizingExtensions.DoSizingAndLayout(parentView, UIRect.With(0, 0, 80, 80));
 
             Assert.That(child.RectRequest, Is.EqualTo(UIRect.With(20, 00, 40, 40)));
+        }
+        
+        [Test]
+        public void When_Layout_InPortraitParentView_Then_LayoutIsCorrect()
+        {
+            var child = Substitute.For<IView>();
+            child.HorizontalLayout.Returns(LayoutOptions.Center);
+            child.MinSize.Returns(UISize.Of(40, 40));
+            child.Content.Returns(default(IView));
+
+            var parentView = Substitute.For<IView>();
+            parentView.MinSize.Returns(UISize.Of(80, 100));
+            parentView.Content.Returns(child);
+
+            ViewSizingExtensions.DoSizingAndLayout(parentView, UIRect.With(0, 0, 80, 80));
+
+            Assert.That(child.RectRequest, Is.EqualTo(UIRect.With(20, 00, 40, 40)));
+        }
+        
+        [Test]
+        public void When_Layout_InLandscapeParentView_Then_LayoutIsCorrect()
+        {
+            var child = Substitute.For<IView>();
+            child.HorizontalLayout.Returns(LayoutOptions.Center);
+            child.MinSize.Returns(UISize.Of(40, 40));
+            child.Content.Returns(default(IView));
+
+            var parentView = Substitute.For<IView>();
+            parentView.MinSize.Returns(UISize.Of(100, 80));
+            parentView.Content.Returns(child);
+
+            ViewSizingExtensions.DoSizingAndLayout(parentView, UIRect.With(0, 0, 80, 80));
+
+            Assert.That(child.RectRequest, Is.EqualTo(UIRect.With(30, 00, 40, 40)));
         }
 
         [Test]
