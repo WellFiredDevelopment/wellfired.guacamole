@@ -2,6 +2,8 @@ using WellFired.Guacamole.Examples.DotPeek.Layout;
 using WellFired.Guacamole.Examples.DotPeek.Model;
 using WellFired.Guacamole.Examples.DotPeek.UIElementFactory;
 using WellFired.Guacamole.Examples.DotPeek.ViewModel;
+using WellFired.Guacamole.Layouts;
+using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.DotPeek
@@ -31,24 +33,23 @@ namespace WellFired.Guacamole.Examples.DotPeek
             var buildReportDiff = new BuildReportDiff(leftReport, rightReport);
             var buildReportDiffViewModel = new BuildReportDiffViewModel(buildReportDiff);
             
-
             var buildTime = DotPeekLabelFactory.Create("Build Time :", "10/06/2017 - 17:03");
-            var gitCommitID = DotPeekLabelFactory.Create("Commit ID :", "67ea1f1");
+            var gitCommitId = DotPeekLabelFactory.Create("Commit ID :", "67ea1f1");
             var platform = DotPeekLabelFactory.Create("Platform :", "MacOS");
             var unityVersion = DotPeekLabelFactory.Create("Unity Version :", "Unity 5.5.1f1");
             var buildSize = DotPeekLabelFactory.Create("Build size :", "199MB", "BuildSizeColor");
             
+            var grid = new Grid();
+            grid.AddRow(buildTime, gitCommitId);
+            grid.AddRow(platform, Grid.GetEmptyView());
+            grid.AddRow(unityVersion, Grid.GetEmptyView());
+            grid.AddRow(buildSize, Grid.GetEmptyView());
+            
             buildSize.BindingContext = buildReportDiffViewModel;
             buildReportDiffViewModel.DetermineDiffView();
 
-            Content =
-                LayoutFactory.CreateVerticalLayout
-                (
-                    LayoutFactory.CreateHorizontalLayout(buildTime, gitCommitID),
-                    platform,
-                    unityVersion,
-                    buildSize
-                );
+            Content = grid.GetGrid();
+            BackgroundColor = UIColor.FromRGB(40, 40, 40);
         }
     }
 }

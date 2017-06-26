@@ -41,6 +41,8 @@ namespace WellFired.Guacamole.Views
                 return;
 
             view.RectRequest = CalculateValidRectRequest(view);
+            //Thibault : In which situation View can be again processed by CalculateRectRequest so that we
+            // have to set a flag to true ? Layout inside Layout ?
             view.ValidRectRequest = true;
         }
 
@@ -152,6 +154,7 @@ namespace WellFired.Guacamole.Views
             if (minSize == UISize.Min)
                 return requestedSize;
 
+            //Thibault : It looks like we are setting requestedSize to minSize. Is it intended ?
             if (requestedSize.Width < minSize.Width)
                 requestedSize.Width = minSize.Width;
             if (requestedSize.Height < minSize.Height)

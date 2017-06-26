@@ -10,6 +10,7 @@ namespace WellFired.Guacamole.Examples.DotPeek.Styles
         {
             Setters =
             {
+                new Setter {Property = View.PaddingProperty, Value = 5},
                 new Setter {Property = View.BackgroundColorProperty, Value = UIColor.FromRGB(40, 40, 40)},
                 new Setter {Property = View.OutlineColorProperty, Value = UIColor.FromRGB(40, 40, 40)},
                 new Setter {Property = View.HorizontalLayoutProperty, Value = LayoutOptions.Fill},

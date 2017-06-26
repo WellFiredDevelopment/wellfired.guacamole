@@ -54,6 +54,9 @@
   <ItemGroup>
     <Compile Include="AdjacentLayoutExample\AdjacentLayoutTestApplication.cs" />
     <Compile Include="AdjacentLayoutExample\AdjacentLayoutTestWindow.cs" />
+    <Compile Include="DotPeekRefresh\DotPeekRefreshApplication.cs" />
+    <Compile Include="DotPeekRefresh\DotPeekRefreshPage.cs" />
+    <Compile Include="DotPeekRefresh\DotPeekWindow.cs" />
     <Compile Include="DotPeek\DotPeekApplication.cs" />
     <Compile Include="DotPeek\DotPeekPage.cs" />
     <Compile Include="DotPeek\DotPeekWindow.cs" />
@@ -64,6 +67,7 @@
     <Compile Include="DotPeek\Model\FileSize.cs" />
     <Compile Include="DotPeek\Styles\Label.cs" />
     <Compile Include="DotPeek\UIElementFactory\DotPeekLabelFactory.cs" />
+    <Compile Include="DotPeek\UIElementFactory\Grid.cs" />
     <Compile Include="DotPeek\ViewModel\BuildReportDiffViewModel.cs" />
     <Compile Include="LabelExample\LabelTestApplication.cs" />
     <Compile Include="LabelExample\LabelTestWindow.cs" />
