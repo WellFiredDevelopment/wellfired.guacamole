@@ -100,9 +100,12 @@
     <Compile Include="IView.cs" />
     <Compile Include="IWindow.cs" />
     <Compile Include="Layouts\AdjacentLayout.cs" />
+    <Compile Include="Layouts\AdjacentLayoutCellCalculator.cs" />
     <Compile Include="Layouts\ICanLayout.cs" />
     <Compile Include="Layouts\ILayoutable.cs" />
     <Compile Include="Layouts\ILayoutChildren.cs" />
+    <Compile Include="Layouts\IVirtualCell.cs" />
+    <Compile Include="Layouts\VirtualCell.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer\INativeRenderer.cs" />
     <Compile Include="Renderer\NativeRendererHelper.cs" />

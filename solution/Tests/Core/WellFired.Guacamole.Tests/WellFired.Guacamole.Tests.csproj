@@ -62,6 +62,13 @@
     <Compile Include="Bindable\FloatBindableObjectTests.cs" />
     <Compile Include="Bindable\IntBindableObjectTests.cs" />
     <Compile Include="Bindable\StringBindableObjectTests.cs" />
+    <Compile Include="Layout\CenterAndExpandChildren\Given_AnHorizontalAdjacentLayout_WithAllChildrenCenteredHorizontally.cs" />
+    <Compile Include="Layout\CenterAndExpandChildren\Given_AnHorizontalAdjacentLayout_WithAllChildrenCenteredVertically.cs" />
+    <Compile Include="Layout\CenterAndExpandChildren\Given_AnHorizontalAdjacentLayout_WithTwoChildren.cs" />
+    <Compile Include="Layout\CenterAndExpandChildren\Given_AnVerticalAdjacentLayout_WithAllChildrenCentered.cs" />
+    <Compile Include="Layout\CenterAndExpandChildren\Given_AnVerticalAdjacentLayout_WithAllChildrenCenteredHorizontally.cs" />
+    <Compile Include="Layout\CenterAndExpandChildren\Given_AnVerticalAdjacentLayout_WithTwoChildren.cs" />
+    <Compile Include="Layout\CenterAndExpandChildren\LayoutFactory.cs" />
     <Compile Include="Layout\CenterAlign\GivenAViewWithHorizontalAndVerticalCenterAlign.cs" />
     <Compile Include="Layout\CenterAlign\Given_AViewWithHorizontalCenterAlign.cs" />
     <Compile Include="Layout\CenterAlign\Given_AViewWithVerticalCenterAlign.cs" />
