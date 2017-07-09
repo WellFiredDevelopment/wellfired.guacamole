@@ -192,6 +192,11 @@ namespace WellFired.Guacamole.Layouts
             return new AdjacentLayout { Orientation = orientation };
         }
 
+        public static ILayoutChildren Of(OrientationOptions orientation, int spacing)
+        {
+            return new AdjacentLayout { Orientation = orientation, Spacing = spacing };
+        }
+
         public static ILayoutChildren Of(OrientationOptions orientation, int spacing, LayoutOptions horizontalLayoutOptions, LayoutOptions verticalLayoutOptions)
         {
             return new AdjacentLayout { Orientation = orientation, Spacing = spacing, HorizontalLayout = horizontalLayoutOptions, VerticalLayout = verticalLayoutOptions };
