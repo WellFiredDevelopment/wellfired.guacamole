@@ -17,6 +17,9 @@ namespace WellFired.Guacamole.Types
 		[PublicAPI]
 		public static UISize One { get; } = Of(1);
 
+		[PublicAPI]
+		public static UISize Zero { get; } = Of(0);
+
 		public UISize(int width, int height) : this()
 		{
 			Width = width;
