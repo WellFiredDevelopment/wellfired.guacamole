@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
@@ -15,10 +16,17 @@ namespace WellFired.Guacamole.Layouts
 
         public void Layout(IEnumerable<ILayoutable> layoutables, UIRect availableSpace, UIPadding containerPadding)
         {
+            var layoutablesArray = layoutables as ILayoutable[] ?? layoutables.ToArray();
+            
+            // This is a really quick implementation of something that we should actually build out, into a real feature.
+            // If we split the view into virtual cells, we can test the layout functionality irrespective of the combinations
+            // Atm, we have to build too many tests, so this can be a solution to that problem. ATM it's quick dirty
+            // and private.
+            var virtualCells = AdjacentLayoutCellCalculator.GetCellsFromLayoutablesArray(layoutablesArray, availableSpace, Orientation, Spacing);
+
             var x = containerPadding.Left;
             var y = containerPadding.Top;
-
-            var layoutablesArray = layoutables as ILayoutable[] ?? layoutables.ToArray();
+            
             if (HorizontalLayout == LayoutOptions.Center)
             {
                 var totalWidth = layoutablesArray.Sum(o => o.RectRequest.Width) / 2;
@@ -31,23 +39,23 @@ namespace WellFired.Guacamole.Layouts
                 var totalHeightWithSpacing = totalHeight + (layoutablesArray.Length - 1) * Spacing / 2;
                 y = availableSpace.Height / 2 - totalHeightWithSpacing;
             }
-                            
+            
             switch (Orientation)
             {
                 case OrientationOptions.Horizontal:
-                    foreach (var layoutable in layoutablesArray)
+                    foreach (var virtualCell in virtualCells)
                     {   
-                        layoutable.X = x;
-                        layoutable.Y = y;
-                        x += layoutable.RectRequest.Width + Spacing;
+                        virtualCell.Layoutable.X = x + virtualCell.PositionInCell.X;
+                        virtualCell.Layoutable.Y = y + virtualCell.PositionInCell.Y;
+                        x += virtualCell.Rect.Width + Spacing;
                     }
                     break;
                 case OrientationOptions.Vertical:
-                    foreach (var layoutable in layoutablesArray)
+                    foreach (var virtualCell in virtualCells)
                     {
-                        layoutable.X = x;
-                        layoutable.Y = y;
-                        y += layoutable.RectRequest.Height + Spacing;
+                        virtualCell.Layoutable.X = x + virtualCell.PositionInCell.X;
+                        virtualCell.Layoutable.Y = y + virtualCell.PositionInCell.Y;
+                        y += virtualCell.Rect.Height + Spacing;
                     }
                     break;
                 default:
