@@ -11,12 +11,12 @@ namespace WellFired.Guacamole.Examples.Taskist.View
     {
         public Inspector()
         {
-            OutlineColor = UIColor.Black;
-            BackgroundColor = UIColor.Red;
+            OutlineColor = UIColor.FromRGB(241, 241, 241);
+            BackgroundColor = UIColor.FromRGB(250, 250, 250);
             MinSize = UISize.Of(300, 30);
             VerticalLayout = LayoutOptions.Fill;
             HorizontalLayout = LayoutOptions.Expand;
-            Padding = UIPadding.With(40, 0, 0, 0);
+            Padding = UIPadding.With(30, 0, 0, 0);
 
             var collection = new ObservableCollection<Filter>
             {
@@ -29,8 +29,9 @@ namespace WellFired.Guacamole.Examples.Taskist.View
 
             Content = new ListView
             {
-                Spacing = 5,
-                BackgroundColor = UIColor.Blue,
+                OutlineColor = UIColor.FromRGB(250, 250, 250),
+                BackgroundColor = UIColor.FromRGB(250, 250, 250),
+                Spacing = 8,
                 HorizontalLayout = LayoutOptions.Fill,
                 VerticalLayout = LayoutOptions.Center,
                 ItemTemplate = DataTemplate.Of(typeof(FilterCell)),

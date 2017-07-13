@@ -6,9 +6,9 @@ namespace WellFired.Guacamole.Examples.Taskist.View
     {
         public TaskistTopBar()
         {
-            OutlineColor = UIColor.Black;
-            HorizontalLayout = LayoutOptions.Fill;
+            OutlineColor = UIColor.FromRGB(186, 52, 27);
             BackgroundColor = UIColor.FromRGB(203, 85, 72);
+            HorizontalLayout = LayoutOptions.Fill;
             MinSize = UISize.Of(0, 40);
         }
     }
