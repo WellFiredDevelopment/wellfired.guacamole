@@ -6,11 +6,8 @@ using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Views
 {
-	public class LayoutView : View, ICanLayout
+	public partial class LayoutView : View, ICanLayout
 	{
-	    public IList<ILayoutable> Children { get; set; }
-	    public ILayoutChildren Layout { get; set; }
-
 	    public LayoutView()
 		{
 		    Children = new List<ILayoutable>();
@@ -45,15 +42,19 @@ namespace WellFired.Guacamole.Views
 	    {
 	        base.OnPropertyChanged(sender, e);
 
-	        if (e.PropertyName != BindingContextProperty.PropertyName)
-	            return;
+		    if (e.PropertyName == ChildrenProperty.PropertyName || 
+		        e.PropertyName == BindingContextProperty.PropertyName)
+			    SetupChildBindingContext();
+	    }
 
+		private void SetupChildBindingContext()
+		{
 	        foreach (var child in Children)
 	        {
 	            var view = child as View;
 	            if (view != null)
 	                view.BindingContext = BindingContext;
 	        }
-	    }
+		}
 	}
 }

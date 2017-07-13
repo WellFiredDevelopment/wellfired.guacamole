@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using WellFired.Guacamole.Collection;
+﻿using WellFired.Guacamole.Collection;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Examples.Taskist.View.Cells;
 using WellFired.Guacamole.Examples.Taskist.ViewModel;
@@ -27,7 +26,7 @@ namespace WellFired.Guacamole.Examples.Taskist.View
             Content = new ListView
             {
                 BackgroundColor = UIColor.Blue,
-                HorizontalLayout = LayoutOptions.Center,
+                HorizontalLayout = LayoutOptions.Fill,
                 VerticalLayout = LayoutOptions.Center,
                 ItemTemplate = DataTemplate.Of(typeof(FilterCell)),
                 ItemSource = collection

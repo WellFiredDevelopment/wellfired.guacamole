@@ -10,14 +10,25 @@ namespace WellFired.Guacamole.Examples.Taskist.View.Cells
     {
         public FilterCell()
         {
-            var filterColor = new Button();
-            var filterName = new Label();
+            var filterColor = new Button
+            {
+                HorizontalLayout = LayoutOptions.Fill,
+                VerticalLayout = LayoutOptions.Center,
+                MinSize = UISize.Of(10) 
+            };
+            
+            var filterName = new Label 
+            {
+                HorizontalLayout = LayoutOptions.Expand,
+                VerticalLayout = LayoutOptions.Center
+            };
 
             filterName.Bind(Label.TextProperty, "FilterName");
 
             Content = new LayoutView
             {
                 Layout = AdjacentLayout.Of(OrientationOptions.Horizontal),
+                VerticalLayout = LayoutOptions.Center,
                 Children = new List<ILayoutable> {
                     filterColor,
                     filterName
