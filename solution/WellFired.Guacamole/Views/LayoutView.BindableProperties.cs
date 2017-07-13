@@ -7,15 +7,13 @@ namespace WellFired.Guacamole.Views
 {
     public partial class LayoutView
     {
-        [PublicAPI] public static readonly BindableProperty ChildrenProperty = BindableProperty.Create<
-            LayoutView, IList<ILayoutable>>(
+        [PublicAPI] public static readonly BindableProperty ChildrenProperty = BindableProperty.Create<LayoutView, IList<ILayoutable>>(
             default(IList<ILayoutable>),
             BindingMode.TwoWay,
             layoutView => layoutView.Children
         );
         
-        [PublicAPI] public static readonly BindableProperty LayoutProperty = BindableProperty.Create<
-            LayoutView, ILayoutChildren>(
+        [PublicAPI] public static readonly BindableProperty LayoutProperty = BindableProperty.Create<LayoutView, ILayoutChildren>(
             default(ILayoutChildren),
             BindingMode.TwoWay,
             layoutView => layoutView.Layout

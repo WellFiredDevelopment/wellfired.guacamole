@@ -97,5 +97,10 @@ namespace WellFired.Guacamole.Types
 	    {
 	        return new UIPadding(i);
 	    }
+
+		public static UIPadding With(int left, int top, int right, int bottom)
+		{
+			return new UIPadding(left, top, right, bottom);
+		}
 	}
 }

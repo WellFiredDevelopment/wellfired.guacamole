@@ -15,16 +15,21 @@ namespace WellFired.Guacamole.Examples.Taskist.View
             BackgroundColor = UIColor.Red;
             MinSize = UISize.Of(300, 30);
             VerticalLayout = LayoutOptions.Fill;
-            HorizontalLayout = LayoutOptions.Fill;
+            HorizontalLayout = LayoutOptions.Expand;
+            Padding = UIPadding.With(40, 0, 0, 0);
 
             var collection = new ObservableCollection<Filter>
             {
-                new Filter {FilterName = "Filter 0"},
-                new Filter {FilterName = "Filter 1"}
+                new Filter { FilterName = "Filter 0" },
+                new Filter { FilterName = "Filter 1" },
+                new Filter { FilterName = "Filter 2" },
+                new Filter { FilterName = "Filter 3" },
+                new Filter { FilterName = "Filter 4" }
             };
 
             Content = new ListView
             {
+                Spacing = 5,
                 BackgroundColor = UIColor.Blue,
                 HorizontalLayout = LayoutOptions.Fill,
                 VerticalLayout = LayoutOptions.Center,

@@ -9,20 +9,20 @@ using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Views
 {
-    public class ListView : ItemsView
+    public partial class ListView : ItemsView
     {
         public ListView()
         {
             VerticalLayout = LayoutOptions.Fill;
             HorizontalLayout = LayoutOptions.Fill;
-            Layout = new AdjacentLayout {Orientation = OrientationOptions.Vertical};
+            Layout = AdjacentLayout.Of(OrientationOptions.Vertical);
         }
 
         protected override ILayoutable CreateDefault(object item)
         {
             string text = null;
             if (item != null)
-                text = item.ToString ();
+                text = item.ToString();
 
             return new LabelCell {
                 Text = text

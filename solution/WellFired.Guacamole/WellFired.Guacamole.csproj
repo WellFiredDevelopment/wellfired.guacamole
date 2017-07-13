@@ -142,6 +142,7 @@
     <Compile Include="Views\Label.cs" />
     <Compile Include="Views\LayoutView.BindableProperties.cs" />
     <Compile Include="Views\LayoutView.cs" />
+    <Compile Include="Views\ListView.BindableProperties.cs" />
     <Compile Include="Views\ListView.cs" />
     <Compile Include="Views\NumberEntry.cs" />
     <Compile Include="Views\Page.cs" />
