@@ -9,7 +9,6 @@ namespace WellFired.Guacamole.Views
 	public class LayoutView : View, ICanLayout
 	{
 	    public IList<ILayoutable> Children { get; set; }
-	    public int Spacing { [PublicAPI] get; set; }
 	    public ILayoutChildren Layout { get; set; }
 
 	    public LayoutView()
@@ -24,8 +23,14 @@ namespace WellFired.Guacamole.Views
 	    {
 	        base.Render(parentRect);
 
+		    var finalContentRect = FinalRenderRect;
+		    finalContentRect.X += ContentRectRequest.X;
+		    finalContentRect.Y += ContentRectRequest.Y;
+		    finalContentRect.Width = ContentRectRequest.Width;
+		    finalContentRect.Height = ContentRectRequest.Height;
+
 	        foreach (var child in Children)
-	            (child as View)?.Render(FinalRenderRect);
+	            (child as View)?.Render(finalContentRect);
 	    }
 
 	    public override void InvalidateRectRequest()

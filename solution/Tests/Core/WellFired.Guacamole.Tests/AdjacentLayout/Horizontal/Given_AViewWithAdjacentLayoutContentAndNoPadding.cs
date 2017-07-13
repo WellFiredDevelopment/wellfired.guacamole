@@ -5,10 +5,10 @@ using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
-namespace WellFired.Guacamole.Tests.Layout.Horizontal
+namespace WellFired.Guacamole.Tests.AdjacentLayout.Horizontal
 {
     [TestFixture]
-    public class Given_AViewWithAdjacentLayoutContentAndPadding
+    public class Given_AViewWithAdjacentLayoutContentAndNoPadding
     {
         [Test]
         public void When_Layout_Then_LayoutIsCorrect()
@@ -32,7 +32,7 @@ namespace WellFired.Guacamole.Tests.Layout.Horizontal
             var parentView = Substitute.For<IView>();
             parentView.HorizontalLayout.Returns(LayoutOptions.Fill);
             parentView.VerticalLayout.Returns(LayoutOptions.Fill);
-            parentView.Padding.Returns(UIPadding.Of(10));
+            parentView.Padding.Returns(UIPadding.Of(0));
             parentView.Content.Returns(layout);
 
             ViewSizingExtensions.DoSizingAndLayout(parentView, availableSize);
@@ -42,10 +42,10 @@ namespace WellFired.Guacamole.Tests.Layout.Horizontal
             Assert.That(parentView.RectRequest.Width, Is.EqualTo(100));
             Assert.That(parentView.RectRequest.Height, Is.EqualTo(100));
 
-            Assert.That(layout.RectRequest.X, Is.EqualTo(10));
-            Assert.That(layout.RectRequest.Y, Is.EqualTo(10));
-            Assert.That(layout.RectRequest.Width, Is.EqualTo(80));
-            Assert.That(layout.RectRequest.Height, Is.EqualTo(80));
+            Assert.That(layout.RectRequest.X, Is.EqualTo(0));
+            Assert.That(layout.RectRequest.Y, Is.EqualTo(0));
+            Assert.That(layout.RectRequest.Width, Is.EqualTo(100));
+            Assert.That(layout.RectRequest.Height, Is.EqualTo(100));
         }
     }
 }

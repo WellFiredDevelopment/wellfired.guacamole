@@ -41,6 +41,8 @@ namespace WellFired.Guacamole.Views
                 return;
 
             view.RectRequest = CalculateValidRectRequest(view);
+            view.ContentRectRequest = view.RectRequest;
+            
             //Thibault : In which situation View can be again processed by CalculateRectRequest so that we
             // have to set a flag to true ? Layout inside Layout ?
             view.ValidRectRequest = true;
@@ -73,6 +75,7 @@ namespace WellFired.Guacamole.Views
         public static void AttemptToFullfillRequests(IView view, UIRect availableSpace)
         {
             var rectRequest = view.RectRequest;
+            var contentRectRequest = view.ContentRectRequest;
 
             rectRequest.X = availableSpace.X;
             rectRequest.Y = availableSpace.Y;
@@ -81,9 +84,11 @@ namespace WellFired.Guacamole.Views
             {
                 case LayoutOptions.Fill:
                     rectRequest.Width = availableSpace.Width;
+                    contentRectRequest.Width = availableSpace.Width;
                     break;
                 case LayoutOptions.Center:
-                    rectRequest.X = (availableSpace.Width - rectRequest.Width) / 2;
+                    rectRequest.Width = availableSpace.Width;
+                    contentRectRequest.X = availableSpace.Width / 2 - contentRectRequest.Width / 2;
                     break;
                 case LayoutOptions.Expand:
                     break;
@@ -95,9 +100,11 @@ namespace WellFired.Guacamole.Views
             {
                 case LayoutOptions.Fill:
                     rectRequest.Height = availableSpace.Height;
+                    contentRectRequest.Height = availableSpace.Height;
                     break;
                 case LayoutOptions.Center:
-                    rectRequest.Y = (availableSpace.Height - rectRequest.Height) / 2;
+                    rectRequest.Height = availableSpace.Height;
+                    contentRectRequest.Y = availableSpace.Height / 2 - contentRectRequest.Height / 2;
                     break;
                 case LayoutOptions.Expand:
                     break;
@@ -106,12 +113,13 @@ namespace WellFired.Guacamole.Views
             }
 
             view.RectRequest = rectRequest;
+            view.ContentRectRequest = contentRectRequest;
 
             if (view.Content != null)
-                AttemptToFullfillRequests(view.Content, UIRect.With(view.RectRequest.Width, view.RectRequest.Height) - view.Padding);
+                AttemptToFullfillRequests(view.Content, UIRect.With(view.ContentRectRequest.Width, view.ContentRectRequest.Height) - view.Padding);
 
             var layout = view as ICanLayout;
-            layout?.Layout.AttemptToFullfillRequests(layout.Children, UIRect.With(view.RectRequest.Width, view.RectRequest.Height) - view.Padding, view.Padding, view.HorizontalLayout, view.VerticalLayout);
+            layout?.Layout.AttemptToFullfillRequests(layout.Children, UIRect.With(view.ContentRectRequest.Width, view.ContentRectRequest.Height) - view.Padding, view.Padding, view.HorizontalLayout, view.VerticalLayout);
         }
 
         public static void UpdateContextIfNeeded(IBindableObject bindable)

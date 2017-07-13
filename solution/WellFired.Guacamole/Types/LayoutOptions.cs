@@ -13,7 +13,7 @@
 		Fill,
 
 	    /// <summary>
-	    /// Your view will be centered within it's parent
+	    /// Your view will be centered within it's parent.
 	    /// </summary>
 	    Center
 	}

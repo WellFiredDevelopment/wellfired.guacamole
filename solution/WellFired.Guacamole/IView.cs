@@ -8,6 +8,7 @@ namespace WellFired.Guacamole
 	    IView Content { get; }
 	    UIPadding Padding { get; }
 	    UIRect RectRequest { get; set; }
+		UIRect ContentRectRequest { get; set; }
 	    string Id { get; set; }
 	    bool ValidRectRequest { get; set; }
 	    INativeRenderer NativeRenderer { get; }

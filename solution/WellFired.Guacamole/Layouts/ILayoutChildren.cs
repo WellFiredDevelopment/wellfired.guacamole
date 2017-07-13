@@ -28,16 +28,15 @@ namespace WellFired.Guacamole.Layouts
         /// <param name="containerPadding">The parents padding.</param>
         /// <param name="horizontalLayout"></param>
         /// <param name="verticalLayout"></param>
-        void AttemptToFullfillRequests(IList<ILayoutable> children, UIRect availableSpace, UIPadding containerPadding,
-            LayoutOptions horizontalLayout, LayoutOptions verticalLayout);
+        void AttemptToFullfillRequests(ICollection<ILayoutable> children, UIRect availableSpace, UIPadding containerPadding, LayoutOptions horizontalLayout, LayoutOptions verticalLayout);
 
         /// <summary>
         /// 3. We layout our children in the space that was available to us.
         /// </summary>
         /// <param name="layoutables">The layoutables that we will layout.</param>
         /// <param name="availableSpace">The space available to these objects. Please be aware that this may have 
-        /// changed since AttemptToFullfillRequests was called.</param>
+        ///     changed since AttemptToFullfillRequests was called.</param>
         /// <param name="containerPadding">The parents padding.</param>
-        void Layout(IEnumerable<ILayoutable> layoutables, UIRect availableSpace, UIPadding containerPadding);
+        void Layout(ICollection<ILayoutable> layoutables, UIRect availableSpace, UIPadding containerPadding);
     }
 }

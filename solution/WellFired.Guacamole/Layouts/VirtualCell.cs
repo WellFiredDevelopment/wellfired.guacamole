@@ -10,7 +10,7 @@ namespace WellFired.Guacamole.Layouts
 
         public void CalculatePositionInCell()
         {
-            if (Layoutable.HorizontalLayout != LayoutOptions.Center && Layoutable.VerticalLayout != LayoutOptions.Center)
+/*            if (Layoutable.HorizontalLayout != LayoutOptions.Center && Layoutable.VerticalLayout != LayoutOptions.Center)
             {
                 PositionInCell = new UIRect(0, 0, Layoutable.RectRequest.Width, Layoutable.RectRequest.Height);
                 return;
@@ -33,8 +33,8 @@ namespace WellFired.Guacamole.Layouts
                 var half = Layoutable.RectRequest.Height / 2;
                 rect.Y = halfContainer - half;
             }
-            
-            PositionInCell = rect;
+            */
+            PositionInCell = UIRect.Zero;
         }
     }
 }

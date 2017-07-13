@@ -3,10 +3,10 @@ using NUnit.Framework;
 using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Types;
 
-namespace WellFired.Guacamole.Tests.Layout.Vertical
+namespace WellFired.Guacamole.Tests.AdjacentLayout.Horizontal
 {
     [TestFixture]
-    public class Given_AnAdjacentLayoutWithNoPadding
+    public class Given_AnAdjacentLayoutWithNoPadding_And_NoSpacing
     {
         [Test]
         public void OneChild()
@@ -16,7 +16,7 @@ namespace WellFired.Guacamole.Tests.Layout.Vertical
             child.Y.Returns(0);
             child.RectRequest.Returns(UIRect.With(0, 0, 50, 50));
 
-            var layout = new AdjacentLayout { Orientation = OrientationOptions.Vertical, Spacing = 5 };
+            var layout = new Layouts.AdjacentLayout { Orientation = OrientationOptions.Horizontal, Spacing = 0};
             layout.Layout(new [] { child }, UIRect.Max, UIPadding.Zero);
 
             Assert.That(child.X, Is.EqualTo(0));
@@ -36,13 +36,13 @@ namespace WellFired.Guacamole.Tests.Layout.Vertical
             child2.Y.Returns(0);
             child2.RectRequest.Returns(UIRect.With(0, 0, 50, 50));
 
-            var layout = new AdjacentLayout { Orientation = OrientationOptions.Vertical, Spacing = 5};
+            var layout = new Layouts.AdjacentLayout { Orientation = OrientationOptions.Horizontal, Spacing = 0};
             layout.Layout(new [] { child, child2 }, UIRect.Max, UIPadding.Zero);
 
             Assert.That(child.X, Is.EqualTo(0));
             Assert.That(child.Y, Is.EqualTo(0));
-            Assert.That(child2.X, Is.EqualTo(0));
-            Assert.That(child2.Y, Is.EqualTo(55));
+            Assert.That(child2.X, Is.EqualTo(50));
+            Assert.That(child2.Y, Is.EqualTo(0));
         }
 
         [Test]
@@ -63,15 +63,15 @@ namespace WellFired.Guacamole.Tests.Layout.Vertical
             child3.Y.Returns(0);
             child3.RectRequest.Returns(UIRect.With(0, 0, 50, 50));
 
-            var layout = new AdjacentLayout { Orientation = OrientationOptions.Vertical, Spacing = 5};
+            var layout = new Layouts.AdjacentLayout { Orientation = OrientationOptions.Horizontal, Spacing = 0};
             layout.Layout(new [] { child, child2, child3 }, UIRect.Max, UIPadding.Zero);
 
             Assert.That(child.X, Is.EqualTo(0));
             Assert.That(child.Y, Is.EqualTo(0));
-            Assert.That(child2.X, Is.EqualTo(0));
-            Assert.That(child2.Y, Is.EqualTo(55));
-            Assert.That(child3.X, Is.EqualTo(0));
-            Assert.That(child3.Y, Is.EqualTo(110));
+            Assert.That(child2.X, Is.EqualTo(50));
+            Assert.That(child2.Y, Is.EqualTo(0));
+            Assert.That(child3.X, Is.EqualTo(100));
+            Assert.That(child3.Y, Is.EqualTo(0));
         }
     }
 }

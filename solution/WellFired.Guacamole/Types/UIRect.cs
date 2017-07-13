@@ -22,6 +22,9 @@ namespace WellFired.Guacamole.Types
 		public static UIRect One { get; } = With(0, 0, 1, 1);
 
 		[PublicAPI]
+		public static UIRect Zero { get; } = With(0, 0, 0, 0);
+
+		[PublicAPI]
 		public int X
 		{
 			get { return _x; }

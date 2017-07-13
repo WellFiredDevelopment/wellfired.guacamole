@@ -3,10 +3,10 @@ using NUnit.Framework;
 using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Types;
 
-namespace WellFired.Guacamole.Tests.Layout.CalculateValidRectRequest
+namespace WellFired.Guacamole.Tests.AdjacentLayout.CalculateValidRectRequest
 {
     [TestFixture]
-    public class Given_AnVerticalsAdacentLayoutWithNoSpacing
+    public class Given_AnHorizontalAdacentLayoutWithFiveSpacing
     {
         [Test]
         public void With_OneChild_And_NoMinSize()
@@ -14,7 +14,7 @@ namespace WellFired.Guacamole.Tests.Layout.CalculateValidRectRequest
             var child0 = Substitute.For<ILayoutable>();
             child0.RectRequest.Returns(UIRect.With(0, 0, 10, 10));
             
-            var adjacentLayout = AdjacentLayout.Of(OrientationOptions.Vertical);
+            var adjacentLayout = Layouts.AdjacentLayout.Of(OrientationOptions.Horizontal, 5);
             var rectRequest = adjacentLayout.CalculateValidRectRequest(new[] {child0}, UISize.Zero);
 
             Assert.That(rectRequest, Is.EqualTo(UIRect.With(0, 0, 10, 10)));
@@ -29,10 +29,10 @@ namespace WellFired.Guacamole.Tests.Layout.CalculateValidRectRequest
             var child1 = Substitute.For<ILayoutable>();
             child1.RectRequest.Returns(UIRect.With(0, 0, 10, 10));
             
-            var adjacentLayout = AdjacentLayout.Of(OrientationOptions.Vertical);
+            var adjacentLayout = Layouts.AdjacentLayout.Of(OrientationOptions.Horizontal, 5);
             var rectRequest = adjacentLayout.CalculateValidRectRequest(new[] {child0, child1}, UISize.Zero);
 
-            Assert.That(rectRequest, Is.EqualTo(UIRect.With(0, 0, 10, 20)));
+            Assert.That(rectRequest, Is.EqualTo(UIRect.With(0, 0, 25, 10)));
         }
         
         [Test]
@@ -47,10 +47,10 @@ namespace WellFired.Guacamole.Tests.Layout.CalculateValidRectRequest
             var child2 = Substitute.For<ILayoutable>();
             child2.RectRequest.Returns(UIRect.With(0, 0, 10, 10));
             
-            var adjacentLayout = AdjacentLayout.Of(OrientationOptions.Vertical);
+            var adjacentLayout = Layouts.AdjacentLayout.Of(OrientationOptions.Horizontal, 5);
             var rectRequest = adjacentLayout.CalculateValidRectRequest(new[] {child0, child1, child2}, UISize.Zero);
 
-            Assert.That(rectRequest, Is.EqualTo(UIRect.With(0, 0, 10, 30)));
+            Assert.That(rectRequest, Is.EqualTo(UIRect.With(0, 0, 40, 10)));
         }
         
         [Test]
@@ -59,7 +59,7 @@ namespace WellFired.Guacamole.Tests.Layout.CalculateValidRectRequest
             var child0 = Substitute.For<ILayoutable>();
             child0.RectRequest.Returns(UIRect.With(0, 0, 10, 10));
             
-            var adjacentLayout = AdjacentLayout.Of(OrientationOptions.Vertical);
+            var adjacentLayout = Layouts.AdjacentLayout.Of(OrientationOptions.Horizontal, 5);
             var rectRequest = adjacentLayout.CalculateValidRectRequest(new[] {child0}, UISize.Of(3));
 
             Assert.That(rectRequest, Is.EqualTo(UIRect.With(0, 0, 10, 10)));
@@ -74,10 +74,10 @@ namespace WellFired.Guacamole.Tests.Layout.CalculateValidRectRequest
             var child1 = Substitute.For<ILayoutable>();
             child1.RectRequest.Returns(UIRect.With(0, 0, 10, 10));
             
-            var adjacentLayout = AdjacentLayout.Of(OrientationOptions.Vertical);
+            var adjacentLayout = Layouts.AdjacentLayout.Of(OrientationOptions.Horizontal, 5);
             var rectRequest = adjacentLayout.CalculateValidRectRequest(new[] {child0, child1}, UISize.Of(3));
 
-            Assert.That(rectRequest, Is.EqualTo(UIRect.With(0, 0, 10, 20)));
+            Assert.That(rectRequest, Is.EqualTo(UIRect.With(0, 0, 25, 10)));
         }
         
         [Test]
@@ -92,10 +92,10 @@ namespace WellFired.Guacamole.Tests.Layout.CalculateValidRectRequest
             var child2 = Substitute.For<ILayoutable>();
             child2.RectRequest.Returns(UIRect.With(0, 0, 10, 10));
             
-            var adjacentLayout = AdjacentLayout.Of(OrientationOptions.Vertical);
+            var adjacentLayout = Layouts.AdjacentLayout.Of(OrientationOptions.Horizontal, 5);
             var rectRequest = adjacentLayout.CalculateValidRectRequest(new[] {child0, child1, child2}, UISize.Of(3));
 
-            Assert.That(rectRequest, Is.EqualTo(UIRect.With(0, 0, 10, 30)));
+            Assert.That(rectRequest, Is.EqualTo(UIRect.With(0, 0, 40, 10)));
         }
         
         [Test]
@@ -104,7 +104,7 @@ namespace WellFired.Guacamole.Tests.Layout.CalculateValidRectRequest
             var child0 = Substitute.For<ILayoutable>();
             child0.RectRequest.Returns(UIRect.With(0, 0, 10, 10));
             
-            var adjacentLayout = AdjacentLayout.Of(OrientationOptions.Vertical);
+            var adjacentLayout = Layouts.AdjacentLayout.Of(OrientationOptions.Horizontal, 5);
             var rectRequest = adjacentLayout.CalculateValidRectRequest(new[] {child0}, UISize.Of(300));
 
             Assert.That(rectRequest, Is.EqualTo(UIRect.With(0, 0, 300, 300)));
@@ -119,7 +119,7 @@ namespace WellFired.Guacamole.Tests.Layout.CalculateValidRectRequest
             var child1 = Substitute.For<ILayoutable>();
             child1.RectRequest.Returns(UIRect.With(0, 0, 10, 10));
             
-            var adjacentLayout = AdjacentLayout.Of(OrientationOptions.Vertical);
+            var adjacentLayout = Layouts.AdjacentLayout.Of(OrientationOptions.Horizontal, 5);
             var rectRequest = adjacentLayout.CalculateValidRectRequest(new[] {child0, child1}, UISize.Of(300));
 
             Assert.That(rectRequest, Is.EqualTo(UIRect.With(0, 0, 300, 300)));
@@ -137,7 +137,7 @@ namespace WellFired.Guacamole.Tests.Layout.CalculateValidRectRequest
             var child2 = Substitute.For<ILayoutable>();
             child2.RectRequest.Returns(UIRect.With(0, 0, 10, 10));
             
-            var adjacentLayout = AdjacentLayout.Of(OrientationOptions.Vertical);
+            var adjacentLayout = Layouts.AdjacentLayout.Of(OrientationOptions.Horizontal, 5);
             var rectRequest = adjacentLayout.CalculateValidRectRequest(new[] {child0, child1, child2}, UISize.Of(300));
 
             Assert.That(rectRequest, Is.EqualTo(UIRect.With(0, 0, 300, 300)));

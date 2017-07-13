@@ -41,8 +41,7 @@ namespace WellFired.Guacamole.Examples.StylingExample
 
 			Content = new LayoutView
 			{
-			    Layout = new AdjacentLayout { Orientation = OrientationOptions.Horizontal },
-			    Spacing = 5,
+			    Layout = new AdjacentLayout { Orientation = OrientationOptions.Horizontal, Spacing = 5 },
 				HorizontalLayout = LayoutOptions.Fill,
 				VerticalLayout = LayoutOptions.Expand,
 				Children =

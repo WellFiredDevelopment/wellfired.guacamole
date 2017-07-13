@@ -16,7 +16,5 @@ namespace WellFired.Guacamole.Views
             get { return _validRectRequest.Y; }
             set { _validRectRequest.Y = value; }
         }
-
-        public UIRect RectRequest => _validRectRequest;
     }
 }

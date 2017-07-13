@@ -16,7 +16,6 @@ namespace WellFired.Guacamole.Integration.Layouts.Complex
                 Layout = AdjacentLayout.Of(OrientationOptions.Horizontal),
                 HorizontalLayout = LayoutOptions.Fill,
                 VerticalLayout = LayoutOptions.Fill,
-                Spacing = 0,
                 Children =
                 {
                     new Label { HorizontalLayout = LayoutOptions.Fill, VerticalLayout = LayoutOptions.Fill },
@@ -31,7 +30,6 @@ namespace WellFired.Guacamole.Integration.Layouts.Complex
                 HorizontalLayout = LayoutOptions.Fill,
                 VerticalLayout = LayoutOptions.Fill,
                 Layout = AdjacentLayout.Of(OrientationOptions.Vertical),
-                Spacing = 0,
                 Children =
                 {
                     label,

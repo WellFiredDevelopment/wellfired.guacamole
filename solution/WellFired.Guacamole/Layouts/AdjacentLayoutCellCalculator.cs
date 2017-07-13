@@ -6,27 +6,11 @@ using WellFired.Guacamole.Types;
 namespace WellFired.Guacamole.Layouts
 {
     public static class AdjacentLayoutCellCalculator
-    {
-        public static IEnumerable<IVirtualCell> GetCellsFromLayoutablesArray(
-            ICollection<ILayoutable> layoutablesArray, 
-            UIRect availableSpace, 
-            OrientationOptions orientation, 
-            int spacing)
+    {   
+        public static void Calculate(ICollection<ILayoutable> cellArray, UIRect availableSpace, OrientationOptions orientation, int spacing)
         {
-            var cellArray = new VirtualCell[layoutablesArray.Count];
-            for (var index = 0; index < layoutablesArray.Count; index++)
-                cellArray[index] = new VirtualCell {Layoutable = layoutablesArray.ElementAt(index)};
+            var totalLostBySpacing = spacing * (cellArray.Count - 1);
             
-            BuildCells(cellArray, availableSpace, orientation, spacing);
-
-            foreach (var cell in cellArray)
-                cell.CalculatePositionInCell();
-            
-            return cellArray;
-        }
-        
-        private static void BuildCells(ICollection<VirtualCell> cellArray, UIRect availableSpace, OrientationOptions orientation, int spacing)
-        {
             var getImportantLayout = new Func<ILayoutable, LayoutOptions>(layoutable =>
                 orientation == OrientationOptions.Horizontal
                     ? layoutable.HorizontalLayout
@@ -55,7 +39,7 @@ namespace WellFired.Guacamole.Layouts
             // A Static element is an element with expand. If we have any elements who are set to fill, then centered 
             // elements are also considered static.
             var staticElements = cellArray.Where(o => {
-                var layout = getImportantLayout(o.Layoutable);
+                var layout = getImportantLayout(o);
                 return layout == LayoutOptions.Expand || anyFill && layout == LayoutOptions.Center;
             }).ToArray();
             
@@ -65,20 +49,20 @@ namespace WellFired.Guacamole.Layouts
                 if (onlyExpand)
                     return false;
                 
-                var layout = getImportantLayout(o.Layoutable);
+                var layout = getImportantLayout(o);
                 if (anyFill && layout == LayoutOptions.Fill)
                     return true;
 
-                return layout == LayoutOptions.Center;
+                return !anyFill && layout == LayoutOptions.Center;
             }).ToArray();
 
-            var staticWidth = staticElements.Select(o => o.Layoutable.RectRequest).Sum(getImportantSize);
-            var dynamicWidth = getImportantSize(availableSpace) - staticWidth;
+            var staticWidth = staticElements.Select(o => o.RectRequest).Sum(getImportantSize);
+            var dynamicWidth = getImportantSize(availableSpace) - totalLostBySpacing - staticWidth;
             var dynamicSharedSpace = !dynamicElements.Any() ? 0 : dynamicWidth / dynamicElements.Length;
 
             foreach (var element in dynamicElements)
             {
-                var rect = element.Rect;
+                var rect = element.RectRequest;
                 
                 if (orientation == OrientationOptions.Horizontal)
                     rect.Width = (int)dynamicSharedSpace;
@@ -90,26 +74,27 @@ namespace WellFired.Guacamole.Layouts
                 if (orientation == OrientationOptions.Vertical)
                     rect.Width = (int)getUnImportantSize(availableSpace);
                 
-                element.Rect = rect;
+                element.RectRequest = rect;
             }
             
             foreach (var element in staticElements)
             {
-                element.Rect = UIRect.From(element.Layoutable.RectRequest.Size);
-                var layout = getUnImportantLayout(element.Layoutable);
+                element.RectRequest = UIRect.From(element.RectRequest.Size);
+                var layout = getUnImportantLayout(element);
                 if (layout == LayoutOptions.Expand)
                     continue;
                 
-                var rect = element.Rect;
+                var rect = element.RectRequest;
                 if (orientation == OrientationOptions.Horizontal)
                     rect.Height = (int)getUnImportantSize(availableSpace);
                 if (orientation == OrientationOptions.Vertical)
                     rect.Width = (int)getUnImportantSize(availableSpace);
-                element.Rect = rect;
+
+                element.RectRequest = rect;
             }
         }
 
-        private static void HasFillAndCenter(ICollection<VirtualCell> cellArray, OrientationOptions orientation, out bool anyFill, out bool anyCenter)
+        private static void HasFillAndCenter(ICollection<ILayoutable> cellArray, OrientationOptions orientation, out bool anyFill, out bool anyCenter)
         {
             var getLayout = new Func<ILayoutable, LayoutOptions>(layoutable =>
                 orientation == OrientationOptions.Horizontal
@@ -122,7 +107,7 @@ namespace WellFired.Guacamole.Layouts
             for (var index = 0; index < cellArray.Count; index++)
             {
                 var cell = cellArray.ElementAt(index);
-                var layout = getLayout(cell.Layoutable);
+                var layout = getLayout(cell);
                 if (layout == LayoutOptions.Center)
                     anyCenter = true;
                 if (layout == LayoutOptions.Fill)

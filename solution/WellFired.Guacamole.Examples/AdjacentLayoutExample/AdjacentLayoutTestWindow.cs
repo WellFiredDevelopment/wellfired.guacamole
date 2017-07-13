@@ -71,7 +71,6 @@ namespace WellFired.Guacamole.Examples.AdjacentLayoutExample
 			{
 			    Layout = new AdjacentLayout { Orientation = OrientationOptions.Horizontal },
 			    HorizontalLayout = LayoutOptions.Fill,
-				Spacing = 5,
 				Children =
 				{
 					textEntryStartStart,

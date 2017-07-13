@@ -13,8 +13,8 @@ namespace WellFired.Guacamole.Examples.DotPeek
         private static void OpenWindow()
         {    
             Launch<DotPeekWindow>(
-                uiRect: UIRect.With(50, 50, 600, 600),
-                minSize: UISize.Of(600, 600),
+                uiRect: UIRect.With(50, 50, 80, 80),
+                minSize: UISize.Of(80, 80),
                 title: "DotPeek");
         }
     }

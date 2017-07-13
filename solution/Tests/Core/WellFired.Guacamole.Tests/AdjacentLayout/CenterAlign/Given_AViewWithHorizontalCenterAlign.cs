@@ -3,7 +3,7 @@ using NUnit.Framework;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
-namespace WellFired.Guacamole.Tests.Layout.CenterAlign
+namespace WellFired.Guacamole.Tests.AdjacentLayout.CenterAlign
 {
     [TestFixture]
     public class Given_AViewWithHorizontalCenterAlign
@@ -13,6 +13,7 @@ namespace WellFired.Guacamole.Tests.Layout.CenterAlign
         {
             var child = Substitute.For<IView>();
             child.HorizontalLayout.Returns(LayoutOptions.Center);
+            child.VerticalLayout.Returns(LayoutOptions.Expand);
             child.MinSize.Returns(UISize.Of(40, 40));
             child.Content.Returns(default(IView));
 
@@ -21,8 +22,9 @@ namespace WellFired.Guacamole.Tests.Layout.CenterAlign
             parentView.Content.Returns(child);
 
             ViewSizingExtensions.DoSizingAndLayout(parentView, UIRect.With(0, 0, 80, 80));
-
-            Assert.That(child.RectRequest, Is.EqualTo(UIRect.With(20, 00, 40, 40)));
+            
+            Assert.That(child.RectRequest, Is.EqualTo(UIRect.With(0, 0, 80, 40)));
+            Assert.That(child.ContentRectRequest, Is.EqualTo(UIRect.With(20, 00, 40, 40)));
         }
         
         [Test]
@@ -30,6 +32,7 @@ namespace WellFired.Guacamole.Tests.Layout.CenterAlign
         {
             var child = Substitute.For<IView>();
             child.HorizontalLayout.Returns(LayoutOptions.Center);
+            child.VerticalLayout.Returns(LayoutOptions.Expand);
             child.MinSize.Returns(UISize.Of(40, 40));
             child.Content.Returns(default(IView));
 
@@ -39,7 +42,8 @@ namespace WellFired.Guacamole.Tests.Layout.CenterAlign
 
             ViewSizingExtensions.DoSizingAndLayout(parentView, UIRect.With(0, 0, 80, 80));
 
-            Assert.That(child.RectRequest, Is.EqualTo(UIRect.With(20, 00, 40, 40)));
+            Assert.That(child.RectRequest, Is.EqualTo(UIRect.With(0, 0, 80, 40)));
+            Assert.That(child.ContentRectRequest, Is.EqualTo(UIRect.With(20, 0, 40, 40)));
         }
         
         [Test]
@@ -47,6 +51,7 @@ namespace WellFired.Guacamole.Tests.Layout.CenterAlign
         {
             var child = Substitute.For<IView>();
             child.HorizontalLayout.Returns(LayoutOptions.Center);
+            child.VerticalLayout.Returns(LayoutOptions.Expand);
             child.MinSize.Returns(UISize.Of(40, 40));
             child.Content.Returns(default(IView));
 
@@ -56,7 +61,8 @@ namespace WellFired.Guacamole.Tests.Layout.CenterAlign
 
             ViewSizingExtensions.DoSizingAndLayout(parentView, UIRect.With(0, 0, 80, 80));
 
-            Assert.That(child.RectRequest, Is.EqualTo(UIRect.With(30, 00, 40, 40)));
+            Assert.That(child.RectRequest, Is.EqualTo(UIRect.With(0, 0, 100, 40)));
+            Assert.That(child.ContentRectRequest, Is.EqualTo(UIRect.With(30, 00, 40, 40)));
         }
 
         [Test]
@@ -77,8 +83,11 @@ namespace WellFired.Guacamole.Tests.Layout.CenterAlign
 
             ViewSizingExtensions.DoSizingAndLayout(parentView, UIRect.With(0, 0, 80, 80));
 
-            Assert.That(child0.RectRequest, Is.EqualTo(UIRect.With(20, 00, 40, 40)));
-            Assert.That(child1.RectRequest, Is.EqualTo(UIRect.With(00, 00, 10, 10)));
+            Assert.That(child0.RectRequest, Is.EqualTo(UIRect.With(0, 0, 80, 40)));
+            Assert.That(child0.ContentRectRequest, Is.EqualTo(UIRect.With(20, 0, 40, 40)));
+            
+            Assert.That(child1.RectRequest, Is.EqualTo(UIRect.With(0, 0, 10, 10)));
+            Assert.That(child1.ContentRectRequest, Is.EqualTo(UIRect.With(0, 0, 10, 10)));
         }
     }
 }
