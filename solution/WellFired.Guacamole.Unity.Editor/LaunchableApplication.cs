@@ -1,4 +1,5 @@
 ﻿using WellFired.Guacamole.Types;
+using WellFired.Guacamole.Unity.Editor.Diagnostics;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Unity.Editor

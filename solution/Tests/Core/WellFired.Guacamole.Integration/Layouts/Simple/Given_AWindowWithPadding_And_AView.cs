@@ -16,7 +16,8 @@ namespace WellFired.Guacamole.Integration.Layouts.Simple
                 Value = 5.0
             };
 
-            var window = new Window {
+            var logger = NSubstitute.Substitute.For<Diagnostics.ILogger>();
+            var window = new Window (logger) {
                 Padding = UIPadding.Of(10),
                 HorizontalLayout = LayoutOptions.Fill,
                 VerticalLayout = LayoutOptions.Fill,
@@ -40,7 +41,8 @@ namespace WellFired.Guacamole.Integration.Layouts.Simple
                 Value = 5.0
             };
 
-            var window = new Window {
+            var logger = NSubstitute.Substitute.For<Diagnostics.ILogger>();
+            var window = new Window (logger) {
                 Padding = UIPadding.Of(10),
                 HorizontalLayout = LayoutOptions.Fill,
                 VerticalLayout = LayoutOptions.Fill,

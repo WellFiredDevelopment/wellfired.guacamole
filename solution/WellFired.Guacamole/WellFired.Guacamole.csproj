@@ -109,7 +109,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer\INativeRenderer.cs" />
     <Compile Include="Renderer\NativeRendererHelper.cs" />
+    <Compile Include="Styling\IStyleDictionary.cs" />
     <Compile Include="Styling\Style.cs" />
+    <Compile Include="Styling\StyleDictionary.cs" />
     <Compile Include="Styling\Styles\Label.cs" />
     <Compile Include="Styling\Styles\Button.cs" />
     <Compile Include="Styling\Styles\LabelCell.cs" />

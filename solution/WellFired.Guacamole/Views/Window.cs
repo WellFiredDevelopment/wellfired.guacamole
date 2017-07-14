@@ -1,30 +1,39 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
 using WellFired.Guacamole.Annotations;
+using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Event;
+using WellFired.Guacamole.Styling;
 using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Views
 {
 	public class Window : View
 	{
+		protected IStyleDictionary StyleDictionary { get; set; }
+		
 		private readonly Device _device = new Device();
+		private readonly ILogger _logger;
 
 		[PublicAPI]
-		public Window(INotifyPropertyChanged persistantData)
+		public Window(ILogger logger, INotifyPropertyChanged persistantData)
 		{
+			_logger = logger;
+			StyleDictionary = new StyleDictionary(_logger);
 		}
 
 		[PublicAPI]
-		public Window()
+		public Window(ILogger logger)
 		{
+			_logger = logger;
+			StyleDictionary = new StyleDictionary(_logger);
 		}
 
 		private UIRect FinalRenderedRect { get; set; }
 
 		public void Layout(UIRect rect)
 		{
-		    var view = (Content as View);
+		    var view = Content as View;
 		    Debug.Assert(view != null, "view != null");
 
 		    ViewSizingExtensions.DoSizingAndLayout(view, rect - Padding);
@@ -34,7 +43,7 @@ namespace WellFired.Guacamole.Views
 
 		public override void Render(UIRect parentRect)
 		{
-		    var view = (Content as View);
+		    var view = Content as View;
 		    Debug.Assert(view != null, "view != null");
 
 		    _device.ProcessActions();
@@ -48,7 +57,7 @@ namespace WellFired.Guacamole.Views
 		{
 			base.OnPropertyChanged(sender, e);
 
-		    var view = (Content as View);
+		    var view = Content as View;
 		    Debug.Assert(view != null, "view != null");
 
 		    if (e.PropertyName == BindingContextProperty.PropertyName)
@@ -59,5 +68,11 @@ namespace WellFired.Guacamole.Views
 	    {
 	        throw new System.NotImplementedException();
 	    }
+		
+		public void SetContent(IView content)
+		{
+			Content = content;
+			Content.SetStyleDictionary(StyleDictionary);
+		}
 	}
 }

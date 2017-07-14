@@ -6,6 +6,8 @@ using WellFired.Guacamole.Exceptions;
 using WellFired.Guacamole.InitializationContext;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Unity.Editor.DataBinding;
+using Logger = WellFired.Guacamole.Unity.Editor.Diagnostics.Logger;
+using ILogger = WellFired.Guacamole.Diagnostics.ILogger;
 
 namespace WellFired.Guacamole.Unity.Editor
 {
@@ -14,16 +16,12 @@ namespace WellFired.Guacamole.Unity.Editor
 	{
 		[SerializeField] private Type _mainContent;
 		[SerializeField] private string _mainContentString;
-
 		[SerializeField] private UISize _maxSize;
-
 		[SerializeField] private UISize _minSize;
-
 		[SerializeField] private ObservableScriptableObject _persistantData;
-
 		[SerializeField] private string _title;
-
 		[SerializeField] private UIRect _uirect;
+		private ILogger _logger;
 
 		public Type MainContent
 		{
@@ -34,6 +32,8 @@ namespace WellFired.Guacamole.Unity.Editor
 				_mainContentString = _mainContent.AssemblyQualifiedName;
 			}
 		}
+
+		public ILogger Logger => _logger ?? (_logger = new Logger());
 
 		// ReSharper disable once InconsistentNaming
 		public UIRect UIRect

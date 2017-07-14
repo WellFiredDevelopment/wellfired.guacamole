@@ -5,6 +5,7 @@ using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Layouts;
+using WellFired.Guacamole.Styling;
 using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Views
@@ -42,6 +43,17 @@ namespace WellFired.Guacamole.Views
             Debug.Assert(layoutable != null, "Data Template type does not implement ICell.");
             bindableObject.BindingContext = item as INotifyPropertyChanged;
             return layoutable;
+        }
+
+        public override void SetStyleDictionary(IStyleDictionary styleDictionary)
+        {
+            base.SetStyleDictionary(styleDictionary);
+
+            foreach (var child in Children)
+            {
+                var view = child as View;
+                view?.SetStyleDictionary(styleDictionary);
+            }
         }
     }
 }

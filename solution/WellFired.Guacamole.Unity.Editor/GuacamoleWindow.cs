@@ -18,12 +18,10 @@ namespace WellFired.Guacamole.Unity.Editor
 	[UsedImplicitly]
 	public class GuacamoleWindow : EditorWindow, IWindow
 	{
-		[SerializeField] private ApplicationInitializationContextScriptableObject
-			_applicationInitializationContextScriptableObject;
+		[SerializeField] private ApplicationInitializationContextScriptableObject _applicationInitializationContextScriptableObject;
+		[SerializeField] private Window _window;
 
 		private Exception _exception;
-
-		[SerializeField] private Window _window;
 
 		private ApplicationInitializationContextScriptableObject ApplicationInitializationContextScriptableObject
 		{
@@ -70,8 +68,7 @@ namespace WellFired.Guacamole.Unity.Editor
 		{
 			initializationContext.ValidateSetup();
 
-			ApplicationInitializationContextScriptableObject =
-				initializationContext as ApplicationInitializationContextScriptableObject;
+			ApplicationInitializationContextScriptableObject = initializationContext as ApplicationInitializationContextScriptableObject;
 
 			if (ApplicationInitializationContextScriptableObject == null)
 				throw new InitializationContextNull();
@@ -91,7 +88,8 @@ namespace WellFired.Guacamole.Unity.Editor
 		[Obfuscation(Feature = "renaming")]
 		public void OnEnable()
 		{
-			Logger.RegisterLogger(Diagnostics.Logger.UnityLogger);
+			if(ApplicationInitializationContextScriptableObject != null)
+				Logger.RegisterLogger(ApplicationInitializationContextScriptableObject.Logger);
 			EditorApplication.update += Update;
 		}
 
@@ -99,7 +97,8 @@ namespace WellFired.Guacamole.Unity.Editor
 		[Obfuscation(Feature = "renaming")]
 		public void OnDisable()
 		{
-			Logger.UnregisterLogger(Diagnostics.Logger.UnityLogger);
+			if(ApplicationInitializationContextScriptableObject != null)
+				Logger.UnregisterLogger(ApplicationInitializationContextScriptableObject.Logger);
 			// ReSharper disable once DelegateSubtraction
 			EditorApplication.update -= Update;
 		}
@@ -154,15 +153,21 @@ namespace WellFired.Guacamole.Unity.Editor
 
 			var contentType = ApplicationInitializationContextScriptableObject.MainContent;
 
-			var constructorInfo = contentType.GetConstructor(new[] {typeof(INotifyPropertyChanged)});
+			var constructorInfo = contentType.GetConstructor(new[] {typeof(Guacamole.Diagnostics.ILogger), typeof(INotifyPropertyChanged)});
 			if (constructorInfo != null)
-				_window =
-					(Window) constructorInfo.Invoke(new object[] {ApplicationInitializationContextScriptableObject.PersistantData});
+				_window = (Window) constructorInfo.Invoke(new object[]
+				{
+					ApplicationInitializationContextScriptableObject.Logger,
+					ApplicationInitializationContextScriptableObject.PersistantData
+				});
 			else
 			{
-				var paramLessCsonstructorInfo = contentType.GetConstructor(new Type[] {});
+				var paramLessCsonstructorInfo = contentType.GetConstructor(new[] {typeof(ILogger)});
 				if (paramLessCsonstructorInfo != null)
-					_window = (Window) paramLessCsonstructorInfo.Invoke(new object[] {});
+					_window = (Window) paramLessCsonstructorInfo.Invoke(new object[]
+					{
+						ApplicationInitializationContextScriptableObject.Logger
+					});
 			}
 
 			if (_window == null)

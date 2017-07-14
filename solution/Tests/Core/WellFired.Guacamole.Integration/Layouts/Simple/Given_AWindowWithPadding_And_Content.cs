@@ -16,8 +16,8 @@ namespace WellFired.Guacamole.Integration.Layouts.Simple
                 MinSize = UISize.Of(80, 13)
             };
 
-            var window = new Window
-            {
+            var logger = NSubstitute.Substitute.For<Diagnostics.ILogger>();
+            var window = new Window (logger) {
                 Padding = UIPadding.Of(10),
                 Content = content
             };

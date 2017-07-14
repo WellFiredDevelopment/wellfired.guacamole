@@ -52,52 +52,51 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdjacentLayoutExample\AdjacentLayoutTestApplication.cs" />
-    <Compile Include="AdjacentLayoutExample\AdjacentLayoutTestWindow.cs" />
-    <Compile Include="DotPeekRefresh\DotPeekRefreshApplication.cs" />
-    <Compile Include="DotPeekRefresh\DotPeekRefreshPage.cs" />
-    <Compile Include="DotPeekRefresh\DotPeekWindow.cs" />
-    <Compile Include="DotPeek\DotPeekApplication.cs" />
-    <Compile Include="DotPeek\DotPeekPage.cs" />
-    <Compile Include="DotPeek\DotPeekWindow.cs" />
-    <Compile Include="DotPeek\Layout\LayoutFactory.cs" />
-    <Compile Include="DotPeek\Model\BuildOverview.cs" />
-    <Compile Include="DotPeek\Model\BuildReport.cs" />
-    <Compile Include="DotPeek\Model\BuildReportDiff.cs" />
-    <Compile Include="DotPeek\Model\FileSize.cs" />
-    <Compile Include="DotPeek\Styles\Label.cs" />
-    <Compile Include="DotPeek\UIElementFactory\DotPeekLabelFactory.cs" />
-    <Compile Include="DotPeek\UIElementFactory\Grid.cs" />
-    <Compile Include="DotPeek\ViewModel\BuildReportDiffViewModel.cs" />
-    <Compile Include="LabelExample\LabelTestApplication.cs" />
-    <Compile Include="LabelExample\LabelTestWindow.cs" />
-    <Compile Include="ListViewExample\ListViewTestApplication.cs" />
-    <Compile Include="ListViewExample\ListViewTestWindow.cs" />
-    <Compile Include="StylingExample\StylingExampleApplication.cs" />
-    <Compile Include="StylingExample\StylingExampleWindow.cs" />
-    <Compile Include="ButtonExample\ButtonTestApplication.cs" />
-    <Compile Include="ButtonExample\ButtonTestWindow.cs" />
-    <Compile Include="OneWayBindingExample\OneWayBindingTestApplication.cs" />
-    <Compile Include="OneWayBindingExample\OneWayBindingTestModel.cs" />
-    <Compile Include="OneWayBindingExample\OneWayBindingTestWindow.cs" />
+    <Compile Include="CaseStudy\DotPeek\DotPeekApplication.cs" />
+    <Compile Include="CaseStudy\DotPeek\DotPeekPage.cs" />
+    <Compile Include="CaseStudy\DotPeek\DotPeekWindow.cs" />
+    <Compile Include="CaseStudy\DotPeek\Layout\LayoutFactory.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\BuildOverview.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\BuildReport.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\BuildReportDiff.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\FileSize.cs" />
+    <Compile Include="CaseStudy\DotPeek\Styles\Label.cs" />
+    <Compile Include="CaseStudy\DotPeek\UIElementFactory\DotPeekLabelFactory.cs" />
+    <Compile Include="CaseStudy\DotPeek\UIElementFactory\Grid.cs" />
+    <Compile Include="CaseStudy\DotPeek\ViewModel\BuildReportDiffViewModel.cs" />
+    <Compile Include="CaseStudy\Taskist\Styles\FilterCell.cs" />
+    <Compile Include="CaseStudy\Taskist\TaskistApplication.cs" />
+    <Compile Include="CaseStudy\Taskist\TaskistWindow.cs" />
+    <Compile Include="CaseStudy\Taskist\ViewModel\Filter.cs" />
+    <Compile Include="CaseStudy\Taskist\View\Cells\FilterCell.cs" />
+    <Compile Include="CaseStudy\Taskist\View\Cells\FilterCell.BindableProperties.cs" />
+    <Compile Include="CaseStudy\Taskist\View\Inspector.cs" />
+    <Compile Include="CaseStudy\Taskist\View\Overview.cs" />
+    <Compile Include="CaseStudy\Taskist\View\TaskistMainPage.cs" />
+    <Compile Include="CaseStudy\Taskist\View\TaskistTopBar.cs" />
+    <Compile Include="Simple\AdjacentLayoutExample\AdjacentLayoutTestApplication.cs" />
+    <Compile Include="Simple\AdjacentLayoutExample\AdjacentLayoutTestWindow.cs" />
+    <Compile Include="Simple\ButtonExample\ButtonTestApplication.cs" />
+    <Compile Include="Simple\ButtonExample\ButtonTestWindow.cs" />
+    <Compile Include="Simple\LabelExample\LabelTestApplication.cs" />
+    <Compile Include="Simple\LabelExample\LabelTestWindow.cs" />
+    <Compile Include="Simple\ListViewExample\ListViewTestApplication.cs" />
+    <Compile Include="Simple\ListViewExample\ListViewTestWindow.cs" />
+    <Compile Include="Simple\OneWayBindingExample\OneWayBindingTestApplication.cs" />
+    <Compile Include="Simple\OneWayBindingExample\OneWayBindingTestModel.cs" />
+    <Compile Include="Simple\OneWayBindingExample\OneWayBindingTestWindow.cs" />
+    <Compile Include="Simple\SliderExample\SliderTestApplication.cs" />
+    <Compile Include="Simple\SliderExample\SliderTestWindow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SliderExample\SliderTestApplication.cs" />
-    <Compile Include="SliderExample\SliderTestWindow.cs" />
-    <Compile Include="Taskist\TaskistApplication.cs" />
-    <Compile Include="Taskist\TaskistWindow.cs" />
-    <Compile Include="Taskist\ViewModel\Filter.cs" />
-    <Compile Include="Taskist\View\Cells\FilterCell.cs" />
-    <Compile Include="Taskist\View\Inspector.cs" />
-    <Compile Include="Taskist\View\Overview.cs" />
-    <Compile Include="Taskist\View\TaskistMainPage.cs" />
-    <Compile Include="Taskist\View\TaskistTopBar.cs" />
-    <Compile Include="TextFieldExample\TextFieldTestApplication.cs" />
-    <Compile Include="TextFieldExample\TextFieldTestWindow.cs" />
-    <Compile Include="TwoWayBindingExample\TwoWayBindingTestApplication.cs" />
-    <Compile Include="TwoWayBindingExample\TwoWayBindingTestModel.cs" />
-    <Compile Include="TwoWayBindingExample\TwoWayBindingTestWindow.cs" />
-    <Compile Include="UIBindingExample\UIBindingTestApplication.cs" />
-    <Compile Include="UIBindingExample\UIBindingTestWindow.cs" />
+    <Compile Include="Simple\StylingExample\StylingExampleApplication.cs" />
+    <Compile Include="Simple\StylingExample\StylingExampleWindow.cs" />
+    <Compile Include="Simple\TextFieldExample\TextFieldTestApplication.cs" />
+    <Compile Include="Simple\TextFieldExample\TextFieldTestWindow.cs" />
+    <Compile Include="Simple\TwoWayBindingExample\TwoWayBindingTestApplication.cs" />
+    <Compile Include="Simple\TwoWayBindingExample\TwoWayBindingTestModel.cs" />
+    <Compile Include="Simple\TwoWayBindingExample\TwoWayBindingTestWindow.cs" />
+    <Compile Include="Simple\UIBindingExample\UIBindingTestApplication.cs" />
+    <Compile Include="Simple\UIBindingExample\UIBindingTestWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
@@ -118,6 +117,10 @@
       <Name>WellFired.Guacamole</Name>
       <Private>False</Private>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CaseStudy" />
+    <Folder Include="Simple" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Layouts;
+using WellFired.Guacamole.Styling;
 using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Views
@@ -55,6 +56,17 @@ namespace WellFired.Guacamole.Views
 	            if (view != null)
 	                view.BindingContext = BindingContext;
 	        }
+		}
+
+		public override void SetStyleDictionary(IStyleDictionary styleDictionary)
+		{
+			base.SetStyleDictionary(styleDictionary);
+
+			foreach (var child in Children)
+			{
+				var view = child as View;
+				view?.SetStyleDictionary(styleDictionary);
+			}
 		}
 	}
 }

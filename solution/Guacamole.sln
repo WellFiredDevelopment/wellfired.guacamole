@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Tests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Unity.Editor.Tests", "Tests\Runtime\WellFired.Guacamole.Unity.Editor.Tests\WellFired.Guacamole.Unity.Editor.Tests.csproj", "{76422BF7-16C8-4938-8713-99FD1B845C53}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Examples.Unity.Editor", "WellFired.Guacamole.Examples.Unity.Editor\WellFired.Guacamole.Examples.Unity.Editor.csproj", "{DCFECFBB-D2FC-4722-A5A2-2DE278853725}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{76422BF7-16C8-4938-8713-99FD1B845C53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76422BF7-16C8-4938-8713-99FD1B845C53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76422BF7-16C8-4938-8713-99FD1B845C53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCFECFBB-D2FC-4722-A5A2-2DE278853725}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCFECFBB-D2FC-4722-A5A2-2DE278853725}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCFECFBB-D2FC-4722-A5A2-2DE278853725}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCFECFBB-D2FC-4722-A5A2-2DE278853725}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,5 +93,6 @@ Global
 		{BAB03372-0CE8-4693-93B7-5BFFB29466B8} = {7436DA95-14F8-4B8F-9D04-E0EFEF0F2EFC}
 		{BB8952BF-3212-4478-9E84-47158D53E12B} = {7436DA95-14F8-4B8F-9D04-E0EFEF0F2EFC}
 		{76422BF7-16C8-4938-8713-99FD1B845C53} = {8EE2433B-7CDD-47C7-8160-3FCA5B9DB8C0}
+		{DCFECFBB-D2FC-4722-A5A2-2DE278853725} = {C2567451-ABD5-42BD-A45F-3425B34AE783}
 	EndGlobalSection
 EndGlobal
