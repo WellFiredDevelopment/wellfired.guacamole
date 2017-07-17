@@ -65,6 +65,7 @@
     <Compile Include="Extensions\UnityVector2Extensions.cs" />
     <Compile Include="GuacamoleWindow.cs" />
     <Compile Include="LaunchableApplication.cs" />
+    <Compile Include="NativeControls\Cells\BaseCellRenderer.cs" />
     <Compile Include="NativeControls\Cells\LabelCellRenderer.cs" />
     <Compile Include="NativeControls\Layouts\LayoutViewRenderer.cs" />
     <Compile Include="NativeControls\Views\BaseRenderer.cs" />

@@ -7,13 +7,14 @@ using WellFired.Guacamole.Examples.CaseStudy.Taskist.View.Cells;
 using WellFired.Guacamole.Examples.Unity.Editor.NativeControls.Cells;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Unity.Editor.Extensions;
+using WellFired.Guacamole.Unity.Editor.NativeControls.Cells;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using Debug = System.Diagnostics.Debug;
 
 [assembly: CustomRenderer(typeof(FilterCell), typeof(FilterCellRenderer))]
 namespace WellFired.Guacamole.Examples.Unity.Editor.NativeControls.Cells
 {
-    public class FilterCellRenderer : BaseRenderer
+    public class FilterCellRenderer : BaseCellRenderer
     {
         private const int Spacing = 16;
         private const int Offset = 10;

@@ -52,6 +52,7 @@
     <Compile Include="Annotations\UsedImplicityAttribute.cs" />
     <Compile Include="Attributes\CustomRendererAttribute.cs" />
     <Compile Include="AutoAction.cs" />
+    <Compile Include="Cells\Cell.BindableProperties.cs" />
     <Compile Include="Cells\Cell.cs" />
     <Compile Include="Cells\ICell.cs" />
     <Compile Include="Cells\LabelCell.BindableProperties.cs" />

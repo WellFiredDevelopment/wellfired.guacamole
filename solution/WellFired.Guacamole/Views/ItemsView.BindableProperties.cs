@@ -10,12 +10,12 @@ namespace WellFired.Guacamole.Views
 {
     public partial class ItemsView
     {
-        [PublicAPI] public static readonly BindableProperty ItemSourceProperty = BindableProperty
-            .Create<ItemsView, IEnumerable>(
-            null,
-            BindingMode.TwoWay,
-            viewBase => viewBase.ItemSource
-        );
+        [PublicAPI] public static readonly BindableProperty ItemSourceProperty =
+            BindableProperty.Create<ItemsView, IEnumerable>(
+                null,
+                BindingMode.TwoWay,
+                viewBase => viewBase.ItemSource
+            );
 
         [PublicAPI] public static readonly BindableProperty ItemTemplateProperty = BindableProperty
             .Create<ItemsView, DataTemplate>(

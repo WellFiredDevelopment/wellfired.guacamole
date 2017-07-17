@@ -13,7 +13,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace WellFired.Guacamole.Unity.Editor.NativeControls.Cells
 {
-    public class LabelCellRenderer : BaseRenderer
+    public class LabelCellRenderer : BaseCellRenderer
     {
         private GUIStyle Style { get; set; }
 

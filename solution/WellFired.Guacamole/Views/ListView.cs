@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.DataBinding;
@@ -39,9 +40,13 @@ namespace WellFired.Guacamole.Views
             var instance = Activator.CreateInstance(template.Type);
             var bindableObject = instance as IBindableObject;
             var layoutable = instance as ILayoutable;
+            var cell = instance as ICell;
             Debug.Assert(bindableObject != null, "Data Template type does not implement IBindableObject.");
             Debug.Assert(layoutable != null, "Data Template type does not implement ICell.");
+            Debug.Assert(cell != null, "cell != null");
             bindableObject.BindingContext = item as INotifyPropertyChanged;
+            cell.Container = this;
+            
             return layoutable;
         }
 
