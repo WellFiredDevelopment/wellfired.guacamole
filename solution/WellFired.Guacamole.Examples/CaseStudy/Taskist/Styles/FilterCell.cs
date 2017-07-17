@@ -6,9 +6,9 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.Styles
 {
     internal static class FilterCell
     {
-        private static UIColor _lightColor = UIColor.FromRGB(255, 255, 255);
-        private static UIColor _darkerColor = UIColor.FromRGB(250, 250, 250);
-        
+        private static readonly UIColor LightColor = UIColor.FromRGB(255, 255, 255);
+        private static readonly UIColor DarkerColor = UIColor.FromRGB(250, 250, 250);
+
         public static readonly Style Style = new Style
         {
             Setters =
@@ -26,7 +26,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.Styles
                     Value = true,
                     Setters =
                     {
-                        new Setter {Property = Views.View.BackgroundColorProperty, Value = _lightColor}
+                        new Setter {Property = Views.View.BackgroundColorProperty, Value = LightColor}
                     }
                 },
                 new Trigger
@@ -35,7 +35,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.Styles
                     Value = false,
                     Setters =
                     {
-                        new Setter {Property = Views.View.BackgroundColorProperty, Value = _darkerColor}
+                        new Setter {Property = Views.View.BackgroundColorProperty, Value = DarkerColor}
                     }
                 },
                 new Trigger
@@ -44,17 +44,17 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.Styles
                     Value = ControlState.Hover,
                     Setters =
                     {
-                        new Setter {Property = Views.View.BackgroundColorProperty, Value = _lightColor}
+                        new Setter {Property = Views.View.BackgroundColorProperty, Value = LightColor}
                     }
                 },
                 new Trigger
                 {
                     Property = Views.View.ControlStateProperty,
                     Value = ControlState.Normal,
-                    Conditionals = { new Conditional { Property = Cells.Cell.IsSelectedProperty, Value = false } },
+                    Conditionals = {new Conditional {Property = Cells.Cell.IsSelectedProperty, Value = false}},
                     Setters =
                     {
-                        new Setter {Property = Views.View.BackgroundColorProperty, Value = _darkerColor}
+                        new Setter {Property = Views.View.BackgroundColorProperty, Value = DarkerColor}
                     }
                 }
             }
