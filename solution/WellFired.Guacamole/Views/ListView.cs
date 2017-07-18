@@ -1,25 +1,22 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
 using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Layouts;
-using WellFired.Guacamole.Styling;
 using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Views
 {
-    public partial class ListView : ItemsView
+    public partial class ListView : ItemsView, IListView
     {
-        private int TotalContentSize { get; set; }
+        public int TotalContentSize { get; set; }
         
         public ListView()
         {
             VerticalLayout = LayoutOptions.Fill;
             HorizontalLayout = LayoutOptions.Fill;
-            Layout = AdjacentLayout.Of(OrientationOptions.Vertical);
         }
 
         protected override ILayoutable CreateDefault(object item)
@@ -29,7 +26,8 @@ namespace WellFired.Guacamole.Views
                 text = item.ToString();
 
             return new LabelCell {
-                Text = text
+                Text = text,
+                Container = this
             };
         }
 
@@ -45,7 +43,7 @@ namespace WellFired.Guacamole.Views
 
         private void RebuildViewBounds()
         {
-            TotalContentSize = Children.Count * EntrySize;
+            TotalContentSize = (Children.Count  - 1) * Spacing + Children.Count * EntrySize;
         }
 
         [NotNull]

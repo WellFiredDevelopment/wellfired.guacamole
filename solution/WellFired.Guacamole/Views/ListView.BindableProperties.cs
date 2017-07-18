@@ -3,7 +3,7 @@ using System.Diagnostics;
 using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.DataBinding;
-using WellFired.Guacamole.Layouts;
+using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Views
 {
@@ -12,34 +12,32 @@ namespace WellFired.Guacamole.Views
         [PublicAPI] public static readonly BindableProperty SpacingProperty = BindableProperty.Create<ListView, int>(
             default(int),
             BindingMode.TwoWay,
-            listView => listView.Spacing
+            v => v.Spacing
         );
         
         [PublicAPI] public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create<ListView, INotifyPropertyChanged>(
             default(INotifyPropertyChanged),
             BindingMode.TwoWay,
-            listView => listView.SelectedItem
+            v => v.SelectedItem
         );
         
         [PublicAPI] public static readonly BindableProperty EntrySizeProperty = BindableProperty.Create<ListView, int>(
             50,
             BindingMode.TwoWay,
-            listView => listView.EntrySize
+            v => v.EntrySize
+        );
+
+        [PublicAPI] public static readonly BindableProperty OrientationProperty = BindableProperty.Create<ListView, OrientationOptions>(
+            OrientationOptions.Vertical, 
+            BindingMode.TwoWay,
+            v => v.Orientation
         );
 
         [PublicAPI]
         public int Spacing
         {
             get { return (int) GetValue(SpacingProperty); }
-            set
-            {
-                if (!SetValue(SpacingProperty, value)) 
-                    return;
-                
-                var adjacentLayout = Layout as AdjacentLayout;
-                if (adjacentLayout != null) 
-                    adjacentLayout.Spacing = Spacing;
-            }
+            set { SetValue(SpacingProperty, value); }
         }
 
         [PublicAPI]
@@ -73,6 +71,13 @@ namespace WellFired.Guacamole.Views
         {
             get { return (int) GetValue(EntrySizeProperty); }
             set { SetValue(EntrySizeProperty, value); }
+        }
+        
+        [PublicAPI]
+        public OrientationOptions Orientation
+        {
+            get { return (OrientationOptions) GetValue(OrientationProperty); }
+            set { SetValue(OrientationProperty, value); }
         }
     }
 }

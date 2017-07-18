@@ -1,15 +1,29 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Collection;
 using WellFired.Guacamole.DataBinding;
+using WellFired.Guacamole.Layouts;
 
 namespace WellFired.Guacamole.Views
 {
     public partial class ItemsView
     {
+        [PublicAPI] public static readonly BindableProperty ChildrenProperty = BindableProperty.Create<ItemsView, IList<ILayoutable>>(default(IList<ILayoutable>),
+            BindingMode.TwoWay,
+            v => v.Children
+        );
+
+        [PublicAPI]
+        public IList<ILayoutable> Children
+        {
+            get { return (IList<ILayoutable>) GetValue(ChildrenProperty); }
+            set { SetValue(ChildrenProperty, value); }
+        }
+
         [PublicAPI] public static readonly BindableProperty ItemSourceProperty =
             BindableProperty.Create<ItemsView, IEnumerable>(
                 null,

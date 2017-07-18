@@ -103,6 +103,7 @@
     <Compile Include="Layouts\AdjacentLayout.cs" />
     <Compile Include="Layouts\AdjacentLayoutCellCalculator.cs" />
     <Compile Include="Layouts\ICanLayout.cs" />
+    <Compile Include="Layouts\IHasChildren.cs" />
     <Compile Include="Layouts\ILayoutable.cs" />
     <Compile Include="Layouts\ILayoutChildren.cs" />
     <Compile Include="Layouts\IVirtualCell.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="Views\ControlState.cs" />
     <Compile Include="Views\IClickable.cs" />
     <Compile Include="Views\IItemsView.cs" />
+    <Compile Include="Views\IListView.cs" />
     <Compile Include="Views\ItemsView.BindableProperties.cs" />
     <Compile Include="Views\ItemsView.cs" />
     <Compile Include="Views\ITypeable.cs" />
@@ -154,6 +156,7 @@
     <Compile Include="Views\LayoutView.cs" />
     <Compile Include="Views\ListView.BindableProperties.cs" />
     <Compile Include="Views\ListView.cs" />
+    <Compile Include="Views\ListViewHelper.cs" />
     <Compile Include="Views\NumberEntry.cs" />
     <Compile Include="Views\Page.cs" />
     <Compile Include="Views\Slider.cs" />

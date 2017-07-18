@@ -18,7 +18,8 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.View
             VerticalLayout = LayoutOptions.Fill;
             Padding = UIPadding.With(30, 60, 10, 0);
 
-            var collection = new ObservableCollection<Filter> {
+            var collection = new ObservableCollection<Filter> 
+            {
                 new Filter { FilterName = "Personal", FilterColor = UIColor.FromRGB(236, 142, 117)},
                 new Filter { FilterName = "Character Health", FilterColor = UIColor.FromRGB(204, 204, 204) },
                 new Filter { FilterName = "Animator Sub States", FilterColor = UIColor.FromRGB(174, 199, 225) },

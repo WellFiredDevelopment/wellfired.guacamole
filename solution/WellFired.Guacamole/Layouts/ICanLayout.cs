@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace WellFired.Guacamole.Layouts
+﻿namespace WellFired.Guacamole.Layouts
 {
-    public interface ICanLayout : IView
+    public interface ICanLayout : IHasChildren
     {
-        IList<ILayoutable> Children { get; }
         ILayoutChildren Layout { get; set; }
     }
 }

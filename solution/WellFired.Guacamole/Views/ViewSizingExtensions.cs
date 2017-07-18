@@ -24,10 +24,10 @@ namespace WellFired.Guacamole.Views
             if (view == null)
                 return;
 
-            var canLayout = view as ICanLayout;
-            if (canLayout != null)
+            var hasChildren = view as IHasChildren;
+            if (hasChildren != null)
             {
-                foreach(var child in canLayout.Children)
+                foreach(var child in hasChildren.Children)
                     CalculateRectRequest(child as IView);
             }
 
@@ -54,6 +54,10 @@ namespace WellFired.Guacamole.Views
             if (canLayout != null)
                 return canLayout.Layout.CalculateValidRectRequest(canLayout.Children, view.MinSize);
 
+            var listView = view as IListView;
+            if (listView != null)
+                return ListViewHelper.CalculateValidRectRequest(listView);
+
             var defaultSize = UISize.Of(view.MinSize.Width, view.MinSize.Height);
             
             var content = view.Content;
@@ -64,7 +68,7 @@ namespace WellFired.Guacamole.Views
             defaultSize.Height += view.Padding.Height;
 
             // If the native renderer returns null, we simply use our own layoutting system.
-            var nativeSize = view?.NativeRenderer?.NativeSize ?? defaultSize;
+            var nativeSize = view.NativeRenderer?.NativeSize ?? defaultSize;
 
             // Constrain
             nativeSize = Constrain(nativeSize, view.MinSize);
@@ -119,7 +123,15 @@ namespace WellFired.Guacamole.Views
                 AttemptToFullfillRequests(view.Content, UIRect.With(view.ContentRectRequest.Width, view.ContentRectRequest.Height) - view.Padding);
 
             var layout = view as ICanLayout;
+            var listView = view as IListView;
+
             layout?.Layout.AttemptToFullfillRequests(layout.Children, UIRect.With(view.ContentRectRequest.Width, view.ContentRectRequest.Height) - view.Padding, view.Padding, view.HorizontalLayout, view.VerticalLayout);
+
+            if (listView == null) 
+                return;
+            
+            foreach (var child in listView.Children)
+                AttemptToFullfillRequests(child as IView, UIRect.With(view.ContentRectRequest.Width, view.ContentRectRequest.Height) - view.Padding);
         }
 
         public static void UpdateContextIfNeeded(IBindableObject bindable)
@@ -131,11 +143,11 @@ namespace WellFired.Guacamole.Views
              if (bindable.BindingContext == null)
                  bindable.BindingContext = bindable.BindingContext;
 
-            var canLayout = bindable as ICanLayout;
-            if (canLayout == null)
+            var children = bindable as IHasChildren;
+            if (children == null)
                 return;
 
-            foreach(var child in canLayout.Children)
+            foreach(var child in children.Children)
                 UpdateContextIfNeeded(child as IBindableObject);
         }
 
@@ -146,6 +158,10 @@ namespace WellFired.Guacamole.Views
 
             var layout = view as ICanLayout;
             layout?.Layout.Layout(layout.Children, view.RectRequest, view.Padding);
+            
+            var listView = view as IListView;
+            if (listView != null)
+                ListViewHelper.Layout(listView, view.RectRequest, view.Padding);
 
             if(view.Content != null)
                 DoLayout(view.Content);
