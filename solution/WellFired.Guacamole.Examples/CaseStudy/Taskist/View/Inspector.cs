@@ -27,6 +27,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.View
             };
 
             Content = new ListView {
+                EntrySize = 38,
                 OutlineColor = UIColor.FromRGB(250, 250, 250),
                 BackgroundColor = UIColor.FromRGB(250, 250, 250),
                 HorizontalLayout = LayoutOptions.Fill,

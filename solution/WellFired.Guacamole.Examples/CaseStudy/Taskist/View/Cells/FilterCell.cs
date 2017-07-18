@@ -7,7 +7,6 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.View.Cells
     {
         public FilterCell()
         {
-            MinSize = UISize.Of(0, 38);
             Bind(FilterTextProperty, "FilterName");
             Bind(FilterColorProperty, "FilterColor");
         }

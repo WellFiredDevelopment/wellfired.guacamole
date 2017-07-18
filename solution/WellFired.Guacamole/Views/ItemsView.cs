@@ -29,11 +29,15 @@ namespace WellFired.Guacamole.Views
         protected abstract ILayoutable CreateWith(DataTemplate template, object item);
         protected abstract ILayoutable CreateDefault(object item);
 
+        protected abstract void OnAdd(ILayoutable item);
+        protected abstract void OnRemove(ILayoutable item);
+
         private void AddCollection(IEnumerable items, int index)
         {
             foreach (var item in items)
             {
                 var layoutable = CreateWith(ItemTemplate, item);
+                OnAdd(layoutable);
                 Children.Insert(index, layoutable);
                 index++;
             }
@@ -43,8 +47,9 @@ namespace WellFired.Guacamole.Views
         {
             foreach (var item in items)
             {
-                var cell = _container[item];
-                Children.Remove(cell);
+                var layoutable = _container[item];
+                OnRemove(layoutable);
+                Children.Remove(layoutable);
                 _container.Remove(item);
             }
         }
@@ -54,9 +59,9 @@ namespace WellFired.Guacamole.Views
             for (var n = 0; n < oldItems.Count; n++)
             {
                 var item = oldItems[n];
-                var cell = _container[item];
+                var layoutable = _container[item];
                 _container.Remove(item);
-                Children.Remove(cell);
+                Children.Remove(layoutable);
                 Children.Insert(index, CreateWith(ItemTemplate, newItems[n]));
                 index++;
             }
@@ -64,6 +69,8 @@ namespace WellFired.Guacamole.Views
 
         private void ResetCollection()
         {
+            foreach(var layoutable in Children)
+                OnRemove(layoutable);
             _container.Clear();
             Children.Clear();
         }

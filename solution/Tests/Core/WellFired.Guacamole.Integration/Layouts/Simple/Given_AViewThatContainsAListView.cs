@@ -5,12 +5,13 @@ using WellFired.Guacamole.Views;
 namespace WellFired.Guacamole.Integration.Layouts.Simple
 {
     [TestFixture]
-    public class Given_AViewWithAListView
+    public class Given_AViewThatContainsAListView
     {
         [Test]
         public void When_TheListViewIsLayout_Then_LayoutIsSuccessful()
         {
             var listView = new ListView {
+                EntrySize = 20,
                 ItemSource = ItemSource.From("One", "Two", "Three")
             };
 

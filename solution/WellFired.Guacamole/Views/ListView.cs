@@ -13,6 +13,8 @@ namespace WellFired.Guacamole.Views
 {
     public partial class ListView : ItemsView
     {
+        private int TotalContentSize { get; set; }
+        
         public ListView()
         {
             VerticalLayout = LayoutOptions.Fill;
@@ -29,6 +31,21 @@ namespace WellFired.Guacamole.Views
             return new LabelCell {
                 Text = text
             };
+        }
+
+        protected override void OnRemove(ILayoutable item)
+        {
+            RebuildViewBounds();
+        }
+
+        protected override void OnAdd(ILayoutable item)
+        {
+            RebuildViewBounds();
+        }
+
+        private void RebuildViewBounds()
+        {
+            TotalContentSize = Children.Count * EntrySize;
         }
 
         [NotNull]
@@ -48,17 +65,6 @@ namespace WellFired.Guacamole.Views
             cell.Container = this;
             
             return layoutable;
-        }
-
-        public override void SetStyleDictionary(IStyleDictionary styleDictionary)
-        {
-            base.SetStyleDictionary(styleDictionary);
-
-            foreach (var child in Children)
-            {
-                var view = child as View;
-                view?.SetStyleDictionary(styleDictionary);
-            }
         }
     }
 }

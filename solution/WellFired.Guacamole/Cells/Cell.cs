@@ -1,4 +1,3 @@
-using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Cells
@@ -7,7 +6,7 @@ namespace WellFired.Guacamole.Cells
     {
         protected Cell()
         {
-            MinSize = UISize.Of(50, 20);
+            
         }
 
         public ListView Container { get; set; }

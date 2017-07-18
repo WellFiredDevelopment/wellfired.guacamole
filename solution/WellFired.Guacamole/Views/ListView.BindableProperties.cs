@@ -20,6 +20,12 @@ namespace WellFired.Guacamole.Views
             BindingMode.TwoWay,
             listView => listView.SelectedItem
         );
+        
+        [PublicAPI] public static readonly BindableProperty EntrySizeProperty = BindableProperty.Create<ListView, int>(
+            50,
+            BindingMode.TwoWay,
+            listView => listView.EntrySize
+        );
 
         [PublicAPI]
         public int Spacing
@@ -56,6 +62,17 @@ namespace WellFired.Guacamole.Views
                         view.IsSelected = true;
                 }
             }
+        }
+
+        /// <summary>
+        /// The size of one Entry into this List View, for the moment, each entry should be the same size, though 
+        /// this might change in the future.
+        /// </summary>
+        [PublicAPI]
+        public int EntrySize
+        {
+            get { return (int) GetValue(EntrySizeProperty); }
+            set { SetValue(EntrySizeProperty, value); }
         }
     }
 }

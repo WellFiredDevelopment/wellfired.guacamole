@@ -34,7 +34,7 @@ namespace WellFired.Guacamole.Examples.Unity.Editor.NativeControls.Cells
 
                 size.Width += _ballSize.Height;
                 size.Width += Spacing;
-                size.Height = Math.Max(size.Height, _ballSize.Height);
+                size.Height = filterCell.Container.EntrySize;
                     
                 return size;
             }

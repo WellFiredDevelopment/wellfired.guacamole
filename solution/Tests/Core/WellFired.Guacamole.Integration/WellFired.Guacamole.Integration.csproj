@@ -44,7 +44,7 @@
     <Compile Include="Layouts\Simple\Given_APageWithAView.cs" />
     <Compile Include="Layouts\Simple\Given_APageWithPadding_And_AView.cs" />
     <Compile Include="Layouts\Simple\Given_AView.cs" />
-    <Compile Include="Layouts\Simple\given_AViewWithAListView.cs" />
+    <Compile Include="Layouts\Simple\Given_AViewThatContainsAListView.cs" />
     <Compile Include="Layouts\Simple\Given_AView_WithPadding.cs" />
     <Compile Include="Layouts\Simple\Given_AWindowWithContent.cs" />
     <Compile Include="Layouts\Simple\Given_AWindowWithPadding_And_AView.cs" />
