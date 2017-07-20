@@ -35,7 +35,7 @@ namespace WellFired.Guacamole.Views
             return visibleDataSet;
         }
 
-        public static void AdjustForNewVds(List<int> oldVds, IEnumerable<int> newVds, IListensToVdsChanges listensToVdsChanges)
+        public static void AdjustForNewVds(int [] oldVds, int [] newVds, IListensToVdsChanges listensToVdsChanges)
         {
             var removals = oldVds.Where(vds => newVds.All(nvds => nvds != vds)).ToArray();
             var additions = newVds.Where(nvds => oldVds.All(vds => vds != nvds)).ToArray();
@@ -49,11 +49,10 @@ namespace WellFired.Guacamole.Views
             // Add : 0, 1, 2
             // Result : 2, 1, 0, 3, 4, 5
             int[] enumerableAdditions;
-            var enumerable = additions;
-            if (enumerable.Any() && oldVds.Any() && enumerable.Last() < oldVds.First())
-                enumerableAdditions = enumerable.Reverse().ToArray();
+            if (additions.Any() && oldVds.Any() && additions.Last() < oldVds.First())
+                enumerableAdditions = additions.Reverse().ToArray();
             else
-                enumerableAdditions = enumerable.ToArray();
+                enumerableAdditions = additions.ToArray();
 
             foreach (var addition in enumerableAdditions)
             {

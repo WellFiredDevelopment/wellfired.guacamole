@@ -84,9 +84,9 @@ namespace WellFired.Guacamole.Views
 
         private void CalculateVisualDataSet()
         {
-            var newVds = ListViewCalculator.CalculateVisualDataSet(-ScrollOffset, NumberOfVisibleEntries * EntrySize, EntrySize, TotalContentSize, Spacing);
+            var newVds = ListViewCalculator.CalculateVisualDataSet(-ScrollOffset, NumberOfVisibleEntries * EntrySize, EntrySize, TotalContentSize, Spacing).ToArray();
             var oldVds = _visualDataSet;
-            ListViewCalculator.AdjustForNewVds(oldVds, newVds, this);
+            ListViewCalculator.AdjustForNewVds(oldVds.ToArray(), newVds, this);
             _visualDataSet = newVds.ToList();
             InitialOffset = ListViewCalculator.CalculateInitialOffset(_visualDataSet, EntrySize, Spacing) + ScrollOffset;
         }
