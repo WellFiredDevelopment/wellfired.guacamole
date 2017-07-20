@@ -22,7 +22,7 @@ namespace WellFired.Guacamole.Views
         private readonly List<ICell> _activeEntries = new List<ICell>();
         private readonly List<ICell> _inactiveEntries = new List<ICell>();
         public int TotalContentSize { get; private set; }
-        public float InitialOffset { get; set; }
+        public float InitialOffset { get; private set; }
 
         public ListView()
         {
