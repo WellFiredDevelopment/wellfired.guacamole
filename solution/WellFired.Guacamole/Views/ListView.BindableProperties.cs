@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.DataBinding;
@@ -120,6 +121,7 @@ namespace WellFired.Guacamole.Views
             {
                 var clampedValue = ListViewHelper.ClampScroll(this, value);
                 SetValue(ScrollOffsetProperty, clampedValue);
+                CalculateVisualDataSet();
             }
         }
     }

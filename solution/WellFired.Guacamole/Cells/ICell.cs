@@ -7,5 +7,6 @@ namespace WellFired.Guacamole.Cells
     {
         IListView Container { set; }
         bool IsSelected { set; }
+        void RecycleWithNewBindingContext();
     }
 }

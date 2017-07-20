@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Exceptions;
@@ -15,10 +16,13 @@ namespace WellFired.Guacamole.Views
     /// an ObservableCollection, when you add, remove, insert or in any way change that collection, the ListView
     /// will be set to update dynamically.
     /// </summary>
-    public partial class ListView : ItemsView, IListView
+    public partial class ListView : ItemsView, IListView, IListensToVdsChanges
     {
+        private List<int> _visualDataSet = new List<int>();
         private readonly List<ICell> _activeEntries = new List<ICell>();
+        private readonly List<ICell> _inactiveEntries = new List<ICell>();
         public int TotalContentSize { get; private set; }
+        public float InitialOffset { get; set; }
 
         public ListView()
         {
@@ -75,42 +79,84 @@ namespace WellFired.Guacamole.Views
             InvalidateRectRequest();
             var viewSize = SizingHelper.GetImportantSize(Orientation, RectRequest);
             CanScroll = viewSize < TotalContentSize;
-            BuildAdditionalEntries(NumberOfVisibleEntries - totalCurrentVisibleEntries);
+            CalculateVisualDataSet();
         }
 
-        private void BuildAdditionalEntries(int count)
+        private void CalculateVisualDataSet()
         {
-            var initialIndex = _activeEntries.Count;
-            for (var n = 0; n < count; n++)
+            var newVds = ListViewCalculator.CalculateVisualDataSet(-ScrollOffset, NumberOfVisibleEntries * EntrySize, EntrySize, TotalContentSize, Spacing);
+            var oldVds = _visualDataSet;
+            ListViewCalculator.AdjustForNewVds(oldVds, newVds, this);
+            _visualDataSet = newVds.ToList();
+            InitialOffset = ListViewCalculator.CalculateInitialOffset(_visualDataSet, EntrySize, Spacing) + ScrollOffset;
+        }
+
+        public void ItemLeftVds(int vdsIndex)
+        {
+            var data = ItemSource[vdsIndex];
+            foreach (var child in Children)
             {
-                var data = ItemSource[initialIndex + n];
+                var cell = (ICell) child;
+                if (!cell.BindingContext.Equals(data)) 
+                    continue;
                 
-                var cell = ItemTemplate == null
-                    ? CellHelper.CreateDefaultCell(data, this)
-                    : CellHelper.CreateCellWith(ItemTemplate, data, this);
+                _inactiveEntries.Add(cell);
+                _activeEntries.Remove(cell);
+                Children.Remove(child);
+                return;
+            }                
+        }
 
-                if (cell == null)
-                    throw new NoCompatibleCellInDataTemplate();
-                
-                cell.SetStyleDictionary(StyleDictionary);
-
-                var rectRequest = cell.RectRequest;
-
-                switch (Orientation)
-                {
-                    case OrientationOptions.Horizontal:
-                        rectRequest.Width = EntrySize;
-                        break;
-                    case OrientationOptions.Vertical:
-                        rectRequest.Height = EntrySize;
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-                
+        public void ItemEnteredVds(int vdsIndex, bool front)
+        {
+            var data = ItemSource[vdsIndex];
+            ICell cell;
+            if (_inactiveEntries.Any())
+            {
+                cell = _inactiveEntries.First();
+                CellHelper.ReUseCell(cell, data);
+                _inactiveEntries.Remove(cell);
                 _activeEntries.Add(cell);
-                Children.Add(cell as ILayoutable);
             }
+            else
+            {
+                cell = GetNewCell(data);
+                _activeEntries.Add(cell);
+            }
+            
+            if (front)
+                Children.Insert(0, cell as ILayoutable);
+            else
+                Children.Add(cell as ILayoutable);
+        }
+
+        private ICell GetNewCell(object data)
+        {
+            var cell = ItemTemplate == null
+                ? CellHelper.CreateDefaultCell(data, this)
+                : CellHelper.CreateCellWith(ItemTemplate, data, this);
+
+            if (cell == null)
+                throw new NoCompatibleCellInDataTemplate();
+
+            cell.SetStyleDictionary(StyleDictionary);
+
+            var rectRequest = cell.RectRequest;
+
+            switch (Orientation)
+            {
+                case OrientationOptions.Horizontal:
+                    rectRequest.Width = EntrySize;
+                    break;
+                case OrientationOptions.Vertical:
+                    rectRequest.Height = EntrySize;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            _activeEntries.Add(cell);
+            return cell;
         }
     }
 }

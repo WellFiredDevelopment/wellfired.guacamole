@@ -10,5 +10,10 @@ namespace WellFired.Guacamole.Cells
         }
 
         public IListView Container { get; set; }
+        
+        public virtual void RecycleWithNewBindingContext()
+        {
+            
+        }
     }
 }

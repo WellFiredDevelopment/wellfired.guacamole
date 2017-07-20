@@ -28,7 +28,7 @@ namespace WellFired.Guacamole.Views
         public static void Layout(IListView listView, UIRect availableSpace, UIPadding containerPadding)
         {
             var isVertical = listView.Orientation == OrientationOptions.Vertical;
-            var runningPosition = listView.ScrollOffset;
+            var runningPosition = listView.InitialOffset;
             foreach (var child in listView.Children)
             {
                 if (isVertical)
@@ -45,7 +45,7 @@ namespace WellFired.Guacamole.Views
                 case OrientationOptions.Vertical:
                     if (availableSpace.Height <= 0.0f)
                         return;
-                    entriesThatCanBeShownAtOnce = (int)Math.Ceiling(((double)availableSpace.Height / listView.EntrySize));
+                    entriesThatCanBeShownAtOnce = availableSpace.Height / listView.EntrySize;
                     break;
                 case OrientationOptions.Horizontal:
                     if (availableSpace.Width <= 0.0f)

@@ -19,26 +19,10 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.View
             VerticalLayout = LayoutOptions.Fill;
             Padding = UIPadding.With(30, 60, 10, 60);
 
-            var collection = new ObservableCollection<Filter> 
-            {
-                new Filter { FilterName = "Item 1", FilterColor = UIColor.FromRGB(236, 142, 117)},
-                new Filter { FilterName = "Item 2", FilterColor = UIColor.FromRGB(204, 204, 204) },
-                new Filter { FilterName = "Item 3", FilterColor = UIColor.FromRGB(174, 199, 225) },
-                new Filter { FilterName = "Item 4", FilterColor = UIColor.FromRGB(146, 229, 211) },
-                new Filter { FilterName = "Item 5", FilterColor = UIColor.FromRGB(217, 171, 224) },
-                new Filter { FilterName = "Item 6", FilterColor = UIColor.FromRGB(236, 142, 117)},
-                new Filter { FilterName = "Item 7", FilterColor = UIColor.FromRGB(204, 204, 204) },
-                new Filter { FilterName = "Item 8", FilterColor = UIColor.FromRGB(174, 199, 225) },
-                new Filter { FilterName = "Item 9", FilterColor = UIColor.FromRGB(146, 229, 211) },
-                new Filter { FilterName = "Item 10", FilterColor = UIColor.FromRGB(217, 171, 224) },
-                new Filter { FilterName = "Item 11", FilterColor = UIColor.FromRGB(236, 142, 117)},
-                new Filter { FilterName = "Item 12", FilterColor = UIColor.FromRGB(204, 204, 204) },
-                new Filter { FilterName = "Item 13", FilterColor = UIColor.FromRGB(174, 199, 225) },
-                new Filter { FilterName = "Item 15", FilterColor = UIColor.FromRGB(146, 229, 211) },
-                new Filter { FilterName = "Item 16", FilterColor = UIColor.FromRGB(217, 171, 224) },
-                new Filter { FilterName = "Item 17", FilterColor = UIColor.FromRGB(236, 142, 117)},
-                new Filter { FilterName = "Item 18", FilterColor = UIColor.FromRGB(204, 204, 204) }
-            };
+            var collection = new ObservableCollection<Filter>();
+
+            for (var n = 0; n < 10000; n++)
+                collection.Add(new Filter { FilterName = $"Item {n}", FilterColor = UIColor.FromRGB(236, 142, 117) });
 
             Content = new LayoutView
             {
@@ -55,7 +39,11 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.View
                         ItemTemplate = DataTemplate.Of(typeof(FilterCell)),
                         ItemSource = collection
                     },
-                    new Button { Text = "New" }
+                    new Button
+                    {
+                        Text = "New",
+                        HorizontalLayout = LayoutOptions.Expand
+                    }
                 }
             };
         }

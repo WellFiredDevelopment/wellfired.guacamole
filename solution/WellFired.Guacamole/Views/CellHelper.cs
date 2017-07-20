@@ -37,5 +37,11 @@ namespace WellFired.Guacamole.Views
             cell.Container = container;
             return cell;
         }
+
+        public static void ReUseCell(ICell entry, object bindingContext)
+        {
+            entry.BindingContext = bindingContext as INotifyPropertyChanged;
+            entry.RecycleWithNewBindingContext();
+        }
     }
 }
