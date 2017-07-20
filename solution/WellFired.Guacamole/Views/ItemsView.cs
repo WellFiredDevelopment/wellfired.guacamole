@@ -1,48 +1,57 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using WellFired.Guacamole.DataBinding;
-using WellFired.Guacamole.Layouts;
-using WellFired.Guacamole.Styling;
-using WellFired.Guacamole.Types;
+﻿using System;
+using System.Collections;
+using WellFired.Guacamole.Collection;
 
 namespace WellFired.Guacamole.Views
 {
-    public abstract partial class ItemsView : View, IItemsView
+    /// <summary>
+    /// This class takes care of the complexities of ItemsView, such as the ListView, here, we take care of ItemSources
+    /// that may or may not be observable collections. we take the slightly complex notification system from .net and 
+    /// whittle it down into easier to understand methods. (I hope).
+    /// </summary>
+    public abstract partial class ItemsView : ViewWithChildren, IItemsView
     {
-        private readonly Dictionary<object, ILayoutable> _container = new Dictionary<object, ILayoutable>();
-
-        protected ItemsView()
-        {
-            Children = new List<ILayoutable>();
-        }
-
-        private void BuildCollection()
-        {
-            foreach (var item in ItemSource)
-            {
-                var cell = CreateWith(ItemTemplate, item);
-                _container[item] = cell;
-                Children.Add(cell);
-                OnAdd(cell);
-            }
-
-            InvalidateRectRequest();
-        }
-
-        protected abstract ILayoutable CreateWith(DataTemplate template, object item);
-        protected abstract ILayoutable CreateDefault(object item);
-
-        protected abstract void OnAdd(ILayoutable item);
-        protected abstract void OnRemove(ILayoutable item);
+        /// <summary>
+        /// This is called when the whole ItemSource is changed. I.E. ItemSource = new collection();
+        /// Note : This is only called if ItemSource is an ObservableCollection.
+        /// </summary>
+        protected abstract void ItemSourceChanged();
+        
+        /// <summary>
+        /// This is called when the ItemSource is cleared. I.E. ItemSource.Clear();
+        /// Note : This is only called if ItemSource is an ObservableCollection.
+        /// </summary>
+        protected abstract void ItemSourceCleared();
+        
+        /// <summary>
+        /// This is called when a new Item is added to the ItemSource.
+        /// Note : This is only called if ItemSource is an ObservableCollection.
+        /// </summary>
+        /// <param name="item">The new item</param>
+        /// <param name="index">The new position this element was added at.</param>
+        protected abstract void ItemAdded(object item, int index);
+        
+        /// <summary>
+        /// This is called when an item is removed from the ItemSource
+        /// Note : This is only called if ItemSource is an ObservableCollection.
+        /// </summary>
+        /// <param name="item">The removed Item</param>
+        protected abstract void ItemRemoved(object item);
+        
+        /// <summary>
+        /// This is called when an item is replaced within the ItemSource.
+        /// Note : This is only called if ItemSource is an ObservableCollection.
+        /// </summary>
+        /// <param name="oldItem">The item that used to exist</param>
+        /// <param name="newItem">The new item</param>
+        /// <param name="index">The index into the ItemSource that you will find this item</param>
+        protected abstract void ItemReplaced(object oldItem, object newItem, int index);
 
         private void AddCollection(IEnumerable items, int index)
         {
             foreach (var item in items)
             {
-                var layoutable = CreateWith(ItemTemplate, item);
-                Children.Insert(index, layoutable);
-                OnAdd(layoutable);
+                ItemAdded(item, index);
                 index++;
             }
         }
@@ -50,84 +59,42 @@ namespace WellFired.Guacamole.Views
         private void RemoveCollection(IEnumerable items)
         {
             foreach (var item in items)
-            {
-                var layoutable = _container[item];
-                Children.Remove(layoutable);
-                OnRemove(layoutable);
-                _container.Remove(item);
-            }
+                ItemRemoved(item);
         }
 
         private void ReplaceCollection(IList oldItems, IList newItems, int index)
         {
             for (var n = 0; n < oldItems.Count; n++)
-            {
-                var item = oldItems[n];
-                var layoutable = _container[item];
-                _container.Remove(item);
-                Children.Remove(layoutable);
-                Children.Insert(index, CreateWith(ItemTemplate, newItems[n]));
-                index++;
-            }
+                ItemReplaced(oldItems[n], newItems[n], index + n);
         }
 
         private void ResetCollection()
         {
-            _container.Clear();
-            Children.Clear();
-            foreach(var layoutable in Children)
-                OnRemove(layoutable);
+            ItemSourceCleared();
         }
 
-        public override void Render(UIRect parentRect)
+        private void NotifyCollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyEvent)
         {
-            base.Render(parentRect);
-
-            var finalContentRect = FinalRenderRect;
-            finalContentRect.X += ContentRectRequest.X;
-            finalContentRect.Y += ContentRectRequest.Y;
-            finalContentRect.Width = ContentRectRequest.Width;
-            finalContentRect.Height = ContentRectRequest.Height;
-
-            foreach (var child in Children)
-                (child as View)?.Render(finalContentRect);
-        }
-
-        public override void InvalidateRectRequest()
-        {
-            base.InvalidateRectRequest();
-
-            foreach (var child in Children)
-                (child as View)?.InvalidateRectRequest();
-        }
-
-        protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            base.OnPropertyChanged(sender, e);
-
-            if (e.PropertyName == ChildrenProperty.PropertyName || 
-                e.PropertyName == BindingContextProperty.PropertyName)
-                SetupChildBindingContext();
-        }
-
-        private void SetupChildBindingContext()
-        {
-            foreach (var child in Children)
+            switch (notifyEvent.Action)
             {
-                var view = child as View;
-                if (view != null)
-                    view.BindingContext = BindingContext;
-            }
-        }
-
-        public override void SetStyleDictionary(IStyleDictionary styleDictionary)
-        {
-            base.SetStyleDictionary(styleDictionary);
-
-            foreach (var child in Children)
-            {
-                var view = child as View;
-                view?.SetStyleDictionary(styleDictionary);
+                case NotifyCollectionChangedAction.Add:
+                    AddCollection(notifyEvent.NewItems, notifyEvent.NewStartingIndex);
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    RemoveCollection(notifyEvent.OldItems);
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    ReplaceCollection(notifyEvent.OldItems, notifyEvent.NewItems, notifyEvent.OldStartingIndex);
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    RemoveCollection(notifyEvent.OldItems);
+                    AddCollection(notifyEvent.OldItems, notifyEvent.OldStartingIndex);
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    ResetCollection();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
     }

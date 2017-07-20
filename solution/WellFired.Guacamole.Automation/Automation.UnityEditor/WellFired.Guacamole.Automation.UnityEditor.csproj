@@ -43,14 +43,17 @@
     <ProjectReference Include="..\..\WellFired.Guacamole.Unity.Editor\WellFired.Guacamole.Unity.Editor.csproj">
       <Project>{9F8C3651-0571-4A3B-A75A-2C7F2F08BDA7}</Project>
       <Name>WellFired.Guacamole.Unity.Editor</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\WellFired.Guacamole\WellFired.Guacamole.csproj">
       <Project>{9804DE8D-6D30-4FD7-ADFE-4EC24A7ADB6E}</Project>
       <Name>WellFired.Guacamole</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Automation\WellFired.Guacamole.Automation.csproj">
       <Project>{CED6AE62-AB35-4D9F-8599-2D1359A814F8}</Project>
       <Name>WellFired.Guacamole.Automation</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

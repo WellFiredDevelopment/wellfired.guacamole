@@ -56,9 +56,50 @@ namespace WellFired.Guacamole.Layouts
                 return !anyFill && layout == LayoutOptions.Center;
             }).ToArray();
 
-            var staticWidth = staticElements.Select(o => o.RectRequest).Sum(getImportantSize);
-            var dynamicWidth = getImportantSize(availableSpace) - totalLostBySpacing - staticWidth;
-            var dynamicSharedSpace = !dynamicElements.Any() ? 0 : dynamicWidth / dynamicElements.Length;
+            var staticSharedSpace = 0.0f;
+            var staticSpace = staticElements.Select(o => o.RectRequest).Sum(getImportantSize);
+            var dynamicSpace = !dynamicElements.Any() ? 0.0f : getImportantSize(availableSpace) - totalLostBySpacing - staticSpace;
+            var dynamicSharedSpace = !dynamicElements.Any() ? 0 : dynamicSpace / dynamicElements.Length;
+
+            // If the statically allocated space is greater than the space available to static entries
+            // we must shrink these static entries to fit inside the available space.
+            var maxAvailableToStaticEntries = getImportantSize(availableSpace) - dynamicSpace;
+            if (staticSpace > maxAvailableToStaticEntries)
+            {
+                var total = 0;
+                var processedCounter = 0;
+                var ordered = staticElements.OrderBy(o => getImportantSize(o.RectRequest));
+                foreach (var entry in ordered)
+                {
+                    total += (int)getImportantSize(entry.RectRequest);
+                    if (total <= maxAvailableToStaticEntries)
+                    {
+                        processedCounter++;
+                        continue;
+                    }
+                 
+                    total -= (int)getImportantSize(entry.RectRequest);
+                    break;
+                }
+
+                if (processedCounter < staticElements.Length)
+                {
+                    var rest = ordered.Skip(processedCounter).ToArray();
+                    staticSharedSpace = (maxAvailableToStaticEntries - total) / rest.Length;
+
+                    foreach (var entry in rest)
+                    {
+                        var rect = entry.RectRequest;
+                        
+                        if (orientation == OrientationOptions.Horizontal)
+                            rect.Width = (int) staticSharedSpace;
+                        if (orientation == OrientationOptions.Vertical)
+                            rect.Height = (int) staticSharedSpace;
+
+                        entry.RectRequest = rect;
+                    }
+                }
+            }
 
             foreach (var element in dynamicElements)
             {

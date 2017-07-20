@@ -5,7 +5,7 @@ namespace WellFired.Guacamole.Cells
 {
     public interface ICell : IView, IBindableObject
     {
-        ListView Container { set; }
+        IListView Container { set; }
         bool IsSelected { set; }
     }
 }

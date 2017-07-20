@@ -45,6 +45,16 @@ namespace WellFired.Guacamole.Types
 				return (Width*397) ^ Height;
 			}
 		}
+		
+		public static UISize operator +(UISize a, UISize b)
+		{
+			return Of(a.Width + b.Width, a.Height + b.Height);
+		}
+		
+		public static UISize operator -(UISize a, UISize b)
+		{
+			return Of(a.Width - b.Width, a.Height - b.Height);
+		}
 
 		public static bool operator ==(UISize a, UISize b)
 		{

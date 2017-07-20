@@ -66,6 +66,15 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			GUI.FocusControl(Control.Id);
 		}
 
+		public virtual bool PushMaskStack(UIRect maskRect)
+		{
+			return false;
+		}
+
+		public virtual void PopMaskStack()
+		{
+		}
+
 		private void CreateBackgroundTexture()
 		{
 			BackgroundTexture = Texture2DExtensions.CreateRoundedTexture(64, 64, Control.BackgroundColor, Control.OutlineColor, Control.CornerRadius, Control.CornerMask);

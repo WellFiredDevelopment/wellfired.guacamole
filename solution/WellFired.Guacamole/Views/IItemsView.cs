@@ -5,7 +5,7 @@ namespace WellFired.Guacamole.Views
 {
     public interface IItemsView
     {
-        IEnumerable ItemSource { get; }
+        IList ItemSource { get; }
         DataTemplate ItemTemplate { get; }
     }
 }

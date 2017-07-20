@@ -9,6 +9,6 @@ namespace WellFired.Guacamole.Cells
             
         }
 
-        public ListView Container { get; set; }
+        public IListView Container { get; set; }
     }
 }

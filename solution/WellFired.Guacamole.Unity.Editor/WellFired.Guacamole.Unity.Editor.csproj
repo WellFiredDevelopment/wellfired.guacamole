@@ -71,6 +71,7 @@
     <Compile Include="NativeControls\Views\BaseRenderer.cs" />
     <Compile Include="NativeControls\Views\ButtonRenderer.cs" />
     <Compile Include="NativeControls\Views\LabelRenderer.cs" />
+    <Compile Include="NativeControls\Views\ListViewRenderer.cs" />
     <Compile Include="NativeControls\Views\NumberEntryRenderer.cs" />
     <Compile Include="NativeControls\Views\PageRenderer.cs" />
     <Compile Include="NativeControls\Views\SliderRenderer.cs" />

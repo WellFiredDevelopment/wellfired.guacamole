@@ -88,8 +88,7 @@ namespace WellFired.Guacamole.Unity.Editor
 		[Obfuscation(Feature = "renaming")]
 		public void OnEnable()
 		{
-			if(ApplicationInitializationContextScriptableObject != null)
-				Logger.RegisterLogger(ApplicationInitializationContextScriptableObject.Logger);
+			Logger.RegisterLogger(Diagnostics.Logger.UnityLogger);
 			EditorApplication.update += Update;
 		}
 
@@ -97,8 +96,7 @@ namespace WellFired.Guacamole.Unity.Editor
 		[Obfuscation(Feature = "renaming")]
 		public void OnDisable()
 		{
-			if(ApplicationInitializationContextScriptableObject != null)
-				Logger.UnregisterLogger(ApplicationInitializationContextScriptableObject.Logger);
+			Logger.UnregisterLogger(Diagnostics.Logger.UnityLogger);
 			// ReSharper disable once DelegateSubtraction
 			EditorApplication.update -= Update;
 		}

@@ -55,6 +55,7 @@
     <ProjectReference Include="..\..\WellFired.Guacamole\WellFired.Guacamole.csproj">
       <Project>{9804DE8D-6D30-4FD7-ADFE-4EC24A7ADB6E}</Project>
       <Name>WellFired.Guacamole</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

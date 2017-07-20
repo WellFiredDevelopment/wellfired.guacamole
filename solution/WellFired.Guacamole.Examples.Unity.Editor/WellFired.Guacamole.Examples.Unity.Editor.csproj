@@ -58,10 +58,12 @@
     <ProjectReference Include="..\WellFired.Guacamole.Unity.Editor\WellFired.Guacamole.Unity.Editor.csproj">
       <Project>{9F8C3651-0571-4A3B-A75A-2C7F2F08BDA7}</Project>
       <Name>WellFired.Guacamole.Unity.Editor</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\WellFired.Guacamole\WellFired.Guacamole.csproj">
       <Project>{9804de8d-6d30-4fd7-adfe-4ec24a7adb6e}</Project>
       <Name>WellFired.Guacamole</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

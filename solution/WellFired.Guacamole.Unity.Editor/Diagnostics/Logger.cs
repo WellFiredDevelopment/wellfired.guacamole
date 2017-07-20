@@ -5,6 +5,8 @@ namespace WellFired.Guacamole.Unity.Editor.Diagnostics
 {
 	public class Logger : ILogger
 	{
+		public static ILogger UnityLogger { get; } = new Logger();
+
 		public void LogMessage(string message)
 		{
 			Debug.Log(message);

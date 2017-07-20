@@ -93,6 +93,7 @@
     <Compile Include="Exceptions\InitializationContextInvalid.cs" />
     <Compile Include="Exceptions\InitializationContextNull.cs" />
     <Compile Include="Exceptions\NativeRendererCannotBeFound.cs" />
+    <Compile Include="Exceptions\NoCompatibleCellInDataTemplate.cs" />
     <Compile Include="Extensions\DelegateExtensions.cs" />
     <Compile Include="IApplication.cs" />
     <Compile Include="ICommand.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Types\UISize.cs" />
     <Compile Include="Types\UITextAlign.cs" />
     <Compile Include="Views\Button.cs" />
+    <Compile Include="Views\CellHelper.cs" />
     <Compile Include="Views\ControlState.cs" />
     <Compile Include="Views\IClickable.cs" />
     <Compile Include="Views\IItemsView.cs" />
@@ -159,6 +161,7 @@
     <Compile Include="Views\ListViewHelper.cs" />
     <Compile Include="Views\NumberEntry.cs" />
     <Compile Include="Views\Page.cs" />
+    <Compile Include="Views\SizingHelper.cs" />
     <Compile Include="Views\Slider.cs" />
     <Compile Include="Views\StyleHelper.cs" />
     <Compile Include="Views\TextEntry.cs" />
@@ -167,6 +170,8 @@
     <Compile Include="Views\View.ILayoutable.cs" />
     <Compile Include="Views\ViewContainer.cs" />
     <Compile Include="Views\ViewSizingExtensions.cs" />
+    <Compile Include="Views\ViewWithChildren.BindableProperties.cs" />
+    <Compile Include="Views\ViewWithChildren.cs" />
     <Compile Include="Views\Window.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

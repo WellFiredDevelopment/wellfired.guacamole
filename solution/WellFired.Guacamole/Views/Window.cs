@@ -10,8 +10,6 @@ namespace WellFired.Guacamole.Views
 {
 	public class Window : View
 	{
-		protected IStyleDictionary StyleDictionary { get; set; }
-		
 		private readonly Device _device = new Device();
 		private readonly ILogger _logger;
 
