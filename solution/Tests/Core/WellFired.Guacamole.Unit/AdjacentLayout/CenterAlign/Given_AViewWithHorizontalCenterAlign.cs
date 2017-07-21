@@ -61,8 +61,8 @@ namespace WellFired.Guacamole.Unit.AdjacentLayout.CenterAlign
 
             ViewSizingExtensions.DoSizingAndLayout(parentView, UIRect.With(0, 0, 80, 80));
 
-            Assert.That(child.RectRequest, Is.EqualTo(UIRect.With(0, 0, 100, 40)));
-            Assert.That(child.ContentRectRequest, Is.EqualTo(UIRect.With(30, 00, 40, 40)));
+            Assert.That(child.RectRequest, Is.EqualTo(UIRect.With(0, 0, 80, 40)));
+            Assert.That(child.ContentRectRequest, Is.EqualTo(UIRect.With(20, 00, 40, 40)));
         }
 
         [Test]
