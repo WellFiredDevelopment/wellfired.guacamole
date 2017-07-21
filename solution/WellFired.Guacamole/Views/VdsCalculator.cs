@@ -4,13 +4,19 @@ using System.Linq;
 
 namespace WellFired.Guacamole.Views
 {
-    public static class ListViewCalculator
+    public static class VdsCalculator
     {        
         /// <summary>
-        /// Given the data that defines a visible layouted control, we can calculate a potentially visible data set.
-        /// The Potentially visible data set would be a series of indicies into and arbritrary set of data.
-        /// We calculate this data set using the paramteres that define the view of our control.
+        /// Given some data that defines a visible control, we can calculate a potentially visible data set, 
+        /// this VDS will simply be a series of indicies into the data that are currently on visible.
+        /// We calculate this data set using the params that define our view.
         /// </summary>
+        /// <param name="virtualScrollPosition">Our Virtual Scroll position.</param>
+        /// <param name="visibleControlSize">The visual size of the control on screen.</param>
+        /// <param name="estimatedElementSize">The visual size of each individual element in the View.</param>
+        /// <param name="estimatedContentSize">The visual total size of all of the content.</param>
+        /// <param name="spacing"></param>
+        /// <returns></returns>
         public static IEnumerable<int> CalculateVisualDataSet(float virtualScrollPosition, int visibleControlSize, int estimatedElementSize, int estimatedContentSize, int spacing)
         {
             var visibleDataSet = new List<int>();
@@ -19,7 +25,8 @@ namespace WellFired.Guacamole.Views
             var sizeX = visibleControlSize;
      
             var minIndex = (int)Math.Floor(virtualScrollPosition / deltaX);
-            var maxIndex = (int)Math.Floor((virtualScrollPosition + sizeX) / (deltaX + 0.1f)); // Here we add a small delta so we don't overun our buffer and select n + 1 visible elements
+            var variance = minIndex == 0 ? 0.1f : 1 / (float)minIndex;
+            var maxIndex = (int)Math.Floor((virtualScrollPosition + sizeX) / (deltaX + variance)); // Here we add a small delta so we don't overun our buffer and select n + 1 visible elements
      
             var contentSizeX = estimatedContentSize;
             var max = (int)Math.Floor(contentSizeX * 2.0f / (deltaX + 0.1f));

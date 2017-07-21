@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using WellFired.Guacamole.Views;
 
-namespace WellFired.Guacamole.Tests.ListView
+namespace WellFired.Guacamole.Tests.Vds
 {
     [TestFixture]
     public class Given_AVds
@@ -14,7 +14,7 @@ namespace WellFired.Guacamole.Tests.ListView
             var newVds = new [] { 0, 1, 2, 3};
             var listensToVdsChanges = Substitute.For<IListensToVdsChanges>();
             
-            ListViewCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
+            VdsCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
             
             listensToVdsChanges.DidNotReceive().ItemLeftVds(Arg.Any<int>());
             Received.InOrder(() => {
@@ -32,7 +32,7 @@ namespace WellFired.Guacamole.Tests.ListView
             var newVds = new [] { 0, 1, 2, 3};
             var listensToVdsChanges = Substitute.For<IListensToVdsChanges>();
             
-            ListViewCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
+            VdsCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
             
             listensToVdsChanges.DidNotReceive().ItemLeftVds(Arg.Any<int>());
             Received.InOrder(() => {
@@ -49,7 +49,7 @@ namespace WellFired.Guacamole.Tests.ListView
             var newVds = new [] { 1, 2, 3};
             var listensToVdsChanges = Substitute.For<IListensToVdsChanges>();
             
-            ListViewCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
+            VdsCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
             
             Received.InOrder(() => {
                 listensToVdsChanges.ItemLeftVds(0);
@@ -66,7 +66,7 @@ namespace WellFired.Guacamole.Tests.ListView
             var newVds = new [] { 2, 3};
             var listensToVdsChanges = Substitute.For<IListensToVdsChanges>();
             
-            ListViewCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
+            VdsCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
             
             listensToVdsChanges.DidNotReceive().ItemLeftVds(2);
             listensToVdsChanges.DidNotReceive().ItemEnteredVds(2, Arg.Any<bool>());
@@ -84,7 +84,7 @@ namespace WellFired.Guacamole.Tests.ListView
             var newVds = new [] { 0, 1, 2 };
             var listensToVdsChanges = Substitute.For<IListensToVdsChanges>();
             
-            ListViewCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
+            VdsCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
             
             listensToVdsChanges.DidNotReceive().ItemLeftVds(2);
             listensToVdsChanges.DidNotReceive().ItemEnteredVds(2, Arg.Any<bool>());
@@ -104,7 +104,7 @@ namespace WellFired.Guacamole.Tests.ListView
             var newVds = new [] { 6, 7 };
             var listensToVdsChanges = Substitute.For<IListensToVdsChanges>();
             
-            ListViewCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
+            VdsCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
             
             Received.InOrder(() => {
                 listensToVdsChanges.ItemLeftVds(3);
@@ -121,7 +121,7 @@ namespace WellFired.Guacamole.Tests.ListView
             var newVds = new [] { 0, 1 };
             var listensToVdsChanges = Substitute.For<IListensToVdsChanges>();
             
-            ListViewCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
+            VdsCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
             
             Received.InOrder(() => {
                 listensToVdsChanges.ItemLeftVds(3);

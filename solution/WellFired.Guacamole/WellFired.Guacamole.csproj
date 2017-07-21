@@ -159,7 +159,8 @@
     <Compile Include="Views\LayoutView.cs" />
     <Compile Include="Views\ListView.BindableProperties.cs" />
     <Compile Include="Views\ListView.cs" />
-    <Compile Include="Views\ListViewCalculator.cs" />
+    <Compile Include="Views\ListView.IListensToVdsChanges.cs" />
+    <Compile Include="Views\VdsCalculator.cs" />
     <Compile Include="Views\ListViewHelper.cs" />
     <Compile Include="Views\NumberEntry.cs" />
     <Compile Include="Views\Page.cs" />

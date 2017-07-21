@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using WellFired.Guacamole.Cells;
-using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Exceptions;
-using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Views
@@ -15,8 +13,13 @@ namespace WellFired.Guacamole.Views
     /// Horizontal or Vertical. On top of that, the view can be set to have a dynamic data source, if the ItemSource is
     /// an ObservableCollection, when you add, remove, insert or in any way change that collection, the ListView
     /// will be set to update dynamically.
+    /// 
+    /// The ListView contains a series of visible cells. These visible cells are recycled for performance reasons. To 
+    /// calculate what should be visible we use the VdsCalculator, that operates on a Visual Data Set. If our view
+    /// is big enough to view 4 entries at once, our VDS will be the four indicies into this data those visible elements
+    /// represent. Entries leaving or entering the VDS are what trigger new cells to be created. 
     /// </summary>
-    public partial class ListView : ItemsView, IListView, IListensToVdsChanges
+    public partial class ListView : ItemsView, IListView
     {
         private List<int> _visualDataSet = new List<int>();
         private readonly List<ICell> _activeEntries = new List<ICell>();
@@ -84,50 +87,11 @@ namespace WellFired.Guacamole.Views
 
         private void CalculateVisualDataSet()
         {
-            var newVds = ListViewCalculator.CalculateVisualDataSet(-ScrollOffset, NumberOfVisibleEntries * EntrySize, EntrySize, TotalContentSize, Spacing).ToArray();
+            var newVds = VdsCalculator.CalculateVisualDataSet(-ScrollOffset, NumberOfVisibleEntries * EntrySize, EntrySize, TotalContentSize, Spacing).ToArray();
             var oldVds = _visualDataSet;
-            ListViewCalculator.AdjustForNewVds(oldVds.ToArray(), newVds, this);
+            VdsCalculator.AdjustForNewVds(oldVds.ToArray(), newVds, this);
             _visualDataSet = newVds.ToList();
-            InitialOffset = ListViewCalculator.CalculateInitialOffset(_visualDataSet, EntrySize, Spacing) + ScrollOffset;
-        }
-
-        public void ItemLeftVds(int vdsIndex)
-        {
-            var data = ItemSource[vdsIndex];
-            foreach (var child in Children)
-            {
-                var cell = (ICell) child;
-                if (!cell.BindingContext.Equals(data)) 
-                    continue;
-                
-                _inactiveEntries.Add(cell);
-                _activeEntries.Remove(cell);
-                Children.Remove(child);
-                return;
-            }                
-        }
-
-        public void ItemEnteredVds(int vdsIndex, bool front)
-        {
-            var data = ItemSource[vdsIndex];
-            ICell cell;
-            if (_inactiveEntries.Any())
-            {
-                cell = _inactiveEntries.First();
-                CellHelper.ReUseCell(cell, data);
-                _inactiveEntries.Remove(cell);
-                _activeEntries.Add(cell);
-            }
-            else
-            {
-                cell = GetNewCell(data);
-                _activeEntries.Add(cell);
-            }
-            
-            if (front)
-                Children.Insert(0, cell as ILayoutable);
-            else
-                Children.Add(cell as ILayoutable);
+            InitialOffset = VdsCalculator.CalculateInitialOffset(_visualDataSet, EntrySize, Spacing) + ScrollOffset;
         }
 
         private ICell GetNewCell(object data)

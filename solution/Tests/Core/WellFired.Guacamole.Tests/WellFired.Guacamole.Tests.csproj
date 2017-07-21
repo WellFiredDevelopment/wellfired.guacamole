@@ -82,9 +82,10 @@
     <Compile Include="AdjacentLayout\View\Given_AView.cs" />
     <Compile Include="AdjacentLayout\View\Given_AViewWithPaddingAndContent.cs" />
     <Compile Include="AdjacentLayout\View\Given_AViewWithNoPaddingAndWithContent.cs" />
-    <Compile Include="ListView\Given_AVds.cs" />
+    <Compile Include="Vds\Given_AVds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Styling\Given_ATrigger.cs" />
+    <Compile Include="Vds\Given_ViewParams.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
