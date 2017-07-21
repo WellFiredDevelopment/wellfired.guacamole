@@ -9,7 +9,7 @@ class nugetRestore
     constructor: (@slnPath, @nugetConfig) ->
 
     restore: ->
-        args = ['restore', @slnPath, '-ConfigFile', @nugetConfig]
+        args = ['restore', @slnPath]
 
         opts = { stdio: 'inherit' }
 
