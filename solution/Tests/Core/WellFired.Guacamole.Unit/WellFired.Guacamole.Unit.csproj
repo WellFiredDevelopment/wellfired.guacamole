@@ -6,8 +6,8 @@
     <ProjectGuid>{BB8952BF-3212-4478-9E84-47158D53E12B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WellFired.Guacamole.Tests</RootNamespace>
-    <AssemblyName>WellFired.Guacamole.Tests</AssemblyName>
+    <RootNamespace>WellFired.Guacamole.Unit</RootNamespace>
+    <AssemblyName>WellFired.Guacamole.Unit</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -36,8 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NSubstitute, Version=1.8.2.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca">
-      <HintPath>..\..\..\packages\NSubstitute.1.8.2.0\lib\net45\NSubstitute.dll</HintPath>
+    <Reference Include="NSubstitute, Version=2.0.3.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca">
+      <HintPath>../../../packages/NSubstitute.2.0.3/lib/net45/NSubstitute.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NSubstituteAutoMocker, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\packages\NSubstituteAutoMocker.1.1.0.0\lib\net45\NSubstituteAutoMocker.dll</HintPath>

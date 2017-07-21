@@ -1,6 +1,6 @@
 global.config = {
-    name:           'Guacamole',
-    slnPath:        'solution/Guacamole.sln',
+    name:           'WellFired.Guacamole',
+    slnPath:        'solution/WellFired.Guacamole.sln',
     unityAssets:    'unity/Assets',
     unityBin:       'unity/Assets/Code',
     unityEditorBin: 'unity/Assets/Code/Editor',

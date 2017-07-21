@@ -1,25 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F46EB31B-104D-4BC6-B1E8-5DDF0E9D5183}</ProjectGuid>
+    <ProjectGuid>{DCFECFBB-D2FC-4722-A5A2-2DE278853725}</ProjectGuid>
+    <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WellFired.Guacamole.Automation.UnityEditor</RootNamespace>
-    <AssemblyName>WellFired.Guacamole.Automation.UnityEditor</AssemblyName>
+    <RootNamespace>WellFired.Guacamole.Examples.Unity.Editor</RootNamespace>
+    <AssemblyName>WellFired.Guacamole.Examples.Unity.Editor</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>../../../Unity/Assets/Test/Automation/</OutputPath>
+    <OutputPath>../../../unity/Assets/Code/Editor/</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -28,43 +27,13 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>../../../Unity/Assets/Test/Automation/</OutputPath>
+    <OutputPath>../../../unity/Assets/Code/Editor/</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Automation.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\WellFired.Guacamole.Unity.Editor\WellFired.Guacamole.Unity.Editor.csproj">
-      <Project>{9F8C3651-0571-4A3B-A75A-2C7F2F08BDA7}</Project>
-      <Name>WellFired.Guacamole.Unity.Editor</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WellFired.Guacamole\WellFired.Guacamole.csproj">
-      <Project>{9804DE8D-6D30-4FD7-ADFE-4EC24A7ADB6E}</Project>
-      <Name>WellFired.Guacamole</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\Automation\WellFired.Guacamole.Automation.csproj">
-      <Project>{CED6AE62-AB35-4D9F-8599-2D1359A814F8}</Project>
-      <Name>WellFired.Guacamole.Automation</Name>
-      <Private>False</Private>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="AsyncBridge.Net35, Version=0.0.0.0, Culture=neutral, PublicKeyToken=b3b1c0202c0d6a87">
-      <HintPath>..\..\Assemblies\AsyncBridge.Net35.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Threading">
-      <HintPath>..\..\Assemblies\System.Threading.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
+    <Reference Include="System" />
     <Reference Include="UnityEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\Assemblies\UnityEditor.dll</HintPath>
       <Private>False</Private>
@@ -73,6 +42,29 @@
       <HintPath>..\..\Assemblies\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="NativeControls\Cells\FilterCellRenderer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NativeControls" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\WellFired.Guacamole.Unity.Editor\WellFired.Guacamole.Unity.Editor.csproj">
+      <Project>{9F8C3651-0571-4A3B-A75A-2C7F2F08BDA7}</Project>
+      <Name>WellFired.Guacamole.Unity.Editor</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WellFired.Guacamole\WellFired.Guacamole.csproj">
+      <Project>{9804de8d-6d30-4fd7-adfe-4ec24a7adb6e}</Project>
+      <Name>WellFired.Guacamole</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\WellFired.Guacamole.Examples\WellFired.Guacamole.Examples.csproj">
+      <Project>{9566c64d-a98f-4202-bc77-01df9af1aef2}</Project>
+      <Name>WellFired.Guacamole.Examples</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

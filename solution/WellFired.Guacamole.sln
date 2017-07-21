@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole", "WellFired.Guacamole\WellFired.Guacamole.csproj", "{9804DE8D-6D30-4FD7-ADFE-4EC24A7ADB6E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7436DA95-14F8-4B8F-9D04-E0EFEF0F2EFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Examples", "WellFired.Guacamole.Examples\WellFired.Guacamole.Examples.csproj", "{9566C64D-A98F-4202-BC77-01DF9AF1AEF2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole", "WellFired.Guacamole\WellFired.Guacamole.csproj", "{9804DE8D-6D30-4FD7-ADFE-4EC24A7ADB6E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Unity.Editor", "WellFired.Guacamole.Unity.Editor\WellFired.Guacamole.Unity.Editor.csproj", "{9F8C3651-0571-4A3B-A75A-2C7F2F08BDA7}"
 EndProject
@@ -13,7 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Unity.R
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{C2567451-ABD5-42BD-A45F-3425B34AE783}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7436DA95-14F8-4B8F-9D04-E0EFEF0F2EFC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Examples", "Example\WellFired.Guacamole.Examples\WellFired.Guacamole.Examples.csproj", "{9566C64D-A98F-4202-BC77-01DF9AF1AEF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Examples.Unity.Editor", "Example\WellFired.Guacamole.Examples.Unity.Editor\WellFired.Guacamole.Examples.Unity.Editor.csproj", "{DCFECFBB-D2FC-4722-A5A2-2DE278853725}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Runtime", "Runtime", "{8EE2433B-7CDD-47C7-8160-3FCA5B9DB8C0}"
 EndProject
@@ -30,8 +32,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Unit", "Tests\Core\WellFired.Guacamole.Unit\WellFired.Guacamole.Unit.csproj", "{BB8952BF-3212-4478-9E84-47158D53E12B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Unity.Editor.Unit", "Tests\Runtime\WellFired.Guacamole.Unity.Editor.Unit\WellFired.Guacamole.Unity.Editor.Unit.csproj", "{76422BF7-16C8-4938-8713-99FD1B845C53}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Examples.Unity.Editor", "WellFired.Guacamole.Examples.Unity.Editor\WellFired.Guacamole.Examples.Unity.Editor.csproj", "{DCFECFBB-D2FC-4722-A5A2-2DE278853725}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

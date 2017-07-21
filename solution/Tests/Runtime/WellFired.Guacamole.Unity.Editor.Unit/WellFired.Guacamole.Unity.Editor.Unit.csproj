@@ -37,7 +37,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AsyncBridge.Net35">
+    <Reference Include="AsyncBridge.Net35, Version=0.0.0.0, Culture=neutral, PublicKeyToken=b3b1c0202c0d6a87">
       <HintPath>..\..\..\Assemblies\AsyncBridge.Net35.dll</HintPath>
       <Private>False</Private>
     </Reference>
