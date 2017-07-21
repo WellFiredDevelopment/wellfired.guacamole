@@ -38,34 +38,30 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.View
                 new Filter { FilterName = "Item 15", FilterColor = UIColor.FromRGB(174, 199, 225) }
             };
 
-            var listView = new ListView
-            {
-                EntrySize = 38,
-                OutlineColor = UIColor.FromRGB(250, 250, 250),
-                BackgroundColor = UIColor.FromRGB(250, 250, 250),
-                HorizontalLayout = LayoutOptions.Fill,
-                VerticalLayout = LayoutOptions.Expand,
-                ItemTemplate = DataTemplate.Of(typeof(FilterCell)),
-                ItemSource = collection
-            };
-
             Content = new LayoutView
             {
                 OutlineColor = UIColor.FromRGB(250, 250, 250),
                 BackgroundColor = UIColor.FromRGB(250, 250, 250),
                 HorizontalLayout = LayoutOptions.Fill,
                 VerticalLayout = LayoutOptions.Fill,
-                Layout = AdjacentLayout.Of(OrientationOptions.Vertical),
+                Layout = AdjacentLayout.Of(OrientationOptions.Vertical, 5),
                 Children = {
-                    listView,
+                    new ListView
+                    {
+                        EntrySize = 38,
+                        OutlineColor = UIColor.FromRGB(250, 250, 250),
+                        BackgroundColor = UIColor.FromRGB(250, 250, 250),
+                        HorizontalLayout = LayoutOptions.Fill,
+                        VerticalLayout = LayoutOptions.Expand,
+                        ItemTemplate = DataTemplate.Of(typeof(FilterCell)),
+                        ItemSource = collection
+                    },
                     new Button
                     {
                         Text = "New"
                     }
                 }
             };
-            
-            listView.ScrollTo(collection[2]);
         }
     }
 }

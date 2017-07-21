@@ -36,7 +36,7 @@ namespace WellFired.Guacamole.Views
                 else
                     child.X = (int)runningPosition;
 
-                runningPosition += (listView.EntrySize + listView.Spacing);
+                runningPosition += listView.EntrySize + listView.Spacing;
             }
 
             int entriesThatCanBeShownAtOnce;
@@ -63,11 +63,16 @@ namespace WellFired.Guacamole.Views
         {
             if (value > 0.0f)
                 return 0.0f;
-            var maxValue = listView.TotalContentSize - listView.NumberOfVisibleEntries * listView.EntrySize;
+            var maxValue = MaxScrollFor(listView);
             if (value < -maxValue)
                 return -maxValue;
 
             return value;
+        }
+
+        public static float MaxScrollFor(IListView listView)
+        {
+            return listView.TotalContentSize - listView.NumberOfVisibleEntries * listView.EntrySize;
         }
 
         public static float CorrectScroll(OrientationOptions orientation, float value)

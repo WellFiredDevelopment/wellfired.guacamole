@@ -124,6 +124,7 @@
     <Compile Include="Styling\Styles\Label.cs" />
     <Compile Include="Styling\Styles\Button.cs" />
     <Compile Include="Styling\Styles\LabelCell.cs" />
+    <Compile Include="Styling\Styles\ListView.cs" />
     <Compile Include="Styling\Styles\Slider.cs" />
     <Compile Include="Styling\Trigger.cs" />
     <Compile Include="Types\CornerMask.cs" />

@@ -31,8 +31,7 @@ namespace WellFired.Guacamole.Views
 
         public ListView()
         {
-            VerticalLayout = LayoutOptions.Fill;
-            HorizontalLayout = LayoutOptions.Fill;
+            Style = Styling.Styles.ListView.Style;
         }
 
         /// <summary>

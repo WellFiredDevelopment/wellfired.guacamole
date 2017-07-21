@@ -56,7 +56,6 @@ namespace WellFired.Guacamole.Layouts
                 return !anyFill && layout == LayoutOptions.Center;
             }).ToArray();
 
-            var staticSharedSpace = 0.0f;
             var staticSpace = staticElements.Select(o => o.RectRequest).Sum(getImportantSize);
             var dynamicSpace = !dynamicElements.Any() ? 0.0f : getImportantSize(availableSpace) - totalLostBySpacing - staticSpace;
             var dynamicSharedSpace = !dynamicElements.Any() ? 0 : dynamicSpace / dynamicElements.Length;
@@ -85,7 +84,7 @@ namespace WellFired.Guacamole.Layouts
                 if (processedCounter < staticElements.Length)
                 {
                     var rest = ordered.Skip(processedCounter).ToArray();
-                    staticSharedSpace = (maxAvailableToStaticEntries - total) / rest.Length;
+                    var staticSharedSpace = (maxAvailableToStaticEntries - total) / rest.Length;
 
                     foreach (var entry in rest)
                     {
@@ -97,6 +96,7 @@ namespace WellFired.Guacamole.Layouts
                             rect.Height = (int) staticSharedSpace;
 
                         entry.RectRequest = rect;
+                        entry.ContentRectRequest = rect;
                     }
                 }
             }

@@ -53,6 +53,42 @@ namespace WellFired.Guacamole.Views
             v => v.ScrollOffset
         );
 
+        [PublicAPI] public static readonly BindableProperty ScrollBarBackgroundColorProperty = BindableProperty.Create<ListView, UIColor>(
+                UIColor.White,
+                BindingMode.TwoWay,
+                v => v.ScrollBarBackgroundColor
+            );
+
+        [PublicAPI] public static readonly BindableProperty ScrollBarOutlineColorProperty = BindableProperty.Create<ListView, UIColor>(
+                default(UIColor),
+                BindingMode.TwoWay,
+                v => v.ScrollBarOutlineColor
+            );
+
+        [PublicAPI] public static readonly BindableProperty ScrollBarCornerRadiusProperty = BindableProperty.Create<ListView, double>(
+                0.0,
+                BindingMode.TwoWay,
+                v => v.ScrollBarCornerRadius
+            );
+
+        [PublicAPI] public static readonly BindableProperty ScrollBarCornerMaskProperty = BindableProperty.Create<ListView, CornerMask>(
+                CornerMask.All,
+                BindingMode.TwoWay,
+                v => v.ScrollBarCornerMask
+            );
+
+        [PublicAPI] public static readonly BindableProperty ScrollBarSizeProperty = BindableProperty.Create<ListView, int>(
+                20,
+                BindingMode.TwoWay,
+                v => v.ScrollBarSize
+            );
+
+        [PublicAPI] public static readonly BindableProperty ShouldShowScrollBarProperty = BindableProperty.Create<ListView, bool>(
+            true,
+            BindingMode.TwoWay,
+            v => v.ShouldShowScrollBar
+        );
+
         [PublicAPI]
         public int Spacing
         {
@@ -123,6 +159,48 @@ namespace WellFired.Guacamole.Views
                 SetValue(ScrollOffsetProperty, clampedValue);
                 CalculateVisualDataSet();
             }
+        }
+
+        [PublicAPI]
+        public UIColor ScrollBarBackgroundColor
+        {
+            get { return (UIColor) GetValue(ScrollBarBackgroundColorProperty); }
+            set { SetValue(ScrollBarBackgroundColorProperty, value); }
+        }
+
+        [PublicAPI]
+        public UIColor ScrollBarOutlineColor
+        {
+            get { return (UIColor) GetValue(ScrollBarOutlineColorProperty); }
+            set { SetValue(ScrollBarOutlineColorProperty, value); }
+        }
+
+        [PublicAPI]
+        public double ScrollBarCornerRadius
+        {
+            get { return (double) GetValue(ScrollBarCornerRadiusProperty); }
+            set { SetValue(ScrollBarCornerRadiusProperty, value); }
+        }
+
+        [PublicAPI]
+        public CornerMask ScrollBarCornerMask
+        {
+            get { return (CornerMask) GetValue(ScrollBarCornerMaskProperty); }
+            set { SetValue(ScrollBarCornerMaskProperty, value); }
+        }
+
+        [PublicAPI]
+        public int ScrollBarSize
+        {
+            get { return (int) GetValue(ScrollBarSizeProperty); }
+            set { SetValue(ScrollBarSizeProperty, value); }
+        }
+
+        [PublicAPI]
+        public bool ShouldShowScrollBar
+        {
+            get { return (bool) GetValue(ShouldShowScrollBarProperty); }
+            set { SetValue(ShouldShowScrollBarProperty, value); }
         }
     }
 }
