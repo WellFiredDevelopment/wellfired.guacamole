@@ -12,7 +12,12 @@ namespace WellFired.Guacamole.Views
         OrientationOptions Orientation { get; }
         int NumberOfVisibleEntries { get; set; }
         INotifyPropertyChanged SelectedItem { set; }
-        float ScrollOffset { get; }
         float InitialOffset { get; }
+        
+        /// <summary>
+        /// ScrollTo a specific item.
+        /// </summary>
+        /// <param name="item">The item you wish to scroll to. This should be the items bindableObject, not the visual element.</param>
+        void ScrollTo(object item);
     }
 }

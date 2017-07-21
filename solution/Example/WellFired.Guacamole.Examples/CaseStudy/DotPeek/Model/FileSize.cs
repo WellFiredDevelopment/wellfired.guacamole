@@ -6,18 +6,28 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model
     {
         private const float EquivalenceTolerance = 512f; 
         
-        public readonly float SizeInKB;
-        public readonly float SizeInMB;
-
-        public FileSize(float sizeInKB)
+        public bool Equals(FileSize other)
         {
-            SizeInKB = sizeInKB;
-            SizeInMB = sizeInKB / 1024;
+            return _sizeInKb.Equals(other._sizeInKb) && _sizeInMb.Equals(other._sizeInMb);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            return obj is FileSize && Equals((FileSize) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (_sizeInKb.GetHashCode() * 397) ^ _sizeInMb.GetHashCode();
+            }
         }
 
         public static bool operator ==(FileSize a, FileSize b)
         {
-            return Math.Abs(a.SizeInKB - b.SizeInKB) < EquivalenceTolerance;
+            return Math.Abs(a._sizeInKb - b._sizeInKb) < EquivalenceTolerance;
         }
 
         public static bool operator !=(FileSize a, FileSize b)
@@ -25,9 +35,18 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model
             return !(a == b);
         }
 
+        private readonly float _sizeInKb;
+        private readonly float _sizeInMb;
+
+        public FileSize(float sizeInKb)
+        {
+            _sizeInKb = sizeInKb;
+            _sizeInMb = sizeInKb / 1024;
+        }
+
         public override string ToString()
         {
-            return $"{SizeInKB} kb";
+            return $"{_sizeInKb} kb";
         }
 
         public static FileSize ConvertToFileSize(string size, string unit)

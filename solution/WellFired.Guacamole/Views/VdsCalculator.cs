@@ -72,5 +72,17 @@ namespace WellFired.Guacamole.Views
         {
             return visualDataSet.First() * (entrySize + spacing);
         }
+
+        /// <summary>
+        /// This will get the desired scroll for a specific item in the list.
+        /// </summary>
+        /// <param name="dataIndex"></param>
+        /// <param name="estimatedElementSize"></param>
+        /// <param name="spacing"></param>
+        /// <returns></returns>
+        public static float DesiredScrollFor(int dataIndex, int estimatedElementSize, int spacing)
+        {
+            return -(dataIndex * estimatedElementSize + spacing * (dataIndex - 1));
+        }
     }
 }

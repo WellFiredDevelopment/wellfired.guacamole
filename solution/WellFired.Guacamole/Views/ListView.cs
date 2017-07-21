@@ -24,6 +24,8 @@ namespace WellFired.Guacamole.Views
         private List<int> _visualDataSet = new List<int>();
         private readonly List<ICell> _activeEntries = new List<ICell>();
         private readonly List<ICell> _inactiveEntries = new List<ICell>();
+        private bool _hasBeenLayouted;
+        private object _cachedScrollTo;
         public int TotalContentSize { get; private set; }
         public float InitialOffset { get; private set; }
 
@@ -78,11 +80,18 @@ namespace WellFired.Guacamole.Views
             var totalCurrentVisibleEntries = _activeEntries.Count;
             if (totalCurrentVisibleEntries > NumberOfVisibleEntries)
                 return;
-
+            
             InvalidateRectRequest();
             var viewSize = SizingHelper.GetImportantSize(Orientation, RectRequest);
             CanScroll = viewSize < TotalContentSize;
             CalculateVisualDataSet();
+            
+            if (!_hasBeenLayouted && _cachedScrollTo != null)
+            {
+                _hasBeenLayouted = true;
+                ScrollTo(_cachedScrollTo);
+                _cachedScrollTo = null;
+            }
         }
 
         private void CalculateVisualDataSet()
@@ -121,6 +130,25 @@ namespace WellFired.Guacamole.Views
 
             _activeEntries.Add(cell);
             return cell;
+        }
+        
+        /// <summary>
+        /// ScrollTo a specific item.
+        /// </summary>
+        /// <param name="item">The item you wish to scroll to. This should be the items bindableObject, not the visual element.</param>
+        public void ScrollTo(object item)
+        {
+            if (!_hasBeenLayouted)
+            {
+                _cachedScrollTo = item;
+                return;
+            }
+            
+            var index = ItemSource.IndexOf(item);
+            if(index == -1)
+                throw new IndexOutOfRangeException();
+            
+            ScrollOffset = VdsCalculator.DesiredScrollFor(index, EntrySize, Spacing);
         }
     }
 }

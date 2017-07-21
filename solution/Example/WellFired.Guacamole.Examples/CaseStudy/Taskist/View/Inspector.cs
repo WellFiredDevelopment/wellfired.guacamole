@@ -28,7 +28,25 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.View
                 new Filter { FilterName = "Item 5", FilterColor = UIColor.FromRGB(217, 171, 224) },
                 new Filter { FilterName = "Item 6", FilterColor = UIColor.FromRGB(236, 142, 117)},
                 new Filter { FilterName = "Item 7", FilterColor = UIColor.FromRGB(204, 204, 204) },
-                new Filter { FilterName = "Item 8", FilterColor = UIColor.FromRGB(174, 199, 225) }
+                new Filter { FilterName = "Item 8", FilterColor = UIColor.FromRGB(174, 199, 225) },
+                new Filter { FilterName = "Item 9", FilterColor = UIColor.FromRGB(204, 204, 204) },
+                new Filter { FilterName = "Item 10", FilterColor = UIColor.FromRGB(174, 199, 225) },
+                new Filter { FilterName = "Item 11", FilterColor = UIColor.FromRGB(146, 229, 211) },
+                new Filter { FilterName = "Item 12", FilterColor = UIColor.FromRGB(217, 171, 224) },
+                new Filter { FilterName = "Item 13", FilterColor = UIColor.FromRGB(236, 142, 117)},
+                new Filter { FilterName = "Item 14", FilterColor = UIColor.FromRGB(204, 204, 204) },
+                new Filter { FilterName = "Item 15", FilterColor = UIColor.FromRGB(174, 199, 225) }
+            };
+
+            var listView = new ListView
+            {
+                EntrySize = 38,
+                OutlineColor = UIColor.FromRGB(250, 250, 250),
+                BackgroundColor = UIColor.FromRGB(250, 250, 250),
+                HorizontalLayout = LayoutOptions.Fill,
+                VerticalLayout = LayoutOptions.Expand,
+                ItemTemplate = DataTemplate.Of(typeof(FilterCell)),
+                ItemSource = collection
             };
 
             Content = new LayoutView
@@ -39,21 +57,15 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.View
                 VerticalLayout = LayoutOptions.Fill,
                 Layout = AdjacentLayout.Of(OrientationOptions.Vertical),
                 Children = {
-                    new ListView {
-                        EntrySize = 38,
-                        OutlineColor = UIColor.FromRGB(250, 250, 250),
-                        BackgroundColor = UIColor.FromRGB(250, 250, 250),
-                        HorizontalLayout = LayoutOptions.Fill,
-                        VerticalLayout = LayoutOptions.Expand,
-                        ItemTemplate = DataTemplate.Of(typeof(FilterCell)),
-                        ItemSource = collection
-                    },
+                    listView,
                     new Button
                     {
                         Text = "New"
                     }
                 }
             };
+            
+            listView.ScrollTo(collection[2]);
         }
     }
 }
