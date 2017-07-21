@@ -6,7 +6,6 @@ using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Cells;
-using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using Debug = System.Diagnostics.Debug;
 
 [assembly: CustomRenderer(typeof(LabelCell), typeof(LabelCellRenderer))]

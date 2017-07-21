@@ -10,8 +10,15 @@ namespace WellFired.Guacamole.Examples.Simple.ListViewExample
         public ListViewTestWindow(ILogger logger, INotifyPropertyChanged persistantData) 
             : base(logger, persistantData)
         {
-            Padding = UIPadding.Of(5);
-            Content = new ListView { ItemSource = ItemSource.From("One", "Two", "Three") };
+            Content = new ListView
+            {
+                HorizontalLayout = LayoutOptions.Expand,
+                VerticalLayout = LayoutOptions.Expand,
+                Orientation = OrientationOptions.Horizontal,
+                EntrySize = 50,
+                Spacing = 5,
+                ItemSource = ItemSource.From("One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight")
+            };
         }
     }
 }

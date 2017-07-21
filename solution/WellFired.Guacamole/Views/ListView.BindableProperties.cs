@@ -121,6 +121,8 @@ namespace WellFired.Guacamole.Views
         /// <summary>
         /// The size of one Entry into this List View, for the moment, each entry should be the same size, though 
         /// this might change in the future.
+        /// The EntrySize refers to the size in the direction of Orientation. I.E. If the Orientation is Vertical, the 
+        /// EntrySize is the EntryHeight, if the Orientation is Horizontal, the EntrySize refers to the width.
         /// </summary>
         [PublicAPI]
         public int EntrySize

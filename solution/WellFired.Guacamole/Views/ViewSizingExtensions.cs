@@ -93,6 +93,10 @@ namespace WellFired.Guacamole.Views
                     contentRectRequest.X = availableSpace.Width / 2 - contentRectRequest.Width / 2;
                     break;
                 case LayoutOptions.Expand:
+                    if (rectRequest.Width > availableSpace.Width)
+                        rectRequest.Width = availableSpace.Width;
+                    if (contentRectRequest.Width > availableSpace.Width)
+                        contentRectRequest.Width = availableSpace.Width;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -109,6 +113,10 @@ namespace WellFired.Guacamole.Views
                     contentRectRequest.Y = availableSpace.Height / 2 - contentRectRequest.Height / 2;
                     break;
                 case LayoutOptions.Expand:
+                    if (rectRequest.Height > availableSpace.Height)
+                        rectRequest.Height = availableSpace.Height;
+                    if (contentRectRequest.Height > availableSpace.Height)
+                        contentRectRequest.Height = availableSpace.Height;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

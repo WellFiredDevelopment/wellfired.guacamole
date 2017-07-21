@@ -49,7 +49,7 @@ namespace WellFired.Guacamole.Views
             switch (orientation)
             {
                 case OrientationOptions.Horizontal:
-                    return x;
+                    return x > 0.0f ? x : y;
                 case OrientationOptions.Vertical:
                     return y;
                 default:

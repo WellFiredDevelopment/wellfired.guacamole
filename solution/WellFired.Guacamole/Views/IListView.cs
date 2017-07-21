@@ -13,7 +13,8 @@ namespace WellFired.Guacamole.Views
         int NumberOfVisibleEntries { get; set; }
         INotifyPropertyChanged SelectedItem { set; }
         float InitialOffset { get; }
-        
+        int ScrollBarSize { get; }
+
         /// <summary>
         /// ScrollTo a specific item.
         /// </summary>

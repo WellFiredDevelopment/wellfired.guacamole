@@ -80,7 +80,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 					scrollBarRect.Y += scrollBarRect.Height - listView.ScrollBarSize;
 					scrollBarRect.Height = listView.ScrollBarSize;
 					sizeRatio = listView.RectRequest.Width / (float) listView.TotalContentSize;
-					scrollBarRect.Height = (int)(scrollBarRect.Width * sizeRatio);
+					scrollBarRect.Width = (int)(scrollBarRect.Width * sizeRatio);
 					portionAvailableToMove = renderRect.Width - scrollBarRect.Width;
 					scrollRatio = -listView.ScrollOffset / ListViewHelper.MaxScrollFor(listView);
 					scrollBarRect.X += (int)(portionAvailableToMove * scrollRatio);

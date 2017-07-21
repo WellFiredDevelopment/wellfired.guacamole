@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Linq;
+using WellFired.Guacamole.Views.BindingContexts;
 
 namespace WellFired.Guacamole.Types
 {
@@ -7,7 +8,7 @@ namespace WellFired.Guacamole.Types
     {
         public static IList From(params string [] collection)
         {
-            return collection.ToList();
+            return collection.Select(o => new StringCellBindingContext(o)).ToList();
         }
     }
 }

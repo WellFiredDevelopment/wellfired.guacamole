@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Types;
 
@@ -14,9 +15,11 @@ namespace WellFired.Guacamole.Views
             {
                 case OrientationOptions.Horizontal:
                     request.Width = size;
+                    request.Height = !listView.Children.Any() ? 0 : listView.Children[0].RectRequest.Height + listView.ScrollBarSize;
                     break;
                 case OrientationOptions.Vertical:
                     request.Height = size;
+                    request.Width = (!listView.Children.Any() ? 0 : listView.Children[0].RectRequest.Width) + listView.ScrollBarSize;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
