@@ -27,9 +27,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0430BA6E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Integration", "Tests\Core\WellFired.Guacamole.Integration\WellFired.Guacamole.Integration.csproj", "{BAB03372-0CE8-4693-93B7-5BFFB29466B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Tests", "Tests\Core\WellFired.Guacamole.Tests\WellFired.Guacamole.Tests.csproj", "{BB8952BF-3212-4478-9E84-47158D53E12B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Unit", "Tests\Core\WellFired.Guacamole.Unit\WellFired.Guacamole.Unit.csproj", "{BB8952BF-3212-4478-9E84-47158D53E12B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Unity.Editor.Tests", "Tests\Runtime\WellFired.Guacamole.Unity.Editor.Tests\WellFired.Guacamole.Unity.Editor.Tests.csproj", "{76422BF7-16C8-4938-8713-99FD1B845C53}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Unity.Editor.Unit", "Tests\Runtime\WellFired.Guacamole.Unity.Editor.Unit\WellFired.Guacamole.Unity.Editor.Unit.csproj", "{76422BF7-16C8-4938-8713-99FD1B845C53}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Examples.Unity.Editor", "WellFired.Guacamole.Examples.Unity.Editor\WellFired.Guacamole.Examples.Unity.Editor.csproj", "{DCFECFBB-D2FC-4722-A5A2-2DE278853725}"
 EndProject

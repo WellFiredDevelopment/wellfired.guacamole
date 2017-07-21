@@ -1,11 +1,11 @@
 language: csharp
 mono: 
   - 4.2.1
-solution: solution/Guacamole.sln
+solution: solution/WellFired.Guacamole.sln
 install:
-  - nuget restore solution/Guacamole.sln
+  - nuget restore solution/WellFired.Guacamole.sln
   - nuget install NUnit.Runners -Version 3.4.1 -OutputDirectory testrunner
 script:
-  - xbuild /p:Configuration=Release solution/Guacamole.sln
-  - mono ./testrunner/NUnit.ConsoleRunner.3.4.1/tools/nunit3-console.exe ./solution/Tests/Core/WellFired.Guacamole.Tests/bin/Release/WellFired.Guacamole.Tests.dll
+  - xbuild /p:Configuration=Release solution/WellFired.Guacamole.sln
+  - mono ./testrunner/NUnit.ConsoleRunner.3.4.1/tools/nunit3-console.exe ./solution/Tests/Core/WellFired.Guacamole.Unit/bin/Release/WellFired.Guacamole.Unit.dll
   - mono ./testrunner/NUnit.ConsoleRunner.3.4.1/tools/nunit3-console.exe ./solution/Tests/Core/WellFired.Guacamole.Integration/bin/Release/WellFired.Guacamole.Integration.dll
