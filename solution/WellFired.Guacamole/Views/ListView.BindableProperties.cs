@@ -6,6 +6,7 @@ using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Types;
+using WellFired.Guacamole.Views.BindingContexts;
 
 namespace WellFired.Guacamole.Views
 {
@@ -105,15 +106,17 @@ namespace WellFired.Guacamole.Views
                 var oldItem = SelectedItem;
                 if (!SetValue(SelectedItemProperty, value)) 
                     return;
-                
-                foreach (var child in Children)
+
+                foreach (var itemSource in ItemSource)
                 {
-                    var cell = child as ICell;
-                    Debug.Assert(cell != null, "cell != null");
-                    if (cell.BindingContext.Equals(oldItem))
-                        cell.IsSelected = false;
-                    else if (cell.BindingContext.Equals(SelectedItem))
-                        cell.IsSelected = true;
+                    if (!(itemSource is CellBindingContextBase))
+                        return;
+                    
+                    var cellBindingContextBase = itemSource as CellBindingContextBase;
+                    if (cellBindingContextBase.Equals(oldItem))
+                        cellBindingContextBase.IsSelected = false;
+                    if (cellBindingContextBase.Equals(SelectedItem))
+                        cellBindingContextBase.IsSelected = true;
                 }
             }
         }

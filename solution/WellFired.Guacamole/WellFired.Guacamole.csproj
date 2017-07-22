@@ -145,7 +145,8 @@
     <Compile Include="Types\UIRect.cs" />
     <Compile Include="Types\UISize.cs" />
     <Compile Include="Types\UITextAlign.cs" />
-    <Compile Include="Views\BindingContexts\StringCellBindingContext.cs" />
+    <Compile Include="Views\BindingContexts\CellBindingContextBase.cs" />
+    <Compile Include="Views\BindingContexts\LabelCellBindingContext.cs" />
     <Compile Include="Views\Button.cs" />
     <Compile Include="Views\CellHelper.cs" />
     <Compile Include="Views\ControlState.cs" />

@@ -8,7 +8,7 @@ namespace WellFired.Guacamole.Types
     {
         public static IList From(params string [] collection)
         {
-            return collection.Select(o => new StringCellBindingContext(o)).ToList();
+            return collection.Select(o => new LabelCellBindingContext(o)).ToList();
         }
     }
 }

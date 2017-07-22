@@ -8,6 +8,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.View.Cells
         {
             Bind(FilterTextProperty, "FilterName");
             Bind(FilterColorProperty, "FilterColor");
+            Bind(IsSelectedProperty, "IsSelected");
         }
     }
 }

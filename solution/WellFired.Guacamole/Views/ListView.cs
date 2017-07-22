@@ -114,18 +114,24 @@ namespace WellFired.Guacamole.Views
             cell.SetStyleDictionary(StyleDictionary);
 
             var rectRequest = cell.RectRequest;
+            var contentRectRequest = cell.ContentRectRequest;
 
             switch (Orientation)
             {
                 case OrientationOptions.Horizontal:
-                    rectRequest.Width = EntrySize;
+                    rectRequest.Width = EntrySize + Spacing;
+                    contentRectRequest.Width = EntrySize;
                     break;
                 case OrientationOptions.Vertical:
-                    rectRequest.Height = EntrySize;
+                    rectRequest.Height = EntrySize + Spacing;
+                    contentRectRequest.Height = EntrySize;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            
+            cell.RectRequest = rectRequest;
+            cell.ContentRectRequest = contentRectRequest;
 
             _activeEntries.Add(cell);
             return cell;

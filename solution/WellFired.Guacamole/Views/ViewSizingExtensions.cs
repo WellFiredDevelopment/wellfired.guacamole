@@ -135,9 +135,12 @@ namespace WellFired.Guacamole.Views
 
             if (listView == null) 
                 return;
-            
+
             foreach (var child in listView.Children)
+            {
+                ListViewHelper.ConstrainToCell(listView, child);
                 AttemptToFullfillRequests(child as IView, UIRect.With(view.ContentRectRequest.Width, view.ContentRectRequest.Height) - view.Padding);
+            }
         }
 
         public static void UpdateContextIfNeeded(IBindableObject bindable)

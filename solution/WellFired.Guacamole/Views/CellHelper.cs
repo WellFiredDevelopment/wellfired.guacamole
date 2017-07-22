@@ -17,7 +17,7 @@ namespace WellFired.Guacamole.Views
 
             cell.BindingContext = bindingContext as INotifyPropertyChanged;
             cell.Bind(LabelCell.TextProperty, "CellLabelText");
-            cell.Bind(Cell.IsSelectedProperty, "IsSelected");
+            cell.Bind(Cell.IsSelectedProperty, "IsSelected", BindingMode.TwoWay);
 
             return cell;
         }

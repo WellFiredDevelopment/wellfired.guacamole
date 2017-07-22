@@ -1,9 +1,9 @@
-﻿using WellFired.Guacamole.DataBinding;
-using WellFired.Guacamole.Types;
+﻿using WellFired.Guacamole.Types;
+using WellFired.Guacamole.Views.BindingContexts;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.ViewModel
 {
-    public class Filter : ObservableBase
+    public class Filter : CellBindingContextBase
     {
         private string _filterName;
         private UIColor _filterColor;

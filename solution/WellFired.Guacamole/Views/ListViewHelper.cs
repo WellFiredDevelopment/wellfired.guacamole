@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using WellFired.Guacamole.Diagnostics;
+using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Views
@@ -89,6 +90,31 @@ namespace WellFired.Guacamole.Views
                 default:
                     throw new ArgumentOutOfRangeException(nameof(orientation), orientation, null);
             }
+        }
+
+        public static void ConstrainToCell(IListView listView, ILayoutable child)
+        {
+            UIRect rectRequest;
+            UIRect contentRectRequest;
+            switch (listView.Orientation)
+            {
+                case OrientationOptions.Horizontal:
+                    rectRequest = child.RectRequest;
+                    contentRectRequest = child.ContentRectRequest;
+                    rectRequest.Width = listView.EntrySize + listView.Spacing;
+                    contentRectRequest.Width = listView.EntrySize;
+                    break;
+                case OrientationOptions.Vertical:
+                    rectRequest = child.RectRequest;
+                    contentRectRequest = child.ContentRectRequest;
+                    rectRequest.Height = listView.EntrySize + listView.Spacing;
+                    contentRectRequest.Height = listView.EntrySize;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            child.RectRequest = rectRequest;
+            child.ContentRectRequest = contentRectRequest;
         }
     }
 }
