@@ -80,6 +80,14 @@
     <Compile Include="CaseStudy\Taskist\View\Overview.cs" />
     <Compile Include="CaseStudy\Taskist\View\TaskistMainPage.cs" />
     <Compile Include="CaseStudy\Taskist\View\TaskistTopBar.cs" />
+    <Compile Include="Intermediate\Sorting\BreakdownPage.cs" />
+    <Compile Include="Intermediate\Sorting\Cells\AssetBreakdownCell.cs" />
+    <Compile Include="Intermediate\Sorting\SortingApplication.cs" />
+    <Compile Include="Intermediate\Sorting\SortingWindow.cs" />
+    <Compile Include="Intermediate\Sorting\Helper\BuiltAssetRandomizer.cs" />
+    <Compile Include="Intermediate\Sorting\Model\BuildAssetData.cs" />
+    <Compile Include="Intermediate\Sorting\ViewModel\Breakdown.cs" />
+    <Compile Include="Intermediate\Sorting\ViewModel\BuiltAssetData.cs" />
     <Compile Include="Simple\AdjacentLayoutExample\AdjacentLayoutTestApplication.cs" />
     <Compile Include="Simple\AdjacentLayoutExample\AdjacentLayoutTestWindow.cs" />
     <Compile Include="Simple\ButtonExample\ButtonTestApplication.cs" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.ComponentModel;
 using WellFired.Guacamole.Collection;
 
 namespace WellFired.Guacamole.Views
@@ -96,6 +97,14 @@ namespace WellFired.Guacamole.Views
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(sender, e);
+
+            if (e.PropertyName == ItemSourceProperty.PropertyName)
+                ItemSourceChanged();
         }
     }
 }
