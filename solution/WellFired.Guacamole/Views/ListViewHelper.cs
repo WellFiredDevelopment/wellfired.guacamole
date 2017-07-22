@@ -76,7 +76,8 @@ namespace WellFired.Guacamole.Views
 
         public static float MaxScrollFor(IListView listView)
         {
-            return listView.TotalContentSize - listView.NumberOfVisibleEntries * listView.EntrySize;
+            var visibleSizeWithSpacing = (listView.NumberOfVisibleEntries - 1) * listView.Spacing;
+            return listView.TotalContentSize - (listView.NumberOfVisibleEntries * listView.EntrySize + visibleSizeWithSpacing);
         }
 
         public static float CorrectScroll(OrientationOptions orientation, float value)

@@ -30,8 +30,8 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeekWithListView
             BackgroundColor = UIColor.White;
             Content = new ListView
             {
-                EntrySize = 300,
-                Spacing = 0,
+                EntrySize = 290,
+                Spacing = 20,
                 Orientation = OrientationOptions.Horizontal,
                 HorizontalLayout = LayoutOptions.Fill,
                 VerticalLayout = LayoutOptions.Fill,

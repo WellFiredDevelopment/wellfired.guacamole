@@ -26,7 +26,6 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeekWithListView.Cells
             
             Content = new LayoutView
             {
-                OutlineColor = UIColor.Black,
                 HorizontalLayout = LayoutOptions.Fill,
                 VerticalLayout = LayoutOptions.Fill,
                 Layout = AdjacentLayout.Of(OrientationOptions.Vertical, 20),
