@@ -175,10 +175,11 @@ namespace WellFired.Guacamole.Views
             if(view.Content != null)
                 DoLayout(view.Content);
 
-            if (layout == null)
+            var hasChildren = view as IHasChildren;
+            if (hasChildren == null)
                 return;
 
-            foreach(var child in layout.Children)
+            foreach(var child in hasChildren.Children)
                 DoLayout(child as IView);
         }
 

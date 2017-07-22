@@ -52,6 +52,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CaseStudy\DotPeekWithListView\Cells\BuildReportCell.cs" />
+    <Compile Include="CaseStudy\DotPeekWithListView\DotPeekApplication.cs" />
+    <Compile Include="CaseStudy\DotPeekWithListView\BuildReportPage.cs" />
+    <Compile Include="CaseStudy\DotPeekWithListView\DotPeekWindow.cs" />
+    <Compile Include="CaseStudy\DotPeekWithListView\Model\BuildReport.cs" />
+    <Compile Include="CaseStudy\DotPeekWithListView\ViewModel\BuildReport.cs" />
     <Compile Include="CaseStudy\DotPeek\DotPeekApplication.cs" />
     <Compile Include="CaseStudy\DotPeek\DotPeekPage.cs" />
     <Compile Include="CaseStudy\DotPeek\DotPeekWindow.cs" />
@@ -119,7 +125,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CaseStudy" />
     <Folder Include="Simple" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
