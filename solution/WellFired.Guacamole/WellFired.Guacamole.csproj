@@ -89,11 +89,15 @@
     <Compile Include="Drawing\Vector.cs" />
     <Compile Include="Event\ClickEvent.cs" />
     <Compile Include="Event\TypeEvent.cs" />
+    <Compile Include="Exceptions\DataTemplateTypeDidntCreateAPage.cs" />
+    <Compile Include="Exceptions\GuacamoleUserFacingException.cs" />
     <Compile Include="Exceptions\GuacamoleWindowCantBeCreated.cs" />
     <Compile Include="Exceptions\InitializationContextInvalid.cs" />
     <Compile Include="Exceptions\InitializationContextNull.cs" />
     <Compile Include="Exceptions\NativeRendererCannotBeFound.cs" />
     <Compile Include="Exceptions\NoCompatibleCellInDataTemplate.cs" />
+    <Compile Include="Exceptions\DataTemplateTypeIsNotBindableException.cs" />
+    <Compile Include="Exceptions\TabbedPagePageShouldntAlreadyHaveBindingContext.cs" />
     <Compile Include="Extensions\DelegateExtensions.cs" />
     <Compile Include="IApplication.cs" />
     <Compile Include="ICommand.cs" />
@@ -147,6 +151,7 @@
     <Compile Include="Types\UITextAlign.cs" />
     <Compile Include="Views\BindingContexts\CellBindingContextBase.cs" />
     <Compile Include="Views\BindingContexts\LabelCellBindingContext.cs" />
+    <Compile Include="Views\BindingContexts\PageBindingContextBase.cs" />
     <Compile Include="Views\Button.cs" />
     <Compile Include="Views\CellHelper.cs" />
     <Compile Include="Views\ControlState.cs" />
@@ -163,6 +168,8 @@
     <Compile Include="Views\ListView.BindableProperties.cs" />
     <Compile Include="Views\ListView.cs" />
     <Compile Include="Views\ListView.IListensToVdsChanges.cs" />
+    <Compile Include="Views\TabbedPage.BindableProperties.cs" />
+    <Compile Include="Views\TabbedPage.cs" />
     <Compile Include="Views\VdsCalculator.cs" />
     <Compile Include="Views\ListViewHelper.cs" />
     <Compile Include="Views\NumberEntry.cs" />

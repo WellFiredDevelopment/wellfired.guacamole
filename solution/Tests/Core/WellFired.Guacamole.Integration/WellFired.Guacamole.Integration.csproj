@@ -65,6 +65,8 @@
     <Compile Include="View\NumberEntry\Bindable\NumberEntryNumberTests.cs" />
     <Compile Include="View\NumberEntry\Bindable\NumberEntryTextColorTests.cs" />
     <Compile Include="View\NumberEntry\Bindable\NumberEntryVerticalTextAlignTests.cs" />
+    <Compile Include="View\Page\Bindable\ContextObject.cs" />
+    <Compile Include="View\Page\Bindable\TitleTests.cs" />
     <Compile Include="View\Slider\Bindable\SliderContextObject.cs" />
     <Compile Include="View\Slider\Bindable\SliderMaxValueTests.cs" />
     <Compile Include="View\Slider\Bindable\SliderMinValueTests.cs" />
@@ -73,6 +75,8 @@
     <Compile Include="View\Slider\Bindable\SliderThumbCornerRadiusTests.cs" />
     <Compile Include="View\Slider\Bindable\SliderThumbOutlineColorTests.cs" />
     <Compile Include="View\Slider\Bindable\SliderValueTests.cs" />
+    <Compile Include="View\TabbedPage\Bindable\ContextObject.cs" />
+    <Compile Include="View\TabbedPage\Bindable\TitleTests.cs" />
     <Compile Include="View\TextEntry\Bindable\TextColorTests.cs" />
     <Compile Include="View\TextEntry\Bindable\ContextObject.cs" />
     <Compile Include="View\TextEntry\Bindable\HorizontalTextAlignTests.cs" />

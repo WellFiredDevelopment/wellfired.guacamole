@@ -102,6 +102,10 @@
     <Compile Include="Simple\SliderExample\SliderTestApplication.cs" />
     <Compile Include="Simple\SliderExample\SliderTestWindow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Simple\TabbedPageExample\AdjacentLayoutTestApplication.cs" />
+    <Compile Include="Simple\TabbedPageExample\TabbedPageWindow.cs" />
+    <Compile Include="Simple\TabbedPageExample\ViewModel\FirstPage.cs" />
+    <Compile Include="Simple\TabbedPageExample\ViewModel\SecondPage.cs" />
     <Compile Include="Simple\TextFieldExample\TextFieldTestApplication.cs" />
     <Compile Include="Simple\TextFieldExample\TextFieldTestWindow.cs" />
     <Compile Include="Simple\TwoWayBindingExample\TwoWayBindingTestApplication.cs" />
@@ -129,9 +133,6 @@
       <Name>WellFired.Guacamole</Name>
       <Private>False</Private>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Simple" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

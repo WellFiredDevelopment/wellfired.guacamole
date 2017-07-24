@@ -92,13 +92,13 @@ namespace WellFired.Guacamole.Views
             var viewSize = SizingHelper.GetImportantSize(Orientation, RectRequest);
             CanScroll = viewSize < TotalContentSize;
             CalculateVisualDataSet();
+
+            if (_hasBeenLayouted || _cachedScrollTo == null) 
+                return;
             
-            if (!_hasBeenLayouted && _cachedScrollTo != null)
-            {
-                _hasBeenLayouted = true;
-                ScrollTo(_cachedScrollTo);
-                _cachedScrollTo = null;
-            }
+            _hasBeenLayouted = true;
+            ScrollTo(_cachedScrollTo);
+            _cachedScrollTo = null;
         }
 
         private void CalculateVisualDataSet()
@@ -114,7 +114,7 @@ namespace WellFired.Guacamole.Views
         {
             var cell = ItemTemplate == null
                 ? CellHelper.CreateDefaultCell(data, this)
-                : CellHelper.CreateCellWith(ItemTemplate, data, this);
+                : CellHelper.CreateCellWith(this, ItemTemplate, data, this);
 
             if (cell == null)
                 throw new NoCompatibleCellInDataTemplate();

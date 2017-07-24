@@ -104,7 +104,15 @@ namespace WellFired.Guacamole.Views
             base.OnPropertyChanged(sender, e);
 
             if (e.PropertyName == ItemSourceProperty.PropertyName)
-                ItemSourceChanged();
+            {
+                if(ItemSource != null)
+                    ItemSourceChanged();
+            }
+            else if (e.PropertyName == ItemTemplateProperty.PropertyName)
+            {
+                if(ItemSource != null)
+                    ItemSourceChanged();
+            }
         }
     }
 }

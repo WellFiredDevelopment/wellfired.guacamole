@@ -10,6 +10,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek
     {
         public DotPeekPage()
         {
+            Title = "Overview";
             var leftReport =
                 new BuildReport
                 {

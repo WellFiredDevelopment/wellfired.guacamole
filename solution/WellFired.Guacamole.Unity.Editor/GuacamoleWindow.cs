@@ -108,14 +108,26 @@ namespace WellFired.Guacamole.Unity.Editor
 			if (_exception != null)
 			{
 				Close();
-				EditorUtility.DisplayDialog(
-					"Exception was thrown",
-					$"The window has thrown an exception, the error is \n\n {_exception.Message} \n\n callstack was \n\n {_exception.StackTrace}",
-					"Close");
+				DisplayUserError(_exception);
 				return;
 			}
 			
 			Repaint();
+		}
+
+		private void DisplayUserError(Exception exception)
+		{
+			var targetInvocationException = exception as TargetInvocationException;
+			if (targetInvocationException != null)
+				exception = targetInvocationException.InnerException;
+			
+			var facingException = exception as GuacamoleUserFacingException;
+			EditorUtility.DisplayDialog(
+				"Guacamole Crashed. :(",
+				facingException != null
+					? $"Your Guacamole window has crashed with the error : \n\n{facingException.UserFacingError()}"
+					: $"The window has thrown an exception, the error is \n\n{_exception.Message} \n\ncallstack was \n\n{_exception.StackTrace}",
+				"Close");
 		}
 
 		[UsedImplicitly]
@@ -139,6 +151,7 @@ namespace WellFired.Guacamole.Unity.Editor
 				catch (Exception e)
 				{
 					_exception = e;
+					return;
 				}
 
 			try

@@ -1,4 +1,5 @@
-﻿using WellFired.Guacamole.DataBinding;
+﻿using System.ComponentModel;
+using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Cells
@@ -8,5 +9,6 @@ namespace WellFired.Guacamole.Cells
         IListView Container { set; }
         bool IsSelected { set; }
         void RecycleWithNewBindingContext();
+        void ResetBindingContext(INotifyPropertyChanged notifyPropertyChanged);
     }
 }

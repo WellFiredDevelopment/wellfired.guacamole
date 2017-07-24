@@ -11,6 +11,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeekWithListView
     {
         public BuildReportPage()
         {
+            Title = "Report";
             var report0 = new Model.BuildReport { BuildTime = 1000, Platform = "Unity Macos", UnityVersion = "2017.1", BuildSize = 98 };
             var report1 = new Model.BuildReport { BuildTime = 1000, Platform = "Unity Macos", UnityVersion = "2017.1", BuildSize = 100 };
             var report2 = new Model.BuildReport { BuildTime = 1000, Platform = "Unity Macos", UnityVersion = "2017.1", BuildSize = 99 };

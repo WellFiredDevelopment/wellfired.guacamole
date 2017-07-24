@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Diagnostics;
 using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.DataBinding;
@@ -22,25 +21,20 @@ namespace WellFired.Guacamole.Views
             return cell;
         }
 
-        public static ICell CreateCellWith(DataTemplate itemTemplate, object bindingContext, IListView container)
+        public static ICell CreateCellWith(object caller, DataTemplate itemTemplate, object bindingContext, IListView container)
         {
-            var instance = Activator.CreateInstance(itemTemplate.Type);
-            var bindableObject = instance as IBindableObject;
-            var layoutable = instance as ILayoutable;
+            var instance = itemTemplate.Create(caller);
+            var bindableObject = instance;
             var cell = instance as ICell;
-            
-            Debug.Assert(bindableObject != null, "Data Template type does not implement IBindableObject.");
-            Debug.Assert(layoutable != null, "Data Template type does not implement ICell.");
-            Debug.Assert(cell != null, "cell != null");
-            
             bindableObject.BindingContext = bindingContext as INotifyPropertyChanged;
+            Debug.Assert(cell != null, "cell != null");
             cell.Container = container;
             return cell;
         }
 
         public static void ReUseCell(ICell entry, object bindingContext)
         {
-            entry.BindingContext = bindingContext as INotifyPropertyChanged;
+            entry.ResetBindingContext(bindingContext as INotifyPropertyChanged);
             entry.RecycleWithNewBindingContext();
         }
     }
