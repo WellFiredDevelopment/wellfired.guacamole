@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using UnityEditor;
 using UnityEngine;
 using WellFired.Guacamole.Annotations;
@@ -17,99 +18,55 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 	{
 		private Texture2D ScrollBarBackgroundTexture { get; set; }
 		private GUIStyle ScrollBarStyle { get; set; }
-		private GUIStyle Style { get; set; }
-
-		private void CreateStyleWith([NotNull] IView listView)
-		{
-			if (Style == null)
-				Style = new GUIStyle();
-
-			Style.focused.background = BackgroundTexture;
-			Style.active.background = BackgroundTexture;
-			Style.hover.background = BackgroundTexture;
-			Style.normal.background = BackgroundTexture;
-
-			Style.padding = listView.Padding.ToRectOffset();
-			
-			if (ScrollBarStyle == null)
-				ScrollBarStyle = new GUIStyle();
-
-			ScrollBarStyle.focused.background = ScrollBarBackgroundTexture;
-			ScrollBarStyle.active.background = ScrollBarBackgroundTexture;
-			ScrollBarStyle.hover.background = ScrollBarBackgroundTexture;
-			ScrollBarStyle.normal.background = ScrollBarBackgroundTexture;
-		}
 
 		public override void Render(UIRect renderRect)
 		{
+			base.Render(renderRect);
+			
 			if (ScrollBarBackgroundTexture == null)
 				CreateScrollBarBackgroundTexture();
-			
-			base.Render(renderRect);
 
-			var listView = Control as ListView;
-
-			Debug.Assert(listView != null, "listView != null");
-
-			CreateStyleWith(listView);
-
-			if (renderRect.ToUnityRect().Contains(UnityEngine.Event.current.mousePosition) && UnityEngine.Event.current.type == EventType.ScrollWheel)
-			{
-				var scrollDelta = SizingHelper.GetImportantValue(listView.Orientation, UnityEngine.Event.current.delta.x, UnityEngine.Event.current.delta.y);
-				scrollDelta = ListViewHelper.CorrectScroll(listView.Orientation, scrollDelta);
-				listView.ScrollOffset += scrollDelta;
-			}
-
-			var offset = (float) Control.CornerRadius;
-			var smallest = (int) (Mathf.Min(offset, Mathf.Min(renderRect.Width*0.5f, renderRect.Height*0.5f)) + 0.5f);
-			smallest = Mathf.Max(smallest, 2);
-			Style.border = new RectOffset(smallest, smallest, smallest, smallest);
-			
-			EditorGUI.LabelField(renderRect.ToUnityRect(), string.Empty, Style);
+			var listView = (ListView)Control;
+			HandleScroll(UnityRect, listView);
+			EditorGUI.LabelField(UnityRect, string.Empty, Style);
 
 			if (!listView.CanScroll || !listView.ShouldShowScrollBar)
 				return;
 
-			var scrollBarRect = renderRect;
-			float sizeRatio;
-			int portionAvailableToMove;
-			float scrollRatio;
-			switch (listView.Orientation)
-			{
-				case OrientationOptions.Horizontal:
-					scrollBarRect.Y += scrollBarRect.Height - listView.ScrollBarSize;
-					scrollBarRect.Height = listView.ScrollBarSize;
-					sizeRatio = listView.RectRequest.Width / (float) listView.TotalContentSize;
-					scrollBarRect.Width = (int)(scrollBarRect.Width * sizeRatio);
-					portionAvailableToMove = renderRect.Width - scrollBarRect.Width;
-					scrollRatio = -listView.ScrollOffset / ListViewHelper.MaxScrollFor(listView);
-					scrollBarRect.X += (int)(portionAvailableToMove * scrollRatio);
-					break;
-				case OrientationOptions.Vertical:
-					scrollBarRect.X += scrollBarRect.Width - listView.ScrollBarSize;
-					scrollBarRect.Width = listView.ScrollBarSize;
-					sizeRatio = listView.RectRequest.Height / (float) listView.TotalContentSize;
-					scrollBarRect.Height = (int)(scrollBarRect.Height * sizeRatio);
-					portionAvailableToMove = renderRect.Height - scrollBarRect.Height;
-					scrollRatio = -listView.ScrollOffset / ListViewHelper.MaxScrollFor(listView);
-					scrollBarRect.Y += (int)(portionAvailableToMove * scrollRatio);
-					break;
-				default:
-					throw new ArgumentOutOfRangeException();
-			}
+			var scrollBarRect = CalculateScrollBarRect(UnityRect, listView);
 
-			offset = (float) listView.ScrollBarCornerRadius;
-			smallest = (int) (Mathf.Min(offset, Mathf.Min(scrollBarRect.Width*0.5f, scrollBarRect.Height*0.5f)) + 0.5f);
+			var offset = (float) listView.ScrollBarCornerRadius;
+			var smallest = (int) (Mathf.Min(offset, Mathf.Min(scrollBarRect.width * 0.5f, scrollBarRect.height * 0.5f)) + 0.5f);
 			smallest = Mathf.Max(smallest, 2);
 			ScrollBarStyle.border = new RectOffset(smallest, smallest, smallest, smallest);
 			
-			EditorGUI.LabelField(scrollBarRect.ToUnityRect(), string.Empty, ScrollBarStyle);
+			EditorGUI.LabelField(scrollBarRect, string.Empty, ScrollBarStyle);
 		}
 
-		public override void ResetStyle()
+		protected override void SetupWithNewStyle()
 		{
-			Style = null;
-			ScrollBarStyle = null;
+			base.SetupWithNewStyle();
+			
+			ScrollBarStyle = new GUIStyle
+			{
+				focused = {background = ScrollBarBackgroundTexture},
+				active = {background = ScrollBarBackgroundTexture},
+				hover = {background = ScrollBarBackgroundTexture},
+				normal = {background = ScrollBarBackgroundTexture}
+			};
+		}
+
+		public override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+		{
+			base.OnPropertyChanged(sender, e);
+
+			if (e.PropertyName == ListView.ScrollBarCornerRadiusProperty.PropertyName ||
+			    e.PropertyName == ListView.ScrollBarOutlineColorProperty.PropertyName ||
+			    e.PropertyName == ListView.ScrollBarBackgroundColorProperty.PropertyName)
+			{
+				CreateScrollBarBackgroundTexture();
+				ResetStyle();
+			}
 		}
 
 		public override bool PushMaskStack(UIRect maskRect)
@@ -150,6 +107,49 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			var listView = Control as ListView;
 			Debug.Assert(listView != null, "listView != null");
 			ScrollBarBackgroundTexture = Texture2DExtensions.CreateRoundedTexture(64, 64, listView.ScrollBarBackgroundColor, listView.ScrollBarOutlineColor, listView.ScrollBarCornerRadius, listView.ScrollBarCornerMask);
+		}
+
+		private static void HandleScroll(Rect unityRect, ListView listView)
+		{
+			if (!unityRect.Contains(UnityEngine.Event.current.mousePosition) || UnityEngine.Event.current.type != EventType.ScrollWheel) 
+				return;
+			
+			var scrollDelta = SizingHelper.GetImportantValue(listView.Orientation, UnityEngine.Event.current.delta.x, UnityEngine.Event.current.delta.y);
+			scrollDelta = ListViewHelper.CorrectScroll(listView.Orientation, scrollDelta);
+			listView.ScrollOffset += scrollDelta;
+		}
+
+		private static Rect CalculateScrollBarRect(Rect unityRect, ListView listView)
+		{
+			var scrollBarRect = unityRect;
+			float sizeRatio;
+			int portionAvailableToMove;
+			float scrollRatio;
+			switch (listView.Orientation)
+			{
+				case OrientationOptions.Horizontal:
+					scrollBarRect.y += scrollBarRect.height - listView.ScrollBarSize;
+					scrollBarRect.height = listView.ScrollBarSize;
+					sizeRatio = listView.RectRequest.Width / (float) listView.TotalContentSize;
+					scrollBarRect.width = (int)(scrollBarRect.width * sizeRatio);
+					portionAvailableToMove = (int)(unityRect.width - scrollBarRect.width);
+					scrollRatio = -listView.ScrollOffset / ListViewHelper.MaxScrollFor(listView);
+					scrollBarRect.x += (int)(portionAvailableToMove * scrollRatio);
+					break;
+				case OrientationOptions.Vertical:
+					scrollBarRect.x += scrollBarRect.width - listView.ScrollBarSize;
+					scrollBarRect.width = listView.ScrollBarSize;
+					sizeRatio = listView.RectRequest.Height / (float) listView.TotalContentSize;
+					scrollBarRect.height = (int)(scrollBarRect.height * sizeRatio);
+					portionAvailableToMove = (int)(unityRect.height - scrollBarRect.height);
+					scrollRatio = -listView.ScrollOffset / ListViewHelper.MaxScrollFor(listView);
+					scrollBarRect.y += (int)(portionAvailableToMove * scrollRatio);
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
+			
+			return scrollBarRect;
 		}
 	}
 }

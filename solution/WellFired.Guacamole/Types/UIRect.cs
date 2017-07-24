@@ -1,4 +1,5 @@
-﻿using WellFired.Guacamole.Annotations;
+﻿using System.Diagnostics;
+using WellFired.Guacamole.Annotations;
 
 namespace WellFired.Guacamole.Types
 {
@@ -104,7 +105,8 @@ namespace WellFired.Guacamole.Types
 
 		public override bool Equals(object obj)
 		{
-			var compareTo = (UIRect) obj;
+			Debug.Assert(obj != null, "obj != null");
+			var compareTo = (UIRect)obj;
 			return (compareTo.X == X) && (compareTo.Y == Y) && (compareTo.Width == Width) && (compareTo.Height == Height);
 		}
 
@@ -115,12 +117,12 @@ namespace WellFired.Guacamole.Types
 
 		public static bool operator ==(UIRect a, UIRect b)
 		{
-			return a.Equals(b);
+			return (a.X == b.X) && (a.Y == b.Y) && (a.Width == b.Width) && (a.Height == b.Height);
 		}
 
 		public static bool operator !=(UIRect a, UIRect b)
 		{
-			return !(a == b);
+			return a.X != b.X || a.Y != b.Y || a.Width != b.Width || a.Height != b.Height;
 		}
 
 		public static UIRect operator +(UIRect rect, UIPadding padding)

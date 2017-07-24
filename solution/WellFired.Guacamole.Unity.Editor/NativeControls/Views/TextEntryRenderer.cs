@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.ComponentModel;
+using UnityEditor;
 using UnityEngine;
 using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Attributes;
@@ -14,61 +15,51 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 {
 	public class TextEntryRenderer : BaseRenderer
 	{
-		private GUIStyle Style { get; set; }
-
 		public override UISize? NativeSize
 		{
 			get
 			{
 				var entry = Control as TextEntry;
 				Debug.Assert(entry != null, $"{nameof(entry)} != null");
-
-				CreateStyleWith(entry);
 				return Style.CalcSize(new GUIContent(entry.Text)).ToUISize();
 			}
 		}
 
-		private void CreateStyleWith([NotNull] TextEntry entry)
+		protected override void SetupWithNewStyle()
 		{
-			if (Style == null)
-				Style = new GUIStyle();
+			base.SetupWithNewStyle();
 
-			Style.focused.background = BackgroundTexture;
-			Style.active.background = BackgroundTexture;
-			Style.hover.background = BackgroundTexture;
-			Style.normal.background = BackgroundTexture;
-
+			var entry = (TextEntry)Control;
 			Style.alignment = UITextAlignExtensions.Combine(entry.HorizontalTextAlign, entry.VerticalTextAlign);
-
 			Style.focused.textColor = entry.TextColor.ToUnityColor();
 			Style.active.textColor = entry.TextColor.ToUnityColor();
 			Style.hover.textColor = entry.TextColor.ToUnityColor();
 			Style.normal.textColor = entry.TextColor.ToUnityColor();
-
-			Style.padding = entry.Padding.ToRectOffset();
 		}
 
 		public override void Render(UIRect renderRect)
 		{
 			base.Render(renderRect);
 
-			var entry = Control as TextEntry;
-
-			Debug.Assert(entry != null, "entry != null");
-
-			CreateStyleWith(entry);
-
-			var offset = (float) Control.CornerRadius;
-			var smallest = (int) (Mathf.Min(offset, Mathf.Min(renderRect.Width*0.5f, renderRect.Height*0.5f)) + 0.5f);
-			smallest = Mathf.Max(smallest, 2);
-			Style.border = new RectOffset(smallest, smallest, smallest, smallest);
-
-			entry.Text = EditorGUI.TextField(renderRect.ToUnityRect(), entry.Text, Style);
+			var entry = (TextEntry)Control;
+			entry.Text = EditorGUI.TextField(UnityRect, entry.Text, Style);
 		}
 
-		public override void ResetStyle()
+		public override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
-			Style = null;
+			base.OnPropertyChanged(sender, e);
+
+			var entry = (TextEntry)Control;
+			if (e.PropertyName == TextEntry.HorizontalTextAlignProperty.PropertyName || e.PropertyName == TextEntry.VerticalTextAlignProperty.PropertyName)
+				Style.alignment = UITextAlignExtensions.Combine(entry.HorizontalTextAlign, entry.VerticalTextAlign);
+
+			if (e.PropertyName == TextEntry.TextColorProperty.PropertyName)
+			{
+				Style.focused.textColor = entry.TextColor.ToUnityColor();
+				Style.active.textColor = entry.TextColor.ToUnityColor();
+				Style.hover.textColor = entry.TextColor.ToUnityColor();
+				Style.normal.textColor = entry.TextColor.ToUnityColor();
+			}
 		}
 	}
 }

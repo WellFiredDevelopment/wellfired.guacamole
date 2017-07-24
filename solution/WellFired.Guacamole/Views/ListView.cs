@@ -48,7 +48,10 @@ namespace WellFired.Guacamole.Views
         protected override void ItemSourceChanged()
         {
             Children.Clear();
-            _inactiveEntries.Clear();
+            
+            foreach (var entry in _activeEntries)
+                _inactiveEntries.Add(entry);
+            
             _activeEntries.Clear();
             _visualDataSet = new List<int>();
             ReCalculateTotalContentSize();
@@ -137,8 +140,6 @@ namespace WellFired.Guacamole.Views
             
             cell.RectRequest = rectRequest;
             cell.ContentRectRequest = contentRectRequest;
-
-            _activeEntries.Add(cell);
             return cell;
         }
         
