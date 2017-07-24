@@ -22,6 +22,8 @@ namespace WellFired.Guacamole.Unity.Editor
 		[SerializeField] private Window _window;
 
 		private Exception _exception;
+		private float _prevLayoutTime;
+		private const float MaxLayoutInterval = (1.0f / 30.0f);
 
 		private ApplicationInitializationContextScriptableObject ApplicationInitializationContextScriptableObject
 		{
@@ -126,9 +128,13 @@ namespace WellFired.Guacamole.Unity.Editor
 			if (UnityEngine.Event.current.type == EventType.Layout)
 				try
 				{
-					var layoutRect = Rect;
-					layoutRect.Location = UILocation.Min;
-					MainContent.Layout(layoutRect);
+					if (Time.realtimeSinceStartup - _prevLayoutTime > MaxLayoutInterval)
+					{
+						var layoutRect = Rect;
+						layoutRect.Location = UILocation.Min;
+						MainContent.Layout(layoutRect);
+						_prevLayoutTime = Time.realtimeSinceStartup;
+					}
 				}
 				catch (Exception e)
 				{

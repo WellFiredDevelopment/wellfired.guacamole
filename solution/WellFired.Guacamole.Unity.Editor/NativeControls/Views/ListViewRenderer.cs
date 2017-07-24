@@ -135,6 +135,8 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 					portionAvailableToMove = (int)(unityRect.width - scrollBarRect.width);
 					scrollRatio = -listView.ScrollOffset / ListViewHelper.MaxScrollFor(listView);
 					scrollBarRect.x += (int)(portionAvailableToMove * scrollRatio);
+					if (scrollBarRect.width < 10.0f)
+						scrollBarRect.width = 10.0f;
 					break;
 				case OrientationOptions.Vertical:
 					scrollBarRect.x += scrollBarRect.width - listView.ScrollBarSize;
@@ -144,6 +146,8 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 					portionAvailableToMove = (int)(unityRect.height - scrollBarRect.height);
 					scrollRatio = -listView.ScrollOffset / ListViewHelper.MaxScrollFor(listView);
 					scrollBarRect.y += (int)(portionAvailableToMove * scrollRatio);
+					if (scrollBarRect.height < 10.0f)
+						scrollBarRect.height = 10.0f;
 					break;
 				default:
 					throw new ArgumentOutOfRangeException();

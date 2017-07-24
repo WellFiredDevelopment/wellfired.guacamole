@@ -11,8 +11,8 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 	public abstract class BaseRenderer : INativeRenderer
 	{
 		private UIRect _prevRect;
-		private const string EmptyStyleName = "EMPTYSTYLE";
-		private GUIStyle _style = new GUIStyle { name = EmptyStyleName };
+		private bool _resetStyle = true;
+		private GUIStyle _style = GUIStyle.none;
 		
 		private Texture2D BackgroundTexture { get; set; }
 		public virtual UISize? NativeSize => null;
@@ -23,10 +23,12 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			get
 			{
-				if (_style.name != EmptyStyleName) 
-					return _style;
+				if (_resetStyle)
+				{
+					_resetStyle = false;
+					SetupWithNewStyle();
+				}
 
-				SetupWithNewStyle();
 				return _style;
 			}
 		}
@@ -53,19 +55,28 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			if (renderRect != _prevRect)
 				UnityRect = renderRect.ToUnityRect();
 			_prevRect = renderRect;
-			
-			if (Control.ControlState != ControlState.Disabled)
-			{
-				if (Control.ControlState != ControlState.Active)
-					if ((UnityEngine.Event.current.type == EventType.MouseDown) && UnityRect.Contains(UnityEngine.Event.current.mousePosition))
-						Control.ControlState = ControlState.Active;
-					else if (UnityRect.Contains(UnityEngine.Event.current.mousePosition))
-						Control.ControlState = ControlState.Hover;
-					else
-						Control.ControlState = ControlState.Normal;
 
-				if (UnityEngine.Event.current.rawType == EventType.MouseUp)
-					Control.ControlState = ControlState.Normal;
+			var controlState = Control.ControlState;
+			var canUpdateState = controlState != ControlState.Disabled;
+						
+			if (canUpdateState)
+			{
+				var newControlState = controlState;
+				if (controlState != ControlState.Active)
+				{
+					if (UnityEngine.Event.current.type == EventType.MouseDown && UnityRect.Contains(UnityEngine.Event.current.mousePosition))
+						newControlState = ControlState.Active;
+					else if (UnityRect.Contains(UnityEngine.Event.current.mousePosition))
+						newControlState = ControlState.Hover;
+					else
+						newControlState = ControlState.Normal;
+				}
+
+				if (UnityEngine.Event.current.rawType == EventType.MouseUp && controlState != ControlState.Normal)
+					newControlState = ControlState.Normal;
+
+				if (controlState != newControlState)
+					Control.ControlState = newControlState;
 			}
 
 			var offset = (float) Control.CornerRadius;
@@ -83,8 +94,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			if (e.PropertyName == View.CornerRadiusProperty.PropertyName ||
 			    e.PropertyName == View.OutlineColorProperty.PropertyName ||
-			    e.PropertyName == View.BackgroundColorProperty.PropertyName ||
-			    e.PropertyName == View.ControlStateProperty.PropertyName)
+			    e.PropertyName == View.BackgroundColorProperty.PropertyName)
 			{
 				CreateBackgroundTexture();
 				ResetStyle();
@@ -93,6 +103,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			if (e.PropertyName == View.EnabledProperty.PropertyName)
 			{
 				Control.ControlState = Control.Enabled ? ControlState.Normal : ControlState.Disabled;
+				CreateBackgroundTexture();
 				ResetStyle();
 			}
 			
@@ -102,7 +113,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 
 		public void ResetStyle()
 		{
-			_style.name = EmptyStyleName;
+			_resetStyle = true;
 		}
 
 		public void FocusControl()
