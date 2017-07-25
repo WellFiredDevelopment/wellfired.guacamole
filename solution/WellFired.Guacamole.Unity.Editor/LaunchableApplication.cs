@@ -6,7 +6,7 @@ namespace WellFired.Guacamole.Unity.Editor
 {
 	public class LaunchableApplication
 	{
-		protected static Application Launch<T>(UIRect uiRect, UISize minSize, string title = null) where T : Window
+		protected static Application Launch<T>(UIRect uiRect, UISize minSize, string title = null, bool allowMultiple = true) where T : Window
 		{
 			var application = new Application();
 
@@ -15,7 +15,8 @@ namespace WellFired.Guacamole.Unity.Editor
 				MainContent = typeof(T),
 				UIRect = uiRect,
 				MinSize = minSize,
-				Title = title
+				Title = title,
+				AllowMultiple = allowMultiple
 			};
 
 			application.Launch(context);

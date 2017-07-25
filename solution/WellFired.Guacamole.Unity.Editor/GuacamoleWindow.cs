@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
@@ -52,6 +53,11 @@ namespace WellFired.Guacamole.Unity.Editor
 		{
 			get { return maxSize.ToUISize(); }
 			set { maxSize = value.ToUnityVector2(); }
+		}
+
+		public bool AllowMultiple
+		{
+			get { return _applicationInitializationContextScriptableObject.AllowMultiple; }
 		}
 
 		public Window MainContent
@@ -193,6 +199,11 @@ namespace WellFired.Guacamole.Unity.Editor
 		public void RaiseEventFor(string controlId, IEvent raisedEvent)
 		{
 			MainContent.RaiseEventFor(controlId, raisedEvent);
+		}
+
+		public bool MatchesMainContent(Type mainContent)
+		{
+			return ApplicationInitializationContextScriptableObject.MainContent == mainContent;
 		}
 	}
 }

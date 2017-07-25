@@ -21,6 +21,7 @@ namespace WellFired.Guacamole.Unity.Editor
 		[SerializeField] private ObservableScriptableObject _persistantData;
 		[SerializeField] private string _title;
 		[SerializeField] private UIRect _uirect;
+		[SerializeField] private bool _allowMultiple;
 		private ILogger _logger;
 
 		public Type MainContent
@@ -64,6 +65,12 @@ namespace WellFired.Guacamole.Unity.Editor
 		{
 			get { return _persistantData; }
 			set { _persistantData = value; }
+		}
+
+		public bool AllowMultiple
+		{
+			get { return _allowMultiple; }
+			set { _allowMultiple = value; }
 		}
 
 		#region IInitializationContext implementation
@@ -132,6 +139,13 @@ namespace WellFired.Guacamole.Unity.Editor
 		{
 			get { return ScriptableObject.PersistantData; }
 			set { ScriptableObject.PersistantData = value; }
+		}
+
+		[PublicAPI]
+		public bool AllowMultiple
+		{
+			get { return ScriptableObject.AllowMultiple; }
+			set { ScriptableObject.AllowMultiple = value; }
 		}
 
 		internal ApplicationInitializationContextScriptableObject ScriptableObject { get; }
