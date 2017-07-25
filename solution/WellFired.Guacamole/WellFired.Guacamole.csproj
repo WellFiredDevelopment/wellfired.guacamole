@@ -92,6 +92,8 @@
     <Compile Include="Exceptions\DataTemplateTypeDidntCreateAPage.cs" />
     <Compile Include="Exceptions\GuacamoleUserFacingException.cs" />
     <Compile Include="Exceptions\GuacamoleWindowCantBeCreated.cs" />
+    <Compile Include="Exceptions\ImageSourceCouldntFindFileException.cs" />
+    <Compile Include="Exceptions\ImageSourceDoesntHaveAccessException.cs" />
     <Compile Include="Exceptions\InitializationContextInvalid.cs" />
     <Compile Include="Exceptions\InitializationContextNull.cs" />
     <Compile Include="Exceptions\NativeRendererCannotBeFound.cs" />
@@ -103,8 +105,9 @@
     <Compile Include="ICommand.cs" />
     <Compile Include="Event\IEvent.cs" />
     <Compile Include="Image\IImageSource.cs" />
+    <Compile Include="Image\Image.cs" />
     <Compile Include="Image\ImageShape.cs" />
-    <Compile Include="Image\ImageShapeData.cs" />
+    <Compile Include="Image\ImageShapeDefinition.cs" />
     <Compile Include="Image\ImageSource.cs" />
     <Compile Include="InitializationContext\IInitializationContext.cs" />
     <Compile Include="IView.cs" />

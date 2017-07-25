@@ -26,20 +26,22 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			}
 		}
 
-		protected override void SetupWithNewStyle()
+		public override void Create()
 		{
-			base.SetupWithNewStyle();
+			base.Create();
 			
 			var imageView = (ImageView)Control;
-			if(imageView.ImageSource != null)
-				_texture = imageView.ImageSource.BuildTexture();
+			if (imageView.ImageSource != null)
+				imageView.ImageSource.OnComplete += OnLoadComplete;
 		}
 
 		public override void Render(UIRect renderRect)
 		{
 			base.Render(renderRect);
 			
-			GUI.DrawTexture(UnityRect, _texture, ScaleMode.ScaleToFit);
+			EditorGUI.LabelField(UnityRect, "", Style);
+			if(_texture != null)
+				GUI.DrawTexture(UnityRect, _texture, ScaleMode.ScaleToFit);
 		}
 
 		public override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -47,11 +49,18 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			base.OnPropertyChanged(sender, e);
 
 			var imageView = (ImageView)Control;
-			if (e.PropertyName == ImageView.ImageSourceProperty.PropertyName)
-			{
-				_texture = imageView.ImageSource.BuildTexture();
-				imageView.InvalidateRectRequest();
-			}
+			
+			if (e.PropertyName != ImageView.ImageSourceProperty.PropertyName) 
+				return;
+			
+			if (imageView.ImageSource != null)
+				imageView.ImageSource.OnComplete += OnLoadComplete;
+		}
+
+		private void OnLoadComplete()
+		{
+			var imageView = (ImageView)Control;
+			_texture = imageView.ImageSource.ToUnityTexture();
 		}
 	}
 }

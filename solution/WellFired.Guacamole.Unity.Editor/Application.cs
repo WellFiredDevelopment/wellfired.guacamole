@@ -33,17 +33,18 @@ namespace WellFired.Guacamole.Unity.Editor
 
 			initializationContext.PersistantData = persistantData;
 
-			_mainWindow = LaunchWindow(initializationContext.MainContent);
+			_mainWindow = GuacamoleWindowLauncher.LaunchWindow(initializationContext.MainContent);
 			_mainWindow.Launch(initializationContext.ScriptableObject);
 		}
 
-		public void Launch(ApplicationInitializationContext initializationContext)
+		public IApplication Launch(ApplicationInitializationContext initializationContext)
 		{
 			if (initializationContext == null)
 				throw new InitializationContextNull();
 
-			_mainWindow = LaunchWindow(initializationContext.MainContent);
+			_mainWindow = GuacamoleWindowLauncher.LaunchWindow(initializationContext.MainContent);
 			_mainWindow.Launch(initializationContext.ScriptableObject);
+			return this;
 		}
 
 		public void Teardown()
@@ -59,27 +60,6 @@ namespace WellFired.Guacamole.Unity.Editor
 		public void Update()
 		{
 			_mainWindow.Repaint();
-		}
-
-		private static GuacamoleWindow LaunchWindow(Type mainContent)
-		{
-			var foundWindows = Resources.FindObjectsOfTypeAll(typeof (GuacamoleWindow)) as GuacamoleWindow[];
-
-			if (foundWindows != null)
-			{
-				foreach (var window in foundWindows)
-				{
-					if (!window.MatchesMainContent(mainContent))
-						continue;
-					
-					if (!window.AllowMultiple)
-						return window;
-				}
-			}
-
-			var instance = ScriptableObject.CreateInstance<GuacamoleWindow>();
-			instance.Show();
-			return instance;
 		}
 	}
 }

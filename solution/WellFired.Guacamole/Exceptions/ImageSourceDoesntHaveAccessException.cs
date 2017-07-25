@@ -1,6 +1,4 @@
-﻿using WellFired.Guacamole.Exceptions;
-
-namespace WellFired.Guacamole.Unity.Editor.Exception
+﻿namespace WellFired.Guacamole.Exceptions
 {
     public class ImageSourceDoesntHaveAccessException : GuacamoleUserFacingException
     {

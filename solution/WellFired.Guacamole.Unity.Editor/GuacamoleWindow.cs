@@ -23,7 +23,7 @@ namespace WellFired.Guacamole.Unity.Editor
 
 		private System.Exception _exception;
 		private float _prevLayoutTime;
-		private const float MaxLayoutInterval = (1.0f / 30.0f);
+		private const float MaxLayoutInterval = 1.0f / 30.0f;
 
 		private ApplicationInitializationContextScriptableObject ApplicationInitializationContextScriptableObject
 		{
@@ -55,10 +55,7 @@ namespace WellFired.Guacamole.Unity.Editor
 			set { maxSize = value.ToUnityVector2(); }
 		}
 
-		public bool AllowMultiple
-		{
-			get { return _applicationInitializationContextScriptableObject.AllowMultiple; }
-		}
+		public bool AllowMultiple => _applicationInitializationContextScriptableObject.AllowMultiple;
 
 		public Window MainContent
 		{

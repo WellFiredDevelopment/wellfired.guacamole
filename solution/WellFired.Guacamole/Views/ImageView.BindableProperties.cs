@@ -15,7 +15,12 @@ namespace WellFired.Guacamole.Views
         public IImageSource ImageSource
         {
             get { return (IImageSource) GetValue(ImageSourceProperty); }
-            set { SetValue(ImageSourceProperty, value); }
+            set
+            {
+                var prevValue = ImageSource; 
+                if(SetValue(ImageSourceProperty, value))
+                    prevValue?.Cancel();
+            }
         }
     }
 }

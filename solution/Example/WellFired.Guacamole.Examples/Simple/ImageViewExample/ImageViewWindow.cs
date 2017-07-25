@@ -15,7 +15,7 @@ namespace WellFired.Guacamole.Examples.Simple.ImageViewExample
 
 			var imageView = new ImageView {
 				BackgroundColor = UIColor.Black,
-				ImageSource = ImageSource.From("doge.jpg")
+				ImageSource = ImageSource.FromFile("doge.jpg")
 			};
 
 			Content = imageView;

@@ -2,7 +2,7 @@
 
 namespace WellFired.Guacamole.Image
 {
-    public class ImageShapeData
+    public class ImageShapeDefinition
     {
         public ImageShape Shape { get; set; }
         public UIColor Color { get; set; }

@@ -37,6 +37,9 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Threading, Version=1.0.2856.102, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\Assemblies\System.Threading.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\Assemblies\UnityEditor.dll</HintPath>
       <Private>False</Private>
@@ -54,8 +57,6 @@
     <Compile Include="DataBinding\ObservableScriptableObject.cs" />
     <Compile Include="DataBinding\ObservableScriptableObjectEditor.cs" />
     <Compile Include="Diagnostics\Logger.cs" />
-    <Compile Include="Exception\ImageSourceCouldntFindFileException.cs" />
-    <Compile Include="Exception\ImageSourceDoesntHaveAccessException.cs" />
     <Compile Include="Extensions\IImageSourceExtensions.cs" />
     <Compile Include="Extensions\UIColorExtensions.cs" />
     <Compile Include="Extensions\UIPaddingExtensions.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Extensions\UnityRectExtensions.cs" />
     <Compile Include="Extensions\UnityVector2Extensions.cs" />
     <Compile Include="GuacamoleWindow.cs" />
+    <Compile Include="GuacamoleWindowLauncher.cs" />
     <Compile Include="LaunchableApplication.cs" />
     <Compile Include="NativeControls\Cells\BaseCellRenderer.cs" />
     <Compile Include="NativeControls\Cells\LabelCellRenderer.cs" />

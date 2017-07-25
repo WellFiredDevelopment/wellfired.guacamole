@@ -1,8 +1,11 @@
-﻿namespace WellFired.Guacamole.Image
+﻿using System;
+
+namespace WellFired.Guacamole.Image
 {
     public interface IImageSource
     {
-        string Filename { get; }
-        ImageShapeData ImageShapeData { get; }
+        void Cancel();
+        bool InProgress { get; }
+        Action OnComplete { get; set; }
     }
 }

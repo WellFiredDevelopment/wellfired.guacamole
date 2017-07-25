@@ -5,6 +5,13 @@ namespace WellFired.Guacamole
 {
 	public class Device
 	{
+		private const string ExtraPath = "Assets/GuacamoleApplication/Editor/";
+		private enum RuntimePlatform
+		{
+			UnityEditor
+		}
+
+		private const RuntimePlatform Platform = RuntimePlatform.UnityEditor;
 		private static readonly Queue<Action> Delegates = new Queue<Action>();
 		private static readonly object DelegatesLock = new object();
 
@@ -25,6 +32,15 @@ namespace WellFired.Guacamole
 					var action = Delegates.Dequeue();
 					action();
 				}
+			}
+		}
+
+		public static string AdjustPath(string location)
+		{
+			switch (Platform)
+			{
+				case RuntimePlatform.UnityEditor:
+					return ExtraPath + location;
 			}
 		}
 	}
