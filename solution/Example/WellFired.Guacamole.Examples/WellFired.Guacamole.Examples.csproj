@@ -92,6 +92,8 @@
     <Compile Include="Simple\AdjacentLayoutExample\AdjacentLayoutTestWindow.cs" />
     <Compile Include="Simple\ButtonExample\ButtonTestApplication.cs" />
     <Compile Include="Simple\ButtonExample\ButtonTestWindow.cs" />
+    <Compile Include="Simple\ImageViewExample\ImageViewWindowApplication.cs" />
+    <Compile Include="Simple\ImageViewExample\ImageViewWindow.cs" />
     <Compile Include="Simple\LabelExample\LabelTestApplication.cs" />
     <Compile Include="Simple\LabelExample\LabelTestWindow.cs" />
     <Compile Include="Simple\ListViewExample\ListViewTestApplication.cs" />
@@ -106,6 +108,7 @@
     <Compile Include="Simple\TabbedPageExample\TabbedPageWindow.cs" />
     <Compile Include="Simple\TabbedPageExample\ViewModel\FirstPage.cs" />
     <Compile Include="Simple\TabbedPageExample\ViewModel\SecondPage.cs" />
+    <Compile Include="Simple\TabbedPageExample\ViewModel\ThirdPage.cs" />
     <Compile Include="Simple\TextFieldExample\TextFieldTestApplication.cs" />
     <Compile Include="Simple\TextFieldExample\TextFieldTestWindow.cs" />
     <Compile Include="Simple\TwoWayBindingExample\TwoWayBindingTestApplication.cs" />

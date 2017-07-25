@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 using WellFired.Guacamole.Event;
@@ -7,13 +8,13 @@ using WellFired.Guacamole.Unity.Editor.DataBinding;
 
 namespace WellFired.Guacamole.Unity.Editor
 {
+	[Serializable]
 	public class Application : IApplication
 	{
-		private GuacamoleWindow _mainWindow;
+		[SerializeField] private GuacamoleWindow _mainWindow;
 		public bool IsRunning => _mainWindow != null;
 
-		public void Launch<TPersistantData>(ApplicationInitializationContext initializationContext)
-			where TPersistantData : ObservableScriptableObject
+		public void Launch<TPersistantData>(ApplicationInitializationContext initializationContext) where TPersistantData : ObservableScriptableObject
 		{
 			if (initializationContext == null)
 				throw new InitializationContextNull();
@@ -24,7 +25,6 @@ namespace WellFired.Guacamole.Unity.Editor
 			{
 				persistantData = ScriptableObject.CreateInstance<TPersistantData>();
 				Directory.CreateDirectory("Assets/Editor");
-
 				AssetDatabase.DeleteAsset(assetPath);
 				AssetDatabase.CreateAsset(persistantData, assetPath);
 				EditorUtility.SetDirty(persistantData);
@@ -42,7 +42,7 @@ namespace WellFired.Guacamole.Unity.Editor
 			if (initializationContext == null)
 				throw new InitializationContextNull();
 
-			_mainWindow = EditorWindow.GetWindow<GuacamoleWindow>();
+			_mainWindow = LaunchWindow();
 			_mainWindow.Launch(initializationContext.ScriptableObject);
 		}
 
@@ -59,6 +59,13 @@ namespace WellFired.Guacamole.Unity.Editor
 		public void Update()
 		{
 			_mainWindow.Repaint();
+		}
+
+		private GuacamoleWindow LaunchWindow()
+		{
+			var instance = ScriptableObject.CreateInstance<GuacamoleWindow>();
+			instance.Show();
+			return instance;
 		}
 	}
 }

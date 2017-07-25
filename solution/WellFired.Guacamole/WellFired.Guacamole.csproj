@@ -102,6 +102,10 @@
     <Compile Include="IApplication.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="Event\IEvent.cs" />
+    <Compile Include="Image\IImageSource.cs" />
+    <Compile Include="Image\ImageShape.cs" />
+    <Compile Include="Image\ImageShapeData.cs" />
+    <Compile Include="Image\ImageSource.cs" />
     <Compile Include="InitializationContext\IInitializationContext.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="IWindow.cs" />
@@ -125,11 +129,13 @@
     <Compile Include="Styling\Setter.cs" />
     <Compile Include="Styling\Style.cs" />
     <Compile Include="Styling\StyleDictionary.cs" />
+    <Compile Include="Styling\Styles\ImageView.cs" />
     <Compile Include="Styling\Styles\Label.cs" />
     <Compile Include="Styling\Styles\Button.cs" />
     <Compile Include="Styling\Styles\LabelCell.cs" />
     <Compile Include="Styling\Styles\ListView.cs" />
     <Compile Include="Styling\Styles\Slider.cs" />
+    <Compile Include="Styling\Styles\TabbedPageButton.cs" />
     <Compile Include="Styling\Trigger.cs" />
     <Compile Include="Types\CornerMask.cs" />
     <Compile Include="Types\ItemSource.cs" />
@@ -159,6 +165,8 @@
     <Compile Include="Views\IItemsView.cs" />
     <Compile Include="Views\IListensToVdsChanges.cs" />
     <Compile Include="Views\IListView.cs" />
+    <Compile Include="Views\ImageView.BindableProperties.cs" />
+    <Compile Include="Views\ImageView.cs" />
     <Compile Include="Views\ItemsView.BindableProperties.cs" />
     <Compile Include="Views\ItemsView.cs" />
     <Compile Include="Views\ITypeable.cs" />
@@ -170,6 +178,8 @@
     <Compile Include="Views\ListView.IListensToVdsChanges.cs" />
     <Compile Include="Views\TabbedPage.BindableProperties.cs" />
     <Compile Include="Views\TabbedPage.cs" />
+    <Compile Include="Views\TabbedPageButton.BindableProperties.cs" />
+    <Compile Include="Views\TabbedPageButton.cs" />
     <Compile Include="Views\VdsCalculator.cs" />
     <Compile Include="Views\ListViewHelper.cs" />
     <Compile Include="Views\NumberEntry.cs" />

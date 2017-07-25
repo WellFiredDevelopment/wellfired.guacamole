@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
@@ -21,7 +20,7 @@ namespace WellFired.Guacamole.Unity.Editor
 		[SerializeField] private ApplicationInitializationContextScriptableObject _applicationInitializationContextScriptableObject;
 		[SerializeField] private Window _window;
 
-		private Exception _exception;
+		private System.Exception _exception;
 		private float _prevLayoutTime;
 		private const float MaxLayoutInterval = (1.0f / 30.0f);
 
@@ -115,7 +114,7 @@ namespace WellFired.Guacamole.Unity.Editor
 			Repaint();
 		}
 
-		private void DisplayUserError(Exception exception)
+		private void DisplayUserError(System.Exception exception)
 		{
 			var targetInvocationException = exception as TargetInvocationException;
 			if (targetInvocationException != null)
@@ -148,7 +147,7 @@ namespace WellFired.Guacamole.Unity.Editor
 						_prevLayoutTime = Time.realtimeSinceStartup;
 					}
 				}
-				catch (Exception e)
+				catch (System.Exception e)
 				{
 					_exception = e;
 					return;
@@ -158,7 +157,7 @@ namespace WellFired.Guacamole.Unity.Editor
 			{
 				MainContent.Render(Rect);
 			}
-			catch (Exception e)
+			catch (System.Exception e)
 			{
 				_exception = e;
 			}

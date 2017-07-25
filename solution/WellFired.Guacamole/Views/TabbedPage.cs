@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -80,18 +79,15 @@ namespace WellFired.Guacamole.Views
                 
                 newPage.BindingContext = bindingContext as INotifyPropertyChanged;
 
-                var button = new Button
+                var button = new TabbedPageButton
                 {
                     ButtonPressedCommand = new Command
                     {
                         CanExecute = true,
-                        ExecuteAction = () =>
-                        {
-                            Selected(bindingContext);
-                        }
+                        ExecuteAction = () => { Selected(bindingContext); }
                     }
                 };
-                
+
                 if (!(newPage is Page))
                     throw new DataTemplateTypeDidntCreateAPage(this, bindingContext, newPage);
 
@@ -108,6 +104,7 @@ namespace WellFired.Guacamole.Views
 
         public void Selected(object bindingContext)
         {
+            TabbedButtonSelect(bindingContext);
             if (bindingContext == null)
             {
                 _tabbedPageContent.Content = _pages.First();
@@ -116,6 +113,15 @@ namespace WellFired.Guacamole.Views
 
             var selectedEntry = _pages.First(o => Equals(o.BindingContext, bindingContext));
             _tabbedPageContent.Content = selectedEntry;
+        }
+
+        private void TabbedButtonSelect(object bindingContext)
+        {
+            var index = bindingContext == null ? 0 : ItemSource.IndexOf(bindingContext);
+            foreach (var item in _tabSelect.Children)
+                ((TabbedPageButton) item).IsSelected = false;
+            
+            ((TabbedPageButton)_tabSelect.Children[index]).IsSelected = true;
         }
     }
 }
