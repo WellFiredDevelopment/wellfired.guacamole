@@ -13,8 +13,8 @@ namespace WellFired.Guacamole.Examples.Simple.ImageViewExample
 		private static void Launch()
 		{
 			Launch<ImageViewWindow>(
-				uiRect: UIRect.With(50, 50, 200, 200),
-				minSize: UISize.Of(200, 200),
+				uiRect: UIRect.With(50, 50, 400, 400),
+				minSize: UISize.Of(400, 400),
 				title: "ImageView");
 		}
 	}

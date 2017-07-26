@@ -8,14 +8,21 @@ namespace WellFired.Guacamole.Examples.Simple.ImageViewExample
 {
 	public class ImageViewWindow : Window
 	{
-		public ImageViewWindow(ILogger logger, INotifyPropertyChanged persistantData) 
+		public ImageViewWindow(ILogger logger, INotifyPropertyChanged persistantData)
 			: base(logger, persistantData)
 		{
 			Padding = UIPadding.Of(5);
 
-			var imageView = new ImageView {
-				BackgroundColor = UIColor.Black,
-				ImageSource = ImageSource.FromFile("doge.jpg")
+			var imageView = new ImageView
+			{	
+				// Display an image from the hard drive.
+				ImageSource = ImageSource.From("doge.jpg")
+				
+				// Display a programmatic image
+				//ImageSource = ImageSource.From(ImageShape.Circle, UIColor.Blue, UIColor.Black)
+				
+				// Display an image from a URL
+				//ImageSource = ImageSource.From(new Uri("https://upload.wikimedia.org/wikipedia/commons/7/75/La-Flotte-big-size-1-orignal.jpg"))
 			};
 
 			Content = imageView;

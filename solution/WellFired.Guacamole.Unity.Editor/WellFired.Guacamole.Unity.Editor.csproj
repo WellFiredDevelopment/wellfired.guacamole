@@ -71,6 +71,7 @@
     <Compile Include="GuacamoleWindowLauncher.cs" />
     <Compile Include="LaunchableApplication.cs" />
     <Compile Include="NativeControls\Cells\BaseCellRenderer.cs" />
+    <Compile Include="NativeControls\Cells\ImageCellRenderer.cs" />
     <Compile Include="NativeControls\Cells\LabelCellRenderer.cs" />
     <Compile Include="NativeControls\Layouts\LayoutViewRenderer.cs" />
     <Compile Include="NativeControls\Page\PageRenderer.cs" />

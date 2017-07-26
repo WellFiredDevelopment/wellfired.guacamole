@@ -4,8 +4,9 @@ namespace WellFired.Guacamole.Image
 {
     public interface IImageSource
     {
+        void Load();
         void Cancel();
         bool InProgress { get; }
-        Action OnComplete { get; set; }
+        Action<LoadedImage> OnComplete { get; set; }
     }
 }

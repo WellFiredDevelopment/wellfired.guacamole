@@ -2,20 +2,18 @@
 using UnityEditor;
 using UnityEngine;
 using WellFired.Guacamole.Attributes;
+using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.Image;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Unity.Editor.Extensions;
-using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
-using WellFired.Guacamole.Views;
+using WellFired.Guacamole.Unity.Editor.NativeControls.Cells;
 using Debug = System.Diagnostics.Debug;
-using ILogger = WellFired.Guacamole.Diagnostics.ILogger;
-using Logger = WellFired.Guacamole.Diagnostics.Logger;
 
-[assembly: CustomRenderer(typeof(ImageView), typeof(ImageViewRenderer))]
+[assembly: CustomRenderer(typeof(ImageCell), typeof(ImageCellRenderer))]
 
-namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
+namespace WellFired.Guacamole.Unity.Editor.NativeControls.Cells
 {
-    public class ImageViewRenderer : BaseRenderer
+    public class ImageCellRenderer : BaseCellRenderer
     {
         private Texture _texture;
 
@@ -23,8 +21,8 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
         {
             get
             {
-                var imageView = Control as ImageView;
-                Debug.Assert(imageView != null, $"{nameof(imageView)} != null");
+                var imageCell = Control as ImageCell;
+                Debug.Assert(imageCell != null, $"{nameof(imageCell)} != null");
                 return _texture == null ? UISize.Zero : Style.CalcSize(new GUIContent(_texture)).ToUISize();
             }
         }
@@ -33,9 +31,9 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
         {
             base.Create();
 			
-            var imageView = (ImageView)Control;
-            if (imageView.ImageSource != null)
-                imageView.ImageSource.OnComplete += OnLoadComplete;
+            var imageCell = (ImageCell)Control;
+            if (imageCell.ImageSource != null)
+                imageCell.ImageSource.OnComplete += OnLoadComplete;
         }
 
         public override void Render(UIRect renderRect)
@@ -52,21 +50,21 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
         {
             base.OnPropertyChanged(sender, e);
 
-            var imageView = (ImageView)Control;
+            var imageCell = (ImageCell)Control;
 			
-            if (e.PropertyName != ImageView.ImageSourceProperty.PropertyName) 
+            if (e.PropertyName != ImageCell.ImageSourceProperty.PropertyName) 
                 return;
 
-            if (imageView.ImageSource == null) 
+            if (imageCell.ImageSource == null) 
                 return;
             
-            imageView.ImageSource.OnComplete += OnLoadComplete;
-            imageView.ImageSource.Load();
+            imageCell.ImageSource.OnComplete += OnLoadComplete;
+            imageCell.ImageSource.Load();
         }
 
         private async void OnLoadComplete(LoadedImage image)
         {
-            var imageCell = (ImageView)Control;
+            var imageCell = (ImageCell)Control;
             _texture = await imageCell.ImageSource.ToUnityTexture(image);
             Control.InvalidateRectRequest();
         }

@@ -31,5 +31,10 @@ namespace WellFired.Guacamole.Renderer
 		/// masked area.
 		/// </summary>
 		void PopMaskStack();
+
+		/// <summary>
+		/// When a view has been recycled, this method will be called. Currently only works for Cells.
+		/// </summary>
+		void RecycleWithNewBindingContext();
 	}
 }

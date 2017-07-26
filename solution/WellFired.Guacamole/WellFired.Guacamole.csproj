@@ -55,6 +55,8 @@
     <Compile Include="Cells\Cell.BindableProperties.cs" />
     <Compile Include="Cells\Cell.cs" />
     <Compile Include="Cells\ICell.cs" />
+    <Compile Include="Cells\ImageCell.BindableProperties.cs" />
+    <Compile Include="Cells\ImageCell.cs" />
     <Compile Include="Cells\LabelCell.BindableProperties.cs" />
     <Compile Include="Cells\LabelCell.cs" />
     <Compile Include="Collection\ObservableCollection.cs" />
@@ -104,11 +106,20 @@
     <Compile Include="IApplication.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="Event\IEvent.cs" />
+    <Compile Include="Image\FileSourceHandler.cs" />
     <Compile Include="Image\IImageSource.cs" />
-    <Compile Include="Image\Image.cs" />
+    <Compile Include="Image\IImageSourceWrapper.cs" />
+    <Compile Include="Image\LoadedImage.cs" />
+    <Compile Include="Image\ImageData.cs" />
     <Compile Include="Image\ImageShape.cs" />
     <Compile Include="Image\ImageShapeDefinition.cs" />
+    <Compile Include="Image\ImageShapeDefinitionHandler.cs" />
     <Compile Include="Image\ImageSource.cs" />
+    <Compile Include="Image\ImageSourceWrapper.cs" />
+    <Compile Include="Image\ImageType.cs" />
+    <Compile Include="Image\ISourceHandler.cs" />
+    <Compile Include="Image\StreamSourceHandler.cs" />
+    <Compile Include="Image\UriSourceHandler.cs" />
     <Compile Include="InitializationContext\IInitializationContext.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="IWindow.cs" />
@@ -132,6 +143,7 @@
     <Compile Include="Styling\Setter.cs" />
     <Compile Include="Styling\Style.cs" />
     <Compile Include="Styling\StyleDictionary.cs" />
+    <Compile Include="Styling\Styles\ImageCell.cs" />
     <Compile Include="Styling\Styles\ImageView.cs" />
     <Compile Include="Styling\Styles\Label.cs" />
     <Compile Include="Styling\Styles\Button.cs" />
@@ -159,6 +171,7 @@
     <Compile Include="Types\UISize.cs" />
     <Compile Include="Types\UITextAlign.cs" />
     <Compile Include="Views\BindingContexts\CellBindingContextBase.cs" />
+    <Compile Include="Views\BindingContexts\ImageCellBindingContext.cs" />
     <Compile Include="Views\BindingContexts\LabelCellBindingContext.cs" />
     <Compile Include="Views\BindingContexts\PageBindingContextBase.cs" />
     <Compile Include="Views\Button.cs" />

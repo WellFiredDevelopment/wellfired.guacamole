@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using WellFired.Guacamole.Views.BindingContexts;
@@ -11,8 +12,13 @@ namespace WellFired.Guacamole.Types
         {
             return collection.Select(o => new LabelCellBindingContext(o)).ToList();
         }
+        
+        public static IList From(params Uri [] collection)
+        {
+            return collection.Select(o => new ImageCellBindingContext(o)).ToList();
+        }
     }
-    
+
     public static class ItemSource<T>
     {
         public static IEnumerable<T> From(params T [] collection)

@@ -130,6 +130,11 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 		}
 
+		public virtual void RecycleWithNewBindingContext()
+		{
+			
+		}
+
 		private void CreateBackgroundTexture()
 		{
 			BackgroundTexture = Texture2DExtensions.CreateRoundedTexture(64, 64, Control.BackgroundColor, Control.OutlineColor, Control.CornerRadius, Control.CornerMask);

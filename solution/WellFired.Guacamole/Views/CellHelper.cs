@@ -3,6 +3,7 @@ using System.Diagnostics;
 using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Layouts;
+using WellFired.Guacamole.Views.BindingContexts;
 
 namespace WellFired.Guacamole.Views
 {
@@ -10,15 +11,30 @@ namespace WellFired.Guacamole.Views
     {
         public static ICell CreateDefaultCell(object bindingContext, IListView container)
         {
-            var cell = new LabelCell {
+            if (bindingContext is LabelCellBindingContext)
+            {
+                var labelCell = new LabelCell
+                {
+                    Container = container
+                };
+
+                labelCell.BindingContext = bindingContext as INotifyPropertyChanged;
+                labelCell.Bind(LabelCell.TextProperty, "CellLabelText");
+                labelCell.Bind(Cell.IsSelectedProperty, "IsSelected", BindingMode.TwoWay);
+
+                return labelCell;
+            }
+            
+            var imageCell = new ImageCell
+            {
                 Container = container
             };
-
-            cell.BindingContext = bindingContext as INotifyPropertyChanged;
-            cell.Bind(LabelCell.TextProperty, "CellLabelText");
-            cell.Bind(Cell.IsSelectedProperty, "IsSelected", BindingMode.TwoWay);
-
-            return cell;
+            
+            imageCell.BindingContext = bindingContext as INotifyPropertyChanged;
+            imageCell.Bind(ImageCell.ImageSourceProperty, "ImageSource");
+            imageCell.Bind(Cell.IsSelectedProperty, "IsSelected", BindingMode.TwoWay);
+            
+            return imageCell;
         }
 
         public static ICell CreateCellWith(object caller, DataTemplate itemTemplate, object bindingContext, IListView container)
