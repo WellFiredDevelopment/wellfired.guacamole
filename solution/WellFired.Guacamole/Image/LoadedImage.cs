@@ -5,17 +5,17 @@ namespace WellFired.Guacamole.Image
     public class LoadedImage
     {
         public ImageType Type { get; set; }
-        public Stream Stream { get; set; }
+        public byte[] Data { get; set; }
         
-        private LoadedImage(ImageType imageType, Stream stream)
+        private LoadedImage(ImageType imageType, byte[] data)
         {
             Type = imageType;
-            Stream = stream;
+            Data = data;
         }
 
         public static LoadedImage From(IImageSourceWrapper imageSourceWrapper)
         {
-            return new LoadedImage(imageSourceWrapper.ImageType, imageSourceWrapper.Stream);
+            return new LoadedImage(imageSourceWrapper.ImageType, imageSourceWrapper.Data);
         }
     }
 }

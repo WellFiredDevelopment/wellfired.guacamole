@@ -1,10 +1,8 @@
-﻿using System.IO;
-
-namespace WellFired.Guacamole.Image
+﻿namespace WellFired.Guacamole.Image
 {
     public interface IImageSourceWrapper
     {
-        Stream Stream { get; }
+        byte[] Data { get; }
         ImageType ImageType { get; }
     }
 }

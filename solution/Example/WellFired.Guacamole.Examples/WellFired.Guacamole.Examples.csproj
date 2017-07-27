@@ -36,6 +36,9 @@
       <HintPath>..\..\Assemblies\AsyncBridge.Net35.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.3\lib\net35\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Threading">
       <HintPath>..\..\Assemblies\System.Threading.dll</HintPath>
@@ -70,6 +73,12 @@
     <Compile Include="CaseStudy\DotPeek\UIElementFactory\DotPeekLabelFactory.cs" />
     <Compile Include="CaseStudy\DotPeek\UIElementFactory\Grid.cs" />
     <Compile Include="CaseStudy\DotPeek\ViewModel\BuildReportDiffViewModel.cs" />
+    <Compile Include="CaseStudy\RedditBrowser\Cells\PostCell.cs" />
+    <Compile Include="CaseStudy\RedditBrowser\Model\SearchResult.cs" />
+    <Compile Include="CaseStudy\RedditBrowser\RedditBrowserApplication.cs" />
+    <Compile Include="CaseStudy\RedditBrowser\RedditBrowserWindow.cs" />
+    <Compile Include="CaseStudy\RedditBrowser\ViewModel\Post.cs" />
+    <Compile Include="CaseStudy\RedditBrowser\ViewModel\SearchResult.cs" />
     <Compile Include="CaseStudy\Taskist\Styles\FilterCell.cs" />
     <Compile Include="CaseStudy\Taskist\TaskistApplication.cs" />
     <Compile Include="CaseStudy\Taskist\TaskistWindow.cs" />
@@ -118,6 +127,7 @@
     <Compile Include="Simple\UIBindingExample\UIBindingTestWindow.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>

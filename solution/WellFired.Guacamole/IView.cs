@@ -14,6 +14,7 @@ namespace WellFired.Guacamole
 	    bool ValidRectRequest { get; set; }
 	    INativeRenderer NativeRenderer { get; }
 	    UISize MinSize { get; }
+		UISize MaxSize { get; }
 	    LayoutOptions HorizontalLayout { get; }
 	    LayoutOptions VerticalLayout { get; }
 		void SetStyleDictionary(IStyleDictionary styleDictionary);

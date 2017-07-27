@@ -10,44 +10,29 @@ namespace WellFired.Guacamole.Unity.Editor.Extensions
     {   
         public static async Task<Texture2D> ToUnityTexture(this IImageSource source, LoadedImage loadedImage)
         {
-            byte[] data;
-            var buffer = new byte[16*1024];
-            using (var ms = new MemoryStream())
-            {
-                int read;
-                while ((read = loadedImage.Stream.Read(buffer, 0, buffer.Length)) > 0)
-                    ms.Write(buffer, 0, read);
-                
-                data = ms.ToArray();
-            }
-            loadedImage.Stream.Close();
-
             Texture2D image = null;
-            switch (loadedImage.Type)
+            Device.ExecuteOnMainThread(() =>
             {
-                case ImageType.Image:
-                    Device.ExecuteOnMainThread(() =>
-                    {
+                switch (loadedImage.Type)
+                {
+                    case ImageType.Image:
                         image = new Texture2D(2, 2);
-                        image.LoadImage(data);
-                    });
-                    break;
-                case ImageType.Raw:
-                    Device.ExecuteOnMainThread(() =>
-                    {
+                        image.LoadImage(loadedImage.Data);
+                        break;
+                    case ImageType.Raw:
                         // [TODO] Don't assume square images for Raw.
-                        var size = (int)Math.Sqrt(data.Length / 4.0f);
+                        var size = (int) Math.Sqrt(loadedImage.Data.Length / 4.0f);
                         // [TODO] Don't assume texture format for Raw.
                         const TextureFormat format = TextureFormat.RGBA32;
-                    
+
                         image = new Texture2D(size, size, format, false);
-                        image.LoadRawTextureData(data);
+                        image.LoadRawTextureData(loadedImage.Data);
                         image.Apply();
-                    });
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            });
 
             const int msTimeout = 5000;
             var msTickCount = 0;

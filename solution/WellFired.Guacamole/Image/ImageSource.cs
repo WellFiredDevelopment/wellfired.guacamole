@@ -11,6 +11,7 @@ namespace WellFired.Guacamole.Image
         private CancellationTokenSource _cancellationTokenSource;
         private readonly ISourceHandler _handler;
         private LoadedImage _loadedImage;
+        private bool _isLoading;
 
         public bool InProgress => _cancellationTokenSource != default(CancellationTokenSource);
         public Action<LoadedImage> OnComplete { get; set; } = delegate {};
@@ -41,17 +42,11 @@ namespace WellFired.Guacamole.Image
 
         public async void Load()
         {
-            // We've already loaded, return immediately and call complete.
-            if (_loadedImage != default(LoadedImage))
-            {
-                DoEnd();
-                return;
-            }
-            
             // we're already loading, so return immediately.
-            if (_cancellationTokenSource == default(CancellationTokenSource))
+            if (_isLoading)
                 return;
 
+            _isLoading = true;
             IImageSourceWrapper wrapper;
             try
             {
@@ -65,12 +60,12 @@ namespace WellFired.Guacamole.Image
             
             if (wrapper == null)
             {
-                _cancellationTokenSource = default(CancellationTokenSource);
+                _isLoading = false;
                 return;
             }
             
             End(wrapper);
-            _cancellationTokenSource = default(CancellationTokenSource);
+            _isLoading = false;
         }
 
         public void Cancel()

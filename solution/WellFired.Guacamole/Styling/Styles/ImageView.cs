@@ -9,6 +9,8 @@ namespace WellFired.Guacamole.Styling.Styles
         {
             Setters =
             {
+                new Setter {Property = View.BackgroundColorProperty, Value = UIColor.FromRGBA(125, 125, 125, 255)},
+                new Setter {Property = View.OutlineColorProperty, Value = UIColor.FromRGBA(125, 125, 125, 255)},
                 new Setter {Property = View.HorizontalLayoutProperty, Value = LayoutOptions.Fill},
                 new Setter {Property = View.VerticalLayoutProperty, Value = LayoutOptions.Fill},
             }

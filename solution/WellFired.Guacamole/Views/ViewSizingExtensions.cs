@@ -69,7 +69,8 @@ namespace WellFired.Guacamole.Views
             var nativeSize = view.NativeRenderer?.NativeSize ?? defaultSize;
 
             // Constrain
-            nativeSize = Constrain(nativeSize, view.MinSize);
+            nativeSize = ConstrainUnder(nativeSize, view.MinSize);
+            nativeSize = ConstrainOver(nativeSize, view.MaxSize);
 
             return UIRect.With(0, 0, nativeSize.Width, nativeSize.Height);
         }
@@ -183,19 +184,28 @@ namespace WellFired.Guacamole.Views
                 DoLayout(child as IView);
         }
 
-        private static UISize Constrain(UISize requestedSize, UISize minSize)
+        private static UISize ConstrainUnder(UISize requestedSize, UISize size)
         {
-            if (minSize == UISize.Min)
+            if (size == UISize.Min)
                 return requestedSize;
 
-            if (requestedSize.Width < minSize.Width)
-                requestedSize.Width = minSize.Width;
-            if (requestedSize.Height < minSize.Height)
-                requestedSize.Height = minSize.Height;
-            if (requestedSize.Width > minSize.Width)
-                requestedSize.Width = minSize.Width;
-            if (requestedSize.Height > minSize.Height)
-                requestedSize.Height = minSize.Height;
+            if (requestedSize.Width < size.Width)
+                requestedSize.Width = size.Width;
+            if (requestedSize.Height < size.Height)
+                requestedSize.Height = size.Height;
+
+            return requestedSize;
+        }
+
+        private static UISize ConstrainOver(UISize requestedSize, UISize size)
+        {
+            if (size == UISize.Min)
+                return requestedSize;
+
+            if (requestedSize.Width > size.Width)
+                requestedSize.Width = size.Width;
+            if (requestedSize.Height > size.Height)
+                requestedSize.Height = size.Height;
 
             return requestedSize;
         }

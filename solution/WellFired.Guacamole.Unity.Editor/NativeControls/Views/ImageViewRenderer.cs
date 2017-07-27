@@ -60,6 +60,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
             if (imageView.ImageSource == null) 
                 return;
             
+            _texture = null;
             imageView.ImageSource.OnComplete += OnLoadComplete;
             imageView.ImageSource.Load();
         }
@@ -69,6 +70,12 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
             var imageCell = (ImageView)Control;
             _texture = await imageCell.ImageSource.ToUnityTexture(image);
             Control.InvalidateRectRequest();
+        }
+
+        public override void RecycleWithNewBindingContext()
+        {
+            base.RecycleWithNewBindingContext();
+            _texture = null;
         }
     }
 }

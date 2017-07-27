@@ -32,6 +32,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			Style.active.textColor = label.TextColor.ToUnityColor();
 			Style.hover.textColor = label.TextColor.ToUnityColor();
 			Style.normal.textColor = label.TextColor.ToUnityColor();
+			Style.wordWrap = true;
 		}
 
 		public override void Render(UIRect renderRect)

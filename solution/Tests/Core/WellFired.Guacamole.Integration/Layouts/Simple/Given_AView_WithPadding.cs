@@ -28,6 +28,7 @@ namespace WellFired.Guacamole.Integration.Layouts.Simple
             var view = new Views.View {
                 Padding = UIPadding.Of(10),
                 MinSize = UISize.Of(50, 10),
+                MaxSize = UISize.Of(50, 10),
                 HorizontalLayout = LayoutOptions.Expand,
                 VerticalLayout = LayoutOptions.Expand,
             };

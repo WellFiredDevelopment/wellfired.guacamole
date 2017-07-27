@@ -12,6 +12,7 @@ namespace WellFired.Guacamole.Integration.Layouts.Simple
         {
             var view = new Slider {
                 MinSize = UISize.Of(50, 10),
+                MaxSize = UISize.Of(100, 10),
                 MinValue = 0.0,
                 MaxValue = 10.0,
                 Value = 5.0
@@ -36,6 +37,7 @@ namespace WellFired.Guacamole.Integration.Layouts.Simple
         {
             var view = new Slider {
                 MinSize = UISize.Of(50, 10),
+                MaxSize = UISize.Of(500, 10),
                 MinValue = 0.0,
                 MaxValue = 10.0,
                 Value = 5.0
