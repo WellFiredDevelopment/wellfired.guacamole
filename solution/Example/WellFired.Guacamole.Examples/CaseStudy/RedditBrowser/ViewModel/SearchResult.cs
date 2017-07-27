@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using WellFired.Guacamole.DataBinding;
+using WellFired.Guacamole.Unity.Editor.Diagnostics;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.RedditBrowser.ViewModel
 {
@@ -34,7 +35,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.RedditBrowser.ViewModel
         public SearchResult()
         {
             // Default this to something sensible
-            SubReddit = "/r/awww";
+            SubReddit = "r/awww";
             
             // Our search command, calls reddits api.
             Search = new Command { 
@@ -51,6 +52,8 @@ namespace WellFired.Guacamole.Examples.CaseStudy.RedditBrowser.ViewModel
                     }
                 }
             };
+            
+            Search.Execute();
         }
         
         private async Task<IList<Post>> DoSearch()
@@ -58,7 +61,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.RedditBrowser.ViewModel
             var jsonResponse = string.Empty;
             await TaskEx.Run(() =>
             {
-                var httpWebRequest = (HttpWebRequest) WebRequest.Create($"https://www.reddit.com{SubReddit}/new.json?sort=new");
+                var httpWebRequest = (HttpWebRequest) WebRequest.Create($"https://www.reddit.com/{SubReddit}/hot.json?sort=new");
                 httpWebRequest.Method = WebRequestMethods.Http.Get;
                 httpWebRequest.Accept = "application/json";
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using UnityEditor;
 using UnityEngine;
 using WellFired.Guacamole.Attributes;
@@ -16,6 +17,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Cells
     public class ImageCellRenderer : BaseCellRenderer
     {
         private Texture _texture;
+        private IImageSource _subscribedImageSource;
 
         public override UISize? NativeSize
         {
@@ -58,8 +60,20 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Cells
             if (imageCell.ImageSource == null) 
                 return;
             
+            _texture = null;
+            if(_subscribedImageSource != null)
+                _subscribedImageSource.OnComplete -= OnLoadComplete;
+            _subscribedImageSource = imageCell.ImageSource; 
             imageCell.ImageSource.OnComplete += OnLoadComplete;
-            imageCell.ImageSource.Load();
+            
+            try
+            {
+                imageCell.ImageSource.Load();
+            }
+            catch (Exception ex)
+            {
+                Device.ExecuteOnMainThread(() => { throw ex; });
+            }
         }
 
         private async void OnLoadComplete(LoadedImage image)

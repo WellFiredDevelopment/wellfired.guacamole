@@ -19,5 +19,10 @@ namespace WellFired.Guacamole.Image
         {
             return new ImageSourceWrapper(_stream, ImageType.Image);;
         }
+
+        public override string ToString()
+        {
+            return $"Stream";
+        }
     }
 }

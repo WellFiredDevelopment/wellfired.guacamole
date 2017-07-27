@@ -28,6 +28,21 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			base.Render(renderRect);
 
 			var button = (Button)Control;
+
+			var controlState = button.ControlState;
+			if (!button.ButtonPressedCommand.CanExecute)
+			{
+				//Guacamole.Diagnostics.Logger.LogMessage("Cannot");
+				if (controlState != ControlState.Disabled)
+					button.ControlState = ControlState.Disabled;
+			}
+			else
+			{
+				//Guacamole.Diagnostics.Logger.LogMessage("Can");
+				if(controlState == ControlState.Disabled)
+					button.ControlState = ControlState.Normal;
+			}
+
 			if (!GUI.Button(UnityRect, button.Text, Style))
 				return;
 			

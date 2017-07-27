@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using UnityEditor;
 using UnityEngine;
 using WellFired.Guacamole.Attributes;
@@ -18,6 +19,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
     public class ImageViewRenderer : BaseRenderer
     {
         private Texture _texture;
+        private IImageSource _subscribedImageSource;
 
         public override UISize? NativeSize
         {
@@ -52,23 +54,34 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
         {
             base.OnPropertyChanged(sender, e);
 
-            var imageView = (ImageView)Control;
-			
-            if (e.PropertyName != ImageView.ImageSourceProperty.PropertyName) 
+            var imageView = (ImageView) Control;
+
+            if (e.PropertyName != ImageView.ImageSourceProperty.PropertyName)
                 return;
 
-            if (imageView.ImageSource == null) 
+            if (imageView.ImageSource == null)
                 return;
-            
+
             _texture = null;
+            if(_subscribedImageSource != null)
+                _subscribedImageSource.OnComplete -= OnLoadComplete;
+            _subscribedImageSource = imageView.ImageSource; 
             imageView.ImageSource.OnComplete += OnLoadComplete;
-            imageView.ImageSource.Load();
+            
+            try
+            {
+                imageView.ImageSource.Load();
+            }
+            catch (Exception ex)
+            {
+                Device.ExecuteOnMainThread(() => { throw ex; });
+            }
         }
 
         private async void OnLoadComplete(LoadedImage image)
         {
-            var imageCell = (ImageView)Control;
-            _texture = await imageCell.ImageSource.ToUnityTexture(image);
+            var imageView = (ImageView)Control;
+            _texture = await imageView.ImageSource.ToUnityTexture(image);
             Control.InvalidateRectRequest();
         }
 

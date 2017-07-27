@@ -17,10 +17,8 @@ namespace WellFired.Guacamole.Examples.Simple.ButtonExample
 				Text = "Press Me Please."
 			};
 
-			var buttonPressed = new Command
-			{
-				ExecuteAction = () => { Logger.LogMessage("Sausages"); },
-				CanExecuteAction = () => true
+			var buttonPressed = new Command {
+				ExecuteAction = () => { Logger.LogMessage("Sausages"); }
 			};
 
 			button.ButtonPressedCommand = buttonPressed;

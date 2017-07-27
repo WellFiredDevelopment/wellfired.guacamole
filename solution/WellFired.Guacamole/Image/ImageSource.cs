@@ -47,16 +47,7 @@ namespace WellFired.Guacamole.Image
                 return;
 
             _isLoading = true;
-            IImageSourceWrapper wrapper;
-            try
-            {
-                wrapper = await _handler.Handle(_cancellationTokenSource.Token);
-            }
-            catch (Exception e)
-            {
-                Device.ExecuteOnMainThread(() => { throw e; });
-                return;
-            }
+            var wrapper = await _handler.Handle(_cancellationTokenSource.Token);
             
             if (wrapper == null)
             {
@@ -71,8 +62,7 @@ namespace WellFired.Guacamole.Image
         public void Cancel()
         {
             // We can cancel our async tasks at any time.
-            if(_cancellationTokenSource != default(CancellationTokenSource))
-                _cancellationTokenSource.Cancel();
+            _cancellationTokenSource.Cancel();
         }
 
         private void End(IImageSourceWrapper imageSourceWrapper)
@@ -91,6 +81,11 @@ namespace WellFired.Guacamole.Image
             {
                 Device.ExecuteOnMainThread(() => { throw e; });
             }
+        }
+
+        public override string ToString()
+        {
+            return $"{_handler}";
         }
 
         /// <summary>

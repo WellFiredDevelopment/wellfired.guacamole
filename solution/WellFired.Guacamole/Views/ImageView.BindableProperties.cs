@@ -7,19 +7,20 @@ namespace WellFired.Guacamole.Views
     public partial class ImageView
     {
         [PublicAPI] public static readonly BindableProperty ImageSourceProperty = BindableProperty.Create<ImageView, IImageSource>(
-                default(IImageSource),
-                BindingMode.TwoWay,
-                v => v.ImageSource
-            );
-        
+            default(IImageSource),
+            BindingMode.TwoWay,
+            v => v.ImageSource
+        );
+
         public IImageSource ImageSource
         {
             get { return (IImageSource) GetValue(ImageSourceProperty); }
             set
             {
-                var prevValue = ImageSource; 
-                if(SetValue(ImageSourceProperty, value))
-                    prevValue?.Cancel();
+                if (ImageSource != value)
+                    ImageSource?.Cancel();
+
+                SetValue(ImageSourceProperty, value);
             }
         }
     }

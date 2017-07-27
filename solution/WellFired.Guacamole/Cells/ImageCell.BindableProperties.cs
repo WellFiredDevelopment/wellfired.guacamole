@@ -17,9 +17,10 @@ namespace WellFired.Guacamole.Cells
             get { return (IImageSource) GetValue(ImageSourceProperty); }
             set
             {
-                var prevValue = ImageSource; 
-                if(SetValue(ImageSourceProperty, value))
-                    prevValue?.Cancel();
+                if (ImageSource != value)
+                    ImageSource?.Cancel();
+
+                SetValue(ImageSourceProperty, value);
             }
         }
     }

@@ -119,5 +119,19 @@ namespace WellFired.Guacamole.Unit.Vds
             
             Assert.That(vds, Is.EquivalentTo(expectedVds));
         }
+        
+        [Test]
+        public void TestCase1_ExpectedResultIsCorrect()
+        {
+            var expectedVds = new[] { 0, 1, 2, 3, 4, 5 };
+            var vds = VdsCalculator.CalculateVisualDataSet(
+                virtualScrollPosition: 0,
+                visibleControlSize: 580, 
+                estimatedElementSize: 100, 
+                estimatedContentSize: 1000, 
+                spacing: 0);
+            
+            Assert.That(vds, Is.EquivalentTo(expectedVds));
+        }
     }
 }

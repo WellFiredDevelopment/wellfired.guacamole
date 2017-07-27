@@ -49,12 +49,12 @@ namespace WellFired.Guacamole.Views
                 case OrientationOptions.Vertical:
                     if (availableSpace.Height <= 0.0f)
                         return;
-                    entriesThatCanBeShownAtOnce = availableSpace.Height / listView.EntrySize;
+                    entriesThatCanBeShownAtOnce = (int)Math.Ceiling((float)availableSpace.Height / listView.EntrySize);
                     break;
                 case OrientationOptions.Horizontal:
                     if (availableSpace.Width <= 0.0f)
                         return;
-                    entriesThatCanBeShownAtOnce = availableSpace.Width / listView.EntrySize;
+                    entriesThatCanBeShownAtOnce = (int)Math.Ceiling((float)availableSpace.Width / listView.EntrySize);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

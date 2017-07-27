@@ -7,11 +7,10 @@ namespace WellFired.Guacamole
 	{
 		public delegate bool CanExecuteDelegate();
 
-		private bool? _canExecute;
+		private bool _canExecute = true;
 
 		public Action ExecuteAction { private get; set; }
-		public CanExecuteDelegate CanExecuteAction { private get; set; }
-
+		
 		public void Execute()
 		{
 			ExecuteAction?.Invoke();
@@ -19,19 +18,8 @@ namespace WellFired.Guacamole
 
 		public bool CanExecute
 		{
-			get
-			{
-				var ce = CanExecuteAction?.Invoke() ?? true;
-
-				var existingValue = _canExecute ?? !ce;
-				var newValue = ce;
-				_canExecute = ce;
-
-				SetProperty(ref existingValue, newValue);
-
-				return _canExecute.Value;
-			}
-			set { _canExecute = value; }
+			get { return _canExecute; }
+			set { SetProperty(ref _canExecute, value); }
 		}
 	}
 }

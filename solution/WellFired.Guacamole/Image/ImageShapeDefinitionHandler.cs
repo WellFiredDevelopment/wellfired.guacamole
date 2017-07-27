@@ -50,5 +50,10 @@ namespace WellFired.Guacamole.Image
 
             return new ImageSourceWrapper(new MemoryStream(byteArray), ImageType.Raw);
         }
+
+        public override string ToString()
+        {
+            return $"{_imageShapeDefinition.Shape}";
+        }
     }
 }

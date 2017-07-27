@@ -47,5 +47,10 @@ namespace WellFired.Guacamole.Image
 
             return new ImageSourceWrapper(webResponse.GetResponseStream(), ImageType.Image);
         }
+
+        public override string ToString()
+        {
+            return $"{_uri}";
+        }
     }
 }

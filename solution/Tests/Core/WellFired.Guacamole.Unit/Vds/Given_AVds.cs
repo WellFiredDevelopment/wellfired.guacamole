@@ -11,7 +11,7 @@ namespace WellFired.Guacamole.Unit.Vds
         public void With_NoEntriesAllNew_CorrectCallbacksOccur()
         {
             var oldVds = new int [0];
-            var newVds = new [] { 0, 1, 2, 3};
+            var newVds = new [] { 0, 1, 2, 3 };
             var listensToVdsChanges = Substitute.For<IListensToVdsChanges>();
             
             VdsCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
@@ -29,7 +29,7 @@ namespace WellFired.Guacamole.Unit.Vds
         public void With_OneEntryAllNew_CorrectCallbacksOccur()
         {
             var oldVds = new [] { 0 };
-            var newVds = new [] { 0, 1, 2, 3};
+            var newVds = new [] { 0, 1, 2, 3 };
             var listensToVdsChanges = Substitute.For<IListensToVdsChanges>();
             
             VdsCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
@@ -46,7 +46,7 @@ namespace WellFired.Guacamole.Unit.Vds
         public void With_OneEntryOneRemoved_CorrectCallbacksOccur()
         {
             var oldVds = new [] { 0 };
-            var newVds = new [] { 1, 2, 3};
+            var newVds = new [] { 1, 2, 3 };
             var listensToVdsChanges = Substitute.For<IListensToVdsChanges>();
             
             VdsCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
@@ -63,7 +63,7 @@ namespace WellFired.Guacamole.Unit.Vds
         public void With_ThreeEntriesTwoRemoved_CorrectCallbacksOccur()
         {
             var oldVds = new [] { 0, 1, 2 };
-            var newVds = new [] { 2, 3};
+            var newVds = new [] { 2, 3 };
             var listensToVdsChanges = Substitute.For<IListensToVdsChanges>();
             
             VdsCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);

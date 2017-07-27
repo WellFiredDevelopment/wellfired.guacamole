@@ -38,5 +38,10 @@ namespace WellFired.Guacamole.Image
                 throw new ImageSourceDoesntHaveAccessException(_location);
             }
         }
+
+        public override string ToString()
+        {
+            return $"{_location}";
+        }
     }
 }
