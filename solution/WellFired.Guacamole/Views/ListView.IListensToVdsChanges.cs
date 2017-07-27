@@ -38,11 +38,15 @@ namespace WellFired.Guacamole.Views
                 cell = GetNewCell(data);
                 _activeEntries.Add(cell);
             }
+
+            var layoutable = (ILayoutable)cell;
+
+            layoutable.X = int.MaxValue;
             
             if (front)
-                Children.Insert(0, cell as ILayoutable);
+                Children.Insert(0, layoutable);
             else
-                Children.Add(cell as ILayoutable);
+                Children.Add(layoutable);
         }
     }
 }

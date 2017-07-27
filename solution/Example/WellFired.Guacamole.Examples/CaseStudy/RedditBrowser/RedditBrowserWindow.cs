@@ -14,11 +14,12 @@ namespace WellFired.Guacamole.Examples.CaseStudy.RedditBrowser
         public RedditBrowserWindow(ILogger logger, INotifyPropertyChanged persistantData) 
             : base(logger, persistantData)
         {
-            var textEntry = new TextEntry();
-            var searchButton = new Button {Text = "Search"};
+            var textEntry = new TextEntry { CornerRadius = 0 };
+            var searchButton = new Button {Text = "Search", CornerRadius = 0};
+            
             var listView = new ListView {
                 HorizontalLayout = LayoutOptions.Fill,
-                VerticalLayout = LayoutOptions.Expand,
+                VerticalLayout = LayoutOptions.Fill,
                 Orientation = OrientationOptions.Vertical,
                 ItemTemplate = DataTemplate.Of(typeof(PostCell)),
                 EntrySize = 100
