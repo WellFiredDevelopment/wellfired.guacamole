@@ -11,14 +11,15 @@ namespace WellFired.Guacamole.Views
     {
         public static ICell CreateDefaultCell(object bindingContext, IListView container)
         {
-            if (bindingContext is LabelCellBindingContext)
+            var context = bindingContext as LabelCellBindingContext;
+            if (context != null)
             {
                 var labelCell = new LabelCell
                 {
                     Container = container
                 };
 
-                labelCell.BindingContext = bindingContext as INotifyPropertyChanged;
+                labelCell.BindingContext = (INotifyPropertyChanged) bindingContext;
                 labelCell.Bind(LabelCell.TextProperty, "CellLabelText");
                 labelCell.Bind(Cell.IsSelectedProperty, "IsSelected", BindingMode.TwoWay);
 

@@ -42,8 +42,6 @@ namespace WellFired.Guacamole
 			{
 				case RuntimePlatform.UnityEditor:
 					return ExtraPath + location;
-				default:
-					throw new ArgumentOutOfRangeException();
 			}
 		}
 	}

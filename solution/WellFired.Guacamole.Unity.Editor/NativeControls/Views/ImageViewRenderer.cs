@@ -46,6 +46,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
             if (e.PropertyName != ImageView.ImageSourceProperty.PropertyName)
                 return;
 
+            _texture = null;
             _texture = await _handler.UpdatedImageSource(imageView.ImageSource);
         }
     }

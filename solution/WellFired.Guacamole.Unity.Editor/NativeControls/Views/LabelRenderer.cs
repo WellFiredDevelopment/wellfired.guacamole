@@ -32,7 +32,8 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			Style.active.textColor = label.TextColor.ToUnityColor();
 			Style.hover.textColor = label.TextColor.ToUnityColor();
 			Style.normal.textColor = label.TextColor.ToUnityColor();
-			Style.wordWrap = true;
+			Style.fontSize = label.FontSize;
+			Style.wordWrap = label.WordWrap;
 		}
 
 		public override void Render(UIRect renderRect)
@@ -58,6 +59,10 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			}
 			if(e.PropertyName == Label.HorizontalTextAlignProperty.PropertyName || e.PropertyName == Label.VerticalTextAlignProperty.PropertyName)
 				Style.alignment = UITextAlignExtensions.Combine(label.HorizontalTextAlign, label.VerticalTextAlign);
+			if (e.PropertyName == Label.WordWrapProperty.PropertyName)
+				Style.wordWrap = label.WordWrap;
+			if (e.PropertyName == Label.FontSizeProperty.PropertyName)
+				Style.fontSize = label.FontSize;
 		}
 	}
 }

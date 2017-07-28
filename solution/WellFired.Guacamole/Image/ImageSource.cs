@@ -2,11 +2,14 @@
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using WellFired.Guacamole.Exceptions;
+using WellFired.Guacamole.FileSystem;
 using WellFired.Guacamole.Types;
+using WellFired.Guacamole.WebRequestHandler;
 
 namespace WellFired.Guacamole.Image
 {
-    public class ImageSource : IImageSource
+    public sealed class ImageSource : IImageSource
     {
         private readonly CancellationTokenSource _cancellationTokenSource;
         private readonly ISourceHandler _handler;
@@ -16,16 +19,16 @@ namespace WellFired.Guacamole.Image
         public bool InProgress => _cancellationTokenSource != default(CancellationTokenSource);
         public Action<LoadedImage> OnComplete { get; set; } = delegate {};
 
-        private ImageSource(string location)
-        {
+        private ImageSource(string location, IFileSystem fileSystem)
+        {   
             _cancellationTokenSource = new CancellationTokenSource();
-            _handler = new FileSourceHandler(location, new FileSystem.FileSystem());
+            _handler = new FileSourceHandler(location, fileSystem);
         }
 
-        private ImageSource(Uri location)
-        {
+        private ImageSource(Uri location, IWebRequestHandler webRequestHandler)
+        {   
             _cancellationTokenSource = new CancellationTokenSource();
-            _handler = new UriSourceHandler(location, new WebRequestHandler.WebRequestHandler());
+            _handler = new UriSourceHandler(location, webRequestHandler);
         }
 
         private ImageSource(Stream stream)
@@ -47,7 +50,7 @@ namespace WellFired.Guacamole.Image
             
             // we're already loading, so return immediately.
             if (_isLoading)
-                throw new AlreadyLoadingException();
+                throw new ImageAlreadyLoadingException();
 
             _isLoading = true;
             var wrapper = await _handler.Handle(_cancellationTokenSource.Token);
@@ -55,7 +58,7 @@ namespace WellFired.Guacamole.Image
             if (wrapper == null)
             {
                 _isLoading = false;
-                throw new HandlerProducedNoWrapperException();
+                throw new ImageSourceHandlerProducedNoWrapperException();
             }
             
             _isLoading = false;
@@ -78,20 +81,28 @@ namespace WellFired.Guacamole.Image
         /// The image passed should be a per platform image location, see the documentation for your desired platform for more information.
         /// </summary>
         /// <param name="location"></param>
+        /// <param name="fileSystem"></param>
         /// <returns></returns>
-        public static IImageSource From(string location)
+        public static IImageSource From(string location, IFileSystem fileSystem = default(IFileSystem))
         {
-            return new ImageSource(location);
+            if (fileSystem == default(IFileSystem))
+                fileSystem = new FileSystem.FileSystem();
+            
+            return new ImageSource(location, fileSystem);
         }
 
         /// <summary>
         /// Here you can pass a URI to load an image from. Any URI should be valid.
         /// </summary>
         /// <param name="location"></param>
+        /// <param name="webRequestHandler"></param>
         /// <returns></returns>
-        public static IImageSource From(Uri location)
+        public static IImageSource From(Uri location, IWebRequestHandler webRequestHandler = default(IWebRequestHandler))
         {
-            return new ImageSource(location);
+            if(webRequestHandler == default(IWebRequestHandler))
+                webRequestHandler = new WebRequestHandler.WebRequestHandler();
+            
+            return new ImageSource(location, webRequestHandler);
         }
 
         /// <summary>
@@ -109,19 +120,22 @@ namespace WellFired.Guacamole.Image
         /// </summary>
         /// <param name="imageShape"></param>
         /// <param name="color"></param>
+        /// <returns></returns>
+        public static IImageSource From(ImageShape imageShape, UIColor color)
+        {
+            return new ImageSource(new ImageShapeDefinition { Shape = imageShape, Size = 64, Color = color, OutlineColor = color });
+        }
+
+        /// <summary>
+        /// Loads an Image from a shape definition
+        /// </summary>
+        /// <param name="imageShape"></param>
+        /// <param name="color"></param>
         /// <param name="outlineColor"></param>
         /// <returns></returns>
         public static IImageSource From(ImageShape imageShape, UIColor color, UIColor outlineColor)
         {
             return new ImageSource(new ImageShapeDefinition { Shape = imageShape, Size = 64, Color = color, OutlineColor = outlineColor });
         }
-    }
-
-    public class HandlerProducedNoWrapperException : Exception
-    {
-    }
-
-    public class AlreadyLoadingException : Exception
-    {
     }
 }

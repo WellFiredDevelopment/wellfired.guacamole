@@ -13,8 +13,8 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.Styles
         {
             Setters =
             {
-                new Setter {Property = Views.View.BackgroundColorProperty, Value = UIColor.FromRGB(250, 250, 250)},
-                new Setter {Property = Views.View.OutlineColorProperty, Value = UIColor.FromRGB(250, 250, 250)},
+                new Setter {Property = Views.View.BackgroundColorProperty, Value = DarkerColor},
+                new Setter {Property = Views.View.OutlineColorProperty, Value = DarkerColor},
                 new Setter {Property = Views.View.HorizontalLayoutProperty, Value = LayoutOptions.Fill},
                 new Setter {Property = Views.View.VerticalLayoutProperty, Value = LayoutOptions.Expand}
             },

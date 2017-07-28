@@ -35,6 +35,9 @@ namespace WellFired.Guacamole.Drawing
 			for (var i = 0; i < image.Length; i++)
 				image[i] = UIColor.Clear;
 
+			if (backgroundColor == UIColor.Clear && outlineColor == UIColor.Clear)
+				return image.Data;
+
 			_shapes.ForEach(shape => shape.Calculate());
 
 			var localOutlineColor = outlineColor;

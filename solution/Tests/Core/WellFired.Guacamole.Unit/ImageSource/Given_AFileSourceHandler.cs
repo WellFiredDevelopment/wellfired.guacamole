@@ -41,7 +41,7 @@ namespace WellFired.Guacamole.Unit.ImageSource
         }
         
         [Test]
-        public void TestingAsyncBehaviour()
+        public void When_TheLoadIsInteruptedWithACancel_Then_TheChainIsCancelled()
         {
             // Testing the cancellation Behaviour, we create a fake Task that waits 4ms before returning a fake stream
             // We also create a second task that waits 1ms and cancels the token.

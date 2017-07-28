@@ -6,35 +6,61 @@ namespace WellFired.Guacamole.Views
 {
 	public class Label : View
 	{
+		[PublicAPI] public static readonly BindableProperty FontSizeProperty = BindableProperty.Create<Label, int>(
+			12,
+			BindingMode.TwoWay,
+			v => v.FontSize
+		);
+		
+		[PublicAPI] public static readonly BindableProperty WordWrapProperty = BindableProperty.Create<Label, bool>(
+			true,
+			BindingMode.TwoWay,
+			v => v.WordWrap
+		);
+		
 		[PublicAPI] public static readonly BindableProperty TextProperty = BindableProperty.Create<Label, string>(
 			string.Empty,
 			BindingMode.TwoWay,
-			entry => entry.Text
+			v => v.Text
 		);
 
 		[PublicAPI] public static readonly BindableProperty TextColorProperty = BindableProperty.Create<Label, UIColor>(
 			UIColor.Black,
 			BindingMode.TwoWay,
-			entry => entry.TextColor
+			v => v.TextColor
 		);
 
 		[PublicAPI] public static readonly BindableProperty HorizontalTextAlignProperty = BindableProperty
 			.Create<Label, UITextAlign>(
 				UITextAlign.Start,
 				BindingMode.TwoWay,
-				entry => entry.HorizontalTextAlign
+				v => v.HorizontalTextAlign
 			);
 
 		[PublicAPI] public static readonly BindableProperty VerticalTextAlignProperty = BindableProperty
 			.Create<Label, UITextAlign>(
 				UITextAlign.Middle,
 				BindingMode.TwoWay,
-				entry => entry.VerticalTextAlign
+				v => v.VerticalTextAlign
 			);
 
 		public Label()
 		{
 			Style = Styling.Styles.Label.Style;
+		}
+
+		[PublicAPI]
+		public int FontSize
+		{
+			get { return (int) GetValue(FontSizeProperty); }
+			set { SetValue(FontSizeProperty, value); }
+		}
+
+		[PublicAPI]
+		public bool WordWrap
+		{
+			get { return (bool) GetValue(WordWrapProperty); }
+			set { SetValue(WordWrapProperty, value); }
 		}
 
 		[PublicAPI]

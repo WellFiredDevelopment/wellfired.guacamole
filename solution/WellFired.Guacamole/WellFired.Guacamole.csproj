@@ -94,8 +94,10 @@
     <Compile Include="Exceptions\DataTemplateTypeDidntCreateAPage.cs" />
     <Compile Include="Exceptions\GuacamoleUserFacingException.cs" />
     <Compile Include="Exceptions\GuacamoleWindowCantBeCreated.cs" />
+    <Compile Include="Exceptions\ImageAlreadyLoadingException.cs" />
     <Compile Include="Exceptions\ImageSourceCouldntFindFileException.cs" />
     <Compile Include="Exceptions\ImageSourceDoesntHaveAccessException.cs" />
+    <Compile Include="Exceptions\ImageSourceHandlerProducedNoWrapperException.cs" />
     <Compile Include="Exceptions\InitializationContextInvalid.cs" />
     <Compile Include="Exceptions\InitializationContextNull.cs" />
     <Compile Include="Exceptions\NativeRendererCannotBeFound.cs" />

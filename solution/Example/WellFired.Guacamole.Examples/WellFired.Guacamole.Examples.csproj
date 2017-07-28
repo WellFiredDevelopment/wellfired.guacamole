@@ -84,7 +84,6 @@
     <Compile Include="CaseStudy\Taskist\TaskistWindow.cs" />
     <Compile Include="CaseStudy\Taskist\ViewModel\Filter.cs" />
     <Compile Include="CaseStudy\Taskist\View\Cells\FilterCell.cs" />
-    <Compile Include="CaseStudy\Taskist\View\Cells\FilterCell.BindableProperties.cs" />
     <Compile Include="CaseStudy\Taskist\View\Inspector.cs" />
     <Compile Include="CaseStudy\Taskist\View\Overview.cs" />
     <Compile Include="CaseStudy\Taskist\View\TaskistMainPage.cs" />

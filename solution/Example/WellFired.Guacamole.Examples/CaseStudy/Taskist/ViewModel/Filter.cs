@@ -1,4 +1,4 @@
-﻿using WellFired.Guacamole.Types;
+﻿using WellFired.Guacamole.Image;
 using WellFired.Guacamole.Views.BindingContexts;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.ViewModel
@@ -6,7 +6,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.ViewModel
     public class Filter : CellBindingContextBase
     {
         private string _filterName;
-        private UIColor _filterColor;
+        private IImageSource _filterImage;
 
         public string FilterName
         {
@@ -14,10 +14,10 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.ViewModel
             set { SetProperty(ref _filterName, value); }
         }
 
-        public UIColor FilterColor
+        public IImageSource FilterImage
         {
-            get { return _filterColor; }
-            set { SetProperty(ref _filterColor, value); }
+            get { return _filterImage; }
+            set { SetProperty(ref _filterImage, value); }
         }
     }
 }

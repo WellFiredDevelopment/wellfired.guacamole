@@ -89,6 +89,8 @@
     <Compile Include="AdjacentLayout\View\Given_AViewWithPaddingAndContent.cs" />
     <Compile Include="AdjacentLayout\View\Given_AViewWithNoPaddingAndWithContent.cs" />
     <Compile Include="ImageSource\Given_AFileSourceHandler.cs" />
+    <Compile Include="ImageSource\Given_AnImageSource_FromFile.cs" />
+    <Compile Include="ImageSource\Given_AnImageSource_FromUri.cs" />
     <Compile Include="ImageSource\Given_AUriSourceHandler.cs" />
     <Compile Include="Vds\Given_AVds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
