@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace WellFired.Guacamole.Image
 {
     public interface IImageSource
     {
-        void Load();
+        Task<LoadedImage> Load();
         void Cancel();
         bool InProgress { get; }
         Action<LoadedImage> OnComplete { get; set; }

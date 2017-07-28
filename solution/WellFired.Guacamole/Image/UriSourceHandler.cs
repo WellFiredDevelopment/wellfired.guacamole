@@ -1,36 +1,30 @@
 ﻿using System;
 using System.IO;
-using System.Net;
-using System.Runtime.Remoting.Messaging;
 using System.Threading;
 using System.Threading.Tasks;
 using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Types;
+using WellFired.Guacamole.WebRequestHandler;
 
 namespace WellFired.Guacamole.Image
 {
-    internal class UriSourceHandler : ISourceHandler
+    public class UriSourceHandler : ISourceHandler
     {
         private readonly Uri _uri;
+        private readonly IWebRequestHandler _webRequestHandler;
 
-        public UriSourceHandler(Uri uri)
+        public UriSourceHandler(Uri uri, IWebRequestHandler webRequestHandler)
         {
             _uri = uri;
+            _webRequestHandler = webRequestHandler;
         }
 
         public async Task<IImageSourceWrapper> Handle(CancellationToken cancellationToken)
         {
-            var webResponse = default(HttpWebResponse);
-
+            Stream stream;
             try
             {
-                await TaskEx.Run(() =>
-                {
-                    var httpRequest = (HttpWebRequest) WebRequest.Create(_uri);
-                    httpRequest.Timeout = 10000;
-                    httpRequest.UserAgent = "GuacamoleUserApplication";
-                    webResponse = (HttpWebResponse) httpRequest.GetResponse();
-                }, cancellationToken);
+                stream = await _webRequestHandler.GetStream(_uri, cancellationToken);
             }
             catch (Exception)
             {
@@ -45,7 +39,7 @@ namespace WellFired.Guacamole.Image
                     .Handle(cancellationToken);
             }
 
-            return new ImageSourceWrapper(webResponse.GetResponseStream(), ImageType.Image);
+            return new ImageSourceWrapper(stream, ImageType.Image);
         }
 
         public override string ToString()

@@ -6,6 +6,7 @@ namespace WellFired.Guacamole
 	public class Device
 	{
 		private const string ExtraPath = "Assets/GuacamoleApplication/Editor/";
+
 		private enum RuntimePlatform
 		{
 			UnityEditor
@@ -41,6 +42,8 @@ namespace WellFired.Guacamole
 			{
 				case RuntimePlatform.UnityEditor:
 					return ExtraPath + location;
+				default:
+					throw new ArgumentOutOfRangeException();
 			}
 		}
 	}

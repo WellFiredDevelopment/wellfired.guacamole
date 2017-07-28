@@ -1,14 +1,14 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
-using WellFired.Guacamole.Diagnostics;
+using System.Threading.Tasks;
 using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Image
 {
     public class ImageSource : IImageSource
     {
-        private CancellationTokenSource _cancellationTokenSource;
+        private readonly CancellationTokenSource _cancellationTokenSource;
         private readonly ISourceHandler _handler;
         private LoadedImage _loadedImage;
         private bool _isLoading;
@@ -19,13 +19,13 @@ namespace WellFired.Guacamole.Image
         private ImageSource(string location)
         {
             _cancellationTokenSource = new CancellationTokenSource();
-            _handler = new FileSourceHandler(location);
+            _handler = new FileSourceHandler(location, new FileSystem.FileSystem());
         }
 
         private ImageSource(Uri location)
         {
             _cancellationTokenSource = new CancellationTokenSource();
-            _handler = new UriSourceHandler(location);
+            _handler = new UriSourceHandler(location, new WebRequestHandler.WebRequestHandler());
         }
 
         private ImageSource(Stream stream)
@@ -40,11 +40,14 @@ namespace WellFired.Guacamole.Image
             _handler = new ImageShapeDefinitionHandler(imageShapeDefinition);
         }
 
-        public async void Load()
+        public async Task<LoadedImage> Load()
         {
+            if (_loadedImage != null)
+                return _loadedImage;
+            
             // we're already loading, so return immediately.
             if (_isLoading)
-                return;
+                throw new AlreadyLoadingException();
 
             _isLoading = true;
             var wrapper = await _handler.Handle(_cancellationTokenSource.Token);
@@ -52,35 +55,18 @@ namespace WellFired.Guacamole.Image
             if (wrapper == null)
             {
                 _isLoading = false;
-                return;
+                throw new HandlerProducedNoWrapperException();
             }
             
-            End(wrapper);
             _isLoading = false;
+            _loadedImage = LoadedImage.From(wrapper);
+            return _loadedImage;
         }
 
         public void Cancel()
         {
             // We can cancel our async tasks at any time.
             _cancellationTokenSource.Cancel();
-        }
-
-        private void End(IImageSourceWrapper imageSourceWrapper)
-        {
-            _loadedImage = LoadedImage.From(imageSourceWrapper);
-            DoEnd();
-        }
-
-        private void DoEnd()
-        {
-            try
-            {
-                OnComplete(_loadedImage);
-            }
-            catch (Exception e)
-            {
-                Device.ExecuteOnMainThread(() => { throw e; });
-            }
         }
 
         public override string ToString()
@@ -129,5 +115,13 @@ namespace WellFired.Guacamole.Image
         {
             return new ImageSource(new ImageShapeDefinition { Shape = imageShape, Size = 64, Color = color, OutlineColor = outlineColor });
         }
+    }
+
+    public class HandlerProducedNoWrapperException : Exception
+    {
+    }
+
+    public class AlreadyLoadingException : Exception
+    {
     }
 }

@@ -3,27 +3,29 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using WellFired.Guacamole.Exceptions;
+using WellFired.Guacamole.FileSystem;
 
 namespace WellFired.Guacamole.Image
 {
-    internal class FileSourceHandler : ISourceHandler
+    public class FileSourceHandler : ISourceHandler
     {
         private readonly string _location;
         private readonly string _adjustedPath;
+        private readonly IFileSystem _fileSystem;
 
-        public FileSourceHandler(string location)
+        public FileSourceHandler(string location, IFileSystem fileSystem)
         {
             _location = location;
             _adjustedPath = Device.AdjustPath(_location);
+            _fileSystem = fileSystem;
         }
 
-#pragma warning disable 1998
         public async Task<IImageSourceWrapper> Handle(CancellationToken cancellationToken)
-#pragma warning restore 1998
         {
             try
             {
-                return new ImageSourceWrapper(new FileStream(_adjustedPath, FileMode.Open), ImageType.Image);
+                var stream = await _fileSystem.GetStream(_adjustedPath, FileMode.Open);
+                return new ImageSourceWrapper(stream, ImageType.Image);
             }
             catch (FileNotFoundException)
             {

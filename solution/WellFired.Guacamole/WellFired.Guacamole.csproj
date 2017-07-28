@@ -103,6 +103,8 @@
     <Compile Include="Exceptions\DataTemplateTypeIsNotBindableException.cs" />
     <Compile Include="Exceptions\TabbedPagePageShouldntAlreadyHaveBindingContext.cs" />
     <Compile Include="Extensions\DelegateExtensions.cs" />
+    <Compile Include="FileSystem\FileSystem.cs" />
+    <Compile Include="FileSystem\IFileSystem.cs" />
     <Compile Include="IApplication.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="Event\IEvent.cs" />
@@ -212,6 +214,8 @@
     <Compile Include="Views\ViewWithChildren.BindableProperties.cs" />
     <Compile Include="Views\ViewWithChildren.cs" />
     <Compile Include="Views\Window.cs" />
+    <Compile Include="WebRequestHandler\IWebRequestHandler.cs" />
+    <Compile Include="WebRequestHandler\WebRequestHandler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,16 +1,12 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using UnityEditor;
 using UnityEngine;
 using WellFired.Guacamole.Attributes;
-using WellFired.Guacamole.Image;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
 using Debug = System.Diagnostics.Debug;
-using ILogger = WellFired.Guacamole.Diagnostics.ILogger;
-using Logger = WellFired.Guacamole.Diagnostics.Logger;
 
 [assembly: CustomRenderer(typeof(ImageView), typeof(ImageViewRenderer))]
 
@@ -19,7 +15,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
     public class ImageViewRenderer : BaseRenderer
     {
         private Texture _texture;
-        private IImageSource _subscribedImageSource;
+        private readonly ImageCreatorHandler _handler = new ImageCreatorHandler();
 
         public override UISize? NativeSize
         {
@@ -29,15 +25,6 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
                 Debug.Assert(imageView != null, $"{nameof(imageView)} != null");
                 return _texture == null ? UISize.Zero : Style.CalcSize(new GUIContent(_texture)).ToUISize();
             }
-        }
-
-        public override void Create()
-        {
-            base.Create();
-			
-            var imageView = (ImageView)Control;
-            if (imageView.ImageSource != null)
-                imageView.ImageSource.OnComplete += OnLoadComplete;
         }
 
         public override void Render(UIRect renderRect)
@@ -50,7 +37,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
                 GUI.DrawTexture(UnityRect, _texture, ScaleMode.ScaleToFit);
         }
 
-        public override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        public override async void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(sender, e);
 
@@ -59,36 +46,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
             if (e.PropertyName != ImageView.ImageSourceProperty.PropertyName)
                 return;
 
-            if (imageView.ImageSource == null)
-                return;
-
-            _texture = null;
-            if(_subscribedImageSource != null)
-                _subscribedImageSource.OnComplete -= OnLoadComplete;
-            _subscribedImageSource = imageView.ImageSource; 
-            imageView.ImageSource.OnComplete += OnLoadComplete;
-            
-            try
-            {
-                imageView.ImageSource.Load();
-            }
-            catch (Exception ex)
-            {
-                Device.ExecuteOnMainThread(() => { throw ex; });
-            }
-        }
-
-        private async void OnLoadComplete(LoadedImage image)
-        {
-            var imageView = (ImageView)Control;
-            _texture = await imageView.ImageSource.ToUnityTexture(image);
-            Control.InvalidateRectRequest();
-        }
-
-        public override void RecycleWithNewBindingContext()
-        {
-            base.RecycleWithNewBindingContext();
-            _texture = null;
+            _texture = await _handler.UpdatedImageSource(imageView.ImageSource);
         }
     }
 }
