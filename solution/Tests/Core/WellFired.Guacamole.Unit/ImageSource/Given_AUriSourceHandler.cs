@@ -2,7 +2,6 @@
 using NSubstitute;
 using NUnit.Framework;
 using System.IO;
-using System.Security.Policy;
 using System.Threading;
 using System.Threading.Tasks;
 using NSubstitute.Core;
@@ -50,27 +49,28 @@ namespace WellFired.Guacamole.Unit.ImageSource
             // Testing the cancellation Behaviour, we create a fake Task that waits 4ms before returning a fake stream
             // We also create a second task that waits 1ms and cancels the token.
             var cancellationTokenSource = new CancellationTokenSource();
-
-            var cancellationTask = TaskEx.Run(async () => {
-                await TaskEx.Delay(1, cancellationTokenSource.Token);
-                cancellationTokenSource.Cancel();
-            }, cancellationTokenSource.Token);
             
             var webRequestHandler = Substitute.For<IWebRequestHandler>();
             webRequestHandler.GetStream(Arg.Any<Uri>(), cancellationTokenSource.Token).Returns(ReturnMockedDataAfterLongTime);
             
             var uriSourceHandler = new UriSourceHandler(new Uri("http://www.wellfired.com"), webRequestHandler);
-
+            IImageSourceWrapper wrapper = null;
+            
             Assert.That(() =>
             {
                 AsyncHelpers.RunSync(() =>
                 {
                     return TaskEx.WhenAll(
-                        TaskEx.Run(() => uriSourceHandler.Handle(cancellationTokenSource.Token), cancellationTokenSource.Token),
-                        TaskEx.Run(() => cancellationTask, cancellationTokenSource.Token)
+                        TaskEx.Run(async () => wrapper = await uriSourceHandler.Handle(cancellationTokenSource.Token), cancellationTokenSource.Token),
+                        TaskEx.Run(async () => {
+                            await TaskEx.Delay(1, cancellationTokenSource.Token);
+                            cancellationTokenSource.Cancel();
+                        }, cancellationTokenSource.Token)
                     );
                 });
             }, Throws.InstanceOf<TaskCanceledException>());
+            
+            Assert.That(wrapper, Is.Null);
         }
 
         private static async Task<Stream> MockedData(CallInfo arg)
@@ -82,7 +82,9 @@ namespace WellFired.Guacamole.Unit.ImageSource
         private static async Task<Stream> ReturnMockedDataAfterLongTime(CallInfo arg)
         {
             var cancellationToken = (CancellationToken)arg[1];
-            await TaskEx.Delay(100, cancellationToken);
+            for(var index = 0; index <= 10; index++)
+                await TaskEx.Delay(1, cancellationToken);
+            
             return new MemoryStream(new byte[] { 23, 44 });
         }
     }

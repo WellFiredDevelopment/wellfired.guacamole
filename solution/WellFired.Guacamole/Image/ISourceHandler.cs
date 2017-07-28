@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace WellFired.Guacamole.Image
 {
-    internal interface ISourceHandler
+    public interface ISourceHandler
     {
         Task<IImageSourceWrapper> Handle(CancellationToken cancellationToken);
     }

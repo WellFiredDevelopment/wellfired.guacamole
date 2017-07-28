@@ -24,7 +24,7 @@ namespace WellFired.Guacamole.Image
         {
             try
             {
-                var stream = await _fileSystem.GetStream(_adjustedPath, FileMode.Open);
+                var stream = await _fileSystem.GetStream(_adjustedPath, FileMode.Open, cancellationToken);
                 return new ImageSourceWrapper(stream, ImageType.Image);
             }
             catch (FileNotFoundException)

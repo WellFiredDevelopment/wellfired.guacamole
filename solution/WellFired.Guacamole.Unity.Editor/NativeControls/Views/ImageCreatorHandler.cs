@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using WellFired.Guacamole.Image;
 using WellFired.Guacamole.Unity.Editor.Extensions;
+using Logger = WellFired.Guacamole.Unity.Editor.Diagnostics.Logger;
 
 namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 {
@@ -20,8 +22,17 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
             }
             catch (Exception ex)
             {
-                Device.ExecuteOnMainThread(() => { throw ex; });
-                return null;
+                try
+                {
+                    Logger.UnityLogger.LogMessage($"Failed to load Image {imageSource} Loaded default instead. Exception was {ex}");
+                    var data = await ImageShapeDefinition.DefaultHandler.Handle(new CancellationToken());
+                    return await imageSource.ToUnityTexture(LoadedImage.From(data));
+                }
+                catch (Exception e)
+                {
+                    Device.ExecuteOnMainThread(() => { throw e; });
+                    return default(Texture2D);
+                }
             }
         }
     }
