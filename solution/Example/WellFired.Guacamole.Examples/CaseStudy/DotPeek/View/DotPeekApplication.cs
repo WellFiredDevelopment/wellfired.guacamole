@@ -3,7 +3,7 @@ using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Unity.Editor;
 
-namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek
+namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View
 {
     [UsedImplicitly]
     public class DotPeekApplication : LaunchableApplication
@@ -13,8 +13,8 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek
         private static void OpenWindow()
         {    
             Launch<DotPeekWindow>(
-                uiRect: UIRect.With(50, 50, 600, 600),
-                minSize: UISize.Of(600, 600),
+                uiRect: UIRect.With(50, 50, 400, 600),
+                minSize: UISize.Of(400, 600),
                 title: "DotPeek");
         }
     }

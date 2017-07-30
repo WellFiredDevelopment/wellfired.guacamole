@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -61,18 +61,18 @@
     <Compile Include="CaseStudy\DotPeekWithListView\DotPeekWindow.cs" />
     <Compile Include="CaseStudy\DotPeekWithListView\Model\BuildReport.cs" />
     <Compile Include="CaseStudy\DotPeekWithListView\ViewModel\BuildReport.cs" />
-    <Compile Include="CaseStudy\DotPeek\DotPeekApplication.cs" />
-    <Compile Include="CaseStudy\DotPeek\DotPeekPage.cs" />
-    <Compile Include="CaseStudy\DotPeek\DotPeekWindow.cs" />
-    <Compile Include="CaseStudy\DotPeek\Layout\LayoutFactory.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\ModelGenerator.cs" />
     <Compile Include="CaseStudy\DotPeek\Model\BuildOverview.cs" />
     <Compile Include="CaseStudy\DotPeek\Model\BuildReport.cs" />
     <Compile Include="CaseStudy\DotPeek\Model\BuildReportDiff.cs" />
     <Compile Include="CaseStudy\DotPeek\Model\FileSize.cs" />
-    <Compile Include="CaseStudy\DotPeek\Styles\Label.cs" />
-    <Compile Include="CaseStudy\DotPeek\UIElementFactory\DotPeekLabelFactory.cs" />
-    <Compile Include="CaseStudy\DotPeek\UIElementFactory\Grid.cs" />
-    <Compile Include="CaseStudy\DotPeek\ViewModel\BuildReportDiffViewModel.cs" />
+    <Compile Include="CaseStudy\DotPeek\ViewModel\OverviewVM.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\DotPeekApplication.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\DotPeekWindow.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Layout\LayoutFactory.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\OverviewPage.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Styles\Label.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Styles\LayoutView.cs" />
     <Compile Include="CaseStudy\RedditBrowser\Cells\PostCell.cs" />
     <Compile Include="CaseStudy\RedditBrowser\Model\SearchResult.cs" />
     <Compile Include="CaseStudy\RedditBrowser\RedditBrowserApplication.cs" />

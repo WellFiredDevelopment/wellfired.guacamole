@@ -2,7 +2,7 @@ using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
-namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.Layout
+namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Layout
 {
     public static class LayoutFactory
     {
@@ -10,10 +10,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.Layout
         {
             return new LayoutView
             {
-                BackgroundColor = UIColor.Grey,
                 Layout = new AdjacentLayout {Orientation = OrientationOptions.Vertical},
-                HorizontalLayout = LayoutOptions.Fill,
-                VerticalLayout = LayoutOptions.Expand,
                 Children = children
             };
         }
@@ -22,10 +19,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.Layout
         {
             return new LayoutView
             {
-                BackgroundColor = UIColor.Grey,
                 Layout = new AdjacentLayout {Orientation = OrientationOptions.Horizontal},
-                HorizontalLayout = LayoutOptions.Fill,
-                VerticalLayout = LayoutOptions.Expand,
                 Children = children
             };
         }

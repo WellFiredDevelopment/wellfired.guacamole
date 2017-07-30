@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model
@@ -39,8 +40,12 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model
             FileHeaders
         }
 
+        public DateTime BuildTime;
+        public string CommitID;
+        public string Platform;
+        public string UnityVersion;
         public FileSize BuildSize;
-        public readonly List<BuildAssetSplit> BuildAssetSplits = new List<BuildAssetSplit>();
+        public List<BuildAssetSplit> BuildAssetSplits;
 
         public override string ToString()
         {

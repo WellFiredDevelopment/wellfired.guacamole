@@ -48,10 +48,14 @@ namespace WellFired.Guacamole.Views
 
         private void SetupChildBindingContext()
         {
+            // [DISCUSS] We currently don't support setting the bindingContext to null, though this is probably something we want to do in the future, maybe someone wants to unbind something?
+            if (BindingContext == null)
+                return;
+            
             foreach (var child in Children)
             {
                 var view = child as View;
-                if (view != null)
+                if (view != null && view.BindingContext == null)
                     view.BindingContext = BindingContext;
             }
         }

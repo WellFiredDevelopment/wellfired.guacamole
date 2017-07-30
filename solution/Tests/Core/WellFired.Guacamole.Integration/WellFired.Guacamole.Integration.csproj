@@ -62,6 +62,8 @@
     <Compile Include="View\Label\Bindable\LabelTextColorTests.cs" />
     <Compile Include="View\Label\Bindable\LabelTextTests.cs" />
     <Compile Include="View\Label\Bindable\LabelVerticalTextAlignTests.cs" />
+    <Compile Include="View\ListView\Binding\BindingTest.cs" />
+    <Compile Include="View\ListView\Binding\ContextObject.cs" />
     <Compile Include="View\NumberEntry\Bindable\NumberEntryContextObject.cs" />
     <Compile Include="View\NumberEntry\Bindable\NumberEntryHorizontalTextAlignTests.cs" />
     <Compile Include="View\NumberEntry\Bindable\NumberEntryNumberTests.cs" />
@@ -96,6 +98,8 @@
     <Compile Include="View\View\Bindable\OutlineColorTests.cs" />
     <Compile Include="View\View\Bindable\PaddingTests.cs" />
     <Compile Include="View\View\Bindable\VerticalLayoutTests.cs" />
+    <Compile Include="View\View\Binding\BindingTests.cs" />
+    <Compile Include="View\View\Binding\ContextObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="NSubstitute, Version=2.0.3.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca">

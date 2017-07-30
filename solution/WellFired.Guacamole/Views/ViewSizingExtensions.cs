@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Layouts;
