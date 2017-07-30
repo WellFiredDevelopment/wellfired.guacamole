@@ -59,6 +59,7 @@ namespace WellFired.Guacamole.Examples.Intermediate.Sorting
             Content = new LayoutView
             {
                 HorizontalLayout = LayoutOptions.Fill,
+                VerticalLayout = LayoutOptions.Fill,
                 Layout = AdjacentLayout.Of(OrientationOptions.Vertical),
                 Children = {
                     buttonView,

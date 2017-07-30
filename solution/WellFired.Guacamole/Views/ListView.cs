@@ -55,7 +55,9 @@ namespace WellFired.Guacamole.Views
             _activeEntries.Clear();
             _visualDataSet = new List<int>();
             ReCalculateTotalContentSize();
-            CalculateVisualDataSet();
+            
+            if (TotalContentSize > 0)
+                CalculateVisualDataSet();
         }
 
         protected override void ItemSourceCleared()

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Collection;
 using WellFired.Guacamole.Examples.Intermediate.Sorting.Helper;
@@ -47,12 +48,17 @@ namespace WellFired.Guacamole.Examples.Intermediate.Sorting.ViewModel
 
         public Breakdown()
         {
-            // Here we simply build some mock data.
-            var random = new Random(DateTime.Now.Millisecond);
-            for (var n = 0; n < 100000; n++)
-                _models.Add(new BuiltAssetData(BuiltAssetRandomizer.Create(random)));
+            TaskEx.Run(() =>
+            {
+                // Here we simply build some mock data.
+                var random = new Random(DateTime.Now.Millisecond);
+                for (var n = 0; n < 100000; n++)
+                    _models.Add(new BuiltAssetData(BuiltAssetRandomizer.Create(random)));
+                
+                Device.ExecuteOnMainThread(() => DisplayList = new List<BuiltAssetData>(_models));
+            });
             
-            DisplayList = new List<BuiltAssetData>(_models);
+            DisplayList = new List<BuiltAssetData>();
             SortByPath = new Command { ExecuteAction = () => DoSortByPath() };
             SortByBefore = new Command { ExecuteAction = () => DoSortByBefore() };
             SortByAfter = new Command { ExecuteAction = () => DoSortByAfter() };
@@ -60,23 +66,44 @@ namespace WellFired.Guacamole.Examples.Intermediate.Sorting.ViewModel
 
         private void DoSortByPath()
         {
-            // We do the sort in place because doing this and creating a list duplicate is faster than using OrderBy, and we have 100,000 entries
-            _models.Sort((a, b) => string.Compare(a.Path, b.Path, StringComparison.Ordinal));
-            DisplayList = _models.ToList();
+            TaskEx.Run(() =>
+            {
+                SortByPath.CanExecute = false;
+                _models.Sort((a, b) => string.Compare(a.Path, b.Path, StringComparison.Ordinal));
+                Device.ExecuteOnMainThread(() =>
+                {
+                    DisplayList = _models.ToList();
+                    SortByPath.CanExecute = true;
+                });
+            });
         }
 
         private void DoSortByBefore()
         {
-            // We do the sort in place because doing this and creating a list duplicate is faster than using OrderBy, and we have 100,000 entries
-            _models.Sort((a, b) => a.BeforeSize.CompareTo(b.BeforeSize));
-            DisplayList = _models.ToList();
+            TaskEx.Run(() =>
+            {
+                SortByBefore.CanExecute = false;
+                _models.Sort((a, b) => a.BeforeSize.CompareTo(b.BeforeSize));
+                Device.ExecuteOnMainThread(() =>
+                {
+                    DisplayList = _models.ToList();
+                    SortByBefore.CanExecute = true;
+                });
+            });
         }
 
         private void DoSortByAfter()
         {
-            // We do the sort in place because doing this and creating a list duplicate is faster than using OrderBy, and we have 100,000 entries
-            _models.Sort((a, b) => a.AfterSize.CompareTo(b.AfterSize));
-            DisplayList = _models.ToList();
+            TaskEx.Run(() =>
+            {
+                SortByAfter.CanExecute = false;
+                _models.Sort((a, b) => a.AfterSize.CompareTo(b.AfterSize));
+                Device.ExecuteOnMainThread(() =>
+                {
+                    DisplayList = _models.ToList();
+                    SortByAfter.CanExecute = true;
+                });
+            });
         }
     }
 }
