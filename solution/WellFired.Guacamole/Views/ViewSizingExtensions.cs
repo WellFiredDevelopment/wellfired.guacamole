@@ -62,9 +62,6 @@ namespace WellFired.Guacamole.Views
             if (content != null)
                 defaultSize = content.RectRequest.Size;
 
-            defaultSize.Width += view.Padding.Width;
-            defaultSize.Height += view.Padding.Height;
-
             // If the native renderer returns null, we simply use our own layoutting system.
             var nativeSize = AdjustForPadding(view.HorizontalLayout, view.VerticalLayout, view.Padding, view.NativeRenderer?.NativeSize ?? defaultSize);
 

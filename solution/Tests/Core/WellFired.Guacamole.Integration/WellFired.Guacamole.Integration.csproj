@@ -33,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Layouts\Adjacent\Given_AnAdjacentLayoutWithChildrenWithPadding.cs" />
     <Compile Include="Layouts\Adjacent\Given_AnAdjacentLayoutWithHorizontalAlign_AndSpacing.cs" />
     <Compile Include="Layouts\Adjacent\Given_AnAdjacentLayoutWithHorizontalAlign.cs" />
     <Compile Include="Layouts\Adjacent\Given_AnAdjacentLayoutWithMultipleChildrenWithCenterAlign.cs" />
