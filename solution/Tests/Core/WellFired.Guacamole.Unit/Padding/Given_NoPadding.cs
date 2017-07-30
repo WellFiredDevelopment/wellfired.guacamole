@@ -15,7 +15,7 @@ namespace WellFired.Guacamole.Unit.Padding
             const LayoutOptions horizontalLayout = LayoutOptions.Expand;
             const LayoutOptions verticalLayout = LayoutOptions.Expand;
             
-            var returnedRect = ViewSizingExtensions.AdjustForPadding(horizontalLayout, verticalLayout, padding, size);
+            var returnedRect = ViewPaddingCalculation.AdjustForPadding(horizontalLayout, verticalLayout, padding, size);
             
             Assert.That(returnedRect, Is.EqualTo(UISize.Of(100, 100)));
         }
@@ -28,7 +28,7 @@ namespace WellFired.Guacamole.Unit.Padding
             const LayoutOptions horizontalLayout = LayoutOptions.Expand;
             const LayoutOptions verticalLayout = LayoutOptions.Fill;
             
-            var returnedRect = ViewSizingExtensions.AdjustForPadding(horizontalLayout, verticalLayout, padding, size);
+            var returnedRect = ViewPaddingCalculation.AdjustForPadding(horizontalLayout, verticalLayout, padding, size);
             
             Assert.That(returnedRect, Is.EqualTo(UISize.Of(100, 100)));
         }
@@ -41,7 +41,7 @@ namespace WellFired.Guacamole.Unit.Padding
             const LayoutOptions horizontalLayout = LayoutOptions.Fill;
             const LayoutOptions verticalLayout = LayoutOptions.Expand;
             
-            var returnedRect = ViewSizingExtensions.AdjustForPadding(horizontalLayout, verticalLayout, padding, size);
+            var returnedRect = ViewPaddingCalculation.AdjustForPadding(horizontalLayout, verticalLayout, padding, size);
             
             Assert.That(returnedRect, Is.EqualTo(UISize.Of(100, 100)));
         }
@@ -54,7 +54,7 @@ namespace WellFired.Guacamole.Unit.Padding
             const LayoutOptions horizontalLayout = LayoutOptions.Fill;
             const LayoutOptions verticalLayout = LayoutOptions.Fill;
             
-            var returnedRect = ViewSizingExtensions.AdjustForPadding(horizontalLayout, verticalLayout, padding, size);
+            var returnedRect = ViewPaddingCalculation.AdjustForPadding(horizontalLayout, verticalLayout, padding, size);
             
             Assert.That(returnedRect, Is.EqualTo(UISize.Of(100, 100)));
         }
@@ -67,7 +67,7 @@ namespace WellFired.Guacamole.Unit.Padding
             const LayoutOptions horizontalLayout = LayoutOptions.Center;
             const LayoutOptions verticalLayout = LayoutOptions.Center;
             
-            var returnedRect = ViewSizingExtensions.AdjustForPadding(horizontalLayout, verticalLayout, padding, size);
+            var returnedRect = ViewPaddingCalculation.AdjustForPadding(horizontalLayout, verticalLayout, padding, size);
             
             Assert.That(returnedRect, Is.EqualTo(UISize.Of(100, 100)));
         }

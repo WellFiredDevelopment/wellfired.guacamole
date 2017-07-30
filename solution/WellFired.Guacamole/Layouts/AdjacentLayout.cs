@@ -89,7 +89,7 @@ namespace WellFired.Guacamole.Layouts
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-
+            
             return UIRect.With(0, 0, Math.Max(totalWidth, minSize.Width), Math.Max(totalHeight, minSize.Height));
         }
 

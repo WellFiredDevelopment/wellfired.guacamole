@@ -50,7 +50,12 @@ namespace WellFired.Guacamole.Views
         {
             var canLayout = view as ICanLayout;
             if (canLayout != null)
-                return canLayout.Layout.CalculateValidRectRequest(canLayout.Children, view.MinSize);
+            {
+                var rectRequest = canLayout.Layout.CalculateValidRectRequest(canLayout.Children, view.MinSize);
+                var totalSize = UISize.Of(rectRequest.Width, rectRequest.Height);
+                var adjustedForPadding = ViewPaddingCalculation.AdjustForPadding(view.HorizontalLayout, view.VerticalLayout, view.Padding, totalSize);
+                return UIRect.With(rectRequest.X, rectRequest.Y, adjustedForPadding.Width, adjustedForPadding.Height);
+            }
 
             var listView = view as IListView;
             if (listView != null)
@@ -63,7 +68,7 @@ namespace WellFired.Guacamole.Views
                 defaultSize = content.RectRequest.Size;
 
             // If the native renderer returns null, we simply use our own layoutting system.
-            var nativeSize = AdjustForPadding(view.HorizontalLayout, view.VerticalLayout, view.Padding, view.NativeRenderer?.NativeSize ?? defaultSize);
+            var nativeSize = ViewPaddingCalculation.AdjustForPadding(view.HorizontalLayout, view.VerticalLayout, view.Padding, view.NativeRenderer?.NativeSize ?? defaultSize);
 
             // Constrain
             nativeSize = ConstrainUnder(nativeSize, view.MinSize);
@@ -206,7 +211,10 @@ namespace WellFired.Guacamole.Views
 
             return requestedSize;
         }
+    }
 
+    public class ViewPaddingCalculation
+    {
         public static UISize AdjustForPadding(LayoutOptions horizontalLayout, LayoutOptions verticalLayout, UIPadding padding, UISize size)
         {
             var flexibleWidth = horizontalLayout == LayoutOptions.Expand;
