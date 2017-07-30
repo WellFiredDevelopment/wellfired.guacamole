@@ -66,7 +66,7 @@ namespace WellFired.Guacamole.Views
             defaultSize.Height += view.Padding.Height;
 
             // If the native renderer returns null, we simply use our own layoutting system.
-            var nativeSize = view.NativeRenderer?.NativeSize ?? defaultSize;
+            var nativeSize = AdjustForPadding(view.HorizontalLayout, view.VerticalLayout, view.Padding, view.NativeRenderer?.NativeSize ?? defaultSize);
 
             // Constrain
             nativeSize = ConstrainUnder(nativeSize, view.MinSize);
@@ -208,6 +208,16 @@ namespace WellFired.Guacamole.Views
                 requestedSize.Height = size.Height;
 
             return requestedSize;
+        }
+
+        public static UISize AdjustForPadding(LayoutOptions horizontalLayout, LayoutOptions verticalLayout, UIPadding padding, UISize size)
+        {
+            var flexibleWidth = horizontalLayout == LayoutOptions.Expand;
+            var flexibleHeight = verticalLayout == LayoutOptions.Expand;
+
+            return UISize.Of(
+                flexibleWidth ? size.Width + padding.Right + padding.Left : size.Width,
+                flexibleHeight ? size.Height + padding.Bottom + padding.Top : size.Height);
         }
     }
 }

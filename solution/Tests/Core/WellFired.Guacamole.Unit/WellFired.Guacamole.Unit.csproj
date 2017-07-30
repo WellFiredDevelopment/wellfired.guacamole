@@ -92,6 +92,8 @@
     <Compile Include="ImageSource\Given_AnImageSource_FromFile.cs" />
     <Compile Include="ImageSource\Given_AnImageSource_FromUri.cs" />
     <Compile Include="ImageSource\Given_AUriSourceHandler.cs" />
+    <Compile Include="Padding\Given_NoPadding.cs" />
+    <Compile Include="Padding\Given_Padding.cs" />
     <Compile Include="Vds\Given_AVds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Styling\Given_ATrigger.cs" />

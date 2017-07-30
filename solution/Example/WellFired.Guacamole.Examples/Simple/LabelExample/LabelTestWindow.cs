@@ -11,7 +11,7 @@ namespace WellFired.Guacamole.Examples.Simple.LabelExample
 			: base(logger, persistantData)
 		{
 			Padding = UIPadding.Of(5);
-		    Content = new Label { Text = "Sausages" };
+		    Content = new Label { Padding = UIPadding.Of(5), Text = "Sausages" };
 		}
 	}
 }
