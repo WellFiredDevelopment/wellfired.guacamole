@@ -51,6 +51,9 @@
     <Compile Include="Layouts\Simple\Given_AWindowWithContent.cs" />
     <Compile Include="Layouts\Simple\Given_AWindowWithPadding_And_AView.cs" />
     <Compile Include="Layouts\Simple\Given_AWindowWithPadding_And_Content.cs" />
+    <Compile Include="ListView\Horizontal\Given_AListView.cs" />
+    <Compile Include="ListView\ReOrdered\Given_AListView.cs" />
+    <Compile Include="ListView\Vertical\Given_AListView.cs" />
     <Compile Include="View\Button\Bindable\ButtonButtonPressedTests.cs" />
     <Compile Include="View\Button\Bindable\ButtonContextObject.cs" />
     <Compile Include="View\Button\Bindable\ButtonHorizontalTextAlignTests.cs" />

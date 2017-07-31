@@ -96,7 +96,8 @@ namespace WellFired.Guacamole.Views
             InvalidateRectRequest();
             var viewSize = SizingHelper.GetImportantSize(Orientation, RectRequest);
             CanScroll = viewSize < TotalContentSize;
-            ScrollOffset = ScrollOffset; // We do this here to reclamp the scroll value incase we've pulled the bottom of a listView too far.
+            if(CanScroll)
+                ScrollOffset = ScrollOffset; // We do this here to reclamp the scroll value incase we've pulled the bottom of a listView too far.
             CalculateVisualDataSet();
 
             if (_hasBeenLayouted || _cachedScrollTo == null) 

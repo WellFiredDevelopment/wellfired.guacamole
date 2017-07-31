@@ -10,7 +10,7 @@ namespace WellFired.Guacamole.Integration.Layouts.Simple
         [Test]
         public void When_TheListViewIsLayout_Then_LayoutIsSuccessful()
         {
-            var listView = new ListView { ItemSource = ItemSource.From("One", "Two", "Three") };
+            var listView = new Views.ListView { ItemSource = ItemSource.From("One", "Two", "Three") };
             ViewSizingExtensions.DoSizingAndLayout(listView, UIRect.With(100, 30));
             Assert.That(listView.RectRequest, Is.EqualTo(UIRect.With(100, 30)));
         }

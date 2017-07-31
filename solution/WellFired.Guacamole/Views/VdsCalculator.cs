@@ -29,12 +29,16 @@ namespace WellFired.Guacamole.Views
             var maxIndex = (int)Math.Floor((virtualScrollPosition + sizeX) / (deltaX + variance)); // Here we add a small delta so we don't overun our buffer and select n + 1 visible elements
      
             var contentSizeX = estimatedContentSize;
-            var max = (int)Math.Floor(contentSizeX * 2.0f / (deltaX + 0.1f));
+            var max = (int)Math.Floor(contentSizeX * 2.0f / (deltaX + variance));
+
+            var maxPossibleIndex = estimatedContentSize / estimatedElementSize - 1;
      
             if (minIndex < 0)
                 minIndex = 0;
             if (maxIndex > max)
                 maxIndex = max;
+            if (maxIndex > maxPossibleIndex)
+                maxIndex = maxPossibleIndex;
      
             for (var iterationIndex = minIndex; iterationIndex <= maxIndex; iterationIndex++)
                 visibleDataSet.Add(iterationIndex);

@@ -161,8 +161,8 @@ namespace WellFired.Guacamole.Views
             set
             {
                 var clampedValue = ListViewHelper.ClampScroll(this, value);
-                SetValue(ScrollOffsetProperty, clampedValue);
-                CalculateVisualDataSet();
+                if(SetValue(ScrollOffsetProperty, clampedValue))
+                    CalculateVisualDataSet();
             }
         }
 

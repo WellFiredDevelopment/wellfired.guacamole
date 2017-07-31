@@ -67,5 +67,13 @@ namespace WellFired.Guacamole.Views
             foreach (var child in Children)
                 (child as View)?.SetStyleDictionary(styleDictionary);
         }
+
+        public override void ResetBindingContext(INotifyPropertyChanged newBindingContext)
+        {
+            base.ResetBindingContext(newBindingContext);
+
+            foreach (var child in Children)
+                (child as View)?.ResetBindingContext(newBindingContext);
+        }
     }
 }

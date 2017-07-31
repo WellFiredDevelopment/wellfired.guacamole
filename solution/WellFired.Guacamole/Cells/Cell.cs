@@ -14,14 +14,14 @@ namespace WellFired.Guacamole.Cells
         
         public virtual void RecycleWithNewBindingContext()
         {
-            NativeRenderer.RecycleWithNewBindingContext();
+            NativeRenderer?.RecycleWithNewBindingContext();
         }
 
         public void ResetBindingContext(INotifyPropertyChanged notifyPropertyChanged)
         {
             BindingContext = notifyPropertyChanged;
             if(Content != null)
-                ((View)Content).BindingContext = notifyPropertyChanged;
+                ((View)Content).ResetBindingContext(notifyPropertyChanged);
         }
     }
 }

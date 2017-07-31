@@ -11,7 +11,6 @@ namespace WellFired.Guacamole.DataBinding
 		private PropertyInfo _propertyInfo;
 		private MethodInfo _propertySetMethod;
 		private string _targetProperty;
-		private object _value;
 		public BindableProperty Property;
 
 		public string TargetProperty
@@ -24,29 +23,7 @@ namespace WellFired.Guacamole.DataBinding
 			}
 		}
 
-		public object Value
-		{
-			set
-			{
-				if (Equals(_value, value))
-					return;
-
-				_value = BindableContextConverter.From(value, Property);
-
-				switch (Property.BindingMode)
-				{
-					case BindingMode.OneWay:
-						return;
-					case BindingMode.TwoWay:
-						break;
-					default:
-						throw new ArgumentOutOfRangeException();
-				}
-
-				_propertySetMethod?.Invoke(Object, new[] {value});
-			}
-			get { return _value; }
-		}
+		public object Value { private set; get; }
 
 		public INotifyPropertyChanged Object
 		{
@@ -77,6 +54,37 @@ namespace WellFired.Guacamole.DataBinding
 		public object GetValue()
 		{
 			return _propertyGetMethod == null ? Value : _propertyGetMethod?.Invoke(Object, null);
+		}
+
+		public bool SetValueFromDest(object value)
+		{
+			if (Equals(Value, value))
+				return false;
+			
+			Value = BindableContextConverter.From(value, Property);
+
+			switch (Property.BindingMode)
+			{
+				case BindingMode.OneWay:
+					return false;
+				case BindingMode.TwoWay:
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
+
+			_propertySetMethod?.Invoke(Object, new[] {value});
+			return true;
+		}
+
+		public bool SetValueFromSource(object value)
+		{
+			if (Equals(Value, value))
+				return false;
+
+			Value = BindableContextConverter.From(value, Property);
+			_propertySetMethod?.Invoke(Object, new[] {value});
+			return true;
 		}
 	}
 

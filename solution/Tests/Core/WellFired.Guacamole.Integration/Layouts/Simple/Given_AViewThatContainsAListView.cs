@@ -10,7 +10,7 @@ namespace WellFired.Guacamole.Integration.Layouts.Simple
         [Test]
         public void When_TheListViewIsLayout_Then_LayoutIsSuccessful()
         {
-            var listView = new ListView {
+            var listView = new Views.ListView {
                 EntrySize = 20,
                 ItemSource = ItemSource.From("One", "Two", "Three")
             };
