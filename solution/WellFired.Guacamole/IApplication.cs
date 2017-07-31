@@ -1,12 +1,10 @@
-﻿using WellFired.Guacamole.Event;
-
-namespace WellFired.Guacamole
+﻿namespace WellFired.Guacamole
 {
 	public interface IApplication
 	{
+		IWindow MainWindow { get; }
 		void Teardown();
 		bool IsRunning { get; }
-		void RaiseEventFor(string controlId, IEvent raisedEvent);
 		void Update();
 	}
 }

@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,13 +33,16 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AutomationLauncher.cs" />
-    <Compile Include="IAutomationLauncher.cs" />
+    <Compile Include="Extensions\Application.cs" />
+    <Compile Include="Extensions\GuacamoleWindow.cs" />
+    <Compile Include="Extensions\View.cs" />
+    <Compile Include="IAutomation.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AsyncBridge.Net35">

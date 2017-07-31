@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using WellFired.Guacamole.Automation.Extensions;
 using WellFired.Guacamole.Event;
 
 namespace WellFired.Guacamole.Automation.UnityEditor
@@ -14,18 +15,24 @@ namespace WellFired.Guacamole.Automation.UnityEditor
 			return _application;
 		}
 
-		public Task Click(string viewId)
+		public async Task Click(string viewId)
 		{
 			_application.RaiseEventFor(viewId, new ClickEvent { Button = 0 });
 			Device.ExecuteOnMainThread(_application.Update);
-			return TaskEx.Delay(100); // Artificial delay to simulate typing
+			await TaskEx.Delay(100); // Artificial delay to simulate typing
 		}
 
-		public Task Type(string viewId, char key)
+		public async Task Type(string viewId, char key)
 		{
 			_application.RaiseEventFor(viewId, new TypeEvent { Key = key });
 			Device.ExecuteOnMainThread(_application.Update);
-			return TaskEx.Delay(100); // Artificial delay to simulate typing
+			await TaskEx.Delay(100); // Artificial delay to simulate typing
+		}
+
+		public async Task Type(string viewId, string message)
+		{
+			foreach (var character in message)
+				await Type(viewId, character);
 		}
 	}
 }

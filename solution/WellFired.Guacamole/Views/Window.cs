@@ -61,11 +61,6 @@ namespace WellFired.Guacamole.Views
 		    if (e.PropertyName == BindingContextProperty.PropertyName)
 			    view.BindingContext = BindingContext;
 		}
-
-	    public void RaiseEventFor(string controlId, IEvent raisedEvent)
-	    {
-	        throw new System.NotImplementedException();
-	    }
 		
 		public void SetContent(IView content)
 		{

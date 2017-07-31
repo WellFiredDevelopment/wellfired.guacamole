@@ -4,7 +4,7 @@ using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
-namespace WellFired.Guacamole.Unity.Editor.Tests.Applications.Empty
+namespace WellFired.Guacamole.Unity.Editor.Unit.Applications.Empty
 {
 	[UsedImplicitly]
 	public class EmptyWindow : Window

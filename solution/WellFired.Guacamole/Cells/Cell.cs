@@ -16,12 +16,5 @@ namespace WellFired.Guacamole.Cells
         {
             NativeRenderer?.RecycleWithNewBindingContext();
         }
-
-        public void ResetBindingContext(INotifyPropertyChanged notifyPropertyChanged)
-        {
-            BindingContext = notifyPropertyChanged;
-            if(Content != null)
-                ((View)Content).ResetBindingContext(notifyPropertyChanged);
-        }
     }
 }

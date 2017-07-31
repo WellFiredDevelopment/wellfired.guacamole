@@ -25,8 +25,5 @@ namespace WellFired.Guacamole
 
 		[PublicAPI]
 		void Launch(IInitializationContext initializationContext);
-
-		[PublicAPI]
-		void RaiseEventFor(string controlId, IEvent raisedEvent);
 	}
 }

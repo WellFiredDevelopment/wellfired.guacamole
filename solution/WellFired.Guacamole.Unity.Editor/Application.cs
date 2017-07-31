@@ -11,6 +11,7 @@ namespace WellFired.Guacamole.Unity.Editor
 	[Serializable]
 	public class Application : IApplication
 	{
+		public IWindow MainWindow => _mainWindow;
 		[SerializeField] private GuacamoleWindow _mainWindow;
 		public bool IsRunning => _mainWindow != null;
 
@@ -49,12 +50,7 @@ namespace WellFired.Guacamole.Unity.Editor
 
 		public void Teardown()
 		{
-			_mainWindow.Close();
-		}
-
-		public void RaiseEventFor(string controlId, IEvent raisedEvent)
-		{
-			_mainWindow.RaiseEventFor(controlId, raisedEvent);
+			_mainWindow.CloseAfterNextUpdate = true;
 		}
 
 		public void Update()

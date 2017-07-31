@@ -21,9 +21,11 @@ namespace WellFired.Guacamole.Unity.Editor
 		[SerializeField] private ApplicationInitializationContextScriptableObject _applicationInitializationContextScriptableObject;
 		[SerializeField] private Window _window;
 
-		private System.Exception _exception;
+		private Exception _exception;
 		private float _prevLayoutTime;
 		private const float MaxLayoutInterval = 1.0f / 30.0f;
+
+		public bool CloseAfterNextUpdate { get; set; }
 
 		private ApplicationInitializationContextScriptableObject ApplicationInitializationContextScriptableObject
 		{
@@ -107,6 +109,12 @@ namespace WellFired.Guacamole.Unity.Editor
 
 		private void Update()
 		{
+			if (CloseAfterNextUpdate)
+			{
+				Close();
+				return;
+			}
+			
 			if (_exception != null)
 			{
 				Close();
@@ -191,11 +199,6 @@ namespace WellFired.Guacamole.Unity.Editor
 
 			if (_window == null)
 				throw new GuacamoleWindowCantBeCreated();
-		}
-
-		public void RaiseEventFor(string controlId, IEvent raisedEvent)
-		{
-			MainContent.RaiseEventFor(controlId, raisedEvent);
 		}
 
 		public bool MatchesMainContent(Type mainContent)

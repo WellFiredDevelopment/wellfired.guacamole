@@ -1,7 +1,7 @@
 ﻿using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Types;
 
-namespace WellFired.Guacamole.Unity.Editor.Tests.Applications.Empty
+namespace WellFired.Guacamole.Unity.Editor.Unit.Applications.Empty
 {
 	[UsedImplicitly]
 	public class EmptyApplication : LaunchableApplication
