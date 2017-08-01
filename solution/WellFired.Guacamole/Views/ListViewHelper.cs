@@ -119,7 +119,7 @@ namespace WellFired.Guacamole.Views
                         rectRequest.Height = listView.RectRequest.Height;
                         contentRectRequest.Height = listView.RectRequest.Height;
                     }
-                    if (child.VerticalLayout == LayoutOptions.Fill)
+                    if (child.VerticalLayout == LayoutOptions.Expand)
                     {
                         if(rectRequest.Height > listView.RectRequest.Height)
                             rectRequest.Height = listView.RectRequest.Height;

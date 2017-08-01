@@ -55,9 +55,13 @@ namespace WellFired.Guacamole.Views
             _activeEntries.Clear();
             _visualDataSet = new List<int>();
             ReCalculateTotalContentSize();
+
+            if (TotalContentSize <= 0) 
+                return;
             
-            if (TotalContentSize > 0)
-                CalculateVisualDataSet();
+            var viewSize = SizingHelper.GetImportantSize(Orientation, RectRequest);
+            CanScroll = viewSize < TotalContentSize;
+            CalculateVisualDataSet();
         }
 
         protected override void ItemSourceCleared()
