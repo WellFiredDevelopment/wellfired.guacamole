@@ -69,22 +69,22 @@ namespace WellFired.Guacamole.Views
             }
         }
 
-        public static float ClampScroll(IListView listView, float value)
+        public static float ClampScroll(int numberOfVisibleEntries, int spacing, float totalContentSize, float entrySize, float value)
         {
             if (value > 0.0f)
                 return 0.0f;
             
-            var maxValue = MaxScrollFor(listView);
+            var maxValue = MaxScrollFor(numberOfVisibleEntries, spacing, totalContentSize, entrySize);
             if (value < -maxValue)
                 return -maxValue;
 
             return value;
         }
 
-        public static float MaxScrollFor(IListView listView)
+        public static float MaxScrollFor(int numberOfVisibleEntries, int spacing, float totalContentSize, float entrySize)
         {
-            var visibleSizeWithSpacing = (listView.NumberOfVisibleEntries - 1) * listView.Spacing;
-            return listView.TotalContentSize - (listView.NumberOfVisibleEntries * listView.EntrySize + visibleSizeWithSpacing);
+            var visibleSizeWithSpacing = (numberOfVisibleEntries - 1) * spacing;
+            return totalContentSize - (numberOfVisibleEntries * entrySize + visibleSizeWithSpacing);
         }
 
         public static float CorrectScroll(OrientationOptions orientation, float value)
