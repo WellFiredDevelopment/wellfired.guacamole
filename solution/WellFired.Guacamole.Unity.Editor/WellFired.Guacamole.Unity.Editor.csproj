@@ -88,6 +88,7 @@
     <Compile Include="NativeControls\Views\SliderRenderer.cs" />
     <Compile Include="NativeControls\Views\TabbedPageButtonRenderer.cs" />
     <Compile Include="NativeControls\Views\TextEntryRenderer.cs" />
+    <Compile Include="NativeControls\Views\ToggleViewRenderer.cs" />
     <Compile Include="NativeControls\Views\ViewContainerRenderer.cs" />
     <Compile Include="NativeControls\Views\ViewRenderer.cs" />
     <Compile Include="NativeControls\Views\WindowRenderer.cs" />

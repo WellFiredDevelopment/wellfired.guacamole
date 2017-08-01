@@ -157,6 +157,7 @@
     <Compile Include="Styling\Styles\ListView.cs" />
     <Compile Include="Styling\Styles\Slider.cs" />
     <Compile Include="Styling\Styles\TabbedPageButton.cs" />
+    <Compile Include="Styling\Styles\ToggleView.cs" />
     <Compile Include="Styling\Trigger.cs" />
     <Compile Include="Types\CornerMask.cs" />
     <Compile Include="Types\ItemSource.cs" />
@@ -202,6 +203,8 @@
     <Compile Include="Views\TabbedPage.cs" />
     <Compile Include="Views\TabbedPageButton.BindableProperties.cs" />
     <Compile Include="Views\TabbedPageButton.cs" />
+    <Compile Include="Views\ToggleView.BindableProperties.cs" />
+    <Compile Include="Views\ToggleView.cs" />
     <Compile Include="Views\VdsCalculator.cs" />
     <Compile Include="Views\ListViewHelper.cs" />
     <Compile Include="Views\NumberEntry.cs" />

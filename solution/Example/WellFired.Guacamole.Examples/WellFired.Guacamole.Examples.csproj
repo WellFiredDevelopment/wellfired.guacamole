@@ -82,10 +82,13 @@
     <Compile Include="CaseStudy\RedditBrowser\ViewModel\Post.cs" />
     <Compile Include="CaseStudy\RedditBrowser\ViewModel\SearchResult.cs" />
     <Compile Include="CaseStudy\Taskist\Styles\FilterCell.cs" />
+    <Compile Include="CaseStudy\Taskist\Styles\TaskCell.cs" />
     <Compile Include="CaseStudy\Taskist\TaskistApplication.cs" />
     <Compile Include="CaseStudy\Taskist\TaskistWindow.cs" />
     <Compile Include="CaseStudy\Taskist\ViewModel\Filter.cs" />
+    <Compile Include="CaseStudy\Taskist\ViewModel\Task.cs" />
     <Compile Include="CaseStudy\Taskist\View\Cells\FilterCell.cs" />
+    <Compile Include="CaseStudy\Taskist\View\Cells\TaskCell.cs" />
     <Compile Include="CaseStudy\Taskist\View\Inspector.cs" />
     <Compile Include="CaseStudy\Taskist\View\Overview.cs" />
     <Compile Include="CaseStudy\Taskist\View\TaskistMainPage.cs" />

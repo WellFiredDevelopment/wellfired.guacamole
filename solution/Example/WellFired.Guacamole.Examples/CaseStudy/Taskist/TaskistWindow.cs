@@ -16,7 +16,8 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist
             StyleDictionary = new StyleDictionary(
                 logger,
                 new Dictionary<Type, Style> {
-                    { typeof(FilterCell), Styles.FilterCell.Style }
+                    { typeof(FilterCell), Styles.FilterCell.Style },
+                    { typeof(TaskCell), Styles.TaskCell.Style }
                 }
             );
             

@@ -23,7 +23,7 @@ namespace WellFired.Guacamole.Integration.ListView.Vertical
 
             Assert.That(listView.Children.Count, Is.EqualTo(4));
 
-            Assert.That(listView.Children[0].RectRequest, Is.EqualTo(UIRect.With(0, 0, 0, 20)));
+            Assert.That(listView.Children[0].RectRequest, Is.EqualTo(UIRect.With(0, 0, 10, 20)));
             Assert.That(listView.Children[1].RectRequest, Is.EqualTo(UIRect.With(0, 20, 0, 20)));
             Assert.That(listView.Children[2].RectRequest, Is.EqualTo(UIRect.With(0, 40, 0, 20)));
             Assert.That(listView.Children[3].RectRequest, Is.EqualTo(UIRect.With(0, 60, 0, 20)));

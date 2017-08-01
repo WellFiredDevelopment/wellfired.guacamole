@@ -30,7 +30,7 @@ namespace WellFired.Guacamole.Unit.ListView
         [Test]
         public void With_MoreEntriesThanSpaceAvailable_ThenMaxScrollIsCorrect()
         {
-            var maxScroll = ListViewHelper.MaxScrollFor(20, 4);
+            var maxScroll = ListViewHelper.MaxScrollFor(4, 20);
             Assert.That(maxScroll, Is.EqualTo(16));
         }
     }
