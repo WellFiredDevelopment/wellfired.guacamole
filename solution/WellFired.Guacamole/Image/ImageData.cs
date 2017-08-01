@@ -6,6 +6,26 @@ namespace WellFired.Guacamole.Image
     public static class ImageData
     {
 	    /// <summary>
+	    /// A helpful utility method that allows us to quickly create a square texture
+	    /// </summary>
+	    /// <param name="width"></param>
+	    /// <param name="height"></param>
+	    /// <param name="backgroundColor"></param>
+	    /// <param name="outlineColor"></param>
+	    /// <returns></returns>
+	    public static UIColor[] BuildSquare(int width, int height, UIColor backgroundColor, UIColor outlineColor)
+	    {
+		    var path = new GraphicsPath();
+
+		    path.AddLine(new Vector(0, 0), new Vector(width, 0));
+		    path.AddLine(new Vector(width, 0), new Vector(width, height));
+		    path.AddLine(new Vector(width, height), new Vector(0, height));
+		    path.AddLine(new Vector(0, height), new Vector(0, 0));
+		    
+		    return path.Draw(width, height, backgroundColor, outlineColor);
+	    }
+	    
+	    /// <summary>
 	    /// This is a helpful Utility method that allows you to create a texture with rounded corners.
 	    /// </summary>
 	    /// <param name="width"></param>

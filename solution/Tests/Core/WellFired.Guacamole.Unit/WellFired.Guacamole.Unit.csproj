@@ -87,6 +87,7 @@
     <Compile Include="AdjacentLayout\Vertical\Given_AnAdjacentLayoutWithNoPadding.cs" />
     <Compile Include="AdjacentLayout\Vertical\Given_AnAdjacentLayoutWithNoSpacing.cs" />
     <Compile Include="AdjacentLayout\Vertical\AdjacentLayoutPaddingSpacing.cs" />
+    <Compile Include="Drawing\ImageData\Given_AnImageParameters.cs" />
     <Compile Include="ImageSource\Given_AFileSourceHandler.cs" />
     <Compile Include="ImageSource\Given_AnImageSource_FromFile.cs" />
     <Compile Include="ImageSource\Given_AnImageSource_FromUri.cs" />
