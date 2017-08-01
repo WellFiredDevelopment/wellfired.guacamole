@@ -124,13 +124,11 @@ namespace WellFired.Guacamole.Views
         private ICell GetNewCell(object data)
         {
             var cell = ItemTemplate == null
-                ? CellHelper.CreateDefaultCell(data, this)
-                : CellHelper.CreateCellWith(this, ItemTemplate, data, this);
+                ? CellHelper.CreateDefaultCell(data, this, StyleDictionary)
+                : CellHelper.CreateCellWith(this, ItemTemplate, data, this, StyleDictionary);
 
             if (cell == null)
                 throw new NoCompatibleCellInDataTemplate();
-
-            cell.SetStyleDictionary(StyleDictionary);
 
             var rectRequest = cell.RectRequest;
             var contentRectRequest = cell.ContentRectRequest;

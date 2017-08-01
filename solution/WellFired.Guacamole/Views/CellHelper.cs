@@ -3,13 +3,14 @@ using System.Diagnostics;
 using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Layouts;
+using WellFired.Guacamole.Styling;
 using WellFired.Guacamole.Views.BindingContexts;
 
 namespace WellFired.Guacamole.Views
 {
     internal static class CellHelper
     {
-        public static ICell CreateDefaultCell(object bindingContext, IListView container)
+        public static ICell CreateDefaultCell(object bindingContext, IListView container, IStyleDictionary styleDictionary)
         {
             var context = bindingContext as LabelCellBindingContext;
             if (context != null)
@@ -19,6 +20,7 @@ namespace WellFired.Guacamole.Views
                     Container = container
                 };
 
+                labelCell.SetStyleDictionary(styleDictionary);
                 labelCell.BindingContext = (INotifyPropertyChanged) bindingContext;
                 labelCell.Bind(LabelCell.TextProperty, "CellLabelText");
                 labelCell.Bind(Cell.IsSelectedProperty, "IsSelected", BindingMode.TwoWay);
@@ -31,6 +33,7 @@ namespace WellFired.Guacamole.Views
                 Container = container
             };
             
+            imageCell.SetStyleDictionary(styleDictionary);
             imageCell.BindingContext = bindingContext as INotifyPropertyChanged;
             imageCell.Bind(ImageCell.ImageSourceProperty, "ImageSource");
             imageCell.Bind(Cell.IsSelectedProperty, "IsSelected", BindingMode.TwoWay);
@@ -38,11 +41,12 @@ namespace WellFired.Guacamole.Views
             return imageCell;
         }
 
-        public static ICell CreateCellWith(object caller, DataTemplate itemTemplate, object bindingContext, IListView container)
+        public static ICell CreateCellWith(object caller, DataTemplate itemTemplate, object bindingContext, IListView container, IStyleDictionary styleDictionary)
         {
             var instance = itemTemplate.Create(caller);
             var bindableObject = instance;
             var cell = instance as ICell;
+            cell.SetStyleDictionary(styleDictionary);
             bindableObject.BindingContext = bindingContext as INotifyPropertyChanged;
             Debug.Assert(cell != null, "cell != null");
             cell.Container = container;
