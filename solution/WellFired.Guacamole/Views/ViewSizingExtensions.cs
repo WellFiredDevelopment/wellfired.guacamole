@@ -1,4 +1,5 @@
 using System;
+using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Layouts;
@@ -79,6 +80,8 @@ namespace WellFired.Guacamole.Views
 
         public static void AttemptToFullfillRequests(IView view, UIRect availableSpace)
         {
+            var isCell = view is ICell;
+            
             var rectRequest = view.RectRequest;
             var contentRectRequest = view.ContentRectRequest;
 
@@ -125,8 +128,11 @@ namespace WellFired.Guacamole.Views
                     throw new ArgumentOutOfRangeException();
             }
 
-            view.RectRequest = rectRequest;
-            view.ContentRectRequest = contentRectRequest;
+            if (!isCell)
+            {
+                view.RectRequest = rectRequest;
+                view.ContentRectRequest = contentRectRequest;
+            }
 
             if (view.Content != null)
                 AttemptToFullfillRequests(view.Content, UIRect.With(view.ContentRectRequest.Width, view.ContentRectRequest.Height) - view.Padding);

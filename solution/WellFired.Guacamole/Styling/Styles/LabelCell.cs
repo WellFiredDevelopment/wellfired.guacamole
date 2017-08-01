@@ -13,9 +13,7 @@ namespace WellFired.Guacamole.Styling.Styles
             Setters =
             {
                 new Setter {Property = View.BackgroundColorProperty, Value = DarkerColor},
-                new Setter {Property = View.OutlineColorProperty, Value = DarkerColor},
-                new Setter {Property = View.HorizontalLayoutProperty, Value = LayoutOptions.Expand},
-                new Setter {Property = View.VerticalLayoutProperty, Value = LayoutOptions.Expand}
+                new Setter {Property = View.OutlineColorProperty, Value = DarkerColor}
             },
             Triggers =
             {
