@@ -69,22 +69,25 @@ namespace WellFired.Guacamole.Views
             }
         }
 
-        public static float ClampScroll(int numberOfVisibleEntries, int spacing, float totalContentSize, float entrySize, float value)
+        public static float ClampScroll(int totalAvailableSpace, int totalContentSize, float value)
         {
             if (value > 0.0f)
                 return 0.0f;
             
-            var maxValue = MaxScrollFor(numberOfVisibleEntries, spacing, totalContentSize, entrySize);
+            var maxValue = MaxScrollFor(totalAvailableSpace, totalContentSize);
+
+            if (maxValue < 0.0f)
+                maxValue = 0.0f;
+            
             if (value < -maxValue)
                 return -maxValue;
 
             return value;
         }
 
-        public static float MaxScrollFor(int numberOfVisibleEntries, int spacing, float totalContentSize, float entrySize)
+        public static float MaxScrollFor(int totalAvailableSpace, int totalContentSize)
         {
-            var visibleSizeWithSpacing = (numberOfVisibleEntries - 1) * spacing;
-            return totalContentSize - (numberOfVisibleEntries * entrySize + visibleSizeWithSpacing);
+            return totalContentSize - totalAvailableSpace;
         }
 
         public static float CorrectScroll(OrientationOptions orientation, float value)
