@@ -1,8 +1,8 @@
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Examples.Intermediate.Sorting.Cells;
 using WellFired.Guacamole.Examples.Intermediate.Sorting.ViewModel;
 using WellFired.Guacamole.Layouts;
-using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.Intermediate.Sorting

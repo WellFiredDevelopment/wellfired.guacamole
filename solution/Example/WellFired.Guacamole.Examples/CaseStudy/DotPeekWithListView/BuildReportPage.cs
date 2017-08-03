@@ -1,8 +1,8 @@
 using WellFired.Guacamole.Collection;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeekWithListView.Cells;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeekWithListView.ViewModel;
-using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.DotPeekWithListView

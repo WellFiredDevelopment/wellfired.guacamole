@@ -1,5 +1,5 @@
-﻿using WellFired.Guacamole.DataBinding;
-using WellFired.Guacamole.Types;
+﻿using WellFired.Guacamole.Data;
+using WellFired.Guacamole.DataBinding;
 
 namespace WellFired.Guacamole.Integration.View.TextEntry.Bindable
 {

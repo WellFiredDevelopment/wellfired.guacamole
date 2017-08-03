@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
-using WellFired.Guacamole.Annotations;
+using WellFired.Guacamole.Data;
+using WellFired.Guacamole.Data.Annotations;
 using WellFired.Guacamole.Diagnostics;
-using WellFired.Guacamole.Event;
 using WellFired.Guacamole.Styling;
-using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Views
 {

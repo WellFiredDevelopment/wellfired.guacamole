@@ -1,7 +1,7 @@
-﻿using WellFired.Guacamole.Annotations;
+﻿using WellFired.Guacamole.Data;
+using WellFired.Guacamole.Data.Annotations;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Styling;
-using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Views
 {
@@ -33,6 +33,20 @@ namespace WellFired.Guacamole.Views
 				default(UIColor),
 				BindingMode.TwoWay,
 				viewBase => viewBase.OutlineColor
+			);
+
+		[PublicAPI] public static readonly BindableProperty OutlineThicknessProperty = BindableProperty
+			.Create<View, float>(
+				default(float),
+				BindingMode.TwoWay,
+				viewBase => viewBase.OutlineThickness
+			);
+
+		[PublicAPI] public static readonly BindableProperty OutlineMaskProperty = BindableProperty
+			.Create<View, OutlineMask>(
+				OutlineMask.All,
+				BindingMode.TwoWay,
+				viewBase => viewBase.OutlineMask
 			);
 
 		[PublicAPI] public static readonly BindableProperty CornerRadiusProperty = BindableProperty
@@ -139,6 +153,20 @@ namespace WellFired.Guacamole.Views
 		{
 			get { return (UIColor) GetValue(OutlineColorProperty); }
 			set { SetValue(OutlineColorProperty, value); }
+		}
+
+		[PublicAPI]
+		public float OutlineThickness
+		{
+			get { return (float) GetValue(OutlineThicknessProperty); }
+			set { SetValue(OutlineThicknessProperty, value); }
+		}
+
+		[PublicAPI]
+		public OutlineMask OutlineMask
+		{
+			get { return (OutlineMask) GetValue(OutlineMaskProperty); }
+			set { SetValue(OutlineMaskProperty, value); }
 		}
 
 		[PublicAPI]

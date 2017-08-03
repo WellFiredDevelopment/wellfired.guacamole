@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using WellFired.Guacamole.Integration.View.View.Bindable;
 
 namespace WellFired.Guacamole.Integration.View.View.Binding
 {

@@ -120,6 +120,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\WellFired.Guacamole.Data\WellFired.Guacamole.Data.csproj">
+      <Project>{0cbc8a3c-5a74-4441-ad8e-0047bafe5a6d}</Project>
+      <Name>WellFired.Guacamole.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\WellFired.Guacamole\WellFired.Guacamole.csproj">
       <Project>{9804de8d-6d30-4fd7-adfe-4ec24a7adb6e}</Project>
       <Name>WellFired.Guacamole</Name>

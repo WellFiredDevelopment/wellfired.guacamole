@@ -2,9 +2,8 @@
 using System.ComponentModel;
 using UnityEditor;
 using UnityEngine;
-using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Attributes;
-using WellFired.Guacamole.Types;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
@@ -106,7 +105,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			var listView = Control as ListView;
 			Debug.Assert(listView != null, "listView != null");
-			ScrollBarBackgroundTexture = Texture2DExtensions.CreateRoundedTexture(64, 64, listView.ScrollBarBackgroundColor, listView.ScrollBarOutlineColor, listView.ScrollBarCornerRadius, listView.ScrollBarCornerMask);
+			ScrollBarBackgroundTexture = Texture2DExtensions.CreateRoundedTexture(64, 64, listView.ScrollBarBackgroundColor, listView.ScrollBarOutlineColor, listView.ScrollBarCornerRadius, 1, listView.ScrollBarCornerMask, OutlineMask.All);
 		}
 
 		private static void HandleScroll(Rect unityRect, ListView listView)

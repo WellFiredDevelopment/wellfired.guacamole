@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using WellFired.Guacamole.Annotations;
+using WellFired.Guacamole.Data.Annotations;
 
 namespace WellFired.Guacamole.DataBinding
 {

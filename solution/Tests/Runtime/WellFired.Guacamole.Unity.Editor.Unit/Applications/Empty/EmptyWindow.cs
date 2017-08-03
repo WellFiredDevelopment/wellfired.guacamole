@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
-using WellFired.Guacamole.Annotations;
+using WellFired.Guacamole.Data;
+using WellFired.Guacamole.Data.Annotations;
 using WellFired.Guacamole.Diagnostics;
-using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Unity.Editor.Unit.Applications.Empty

@@ -1,9 +1,7 @@
 ﻿using System.ComponentModel;
-using UnityEditor;
 using UnityEngine;
 using WellFired.Guacamole.Attributes;
-using WellFired.Guacamole.Types;
-using WellFired.Guacamole.Unity.Editor.Extensions;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
 
@@ -15,7 +13,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 	{
 		private readonly ImageCreatorHandler _handler = new ImageCreatorHandler();
 		private Texture2D _texture = default(Texture2D);
-		public override UISize? NativeSize => UISize.Of(30);
+		public override UISize? NativeSize => UISize.Of(18);
 
 		public override void Render(UIRect renderRect)
 		{
@@ -54,7 +52,11 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			base.OnPropertyChanged(sender, e);
 			
 			var toggleView = (ToggleView)Control;
-			CreateTextureFor(toggleView);
+			
+			if(e.PropertyName == ToggleView.OnProperty.PropertyName ||
+			   e.PropertyName == ToggleView.OnImageSourceProperty.PropertyName ||
+			   e.PropertyName == ToggleView.OffImageSourceProperty.PropertyName)
+				CreateTextureFor(toggleView);
 		}
 
 		private async void CreateTextureFor(ToggleView toggleView)

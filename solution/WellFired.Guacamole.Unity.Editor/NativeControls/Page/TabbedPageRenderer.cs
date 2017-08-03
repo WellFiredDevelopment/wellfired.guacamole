@@ -1,11 +1,10 @@
 using UnityEngine;
 using WellFired.Guacamole.Attributes;
-using WellFired.Guacamole.Types;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Page;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
-using Debug = System.Diagnostics.Debug;
 
 [assembly: CustomRenderer(typeof(TabbedPage), typeof(TabbedPageRenderer))]
 namespace WellFired.Guacamole.Unity.Editor.NativeControls.Page

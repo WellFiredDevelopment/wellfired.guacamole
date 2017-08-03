@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
-using WellFired.Guacamole.Annotations;
+using WellFired.Guacamole.Data;
+using WellFired.Guacamole.Data.Annotations;
 using WellFired.Guacamole.DataBinding;
-using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Views
 {

@@ -1,5 +1,5 @@
-﻿using WellFired.Guacamole.Annotations;
-using WellFired.Guacamole.Types;
+﻿using JetBrains.Annotations;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Views.BindingContexts;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.DotPeekWithListView.ViewModel

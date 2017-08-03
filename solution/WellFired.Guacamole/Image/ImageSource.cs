@@ -2,9 +2,9 @@
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Exceptions;
 using WellFired.Guacamole.FileSystem;
-using WellFired.Guacamole.Types;
 using WellFired.Guacamole.WebRequestHandler;
 
 namespace WellFired.Guacamole.Image

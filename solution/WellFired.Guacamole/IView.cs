@@ -1,6 +1,6 @@
-﻿using WellFired.Guacamole.Renderer;
+﻿using WellFired.Guacamole.Data;
+using WellFired.Guacamole.Renderer;
 using WellFired.Guacamole.Styling;
-using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole
 {

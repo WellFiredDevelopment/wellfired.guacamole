@@ -1,5 +1,5 @@
 ﻿using System;
-using WellFired.Guacamole.Annotations;
+using WellFired.Guacamole.Data.Annotations;
 using WellFired.Guacamole.Extensions;
 
 namespace WellFired.Guacamole

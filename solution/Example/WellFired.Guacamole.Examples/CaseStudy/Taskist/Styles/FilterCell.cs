@@ -1,5 +1,5 @@
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Styling;
-using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.Styles

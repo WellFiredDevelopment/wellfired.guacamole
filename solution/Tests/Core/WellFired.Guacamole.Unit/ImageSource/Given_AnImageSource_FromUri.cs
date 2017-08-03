@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using NSubstitute;
 using NSubstitute.Core;
 using NUnit.Framework;
-using WellFired.Guacamole.FileSystem;
 using WellFired.Guacamole.Image;
 using WellFired.Guacamole.WebRequestHandler;
 

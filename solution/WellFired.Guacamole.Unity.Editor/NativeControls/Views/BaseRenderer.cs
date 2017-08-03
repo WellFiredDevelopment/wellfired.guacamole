@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel;
 using UnityEngine;
-using WellFired.Guacamole.Annotations;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Renderer;
-using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Views;
 
@@ -23,12 +22,11 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			get
 			{
-				if (_resetStyle)
-				{
-					_resetStyle = false;
-					SetupWithNewStyle();
-				}
-
+				if (!_resetStyle) 
+					return _style;
+				
+				_resetStyle = false;
+				SetupWithNewStyle();
 				return _style;
 			}
 		}
@@ -137,7 +135,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 
 		private void CreateBackgroundTexture()
 		{
-			BackgroundTexture = Texture2DExtensions.CreateRoundedTexture(64, 64, Control.BackgroundColor, Control.OutlineColor, Control.CornerRadius, Control.CornerMask);
+			BackgroundTexture = Texture2DExtensions.CreateRoundedTexture(64, 64, Control.BackgroundColor, Control.OutlineColor, Control.CornerRadius, Control.OutlineThickness, Control.CornerMask, Control.OutlineMask);
 		}
 	}
 }

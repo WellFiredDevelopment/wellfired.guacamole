@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Reflection.Emit;
-using WellFired.Guacamole.Annotations;
 
 namespace WellFired.Guacamole.Styling
 {

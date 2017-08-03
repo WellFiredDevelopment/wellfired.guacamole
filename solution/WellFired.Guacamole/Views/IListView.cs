@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Layouts;
-using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Views
 {

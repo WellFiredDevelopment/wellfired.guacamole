@@ -45,13 +45,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Annotations\CanBeNull.cs" />
-    <Compile Include="Annotations\ImplicitUseKindFlags.cs" />
-    <Compile Include="Annotations\ImplicitUseTargetFlags.cs" />
-    <Compile Include="Annotations\MeansImplicitUse.cs" />
-    <Compile Include="Annotations\NotNull.cs" />
-    <Compile Include="Annotations\PublicAPIAttribute.cs" />
-    <Compile Include="Annotations\UsedImplicityAttribute.cs" />
     <Compile Include="Attributes\CustomRendererAttribute.cs" />
     <Compile Include="AutoAction.cs" />
     <Compile Include="Cells\Cell.BindableProperties.cs" />
@@ -63,7 +56,6 @@
     <Compile Include="Cells\LabelCell.cs" />
     <Compile Include="Collection\ObservableCollection.cs" />
     <Compile Include="Command.cs" />
-    <Compile Include="Converters\UIPaddingConverter.cs" />
     <Compile Include="DataBinding\BindableContext.cs" />
     <Compile Include="DataBinding\BindableObject.cs" />
     <Compile Include="DataBinding\BindableProperty.cs" />
@@ -80,17 +72,6 @@
     <Compile Include="Diagnostics\ILogger.cs" />
     <Compile Include="Diagnostics\Logger.cs" />
     <Compile Include="Disposable.cs" />
-    <Compile Include="Drawing\GraphicsPath.cs" />
-    <Compile Include="Drawing\Pixel.cs" />
-    <Compile Include="Drawing\ImageFill.cs" />
-    <Compile Include="Drawing\Rect.cs" />
-    <Compile Include="Drawing\Shapes\Arc.cs" />
-    <Compile Include="Drawing\Shapes\IShape.cs" />
-    <Compile Include="Drawing\Shapes\Line.cs" />
-    <Compile Include="Drawing\Shapes\Side.cs" />
-    <Compile Include="Drawing\Size.cs" />
-    <Compile Include="Drawing\UIImageRaw.cs" />
-    <Compile Include="Drawing\Vector.cs" />
     <Compile Include="Event\ClickEvent.cs" />
     <Compile Include="Event\TypeEvent.cs" />
     <Compile Include="Exceptions\DataTemplateTypeDidntCreateAPage.cs" />
@@ -107,6 +88,7 @@
     <Compile Include="Exceptions\DataTemplateTypeIsNotBindableException.cs" />
     <Compile Include="Exceptions\TabbedPagePageShouldntAlreadyHaveBindingContext.cs" />
     <Compile Include="Extensions\DelegateExtensions.cs" />
+    <Compile Include="Extensions\FloatExtensions.cs" />
     <Compile Include="FileSystem\FileSystem.cs" />
     <Compile Include="FileSystem\IFileSystem.cs" />
     <Compile Include="IApplication.cs" />
@@ -159,24 +141,7 @@
     <Compile Include="Styling\Styles\TabbedPageButton.cs" />
     <Compile Include="Styling\Styles\ToggleView.cs" />
     <Compile Include="Styling\Trigger.cs" />
-    <Compile Include="Types\CornerMask.cs" />
     <Compile Include="Types\ItemSource.cs" />
-    <Compile Include="Types\LayoutOptions.cs" />
-    <Compile Include="Types\OrientationOptions.cs" />
-    <Compile Include="Types\UIColor.cs" />
-    <Compile Include="Types\UIColorBlues.cs" />
-    <Compile Include="Types\UIColorBrowns.cs" />
-    <Compile Include="Types\UIColorGreens.cs" />
-    <Compile Include="Types\UIColorGreys.cs" />
-    <Compile Include="Types\UIColorOranges.cs" />
-    <Compile Include="Types\UIColorPinks.cs" />
-    <Compile Include="Types\UIColorWhites.cs" />
-    <Compile Include="Types\UIColorYellows.cs" />
-    <Compile Include="Types\UILocation.cs" />
-    <Compile Include="Types\UIPadding.cs" />
-    <Compile Include="Types\UIRect.cs" />
-    <Compile Include="Types\UISize.cs" />
-    <Compile Include="Types\UITextAlign.cs" />
     <Compile Include="Views\BindingContexts\CellBindingContextBase.cs" />
     <Compile Include="Views\BindingContexts\ImageCellBindingContext.cs" />
     <Compile Include="Views\BindingContexts\LabelCellBindingContext.cs" />
@@ -223,6 +188,18 @@
     <Compile Include="Views\Window.cs" />
     <Compile Include="WebRequestHandler\IWebRequestHandler.cs" />
     <Compile Include="WebRequestHandler\WebRequestHandler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WellFired.Guacamole.Data\WellFired.Guacamole.Data.csproj">
+      <Project>{0cbc8a3c-5a74-4441-ad8e-0047bafe5a6d}</Project>
+      <Name>WellFired.Guacamole.Data</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\WellFired.Guacamole.Drawing\WellFired.Guacamole.Drawing.csproj">
+      <Project>{71844acc-d2ec-4216-bd8d-ac63647ad6ac}</Project>
+      <Name>WellFired.Guacamole.Drawing</Name>
+      <Private>False</Private>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

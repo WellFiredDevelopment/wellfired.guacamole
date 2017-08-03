@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq;
-using WellFired.Guacamole.Diagnostics;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Layouts;
-using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Views
 {

@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.DataBinding;
-using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Integration.View.View.Bindable
 {

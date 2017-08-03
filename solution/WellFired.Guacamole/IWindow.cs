@@ -1,7 +1,6 @@
-﻿using WellFired.Guacamole.Annotations;
-using WellFired.Guacamole.Event;
+﻿using WellFired.Guacamole.Data;
+using WellFired.Guacamole.Data.Annotations;
 using WellFired.Guacamole.InitializationContext;
-using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole

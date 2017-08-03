@@ -1,4 +1,4 @@
-using WellFired.Guacamole.Types;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View

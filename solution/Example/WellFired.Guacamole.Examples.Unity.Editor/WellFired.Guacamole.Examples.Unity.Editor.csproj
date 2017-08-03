@@ -67,6 +67,11 @@
       <Project>{9566c64d-a98f-4202-bc77-01df9af1aef2}</Project>
       <Name>WellFired.Guacamole.Examples</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\WellFired.Guacamole.Data\WellFired.Guacamole.Data.csproj">
+      <Project>{0cbc8a3c-5a74-4441-ad8e-0047bafe5a6d}</Project>
+      <Name>WellFired.Guacamole.Data</Name>
+      <Private>False</Private>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

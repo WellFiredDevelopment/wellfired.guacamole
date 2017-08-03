@@ -2,7 +2,7 @@
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using WellFired.Guacamole.Types;
+using WellFired.Guacamole.Data;
 
 namespace WellFired.Guacamole.Image
 {
@@ -33,7 +33,7 @@ namespace WellFired.Guacamole.Image
                         throw new ArgumentOutOfRangeException();
                 }
                 
-                var imageData = ImageData.BuildRounded(_imageShapeDefinition.Size, _imageShapeDefinition.Size, _imageShapeDefinition.Color, _imageShapeDefinition.OutlineColor, corner, CornerMask.All);
+                var imageData = ImageData.BuildRounded(_imageShapeDefinition.Size, _imageShapeDefinition.Size, _imageShapeDefinition.Color, _imageShapeDefinition.OutlineColor, corner, 1, CornerMask.All, OutlineMask.All);
                 
                 var counter = 0;
                 foreach (var color in imageData)

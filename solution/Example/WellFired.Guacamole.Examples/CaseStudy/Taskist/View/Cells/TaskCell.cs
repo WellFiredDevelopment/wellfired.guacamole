@@ -1,7 +1,8 @@
 ﻿using WellFired.Guacamole.Cells;
+using WellFired.Guacamole.Data;
+using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Styling;
-using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.View.Cells
@@ -48,7 +49,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.View.Cells
             Content = layoutView;
             
             filterName.Bind(Label.TextProperty, "Description");
-            filterName.Bind(ToggleView.OnProperty, "Done");
+            filterName.Bind(ToggleView.OnProperty, "Done", BindingMode.TwoWay);
         }
     }
 }

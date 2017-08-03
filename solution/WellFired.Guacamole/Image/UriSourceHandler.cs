@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.WebRequestHandler;
 
 namespace WellFired.Guacamole.Image

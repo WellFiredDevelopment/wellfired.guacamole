@@ -1,5 +1,5 @@
-﻿using WellFired.Guacamole.Layouts;
-using WellFired.Guacamole.Types;
+﻿using WellFired.Guacamole.Data;
+using WellFired.Guacamole.Layouts;
 
 namespace WellFired.Guacamole.Views
 {

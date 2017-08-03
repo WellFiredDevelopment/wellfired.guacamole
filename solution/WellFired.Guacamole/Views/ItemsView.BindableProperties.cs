@@ -1,6 +1,6 @@
 ﻿using System.Collections;
-using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Collection;
+using WellFired.Guacamole.Data.Annotations;
 using WellFired.Guacamole.DataBinding;
 
 namespace WellFired.Guacamole.Views

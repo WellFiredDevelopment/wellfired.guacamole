@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Reflection;
 using UnityEngine;
-using WellFired.Guacamole.Annotations;
+using WellFired.Guacamole.Data;
+using WellFired.Guacamole.Data.Annotations;
 using WellFired.Guacamole.Exceptions;
 using WellFired.Guacamole.InitializationContext;
-using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Unity.Editor.DataBinding;
 using Logger = WellFired.Guacamole.Unity.Editor.Diagnostics.Logger;
 using ILogger = WellFired.Guacamole.Diagnostics.ILogger;

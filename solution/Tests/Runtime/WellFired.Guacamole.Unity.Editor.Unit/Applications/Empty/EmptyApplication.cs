@@ -1,5 +1,5 @@
-﻿using WellFired.Guacamole.Annotations;
-using WellFired.Guacamole.Types;
+﻿using WellFired.Guacamole.Data;
+using WellFired.Guacamole.Data.Annotations;
 
 namespace WellFired.Guacamole.Unity.Editor.Unit.Applications.Empty
 {

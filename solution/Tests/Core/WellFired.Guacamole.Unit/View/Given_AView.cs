@@ -1,9 +1,9 @@
 ﻿using NSubstitute;
 using NUnit.Framework;
-using WellFired.Guacamole.Types;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Views;
 
-namespace WellFired.Guacamole.Unit.AdjacentLayout.View
+namespace WellFired.Guacamole.Unit.View
 {
     [TestFixture]
     public class Given_AView

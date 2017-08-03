@@ -1,9 +1,8 @@
 using System;
 using WellFired.Guacamole.Cells;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.DataBinding;
-using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Layouts;
-using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Views
 {

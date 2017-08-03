@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
-using WellFired.Guacamole.Annotations;
+using WellFired.Guacamole.Data.Annotations;
 using Object = UnityEngine.Object;
 
 namespace WellFired.Guacamole.Unity.Editor.DataBinding

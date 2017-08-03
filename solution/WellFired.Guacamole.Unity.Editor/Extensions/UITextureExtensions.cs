@@ -1,7 +1,8 @@
-﻿using JetBrains.Annotations;
+﻿using System.IO;
+using JetBrains.Annotations;
 using UnityEngine;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Image;
-using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Unity.Editor.Extensions
 {
@@ -26,6 +27,10 @@ namespace WellFired.Guacamole.Unity.Editor.Extensions
 			return result;
 		}
 
+#if DEBUG_TEXTURE_CREATION
+		private static int _counter;
+#endif
+
 		[PublicAPI]
 		public static Texture2D CreateRoundedTexture(
 			int width,
@@ -33,14 +38,19 @@ namespace WellFired.Guacamole.Unity.Editor.Extensions
 			UIColor backgroundColor,
 			UIColor outlineColor,
 			double radius,
-			CornerMask cornerMask)
+			double thickness,
+			CornerMask cornerMask,
+			OutlineMask outlineMask)
 		{
 			var result = new Texture2D(width, height)
 			{
 				wrapMode = TextureWrapMode.Clamp
 			};
 
-			var pixelData = ImageData.BuildRounded(width, height, backgroundColor, outlineColor, radius, cornerMask);
+			var pixelData = radius < 3 
+				? ImageData.BuildSquare(width, height, backgroundColor, outlineColor, thickness) 
+				: ImageData.BuildRounded(width, height, backgroundColor, outlineColor, radius, thickness, cornerMask, outlineMask);
+			
 			var unityPixelData = new Color[pixelData.Length];
 			for (var index = 0; index < unityPixelData.Length; index++)
 				unityPixelData[index] = pixelData[index].ToUnityColor();
@@ -48,6 +58,12 @@ namespace WellFired.Guacamole.Unity.Editor.Extensions
 			result.SetPixels(unityPixelData);
 			result.Apply();
 			result.hideFlags = HideFlags.HideAndDontSave;
+
+#if DEBUG_TEXTURE_CREATION
+			var bytes = result.EncodeToPNG();
+			File.WriteAllBytes($"Assets/file{_counter}.png", bytes);
+			_counter++;
+#endif
 
 			return result;
 		}

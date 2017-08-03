@@ -1,4 +1,4 @@
-﻿using WellFired.Guacamole.Types;
+﻿using WellFired.Guacamole.Data;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.View
 {

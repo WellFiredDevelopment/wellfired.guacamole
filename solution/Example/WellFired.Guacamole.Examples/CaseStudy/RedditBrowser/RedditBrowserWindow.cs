@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Examples.CaseStudy.RedditBrowser.Cells;
 using WellFired.Guacamole.Examples.CaseStudy.RedditBrowser.ViewModel;
 using WellFired.Guacamole.Layouts;
-using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.RedditBrowser

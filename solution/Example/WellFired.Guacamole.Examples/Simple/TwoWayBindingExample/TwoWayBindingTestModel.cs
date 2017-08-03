@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using WellFired.Guacamole.Annotations;
+﻿using JetBrains.Annotations;
+using UnityEngine;
 using WellFired.Guacamole.Unity.Editor.DataBinding;
 
 namespace WellFired.Guacamole.Examples.Simple.TwoWayBindingExample

@@ -1,6 +1,6 @@
+using JetBrains.Annotations;
 using UnityEditor;
-using WellFired.Guacamole.Annotations;
-using WellFired.Guacamole.Types;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Unity.Editor;
 
 namespace WellFired.Guacamole.Examples.Intermediate.Sorting

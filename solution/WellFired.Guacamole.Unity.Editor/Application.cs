@@ -2,7 +2,6 @@
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-using WellFired.Guacamole.Event;
 using WellFired.Guacamole.Exceptions;
 using WellFired.Guacamole.Unity.Editor.DataBinding;
 

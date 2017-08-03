@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
-using NUnit.Framework.Internal;
-using WellFired.Guacamole.Types;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Integration.Layouts.Simple

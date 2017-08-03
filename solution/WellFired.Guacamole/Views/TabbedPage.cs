@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Exceptions;
 using WellFired.Guacamole.Layouts;
-using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Views
 {

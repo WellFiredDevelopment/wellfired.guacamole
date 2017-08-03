@@ -1,6 +1,6 @@
-﻿using WellFired.Guacamole.Annotations;
+﻿using WellFired.Guacamole.Data;
+using WellFired.Guacamole.Data.Annotations;
 using WellFired.Guacamole.DataBinding;
-using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Views
 {
@@ -37,7 +37,7 @@ namespace WellFired.Guacamole.Views
 		{
 			// Set some nice defaults
 			BackgroundColor = UIColor.FromRGB(66, 66, 66);
-			OutlineColor = BackgroundColor;
+			OutlineColor = UIColor.Black;
 			TextColor = UIColor.White;
 			HorizontalLayout = LayoutOptions.Fill;
 			CornerRadius = 8;

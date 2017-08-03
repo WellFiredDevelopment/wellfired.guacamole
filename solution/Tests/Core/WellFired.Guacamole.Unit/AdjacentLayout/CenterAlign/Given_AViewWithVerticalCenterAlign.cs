@@ -1,6 +1,6 @@
 ﻿using NSubstitute;
 using NUnit.Framework;
-using WellFired.Guacamole.Types;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Unit.AdjacentLayout.CenterAlign

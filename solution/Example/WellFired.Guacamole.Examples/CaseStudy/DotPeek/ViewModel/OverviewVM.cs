@@ -1,7 +1,7 @@
-﻿using WellFired.Guacamole.Annotations;
+﻿using JetBrains.Annotations;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model;
-using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel
 {

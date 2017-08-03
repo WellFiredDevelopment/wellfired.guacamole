@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using WellFired.Guacamole.Annotations;
+using WellFired.Guacamole.Data.Annotations;
 
 namespace WellFired.Guacamole.Diagnostics
 {

@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WellFired.Guacamole.Annotations;
-using WellFired.Guacamole.Collection;
+using JetBrains.Annotations;
 using WellFired.Guacamole.Examples.Intermediate.Sorting.Helper;
 using WellFired.Guacamole.Views.BindingContexts;
 

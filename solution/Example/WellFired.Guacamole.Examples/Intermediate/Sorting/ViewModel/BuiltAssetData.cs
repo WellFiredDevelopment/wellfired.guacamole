@@ -1,4 +1,4 @@
-﻿using WellFired.Guacamole.Annotations;
+﻿using JetBrains.Annotations;
 using WellFired.Guacamole.Views.BindingContexts;
 
 namespace WellFired.Guacamole.Examples.Intermediate.Sorting.ViewModel

@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.DataBinding;
-using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Styling;
 using WellFired.Guacamole.Views.BindingContexts;
 

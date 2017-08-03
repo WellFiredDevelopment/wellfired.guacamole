@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace WellFired.Guacamole.Image
+﻿namespace WellFired.Guacamole.Image
 {
     public class LoadedImage
     {

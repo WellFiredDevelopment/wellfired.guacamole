@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel;
 using UnityEditor;
 using UnityEngine;
-using WellFired.Guacamole.Annotations;
 using WellFired.Guacamole.Attributes;
-using WellFired.Guacamole.Types;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;

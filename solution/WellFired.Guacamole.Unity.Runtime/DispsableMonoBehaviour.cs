@@ -1,6 +1,6 @@
 ﻿using System;
+using JetBrains.Annotations;
 using UnityEngine;
-using WellFired.Guacamole.Annotations;
 
 namespace WellFired.Guacamole.Unity.Runtime
 {

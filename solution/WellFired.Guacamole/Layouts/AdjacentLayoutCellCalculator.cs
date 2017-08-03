@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using WellFired.Guacamole.Types;
+using WellFired.Guacamole.Data;
 
 namespace WellFired.Guacamole.Layouts
 {

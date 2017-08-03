@@ -1,4 +1,4 @@
-﻿using WellFired.Guacamole.Annotations;
+﻿using WellFired.Guacamole.Data.Annotations;
 using WellFired.Guacamole.DataBinding;
 
 namespace WellFired.Guacamole.Styling

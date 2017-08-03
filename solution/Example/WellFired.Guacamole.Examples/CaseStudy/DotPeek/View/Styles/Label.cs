@@ -1,5 +1,5 @@
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Styling;
-using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Styles
 {

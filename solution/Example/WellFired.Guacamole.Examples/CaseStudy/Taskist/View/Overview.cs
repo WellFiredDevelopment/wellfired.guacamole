@@ -1,9 +1,9 @@
 ﻿using WellFired.Guacamole.Collection;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Examples.CaseStudy.Taskist.View.Cells;
 using WellFired.Guacamole.Examples.CaseStudy.Taskist.ViewModel;
 using WellFired.Guacamole.Layouts;
-using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.View

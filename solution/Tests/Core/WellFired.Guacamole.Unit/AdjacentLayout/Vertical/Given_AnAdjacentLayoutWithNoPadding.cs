@@ -1,7 +1,7 @@
 ﻿using NSubstitute;
 using NUnit.Framework;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Layouts;
-using WellFired.Guacamole.Types;
 
 namespace WellFired.Guacamole.Unit.AdjacentLayout.Vertical
 {

@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using WellFired.Guacamole.Types;
+using WellFired.Guacamole.Data;
 
 namespace WellFired.Guacamole.Integration.View.Slider.Bindable
 {

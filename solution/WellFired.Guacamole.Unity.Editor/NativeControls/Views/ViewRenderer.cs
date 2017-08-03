@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using WellFired.Guacamole.Attributes;
-using WellFired.Guacamole.Types;
-using WellFired.Guacamole.Unity.Editor.Extensions;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
 

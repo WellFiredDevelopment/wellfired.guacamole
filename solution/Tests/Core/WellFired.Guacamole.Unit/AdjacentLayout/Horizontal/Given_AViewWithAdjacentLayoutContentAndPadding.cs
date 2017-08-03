@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using NSubstitute;
 using NUnit.Framework;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Layouts;
-using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Unit.AdjacentLayout.Horizontal

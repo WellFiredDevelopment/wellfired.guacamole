@@ -1,5 +1,4 @@
-﻿using System;
-using WellFired.Guacamole.Examples.CaseStudy.RedditBrowser.Model;
+﻿using WellFired.Guacamole.Examples.CaseStudy.RedditBrowser.Model;
 using WellFired.Guacamole.Image;
 using WellFired.Guacamole.Views.BindingContexts;
 

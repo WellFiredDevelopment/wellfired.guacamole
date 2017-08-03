@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
 using WellFired.Guacamole.Views.BindingContexts;

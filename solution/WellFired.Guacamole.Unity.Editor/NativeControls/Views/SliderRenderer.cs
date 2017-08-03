@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using UnityEngine;
 using WellFired.Guacamole.Attributes;
-using WellFired.Guacamole.Types;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
@@ -78,8 +78,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			var slider = Control as Slider;
 			Debug.Assert(slider != null, "slider != null");
-			ThumbBackgroundTexture = Texture2DExtensions.CreateRoundedTexture(32, 32, slider.ThumbBackgroundColor,
-				slider.ThumbOutlineColor, slider.ThumbCornerRadius, slider.ThumbCornerMask);
+			ThumbBackgroundTexture = Texture2DExtensions.CreateRoundedTexture(32, 32, slider.ThumbBackgroundColor, slider.ThumbOutlineColor, slider.ThumbCornerRadius, 1, slider.ThumbCornerMask, OutlineMask.All);
 		}
 	}
 }
