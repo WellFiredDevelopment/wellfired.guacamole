@@ -6,7 +6,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model
 {
     public class BuildOverview
     {
-        public struct BuildAssetSplit
+        public class BuildAssetSplit
         {
             public readonly Category Category;
             public readonly float Percentage;

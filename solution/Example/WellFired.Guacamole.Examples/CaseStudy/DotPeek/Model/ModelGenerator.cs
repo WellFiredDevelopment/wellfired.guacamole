@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model.Assets;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model
 {
@@ -20,13 +21,31 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model
                     {
                         new BuildOverview.BuildAssetSplit(BuildOverview.Category.Animations, new FileSize(259),
                             2.4f),
-                        new BuildOverview.BuildAssetSplit(BuildOverview.Category.Meshes, new FileSize(280),
+                        new BuildOverview.BuildAssetSplit(BuildOverview.Category.Meshes, new FileSize(450),
                             4f)
-                    })
-                }
+                    }),
+                },
+                
+                ResourcesIncludedAssets = new List<IAsset>(new IAsset[]
+                {
+                    new Model3D
+                    {
+                        ImportedSize = new FileSize(456),
+                        RawSize = new FileSize(477),
+                        Path = "Assets/Resources/Meshes/bebe.fbx",
+                        Percentage = 0.2f
+                    },
+                    new Model3D()
+                    {
+                        ImportedSize = new FileSize(1024),
+                        RawSize = new FileSize(1024),
+                        Path = "Assets/Resources/Prefab/mayi.prefab",
+                        Percentage = 2f
+                    }
+                })
             };
         }
-        
+
         public static BuildReport GetPreviousReport()
         {
             return new BuildReport
@@ -45,7 +64,25 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model
                         new BuildOverview.BuildAssetSplit(BuildOverview.Category.Meshes, new FileSize(300),
                             3f)
                     })
-                }
+                },
+
+                ResourcesIncludedAssets = new List<IAsset>(new IAsset[]
+                {
+                    new Model3D
+                    {
+                        ImportedSize = new FileSize(456),
+                        RawSize = new FileSize(477),
+                        Path = "Assets/Meshes/bebe.fbx",
+                        Percentage = 0.2f
+                    },
+                    new Prefab()
+                    {
+                        ImportedSize = new FileSize(512),
+                        RawSize = new FileSize(512),
+                        Path = "Assets/Meshes/mayi.prefab",
+                        Percentage = 2f
+                    }
+                })
             };
         }
     }

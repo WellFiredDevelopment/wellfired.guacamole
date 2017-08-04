@@ -17,7 +17,7 @@ namespace WellFired.Guacamole.Image
         public async Task<IImageSourceWrapper> Handle(CancellationToken cancellationToken)
 #pragma warning restore 1998
         {
-            return new ImageSourceWrapper(_stream, ImageType.Image);;
+            return new ImageSourceWrapper(_stream, ImageType.Image);
         }
 
         public override string ToString()

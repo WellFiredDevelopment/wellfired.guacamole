@@ -4,7 +4,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model
 {
     public struct FileSize
     {
-        private const float EquivalenceTolerance = 512f; 
+        private const float EquivalenceTolerance = 100f; 
         
         public bool Equals(FileSize other)
         {
@@ -33,6 +33,21 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model
         public static bool operator !=(FileSize a, FileSize b)
         {
             return !(a == b);
+        }
+        
+        public static bool operator >(FileSize a, FileSize b)
+        {
+            return a.SizeInKb - b.SizeInKb > EquivalenceTolerance;
+        }
+
+        public static bool operator <(FileSize a, FileSize b)
+        {
+            return b.SizeInKb - a.SizeInKb > EquivalenceTolerance;
+        }
+
+        public static FileSize operator +(FileSize a, FileSize b)
+        {
+            return new FileSize(a.SizeInKb + b.SizeInKb);
         }
 
         public readonly float SizeInKb;
