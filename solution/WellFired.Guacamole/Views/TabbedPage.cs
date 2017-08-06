@@ -4,6 +4,7 @@ using System.Linq;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Exceptions;
 using WellFired.Guacamole.Layouts;
+using WellFired.Guacamole.Styling;
 
 namespace WellFired.Guacamole.Views
 {
@@ -78,7 +79,7 @@ namespace WellFired.Guacamole.Views
                     throw new TabbedPagePageShouldntAlreadyHaveBindingContext(this, bindingContext, newPage);
                 
                 newPage.BindingContext = bindingContext as INotifyPropertyChanged;
-
+                
                 var button = new TabbedPageButton
                 {
                     ButtonPressedCommand = new Command
@@ -122,6 +123,25 @@ namespace WellFired.Guacamole.Views
                 ((TabbedPageButton) item).IsSelected = false;
             
             ((TabbedPageButton)_tabSelect.Children[index]).IsSelected = true;
+        }
+
+        public override void SetStyleDictionary(IStyleDictionary styleDictionary)
+        {
+            base.SetStyleDictionary(styleDictionary);
+
+            foreach (var page in _pages)
+            {
+                page.SetStyleDictionary(styleDictionary);
+            }
+
+            foreach (var layoutable in _tabSelect.Children)
+            {
+                var button = layoutable as View;
+                if (button != null)
+                {
+                    button.SetStyleDictionary(styleDictionary);
+                }
+            }
         }
     }
 }
