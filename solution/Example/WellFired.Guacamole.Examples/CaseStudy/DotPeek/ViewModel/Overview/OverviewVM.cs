@@ -5,7 +5,7 @@ using WellFired.Guacamole.Data.Annotations;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model;
 
-namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel
+namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel.Overview
 {
     public class OverviewVM : ObservableBase
     {

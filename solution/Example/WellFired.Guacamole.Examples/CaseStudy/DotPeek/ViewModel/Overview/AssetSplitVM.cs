@@ -3,9 +3,8 @@ using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Data.Annotations;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model;
-using WellFired.Guacamole.Types;
 
-namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel
+namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel.Overview
 {
     public class AssetSplitVM : ObservableBase
     {

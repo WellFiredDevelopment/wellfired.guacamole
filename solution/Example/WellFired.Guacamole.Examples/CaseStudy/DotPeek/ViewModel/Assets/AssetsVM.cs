@@ -8,7 +8,7 @@ using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model.Assets;
 
-namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel
+namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel.Assets
 {
     public class AssetsVM : ObservableBase
     {
@@ -74,21 +74,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel
 
         private void GenerateAssetsList(List<IAsset> assets, List<IAsset> previouslyAssets = null)
         {
-//            _assetsList = new List<AssetCellVM>();
-//            
-//                foreach (var asset in assets)
-//                {
-//                    var previousIdenticalAsset = previouslyAssets?.Find(
-//                        x => string.Equals(x.Path, asset.Path, StringComparison.Ordinal)
-//                    );
-//                
-//                    _assetsList.Add(new AssetCellVM(asset, previousIdenticalAsset));
-//                }
-//
-//            DisplayedAssetsList = new List<AssetCellVM>(_assetsList);
-            TaskEx.Run(() =>
-            {
-                _assetsList = new List<AssetCellVM>();
+            _assetsList = new List<AssetCellVM>();
             
                 foreach (var asset in assets)
                 {
@@ -98,9 +84,23 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel
                 
                     _assetsList.Add(new AssetCellVM(asset, previousIdenticalAsset));
                 }
-                
-                Device.ExecuteOnMainThread(() => DisplayedAssetsList = new List<AssetCellVM>(_assetsList));
-            });
+
+            DisplayedAssetsList = new List<AssetCellVM>(_assetsList);
+//            TaskEx.Run(() =>
+//            {
+//                _assetsList = new List<AssetCellVM>();
+//            
+//                foreach (var asset in assets)
+//                {
+//                    var previousIdenticalAsset = previouslyAssets?.Find(
+//                        x => string.Equals(x.Path, asset.Path, StringComparison.Ordinal)
+//                    );
+//                
+//                    _assetsList.Add(new AssetCellVM(asset, previousIdenticalAsset));
+//                }
+//                
+//                Device.ExecuteOnMainThread(() => DisplayedAssetsList = new List<AssetCellVM>(_assetsList));
+//            });
         }
         
         private void DoSortByPath()

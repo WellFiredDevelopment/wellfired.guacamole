@@ -71,10 +71,10 @@
     <Compile Include="CaseStudy\DotPeek\Model\BuildOverview.cs" />
     <Compile Include="CaseStudy\DotPeek\Model\BuildReport.cs" />
     <Compile Include="CaseStudy\DotPeek\Model\FileSize.cs" />
-    <Compile Include="CaseStudy\DotPeek\ViewModel\AssetSplitVM.cs" />
-    <Compile Include="CaseStudy\DotPeek\ViewModel\OverviewVM.cs" />
-    <Compile Include="CaseStudy\DotPeek\ViewModel\AssetCellVM.cs" />
-    <Compile Include="CaseStudy\DotPeek\ViewModel\AssetsVM.cs" />
+    <Compile Include="CaseStudy\DotPeek\ViewModel\Assets\AssetCellVM.cs" />
+    <Compile Include="CaseStudy\DotPeek\ViewModel\Assets\AssetsVM.cs" />
+    <Compile Include="CaseStudy\DotPeek\ViewModel\Overview\AssetSplitVM.cs" />
+    <Compile Include="CaseStudy\DotPeek\ViewModel\Overview\OverviewVM.cs" />
     <Compile Include="CaseStudy\DotPeek\ViewModel\ViewModelUtils.cs" />
     <Compile Include="CaseStudy\DotPeek\View\DotPeekApplication.cs" />
     <Compile Include="CaseStudy\DotPeek\View\DotPeekWindow.cs" />
@@ -83,9 +83,9 @@
     <Compile Include="CaseStudy\DotPeek\View\Pages\OverviewPage\AssetSplitCell.cs" />
     <Compile Include="CaseStudy\DotPeek\View\Pages\OverviewPage\OverviewPage.cs" />
     <Compile Include="CaseStudy\DotPeek\View\Pages\OverviewPage\OverviewPageUICreator.cs" />
-    <Compile Include="CaseStudy\DotPeek\View\Pages\UsedAssetsPage\AssetCell.cs" />
-    <Compile Include="CaseStudy\DotPeek\View\Pages\UsedAssetsPage\AssetsPage.cs" />
-    <Compile Include="CaseStudy\DotPeek\View\Pages\UsedAssetsPage\AssetsPageUICreator.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Pages\AssetsPage\AssetCell.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Pages\AssetsPage\AssetsPage.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Pages\AssetsPage\AssetsPageUICreator.cs" />
     <Compile Include="CaseStudy\DotPeek\View\Styles\Cell.cs" />
     <Compile Include="CaseStudy\DotPeek\View\Styles\ColumnLegendButton.cs" />
     <Compile Include="CaseStudy\DotPeek\View\Styles\Label.cs" />

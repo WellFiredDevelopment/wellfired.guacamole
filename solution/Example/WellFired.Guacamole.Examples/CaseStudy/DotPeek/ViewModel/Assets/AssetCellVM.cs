@@ -2,9 +2,8 @@
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model.Assets;
-using WellFired.Guacamole.Types;
 
-namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel
+namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel.Assets
 {
     public class AssetCellVM : ObservableBase
     {

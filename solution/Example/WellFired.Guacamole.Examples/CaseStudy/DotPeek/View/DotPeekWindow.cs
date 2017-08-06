@@ -2,13 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using WellFired.Guacamole.Cells;
+using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model.Assets;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.OverviewPage;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.UsedAssetsPage;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.UIElements;
-using WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel;
+using WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel.Assets;
+using WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel.Overview;
 using WellFired.Guacamole.Styling;
 using WellFired.Guacamole.Views;
 
@@ -16,28 +18,44 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View
 {
     public class DotPeekWindow : Window
     {
-        public DotPeekWindow(ILogger logger, INotifyPropertyChanged persistantData) 
+        public DotPeekWindow(ILogger logger, INotifyPropertyChanged persistantData)
             : base(logger, persistantData)
-        {   
+        {
             StyleDictionary = new StyleDictionary(
                 logger,
-                new Dictionary<Type, Style> {
-                    { typeof(Label), Styles.Label.Style},
-                    { typeof(LayoutView), Styles.LayoutView.Style},
-                    { typeof(ListView), Styles.ListView.Style},
-                    { typeof(Cell), Styles.Cell.Style},
-                    { typeof(ViewContainer), Styles.ViewContainer.Style},
-                    { typeof(ColumnLegendButton), Styles.ColumnLegendButton.Style}
+                new Dictionary<Type, Style>
+                {
+                    {typeof(Label), Styles.Label.Style},
+                    {typeof(LayoutView), Styles.LayoutView.Style},
+                    {typeof(ListView), Styles.ListView.Style},
+                    {typeof(Cell), Styles.Cell.Style},
+                    {typeof(ViewContainer), Styles.ViewContainer.Style},
+                    {typeof(ColumnLegendButton), Styles.ColumnLegendButton.Style}
                 }
             );
 
-//            var overviewPage = new OverviewPage();
-//            SetContent(overviewPage);
-//            overviewPage.BindingContext = GetOverviewBindingContext();
+            var overviewVM = GetOverviewBindingContext();
+            var usedAssetVM = GetUsedAssetsBindingContext();
+            var unusedAssetVM = GetUnusedAssetsBindingContext();
+
+            var tabbedPage = new TabbedPage
+            {
+                ItemSource = new object[] {overviewVM, usedAssetVM, unusedAssetVM},
+                ItemTemplate = DataTemplate.Of(o =>
+                {
+                    Page page = null;
+                    if (o == overviewVM)
+                        page = new OverviewPage {Title = "Overview"};
+                    else if (o == usedAssetVM)
+                        page = new AssetsPage {Title = "Used Assets"};
+                    else if (o == unusedAssetVM)
+                        page = new AssetsPage {Title = "Unused Assets"};
+
+                    return page;
+                })
+            };
             
-            var usedAssetsPage = new AssetsPage();
-            SetContent(usedAssetsPage);
-            usedAssetsPage.BindingContext = GetUsedAssetsBindingContext();
+            SetContent(tabbedPage);
         }
 
         private static OverviewVM GetOverviewBindingContext()
@@ -51,15 +69,29 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View
         {
             var newReport = ModelGenerator.GetCurrentReport();
             var previousReport = ModelGenerator.GetPreviousReport();
-            
+
             var usedAssets = new List<IAsset>();
             usedAssets.AddRange(newReport.NonResourcesIncludedAssets);
             usedAssets.AddRange(newReport.ResourcesIncludedAssets);
-            
+
             var previousUsedAssets = new List<IAsset>();
             previousUsedAssets.AddRange(previousReport.NonResourcesIncludedAssets);
             previousUsedAssets.AddRange(previousReport.ResourcesIncludedAssets);
-            
+
+            return new AssetsVM(usedAssets, previousUsedAssets);
+        }
+
+        private static AssetsVM GetUnusedAssetsBindingContext()
+        {
+            var newReport = ModelGenerator.GetCurrentReport();
+            var previousReport = ModelGenerator.GetPreviousReport();
+
+            var usedAssets = new List<IAsset>();
+            usedAssets.AddRange(newReport.UnusedAssets);
+
+            var previousUsedAssets = new List<IAsset>();
+            previousUsedAssets.AddRange(previousReport.UnusedAssets);
+
             return new AssetsVM(usedAssets, previousUsedAssets);
         }
     }
