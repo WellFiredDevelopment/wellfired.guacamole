@@ -1,64 +1,87 @@
-﻿using System.Collections.Generic;
-using WellFired.Guacamole.Data;
+﻿using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Drawing.Shapes;
+
+// Disabled here since it makes passing variables to the shape constructors easier to read
+// ReSharper disable ArgumentsStyleNamedExpression
 
 namespace WellFired.Guacamole.Drawing
 {
 	public class GraphicsPath
 	{
-		private readonly List<IRasterizableShape> _shapes = new List<IRasterizableShape>();
-		private readonly double _thickness;
+		private IRasterizableShape _shape;
 
-		public GraphicsPath(double thickness)
+		public void FromCircle(Vector center, double radius, double thickness, ByteColor background, ByteColor outline)
 		{
-			_thickness = thickness;
+			FromRasterizableShape(new Circle(
+				center: center,
+				radius: radius,
+				background: background, 
+				outline: outline,
+				thickness: thickness));
 		}
 
-		public void AddLine(Vector startPoint, Vector endPoint)
+		public void FromDonut(Vector center, double radius, double holeRadius, ByteColor background)
 		{
-			AddRasterizableShapeShape(new Line(startPoint, endPoint, _thickness));
+			FromRasterizableShape(new DonutFill(
+				center: center,
+				radius: radius,
+				holeRadius: holeRadius,
+				background: background));
 		}
 
-		public void AddCircleQuarter(QuarterCircle.Quarter quarter, Vector center, double radius)
+		public void FromRoundedCornerRect(Rect rect, double radius, double thickness, ByteColor background, ByteColor outline, CornerMask cornerMask, OutlineMask outlineMask)
 		{
-			AddRasterizableShapeShape(new QuarterCircle(quarter, center, radius, _thickness));
+			FromRasterizableShape(new RoundedCornerRect(
+				rect: rect,
+				radius: radius,
+				thickness: thickness,
+				background: background,
+				outline: outline,
+				cornerMask: cornerMask, 
+				outlineMask: outlineMask));
 		}
 
-		public void AddCircle(Vector center, double radius)
+		public void FromRect(Rect rect, double thickness, ByteColor background, ByteColor outline, OutlineMask outlineMask)
 		{
-			AddRasterizableShapeShape(new Circle(center, radius, _thickness));
+			FromRasterizableShape(new SquareRect(
+				rect: rect,
+				thickness: thickness,
+				background: background,
+				outline: outline,
+				outlineMask: outlineMask));
 		}
 
-		public void AddRectDefinedEllipse(Rect rect)
+		public void FromLine(Vector startPoint, Vector endPoint)
 		{
-			AddRasterizableShapeShape(new RectDefinedEllipse(rect, _thickness));
+			//FromRasterizableShape(new Line(startPoint, endPoint, _thickness));
 		}
 
-		public void AddRasterizableShapeShape(IRasterizableShape shape)
+		public void FromCircleQuarter(QuarterCircle.Quarter quarter, Vector center, double radius, double thickness, ByteColor background, ByteColor outline)
 		{
-			_shapes.Add(shape);
+			FromRasterizableShape(new Quarter(quarter, center, radius, thickness, background, outline));
 		}
 
-		public UIColor[] Draw(int width, int height, UIColor backgroundColor, UIColor outlineColor)
+		public void FromRectDefinedEllipse(Rect rect)
 		{
-			var image = new UIImageRaw {Data = new UIColor[width * height], Width = width, Height = height};
-			for (var i = 0; i < image.Length; i++)
-				image[i] = UIColor.Clear;
+			//FromRasterizableShape(new RectDefinedEllipse(rect));
+		}
 
-			if (backgroundColor == UIColor.Clear && outlineColor == UIColor.Clear)
-				return image.Data;
+		public void FromRasterizableShape(IRasterizableShape shape)
+		{
+			_shape = shape;
+		}
 
-			_shapes.ForEach(shape => shape.RasterizeWithWidthAndAA(image, outlineColor));
+		public byte[] Draw(int width, int height)
+		{
+			// Bytes default to 0 so we don't need to clear this array.
+			var byteData = new byte[width * height * 4];
 
-			var startingPixel = new Pixel
-			{
-				X = (int) (width*0.5),
-				Y = (int) (height*0.5)
-			};
-
-			new ImageFill().Fill(image, startingPixel, backgroundColor, ImageFill.FillStyle.Linear);
+			_shape?.Rasterize(
+				byteData: byteData, 
+				width: width, 
+				height: height);
 			
-			return image.Data;
+			return byteData;
 		}
 	}
 }

@@ -60,8 +60,11 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			base.OnPropertyChanged(sender, e);
 
 			if (e.PropertyName == ListView.ScrollBarCornerRadiusProperty.PropertyName ||
+			    e.PropertyName == ListView.ScrollBarCornerMaskProperty.PropertyName ||
 			    e.PropertyName == ListView.ScrollBarOutlineColorProperty.PropertyName ||
-			    e.PropertyName == ListView.ScrollBarBackgroundColorProperty.PropertyName)
+			    e.PropertyName == ListView.ScrollBarBackgroundColorProperty.PropertyName ||
+			    e.PropertyName == ListView.ScrollBarOutlineThicknessProperty.PropertyName ||
+			    e.PropertyName == ListView.ScrollBarOutlineMaskProperty.PropertyName)
 			{
 				CreateScrollBarBackgroundTexture();
 				ResetStyle();
@@ -105,7 +108,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			var listView = Control as ListView;
 			Debug.Assert(listView != null, "listView != null");
-			ScrollBarBackgroundTexture = Texture2DExtensions.CreateRoundedTexture(64, 64, listView.ScrollBarBackgroundColor, listView.ScrollBarOutlineColor, listView.ScrollBarCornerRadius, 1, listView.ScrollBarCornerMask, OutlineMask.All);
+			ScrollBarBackgroundTexture = Texture2DExtensions.CreateRoundedTexture(64, 64, listView.ScrollBarBackgroundColor, listView.ScrollBarOutlineColor, listView.ScrollBarCornerRadius, listView.ScrollBarOutlineThickness, listView.ScrollBarCornerMask, listView.ScrollBarOutlineMask);
 		}
 
 		private static void HandleScroll(Rect unityRect, ListView listView)

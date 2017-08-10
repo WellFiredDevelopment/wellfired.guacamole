@@ -36,8 +36,8 @@ namespace WellFired.Guacamole.Views
 			);
 
 		[PublicAPI] public static readonly BindableProperty OutlineThicknessProperty = BindableProperty
-			.Create<View, float>(
-				default(float),
+			.Create<View, double>(
+				4.0,
 				BindingMode.TwoWay,
 				viewBase => viewBase.OutlineThickness
 			);
@@ -156,9 +156,9 @@ namespace WellFired.Guacamole.Views
 		}
 
 		[PublicAPI]
-		public float OutlineThickness
+		public double OutlineThickness
 		{
-			get { return (float) GetValue(OutlineThicknessProperty); }
+			get { return (double) GetValue(OutlineThicknessProperty); }
 			set { SetValue(OutlineThicknessProperty, value); }
 		}
 

@@ -13,7 +13,8 @@ namespace WellFired.Guacamole.Styling.Styles
             Setters =
             {
                 new Setter {Property = View.BackgroundColorProperty, Value = DarkerColor},
-                new Setter {Property = View.OutlineColorProperty, Value = DarkerColor}
+                new Setter {Property = View.OutlineColorProperty, Value = DarkerColor},
+                new Setter {Property = View.OutlineThicknessProperty, Value = 4.0},
             },
             Triggers =
             {

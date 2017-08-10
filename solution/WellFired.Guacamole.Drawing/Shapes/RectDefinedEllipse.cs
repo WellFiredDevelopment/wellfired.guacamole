@@ -14,7 +14,7 @@ namespace WellFired.Guacamole.Drawing.Shapes
             //_thickness = thickness;
         }
 
-        public void Rasterize(UIImageRaw image, UIColor color)
+        public void Rasterize(RawImage image, UIColor color)
         {
             var width = image.Width;
             var height = image.Height;
@@ -33,12 +33,12 @@ namespace WellFired.Guacamole.Drawing.Shapes
                     return;
                 if (y < 0)
                     return;
-                var index = width * y + x;
-                image[index] = color;
+                //var index = width * y + x;
+                //image[index] = color;
             });
         }
 
-        public void RasterizeWithAA(UIImageRaw image, UIColor color)
+        public void RasterizeWithAA(RawImage image, UIColor color)
         {
             var width = image.Width;
             var height = image.Height;
@@ -57,13 +57,13 @@ namespace WellFired.Guacamole.Drawing.Shapes
                     return;
                 if (y < 0)
                     return;
-                var index = width * (height - y - 1) + x;
-                color.A = 1.0f - a / 255.0f;
-                image[index] = color;
+                //var index = width * (height - y - 1) + x;
+                //color.A = 1.0f - a / 255.0f;
+                //image[index] = color;
             });
         }
 
-        public void RasterizeWithWidthAndAA(UIImageRaw image, UIColor color)
+        public void RasterizeWithWidthAndAA(RawImage image, UIColor color)
         {
             RasterizeWithAA(image, color);
         }
@@ -141,7 +141,7 @@ namespace WellFired.Guacamole.Drawing.Shapes
         /// <summary>
         /// Taken from the Bresenham paper at http://members.chello.at/easyfilter/Bresenham.pdf
         /// </summary>
-        private static void DoAA(int x0, int x1, int y0, int y1, int width, int height, UIImageRaw image, UIColor color, Action<int, int, int> plot)
+        private static void DoAA(int x0, int x1, int y0, int y1, int width, int height, RawImage image, UIColor color, Action<int, int, int> plot)
         {
             long a = Math.Abs(x1 - x0), b = Math.Abs(y1 - y0), b1 = b & 1;
             float dx = (float) (4 * (a - 1.0) * b * b), dy = 4 * (b1 + 1) * a * a;
@@ -150,8 +150,10 @@ namespace WellFired.Guacamole.Drawing.Shapes
 
             if (a == 0 || b == 0)
             {
-                Line.PlotLine(x0, y0, x1, y1, width, height, image, color);
-                return;
+                throw new Exception();
+                // [TODO] : Replace this with the new Algorithms.line version.
+//              Line.Plot(x0, y0, x1, y1, width, height, image.Data, color);
+//              return;
             }
 
             if (x0 > x1)
@@ -221,6 +223,11 @@ namespace WellFired.Guacamole.Drawing.Shapes
                     plot(x1, y1, (int) i);
                     err += dy += a;
                 }
+        }
+
+        public void Rasterize(byte[] byteData, int width, int height)
+        {
+            throw new NotImplementedException();
         }
     }
 }

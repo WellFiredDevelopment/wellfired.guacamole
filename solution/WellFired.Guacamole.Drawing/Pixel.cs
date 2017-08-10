@@ -4,8 +4,14 @@ namespace WellFired.Guacamole.Drawing
 {
 	public struct Pixel : IEquatable<Pixel>
 	{
-		public int X;
-		public int Y;
+		public int X { get; }
+		public int Y { get; }
+
+		public Pixel(int x, int y)
+		{
+			X = x;
+			Y = y;
+		}
 
 		public override bool Equals(object obj)
 		{

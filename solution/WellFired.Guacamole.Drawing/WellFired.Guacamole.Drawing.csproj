@@ -38,23 +38,43 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithms\Circle.cs" />
+    <Compile Include="Algorithms\Line.cs" />
+    <Compile Include="Blend\Blend.cs" />
+    <Compile Include="Blend\BlendOperation.cs" />
+    <Compile Include="Blend\AlphaBlend.cs" />
+    <Compile Include="Blend\EraseAlphaBlend.cs" />
+    <Compile Include="Blend\MaxRGBBlendABlend.cs" />
+    <Compile Include="Blend\ReplaceAlphaBlend.cs" />
+    <Compile Include="ByteColor.cs" />
+    <Compile Include="Extensions\ArrayExtensions.cs" />
+    <Compile Include="Extensions\CornerMaskExtensions.cs" />
+    <Compile Include="Extensions\OutlineMaskExtensions.cs" />
     <Compile Include="Extensions\UIColorExtensions.cs" />
     <Compile Include="GraphicsPath.cs" />
     <Compile Include="ImageFill.cs" />
+    <Compile Include="ImageFill.FillStyle.cs" />
+    <Compile Include="Layer\Layer.cs" />
+    <Compile Include="Layer\Operation.cs" />
     <Compile Include="Pixel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rect.cs" />
-    <Compile Include="Shapes\BottomLeftQuarterRasterizer.cs" />
-    <Compile Include="Shapes\BottomRightQuarterRasterizer.cs" />
     <Compile Include="Shapes\Circle.cs" />
+    <Compile Include="Shapes\CircleFill.cs" />
+    <Compile Include="Shapes\CircleOutline.cs" />
+    <Compile Include="Shapes\DonutFill.cs" />
     <Compile Include="Shapes\IRasterizableShape.cs" />
     <Compile Include="Shapes\Line.cs" />
     <Compile Include="Shapes\QuarterCircle.cs" />
+    <Compile Include="Shapes\QuarterDonutFill.cs" />
+    <Compile Include="Shapes\QuarterFill.cs" />
+    <Compile Include="Shapes\QuarterOutline.cs" />
     <Compile Include="Shapes\RectDefinedEllipse.cs" />
-    <Compile Include="Shapes\TopLeftQuarterRasterizer.cs" />
-    <Compile Include="Shapes\TopRightQuarterRasterizer.cs" />
+    <Compile Include="Shapes\RoundedCornerRect.cs" />
+    <Compile Include="Shapes\Quarter.cs" />
     <Compile Include="Size.cs" />
-    <Compile Include="UIImageRaw.cs" />
+    <Compile Include="RawImage.cs" />
+    <Compile Include="SquareRect.cs" />
     <Compile Include="Vector.cs" />
   </ItemGroup>
   <ItemGroup>

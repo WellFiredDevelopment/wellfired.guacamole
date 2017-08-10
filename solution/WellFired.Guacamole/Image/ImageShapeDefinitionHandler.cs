@@ -17,8 +17,7 @@ namespace WellFired.Guacamole.Image
 
         public async Task<IImageSourceWrapper> Handle(CancellationToken cancellationToken)
         {
-            var imageIncludingChanel = _imageShapeDefinition.Size * _imageShapeDefinition.Size * 4;
-            var byteArray = new byte[imageIncludingChanel];
+            var byteArray = new byte[0];
 
             await TaskEx.Run(() =>
             {
@@ -33,19 +32,7 @@ namespace WellFired.Guacamole.Image
                         throw new ArgumentOutOfRangeException();
                 }
                 
-                var imageData = ImageData.BuildRounded(_imageShapeDefinition.Size, _imageShapeDefinition.Size, _imageShapeDefinition.Color, _imageShapeDefinition.OutlineColor, corner, 1, CornerMask.All, OutlineMask.All);
-                
-                var counter = 0;
-                foreach (var color in imageData)
-                {
-                    byteArray[counter + 0] = (byte)(color.R * 255);
-                    byteArray[counter + 1] = (byte)(color.G * 255);
-                    byteArray[counter + 2] = (byte)(color.B * 255);
-                    byteArray[counter + 3] = (byte)(color.A * 255);
-                
-                    counter += 4;
-                }
-                
+                byteArray = ImageData.BuildRounded(_imageShapeDefinition.Size, _imageShapeDefinition.Size, _imageShapeDefinition.Color, _imageShapeDefinition.OutlineColor, corner, _imageShapeDefinition.Thickness, CornerMask.All, OutlineMask.All);
             }, cancellationToken);
 
             return new ImageSourceWrapper(new MemoryStream(byteArray), ImageType.Raw);

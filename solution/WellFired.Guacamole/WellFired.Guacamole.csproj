@@ -87,6 +87,7 @@
     <Compile Include="Exceptions\NoCompatibleCellInDataTemplate.cs" />
     <Compile Include="Exceptions\DataTemplateTypeIsNotBindableException.cs" />
     <Compile Include="Exceptions\TabbedPagePageShouldntAlreadyHaveBindingContext.cs" />
+    <Compile Include="Extensions\ColorExtensions.cs" />
     <Compile Include="Extensions\DelegateExtensions.cs" />
     <Compile Include="Extensions\FloatExtensions.cs" />
     <Compile Include="FileSystem\FileSystem.cs" />

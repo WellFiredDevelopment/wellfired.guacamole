@@ -119,23 +119,25 @@ namespace WellFired.Guacamole.Image
         /// Loads an Image from a shape definition
         /// </summary>
         /// <param name="imageShape"></param>
+        /// <param name="thickness"></param>
         /// <param name="color"></param>
         /// <returns></returns>
-        public static IImageSource From(ImageShape imageShape, UIColor color)
+        public static IImageSource From(ImageShape imageShape, double thickness, UIColor color)
         {
-            return new ImageSource(new ImageShapeDefinition { Shape = imageShape, Size = 64, Color = color, OutlineColor = color });
+            return new ImageSource(new ImageShapeDefinition { Shape = imageShape, Size = 64, Color = color, OutlineColor = color, Thickness = thickness });
         }
 
         /// <summary>
         /// Loads an Image from a shape definition
         /// </summary>
         /// <param name="imageShape"></param>
+        /// <param name="thickness"></param>
         /// <param name="color"></param>
         /// <param name="outlineColor"></param>
         /// <returns></returns>
-        public static IImageSource From(ImageShape imageShape, UIColor color, UIColor outlineColor)
+        public static IImageSource From(ImageShape imageShape, double thickness, UIColor color, UIColor outlineColor)
         {
-            return new ImageSource(new ImageShapeDefinition { Shape = imageShape, Size = 64, Color = color, OutlineColor = outlineColor });
+            return new ImageSource(new ImageShapeDefinition { Shape = imageShape, Size = 64, Color = color, OutlineColor = outlineColor, Thickness = thickness });
         }
     }
 }

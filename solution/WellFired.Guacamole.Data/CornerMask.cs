@@ -6,6 +6,7 @@ namespace WellFired.Guacamole.Data
 	[Flags]
 	public enum CornerMask
 	{
+		None = 0,
 		TopLeft = 1 << 0,
 		TopRight = 1 << 1,
 		BottomLeft = 1 << 2,
@@ -14,7 +15,7 @@ namespace WellFired.Guacamole.Data
 		All = TopLeft | TopRight | BottomLeft | BottomRight,
 		Right = TopRight | BottomRight,
 		Left = TopLeft | BottomLeft,
-		[UsedImplicitly] Top = TopLeft | TopRight,
-		[UsedImplicitly] Bottom = BottomLeft | BottomRight
+		Top = TopLeft | TopRight,
+		Bottom = BottomLeft | BottomRight
 	}
 }

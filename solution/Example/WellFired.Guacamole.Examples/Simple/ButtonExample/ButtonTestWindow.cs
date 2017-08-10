@@ -12,13 +12,12 @@ namespace WellFired.Guacamole.Examples.Simple.ButtonExample
 		{
 			Padding = UIPadding.Of(5);
 
-			var button = new Button
-			{
+			var button = new Button {
 				Text = "Press Me Please."
 			};
 
 			var buttonPressed = new Command {
-				ExecuteAction = () => { Logger.LogMessage("Sausages"); }
+				ExecuteAction = () => { Logger.LogMessage("Button Click Command"); }
 			};
 
 			button.ButtonPressedCommand = buttonPressed;

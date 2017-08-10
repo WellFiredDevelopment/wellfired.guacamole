@@ -13,6 +13,7 @@ namespace WellFired.Guacamole.Styling.Styles
             {
                 new Setter {Property = View.BackgroundColorProperty, Value = DarkerColor},
                 new Setter {Property = View.OutlineColorProperty, Value = DarkerColor},
+                new Setter {Property = View.OutlineThicknessProperty, Value = 4.0},
                 new Setter {Property = View.HorizontalLayoutProperty, Value = LayoutOptions.Expand},
                 new Setter {Property = View.VerticalLayoutProperty, Value = LayoutOptions.Expand}
             }

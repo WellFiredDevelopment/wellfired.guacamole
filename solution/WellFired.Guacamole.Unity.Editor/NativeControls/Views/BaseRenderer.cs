@@ -9,6 +9,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 {
 	public abstract class BaseRenderer : INativeRenderer
 	{
+		private bool _firstRender;
 		private UIRect _prevRect;
 		private bool _resetStyle = true;
 		private GUIStyle _style = GUIStyle.none;
@@ -50,6 +51,13 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 
 		public virtual void Render(UIRect renderRect)
 		{
+			if (!_firstRender)
+			{
+				_resetStyle = true;
+				_firstRender = true;
+				CreateBackgroundTexture();
+			}
+			
 			if (renderRect != _prevRect)
 				UnityRect = renderRect.ToUnityRect();
 			_prevRect = renderRect;
@@ -77,13 +85,11 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 					Control.ControlState = newControlState;
 			}
 
-			var offset = (float) Control.CornerRadius;
+			var thickness = (int) Control.OutlineThickness;
+			var offset = (float) Control.CornerRadius + thickness;
 			var smallest = (int) (Mathf.Min(offset, Mathf.Min(UnityRect.width * 0.5f, UnityRect.height * 0.5f)) + 0.5f);
 			smallest = Mathf.Max(smallest, 2);
 			Style.border = new RectOffset(smallest, smallest, smallest, smallest);
-
-			if (BackgroundTexture == null)
-				CreateBackgroundTexture();
 
 			GUI.SetNextControlName(Control.Id);
 		}
@@ -92,7 +98,10 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			if (e.PropertyName == View.CornerRadiusProperty.PropertyName ||
 			    e.PropertyName == View.OutlineColorProperty.PropertyName ||
-			    e.PropertyName == View.BackgroundColorProperty.PropertyName)
+			    e.PropertyName == View.BackgroundColorProperty.PropertyName ||
+			    e.PropertyName == View.OutlineThicknessProperty.PropertyName ||
+			    e.PropertyName == View.OutlineMaskProperty.PropertyName ||
+			    e.PropertyName == View.CornerMaskProperty.PropertyName)
 			{
 				CreateBackgroundTexture();
 				ResetStyle();
@@ -135,6 +144,9 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 
 		private void CreateBackgroundTexture()
 		{
+			if (!_firstRender)
+				return;
+			
 			BackgroundTexture = Texture2DExtensions.CreateRoundedTexture(64, 64, Control.BackgroundColor, Control.OutlineColor, Control.CornerRadius, Control.OutlineThickness, Control.CornerMask, Control.OutlineMask);
 		}
 	}

@@ -16,17 +16,20 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.View.Cells
             var doneNotDone = new ToggleView
             {
                 HorizontalLayout = LayoutOptions.Expand,
-                VerticalLayout = LayoutOptions.Center
+                VerticalLayout = LayoutOptions.Center,
+                MinSize = UISize.Of(24, 24)
             };
 
             var filterName = new Label
             {
-                BackgroundColor = UIColor.Beige,
+                BackgroundColor = UIColor.Clear,
                 HorizontalTextAlign = UITextAlign.Start,
                 VerticalTextAlign = UITextAlign.Middle,
                 TextColor = UIColor.FromRGB(62, 62, 62),
                 VerticalLayout = LayoutOptions.Fill,
-                FontSize = 14
+                OutlineMask = OutlineMask.Bottom,
+                FontSize = 14,
+                OutlineThickness = 1.0
             };
             
             var layoutView = new LayoutView
@@ -42,7 +45,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.View.Cells
                 }
             };
             
-            doneNotDone.Style = default(Style); // Clear the default style on this because we don't want it to act like regular ImageView
+            doneNotDone.Style = default(Style); // Clear the default style on this because we don't want it to act like regular ToggleView
             filterName.Style = default(Style);  // Clear the default style on this because we don't want it to act like regular Label
             layoutView.Style = default(Style);  // Clear the default style on this because we don't want it to act like regular LayoutView
 

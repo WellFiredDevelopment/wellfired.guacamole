@@ -1,4 +1,7 @@
-﻿using System.IO;
+﻿//#define DEBUG_TEXTURE_CREATION
+#if DEBUG_TEXTURE_CREATION
+using System.IO;
+#endif
 using JetBrains.Annotations;
 using UnityEngine;
 using WellFired.Guacamole.Data;
@@ -42,18 +45,26 @@ namespace WellFired.Guacamole.Unity.Editor.Extensions
 			CornerMask cornerMask,
 			OutlineMask outlineMask)
 		{
-			var result = new Texture2D(width, height)
-			{
+			var result = new Texture2D(width, height) {
 				wrapMode = TextureWrapMode.Clamp
 			};
-
-			var pixelData = radius < 3 
-				? ImageData.BuildSquare(width, height, backgroundColor, outlineColor, thickness) 
+			
+			var pixelData = radius < 1 || cornerMask == CornerMask.None
+				? ImageData.BuildRect(width, height, backgroundColor, outlineColor, thickness, outlineMask) 
 				: ImageData.BuildRounded(width, height, backgroundColor, outlineColor, radius, thickness, cornerMask, outlineMask);
 			
-			var unityPixelData = new Color[pixelData.Length];
+			var unityPixelData = new Color[pixelData.Length / 4];
+			var byteIndex = 0;
 			for (var index = 0; index < unityPixelData.Length; index++)
-				unityPixelData[index] = pixelData[index].ToUnityColor();
+			{
+				unityPixelData[index] = new Color32(
+					pixelData[byteIndex+0], 
+					pixelData[byteIndex+1], 
+					pixelData[byteIndex+2], 
+					pixelData[byteIndex+3]);
+
+				byteIndex += 4;
+			}
 
 			result.SetPixels(unityPixelData);
 			result.Apply();

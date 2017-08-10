@@ -22,21 +22,21 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.View
 
             var collection = new ObservableCollection<Filter>
             {
-                new Filter { FilterName = "Item 1", FilterImage = ImageSource.From(ImageShape.Circle, UIColor.FromRGB(236, 142, 117)) },
-                new Filter { FilterName = "Item 2", FilterImage = ImageSource.From(ImageShape.Circle, UIColor.FromRGB(204, 204, 204)) },
-                new Filter { FilterName = "Item 3", FilterImage = ImageSource.From(ImageShape.Circle, UIColor.FromRGB(174, 199, 225)) },
-                new Filter { FilterName = "Item 4", FilterImage = ImageSource.From(ImageShape.Circle, UIColor.FromRGB(146, 229, 211)) },
-                new Filter { FilterName = "Item 5", FilterImage = ImageSource.From(ImageShape.Circle, UIColor.FromRGB(217, 171, 224)) },
-                new Filter { FilterName = "Item 6", FilterImage = ImageSource.From(ImageShape.Circle, UIColor.FromRGB(236, 142, 117)) },
-                new Filter { FilterName = "Item 7", FilterImage = ImageSource.From(ImageShape.Circle, UIColor.FromRGB(204, 204, 204)) },
-                new Filter { FilterName = "Item 8", FilterImage = ImageSource.From(ImageShape.Circle, UIColor.FromRGB(174, 199, 225)) },
-                new Filter { FilterName = "Item 9", FilterImage = ImageSource.From(ImageShape.Circle, UIColor.FromRGB(204, 204, 204)) },
-                new Filter { FilterName = "Item 10", FilterImage = ImageSource.From(ImageShape.Circle, UIColor.FromRGB(174, 199, 225)) },
-                new Filter { FilterName = "Item 11", FilterImage = ImageSource.From(ImageShape.Circle, UIColor.FromRGB(146, 229, 211)) },
-                new Filter { FilterName = "Item 12", FilterImage = ImageSource.From(ImageShape.Circle, UIColor.FromRGB(217, 171, 224)) },
-                new Filter { FilterName = "Item 13", FilterImage = ImageSource.From(ImageShape.Circle, UIColor.FromRGB(236, 142, 117)) },
-                new Filter { FilterName = "Item 14", FilterImage = ImageSource.From(ImageShape.Circle, UIColor.FromRGB(204, 204, 204)) },
-                new Filter { FilterName = "Item 15", FilterImage = ImageSource.From(ImageShape.Circle, UIColor.FromRGB(174, 199, 225)) }
+                new Filter { FilterName = "Item 1", FilterImage = ImageSource.From(ImageShape.Circle, 6.0, UIColor.FromRGB(236, 142, 117)) },
+                new Filter { FilterName = "Item 2", FilterImage = ImageSource.From(ImageShape.Circle, 6.0, UIColor.FromRGB(204, 204, 204)) },
+                new Filter { FilterName = "Item 3", FilterImage = ImageSource.From(ImageShape.Circle, 6.0, UIColor.FromRGB(174, 199, 225)) },
+                new Filter { FilterName = "Item 4", FilterImage = ImageSource.From(ImageShape.Circle, 6.0, UIColor.FromRGB(146, 229, 211)) },
+                new Filter { FilterName = "Item 5", FilterImage = ImageSource.From(ImageShape.Circle, 6.0, UIColor.FromRGB(217, 171, 224)) },
+                new Filter { FilterName = "Item 6", FilterImage = ImageSource.From(ImageShape.Circle, 6.0, UIColor.FromRGB(236, 142, 117)) },
+                new Filter { FilterName = "Item 7", FilterImage = ImageSource.From(ImageShape.Circle, 6.0, UIColor.FromRGB(204, 204, 204)) },
+                new Filter { FilterName = "Item 8", FilterImage = ImageSource.From(ImageShape.Circle, 6.0, UIColor.FromRGB(174, 199, 225)) },
+                new Filter { FilterName = "Item 9", FilterImage = ImageSource.From(ImageShape.Circle, 6.0, UIColor.FromRGB(204, 204, 204)) },
+                new Filter { FilterName = "Item 10", FilterImage = ImageSource.From(ImageShape.Circle, 6.0, UIColor.FromRGB(174, 199, 225)) },
+                new Filter { FilterName = "Item 11", FilterImage = ImageSource.From(ImageShape.Circle, 6.0, UIColor.FromRGB(146, 229, 211)) },
+                new Filter { FilterName = "Item 12", FilterImage = ImageSource.From(ImageShape.Circle, 6.0, UIColor.FromRGB(217, 171, 224)) },
+                new Filter { FilterName = "Item 13", FilterImage = ImageSource.From(ImageShape.Circle, 6.0, UIColor.FromRGB(236, 142, 117)) },
+                new Filter { FilterName = "Item 14", FilterImage = ImageSource.From(ImageShape.Circle, 6.0, UIColor.FromRGB(204, 204, 204)) },
+                new Filter { FilterName = "Item 15", FilterImage = ImageSource.From(ImageShape.Circle, 6.0, UIColor.FromRGB(174, 199, 225)) }
             };
 
             Content = new LayoutView

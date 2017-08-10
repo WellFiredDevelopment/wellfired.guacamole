@@ -15,7 +15,7 @@ namespace WellFired.Guacamole.Unit.Drawing.ImageData
         [Test]
         public void When_AttemptingToBuildAnSquareImage_Then_BuiltSuccessfully()
         {
-            Assert.That(() => Image.ImageData.BuildSquare(128, 128, UIColor.Aquamarine, UIColor.Beige, 1), Throws.Nothing);
+            Assert.That(() => Image.ImageData.BuildRect(128, 128, UIColor.Aquamarine, UIColor.Beige, 1, OutlineMask.All), Throws.Nothing);
         }
         
         [Test]

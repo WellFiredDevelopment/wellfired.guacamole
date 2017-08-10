@@ -20,13 +20,13 @@ namespace WellFired.Guacamole.Views
             );
 
         [PublicAPI] public static readonly BindableProperty OnImageSourceProperty = BindableProperty.Create<ToggleView, IImageSource>(
-            ImageSource.From(ImageShape.Circle, UIColor.Grey),
+            ImageSource.From(ImageShape.Circle, 4.0, UIColor.Grey),
             BindingMode.TwoWay,
             v => v.OnImageSource
         );
 
         [PublicAPI] public static readonly BindableProperty OffImageSourceProperty = BindableProperty.Create<ToggleView, IImageSource>(
-            ImageSource.From(ImageShape.Circle, UIColor.Clear, UIColor.Grey),
+            ImageSource.From(ImageShape.Circle, 4.0, UIColor.Clear, UIColor.Grey),
             BindingMode.TwoWay,
             v => v.OffImageSource
         );

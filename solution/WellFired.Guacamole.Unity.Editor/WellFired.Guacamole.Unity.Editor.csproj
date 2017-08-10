@@ -103,6 +103,10 @@
       <Name>WellFired.Guacamole.Data</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\WellFired.Guacamole.Drawing\WellFired.Guacamole.Drawing.csproj">
+      <Project>{71844ACC-D2EC-4216-BD8D-AC63647AD6AC}</Project>
+      <Name>WellFired.Guacamole.Drawing</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WellFired.Guacamole\WellFired.Guacamole.csproj">
       <Project>{9804de8d-6d30-4fd7-adfe-4ec24a7adb6e}</Project>
       <Name>WellFired.Guacamole</Name>

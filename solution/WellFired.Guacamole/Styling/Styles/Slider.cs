@@ -11,6 +11,7 @@ namespace WellFired.Guacamole.Styling.Styles
 			{
 				new Setter {Property = View.BackgroundColorProperty, Value = UIColor.FromRGB(125, 125, 125)},
 				new Setter {Property = View.OutlineColorProperty, Value = UIColor.FromRGB(0, 0, 0)},
+				new Setter {Property = View.OutlineThicknessProperty, Value = 4.0},
 				new Setter {Property = View.HorizontalLayoutProperty, Value = LayoutOptions.Fill},
 				new Setter {Property = View.VerticalLayoutProperty, Value = LayoutOptions.Expand},
 				new Setter {Property = View.PaddingProperty, Value = 5},

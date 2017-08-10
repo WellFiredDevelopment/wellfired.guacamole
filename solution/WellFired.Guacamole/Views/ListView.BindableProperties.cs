@@ -74,6 +74,18 @@ namespace WellFired.Guacamole.Views
                 v => v.ScrollBarCornerMask
             );
 
+        [PublicAPI] public static readonly BindableProperty ScrollBarOutlineThicknessProperty = BindableProperty.Create<ListView, double>(
+            1.0,
+            BindingMode.TwoWay,
+            v => v.ScrollBarOutlineThickness
+        );
+
+        [PublicAPI] public static readonly BindableProperty ScrollBarOutlineMaskProperty = BindableProperty.Create<ListView, OutlineMask>(
+            Data.OutlineMask.All,
+            BindingMode.TwoWay,
+            v => v.ScrollBarOutlineMask
+        );
+
         [PublicAPI] public static readonly BindableProperty ScrollBarSizeProperty = BindableProperty.Create<ListView, int>(
                 20,
                 BindingMode.TwoWay,
@@ -189,6 +201,20 @@ namespace WellFired.Guacamole.Views
         {
             get { return (CornerMask) GetValue(ScrollBarCornerMaskProperty); }
             set { SetValue(ScrollBarCornerMaskProperty, value); }
+        }
+
+        [PublicAPI]
+        public double ScrollBarOutlineThickness
+        {
+            get { return (double) GetValue(ScrollBarOutlineThicknessProperty); }
+            set { SetValue(ScrollBarOutlineThicknessProperty, value); }
+        }
+
+        [PublicAPI]
+        public OutlineMask ScrollBarOutlineMask
+        {
+            get { return (OutlineMask) GetValue(ScrollBarOutlineMaskProperty); }
+            set { SetValue(ScrollBarOutlineMaskProperty, value); }
         }
 
         [PublicAPI]
