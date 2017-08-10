@@ -111,7 +111,7 @@ namespace WellFired.Guacamole.Drawing.Algorithms
                 if (quarter == QuarterCircle.Quarter.TopRight)
                     plot(xm - y, ym - x, (byte) i);
 
-                if (x == 0)
+                if (x < 0)
                     break;
 
                 e2 = err;
