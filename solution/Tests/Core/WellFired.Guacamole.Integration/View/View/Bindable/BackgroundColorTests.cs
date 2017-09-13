@@ -31,12 +31,26 @@ namespace WellFired.Guacamole.Integration.View.View.Bindable
 		[Test]
 		public void ViewBaseBackgroundColorBindingDoesntWorkInTwoWayWithOneWayMode()
 		{
-			_view.Bind(Views.View.BackgroundColorProperty, nameof(_context.BackgroundColor));
+			_view.Bind(Views.View.BackgroundColorProperty, nameof(_context.BackgroundColor), BindingMode.OneWay);
 			Assert.That(_context.BackgroundColor, Is.EqualTo(_view.BackgroundColor));
 			_context.BackgroundColor = UIColor.Blue;
 			Assert.That(_context.BackgroundColor, Is.EqualTo(_view.BackgroundColor));
 			_view.BackgroundColor = UIColor.Red;
 			Assert.That(_context.BackgroundColor, Is.Not.EqualTo(_view.BackgroundColor));
+		}
+		
+		[Test]
+		public void ViewBaseBackgroundColorBindingDoesntWorkInTwoWayWithReadOnlyMode()
+		{
+			_view.Bind(Views.View.BackgroundColorProperty, nameof(_context.BackgroundColor), BindingMode.ReadOnly);
+			Assert.That(_context.BackgroundColor, Is.EqualTo(_view.BackgroundColor));
+			
+			_context.BackgroundColor = UIColor.Blue;
+			Assert.That(_context.BackgroundColor, Is.EqualTo(_view.BackgroundColor));
+			
+			_view.BackgroundColor = UIColor.Red;
+			Assert.That(_view.BackgroundColor, Is.Not.EqualTo(UIColor.Red));
+			Assert.That(_context.BackgroundColor, Is.EqualTo(_view.BackgroundColor));
 		}
 
 		[Test]

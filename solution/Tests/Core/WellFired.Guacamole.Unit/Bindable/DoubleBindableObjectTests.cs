@@ -38,13 +38,12 @@ namespace WellFired.Guacamole.Unit.Bindable
 			var source = new BindableTestObject();
 			var bindingContext = new ContextObject();
 			source.BindingContext = bindingContext;
-			source.Bind(BindableTestObject.DoubleProperty, nameof(ContextObject.Value));
+			source.Bind(BindableTestObject.DoubleProperty, nameof(ContextObject.Value), BindingMode.OneWay);
 			bindingContext.Value = 10.0;
 
 			Assert.That(source.Value, Is.EqualTo(bindingContext.Value));
 
 			source.Value = 15.0;
-
 			Assert.That(bindingContext.Value, Is.Not.EqualTo(source.Value));
 		}
 
@@ -57,6 +56,24 @@ namespace WellFired.Guacamole.Unit.Bindable
 			source.Bind(BindableTestObject.DoubleProperty, nameof(ContextObject.Value));
 			bindingContext.Value = 10.0;
 
+			Assert.That(source.Value, Is.EqualTo(bindingContext.Value));
+		}
+		
+		[Test]
+		public void ReadOnlyBindingTest()
+		{
+			var source = new BindableTestObject();
+			var bindingContext = new ContextObject();
+			source.BindingContext = bindingContext;
+			source.Bind(BindableTestObject.DoubleProperty, nameof(ContextObject.Value), BindingMode.ReadOnly);
+			
+			bindingContext.Value = 10.0;
+
+			Assert.That(bindingContext.Value, Is.EqualTo(10.0));
+			Assert.That(source.Value, Is.EqualTo(bindingContext.Value));
+
+			source.Value = 15.0;
+			Assert.That(source.Value, Is.EqualTo(10.0));
 			Assert.That(source.Value, Is.EqualTo(bindingContext.Value));
 		}
 

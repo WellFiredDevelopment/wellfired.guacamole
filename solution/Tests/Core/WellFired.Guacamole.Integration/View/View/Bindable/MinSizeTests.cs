@@ -31,12 +31,26 @@ namespace WellFired.Guacamole.Integration.View.View.Bindable
 		[Test]
 		public void ViewBaseMinSizeBindingDoesntWorkInTwoWayWithOneWayMode()
 		{
-			_view.Bind(Views.View.MinSizeProperty, nameof(_context.MinSize));
+			_view.Bind(Views.View.MinSizeProperty, nameof(_context.MinSize), BindingMode.OneWay);
 			Assert.That(_context.MinSize == _view.MinSize);
 			_context.MinSize = UISize.One;
 			Assert.That(_context.MinSize == _view.MinSize);
 			_view.MinSize = UISize.Min;
 			Assert.That(_context.MinSize != _view.MinSize);
+		}
+		
+		[Test]
+		public void ViewBaseMinSizeBindingDoesntWorkInTwoWayWithReadOnlyMode()
+		{
+			_view.Bind(Views.View.MinSizeProperty, nameof(_context.MinSize), BindingMode.ReadOnly);
+			Assert.That(_context.MinSize == _view.MinSize);
+			
+			_context.MinSize = UISize.One;
+			Assert.That(_context.MinSize == _view.MinSize);
+			
+			_view.MinSize = UISize.Min;
+			Assert.That(_view.MinSize != UISize.Min);
+			Assert.That(_context.MinSize == _view.MinSize);
 		}
 
 		[Test]

@@ -1,5 +1,6 @@
 ﻿using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.Data;
+using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Views;
 
@@ -17,6 +18,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.UsedAssetsPa
             {
                 HorizontalLayout = LayoutOptions.Fill,
                 VerticalLayout = LayoutOptions.Fill,
+                HorizontalTextAlign = UITextAlign.Start
             };
             
             var importedSize = new Label
@@ -40,20 +42,20 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.UsedAssetsPa
                 MinSize = UISize.Of(80, 0)
             };
 
-            assetPath.Bind(Label.TextProperty, "AssetPath");
+            assetPath.Bind(Label.TextProperty, "AssetPath", BindingMode.ReadOnly);
             
-            importedSize.Bind(Label.TextProperty, "ImportedSize");
-            importedSize.Bind(BackgroundColorProperty, "ImportedSizeBackgroundColor");
+            importedSize.Bind(Label.TextProperty, "ImportedSize", BindingMode.ReadOnly);
+            importedSize.Bind(BackgroundColorProperty, "ImportedSizeBackgroundColor", BindingMode.ReadOnly);
             
-            rawSize.Bind(Label.TextProperty, "RawSize");
-            rawSize.Bind(BackgroundColorProperty, "RawSizeBackgroundColor");
+            rawSize.Bind(Label.TextProperty, "RawSize", BindingMode.ReadOnly);
+            rawSize.Bind(BackgroundColorProperty, "RawSizeBackgroundColor", BindingMode.ReadOnly);
             
-            percentage.Bind(Label.TextProperty, "Percentage");
+            percentage.Bind(Label.TextProperty, "Percentage", BindingMode.ReadOnly);
             
             Content = new LayoutView
             {
                 HorizontalLayout = LayoutOptions.Fill,
-                VerticalLayout = LayoutOptions.Fill,
+                VerticalLayout = LayoutOptions.Expand,
                 Layout = AdjacentLayout.Of(OrientationOptions.Horizontal),
                 Children = {
                     assetPath, 

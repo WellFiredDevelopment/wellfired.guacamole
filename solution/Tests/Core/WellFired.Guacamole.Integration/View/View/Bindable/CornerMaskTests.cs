@@ -38,6 +38,20 @@ namespace WellFired.Guacamole.Integration.View.View.Bindable
 			_view.CornerMask = CornerMask.BottomLeft;
 			Assert.That(_context.CornerMask != _view.CornerMask);
 		}
+		
+		[Test]
+		public void ViewBaseCornerMaskBindingDoesntWorkInTwoWayWithReadOnlyMode()
+		{
+			_view.Bind(Views.View.CornerMaskProperty, nameof(_context.CornerMask), BindingMode.ReadOnly);
+			Assert.That(_context.CornerMask == _view.CornerMask);
+			
+			_context.CornerMask = CornerMask.Bottom;
+			Assert.That(_context.CornerMask == _view.CornerMask);
+			
+			_view.CornerMask = CornerMask.BottomLeft;
+			Assert.That(_view.CornerMask != CornerMask.BottomLeft);
+			Assert.That(_context.CornerMask == _view.CornerMask);
+		}
 
 		[Test]
 		public void ViewBaseCornerMaskBindingWorksInOneWay()

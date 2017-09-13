@@ -12,15 +12,37 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel.Assets
 {
     public class AssetsVM : ObservableBase
     {
-        private List<AssetCellVM> _assetsList;
+        private const string InitialAssetPathText = "Asset Path";
+        private const string InitialImportedSizeText = "Imported Size";
+        private const string InitialRawSizeText = "Raw Size";
+        private const string InitialPercentageText = "Percentage";
+
+        private enum State
+        {
+            Unselected = 0,
+            Ordered = 1,
+            Reversed = 2
+        }
         
+        private List<AssetCellVM> _assetsList;
         private string _totalSize;
         private UIColor _totalSizeBackgroundColor;
-        private Command _sortByPath;
-        private List<AssetCellVM> _displayedAssetsList;
+        private IList<AssetCellVM> _displayedAssetsList;
+        private Command _sortByAssetPath;
+        private Command _sortByImportedSize;
+        private Command _sortByRawSize;
+        private Command _sortByPercentage;
+        private State _assetPathState;
+        private State _importedSizeState;
+        private State _rawSizeState;
+        private State _percentageState;
+        private string _assetPathText = InitialAssetPathText;
+        private string _importedSizeText = InitialImportedSizeText;
+        private string _rawSizeText = InitialRawSizeText;
+        private string _percentageText = InitialPercentageText;
 
         [PublicAPI]
-        public List<AssetCellVM> DisplayedAssetsList
+        public IList<AssetCellVM> DisplayedAssetsList
         {
             get { return _displayedAssetsList; }
             set { SetProperty(ref _displayedAssetsList, value); }
@@ -40,81 +62,177 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel.Assets
             set { SetProperty(ref _totalSizeBackgroundColor, value); }
         }
         
+        public string AssetPathText 
+        { 
+            get { return _assetPathText; }
+            set { SetProperty(ref _assetPathText, value); } 
+        }
+        
+        public string ImportedSizeText 
+        { 
+            get { return _importedSizeText; }
+            set { SetProperty(ref _importedSizeText, value); } 
+        }
+        
+        public string RawSizeText 
+        { 
+            get { return _rawSizeText; }
+            set { SetProperty(ref _rawSizeText, value); } 
+        }
+        
+        public string PercentageText 
+        { 
+            get { return _percentageText; }
+            set { SetProperty(ref _percentageText, value); } 
+        }
+
         [PublicAPI]
-        public Command SortByPath
+        public Command SortByAssetPath
         {
-            get { return _sortByPath; }
-            set { SetProperty(ref _sortByPath, value); }
+            get { return _sortByAssetPath; }
+            set { SetProperty(ref _sortByAssetPath, value); }
+        }
+        
+        [PublicAPI]
+        public Command SortByImportedSize
+        {
+            get { return _sortByImportedSize; }
+            set { SetProperty(ref _sortByImportedSize, value); }
+        }
+        
+        [PublicAPI]
+        public Command SortByRawSize
+        {
+            get { return _sortByRawSize; }
+            set { SetProperty(ref _sortByRawSize, value); }
+        }
+        
+        [PublicAPI]
+        public Command SortByPercentage
+        {
+            get { return _sortByPercentage; }
+            set { SetProperty(ref _sortByPercentage, value); }
         }
 
         public AssetsVM(List<IAsset> assets, List<IAsset> previousAssets = null)
         {
             GenerateTotalSize(assets, previousAssets);
-            //DisplayedAssetsList = new List<AssetCellVM>();
             GenerateAssetsList(assets, previousAssets);
-            SortByPath = new Command { ExecuteAction = () => DoSortByPath() };
-            //SortByPath.Execute();
+            
+            SortByAssetPath = new Command { ExecuteAction = () => {
+                PerformSort(ref _assetPathState, a => a.AssetPath);
+                AssetPathText = GetPath(InitialAssetPathText, _assetPathState);
+            }};
+            SortByImportedSize = new Command { ExecuteAction = () => {
+                PerformSort(ref _importedSizeState, a => a.ImportedSize);
+                ImportedSizeText = GetPath(InitialImportedSizeText, _importedSizeState);
+            }};
+            SortByRawSize = new Command { ExecuteAction = () => {
+                PerformSort(ref _rawSizeState, a => a.RawSize);
+                RawSizeText = GetPath(InitialRawSizeText, _rawSizeState);
+            }};
+            SortByPercentage = new Command { ExecuteAction = () => {
+                PerformSort(ref _percentageState, a => a.Percentage);
+                PercentageText = GetPath(InitialPercentageText, _percentageState);
+            }};
         }
 
-        private void GenerateTotalSize(List<IAsset> assets, List<IAsset> previousAssets = null)
+        private void PerformSort<TKey>(ref State state, Func<AssetCellVM, TKey> keySelector)
+        {
+            var cachedState = state;
+            Reset();
+            state = CycleState(cachedState);
+            DoSort(state, keySelector);
+        }
+
+        private void Reset()
+        {
+            _assetPathState = State.Unselected;
+            AssetPathText = GetPath(InitialAssetPathText, _assetPathState);
+            _importedSizeState = State.Unselected;
+            ImportedSizeText = GetPath(InitialImportedSizeText, _importedSizeState);
+            _rawSizeState = State.Unselected;
+            RawSizeText = GetPath(InitialRawSizeText, _rawSizeState);
+            _percentageState = State.Unselected;
+            PercentageText = GetPath(InitialPercentageText, _percentageState);
+        }
+
+        private void GenerateTotalSize(IEnumerable<IAsset> assets, List<IAsset> previousAssets = null)
         {
             var size = new FileSize(0f);
             size = assets.Aggregate(size, (current, asset) => current + asset.ImportedSize);
             TotalSize = $"{size.SizeInMb:0.00} MB";
+
+            if (previousAssets == null) 
+                return;
             
-            if (previousAssets != null)
-            {
-                var previousSize = new FileSize(0f);
-                previousSize = previousAssets.Aggregate(previousSize, (current, asset) => current + asset.ImportedSize);
+            var previousSize = new FileSize(0f);
+            previousSize = previousAssets.Aggregate(previousSize, (current, asset) => current + asset.ImportedSize);
                 
-                TotalSizeBacgroundColor =
-                    ViewModelUtils.CompareSizeColor(size, previousSize);
-            }
+            TotalSizeBacgroundColor = ViewModelUtils.CompareSizeColor(size, previousSize);
         }
 
-        private void GenerateAssetsList(List<IAsset> assets, List<IAsset> previouslyAssets = null)
+        private void GenerateAssetsList(IEnumerable<IAsset> assets, List<IAsset> previouslyAssets = null)
         {
             _assetsList = new List<AssetCellVM>();
             
-                foreach (var asset in assets)
-                {
-                    var previousIdenticalAsset = previouslyAssets?.Find(
-                        x => string.Equals(x.Path, asset.Path, StringComparison.Ordinal)
-                    );
-                
-                    _assetsList.Add(new AssetCellVM(asset, previousIdenticalAsset));
-                }
-
-            DisplayedAssetsList = new List<AssetCellVM>(_assetsList);
-//            TaskEx.Run(() =>
-//            {
-//                _assetsList = new List<AssetCellVM>();
-//            
-//                foreach (var asset in assets)
-//                {
-//                    var previousIdenticalAsset = previouslyAssets?.Find(
-//                        x => string.Equals(x.Path, asset.Path, StringComparison.Ordinal)
-//                    );
-//                
-//                    _assetsList.Add(new AssetCellVM(asset, previousIdenticalAsset));
-//                }
-//                
-//                Device.ExecuteOnMainThread(() => DisplayedAssetsList = new List<AssetCellVM>(_assetsList));
-//            });
-        }
-        
-        private void DoSortByPath()
-        {
-            TaskEx.Run(() =>
+            foreach (var asset in assets)
             {
-                SortByPath.CanExecute = false;
-                _assetsList.Sort((a, b) => string.Compare(a.AssetPath, b.AssetPath, StringComparison.Ordinal));
+                var previousIdenticalAsset = previouslyAssets?.Find(x => string.Equals(x.Path, asset.Path, StringComparison.Ordinal));
+                _assetsList.Add(new AssetCellVM(asset, previousIdenticalAsset));
+            }
+
+            DisplayedAssetsList = _assetsList;
+        }
+
+        private void DoSort<TKey>(State state, Func<AssetCellVM, TKey> keySelector)
+        {
+            TaskEx.Run(() => {
                 Device.ExecuteOnMainThread(() =>
                 {
-                    _displayedAssetsList = _assetsList.ToList();
-                    SortByPath.CanExecute = true;
+                    switch (state)
+                    {
+                        case State.Unselected:
+                            break;
+                        case State.Ordered:
+                            DisplayedAssetsList = _assetsList.OrderBy(keySelector).ToList();
+                            break;
+                        default:
+                            DisplayedAssetsList = _assetsList.OrderByDescending(keySelector).ToList();
+                            break;
+                    }
                 });
-            });
+            });   
+        }
+
+        private State CycleState(State assetPathState)
+        {
+            switch (assetPathState)
+            {
+                case State.Unselected:
+                    return State.Ordered;
+                case State.Ordered:
+                    return State.Reversed;
+                case State.Reversed:
+                    return State.Ordered;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(assetPathState), assetPathState, null);
+            }
+        }
+
+        private string GetPath(string path, State assetPathState)
+        {
+            switch (assetPathState)
+            {
+                case State.Unselected:
+                    return path;
+                case State.Ordered:
+                    return path + "↓";
+                case State.Reversed:
+                    return path + "↑";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(assetPathState), assetPathState, null);
+            }
         }
     }
 }

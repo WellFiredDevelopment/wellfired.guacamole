@@ -31,7 +31,7 @@ namespace WellFired.Guacamole.Integration.View.View.Bindable
 		[Test]
 		public void ViewBaseHorizontalLayoutOptionsBindingDoesntWorkInTwoWayWithOneWayMode()
 		{
-			_view.Bind(Views.View.HorizontalLayoutProperty, nameof(_context.HorizontalLayoutOptions));
+			_view.Bind(Views.View.HorizontalLayoutProperty, nameof(_context.HorizontalLayoutOptions), BindingMode.OneWay);
 			Assert.That(_context.HorizontalLayoutOptions == _view.HorizontalLayout);
 			_context.HorizontalLayoutOptions = LayoutOptions.Fill;
 			Assert.That(_context.HorizontalLayoutOptions == _view.HorizontalLayout);
@@ -39,6 +39,20 @@ namespace WellFired.Guacamole.Integration.View.View.Bindable
 			Assert.That(_context.HorizontalLayoutOptions != _view.HorizontalLayout);
 		}
 
+		[Test]
+		public void ViewBaseHorizontalLayoutOptionsBindingDoesntWorkInTwoWayWithReadOnlyMode()
+		{
+			_view.Bind(Views.View.HorizontalLayoutProperty, nameof(_context.HorizontalLayoutOptions), BindingMode.ReadOnly);
+			Assert.That(_context.HorizontalLayoutOptions == _view.HorizontalLayout);
+			
+			_context.HorizontalLayoutOptions = LayoutOptions.Fill;
+			Assert.That(_context.HorizontalLayoutOptions == _view.HorizontalLayout);
+			
+			_view.HorizontalLayout = LayoutOptions.Expand;
+			Assert.That(_view.HorizontalLayout != LayoutOptions.Expand);
+			Assert.That(_context.HorizontalLayoutOptions == _view.HorizontalLayout);
+		}
+		
 		[Test]
 		public void ViewBaseHorizontalLayoutOptionsBindingWorksInOneWay()
 		{

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using UnityEngine;
 using WellFired.Guacamole.Data;
+using WellFired.Guacamole.Event;
 using WellFired.Guacamole.Renderer;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Views;

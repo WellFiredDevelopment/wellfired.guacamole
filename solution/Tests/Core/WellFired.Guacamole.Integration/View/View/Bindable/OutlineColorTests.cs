@@ -31,12 +31,26 @@ namespace WellFired.Guacamole.Integration.View.View.Bindable
 		[Test]
 		public void ViewBaseOutlineColorBindingDoesntWorkInTwoWayWithOneWayMode()
 		{
-			_view.Bind(Views.View.OutlineColorProperty, nameof(_context.OutlineColor));
+			_view.Bind(Views.View.OutlineColorProperty, nameof(_context.OutlineColor), BindingMode.OneWay);
 			Assert.That(_context.OutlineColor == _view.OutlineColor);
 			_context.OutlineColor = UIColor.Blue;
 			Assert.That(_context.OutlineColor == _view.OutlineColor);
 			_view.OutlineColor = UIColor.Red;
 			Assert.That(_context.OutlineColor != _view.OutlineColor);
+		}
+		
+		[Test]
+		public void ViewBaseOutlineColorBindingDoesntWorkInTwoWayWithReadOnlyMode()
+		{
+			_view.Bind(Views.View.OutlineColorProperty, nameof(_context.OutlineColor), BindingMode.ReadOnly);
+			Assert.That(_context.OutlineColor == _view.OutlineColor);
+			
+			_context.OutlineColor = UIColor.Blue;
+			Assert.That(_context.OutlineColor == _view.OutlineColor);
+			
+			_view.OutlineColor = UIColor.Red;
+			Assert.That(_view.OutlineColor != UIColor.Red);
+			Assert.That(_context.OutlineColor == _view.OutlineColor);
 		}
 
 		[Test]

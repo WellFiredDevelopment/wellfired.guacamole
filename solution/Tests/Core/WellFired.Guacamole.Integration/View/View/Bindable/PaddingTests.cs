@@ -31,12 +31,26 @@ namespace WellFired.Guacamole.Integration.View.View.Bindable
 		[Test]
 		public void ViewBasePaddingBindingDoesntWorkInTwoWayWithOneWayMode()
 		{
-			_view.Bind(Views.View.PaddingProperty, nameof(_context.Padding));
+			_view.Bind(Views.View.PaddingProperty, nameof(_context.Padding), BindingMode.OneWay);
 			Assert.That(_context.Padding == _view.Padding);
 			_context.Padding = UIPadding.Zero;
 			Assert.That(_context.Padding == _view.Padding);
 			_view.Padding = UIPadding.One;
 			Assert.That(_context.Padding != _view.Padding);
+		}
+		
+		[Test]
+		public void ViewBasePaddingBindingDoesntWorkInTwoWayWithReadOnlyMode()
+		{
+			_view.Bind(Views.View.PaddingProperty, nameof(_context.Padding), BindingMode.ReadOnly);
+			Assert.That(_context.Padding == _view.Padding);
+			
+			_context.Padding = UIPadding.Zero;
+			Assert.That(_context.Padding == _view.Padding);
+			
+			_view.Padding = UIPadding.One;
+			Assert.That(_view.Padding != UIPadding.One);
+			Assert.That(_context.Padding == _view.Padding);
 		}
 
 		[Test]

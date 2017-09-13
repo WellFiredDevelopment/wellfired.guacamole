@@ -31,7 +31,18 @@ namespace WellFired.Guacamole.Integration.View.View.Bindable
 		[Test]
 		public void ViewBaseCornerRadiusBindingDoesntWorkInTwoWayWithOneWayMode()
 		{
-			_view.Bind(Views.View.CornerRadiusProperty, nameof(_context.CornerRadius));
+			_view.Bind(Views.View.CornerRadiusProperty, nameof(_context.CornerRadius), BindingMode.OneWay);
+			Assert.That(Math.Abs(_context.CornerRadius - _view.CornerRadius) < 0.01f);
+			_context.CornerRadius = 2.0f;
+			Assert.That(Math.Abs(_context.CornerRadius - _view.CornerRadius) < 0.01f);
+			_view.CornerRadius = 3.0f;
+			Assert.That(Math.Abs(_context.CornerRadius - _view.CornerRadius) > 0.01f);
+		}
+		
+		[Test]
+		public void ViewBaseCornerRadiusBindingDoesntWorkInTwoWayWithReadOnlyMode()
+		{
+			_view.Bind(Views.View.CornerRadiusProperty, nameof(_context.CornerRadius), BindingMode.OneWay);
 			Assert.That(Math.Abs(_context.CornerRadius - _view.CornerRadius) < 0.01f);
 			_context.CornerRadius = 2.0f;
 			Assert.That(Math.Abs(_context.CornerRadius - _view.CornerRadius) < 0.01f);

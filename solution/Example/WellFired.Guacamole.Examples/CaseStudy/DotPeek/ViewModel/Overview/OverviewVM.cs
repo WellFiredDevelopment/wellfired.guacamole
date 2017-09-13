@@ -98,9 +98,9 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel.Overview
 
         public OverviewVM(BuildReport buildReport, BuildReport previousReport = null)
         {
-            BuildTime = "Build Time : " + buildReport.BuildOverview.BuildTime.ToShortDateString();
-            CommitID = "Commit ID : " + buildReport.BuildOverview.CommitID;
-            Platform = "Platform : " + buildReport.BuildOverview.Platform;
+            BuildTime = $"<b><size=20>Build Time : </size></b>{buildReport.BuildOverview.BuildTime.ToShortDateString()}";
+            CommitID = $"<b>Commit ID : </b>{buildReport.BuildOverview.CommitID}";
+            Platform = $"<b><size=25>Platform : </size></b><size=18>{buildReport.BuildOverview.Platform}</size>";
             UnityVersion = buildReport.BuildOverview.UnityVersion;
             BuildSize = $"{buildReport.BuildOverview.BuildSize.SizeInMb:0.00} MB";
 

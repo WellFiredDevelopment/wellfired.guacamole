@@ -1,4 +1,5 @@
 using WellFired.Guacamole.Data;
+using WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.UIElements;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.OverviewPage
@@ -11,6 +12,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.OverviewPage
             var platform = OverviewPageUICreator.GeneratePlatform();
 
             var unityVersion = OverviewPageUICreator.GenerateUnityVersion();
+            unityVersion.MaxSize = UISize.Of(0, 700);
             unityVersion.Padding = UIPadding.With(0, 20, 0, 0);
 
             var buildSize = OverviewPageUICreator.GenerateBuildSize();
@@ -21,7 +23,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.OverviewPage
             var resourceAssetsSize = OverviewPageUICreator.GenerateResourceAssetsSize();
             resourceAssetsSize.Padding = UIPadding.With(0, 10, 0, 0);
 
-            var verticalLayout = Layout.LayoutFactory.CreateVerticalLayout(buildTimeAndCommitID, platform, unityVersion,
+            var verticalLayout = LayoutFactory.CreateVerticalLayout(buildTimeAndCommitID, platform, unityVersion,
                 buildSize, buildAssetSplit, resourceAssetsSize);
             
             verticalLayout.Padding = UIPadding.With(20, 50, 20, 0);

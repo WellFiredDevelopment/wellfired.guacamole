@@ -14,8 +14,7 @@ namespace WellFired.Guacamole.DataBinding
 
 		public BindingMode BindingMode { get; set; }
 
-		public static BindableProperty Create<TA, TB>(TB defaultValue, BindingMode bindingMode,
-			Expression<Func<TA, TB>> getter)
+		public static BindableProperty Create<TA, TB>(TB defaultValue, BindingMode bindingMode, Expression<Func<TA, TB>> getter)
 		{
 			var expression = getter.Body;
 

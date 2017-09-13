@@ -35,6 +35,12 @@ namespace WellFired.Guacamole.DataBinding
 			}
 		}
 
+		public BindingMode InstancedBindingMode
+		{
+			get; 
+			set;
+		}
+
 		private void ConfigureSet()
 		{
 			if ((Object == null) || (Property == null) || (TargetProperty == null))
@@ -62,10 +68,11 @@ namespace WellFired.Guacamole.DataBinding
 				return false;
 			
 			Value = BindableContextConverter.From(value, Property);
-
-			switch (Property.BindingMode)
+			
+			switch (InstancedBindingMode)
 			{
 				case BindingMode.OneWay:
+				case BindingMode.ReadOnly:
 					return false;
 				case BindingMode.TwoWay:
 					break;

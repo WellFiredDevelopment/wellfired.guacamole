@@ -2,8 +2,7 @@
 
 namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.UIElements
 {
-    public class ColumnLegendButton : Button
+    public class HeaderButton : Button
     {
-        
     }
 }

@@ -37,6 +37,19 @@ namespace WellFired.Guacamole.Integration.View.View.Bindable
 			_view.Enabled = !_view.Enabled;
 			Assert.That(_context.Enabled != _view.Enabled);
 		}
+		
+		[Test]
+		public void ViewBaseEnabledBindingDoesntWorkInTwoWayWithReadOnlyMode()
+		{
+			_view.Bind(Views.View.EnabledProperty, nameof(_context.Enabled), BindingMode.ReadOnly);
+			Assert.That(_context.Enabled == _view.Enabled);
+			
+			_context.Enabled = !_context.Enabled;
+			Assert.That(_context.Enabled == _view.Enabled);
+
+			_view.Enabled = !_context.Enabled;
+			Assert.That(_view.Enabled == _context.Enabled);
+		}
 
 		[Test]
 		public void ViewBaseEnabledBindingWorksInOneWay()

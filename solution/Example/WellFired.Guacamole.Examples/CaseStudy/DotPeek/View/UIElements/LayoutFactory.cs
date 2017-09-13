@@ -2,7 +2,7 @@ using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Views;
 
-namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Layout
+namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.UIElements
 {
     public static class LayoutFactory
     {

@@ -15,22 +15,23 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.OverviewPage
 
             var assetType = new Label
             {
-                HorizontalLayout = LayoutOptions.Expand,
-                VerticalLayout = LayoutOptions.Expand,
+                HorizontalLayout = LayoutOptions.Fill,
+                VerticalLayout = LayoutOptions.Fill,
+                HorizontalTextAlign = UITextAlign.Start
             };
             
             var size = new Label
             {
                 HorizontalLayout = LayoutOptions.Expand,
-                VerticalLayout = LayoutOptions.Expand,
-                MinSize = UISize.Of(80, 0)
+                VerticalLayout = LayoutOptions.Fill,
+                MinSize = UISize.Of(100, 0)
             };
             
             var percentage = new Label
             {
                 HorizontalLayout = LayoutOptions.Expand,
-                VerticalLayout = LayoutOptions.Expand,
-                MinSize = UISize.Of(80, 0)
+                VerticalLayout = LayoutOptions.Fill,
+                MinSize = UISize.Of(100, 0)
             };
 
             assetType.Bind(Label.TextProperty, "AssetType");
@@ -44,8 +45,9 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.OverviewPage
             Content = new LayoutView
             {
                 HorizontalLayout = LayoutOptions.Fill,
-                VerticalLayout = LayoutOptions.Fill,
+                VerticalLayout = LayoutOptions.Expand,
                 Layout = AdjacentLayout.Of(OrientationOptions.Horizontal),
+                MinSize = UISize.Of(0, 24),
                 Children = {
                     assetType, 
                     size,

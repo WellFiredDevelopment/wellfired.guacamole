@@ -60,6 +60,7 @@
     <Compile Include="Bindable\BooleanBindableObjectTests.cs" />
     <Compile Include="Bindable\DoubleBindableObjectTests.cs" />
     <Compile Include="Bindable\FloatBindableObjectTests.cs" />
+    <Compile Include="Bindable\GeneralBindableObjectTests.cs" />
     <Compile Include="Bindable\IntBindableObjectTests.cs" />
     <Compile Include="Bindable\StringBindableObjectTests.cs" />
     <Compile Include="AdjacentLayout\CalculateValidRectRequest\Given_AnHorizontalAdacentLayoutWithFiveSpacing.cs" />

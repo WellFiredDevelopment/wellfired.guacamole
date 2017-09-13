@@ -1,5 +1,6 @@
 ﻿using WellFired.Guacamole.Data;
-using WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Layout;
+using WellFired.Guacamole.DataBinding;
+using WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.UIElements;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.UsedAssetsPage
@@ -26,8 +27,8 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.UsedAssetsPa
                 FontSize = 30
             };
 
-            totalSizeValue.Bind(Label.TextProperty, "TotalSize");
-            totalSizeValue.Bind(Views.View.BackgroundColorProperty, "TotalSizeBacgroundColor");
+            totalSizeValue.Bind(Label.TextProperty, "TotalSize", BindingMode.ReadOnly);
+            totalSizeValue.Bind(Views.View.BackgroundColorProperty, "TotalSizeBacgroundColor", BindingMode.ReadOnly);
             var viewContainer = new ViewContainer
             {
                 Content = totalSizeValue,
@@ -40,11 +41,36 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.UsedAssetsPa
 
         public static Views.View GenerateUsedAssetsList()
         {
-            return ListViewFactory.CreateListView(typeof(AssetCell), "DisplayedAssetsList",
-                new ListViewFactory.LegendDefinition("Path", UISize.Min, UISize.Max),
-                new ListViewFactory.LegendDefinition("Imported Size", UISize.Of(80, 0), UISize.Max),
-                new ListViewFactory.LegendDefinition("Raw Size", UISize.Of(80, 0), UISize.Max),
-                new ListViewFactory.LegendDefinition("Percentage", UISize.Of(80, 0), UISize.Max));
+            var pathHeader = new HeaderButton {Text= "Path", HorizontalLayout = LayoutOptions.Fill, VerticalLayout = LayoutOptions.Fill};
+            var importedSizeHeader = new HeaderButton {Text= "Imp. Size", HorizontalLayout = LayoutOptions.Expand, MaxSize = UISize.Of(110, 1000)};
+            var rawSizeHeader = new HeaderButton {Text= "Raw Size", HorizontalLayout = LayoutOptions.Expand, MaxSize = UISize.Of(110, 1000)};
+            var percentageHeader = new HeaderButton {Text= "Per.", HorizontalLayout = LayoutOptions.Expand, MaxSize = UISize.Of(110, 1000)};
+            
+            pathHeader.Bind(Button.ButtonPressedCommandProperty, "SortByAssetPath");
+            importedSizeHeader.Bind(Button.ButtonPressedCommandProperty, "SortByImportedSize");
+            rawSizeHeader.Bind(Button.ButtonPressedCommandProperty, "SortByRawSize");
+            percentageHeader.Bind(Button.ButtonPressedCommandProperty, "SortByPercentage");
+            
+            pathHeader.Bind(Button.TextProperty, "AssetPathText");
+            importedSizeHeader.Bind(Button.TextProperty, "ImportedSizeText");
+            rawSizeHeader.Bind(Button.TextProperty, "RawSizeText");
+            percentageHeader.Bind(Button.TextProperty, "PercentageText");
+
+            var listHeader = LayoutFactory.CreateHorizontalLayout(pathHeader, importedSizeHeader, rawSizeHeader, percentageHeader);
+            listHeader.Padding = UIPadding.With(0, 0, 0, 10);
+            
+            var list = new ListView {
+                EntrySize = 14,
+                Spacing = 0,
+                Orientation = OrientationOptions.Vertical,
+                HorizontalLayout = LayoutOptions.Fill,
+                VerticalLayout = LayoutOptions.Expand,
+                ItemTemplate = DataTemplate.Of(typeof(AssetCell)),
+            };
+            
+            list.Bind(ItemsView.ItemSourceProperty, "DisplayedAssetsList", BindingMode.ReadOnly);
+
+            return LayoutFactory.CreateVerticalLayout(listHeader, list);
         }
     }
 }

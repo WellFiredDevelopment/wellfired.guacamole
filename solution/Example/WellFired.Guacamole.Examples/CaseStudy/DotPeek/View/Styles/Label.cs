@@ -12,8 +12,8 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Styles
                 new Setter {Property = Views.View.BackgroundColorProperty, Value = UIColor.FromRGB(40, 40, 40)},
                 new Setter {Property = Views.View.OutlineColorProperty, Value = UIColor.FromRGB(40, 40, 40)},
                 new Setter {Property = Views.Label.TextColorProperty, Value = UIColor.White},
-                new Setter {Property = Views.Label.VerticalTextAlignProperty, Value = UITextAlign.Middle}
-
+                new Setter {Property = Views.Label.VerticalTextAlignProperty, Value = UITextAlign.Middle},
+                new Setter {Property = Views.Label.WordWrapProperty, Value = false}
             }
         };
     }

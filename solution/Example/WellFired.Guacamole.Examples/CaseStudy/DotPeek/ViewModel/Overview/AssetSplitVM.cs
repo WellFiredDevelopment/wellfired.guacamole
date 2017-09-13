@@ -9,13 +9,12 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel.Overview
     public class AssetSplitVM : ObservableBase
     {
         private const double Tolerance = 0.1;
-        
+
         private string _assetType;
         private string _size;
         private UIColor _sizeBackgroundColor;
         private string _percentage;
         private UIColor _percentageBackgroundColor;
-
 
         [PublicAPI]
         public string AssetType
@@ -52,22 +51,24 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel.Overview
             set { SetProperty(ref _percentageBackgroundColor, value); }
         }
 
-        public AssetSplitVM(BuildOverview.BuildAssetSplit assetSplit, BuildOverview.BuildAssetSplit previousAssetSplit = null)
+        public AssetSplitVM(BuildOverview.BuildAssetSplit assetSplit,
+            BuildOverview.BuildAssetSplit previousAssetSplit = null)
         {
             AssetType = assetSplit.Category.ToString();
             Size = $"{assetSplit.Size.SizeInMb:0.00} MB";
             Percentage = assetSplit.Percentage + "%";
-            
+
             if (previousAssetSplit != null)
             {
                 GenerateDiff(assetSplit, previousAssetSplit);
             }
         }
 
-        private void GenerateDiff(BuildOverview.BuildAssetSplit assetSplit, BuildOverview.BuildAssetSplit previousAssetSplit)
+        private void GenerateDiff(BuildOverview.BuildAssetSplit assetSplit,
+            BuildOverview.BuildAssetSplit previousAssetSplit)
         {
             SizeBackgroundColor = ViewModelUtils.CompareSizeColor(assetSplit.Size, previousAssetSplit.Size);
-            
+
             PercentageBackgroundColor =
                 Math.Abs(assetSplit.Percentage - previousAssetSplit.Percentage) >= Tolerance
                     ? UIColor.FromRGB(0, 136, 43)

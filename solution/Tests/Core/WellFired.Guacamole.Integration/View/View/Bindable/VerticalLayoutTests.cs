@@ -31,12 +31,26 @@ namespace WellFired.Guacamole.Integration.View.View.Bindable
 		[Test]
 		public void ViewBaseVerticalLayoutOptionsBindingDoesntWorkInTwoWayWithOneWayMode()
 		{
-			_view.Bind(Views.View.VerticalLayoutProperty, nameof(_context.VerticalLayoutOptions));
+			_view.Bind(Views.View.VerticalLayoutProperty, nameof(_context.VerticalLayoutOptions), BindingMode.OneWay);
 			Assert.That(_context.VerticalLayoutOptions == _view.VerticalLayout);
 			_context.VerticalLayoutOptions = LayoutOptions.Fill;
 			Assert.That(_context.VerticalLayoutOptions == _view.VerticalLayout);
 			_view.VerticalLayout = LayoutOptions.Expand;
 			Assert.That(_context.VerticalLayoutOptions != _view.VerticalLayout);
+		}
+		
+		[Test]
+		public void ViewBaseVerticalLayoutOptionsBindingDoesntWorkInTwoWayWithReadOnlyMode()
+		{
+			_view.Bind(Views.View.VerticalLayoutProperty, nameof(_context.VerticalLayoutOptions), BindingMode.ReadOnly);
+			Assert.That(_context.VerticalLayoutOptions == _view.VerticalLayout);
+			
+			_context.VerticalLayoutOptions = LayoutOptions.Fill;
+			Assert.That(_context.VerticalLayoutOptions == _view.VerticalLayout);
+			
+			_view.VerticalLayout = LayoutOptions.Expand;
+			Assert.That(_view.VerticalLayout != LayoutOptions.Expand);
+			Assert.That(_context.VerticalLayoutOptions == _view.VerticalLayout);
 		}
 
 		[Test]

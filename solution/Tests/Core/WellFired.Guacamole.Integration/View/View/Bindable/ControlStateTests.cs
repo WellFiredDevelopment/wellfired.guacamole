@@ -39,6 +39,21 @@ namespace WellFired.Guacamole.Integration.View.View.Bindable
 			_view.ControlState = ControlState.Hover;
 			Assert.That(_context.ControlState != _view.ControlState);
 		}
+		
+		[Test]
+		public void ViewBaseControlStateBindingDoesntWorkInTwoWayWithReadOnlyMode()
+		{
+			_view.Bind(Views.View.ControlStateProperty, nameof(_context.ControlState),
+				BindingMode.ReadOnly);
+			Assert.That(_context.ControlState == _view.ControlState);
+			
+			_context.ControlState = ControlState.Disabled;
+			Assert.That(_context.ControlState == _view.ControlState);
+			
+			_view.ControlState = ControlState.Hover;
+			Assert.That(_view.ControlState != ControlState.Hover);
+			Assert.That(_context.ControlState == _view.ControlState);
+		}
 
 		[Test]
 		public void ViewBaseControlStateBindingWorksInOneWay()

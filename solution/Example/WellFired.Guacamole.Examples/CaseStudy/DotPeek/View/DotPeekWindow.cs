@@ -2,15 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using WellFired.Guacamole.Cells;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model.Assets;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.OverviewPage;
+using WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.ProjectSettingsPage;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.UsedAssetsPage;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.UIElements;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel.Assets;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel.Overview;
+using WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel.ProjectSettings;
 using WellFired.Guacamole.Styling;
 using WellFired.Guacamole.Views;
 
@@ -30,17 +33,21 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View
                     {typeof(ListView), Styles.ListView.Style},
                     {typeof(Cell), Styles.Cell.Style},
                     {typeof(ViewContainer), Styles.ViewContainer.Style},
-                    {typeof(ColumnLegendButton), Styles.ColumnLegendButton.Style}
+                    {typeof(HeaderButton), Styles.HeaderButton.Style},
+                    {typeof(PreprocessorCell), Styles.PreprocessorCell.Style}
                 }
             );
 
+            BackgroundColor = UIColor.FromRGB(40, 40, 40);
+            
             var overviewVM = GetOverviewBindingContext();
             var usedAssetVM = GetUsedAssetsBindingContext();
             var unusedAssetVM = GetUnusedAssetsBindingContext();
+            var projectSettingsVM = GetProjectSettingsBindingContext();
 
             var tabbedPage = new TabbedPage
             {
-                ItemSource = new object[] {overviewVM, usedAssetVM, unusedAssetVM},
+                ItemSource = new object[] {overviewVM, usedAssetVM, unusedAssetVM, projectSettingsVM},
                 ItemTemplate = DataTemplate.Of(o =>
                 {
                     Page page = null;
@@ -50,11 +57,13 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View
                         page = new AssetsPage {Title = "Used Assets"};
                     else if (o == unusedAssetVM)
                         page = new AssetsPage {Title = "Unused Assets"};
+                    else if (o == projectSettingsVM)
+                        page = new ProjectSettingsPage {Title = "Project Settings"};
 
                     return page;
                 })
             };
-            
+
             SetContent(tabbedPage);
         }
 
@@ -93,6 +102,13 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View
             previousUsedAssets.AddRange(previousReport.UnusedAssets);
 
             return new AssetsVM(usedAssets, previousUsedAssets);
+        }
+
+        private static ProjectSettingsVM GetProjectSettingsBindingContext()
+        {
+            var newReport = ModelGenerator.GetCurrentReport();
+            var previousReport = ModelGenerator.GetPreviousReport();
+            return new ProjectSettingsVM(newReport, previousReport);
         }
     }
 }

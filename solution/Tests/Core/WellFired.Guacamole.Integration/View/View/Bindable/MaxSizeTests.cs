@@ -31,12 +31,26 @@ namespace WellFired.Guacamole.Integration.View.View.Bindable
 		[Test]
 		public void ViewBaseMaxSizeBindingDoesntWorkInTwoWayWithOneWayMode()
 		{
-			_view.Bind(Views.View.MaxSizeProperty, nameof(_context.MaxSize));
+			_view.Bind(Views.View.MaxSizeProperty, nameof(_context.MaxSize), BindingMode.OneWay);
 			Assert.That(_context.MaxSize == _view.MaxSize);
 			_context.MaxSize = UISize.One;
 			Assert.That(_context.MaxSize == _view.MaxSize);
 			_view.MaxSize = UISize.Min;
 			Assert.That(_context.MaxSize != _view.MaxSize);
+		}
+		
+		[Test]
+		public void ViewBaseMaxSizeBindingDoesntWorkInTwoWayWithReadOnlyMode()
+		{
+			_view.Bind(Views.View.MaxSizeProperty, nameof(_context.MaxSize), BindingMode.ReadOnly);
+			Assert.That(_context.MaxSize == _view.MaxSize);
+			
+			_context.MaxSize = UISize.One;
+			Assert.That(_context.MaxSize == _view.MaxSize);
+			
+			_view.MaxSize = UISize.Min;
+			Assert.That(_view.MaxSize != UISize.Min);
+			Assert.That(_context.MaxSize == _view.MaxSize);
 		}
 
 		[Test]

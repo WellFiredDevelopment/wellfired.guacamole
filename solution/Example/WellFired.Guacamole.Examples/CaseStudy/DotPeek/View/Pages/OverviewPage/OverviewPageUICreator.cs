@@ -1,5 +1,6 @@
 using WellFired.Guacamole.Data;
-using WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Layout;
+using WellFired.Guacamole.DataBinding;
+using WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.UIElements;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.OverviewPage
@@ -12,7 +13,8 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.OverviewPage
             {
                 HorizontalTextAlign = UITextAlign.Start,
                 VerticalLayout = LayoutOptions.Center,
-                HorizontalLayout = LayoutOptions.Fill
+                HorizontalLayout = LayoutOptions.Expand,
+                RichText = true
             };
             
             var commitId = new Label
@@ -20,10 +22,12 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.OverviewPage
                 HorizontalTextAlign = UITextAlign.Middle,
                 VerticalLayout = LayoutOptions.Center,
                 HorizontalLayout = LayoutOptions.Fill,
+                Padding = UIPadding.With(0,8,0,0),
+                RichText = true
             };
             
-            buildTime.Bind(Label.TextProperty, "BuildTime");
-            commitId.Bind(Label.TextProperty, "CommitID");
+            buildTime.Bind(Label.TextProperty, "BuildTime", BindingMode.ReadOnly);
+            commitId.Bind(Label.TextProperty, "CommitID", BindingMode.ReadOnly);
             
             return LayoutFactory.CreateHorizontalLayout(buildTime, commitId);
         }
@@ -35,22 +39,25 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.OverviewPage
                 HorizontalTextAlign = UITextAlign.Start,
                 VerticalLayout = LayoutOptions.Center,
                 HorizontalLayout = LayoutOptions.Fill,
-                Padding = UIPadding.With(0, 20, 0, 0)
+                Padding = UIPadding.With(0, 20, 0, 0),
+                RichText = true
             };
             
-            platform.Bind(Label.TextProperty, "Platform");
-            return LayoutFactory.CreateHorizontalLayout(platform, new ViewContainer());
+            platform.Bind(Label.TextProperty, "Platform", BindingMode.ReadOnly);
+            return LayoutFactory.CreateHorizontalLayout(platform);
         }
 
         public static Views.View GenerateUnityVersion()
         {
             var unityVersionTitle = new Label
             {
-                Text = "Unity Version",
+                Text = "<b>Unity Version</b>",
+                RichText = true,
                 HorizontalTextAlign = UITextAlign.Start,
                 VerticalLayout = LayoutOptions.Center,
                 HorizontalLayout = LayoutOptions.Fill,
-                Padding = UIPadding.With(0, 10, 0, 0)
+                Padding = UIPadding.With(0, 10, 0, 0),
+                FontSize = 25
             };
 
             var unityVersionValue = new Label
@@ -62,13 +69,14 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.OverviewPage
                 FontSize = 20
             };
 
-            unityVersionValue.Bind(Label.TextProperty, "UnityVersion");
-            unityVersionValue.Bind(Views.View.BackgroundColorProperty, "UnityVersionBackgroundColor");
+            unityVersionValue.Bind(Label.TextProperty, "UnityVersion", BindingMode.ReadOnly);
+            unityVersionValue.Bind(Views.View.BackgroundColorProperty, "UnityVersionBackgroundColor", BindingMode.ReadOnly);
             var viewContainer = new ViewContainer
             {
                 Content = unityVersionValue,
                 HorizontalLayout = LayoutOptions.Fill,
-                VerticalLayout = LayoutOptions.Center
+                VerticalLayout = LayoutOptions.Center,
+                Padding = UIPadding.With(0, 8, 0, 0)
             };
             
             return LayoutFactory.CreateHorizontalLayout(unityVersionTitle, viewContainer);
@@ -78,11 +86,13 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.OverviewPage
         {
             var buildSizeTitle = new Label
             {
-                Text = "Build Size",
+                Text = "<b>Build Size</b>",
+                RichText = true,
                 HorizontalTextAlign = UITextAlign.Start,
                 VerticalLayout = LayoutOptions.Center,
                 HorizontalLayout = LayoutOptions.Fill,
-                Padding = UIPadding.With(0, 10, 0, 0)
+                Padding = UIPadding.With(0, 10, 0, 0),
+                FontSize = 30
             };
 
             var buildSizeValue = new Label
@@ -90,17 +100,18 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.OverviewPage
                 HorizontalTextAlign = UITextAlign.Middle,
                 VerticalLayout = LayoutOptions.Center,
                 HorizontalLayout = LayoutOptions.Center,
-                Padding = UIPadding.With(10, 10, 10, 10),
+                Padding = UIPadding.With(10, 13, 10, 10),
                 FontSize = 30
             };
 
-            buildSizeValue.Bind(Label.TextProperty, "BuildSize");
-            buildSizeValue.Bind(Views.View.BackgroundColorProperty, "BuildSizeBackgroundColor");
+            buildSizeValue.Bind(Label.TextProperty, "BuildSize", BindingMode.ReadOnly);
+            buildSizeValue.Bind(Views.View.BackgroundColorProperty, "BuildSizeBackgroundColor", BindingMode.ReadOnly);
             var viewContainer = new ViewContainer
             {
                 Content = buildSizeValue,
                 HorizontalLayout = LayoutOptions.Fill,
-                VerticalLayout = LayoutOptions.Center
+                VerticalLayout = LayoutOptions.Center,
+                Padding = UIPadding.With(0, 5, 0, 0)
             };
             
             return LayoutFactory.CreateHorizontalLayout(buildSizeTitle, viewContainer);
@@ -133,8 +144,8 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.OverviewPage
                 VerticalLayout = LayoutOptions.Center
             };
             
-            resourcesAssetSizeValue.Bind(Label.TextProperty, "ResourceAssetsSize");
-            resourcesAssetSizeValue.Bind(Views.View.BackgroundColorProperty, "ResourceAssetsSizeBackgroundColor");
+            resourcesAssetSizeValue.Bind(Label.TextProperty, "ResourceAssetsSize", BindingMode.ReadOnly);
+            resourcesAssetSizeValue.Bind(Views.View.BackgroundColorProperty, "ResourceAssetsSizeBackgroundColor", BindingMode.ReadOnly);
             
             return LayoutFactory.CreateHorizontalLayout(resourcesAssetSizeTitle, viewContainer);
         }
@@ -143,22 +154,25 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.OverviewPage
         {
             var buildAssetSplit = new Label
             {
-                Text = "Build Asset Split",
-                HorizontalTextAlign = UITextAlign.Middle,
-                VerticalLayout = LayoutOptions.Fill,
-                HorizontalLayout = LayoutOptions.Center,
-                Padding = UIPadding.With(0, 20, 0, 15)
+                Text = "Asset Breakdown",
+                HorizontalTextAlign = UITextAlign.Start,
+                VerticalLayout = LayoutOptions.Expand,
+                HorizontalLayout = LayoutOptions.Expand,
+                FontSize = 18,
+                Padding = UIPadding.With(0, 20, 0, 0)
             };
             
-            var listView = ListViewFactory.CreateListView(typeof(AssetSplitCell), "AssetSplitList",
-                new[]
-                {
-                    new ListViewFactory.LegendDefinition("Category", UISize.Min, UISize.Max),
-                    new ListViewFactory.LegendDefinition("Size", UISize.Of(80, 0), UISize.Max),
-                    new ListViewFactory.LegendDefinition("Percentage", UISize.Of(80, 0), UISize.Max)
-                });
+            var list = new ListView {
+                EntrySize = 24,
+                Orientation = OrientationOptions.Vertical,
+                HorizontalLayout = LayoutOptions.Fill,
+                VerticalLayout = LayoutOptions.Expand,
+                ItemTemplate = DataTemplate.Of(typeof(AssetSplitCell)),
+            };
+            
+            list.Bind(ItemsView.ItemSourceProperty, "AssetSplitList", BindingMode.ReadOnly);
 
-            return LayoutFactory.CreateVerticalLayout(buildAssetSplit, listView);
+            return LayoutFactory.CreateVerticalLayout(buildAssetSplit, list);
         }
     }
 }

@@ -30,12 +30,24 @@ namespace WellFired.Guacamole.Integration.View.Page.Bindable
 		[Test]
 		public void ViewBaseBackgroundColorBindingDoesntWorkInTwoWayWithOneWayMode()
 		{
-			_view.Bind(Views.Page.TitleProperty, nameof(_context.Title));
+			_view.Bind(Views.Page.TitleProperty, nameof(_context.Title), BindingMode.OneWay);
 			Assert.That(_context.Title == _view.Title);
 			_context.Title = "a";
 			Assert.That(_context.Title == _view.Title);
 			_view.Title = "b";
 			Assert.That(_context.Title != _view.Title);
+		}
+		
+		[Test]
+		public void ViewBaseBackgroundColorBindingDoesntWorkInTwoWayWithReadOnlyMode()
+		{
+			_view.Bind(Views.Page.TitleProperty, nameof(_context.Title), BindingMode.ReadOnly);
+			Assert.That(_context.Title == _view.Title);
+			_context.Title = "a";
+			Assert.That(_context.Title == _view.Title);
+			_view.Title = "b";
+			Assert.That(_view.Title == "a");
+			Assert.That(_context.Title == _view.Title);
 		}
 
 		[Test]

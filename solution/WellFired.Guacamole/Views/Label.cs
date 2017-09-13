@@ -24,6 +24,12 @@ namespace WellFired.Guacamole.Views
 			v => v.Clipping
 		);
 		
+		[PublicAPI] public static readonly BindableProperty RichTextProperty = BindableProperty.Create<Label, bool>(
+			false,
+			BindingMode.TwoWay,
+			v => v.RichText
+		);
+		
 		[PublicAPI] public static readonly BindableProperty TextProperty = BindableProperty.Create<Label, string>(
 			string.Empty,
 			BindingMode.TwoWay,
@@ -74,6 +80,13 @@ namespace WellFired.Guacamole.Views
 		{
 			get { return (UITextClipping) GetValue(ClippingProperty); }
 			set { SetValue(ClippingProperty, value); }
+		}
+		
+		[PublicAPI]
+		public bool RichText
+		{
+			get { return (bool) GetValue(RichTextProperty); }
+			set { SetValue(RichTextProperty, value); }
 		}
 
 		[PublicAPI]
