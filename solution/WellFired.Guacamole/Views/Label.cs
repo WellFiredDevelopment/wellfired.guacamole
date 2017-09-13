@@ -18,6 +18,12 @@ namespace WellFired.Guacamole.Views
 			v => v.WordWrap
 		);
 		
+		[PublicAPI] public static readonly BindableProperty ClippingProperty = BindableProperty.Create<Label, UITextClipping>(
+			UITextClipping.Clip,
+			BindingMode.TwoWay,
+			v => v.Clipping
+		);
+		
 		[PublicAPI] public static readonly BindableProperty TextProperty = BindableProperty.Create<Label, string>(
 			string.Empty,
 			BindingMode.TwoWay,
@@ -61,6 +67,13 @@ namespace WellFired.Guacamole.Views
 		{
 			get { return (bool) GetValue(WordWrapProperty); }
 			set { SetValue(WordWrapProperty, value); }
+		}
+		
+		[PublicAPI]
+		public UITextClipping Clipping
+		{
+			get { return (UITextClipping) GetValue(ClippingProperty); }
+			set { SetValue(ClippingProperty, value); }
 		}
 
 		[PublicAPI]

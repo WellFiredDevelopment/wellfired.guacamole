@@ -28,6 +28,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			
 			var label = (Label)Control;
 			Style.alignment = UITextAlignExtensions.Combine(label.HorizontalTextAlign, label.VerticalTextAlign);
+			Style.clipping = label.Clipping.ToUnityClipping();
 			Style.focused.textColor = label.TextColor.ToUnityColor();
 			Style.active.textColor = label.TextColor.ToUnityColor();
 			Style.hover.textColor = label.TextColor.ToUnityColor();
@@ -61,6 +62,8 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 				Style.alignment = UITextAlignExtensions.Combine(label.HorizontalTextAlign, label.VerticalTextAlign);
 			if (e.PropertyName == Label.WordWrapProperty.PropertyName)
 				Style.wordWrap = label.WordWrap;
+			if (e.PropertyName == Label.ClippingProperty.PropertyName)
+				Style.clipping = label.Clipping.ToUnityClipping();
 			if (e.PropertyName == Label.FontSizeProperty.PropertyName)
 				Style.fontSize = label.FontSize;
 		}

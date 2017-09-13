@@ -68,6 +68,7 @@
     <Compile Include="UIRect.cs" />
     <Compile Include="UISize.cs" />
     <Compile Include="UITextAlign.cs" />
+    <Compile Include="UITextClipping.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
