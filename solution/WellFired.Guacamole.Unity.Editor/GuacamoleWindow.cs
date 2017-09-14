@@ -79,9 +79,9 @@ namespace WellFired.Guacamole.Unity.Editor
 				throw new InitializationContextNull();
 
 			Title = ApplicationInitializationContextScriptableObject.Title;
-			Rect = ApplicationInitializationContextScriptableObject.UIRect;
 			MinSize = ApplicationInitializationContextScriptableObject.MinSize;
 			MaxSize = ApplicationInitializationContextScriptableObject.MaxSize;
+			Rect = ApplicationInitializationContextScriptableObject.UIRect;
 
 			if (MaxSize == UISize.Min)
 				MaxSize = UISize.Of(100000);
