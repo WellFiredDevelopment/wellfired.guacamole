@@ -206,7 +206,7 @@ namespace WellFired.Guacamole.Views
 
         private static UISize ConstrainOver(UISize requestedSize, UISize size)
         {
-            if (size == UISize.Max)
+            if (size == UISize.Min)
                 return requestedSize;
 
             if (requestedSize.Width > size.Width)
