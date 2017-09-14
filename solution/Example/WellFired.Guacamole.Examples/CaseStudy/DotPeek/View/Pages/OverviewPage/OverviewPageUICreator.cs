@@ -13,8 +13,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.OverviewPage
             {
                 HorizontalTextAlign = UITextAlign.Start,
                 VerticalLayout = LayoutOptions.Center,
-                HorizontalLayout = LayoutOptions.Expand,
-                RichText = true
+                HorizontalLayout = LayoutOptions.Expand
             };
             
             var commitId = new Label
@@ -22,8 +21,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.OverviewPage
                 HorizontalTextAlign = UITextAlign.Middle,
                 VerticalLayout = LayoutOptions.Center,
                 HorizontalLayout = LayoutOptions.Fill,
-                Padding = UIPadding.With(0,8,0,0),
-                RichText = true
+                Padding = UIPadding.With(0,8,0,0)
             };
             
             buildTime.Bind(Label.TextProperty, "BuildTime", BindingMode.ReadOnly);
@@ -39,8 +37,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.OverviewPage
                 HorizontalTextAlign = UITextAlign.Start,
                 VerticalLayout = LayoutOptions.Center,
                 HorizontalLayout = LayoutOptions.Fill,
-                Padding = UIPadding.With(0, 20, 0, 0),
-                RichText = true
+                Padding = UIPadding.With(0, 20, 0, 0)
             };
             
             platform.Bind(Label.TextProperty, "Platform", BindingMode.ReadOnly);
@@ -52,7 +49,6 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.OverviewPage
             var unityVersionTitle = new Label
             {
                 Text = "<b>Unity Version</b>",
-                RichText = true,
                 HorizontalTextAlign = UITextAlign.Start,
                 VerticalLayout = LayoutOptions.Center,
                 HorizontalLayout = LayoutOptions.Fill,
@@ -87,7 +83,6 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages.OverviewPage
             var buildSizeTitle = new Label
             {
                 Text = "<b>Build Size</b>",
-                RichText = true,
                 HorizontalTextAlign = UITextAlign.Start,
                 VerticalLayout = LayoutOptions.Center,
                 HorizontalLayout = LayoutOptions.Fill,

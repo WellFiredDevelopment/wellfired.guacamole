@@ -29,13 +29,13 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			var label = (Label)Control;
 			Style.alignment = UITextAlignExtensions.Combine(label.HorizontalTextAlign, label.VerticalTextAlign);
 			Style.clipping = label.Clipping.ToUnityClipping();
-			Style.richText = label.RichText;
 			Style.focused.textColor = label.TextColor.ToUnityColor();
 			Style.active.textColor = label.TextColor.ToUnityColor();
 			Style.hover.textColor = label.TextColor.ToUnityColor();
 			Style.normal.textColor = label.TextColor.ToUnityColor();
 			Style.fontSize = label.FontSize;
 			Style.wordWrap = label.WordWrap;
+			Style.richText = true;
 		}
 
 		public override void Render(UIRect renderRect)
@@ -65,8 +65,6 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 				Style.wordWrap = label.WordWrap;
 			if (e.PropertyName == Label.ClippingProperty.PropertyName)
 				Style.clipping = label.Clipping.ToUnityClipping();
-			if (e.PropertyName == Label.RichTextProperty.PropertyName)
-				Style.richText = label.RichText;
 			if (e.PropertyName == Label.FontSizeProperty.PropertyName)
 				Style.fontSize = label.FontSize;
 		}
