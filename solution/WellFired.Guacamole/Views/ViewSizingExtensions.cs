@@ -6,8 +6,25 @@ using WellFired.Guacamole.Layouts;
 
 namespace WellFired.Guacamole.Views
 {
+    /// <summary>
+    /// This static class is a bunch of helpfull layout and sizing utilities for views.
+    /// </summary>
     public static class ViewSizingExtensions
     {
+        /// <summary>
+        /// A simple utility method that allows you to publically and programatically resize a view, call this on the parent view and all 
+        /// child views will be refreshed automatically.
+        /// 
+        /// The Layout and sizing algorithm works as a multipass system, each pass is described below.
+        /// 
+        /// 1. We traverse from leaf nodes to the root node requesting size information for each view. This information is requested and might not be fullfilled.
+        /// 2. We traverse from root to leaf nodes now that we have know Rect Requests. As we travers down the tree, we try to fullfill each Views Rect Request, however
+        /// this might be impossible due to tight constraints on parents and if this is the case, the view will shrink to fit it's parent.
+        /// 3. We finally layout our elements now we know their size data.
+        /// 
+        /// </summary>
+        /// <param name="view"></param>
+        /// <param name="availableRegion"></param>
         public static void DoSizingAndLayout(IView view, UIRect availableRegion)
         {
             CalculateRectRequest(view);
@@ -19,33 +36,56 @@ namespace WellFired.Guacamole.Views
 
             DoLayout(view);
         }
-
-        private static void CalculateRectRequest(IView view)
+        
+        /// <summary>
+        /// This method will traverse the tree from leaf -> root, if any of the views are invalid, it will request a resize.
+        /// Due to the recursive nature of this algorithm, if the algorithm finds an invalid view, this flag will be bubbled 
+        /// towards the root, so every view that should be recalculated will be.
+        /// </summary>
+        /// <param name="view"></param>
+        /// <returns>Has the passed view been invalidated</returns>
+        /// <exception cref="Exception"></exception>
+        private static bool CalculateRectRequest(IView view)
         {
             if (view == null)
-                return;
+                return false;
+
+            var hasInvalidated = false;
 
             var hasChildren = view as IHasChildren;
             if (hasChildren != null)
             {
-                foreach(var child in hasChildren.Children)
-                    CalculateRectRequest(child as IView);
+                foreach (var child in hasChildren.Children)
+                {
+                    if (CalculateRectRequest(child as IView))
+                        hasInvalidated = true;
+                }
             }
 
             var content = view.Content;
+            
             if(view.Equals(content))
                 throw new Exception("Circular view dependency");
 
-            CalculateRectRequest(content);
+            if (CalculateRectRequest(content))
+                hasInvalidated = true;
 
-            if (view.ValidRectRequest)
-                return;
+            if (!hasInvalidated && view.ValidRectRequest)
+                return false;
 
             view.RectRequest = CalculateValidRectRequest(view);
             view.ContentRectRequest = view.RectRequest;
             view.ValidRectRequest = true;
+
+            return true;
         }
 
+        /// <summary>
+        /// Takes the views Requested Rect and tries to calculate the actual rect request based on view constraints such as padding and min / max size requests.
+        /// This might reduce or expand the Requested Rect based on the views constraints. 
+        /// </summary>
+        /// <param name="view"></param>
+        /// <returns></returns>
         private static UIRect CalculateValidRectRequest(IView view)
         {
             var canLayout = view as ICanLayout;
@@ -77,6 +117,13 @@ namespace WellFired.Guacamole.Views
             return UIRect.With(0, 0, nativeSize.Width, nativeSize.Height);
         }
 
+        /// <summary>
+        /// This method will traverse the tree from root -> leaf, trying to satisfy Requested Rects. It's possible that requested rects cannot be 
+        /// fullfilled due to constraints on parents, and in this case, requested rects will shrink to fit.
+        /// </summary>
+        /// <param name="view">The view to fullfill</param>
+        /// <param name="availableSpace">The space that is available to this view</param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public static void AttemptToFullfillRequests(IView view, UIRect availableSpace)
         {
             var isCell = view is ICell;

@@ -18,7 +18,11 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			get
 			{
 				var label = (Label)Control;
-				return Style.CalcSize(new GUIContent(label.Text)).ToUISize();
+				var content = new GUIContent(label.Text);
+				var size = Style.CalcSize(content);
+				
+				// If we don't have word wrap on, we return the calculated size, this should always work when it's only considering the X Axis.
+				return !label.WordWrap ? size.ToUISize() : TextViewExtensions.CalculateNativeSizeWithWordWrap(Control, size, content, Style);
 			}
 		}
 
@@ -43,7 +47,15 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			base.Render(renderRect);
 
 			var label = (Label)Control;
+			
 			EditorGUI.LabelField(UnityRect, label.Text, Style);
+
+			if (!label.WordWrap)
+				return;
+			
+			var content = new GUIContent(label.Text);
+			if(TextViewExtensions.HasHeightChanged(renderRect, content, Style))
+				Control.InvalidateRectRequest();
 		}
 
 		public override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
