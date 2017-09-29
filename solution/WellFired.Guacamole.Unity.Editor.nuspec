@@ -1,21 +1,22 @@
-<?xml version="1.0"?>
-<package >
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>WellFired.Guacamole.Unity.Editor</id>
-    <version>$version$</version>
+    <version>1.0.0</version>
+    <title>WellFired.Guacamole.Unity.Editor</title>
     <authors>WellFired Development</authors>
     <owners>WellFired Development</owners>
-    <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
-    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
-    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Test</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
-    <copyright>Copyright 2017</copyright>
+    <description>Description</description>
+    <copyright>Copyright ©  2016</copyright>
+    <dependencies>
+      <dependency id="AsyncBridge.Net35" version="0.2.0" />
+      <dependency id="System.Threading.dll" version="1.0.2856" />
+    </dependencies>
   </metadata>
   <files>
-    <file src="bin/Release/WellFired.Guacamole.Unity.Editor.dll" target="lib" />
-    <file src="bin/Release/WellFired.Guacamole.Data.dll" target="lib" />
-    <file src="bin/Release/WellFired.Guacamole.Drawing.dll" target="lib" />
-  </files>
+      <file src="../unity/Assets/Code/Editor/WellFired.Guacamole.Unity.Editor.dll" target="lib" />
+      <file src="../unity/Assets/Code/WellFired.Guacamole.Data.dll" target="lib" />
+      <file src="../unity/Assets/Code/Editor/WellFired.Guacamole.Drawing.dll" target="lib" />
+    </files>
 </package>
