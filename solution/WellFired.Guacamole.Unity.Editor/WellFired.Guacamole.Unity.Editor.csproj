@@ -35,12 +35,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AsyncBridge.Net35, Version=0.0.0.0, Culture=neutral, PublicKeyToken=b3b1c0202c0d6a87">
-      <HintPath>../Assemblies/AsyncBridge.Net35.dll</HintPath>
+      <HintPath>..\packages\AsyncBridge.Net35.0.2.0\lib\net35-Client\AsyncBridge.Net35.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Threading, Version=1.0.2856.102, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <HintPath>..\Assemblies\System.Threading.dll</HintPath>
+      <HintPath>..\packages\TaskParallelLibrary.1.0.2856.0\lib\Net35\System.Threading.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\Assemblies\UnityEditor.dll</HintPath>
@@ -54,7 +55,6 @@
   <ItemGroup>
     <Compile Include="Application.cs" />
     <Compile Include="ApplicationInitializationContextScriptableObject.cs" />
-    <Compile Include="Assembly.cs" />
     <Compile Include="DataBinding\ExposePropertyAttribute.cs" />
     <Compile Include="DataBinding\ObservableScriptableObject.cs" />
     <Compile Include="DataBinding\ObservableScriptableObjectEditor.cs" />
@@ -97,6 +97,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
@@ -108,6 +109,7 @@
     <ProjectReference Include="..\WellFired.Guacamole.Drawing\WellFired.Guacamole.Drawing.csproj">
       <Project>{71844ACC-D2EC-4216-BD8D-AC63647AD6AC}</Project>
       <Name>WellFired.Guacamole.Drawing</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\WellFired.Guacamole\WellFired.Guacamole.csproj">
       <Project>{9804de8d-6d30-4fd7-adfe-4ec24a7adb6e}</Project>

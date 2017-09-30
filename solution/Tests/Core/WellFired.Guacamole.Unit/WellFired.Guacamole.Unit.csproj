@@ -40,19 +40,24 @@
   <ItemGroup>
     <Reference Include="AsyncBridge.Net35, Version=0.0.0.0, Culture=neutral, PublicKeyToken=b3b1c0202c0d6a87">
       <HintPath>..\..\..\packages\AsyncBridge.Net35.0.2.0\lib\net35-Client\AsyncBridge.Net35.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="NSubstitute, Version=2.0.1.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca">
       <HintPath>..\..\..\packages\NSubstitute.2.0.1-rc\lib\net35\NSubstitute.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="NSubstituteAutoMocker, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\packages\NSubstituteAutoMocker.1.1.0.0\lib\net45\NSubstituteAutoMocker.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="nunit.framework, Version=3.7.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb">
       <HintPath>..\..\..\packages\NUnit.3.7.1\lib\net35\nunit.framework.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Threading, Version=1.0.2856.102, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <HintPath>..\..\..\packages\System.Threading.dll.1.0.2856.0\lib\net35\System.Threading.dll</HintPath>
+      <HintPath>..\..\..\packages\TaskParallelLibrary.1.0.2856.0\lib\Net35\System.Threading.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -103,10 +108,12 @@
     <ProjectReference Include="..\..\..\WellFired.Guacamole.Data\WellFired.Guacamole.Data.csproj">
       <Project>{0cbc8a3c-5a74-4441-ad8e-0047bafe5a6d}</Project>
       <Name>WellFired.Guacamole.Data</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\..\WellFired.Guacamole\WellFired.Guacamole.csproj">
       <Project>{9804de8d-6d30-4fd7-adfe-4ec24a7adb6e}</Project>
       <Name>WellFired.Guacamole</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
