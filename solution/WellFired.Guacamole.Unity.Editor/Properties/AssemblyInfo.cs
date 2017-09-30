@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
-using UnityEngine;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -20,5 +19,3 @@ using UnityEngine;
 [assembly: AssemblyVersion("0.0.0.0")]
 [assembly: AssemblyFileVersion("0.0.0.0")]
 [assembly: AssemblyInformationalVersion("0.0.0.0")]
-[assembly: UnityAPICompatibilityVersion("5.4.0f3")]
-[assembly: UnityAPICompatibilityVersion("5.4.0f2")]
