@@ -15,7 +15,10 @@ namespace WellFired.Guacamole.Examples.Simple.TwoWayBindingExample
 			Launch<TwoWayBindingTestWindow>(
 				uiRect: UIRect.With(50, 50, 600, 200),
 				minSize: UISize.Of(260, 30),
-				title: "TwoWayBindingTest Test");
+				title: "TwoWayBindingTest Test",
+				allowMultiple: false,
+				applicationName:"TwoWayBindingTest",
+				persistantType:typeof(TwoWayBindingTestModel));
 		}
 	}
 }
