@@ -47,6 +47,7 @@ namespace WellFired.Guacamole.Integration.Layouts.Adjacent
 		{
 			var adjacentLayout = new LayoutView
 			{
+				HorizontalLayout = LayoutOptions.Expand,
 			    Layout = AdjacentLayout.Of(OrientationOptions.Horizontal),
 				Children =
 				{
@@ -68,6 +69,7 @@ namespace WellFired.Guacamole.Integration.Layouts.Adjacent
 		{
 			var adjacentLayout = new LayoutView
 			{
+				HorizontalLayout = LayoutOptions.Expand,
 			    Layout = AdjacentLayout.Of(OrientationOptions.Horizontal),
 				Children =
 				{

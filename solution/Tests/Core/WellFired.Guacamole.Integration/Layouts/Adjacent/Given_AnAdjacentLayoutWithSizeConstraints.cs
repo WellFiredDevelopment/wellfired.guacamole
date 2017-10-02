@@ -13,6 +13,7 @@ namespace WellFired.Guacamole.Integration.Layouts.Adjacent
         {
             var adjacentLayout = new LayoutView
             {
+                HorizontalLayout = LayoutOptions.Expand,
                 Layout = AdjacentLayout.Of(OrientationOptions.Horizontal),
                 MinSize = UISize.Of(100)
             };
@@ -28,6 +29,7 @@ namespace WellFired.Guacamole.Integration.Layouts.Adjacent
         {
             var adjacentLayout = new LayoutView
             {
+                HorizontalLayout = LayoutOptions.Expand,
                 Layout = AdjacentLayout.Of(OrientationOptions.Horizontal),
                 MinSize = UISize.Of(100),
                 Children =
@@ -47,6 +49,7 @@ namespace WellFired.Guacamole.Integration.Layouts.Adjacent
         {
             var adjacentLayout = new LayoutView
             {
+                HorizontalLayout = LayoutOptions.Expand,
                 Layout = AdjacentLayout.Of(OrientationOptions.Horizontal),
                 MinSize = UISize.Of(100),
                 Children =
