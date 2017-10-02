@@ -61,6 +61,7 @@
     <Compile Include="DataBinding\BindableProperty.cs" />
     <Compile Include="DataBinding\BindingMode.cs" />
     <Compile Include="DataBinding\ConverterHelper.cs" />
+    <Compile Include="DataBinding\Converter\Extensions.cs" />
     <Compile Include="DataBinding\Converter\IValueConverter.cs" />
     <Compile Include="DataBinding\Converter\ValueConverter.cs" />
     <Compile Include="DataBinding\DataTemplate.cs" />

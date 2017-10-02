@@ -79,6 +79,8 @@
     <Compile Include="AdjacentLayout\Vertical\Given_AnAdjacentLayoutWithNoSpacing.cs" />
     <Compile Include="AdjacentLayout\Vertical\AdjacentLayoutPaddingSpacing.cs" />
     <Compile Include="Converter\ConvertTest.cs" />
+    <Compile Include="Converter\Default\BackingStore.cs" />
+    <Compile Include="Converter\Default\Given_TheDefaultConverter.cs" />
     <Compile Include="Converter\YesNoBindingContext.cs" />
     <Compile Include="Converter\YesNoConverter.cs" />
     <Compile Include="Drawing\ImageData\Given_AnImageParameters.cs" />

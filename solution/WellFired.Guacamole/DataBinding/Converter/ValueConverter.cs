@@ -11,6 +11,9 @@ namespace WellFired.Guacamole.DataBinding.Converter
 			if (targetType == typeof(string))
 				return value?.ToString();
 
+			if (targetType == typeof(double) && value is int)
+				return ((int)value).ConvertToDouble();
+
 			if (value.GetType() == targetType)
 				return value;
 
@@ -21,7 +24,7 @@ namespace WellFired.Guacamole.DataBinding.Converter
 			if (converter.CanConvertFrom(value.GetType()))
 				return converter.ConvertFrom(value);
 
-			throw new SystemException($"Cannot convert {value} to {targetType}");
+			throw new SystemException($"Cannot convert {value} of type {value.GetType()} to {targetType}");
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -29,6 +32,9 @@ namespace WellFired.Guacamole.DataBinding.Converter
 			if (targetType == typeof(string))
 				return value?.ToString();
 
+			if (targetType == typeof(double) && value is int)
+				return ((int)value).ConvertToDouble();
+
 			if (value.GetType() == targetType)
 				return value;
 
@@ -39,7 +45,7 @@ namespace WellFired.Guacamole.DataBinding.Converter
 			if (converter.CanConvertFrom(value.GetType()))
 				return converter.ConvertFrom(value);
 
-			throw new SystemException($"Cannot convert {value} to {targetType}");
+			throw new SystemException($"Cannot convert {value} of type {value.GetType()} to {targetType}");
 		}
 	}
 }
