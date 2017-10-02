@@ -23,8 +23,7 @@ namespace WellFired.Guacamole.Integration.View.NumberEntry.Bindable
 			_numberEntryView.VerticalTextAlign = UITextAlign.End;
 			_numberEntryContext.VerticalTextAlign = UITextAlign.Middle;
 			Assert.That(_numberEntryContext.VerticalTextAlign != _numberEntryView.VerticalTextAlign);
-			_numberEntryView.Bind(Views.NumberEntry.VerticalTextAlignProperty,
-				nameof(_numberEntryContext.VerticalTextAlign));
+			_numberEntryView.Bind(Views.NumberEntry.VerticalTextAlignProperty, nameof(_numberEntryContext.VerticalTextAlign));
 			Assert.That(_numberEntryContext.VerticalTextAlign == _numberEntryView.VerticalTextAlign);
 			_numberEntryContext.VerticalTextAlign = UITextAlign.Start;
 			Assert.That(_numberEntryContext.VerticalTextAlign == _numberEntryView.VerticalTextAlign);

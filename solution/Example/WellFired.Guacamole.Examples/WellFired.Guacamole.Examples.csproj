@@ -85,7 +85,6 @@
     <Compile Include="CaseStudy\DotPeek\ViewModel\AssetCell.cs" />
     <Compile Include="CaseStudy\DotPeek\ViewModel\AssetsBase.cs" />
     <Compile Include="CaseStudy\DotPeek\ViewModel\AssetSplit.cs" />
-    <Compile Include="CaseStudy\DotPeek\ViewModel\Debug\Utility.cs" />
     <Compile Include="CaseStudy\DotPeek\ViewModel\ObservableScriptableObject.cs" />
     <Compile Include="CaseStudy\DotPeek\ViewModel\Overview.cs" />
     <Compile Include="CaseStudy\DotPeek\ViewModel\PersistentData.cs" />
@@ -94,6 +93,7 @@
     <Compile Include="CaseStudy\DotPeek\ViewModel\UnusedAssets.cs" />
     <Compile Include="CaseStudy\DotPeek\ViewModel\UsedAssets.cs" />
     <Compile Include="CaseStudy\DotPeek\ViewModel\Utilities\ColorCompare.cs" />
+    <Compile Include="CaseStudy\DotPeek\ViewModel\Utilities\Debug.cs" />
     <Compile Include="CaseStudy\DotPeek\View\Buttons\HeaderButton.cs" />
     <Compile Include="CaseStudy\DotPeek\View\Cells\AssetBreakdownCell.cs" />
     <Compile Include="CaseStudy\DotPeek\View\Cells\AssetCell.cs" />

@@ -4,13 +4,14 @@ using System.Linq;
 using UnityEngine;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model;
+using WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel.Utilities;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel
 {
 	[Serializable]
 	public class PersistentData : ObservableScriptableObject
 	{
-		private static readonly BuildReport LeftReport = Debug.Utility.GenerateTempBuildReport();
+		private static readonly BuildReport LeftReport = Utility.GenerateTempBuildReport();
 		
 		[SerializeField] private string _selectedPageName;
 		private ObservableBase _selectedPage;
@@ -19,8 +20,8 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel
 			= new List<ObservableBase> {
 				new Overview(LeftReport, BuildReport.Null),
 				new ProjectSettings(LeftReport, BuildReport.Null),
-				new UnusedAssets(Debug.Utility.ListOfAssets(), null),
-				new UsedAssets(Debug.Utility.ListOfAssets(), null),
+				new UnusedAssets(Utility.ListOfAssets(), null),
+				new UsedAssets(Utility.ListOfAssets(), null),
 			};
 
 		public ObservableBase SelectedPage

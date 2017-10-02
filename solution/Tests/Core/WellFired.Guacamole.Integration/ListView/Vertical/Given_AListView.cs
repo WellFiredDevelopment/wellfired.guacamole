@@ -14,7 +14,7 @@ namespace WellFired.Guacamole.Integration.ListView.Vertical
             var listView = new Views.ListView
             {
                 HorizontalLayout = LayoutOptions.Expand,
-                VerticalLayout = LayoutOptions.Expand,
+                VerticalLayout = LayoutOptions.Fill,
                 Orientation = OrientationOptions.Vertical,
                 EntrySize = 20,
                 ItemSource = ItemSource.From("One", "Two", "Three", "Four")
