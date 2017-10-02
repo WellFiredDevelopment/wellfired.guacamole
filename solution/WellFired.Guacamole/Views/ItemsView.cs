@@ -107,11 +107,15 @@ namespace WellFired.Guacamole.Views
             {
                 if(ItemSource != null)
                     ItemSourceChanged();
+                
+                SetStyleDictionary(StyleDictionary);
             }
             else if (e.PropertyName == ItemTemplateProperty.PropertyName)
             {
                 if(ItemSource != null)
                     ItemSourceChanged();
+                
+                SetStyleDictionary(StyleDictionary);
             }
         }
     }
