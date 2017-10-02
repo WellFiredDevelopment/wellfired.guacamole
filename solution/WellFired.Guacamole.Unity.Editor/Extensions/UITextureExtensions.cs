@@ -2,9 +2,10 @@
 #if DEBUG_TEXTURE_CREATION
 using System.IO;
 #endif
-using JetBrains.Annotations;
+using System;
 using UnityEngine;
 using WellFired.Guacamole.Data;
+using WellFired.Guacamole.Data.Annotations;
 using WellFired.Guacamole.Image;
 
 namespace WellFired.Guacamole.Unity.Editor.Extensions
@@ -48,6 +49,10 @@ namespace WellFired.Guacamole.Unity.Editor.Extensions
 			var result = new Texture2D(width, height) {
 				wrapMode = TextureWrapMode.Clamp
 			};
+
+			// If we have a thickness of 0, we should set the outline and background color to be the same, thickness of 0 is effectively no outline
+			if (Math.Abs(thickness) < 0.01)
+				outlineColor = backgroundColor;
 			
 			var pixelData = radius < 1 || cornerMask == CornerMask.None
 				? ImageData.BuildRect(width, height, backgroundColor, outlineColor, thickness, outlineMask) 
