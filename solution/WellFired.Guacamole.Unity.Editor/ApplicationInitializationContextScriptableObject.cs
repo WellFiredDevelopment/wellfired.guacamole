@@ -20,7 +20,7 @@ namespace WellFired.Guacamole.Unity.Editor
 		[SerializeField] private UISize _minSize;
 		[SerializeField] private string _title;
 		[SerializeField] private string _applicationName;
-		[SerializeField] private ObservableScriptableObject _persistantData;
+		[SerializeField] private ScriptableObject _persistantData;
 		[SerializeField] private UIRect _uirect;
 		[SerializeField] private bool _allowMultiple;
 		private ILogger _logger;
@@ -68,7 +68,7 @@ namespace WellFired.Guacamole.Unity.Editor
 			set { _applicationName = value; }
 		}
 
-		public ObservableScriptableObject PersistantData
+		public ScriptableObject PersistantData
 		{
 			get { return _persistantData; }
 			set { _persistantData = value; }
@@ -149,7 +149,7 @@ namespace WellFired.Guacamole.Unity.Editor
 		}
 
 		[PublicAPI]
-		public ObservableScriptableObject PersistantData
+		public ScriptableObject PersistantData
 		{
 			get { return ScriptableObject.PersistantData; }
 			set { ScriptableObject.PersistantData = value; }

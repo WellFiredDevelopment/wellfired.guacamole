@@ -1,9 +1,23 @@
-using System;
+﻿using System;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model
 {
     public struct FileSize
     {
+        public readonly float SizeInKb;
+        public readonly float SizeInMb;
+
+        public FileSize(float sizeInKb)
+        {
+            SizeInKb = sizeInKb;
+            SizeInMb = sizeInKb / 1024;
+        }
+
+        public override string ToString()
+        {
+            return $"{SizeInKb} kb";
+        }
+        
         private const float EquivalenceTolerance = 100f; 
         
         public bool Equals(FileSize other)
@@ -48,20 +62,6 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model
         public static FileSize operator +(FileSize a, FileSize b)
         {
             return new FileSize(a.SizeInKb + b.SizeInKb);
-        }
-
-        public readonly float SizeInKb;
-        public readonly float SizeInMb;
-
-        public FileSize(float sizeInKb)
-        {
-            SizeInKb = sizeInKb;
-            SizeInMb = sizeInKb / 1024;
-        }
-
-        public override string ToString()
-        {
-            return $"{SizeInKb} kb";
         }
 
         public static FileSize ConvertToFileSize(string size, string unit)

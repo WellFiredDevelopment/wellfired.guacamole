@@ -85,7 +85,11 @@ namespace WellFired.Guacamole.Views
                     ButtonPressedCommand = new Command
                     {
                         CanExecute = true,
-                        ExecuteAction = () => { Selected(bindingContext); }
+                        ExecuteAction = () =>
+                        {
+                            SelectedPage = bindingContext;
+                            Selected(SelectedPage);
+                        }
                     }
                 };
 
@@ -104,7 +108,10 @@ namespace WellFired.Guacamole.Views
         }
 
         public void Selected(object bindingContext)
-        {
+        {   
+            if (_pages.Count == 0)
+                return;
+            
             TabbedButtonSelect(bindingContext);
             if (bindingContext == null)
             {
@@ -112,13 +119,24 @@ namespace WellFired.Guacamole.Views
                 return;
             }
 
-            var selectedEntry = _pages.First(o => Equals(o.BindingContext, bindingContext));
+            var selectedEntry = _pages.FirstOrDefault(o => Equals(o.BindingContext, bindingContext));
+
+            if (selectedEntry == null)
+                return;
+            
             _tabbedPageContent.Content = selectedEntry;
         }
 
         private void TabbedButtonSelect(object bindingContext)
         {
+            if (ItemSource == null || ItemSource.Count == 0)
+                return;
+            
             var index = bindingContext == null ? 0 : ItemSource.IndexOf(bindingContext);
+
+            if (index == -1)
+                return;
+            
             foreach (var item in _tabSelect.Children)
                 ((TabbedPageButton) item).IsSelected = false;
             
@@ -130,18 +148,18 @@ namespace WellFired.Guacamole.Views
             base.SetStyleDictionary(styleDictionary);
 
             foreach (var page in _pages)
-            {
                 page.SetStyleDictionary(styleDictionary);
-            }
 
             foreach (var layoutable in _tabSelect.Children)
-            {
-                var button = layoutable as View;
-                if (button != null)
-                {
-                    button.SetStyleDictionary(styleDictionary);
-                }
-            }
+                (layoutable as View)?.SetStyleDictionary(styleDictionary);
+        }
+
+        protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(sender, e);
+
+            if (e.PropertyName == SelectedPageProperty.PropertyName)
+                Selected(SelectedPage);
         }
     }
 }

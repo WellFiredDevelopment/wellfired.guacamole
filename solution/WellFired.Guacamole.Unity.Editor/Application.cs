@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -32,7 +33,7 @@ namespace WellFired.Guacamole.Unity.Editor
 				AssetDatabase.SaveAssets();
 			}
 
-			initializationContext.PersistantData = (ObservableScriptableObject) persistantData;
+			initializationContext.PersistantData = persistantData as ScriptableObject;
 
 			_mainWindow = GuacamoleWindowLauncher.LaunchWindow(initializationContext.MainContent);
 			_mainWindow.Launch(initializationContext.ScriptableObject);
