@@ -83,7 +83,6 @@ namespace WellFired.Guacamole.DataBinding
 			if (Equals(Value, value))
 				return false;
 			
-			Diagnostics.Logger.LogMessage($"Converting back from dest {Property.PropertyType}");
 			Value = _defaultConverter.Convert(value, Property.PropertyType, null, CultureInfo.CurrentCulture);;
 			
 			switch (InstancedBindingMode)
@@ -100,7 +99,6 @@ namespace WellFired.Guacamole.DataBinding
 			if (_propertySetMethod == null)
 				return true; // We return true here because we've got far enough to set our Value, even if we don't have a _propertySetMethod. Which means we're probably not bound to anything
 
-			Diagnostics.Logger.LogMessage($"Convert {value} to {_propertyInfo.PropertyType}");
 			var converted = InstancedConverter != null ? InstancedConverter.Convert(value, _propertyInfo.PropertyType, null, CultureInfo.CurrentCulture) : value;
 			_propertySetMethod.Invoke(Object, new[] {converted});
 			return true;
