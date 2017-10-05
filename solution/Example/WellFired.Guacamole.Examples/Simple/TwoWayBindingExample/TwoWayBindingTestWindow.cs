@@ -2,14 +2,15 @@
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Diagnostics;
+using WellFired.Guacamole.Platform;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.Simple.TwoWayBindingExample
 {
 	public class TwoWayBindingTestWindow : Window
 	{
-		public TwoWayBindingTestWindow(ILogger logger, INotifyPropertyChanged persistantData) 
-			: base(logger, persistantData)
+		public TwoWayBindingTestWindow(ILogger logger, INotifyPropertyChanged persistantData, IPlatformProvider platformProvider) 
+			: base(logger, persistantData, platformProvider)
 		{
 			Padding = UIPadding.Of(5);
 

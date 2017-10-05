@@ -5,14 +5,15 @@ using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Examples.CaseStudy.RedditBrowser.Cells;
 using WellFired.Guacamole.Examples.CaseStudy.RedditBrowser.ViewModel;
 using WellFired.Guacamole.Layouts;
+using WellFired.Guacamole.Platform;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.RedditBrowser
 {
     public class RedditBrowserWindow : Window
     {
-        public RedditBrowserWindow(ILogger logger, INotifyPropertyChanged persistantData) 
-            : base(logger, persistantData)
+        public RedditBrowserWindow(ILogger logger, INotifyPropertyChanged persistantData, IPlatformProvider platformProvider) 
+            : base(logger, persistantData, platformProvider)
         {
             var textEntry = new TextEntry { CornerRadius = 0 };
             var searchButton = new Button {Text = "Search", CornerRadius = 0};

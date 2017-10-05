@@ -16,6 +16,8 @@ namespace WellFired.Guacamole.Unity.Editor
 	{
 		[SerializeField] private Type _mainContent;
 		[SerializeField] private string _mainContentString;
+		[SerializeField] private Type _platformProvider;
+		[SerializeField] private string _platformProviderString;
 		[SerializeField] private UISize _maxSize;
 		[SerializeField] private UISize _minSize;
 		[SerializeField] private string _title;
@@ -78,6 +80,21 @@ namespace WellFired.Guacamole.Unity.Editor
 		{
 			get { return _allowMultiple; }
 			set { _allowMultiple = value; }
+		}
+
+		public Type PlatformProvider 
+		{ 
+			get
+			{
+				if (string.IsNullOrEmpty(_platformProviderString) && _platformProvider == null)
+					return null;
+				
+				return _platformProvider ?? (_platformProvider = Type.GetType(_platformProviderString)); }
+			set
+			{
+				_platformProvider = value;
+				_platformProviderString = _platformProvider.AssemblyQualifiedName;
+			}
 		}
 
 		#region IInitializationContext implementation
@@ -153,6 +170,12 @@ namespace WellFired.Guacamole.Unity.Editor
 		{
 			get { return ScriptableObject.PersistantData; }
 			set { ScriptableObject.PersistantData = value; }
+		}
+
+		public Type PlatformProvider
+		{
+			get { return ScriptableObject.PlatformProvider; }
+			set { ScriptableObject.PlatformProvider = value; }
 		}
 
 		[PublicAPI]

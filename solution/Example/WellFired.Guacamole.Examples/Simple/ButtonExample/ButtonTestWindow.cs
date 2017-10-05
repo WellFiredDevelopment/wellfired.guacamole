@@ -1,14 +1,15 @@
 ﻿using System.ComponentModel;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Diagnostics;
+using WellFired.Guacamole.Platform;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.Simple.ButtonExample
 {
 	public class ButtonTestWindow : Window
 	{
-		public ButtonTestWindow(ILogger logger, INotifyPropertyChanged persistantData) 
-			: base(logger, persistantData)
+		public ButtonTestWindow(ILogger logger, INotifyPropertyChanged persistantData, IPlatformProvider platformProvider) 
+			: base(logger, persistantData, platformProvider)
 		{
 			Padding = UIPadding.Of(5);
 

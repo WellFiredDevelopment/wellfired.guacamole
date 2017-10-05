@@ -2,6 +2,7 @@
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Layouts;
+using WellFired.Guacamole.Platform;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.Simple.UIBindingExample
@@ -9,8 +10,8 @@ namespace WellFired.Guacamole.Examples.Simple.UIBindingExample
 	// ReSharper disable once InconsistentNaming
 	public class UIBindingTestWindow : Window
 	{
-		public UIBindingTestWindow(ILogger logger, INotifyPropertyChanged persistantData) 
-			: base(logger, persistantData)
+		public UIBindingTestWindow(ILogger logger, INotifyPropertyChanged persistantData, IPlatformProvider platformProvider) 
+			: base(logger, persistantData, platformProvider)
 		{
 			Padding = UIPadding.Of(5);
 

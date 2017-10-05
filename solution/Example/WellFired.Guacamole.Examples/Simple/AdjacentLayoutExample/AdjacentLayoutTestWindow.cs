@@ -2,14 +2,15 @@
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Layouts;
+using WellFired.Guacamole.Platform;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.Simple.AdjacentLayoutExample
 {
 	public class AdjacentLayoutTestWindow : Window
 	{
-		public AdjacentLayoutTestWindow(ILogger logger, INotifyPropertyChanged persistantData) 
-			: base(logger, persistantData)
+		public AdjacentLayoutTestWindow(ILogger logger, INotifyPropertyChanged persistantData, IPlatformProvider platformProvider) 
+			: base(logger, persistantData, platformProvider)
 		{
 			Padding = UIPadding.Of(5);
 

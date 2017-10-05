@@ -3,14 +3,15 @@ using WellFired.Guacamole.Data;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Examples.Simple.TabbedPageExample.ViewModel;
+using WellFired.Guacamole.Platform;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.Simple.TabbedPageExample
 {
 	public class TabbedPageWindow : Window
 	{
-		public TabbedPageWindow(ILogger logger, INotifyPropertyChanged persistantData) 
-			: base(logger, persistantData)
+		public TabbedPageWindow(ILogger logger, INotifyPropertyChanged persistantData, IPlatformProvider platformProvider) 
+			: base(logger, persistantData, platformProvider)
 		{
 			Content = new TabbedPage
 			{

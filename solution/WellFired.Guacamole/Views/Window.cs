@@ -3,6 +3,7 @@ using System.Diagnostics;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Data.Annotations;
 using WellFired.Guacamole.Diagnostics;
+using WellFired.Guacamole.Platform;
 using WellFired.Guacamole.Styling;
 
 namespace WellFired.Guacamole.Views
@@ -13,14 +14,14 @@ namespace WellFired.Guacamole.Views
 		private readonly ILogger _logger;
 
 		[PublicAPI]
-		public Window(ILogger logger, INotifyPropertyChanged persistantData)
+		public Window(ILogger logger, INotifyPropertyChanged persistantData, IPlatformProvider platformProvider)
 		{
 			_logger = logger;
 			StyleDictionary = new StyleDictionary(_logger);
 		}
 
 		[PublicAPI]
-		public Window(ILogger logger)
+		public Window(ILogger logger, IPlatformProvider platformProvider)
 		{
 			_logger = logger;
 			StyleDictionary = new StyleDictionary(_logger);

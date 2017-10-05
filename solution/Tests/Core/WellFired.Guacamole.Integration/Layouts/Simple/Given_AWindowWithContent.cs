@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using WellFired.Guacamole.Data;
+using WellFired.Guacamole.Platform;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Integration.Layouts.Simple
@@ -18,7 +19,7 @@ namespace WellFired.Guacamole.Integration.Layouts.Simple
             };
 
             var logger = NSubstitute.Substitute.For<Diagnostics.ILogger>();
-            var window = new Window (logger) {
+            var window = new Window (logger, default(IPlatformProvider)) {
                 HorizontalLayout = LayoutOptions.Fill,
                 VerticalLayout = LayoutOptions.Fill,
                 Content = view
@@ -43,7 +44,7 @@ namespace WellFired.Guacamole.Integration.Layouts.Simple
             };
 
             var logger = NSubstitute.Substitute.For<Diagnostics.ILogger>();
-            var window = new Window (logger) {
+            var window = new Window (logger, default(IPlatformProvider)) {
                 HorizontalLayout = LayoutOptions.Fill,
                 VerticalLayout = LayoutOptions.Fill,
                 Content = view

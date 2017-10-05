@@ -15,11 +15,25 @@ namespace WellFired.Guacamole.Unity.Editor
 		[SerializeField] private GuacamoleWindow _mainWindow;
 		public bool IsRunning => _mainWindow != null;
 
-		public IApplication Launch(ApplicationInitializationContext initializationContext, Type persistantType)
+		public IApplication Launch(ApplicationInitializationContext initializationContext, Type persistantType = null, Type platformProvider = null)
 		{
 			if (initializationContext == null)
 				throw new InitializationContextNull();
 
+			if (persistantType != null)
+				ConfigurePersistentData(initializationContext, persistantType);
+
+			if (platformProvider != null)
+				ConfigurePlatformProvider(initializationContext, platformProvider);
+
+			_mainWindow = GuacamoleWindowLauncher.LaunchWindow(initializationContext.MainContent);
+			_mainWindow.Launch(initializationContext.ScriptableObject);
+			
+			return this;
+		}
+
+		private static void ConfigurePersistentData(ApplicationInitializationContext initializationContext, Type persistantType)
+		{
 			var assetPath = Device.AdjustPath($"{initializationContext.ApplicationName}/{initializationContext.ApplicationName}.asset");
 			var persistantData = AssetDatabase.LoadAssetAtPath(assetPath, persistantType);
 			
@@ -34,21 +48,11 @@ namespace WellFired.Guacamole.Unity.Editor
 			}
 
 			initializationContext.PersistantData = persistantData as ScriptableObject;
-
-			_mainWindow = GuacamoleWindowLauncher.LaunchWindow(initializationContext.MainContent);
-			_mainWindow.Launch(initializationContext.ScriptableObject);
-			
-			return this;
 		}
 
-		public IApplication Launch(ApplicationInitializationContext initializationContext)
+		private static void ConfigurePlatformProvider(ApplicationInitializationContext initializationContext, Type platformProvider)
 		{
-			if (initializationContext == null)
-				throw new InitializationContextNull();
-
-			_mainWindow = GuacamoleWindowLauncher.LaunchWindow(initializationContext.MainContent);
-			_mainWindow.Launch(initializationContext.ScriptableObject);
-			return this;
+			initializationContext.PlatformProvider = platformProvider;
 		}
 
 		public void Teardown()

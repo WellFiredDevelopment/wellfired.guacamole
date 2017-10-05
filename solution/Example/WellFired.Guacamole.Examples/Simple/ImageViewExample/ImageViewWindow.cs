@@ -2,14 +2,15 @@
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Image;
+using WellFired.Guacamole.Platform;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.Simple.ImageViewExample
 {
 	public class ImageViewWindow : Window
 	{
-		public ImageViewWindow(ILogger logger, INotifyPropertyChanged persistantData)
-			: base(logger, persistantData)
+		public ImageViewWindow(ILogger logger, INotifyPropertyChanged persistantData, IPlatformProvider platformProvider)
+			: base(logger, persistantData, platformProvider)
 		{
 			Padding = UIPadding.Of(5);
 
