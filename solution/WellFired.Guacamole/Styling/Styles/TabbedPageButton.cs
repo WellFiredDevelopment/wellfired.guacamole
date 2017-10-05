@@ -9,16 +9,17 @@ namespace WellFired.Guacamole.Styling.Styles
         {
             Setters =
             {
-                new Setter {Property = View.BackgroundColorProperty, Value = UIColor.FromRGBA(125, 125, 125, 255)},
-                new Setter {Property = View.OutlineColorProperty, Value = UIColor.FromRGB(88, 88, 88)},
-                new Setter {Property = View.OutlineThicknessProperty, Value = 4.0},
+                new Setter {Property = View.BackgroundColorProperty, Value = UIColor.FromRGB(245, 245, 245)},
                 new Setter {Property = View.HorizontalLayoutProperty, Value = LayoutOptions.Fill},
                 new Setter {Property = View.VerticalLayoutProperty, Value = LayoutOptions.Expand},
                 new Setter {Property = View.PaddingProperty, Value = 5},
                 new Setter {Property = Views.Button.TextColorProperty, Value = UIColor.White},
                 new Setter {Property = View.CornerRadiusProperty, Value = 0.0},
                 new Setter {Property = Views.Button.HorizontalTextAlignProperty, Value = UITextAlign.Middle},
-                new Setter {Property = Views.Button.VerticalTextAlignProperty, Value = UITextAlign.Middle}
+                new Setter {Property = Views.Button.VerticalTextAlignProperty, Value = UITextAlign.Middle},
+                new Setter {Property = Views.Button.TextColorProperty, Value = UIColor.Black},
+                new Setter {Property = View.OutlineMaskProperty, Value = OutlineMask.Bottom},
+                new Setter {Property = View.OutlineThicknessProperty, Value = 1},
             },
             Triggers =
             {
@@ -28,7 +29,9 @@ namespace WellFired.Guacamole.Styling.Styles
                     Value = true,
                     Setters =
                     {
-                        new Setter {Property = View.BackgroundColorProperty, Value = UIColor.FromRGB(140, 140, 140)}
+                        new Setter {Property = View.OutlineMaskProperty, Value = OutlineMask.Left | OutlineMask.Top | OutlineMask.Right},
+                        new Setter {Property = View.OutlineThicknessProperty, Value = 1},
+                        new Setter {Property = View.BackgroundColorProperty, Value = UIColor.White}
                     }
                 },
                 new Trigger
@@ -37,16 +40,33 @@ namespace WellFired.Guacamole.Styling.Styles
                     Value = false,
                     Setters =
                     {
-                        new Setter {Property = View.BackgroundColorProperty, Value = UIColor.FromRGB(125, 125, 125)}
+                        new Setter {Property = View.OutlineMaskProperty, Value = OutlineMask.Bottom},
+                        new Setter {Property = View.OutlineThicknessProperty, Value = 1},
+                        new Setter {Property = View.BackgroundColorProperty, Value = UIColor.FromRGB(245, 245, 245)}
                     }
                 },
                 new Trigger
                 {
                     Property = View.ControlStateProperty,
                     Value = ControlState.Hover,
+                    Conditionals = {new Conditional {Property = Views.TabbedPageButton.IsSelectedProperty, Value = true}},
                     Setters =
                     {
-                        new Setter {Property = View.BackgroundColorProperty, Value = UIColor.FromRGB(158, 158, 158)}
+                        new Setter {Property = View.OutlineMaskProperty, Value = OutlineMask.Left | OutlineMask.Top | OutlineMask.Right},
+                        new Setter {Property = View.OutlineThicknessProperty, Value = 1},
+                        new Setter {Property = View.BackgroundColorProperty, Value = UIColor.White}
+                    }
+                },
+                new Trigger
+                {
+                    Property = View.ControlStateProperty,
+                    Value = ControlState.Hover,
+                    Conditionals = {new Conditional {Property = Views.TabbedPageButton.IsSelectedProperty, Value = false}},
+                    Setters =
+                    {
+                        new Setter {Property = View.OutlineMaskProperty, Value = OutlineMask.Bottom},
+                        new Setter {Property = View.OutlineThicknessProperty, Value = 1},
+                        new Setter {Property = View.BackgroundColorProperty, Value = UIColor.White}
                     }
                 },
                 new Trigger
@@ -56,7 +76,9 @@ namespace WellFired.Guacamole.Styling.Styles
                     Conditionals = {new Conditional {Property = Views.TabbedPageButton.IsSelectedProperty, Value = false}},
                     Setters =
                     {
-                        new Setter {Property = View.BackgroundColorProperty, Value = UIColor.FromRGB(125, 125, 125)}
+                        new Setter {Property = View.OutlineMaskProperty, Value = OutlineMask.Bottom},
+                        new Setter {Property = View.OutlineThicknessProperty, Value = 1},
+                        new Setter {Property = View.BackgroundColorProperty, Value = UIColor.FromRGB(245, 245, 245)}
                     }
                 },
                 new Trigger
@@ -66,7 +88,9 @@ namespace WellFired.Guacamole.Styling.Styles
                     Conditionals = {new Conditional {Property = Views.TabbedPageButton.IsSelectedProperty, Value = true}},
                     Setters =
                     {
-                        new Setter {Property = View.BackgroundColorProperty, Value = UIColor.FromRGB(140, 140, 140)}
+                        new Setter {Property = View.OutlineMaskProperty, Value = OutlineMask.Left | OutlineMask.Top | OutlineMask.Right},
+                        new Setter {Property = View.OutlineThicknessProperty, Value = 1},
+                        new Setter {Property = View.BackgroundColorProperty, Value = UIColor.White}
                     }
                 },
                 new Trigger
@@ -75,7 +99,9 @@ namespace WellFired.Guacamole.Styling.Styles
                     Value = ControlState.Active,
                     Setters =
                     {
-                        new Setter {Property = View.BackgroundColorProperty, Value = UIColor.FromRGB(64, 124, 191)}
+                        new Setter {Property = View.OutlineMaskProperty, Value = OutlineMask.Left | OutlineMask.Top | OutlineMask.Right},
+                        new Setter {Property = View.OutlineThicknessProperty, Value = 1},
+                        new Setter {Property = View.BackgroundColorProperty, Value = UIColor.White}
                     }
                 },
                 new Trigger

@@ -17,11 +17,14 @@ namespace WellFired.Guacamole.Examples.Simple.TabbedPageExample
 			{
 				ItemSource = new object [] { new FirstPage(), new SecondPage(), new ThirdPage() },
 				ItemTemplate = DataTemplate.Of(o => {
-					if (o is FirstPage)
-						return new Page {Title = "First", BackgroundColor = UIColor.Aquamarine, OutlineColor = UIColor.Aquamarine};
-					if (o is SecondPage)
-						return new Page {Title = "Second", BackgroundColor = UIColor.Beige, OutlineColor = UIColor.Beige};
-					return new Page {Title = "Third", BackgroundColor = UIColor.Brown, OutlineColor = UIColor.Brown};
+					switch (o)
+					{
+						case FirstPage _:
+							return new Page {Title = "First", BackgroundColor = UIColor.Aquamarine, OutlineThickness = 0};
+						case SecondPage _:
+							return new Page {Title = "Second", BackgroundColor = UIColor.Beige, OutlineThickness = 0};
+					}
+					return new Page {Title = "Third", BackgroundColor = UIColor.Brown, OutlineThickness = 0};
 				})
 			};
 		}
