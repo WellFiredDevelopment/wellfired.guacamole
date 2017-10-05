@@ -28,6 +28,7 @@ namespace WellFired.Guacamole.Views.MasterDetailPage
 
         protected void SetDetail(ILayoutable layoutable)
         {
+            ((View)layoutable).SetStyleDictionary(StyleDictionary);
             InvalidateRectRequest();
             ((LayoutView)Content).Children[1] = layoutable;
         }
