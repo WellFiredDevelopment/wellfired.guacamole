@@ -11,9 +11,8 @@ namespace WellFired.Guacamole.Views
     internal static class CellHelper
     {
         public static ICell CreateDefaultCell(object bindingContext, IListView container, IStyleDictionary styleDictionary)
-        {   
-            var defaultCellContext = bindingContext as IDefaultCellContext;
-            if (defaultCellContext != null)
+        {
+            if (bindingContext is IDefaultCellContext defaultCellContext)
             {
                 var labelCell = new LabelCell {
                     Container = container

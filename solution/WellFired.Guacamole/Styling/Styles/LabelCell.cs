@@ -6,7 +6,7 @@ namespace WellFired.Guacamole.Styling.Styles
     internal static class LabelCell
     {
         private static readonly UIColor LightColor = UIColor.FromRGB(255, 255, 255);
-        private static readonly UIColor DarkerColor = UIColor.FromRGB(200, 200, 200);
+        private static readonly UIColor DarkerColor = UIColor.FromRGB(250, 250, 250);
 
         public static readonly Style Style = new Style
         {
@@ -14,7 +14,7 @@ namespace WellFired.Guacamole.Styling.Styles
             {
                 new Setter {Property = View.BackgroundColorProperty, Value = DarkerColor},
                 new Setter {Property = View.OutlineColorProperty, Value = DarkerColor},
-                new Setter {Property = View.OutlineThicknessProperty, Value = 4.0},
+                new Setter {Property = View.OutlineThicknessProperty, Value = 0.0},
             },
             Triggers =
             {
