@@ -4,24 +4,24 @@ using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Styling;
 using WellFired.Guacamole.Views.BindingContexts;
+using WellFired.Guacamole.Views.Cells;
 
 namespace WellFired.Guacamole.Views
 {
     internal static class CellHelper
     {
         public static ICell CreateDefaultCell(object bindingContext, IListView container, IStyleDictionary styleDictionary)
-        {
-            var context = bindingContext as LabelCellBindingContext;
-            if (context != null)
+        {   
+            var defaultCellContext = bindingContext as IDefaultCellContext;
+            if (defaultCellContext != null)
             {
-                var labelCell = new LabelCell
-                {
+                var labelCell = new LabelCell {
                     Container = container
                 };
 
                 labelCell.SetStyleDictionary(styleDictionary);
-                labelCell.BindingContext = (INotifyPropertyChanged) bindingContext;
-                labelCell.Bind(LabelCell.TextProperty, "CellLabelText");
+                labelCell.BindingContext = defaultCellContext;
+                labelCell.Bind(LabelCell.TextProperty, "CellLabelText", BindingMode.ReadOnly);
                 labelCell.Bind(Cell.IsSelectedProperty, "IsSelected", BindingMode.TwoWay);
 
                 return labelCell;

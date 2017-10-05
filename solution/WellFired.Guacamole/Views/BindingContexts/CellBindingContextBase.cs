@@ -1,9 +1,10 @@
 ﻿using WellFired.Guacamole.Data.Annotations;
 using WellFired.Guacamole.DataBinding;
+using WellFired.Guacamole.Views.Cells;
 
 namespace WellFired.Guacamole.Views.BindingContexts
 {
-    public class CellBindingContextBase : ObservableBase
+    public class CellBindingContextBase : ObservableBase, IDefaultCellContext
     {
         private bool _isSelected;
         

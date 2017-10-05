@@ -13,6 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
+    <LangVersion>7</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -70,6 +71,7 @@
     <Compile Include="DataBinding\NotifyBase.cs" />
     <Compile Include="DataBinding\ObservableBase.cs" />
     <Compile Include="DataBinding\ReflectExt.cs" />
+    <Compile Include="DataBinding\SelectedItemChangedEventArgs.cs" />
     <Compile Include="Device.cs" />
     <Compile Include="Diagnostics\DefaultLogger.cs" />
     <Compile Include="Diagnostics\ILogger.cs" />
@@ -154,6 +156,7 @@
     <Compile Include="Views\BindingContexts\PageBindingContextBase.cs" />
     <Compile Include="Views\Button.cs" />
     <Compile Include="Views\CellHelper.cs" />
+    <Compile Include="Views\Cells\IDefaultCellContext.cs" />
     <Compile Include="Views\ControlState.cs" />
     <Compile Include="Views\IClickable.cs" />
     <Compile Include="Views\IItemsView.cs" />
@@ -170,6 +173,9 @@
     <Compile Include="Views\ListView.BindableProperties.cs" />
     <Compile Include="Views\ListView.cs" />
     <Compile Include="Views\ListView.IListensToVdsChanges.cs" />
+    <Compile Include="Views\MasterDetailPage\ListViewMasterDetailPage.cs" />
+    <Compile Include="Views\MasterDetailPage\MasterDetailPage.cs" />
+    <Compile Include="Views\MasterDetailPage\MasterPageItem.cs" />
     <Compile Include="Views\TabbedPage.BindableProperties.cs" />
     <Compile Include="Views\TabbedPage.cs" />
     <Compile Include="Views\TabbedPageButton.BindableProperties.cs" />

@@ -24,7 +24,7 @@ namespace WellFired.Guacamole.Views
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-
+            
             return request;
         }
 

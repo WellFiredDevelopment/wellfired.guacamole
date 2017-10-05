@@ -99,7 +99,15 @@ namespace WellFired.Guacamole.Views
 
             var listView = view as IListView;
             if (listView != null)
-                return ListViewHelper.CalculateValidRectRequest(listView);
+            {
+                var requestedSize = ListViewHelper.CalculateValidRectRequest(listView);
+                
+                var size = ConstrainUnder(requestedSize.Size, listView.MinSize);
+                size = ConstrainOver(size, listView.MaxSize);
+                requestedSize.Size = size;
+
+                return requestedSize;
+            }
 
             var defaultSize = UISize.Of(view.MinSize.Width, view.MinSize.Height);
             

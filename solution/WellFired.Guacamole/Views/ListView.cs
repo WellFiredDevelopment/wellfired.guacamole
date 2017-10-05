@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.Data;
+using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Exceptions;
 
 namespace WellFired.Guacamole.Views
@@ -13,7 +14,6 @@ namespace WellFired.Guacamole.Views
     /// Horizontal or Vertical. On top of that, the view can be set to have a dynamic data source, if the ItemSource is
     /// an ObservableCollection, when you add, remove, insert or in any way change that collection, the ListView
     /// will be set to update dynamically.
-    /// 
     /// The ListView contains a series of visible cells. These visible cells are recycled for performance reasons. To 
     /// calculate what should be visible we use the VdsCalculator, that operates on a Visual Data Set. If our view
     /// is big enough to view 4 entries at once, our VDS will be the four indicies into this data those visible elements
@@ -28,6 +28,7 @@ namespace WellFired.Guacamole.Views
         private object _cachedScrollTo;
         public int TotalContentSize { get; private set; }
         public float InitialOffset { get; private set; }
+        public Action<INotifyPropertyChanged, SelectedItemChangedEventArgs> OnItemSelected { get; set; } = delegate {  };
 
         public ListView()
         {
