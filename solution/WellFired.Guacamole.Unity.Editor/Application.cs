@@ -23,9 +23,6 @@ namespace WellFired.Guacamole.Unity.Editor
 			if (persistantType != null)
 				ConfigurePersistentData(initializationContext, persistantType);
 
-			if (platformProvider != null)
-				ConfigurePlatformProvider(initializationContext, platformProvider);
-
 			_mainWindow = GuacamoleWindowLauncher.LaunchWindow(initializationContext.MainContent);
 			_mainWindow.Launch(initializationContext.ScriptableObject);
 			
@@ -48,11 +45,6 @@ namespace WellFired.Guacamole.Unity.Editor
 			}
 
 			initializationContext.PersistantData = persistantData as ScriptableObject;
-		}
-
-		private static void ConfigurePlatformProvider(ApplicationInitializationContext initializationContext, Type platformProvider)
-		{
-			initializationContext.PlatformProvider = platformProvider;
 		}
 
 		public void Teardown()

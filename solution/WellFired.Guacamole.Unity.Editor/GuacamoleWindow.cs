@@ -10,6 +10,7 @@ using WellFired.Guacamole.InitializationContext;
 using WellFired.Guacamole.Platform;
 using WellFired.Guacamole.Renderer;
 using WellFired.Guacamole.Unity.Editor.Extensions;
+using WellFired.Guacamole.Unity.Editor.Platform;
 using WellFired.Guacamole.Views;
 using Logger = WellFired.Guacamole.Diagnostics.Logger;
 
@@ -179,14 +180,12 @@ namespace WellFired.Guacamole.Unity.Editor
 			NativeRendererHelper.LaunchedAssembly = Assembly.GetExecutingAssembly();
 
 			var contentType = ApplicationInitializationContextScriptableObject.MainContent;
-			object platformProvider = null;
-
-			if (ApplicationInitializationContextScriptableObject.PlatformProvider != null)
-				platformProvider = Activator.CreateInstance (ApplicationInitializationContextScriptableObject.PlatformProvider);
+			
+			var platformProvider = new UnityPlatformProvider();
 
 			var constructorInfo = contentType.GetConstructor(new[] {typeof(Guacamole.Diagnostics.ILogger), typeof(INotifyPropertyChanged), typeof(IPlatformProvider)});
 			if (constructorInfo != null)
-				_window = (Window) constructorInfo.Invoke(new[]
+				_window = (Window) constructorInfo.Invoke(new object[]
 				{
 					ApplicationInitializationContextScriptableObject.Logger,
 					ApplicationInitializationContextScriptableObject.PersistantData,
@@ -196,7 +195,7 @@ namespace WellFired.Guacamole.Unity.Editor
 			{
 				var paramLessCsonstructorInfo = contentType.GetConstructor(new[] {typeof(ILogger), typeof(IPlatformProvider)});
 				if (paramLessCsonstructorInfo != null)
-					_window = (Window) paramLessCsonstructorInfo.Invoke(new[]
+					_window = (Window) paramLessCsonstructorInfo.Invoke(new object[]
 					{
 						ApplicationInitializationContextScriptableObject.Logger,
 						platformProvider
