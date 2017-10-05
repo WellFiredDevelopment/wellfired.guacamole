@@ -6,7 +6,7 @@ namespace WellFired.Guacamole.Styling.Styles
     internal static class LabelCell
     {
         private static readonly UIColor LightColor = UIColor.FromRGB(255, 255, 255);
-        private static readonly UIColor DarkerColor = UIColor.FromRGB(250, 250, 250);
+        private static readonly UIColor DarkerColor = UIColor.FromRGB(245, 245, 245);
 
         public static readonly Style Style = new Style
         {
