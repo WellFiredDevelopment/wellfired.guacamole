@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using UnityEditor;
 using UnityEngine;
 using WellFired.Guacamole.Attributes;
 using WellFired.Guacamole.Data;
@@ -28,6 +29,8 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			base.Render(renderRect);
 
 			var button = (Button)Control;
+
+			EditorGUIUtility.AddCursorRect(UnityRect, MouseCursor.Link);
 
 			var controlState = button.ControlState;
 			if (!button.ButtonPressedCommand.CanExecute)

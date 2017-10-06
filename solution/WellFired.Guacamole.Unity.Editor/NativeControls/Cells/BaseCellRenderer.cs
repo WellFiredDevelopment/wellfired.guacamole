@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Unity.Editor.Extensions;
@@ -14,6 +15,8 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Cells
 		{
 			var cell = Control as Cell;
 			Debug.Assert(cell != null, "cell != null");
+
+			EditorGUIUtility.AddCursorRect(UnityRect, MouseCursor.Link);
 
 			if (Control.ControlState != ControlState.Disabled)
 			{
