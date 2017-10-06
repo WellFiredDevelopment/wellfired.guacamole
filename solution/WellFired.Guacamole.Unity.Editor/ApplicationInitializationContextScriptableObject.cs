@@ -16,6 +16,8 @@ namespace WellFired.Guacamole.Unity.Editor
 	{
 		[SerializeField] private Type _mainContent;
 		[SerializeField] private string _mainContentString;
+		[SerializeField] private Type _mainViewModel;
+		[SerializeField] private string _mainViewModelString;
 		[SerializeField] private UISize _maxSize;
 		[SerializeField] private UISize _minSize;
 		[SerializeField] private string _title;
@@ -32,6 +34,22 @@ namespace WellFired.Guacamole.Unity.Editor
 			{
 				_mainContent = value;
 				_mainContentString = _mainContent.AssemblyQualifiedName;
+			}
+		}
+		
+		public Type MainViewModel
+		{
+			get
+			{
+				if (_mainViewModel == null && string.IsNullOrEmpty(_mainViewModelString))
+					return default(Type);
+				
+				return _mainViewModel ?? (_mainViewModel = Type.GetType(_mainViewModelString));
+			}
+			set
+			{
+				_mainViewModel = value;
+				_mainViewModelString = _mainViewModel.AssemblyQualifiedName;
 			}
 		}
 
@@ -110,6 +128,12 @@ namespace WellFired.Guacamole.Unity.Editor
 		{
 			get { return ScriptableObject.MainContent; }
 			set { ScriptableObject.MainContent = value; }
+		}
+
+		public Type MainViewModel
+		{
+			get { return ScriptableObject.MainViewModel; }
+			set { ScriptableObject.MainViewModel = value; }
 		}
 
 		// ReSharper disable once InconsistentNaming

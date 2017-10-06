@@ -67,6 +67,7 @@
     <Compile Include="DataBinding\Converter\ValueConverter.cs" />
     <Compile Include="DataBinding\DataTemplate.cs" />
     <Compile Include="DataBinding\Exceptions\BindingExistsException.cs" />
+    <Compile Include="DataBinding\IBasicViewModel.cs" />
     <Compile Include="DataBinding\IBindableObject.cs" />
     <Compile Include="DataBinding\NotifyBase.cs" />
     <Compile Include="DataBinding\ObservableBase.cs" />

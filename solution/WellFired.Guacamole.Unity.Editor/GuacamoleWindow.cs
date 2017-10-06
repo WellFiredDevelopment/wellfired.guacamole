@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Data.Annotations;
+using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Exceptions;
 using WellFired.Guacamole.InitializationContext;
 using WellFired.Guacamole.Platform;
@@ -180,6 +181,7 @@ namespace WellFired.Guacamole.Unity.Editor
 			NativeRendererHelper.LaunchedAssembly = Assembly.GetExecutingAssembly();
 
 			var contentType = ApplicationInitializationContextScriptableObject.MainContent;
+			var viewModelType = ApplicationInitializationContextScriptableObject.MainViewModel;
 			
 			var platformProvider = new UnityPlatformProvider();
 
@@ -200,6 +202,17 @@ namespace WellFired.Guacamole.Unity.Editor
 						ApplicationInitializationContextScriptableObject.Logger,
 						platformProvider
 					});
+			}
+
+			if (viewModelType != default(Type))
+			{
+				var viewModel = (IBasicViewModel)Activator.CreateInstance(viewModelType);
+				viewModel.Inject(
+					ApplicationInitializationContextScriptableObject.Logger,
+					(INotifyPropertyChanged)ApplicationInitializationContextScriptableObject.PersistantData,
+					platformProvider);
+
+				_window.BindingContext = viewModel;
 			}
 
 			if (_window == null)
