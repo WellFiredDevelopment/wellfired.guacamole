@@ -9,26 +9,16 @@ namespace WellFired.Guacamole.Styling.Styles
 		{
 			Setters =
 			{
-				new Setter {Property = View.BackgroundColorProperty, Value = UIColor.FromRGBA(125, 125, 125, 255)},
-				new Setter {Property = View.OutlineColorProperty, Value = UIColor.FromRGB(88, 88, 88)},
-				new Setter {Property = View.OutlineThicknessProperty, Value = 4.0},
+				new Setter {Property = View.BackgroundColorProperty, Value = UIColor.White},
+				new Setter {Property = View.OutlineThicknessProperty, Value = 0},
 				new Setter {Property = View.HorizontalLayoutProperty, Value = LayoutOptions.Fill},
 				new Setter {Property = View.VerticalLayoutProperty, Value = LayoutOptions.Expand},
-				new Setter {Property = Views.Label.TextColorProperty, Value = UIColor.White},
-				new Setter {Property = Views.Label.HorizontalTextAlignProperty, Value = UITextAlign.Middle},
+				new Setter {Property = Views.Label.TextColorProperty, Value = UIColor.Black},
+				new Setter {Property = Views.Label.HorizontalTextAlignProperty, Value = UITextAlign.Start},
 				new Setter {Property = Views.Label.VerticalTextAlignProperty, Value = UITextAlign.Middle}
 			},
 			Triggers =
 			{
-				new Trigger
-				{
-					Property = View.ControlStateProperty,
-					Value = ControlState.Normal,
-					Setters =
-					{
-						new Setter {Property = View.BackgroundColorProperty, Value = UIColor.FromRGB(125, 125, 125)}
-					}
-				},
 				new Trigger
 				{
 					Property = View.ControlStateProperty,
