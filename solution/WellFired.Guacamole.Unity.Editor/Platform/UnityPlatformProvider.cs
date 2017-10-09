@@ -8,6 +8,14 @@ namespace WellFired.Guacamole.Unity.Editor.Platform
 	/// </summary>
 	public class UnityPlatformProvider : IPlatformProvider
 	{
-		public IPersistentDataStorageService GetPersistentDataStorage => new UnityPersistentDataStorageService();
+		private readonly string _applicationName;
+
+		public UnityPlatformProvider(string applicationName)
+		{
+			_applicationName = applicationName;
+		}
+		
+		public IDataStorageService GetPersonalDataStorage(string applicationName) => new UnityPersonalDataStorageService(_applicationName);
+		public IDataStorageService GetTeamSharedDataStorage(string applicationName) => new UnityTeamSharedDataStorageService(_applicationName);
 	}
 }

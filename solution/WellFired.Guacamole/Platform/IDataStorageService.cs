@@ -3,7 +3,7 @@
 	/// <summary>
 	/// This interface defines a simple key value store.
 	/// </summary>
-	public interface IPersistentDataStorageService
+	public interface IDataStorageService
 	{
 		/// <summary>
 		/// Reads the data that is associated with the given key.

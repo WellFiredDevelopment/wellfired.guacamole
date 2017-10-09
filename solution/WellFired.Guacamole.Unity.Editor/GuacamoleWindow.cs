@@ -183,7 +183,7 @@ namespace WellFired.Guacamole.Unity.Editor
 			var contentType = ApplicationInitializationContextScriptableObject.MainContent;
 			var viewModelType = ApplicationInitializationContextScriptableObject.MainViewModel;
 			
-			var platformProvider = new UnityPlatformProvider();
+			var platformProvider = new UnityPlatformProvider(_applicationInitializationContextScriptableObject.ApplicationName);
 
 			var constructorInfo = contentType.GetConstructor(new[] {typeof(Guacamole.Diagnostics.ILogger), typeof(INotifyPropertyChanged), typeof(IPlatformProvider)});
 			if (constructorInfo != null)
