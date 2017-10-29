@@ -3,6 +3,7 @@ using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Data.Annotations;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Cells;
+using WellFired.Guacamole.Diagnostics;
 
 namespace WellFired.Guacamole.Views
 {
@@ -121,7 +122,7 @@ namespace WellFired.Guacamole.Views
                 if (!SetValue(SelectedItemProperty, value)) 
                     return;
 
-                foreach (var itemSource in ItemSource)
+                foreach (var itemSource in CompositeCollection)
                 {
                     if (!(itemSource is IDefaultCellContext))
                         break;

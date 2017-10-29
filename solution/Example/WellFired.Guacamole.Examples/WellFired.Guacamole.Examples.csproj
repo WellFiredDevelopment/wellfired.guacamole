@@ -157,10 +157,10 @@
     <Compile Include="Simple\LabelExample\LabelTestWindow.cs" />
     <Compile Include="Simple\ListViewExample\ListViewTestApplication.cs" />
     <Compile Include="Simple\ListViewExample\ListViewTestWindow.cs" />
-    <Compile Include="Simple\ListViewGroupExample\ListViewTestApplication.cs" />
-    <Compile Include="Simple\ListViewGroupExample\ListViewTestWindow.cs" />
-    <Compile Include="Simple\ListViewWithBoundDataExample\ListViewTestApplication.cs" />
-    <Compile Include="Simple\ListViewWithBoundDataExample\ListViewTestWindow.cs" />
+    <Compile Include="Simple\ListViewGroupExample\ListViewGroupTestApplication.cs" />
+    <Compile Include="Simple\ListViewGroupExample\ListViewGroupTestWindow.cs" />
+    <Compile Include="Simple\ListViewWithBoundDataExample\ListViewWithBoundDataTestApplication.cs" />
+    <Compile Include="Simple\ListViewWithBoundDataExample\ListViewWithBoundDataTestWindow.cs" />
     <Compile Include="Simple\MasterDetailPageExample\MasterDetailPageApplication.cs" />
     <Compile Include="Simple\MasterDetailPageExample\MasterDetailPageWindow.cs" />
     <Compile Include="Simple\OneWayBindingExample\OneWayBindingTestApplication.cs" />

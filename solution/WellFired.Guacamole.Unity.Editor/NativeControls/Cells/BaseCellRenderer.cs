@@ -11,12 +11,15 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Cells
 {
 	public abstract class BaseCellRenderer : BaseRenderer
 	{
+		protected virtual bool CanMouseOver { get; } = true;
+		
 		public override void Render(UIRect renderRect)
 		{
 			var cell = Control as Cell;
 			Debug.Assert(cell != null, "cell != null");
 
-			EditorGUIUtility.AddCursorRect(UnityRect, MouseCursor.Link);
+			if(CanMouseOver)
+				EditorGUIUtility.AddCursorRect(UnityRect, MouseCursor.Link);
 
 			if (Control.ControlState != ControlState.Disabled)
 			{

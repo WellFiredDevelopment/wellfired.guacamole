@@ -56,7 +56,7 @@ namespace WellFired.Guacamole.Views
         /// <returns></returns>
         protected object GetItem(int index)
         {
-            return _compositeCollection[index];
+            return CompositeCollection[index];
         }
 
         /// <summary>
@@ -66,19 +66,19 @@ namespace WellFired.Guacamole.Views
         /// <returns></returns>
         protected int GetIndexOf(object item)
         {
-            return _compositeCollection.IndexOf(item);
+            return CompositeCollection.IndexOf(item);
         }
 
         /// <summary>
         /// This bool will return true if the ItemSource is built from a collection that is sequential, false if it is grouped
         /// </summary>
-        protected bool IsItemSourceContiguous => _compositeCollection.IsContiguousCollection;
+        protected bool IsItemSourceContiguous => CompositeCollection.IsContiguousCollection;
 
         /// <summary>
         /// Returns the count of our ItemSource
         /// </summary>
         /// <returns></returns>
-        protected int ItemSourceCount => _compositeCollection.Count;
+        protected int ItemSourceCount => CompositeCollection.Count;
 
         private void AddCollection(IEnumerable items, int index)
         {
@@ -150,9 +150,9 @@ namespace WellFired.Guacamole.Views
         private void RegisterNewItemSource()
         {
             // We internally build a CompositeCollection to house our entries, this allows us to provide complex NotifyCollectionChanged behavious with multiple collections.
-            _compositeCollection.CollectionChanged -= NotifyCollectionChangedOnCollectionChanged;
-            _compositeCollection = new CompositeCollection(ItemSource);
-            _compositeCollection.CollectionChanged += NotifyCollectionChangedOnCollectionChanged;
+            CompositeCollection.CollectionChanged -= NotifyCollectionChangedOnCollectionChanged;
+            CompositeCollection = new CompositeCollection(ItemSource);
+            CompositeCollection.CollectionChanged += NotifyCollectionChangedOnCollectionChanged;
             ItemSourceChanged();
         }
     }

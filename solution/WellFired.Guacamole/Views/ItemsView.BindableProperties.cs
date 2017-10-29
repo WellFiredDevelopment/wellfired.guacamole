@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Data.Annotations;
 using WellFired.Guacamole.DataBinding;
@@ -9,9 +10,9 @@ namespace WellFired.Guacamole.Views
     {
         [PublicAPI] public static readonly BindableProperty ItemSourceProperty = BindableProperty.Create<ItemsView, ICollection>(default(ICollection), BindingMode.TwoWay, viewBase => viewBase.ItemSource);
         [PublicAPI] public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create<ItemsView, DataTemplate>(null, BindingMode.TwoWay, viewBase => viewBase.ItemTemplate);
-        [PublicAPI] public static readonly BindableProperty HeaderTemplateProperty = BindableProperty.Create<ItemsView, DataTemplate>(null, BindingMode.TwoWay, viewBase => viewBase.HeaderTemplate);
+        [PublicAPI] public static readonly BindableProperty HeaderTemplateProperty = BindableProperty.Create<ItemsView, DataTemplate>(DataTemplate.Of(typeof(HeaderCell)), BindingMode.TwoWay, viewBase => viewBase.HeaderTemplate);
 
-        private CompositeCollection _compositeCollection = new CompositeCollection();
+        protected CompositeCollection CompositeCollection = new CompositeCollection();
         
         [PublicAPI]
         public IList ItemSource
