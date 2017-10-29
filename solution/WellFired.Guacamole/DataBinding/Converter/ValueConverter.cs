@@ -14,6 +14,15 @@ namespace WellFired.Guacamole.DataBinding.Converter
 			if (targetType == typeof(double) && value is int)
 				return ((int)value).ConvertToDouble();
 
+			if (value == null)
+			{
+				var canBeNull = !targetType.IsValueType || Nullable.GetUnderlyingType(targetType) != null;
+				if (canBeNull)
+					return null;
+				
+				throw new SystemException("Converting null to a non nullable type");
+			}
+
 			if (value.GetType() == targetType)
 				return value;
 
@@ -35,6 +44,15 @@ namespace WellFired.Guacamole.DataBinding.Converter
 			if (targetType == typeof(double) && value is int)
 				return ((int)value).ConvertToDouble();
 
+			if (value == null)
+			{
+				var canBeNull = !targetType.IsValueType || Nullable.GetUnderlyingType(targetType) != null;
+				if (canBeNull)
+					return null;
+				
+				throw new SystemException("Converting null to a non nullable type");
+			}
+			
 			if (value.GetType() == targetType)
 				return value;
 
