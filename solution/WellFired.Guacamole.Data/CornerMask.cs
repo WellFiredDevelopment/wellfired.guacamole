@@ -1,5 +1,4 @@
 ﻿using System;
-using WellFired.Guacamole.Data.Annotations;
 
 namespace WellFired.Guacamole.Data
 {

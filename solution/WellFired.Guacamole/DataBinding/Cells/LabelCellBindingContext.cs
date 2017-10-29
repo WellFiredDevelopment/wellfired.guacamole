@@ -1,7 +1,7 @@
-﻿using WellFired.Guacamole.Data.Annotations;
-using WellFired.Guacamole.Views.Cells;
+﻿using WellFired.Guacamole.Cells;
+using WellFired.Guacamole.Data.Annotations;
 
-namespace WellFired.Guacamole.Views.BindingContexts
+namespace WellFired.Guacamole.DataBinding.Cells
 {
     public class LabelCellBindingContext : CellBindingContextBase, IDefaultCellContext
     {
@@ -10,8 +10,8 @@ namespace WellFired.Guacamole.Views.BindingContexts
         [PublicAPI]
         public string CellLabelText
         {
-            get { return _cellLabelText; }
-            set { SetProperty(ref _cellLabelText, value); }
+            get => _cellLabelText;
+            set => SetProperty(ref _cellLabelText, value);
         }
 
         public LabelCellBindingContext(string cellLabelText)

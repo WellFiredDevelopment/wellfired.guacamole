@@ -25,7 +25,7 @@ namespace WellFired.Guacamole.Unity.Editor
 
 		private Exception _exception;
 		private float _prevLayoutTime;
-		private const float MaxLayoutInterval = 1.0f / 30.0f;
+		private const float MaxLayoutInterval = 1.0f / 90.0f; // Clamp the update at 90 fps for silky smooth lists.
 
 		public bool CloseAfterNextUpdate { get; set; }
 
@@ -127,7 +127,7 @@ namespace WellFired.Guacamole.Unity.Editor
 			Repaint();
 		}
 
-		private void DisplayUserError(System.Exception exception)
+		private void DisplayUserError(Exception exception)
 		{
 			var targetInvocationException = exception as TargetInvocationException;
 			if (targetInvocationException != null)
@@ -160,7 +160,7 @@ namespace WellFired.Guacamole.Unity.Editor
 						_prevLayoutTime = Time.realtimeSinceStartup;
 					}
 				}
-				catch (System.Exception e)
+				catch (Exception e)
 				{
 					_exception = e;
 					return;
@@ -170,7 +170,7 @@ namespace WellFired.Guacamole.Unity.Editor
 			{
 				MainContent.Render(Rect);
 			}
-			catch (System.Exception e)
+			catch (Exception e)
 			{
 				_exception = e;
 			}

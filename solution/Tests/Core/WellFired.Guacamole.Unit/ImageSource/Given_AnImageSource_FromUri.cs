@@ -11,7 +11,7 @@ using WellFired.Guacamole.WebRequestHandler;
 namespace WellFired.Guacamole.Unit.ImageSource
 {
     [TestFixture]
-    public class Given_AnImageSource_FromUri
+    public class GivenAnImageSourceFromUri
     {
         [Test]
         public void When_TheLoadIsInteruptedWithACancel_Then_TheChainIsCancelled()

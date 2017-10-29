@@ -1,5 +1,4 @@
-﻿using System;
-using WellFired.Guacamole.Drawing.Blend;
+﻿using WellFired.Guacamole.Drawing.Blend;
 
 namespace WellFired.Guacamole.Drawing.Shapes
 {

@@ -5,7 +5,6 @@ using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Data.Annotations;
 using WellFired.Guacamole.Exceptions;
 using WellFired.Guacamole.InitializationContext;
-using WellFired.Guacamole.Unity.Editor.DataBinding;
 using Logger = WellFired.Guacamole.Unity.Editor.Diagnostics.Logger;
 using ILogger = WellFired.Guacamole.Diagnostics.ILogger;
 

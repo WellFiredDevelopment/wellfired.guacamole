@@ -91,6 +91,15 @@
     <Compile Include="ListView\Given_ViewParams.cs" />
     <Compile Include="Padding\Given_NoPadding.cs" />
     <Compile Include="Padding\Given_Padding.cs" />
+    <Compile Include="CompositeCollection\Group.cs" />
+    <Compile Include="CompositeCollection\IEventMockReciever.cs" />
+    <Compile Include="CompositeCollection\WithOneTierDataNoObservables.cs" />
+    <Compile Include="CompositeCollection\WithOneTierDataObservable.cs" />
+    <Compile Include="CompositeCollection\WithTwoTierDataNoObservables.cs" />
+    <Compile Include="CompositeCollection\WithTwoTierDataWithChildrenAndParentObservable.cs" />
+    <Compile Include="CompositeCollection\WithTwoTierDataWithChildrenObservable.cs" />
+    <Compile Include="CompositeCollection\WithTwoTierDataWithParentObservable.cs" />
+    <Compile Include="Vds\Given_AVariableHeightViewParams.cs" />
     <Compile Include="Vds\Given_AVds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Styling\Given_ATrigger.cs" />

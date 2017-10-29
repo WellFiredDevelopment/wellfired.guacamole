@@ -1,10 +1,8 @@
 ﻿using System;
-using System.ComponentModel;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
 using WellFired.Guacamole.Exceptions;
-using WellFired.Guacamole.Unity.Editor.DataBinding;
 
 namespace WellFired.Guacamole.Unity.Editor
 {

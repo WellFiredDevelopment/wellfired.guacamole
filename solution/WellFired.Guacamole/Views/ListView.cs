@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.DataBinding;
+using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Exceptions;
 
 namespace WellFired.Guacamole.Views
@@ -21,13 +23,19 @@ namespace WellFired.Guacamole.Views
     /// </summary>
     public partial class ListView : ItemsView, IListView
     {
+        // This is our currently displayed VDS
         private List<int> _visualDataSet = new List<int>();
-        private readonly List<ICell> _activeEntries = new List<ICell>();
-        private readonly List<ICell> _inactiveEntries = new List<ICell>();
-        private bool _hasBeenLayouted;
-        private object _cachedScrollTo;
+        
+        // We keep a list of new VDS here to avoid allocations, it's cleared at the beginning of every calculation
+        private List<int> _newVds = new List<int>();
+        
+        private readonly List<ICell> _activeCells = new List<ICell>();
+        private readonly Dictionary<Type, List<ICell>> _inactiveCells = new Dictionary<Type, List<ICell>>();
+        
         public int TotalContentSize { get; private set; }
         public float InitialOffset { get; private set; }
+        private int _headersCount;
+        private int _itemsCount;
         public Action<INotifyPropertyChanged, SelectedItemChangedEventArgs> OnItemSelected { get; set; } = delegate {  };
 
         public ListView()
@@ -41,19 +49,21 @@ namespace WellFired.Guacamole.Views
         /// </summary>
         private void ReCalculateTotalContentSize()
         {
-            var count = ItemSource.Count;
-            TotalContentSize = (count - 1) * Spacing + count * EntrySize;
+            var spacing = (_headersCount + _itemsCount - 1) * Spacing;
+            TotalContentSize = spacing + _headersCount * HeaderSize + _itemsCount * EntrySize;
             InvalidateRectRequest();
         }
 
         protected override void ItemSourceChanged()
         {
+            FigureOutGroup();
+            
             Children.Clear();
+
+            foreach (var cell in _activeCells)
+                Cache(cell);
             
-            foreach (var entry in _activeEntries)
-                _inactiveEntries.Add(entry);
-            
-            _activeEntries.Clear();
+            _activeCells.Clear();
             _visualDataSet = new List<int>();
             ReCalculateTotalContentSize();
 
@@ -63,6 +73,26 @@ namespace WellFired.Guacamole.Views
             var viewSize = SizingHelper.GetImportantSize(Orientation, RectRequest);
             CanScroll = viewSize < TotalContentSize;
             CalculateVisualDataSet();
+        }
+
+        private void FigureOutGroup()
+        {
+            _headersCount = 0;
+            _itemsCount = 0;
+
+            if (ItemSourceCount == 0)
+                return;
+            
+            if (IsItemSourceContiguous)
+            {
+                _itemsCount = ItemSourceCount;
+                return;
+            }
+
+            // we intentionally use the raw itemsource here, since that will give use the header information if the collection
+            // is not contiguous
+            _headersCount = ItemSource.Count;
+            _itemsCount = ItemSourceCount - _headersCount;
         }
 
         protected override void ItemSourceCleared()
@@ -88,11 +118,11 @@ namespace WellFired.Guacamole.Views
         {
             base.OnPropertyChanged(sender, e);
 
-            if (e.PropertyName != NumberOfVisibleEntriesProperty.PropertyName)
+            if (e.PropertyName != AvailableSpaceProperty.PropertyName)
                 return;
 
-            var totalCurrentVisibleEntries = _activeEntries.Count;
-            if (totalCurrentVisibleEntries > NumberOfVisibleEntries)
+            var totalCurrentVisibleEntries = _activeCells.Count;
+            if (totalCurrentVisibleEntries > AvailableSpace)
                 return;
 
             if (TotalContentSize <= 0)
@@ -103,30 +133,43 @@ namespace WellFired.Guacamole.Views
             CanScroll = viewSize < TotalContentSize;
             if(CanScroll)
                 ScrollOffset = ScrollOffset; // We do this here to reclamp the scroll value incase we've pulled the bottom of a listView too far.
-            CalculateVisualDataSet();
-
-            if (_hasBeenLayouted || _cachedScrollTo == null) 
-                return;
             
-            _hasBeenLayouted = true;
-            ScrollTo(_cachedScrollTo);
-            _cachedScrollTo = null;
+            CalculateVisualDataSet();
         }
-
+        
+        /// <summary>
+        /// This methods works internally and mathmatically to work out which indicies this list should be rendering. We will
+        /// generate a list of indiciest o display and compare this to our previous update, if anything needs adding or removing
+        /// it will be handled by AdjustForNewVds.
+        /// </summary>
         private void CalculateVisualDataSet()
         {
-            var newVds = VdsCalculator.CalculateVisualDataSet(-ScrollOffset, NumberOfVisibleEntries * EntrySize, EntrySize, TotalContentSize, Spacing).ToArray();
-            var oldVds = _visualDataSet;
-            VdsCalculator.AdjustForNewVds(oldVds.ToArray(), newVds, this);
-            _visualDataSet = newVds.ToList();
-            InitialOffset = VdsCalculator.CalculateInitialOffset(_visualDataSet, EntrySize, Spacing) + ScrollOffset;
+            _newVds.Clear();
+            
+            var scrollOffset = ScrollOffset;
+            VdsCalculator.CalculateVisualDataSetWithVariableHeight(scrollOffset, AvailableSpace, ItemSourceCount, GetEntrySizeFor, ref _newVds);
+            VdsCalculator.AdjustForNewVds(_visualDataSet, _newVds, this);
+            
+            // Here we clone this so we can compare on the next CalculateVisualDataSet
+            _visualDataSet = _newVds.ToList();
         }
 
-        private ICell GetNewCell(object data)
+        /// <summary>
+        /// This will return a cell from either our internal cache or build a new one for you.
+        /// When cells are returned, they should already have their binding context set, so the caller does not have to worry about this.
+        /// </summary>
+        /// <param name="data">The object for which we'd like to find a cell and bind</param>
+        /// <returns></returns>
+        /// <exception cref="NoCompatibleCellInDataTemplate"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        private ICell GetAReusableCell(object data)
         {
-            var cell = ItemTemplate == null
+            var itemTemplate = GetTemplateFor(data);
+            var entrySize = GetEntrySizeFor(data);
+            
+            var cell = itemTemplate == null
                 ? CellHelper.CreateDefaultCell(data, this, StyleDictionary)
-                : CellHelper.CreateCellWith(this, ItemTemplate, data, this, StyleDictionary);
+                : CellHelper.CreateCellWith(this, itemTemplate, data, this, StyleDictionary);
 
             if (cell == null)
                 throw new NoCompatibleCellInDataTemplate();
@@ -137,12 +180,12 @@ namespace WellFired.Guacamole.Views
             switch (Orientation)
             {
                 case OrientationOptions.Horizontal:
-                    rectRequest.Width = EntrySize + Spacing;
-                    contentRectRequest.Width = EntrySize;
+                    rectRequest.Width = entrySize + Spacing;
+                    contentRectRequest.Width = entrySize;
                     break;
                 case OrientationOptions.Vertical:
-                    rectRequest.Height = EntrySize + Spacing;
-                    contentRectRequest.Height = EntrySize;
+                    rectRequest.Height = entrySize + Spacing;
+                    contentRectRequest.Height = entrySize;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -152,24 +195,102 @@ namespace WellFired.Guacamole.Views
             cell.ContentRectRequest = contentRectRequest;
             return cell;
         }
-        
+
+        /// <inheritdoc />
         /// <summary>
         /// ScrollTo a specific item.
         /// </summary>
         /// <param name="item">The item you wish to scroll to. This should be the items bindableObject, not the visual element.</param>
         public void ScrollTo(object item)
         {
-            if (!_hasBeenLayouted)
-            {
-                _cachedScrollTo = item;
-                return;
-            }
-            
-            var index = ItemSource.IndexOf(item);
+            var index = GetIndexOf(item);
             if(index == -1)
                 throw new IndexOutOfRangeException();
+
+            ScrollOffset = VdsCalculator.DesiredScrollFor(index, ItemSourceCount, GetEntrySizeFor);
+        }
+
+        /// <summary>
+        /// This method will put a cell back into our internal cache. Cells can be reused later by calling the retrieve method
+        /// </summary>
+        /// <param name="cell">The cell to cache</param>
+        private void Cache(ICell cell)
+        {
+            var bindingContext = cell.BindingContext.GetType();
+            if (!_inactiveCells.TryGetValue(bindingContext, out var list))
+            {
+                list = new List<ICell>();
+                _inactiveCells[bindingContext] = list;
+            }
             
-            ScrollOffset = VdsCalculator.DesiredScrollFor(index, EntrySize, Spacing);
+            list.Add(cell);
+        }
+
+        /// <summary>
+        /// We will attempt to retrieve an item from our internal cell cache.
+        /// </summary>
+        /// <param name="forBoundObject">The bound object for which we want to find a view</param>
+        /// <returns>either a valid reusable item or default(ICell).</returns>
+        private ICell Retrieve(object forBoundObject)
+        {
+            var bindingObjectType = forBoundObject.GetType();
+            if (!_inactiveCells.TryGetValue(bindingObjectType, out var _))
+                return default(ICell);
+
+            if(!_inactiveCells[bindingObjectType].Any())
+                return default(ICell);
+            
+            var cell = _inactiveCells[bindingObjectType].First();
+            _inactiveCells[bindingObjectType].Remove(cell);
+            return cell;
+        }
+
+        /// <summary>
+        /// This method will get either the header or entry data templace depending on the object that was passed.
+        /// </summary>
+        /// <param name="data">The Bound object whos size we want to check.</param>
+        /// <returns></returns>
+        private DataTemplate GetTemplateFor(object data)
+        {
+            if (data is ICollection)
+                return HeaderTemplate;
+            
+            return ItemTemplate;
+        }
+
+        /// <summary>
+        /// This method will return the EntrySize for a given element in the ItemSource if grouping is not enabled, we will always
+        /// immediately return the default entry size, if grouping is enabled, we shall return either the HeaderSize or the EntrySize 
+        /// depending on which element is passed.
+        /// </summary>
+        /// <param name="index">The index for which to get the entry</param>
+        /// <returns></returns>
+        private int GetEntrySizeFor(int index)
+        {
+            if (IsItemSourceContiguous)
+                return EntrySize + Spacing;
+
+            var entry = GetItem(index);
+
+            return entry is ICollection ? HeaderSize + Spacing : EntrySize + Spacing;
+        }
+
+        /// <summary>
+        /// This method will return the EntrySize for a given element in the ItemSource if grouping is not enabled, we will always
+        /// immediately return the default entry size, if grouping is enabled, we shall return either the HeaderSize or the EntrySize 
+        /// depending on which element is passed.
+        /// </summary>
+        /// <param name="data">The Bound object whos size we want to check.</param>
+        /// <returns></returns>
+        public int GetEntrySizeFor(object data)
+        {
+            if (IsItemSourceContiguous)
+                return EntrySize;
+
+            if (data is ICollection)
+                return HeaderSize;
+            
+            return EntrySize;
         }
     }
 }

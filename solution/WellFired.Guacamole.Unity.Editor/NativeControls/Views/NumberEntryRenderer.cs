@@ -56,13 +56,13 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			if (e.PropertyName == NumberEntry.HorizontalTextAlignProperty.PropertyName || e.PropertyName == NumberEntry.VerticalTextAlignProperty.PropertyName)
 				Style.alignment = UITextAlignExtensions.Combine(entry.HorizontalTextAlign, entry.VerticalTextAlign);
 
-			if (e.PropertyName == NumberEntry.TextColorProperty.PropertyName)
-			{
-				Style.focused.textColor = entry.TextColor.ToUnityColor();
-				Style.active.textColor = entry.TextColor.ToUnityColor();
-				Style.hover.textColor = entry.TextColor.ToUnityColor();
-				Style.normal.textColor = entry.TextColor.ToUnityColor();	
-			}
+			if (e.PropertyName != NumberEntry.TextColorProperty.PropertyName) 
+				return;
+			
+			Style.focused.textColor = entry.TextColor.ToUnityColor();
+			Style.active.textColor = entry.TextColor.ToUnityColor();
+			Style.hover.textColor = entry.TextColor.ToUnityColor();
+			Style.normal.textColor = entry.TextColor.ToUnityColor();
 		}
 	}
 }

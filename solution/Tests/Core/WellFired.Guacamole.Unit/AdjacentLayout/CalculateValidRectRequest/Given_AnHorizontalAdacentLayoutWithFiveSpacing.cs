@@ -6,7 +6,7 @@ using WellFired.Guacamole.Layouts;
 namespace WellFired.Guacamole.Unit.AdjacentLayout.CalculateValidRectRequest
 {
     [TestFixture]
-    public class Given_AnHorizontalAdacentLayoutWithFiveSpacing
+    public class GivenAnHorizontalAdacentLayoutWithFiveSpacing
     {
         [Test]
         public void With_OneChild_And_NoMinSize()

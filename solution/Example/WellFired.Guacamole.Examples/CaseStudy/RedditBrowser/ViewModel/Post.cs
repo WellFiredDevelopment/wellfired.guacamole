@@ -1,6 +1,6 @@
-﻿using WellFired.Guacamole.Examples.CaseStudy.RedditBrowser.Model;
+﻿using WellFired.Guacamole.DataBinding.Cells;
+using WellFired.Guacamole.Examples.CaseStudy.RedditBrowser.Model;
 using WellFired.Guacamole.Image;
-using WellFired.Guacamole.Views.BindingContexts;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.RedditBrowser.ViewModel
 {

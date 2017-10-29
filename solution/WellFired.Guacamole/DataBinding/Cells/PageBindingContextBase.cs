@@ -1,7 +1,6 @@
 ﻿using WellFired.Guacamole.Data.Annotations;
-using WellFired.Guacamole.DataBinding;
 
-namespace WellFired.Guacamole.Views.BindingContexts
+namespace WellFired.Guacamole.DataBinding.Cells
 {
     public class PageBindingContextBase : ObservableBase
     {
@@ -10,8 +9,8 @@ namespace WellFired.Guacamole.Views.BindingContexts
         [PublicAPI]
         public string Title
         {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
+            get => _title;
+            set => SetProperty(ref _title, value);
         }
     }
 }

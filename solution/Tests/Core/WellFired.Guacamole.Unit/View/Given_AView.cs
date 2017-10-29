@@ -6,7 +6,7 @@ using WellFired.Guacamole.Views;
 namespace WellFired.Guacamole.Unit.View
 {
     [TestFixture]
-    public class Given_AView
+    public class GivenAView
     {
         [Test]
         public void That_IsLayedoutTwice_Then_LayoutIsDoneCorrectly()

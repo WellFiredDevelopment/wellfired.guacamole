@@ -6,7 +6,7 @@ using WellFired.Guacamole.Views;
 namespace WellFired.Guacamole.Integration.Layouts.Adjacent
 {
     [TestFixture]
-    public class Given_AnAdjacentLayoutWithSizeConstraints
+    public class GivenAnAdjacentLayoutWithSizeConstraints
     {
         [Test]
         public void And_NoChildren_And_MinSize_When_Layout_Then_LayoutIsCorrect()

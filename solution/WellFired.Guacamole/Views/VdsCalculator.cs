@@ -1,11 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WellFired.Guacamole.Data;
+using WellFired.Guacamole.Diagnostics;
 
 namespace WellFired.Guacamole.Views
 {
     public static class VdsCalculator
-    {        
+    {
+        /// <summary>
+        /// </summary>
+        /// <returns></returns>
+        public static void CalculateVisualDataSetWithVariableHeight(float scrollOffset, float visibleControlSize, int maxEntries, Func<int, int> obtainHeight, ref List<int> visibleDataSet)
+        {   
+            if (MathUtil.NearEqual(Math.Abs(visibleControlSize), 0.0f))
+                return;
+
+            var focusedEntry = 0;
+            var runningHeight = 0.0f;
+            for (; focusedEntry < maxEntries; focusedEntry++)
+            {
+                var height = obtainHeight(focusedEntry);
+                var start = runningHeight;
+                var end = runningHeight + height;
+
+                if (scrollOffset >= start && scrollOffset < end)
+                {
+                    scrollOffset = start - scrollOffset;
+                    break;
+                }
+
+                runningHeight += height;
+            }
+
+            var firstEntry = focusedEntry;
+            var focusedHeight = obtainHeight(firstEntry) + scrollOffset;
+
+            if (firstEntry > maxEntries)
+                return;
+            
+            visibleDataSet.Add(firstEntry);
+
+            var runningTotal = focusedHeight;
+            for (var index = firstEntry + 1; index < maxEntries; index++)
+            {
+                runningTotal += obtainHeight(index);
+                
+                visibleDataSet.Add(index);
+                
+                if (runningTotal >= visibleControlSize)
+                    break;
+            }
+        }
+        
         /// <summary>
         /// Given some data that defines a visible control, we can calculate a potentially visible data set, 
         /// this VDS will simply be a series of indicies into the data that are currently on visible.
@@ -46,47 +93,68 @@ namespace WellFired.Guacamole.Views
             return visibleDataSet;
         }
 
-        public static void AdjustForNewVds(int [] oldVds, int [] newVds, IListensToVdsChanges listensToVdsChanges)
+        private static readonly List<int> Removals = new List<int>();
+        private static readonly List<int> Additions = new List<int>();
+        public static void AdjustForNewVds(List<int> oldVds, List<int> newVds, IListensToVdsChanges listensToVdsChanges)
         {
-            var removals = oldVds.Where(vds => newVds.All(nvds => nvds != vds)).ToArray();
-            var additions = newVds.Where(nvds => oldVds.All(vds => vds != nvds)).ToArray();
+            Removals.Clear();
+            Additions.Clear();
+
+            for (var index = 0; index < oldVds.Count; index++)
+            {
+                var vds = oldVds[index];
+                if(!newVds.Contains(vds))
+                    Removals.Add(vds);
+            }
             
-            foreach(var removal in removals)
-                listensToVdsChanges.ItemLeftVds(removal);
-            
+            for (var index = 0; index < newVds.Count; index++)
+            {
+                var vds = newVds[index];
+                if(!oldVds.Contains(vds))
+                    Additions.Add(vds);
+            }
+
+            for (var index = 0; index < Removals.Count; index++)
+            {
+                var removal = Removals[index];
+                var front = oldVds.Any() && removal < oldVds.Last();
+                listensToVdsChanges.ItemLeftVds(removal, front);
+            }
+
             // We do this in reverse, so the insertion callbacks get fired in the correct order. Otherwise, we'd insert as such.
             // The order is important, since we're doing this index based.
             // VDS : 3, 4, 5
             // Add : 0, 1, 2
             // Result : 2, 1, 0, 3, 4, 5
-            int[] enumerableAdditions;
-            if (additions.Any() && oldVds.Any() && additions.Last() < oldVds.First())
-                enumerableAdditions = additions.Reverse().ToArray();
-            else
-                enumerableAdditions = additions.ToArray();
-
-            foreach (var addition in enumerableAdditions)
+            if (Additions.Any() && oldVds.Any() && Additions.Last() < oldVds.First())
             {
-                var front = oldVds.Any() && addition < oldVds.First();
-                listensToVdsChanges.ItemEnteredVds(addition, front);
+                for (var index = Additions.Count - 1; index >= 0; index--)
+                {
+                    var front = oldVds.Any() && Additions[index] < oldVds.First();
+                    listensToVdsChanges.ItemEnteredVds(Additions[index], front);       
+                }
             }
-        }
-
-        public static float CalculateInitialOffset(IEnumerable<int> visualDataSet, int entrySize, int spacing)
-        {
-            return visualDataSet.First() * (entrySize + spacing);
+            else
+            {
+                for (var index = 0; index < Additions.Count; index++)
+                {
+                    var front = oldVds.Any() && Additions[index] < oldVds.First();
+                    listensToVdsChanges.ItemEnteredVds(Additions[index], front);       
+                }
+            }
         }
 
         /// <summary>
         /// This will get the desired scroll for a specific item in the list.
         /// </summary>
-        /// <param name="dataIndex"></param>
-        /// <param name="estimatedElementSize"></param>
-        /// <param name="spacing"></param>
         /// <returns></returns>
-        public static float DesiredScrollFor(int dataIndex, int estimatedElementSize, int spacing)
+        public static float DesiredScrollFor(int dataIndex, int maxEntries, Func<int, int> obtainHeight)
         {
-            return -(dataIndex * estimatedElementSize + spacing * (dataIndex - 1));
+            var runningHeight = 0;
+            for (var focusedEntry = 0; focusedEntry < dataIndex; focusedEntry++)
+                runningHeight += obtainHeight(focusedEntry);
+
+            return runningHeight;
         }
     }
 }

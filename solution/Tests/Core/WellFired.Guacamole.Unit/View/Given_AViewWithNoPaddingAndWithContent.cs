@@ -6,7 +6,7 @@ using WellFired.Guacamole.Views;
 namespace WellFired.Guacamole.Unit.View
 {
     [TestFixture]
-    public class Given_AViewWithNoPaddingAndWithContent
+    public class GivenAViewWithNoPaddingAndWithContent
     {
         [Test]
         public void When_TheViewIsLayout_Then_LayoutIsCorrect()

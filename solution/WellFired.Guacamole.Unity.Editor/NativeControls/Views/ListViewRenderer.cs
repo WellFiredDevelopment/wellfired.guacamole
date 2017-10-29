@@ -78,7 +78,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			var listView = Control as ListView;
 			Debug.Assert(listView != null, "listView != null");
 			
-			if (listView.ShouldShowScrollBar)
+			if (listView.ShouldShowScrollBar && listView.CanScroll)
 			{
 				switch (listView.Orientation)
 				{
@@ -123,6 +123,9 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 
 		private static Rect CalculateScrollBarRect(Rect unityRect, ListView listView)
 		{
+			if (!listView.CanScroll)
+				return Rect.zero;
+			
 			var scrollBarRect = unityRect;
 			float sizeRatio;
 			int portionAvailableToMove;
@@ -132,10 +135,10 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 				case OrientationOptions.Horizontal:
 					scrollBarRect.y += scrollBarRect.height - listView.ScrollBarSize;
 					scrollBarRect.height = listView.ScrollBarSize;
-					sizeRatio = listView.RectRequest.Width / (float) listView.TotalContentSize;
+					sizeRatio = listView.RectRequest.Width / listView.TotalContentSize;
 					scrollBarRect.width = (int)(scrollBarRect.width * sizeRatio);
 					portionAvailableToMove = (int)(unityRect.width - scrollBarRect.width);
-					scrollRatio = -listView.ScrollOffset / ListViewHelper.MaxScrollFor((int)unityRect.width, listView.TotalContentSize);
+					scrollRatio = listView.ScrollOffset / ListViewHelper.MaxScrollFor((int)unityRect.width, listView.TotalContentSize);
 					scrollBarRect.x += (int)(portionAvailableToMove * scrollRatio);
 					if (scrollBarRect.width < 10.0f)
 						scrollBarRect.width = 10.0f;
@@ -143,10 +146,10 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 				case OrientationOptions.Vertical:
 					scrollBarRect.x += scrollBarRect.width - listView.ScrollBarSize;
 					scrollBarRect.width = listView.ScrollBarSize;
-					sizeRatio = listView.RectRequest.Height / (float) listView.TotalContentSize;
+					sizeRatio = listView.RectRequest.Height / listView.TotalContentSize;
 					scrollBarRect.height = (int)(scrollBarRect.height * sizeRatio);
 					portionAvailableToMove = (int)(unityRect.height - scrollBarRect.height);
-					scrollRatio = -listView.ScrollOffset / ListViewHelper.MaxScrollFor((int)unityRect.height, listView.TotalContentSize);
+					scrollRatio = listView.ScrollOffset / ListViewHelper.MaxScrollFor((int)unityRect.height, listView.TotalContentSize);
 					scrollBarRect.y += (int)(portionAvailableToMove * scrollRatio);
 					if (scrollBarRect.height < 10.0f)
 						scrollBarRect.height = 10.0f;

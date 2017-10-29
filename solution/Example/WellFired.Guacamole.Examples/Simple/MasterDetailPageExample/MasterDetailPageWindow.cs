@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using WellFired.Guacamole.Data;
-using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Diagnostics;
-using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Platform;
 using WellFired.Guacamole.Views;
 using WellFired.Guacamole.Views.MasterDetailPage;

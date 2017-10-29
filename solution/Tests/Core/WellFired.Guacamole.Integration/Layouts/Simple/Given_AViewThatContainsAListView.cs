@@ -6,7 +6,7 @@ using WellFired.Guacamole.Views;
 namespace WellFired.Guacamole.Integration.Layouts.Simple
 {
     [TestFixture]
-    public class Given_AViewThatContainsAListView
+    public class GivenAViewThatContainsAListView
     {
         [Test]
         public void When_TheListViewIsLayout_Then_LayoutIsSuccessful()

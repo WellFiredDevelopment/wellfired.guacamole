@@ -8,7 +8,7 @@ namespace WellFired.Guacamole.Unity.Editor.Extensions
 		// ReSharper disable once InconsistentNaming
 		public static UIRect ToUIRect(this Rect source)
 		{
-			return UIRect.With((int) source.x, (int) source.y, (int) source.width, (int) source.height);
+			return UIRect.With(source.x, source.y, source.width, source.height);
 		}
 	}
 }

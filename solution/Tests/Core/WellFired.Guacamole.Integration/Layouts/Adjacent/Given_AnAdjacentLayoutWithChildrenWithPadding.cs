@@ -6,7 +6,7 @@ using WellFired.Guacamole.Views;
 namespace WellFired.Guacamole.Integration.Layouts.Adjacent
 {
 	[TestFixture]
-	public class Given_AnAdjacentLayoutWithChildrenWithPadding
+	public class GivenAnAdjacentLayoutWithChildrenWithPadding
 	{
 	    [Test]
 	    public void When_Layout_Then_LayoutIsCorrect()

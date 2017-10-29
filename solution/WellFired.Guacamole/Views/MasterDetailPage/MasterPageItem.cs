@@ -1,6 +1,6 @@
 ﻿using System;
+using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.DataBinding;
-using WellFired.Guacamole.Views.Cells;
 
 namespace WellFired.Guacamole.Views.MasterDetailPage
 {

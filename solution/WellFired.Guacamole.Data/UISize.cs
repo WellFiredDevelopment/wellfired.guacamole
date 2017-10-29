@@ -5,8 +5,8 @@ namespace WellFired.Guacamole.Data
 	// ReSharper disable once InconsistentNaming
 	public struct UISize
 	{
-		public int Width { get; set; }
-		public int Height { get; set; }
+		public float Width { get; set; }
+		public float Height { get; set; }
 
 		[PublicAPI]
 		public static UISize Min { get; } = Of(0);
@@ -20,29 +20,32 @@ namespace WellFired.Guacamole.Data
 		[PublicAPI]
 		public static UISize Zero { get; } = Of(0);
 
-		public UISize(int width, int height) : this()
+		public UISize(float width, float height) : this()
 		{
 			Width = width;
 			Height = height;
 		}
-
+		
 		public override bool Equals(object obj)
 		{
 			var compareTo = (UISize) obj;
-			return (compareTo.Width == Width) && (compareTo.Height == Height);
+			return MathUtil.NearEqual(compareTo.Width, Width) && MathUtil.NearEqual(compareTo.Height, Height);
 		}
 
 		[PublicAPI]
 		public bool Equals(UISize other)
 		{
-			return (Width == other.Width) && (Height == other.Height);
+			return MathUtil.NearEqual(Width, other.Width) && MathUtil.NearEqual(Height, other.Height);
 		}
 
 		public override int GetHashCode()
 		{
 			unchecked
 			{
-				return (Width*397) ^ Height;
+				// ReSharper disable once NonReadonlyMemberInGetHashCode
+				return (Width.GetHashCode() * 397) ^ 
+				       // ReSharper disable once NonReadonlyMemberInGetHashCode
+				       Height.GetHashCode();
 			}
 		}
 		
@@ -66,19 +69,19 @@ namespace WellFired.Guacamole.Data
 			return !(a == b);
 		}
 
-	    public override string ToString()
-	    {
-	        return $"{nameof(Width)}: {Width} {nameof(Height)}: {Height}";
-	    }
+		public override string ToString()
+		{
+			return $"{nameof(Width)}: {Width} {nameof(Height)}: {Height}";
+		}
 
-	    public static UISize Of(int width, int height)
-	    {
-	        return new UISize(width, height);
-	    }
+		public static UISize Of(float width, float height)
+		{
+			return new UISize(width, height);
+		}
 
-	    public static UISize Of(int size)
-	    {
-	        return new UISize(size, size);
-	    }
+		public static UISize Of(float size)
+		{
+			return new UISize(size, size);
+		}
 	}
 }

@@ -62,10 +62,10 @@ namespace WellFired.Guacamole.Unit
 
         private class ExclusiveSynchronizationContext : SynchronizationContext
         {
-            private bool done;
+            private bool _done;
             public Exception InnerException { get; set; }
-            readonly AutoResetEvent workItemsWaiting = new AutoResetEvent(false);
-            readonly Queue<Tuple<SendOrPostCallback, object>> items =
+            readonly AutoResetEvent _workItemsWaiting = new AutoResetEvent(false);
+            readonly Queue<Tuple<SendOrPostCallback, object>> _items =
                 new Queue<Tuple<SendOrPostCallback, object>>();
 
             public override void Send(SendOrPostCallback d, object state)
@@ -75,28 +75,28 @@ namespace WellFired.Guacamole.Unit
 
             public override void Post(SendOrPostCallback d, object state)
             {
-                lock (items)
+                lock (_items)
                 {
-                    items.Enqueue(Tuple.Create(d, state));
+                    _items.Enqueue(Tuple.Create(d, state));
                 }
-                workItemsWaiting.Set();
+                _workItemsWaiting.Set();
             }
 
             public void EndMessageLoop()
             {
-                Post(_ => done = true, null);
+                Post(_ => _done = true, null);
             }
 
             public void BeginMessageLoop()
             {
-                while (!done)
+                while (!_done)
                 {
                     Tuple<SendOrPostCallback, object> task = null;
-                    lock (items)
+                    lock (_items)
                     {
-                        if (items.Count > 0)
+                        if (_items.Count > 0)
                         {
-                            task = items.Dequeue();
+                            task = _items.Dequeue();
                         }
                     }
                     if (task != null)
@@ -111,7 +111,7 @@ namespace WellFired.Guacamole.Unit
                     }
                     else
                     {
-                        workItemsWaiting.WaitOne();
+                        _workItemsWaiting.WaitOne();
                     }
                 }
             }

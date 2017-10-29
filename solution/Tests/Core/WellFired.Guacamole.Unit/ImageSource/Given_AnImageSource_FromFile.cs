@@ -10,7 +10,7 @@ using WellFired.Guacamole.Image;
 namespace WellFired.Guacamole.Unit.ImageSource
 {
     [TestFixture]
-    public class Given_AnImageSource_FromFile
+    public class GivenAnImageSourceFromFile
     {
         [Test]
         public void When_TheLoadIsInteruptedWithACancel_Then_TheChainIsCancelled()

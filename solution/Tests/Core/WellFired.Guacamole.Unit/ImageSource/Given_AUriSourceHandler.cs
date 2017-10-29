@@ -12,7 +12,7 @@ using WellFired.Guacamole.WebRequestHandler;
 namespace WellFired.Guacamole.Unit.ImageSource
 {
     [TestFixture]
-    public class Given_AUriSourceHandler
+    public class GivenAUriSourceHandler
     {
         [Test]
         public void When_AnInValidPathIsPassedAnExceptionIsThrown()

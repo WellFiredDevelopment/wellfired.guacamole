@@ -4,7 +4,7 @@ using WellFired.Guacamole.Views;
 namespace WellFired.Guacamole.Unit.ListView
 {
     [TestFixture]
-    public class Given_ViewParams
+    public class GivenViewParams
     {
         [Test]
         public void With_TenEntries_That_FitExactly_ThenMaxScrollIsCorrect()

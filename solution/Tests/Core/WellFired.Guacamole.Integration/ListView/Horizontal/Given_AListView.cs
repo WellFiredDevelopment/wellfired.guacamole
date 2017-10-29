@@ -6,7 +6,7 @@ using WellFired.Guacamole.Views;
 namespace WellFired.Guacamole.Integration.ListView.Horizontal
 {
     [TestFixture]
-    public class Given_AListView
+    public class GivenAListView
     {
         [Test]
         public void With_Expand_And_AnItemSource_When_Layout_Then_ChildrenAreCorrect()

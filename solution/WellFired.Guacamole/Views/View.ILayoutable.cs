@@ -4,16 +4,16 @@ namespace WellFired.Guacamole.Views
 {
     public partial class View : ILayoutable
     {
-        public int X
+        public float X
         {
-            get { return _validRectRequest.X; }
-            set { _validRectRequest.X = value; }
+            get => _validRectRequest.X;
+            set => _validRectRequest.X = value;
         }
 
-        public int Y
+        public float Y
         {
-            get { return _validRectRequest.Y; }
-            set { _validRectRequest.Y = value; }
+            get => _validRectRequest.Y;
+            set => _validRectRequest.Y = value;
         }
     }
 }

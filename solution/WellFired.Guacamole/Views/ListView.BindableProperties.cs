@@ -2,8 +2,7 @@
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Data.Annotations;
 using WellFired.Guacamole.DataBinding;
-using WellFired.Guacamole.Views.BindingContexts;
-using WellFired.Guacamole.Views.Cells;
+using WellFired.Guacamole.Cells;
 
 namespace WellFired.Guacamole.Views
 {
@@ -26,6 +25,12 @@ namespace WellFired.Guacamole.Views
             BindingMode.TwoWay,
             v => v.EntrySize
         );
+        
+        [PublicAPI] public static readonly BindableProperty HeaderSizeProperty = BindableProperty.Create<ListView, int>(
+            50,
+            BindingMode.TwoWay,
+            v => v.HeaderSize
+        );
 
         [PublicAPI] public static readonly BindableProperty OrientationProperty = BindableProperty.Create<ListView, OrientationOptions>(
             OrientationOptions.Vertical, 
@@ -33,10 +38,10 @@ namespace WellFired.Guacamole.Views
             v => v.Orientation
         );
 
-        [PublicAPI] public static readonly BindableProperty NumberOfVisibleEntriesProperty = BindableProperty.Create<ListView, int>(
-            default(int), 
+        [PublicAPI] public static readonly BindableProperty AvailableSpaceProperty = BindableProperty.Create<ListView, float>(
+            default(float), 
             BindingMode.TwoWay,
-            v => v.NumberOfVisibleEntries
+            v => v.AvailableSpace
         );
 
         [PublicAPI] public static readonly BindableProperty CanScrollProperty = BindableProperty.Create<ListView, bool>(
@@ -82,7 +87,7 @@ namespace WellFired.Guacamole.Views
         );
 
         [PublicAPI] public static readonly BindableProperty ScrollBarOutlineMaskProperty = BindableProperty.Create<ListView, OutlineMask>(
-            Data.OutlineMask.All,
+            OutlineMask.All,
             BindingMode.TwoWay,
             v => v.ScrollBarOutlineMask
         );
@@ -102,14 +107,14 @@ namespace WellFired.Guacamole.Views
         [PublicAPI]
         public int Spacing
         {
-            get { return (int) GetValue(SpacingProperty); }
-            set { SetValue(SpacingProperty, value); }
+            get => (int) GetValue(SpacingProperty);
+            set => SetValue(SpacingProperty, value);
         }
 
         [PublicAPI]
         public INotifyPropertyChanged SelectedItem
         {
-            get { return (INotifyPropertyChanged)GetValue(SelectedItemProperty); }
+            get => (INotifyPropertyChanged)GetValue(SelectedItemProperty);
             set
             {
                 var oldItem = SelectedItem;
@@ -141,97 +146,115 @@ namespace WellFired.Guacamole.Views
         [PublicAPI]
         public int EntrySize
         {
-            get { return (int) GetValue(EntrySizeProperty); }
-            set { SetValue(EntrySizeProperty, value); }
+            get => (int) GetValue(EntrySizeProperty);
+            set => SetValue(EntrySizeProperty, value);
+        }
+
+        /// <summary>
+        /// The size of one Header Entry into this List View, for the moment, each Header Entry should be the same size, though 
+        /// this might change in the future.
+        /// The HeaderSize refers to the size in the direction of Orientation. I.E. If the Orientation is Vertical, the 
+        /// HeaderSize is the EntryHeight, if the Orientation is Horizontal, the HeaderSize refers to the width.
+        /// </summary>
+        [PublicAPI]
+        public int HeaderSize
+        {
+            get => (int) GetValue(HeaderSizeProperty);
+            set => SetValue(HeaderSizeProperty, value);
         }
         
         [PublicAPI]
         public OrientationOptions Orientation
         {
-            get { return (OrientationOptions) GetValue(OrientationProperty); }
-            set { SetValue(OrientationProperty, value); }
+            get => (OrientationOptions) GetValue(OrientationProperty);
+            set => SetValue(OrientationProperty, value);
         }
 
         [PublicAPI]
-        public int NumberOfVisibleEntries 
+        public float AvailableSpace 
         { 
-            get { return (int) GetValue(NumberOfVisibleEntriesProperty); }
-            set { SetValue(NumberOfVisibleEntriesProperty, value); } 
+            get => (float) GetValue(AvailableSpaceProperty);
+            set => SetValue(AvailableSpaceProperty, value);
         }
 
         [PublicAPI]
         public bool CanScroll
         {
-            get { return (bool) GetValue(CanScrollProperty); }
-            private set { SetValue(CanScrollProperty, value); }
+            get => (bool) GetValue(CanScrollProperty);
+            private set => SetValue(CanScrollProperty, value);
         }
 
         public float ScrollOffset 
         { 
-            get { return (float) GetValue(ScrollOffsetProperty); }
+            get => (float) GetValue(ScrollOffsetProperty);
             set
             {
                 var viewSize = SizingHelper.GetImportantSize(Orientation, RectRequest);
                 var clampedValue = ListViewHelper.ClampScroll(viewSize,  TotalContentSize, value);
-                if(SetValue(ScrollOffsetProperty, clampedValue))
-                    CalculateVisualDataSet();
+                var previousValue = ScrollOffset;
+
+                if (!SetValue(ScrollOffsetProperty, clampedValue)) 
+                    return;
+                
+                InitialOffset -= ScrollOffset - previousValue;
+                CalculateVisualDataSet();
             }
         }
 
         [PublicAPI]
         public UIColor ScrollBarBackgroundColor
         {
-            get { return (UIColor) GetValue(ScrollBarBackgroundColorProperty); }
-            set { SetValue(ScrollBarBackgroundColorProperty, value); }
+            get => (UIColor) GetValue(ScrollBarBackgroundColorProperty);
+            set => SetValue(ScrollBarBackgroundColorProperty, value);
         }
 
         [PublicAPI]
         public UIColor ScrollBarOutlineColor
         {
-            get { return (UIColor) GetValue(ScrollBarOutlineColorProperty); }
-            set { SetValue(ScrollBarOutlineColorProperty, value); }
+            get => (UIColor) GetValue(ScrollBarOutlineColorProperty);
+            set => SetValue(ScrollBarOutlineColorProperty, value);
         }
 
         [PublicAPI]
         public double ScrollBarCornerRadius
         {
-            get { return (double) GetValue(ScrollBarCornerRadiusProperty); }
-            set { SetValue(ScrollBarCornerRadiusProperty, value); }
+            get => (double) GetValue(ScrollBarCornerRadiusProperty);
+            set => SetValue(ScrollBarCornerRadiusProperty, value);
         }
 
         [PublicAPI]
         public CornerMask ScrollBarCornerMask
         {
-            get { return (CornerMask) GetValue(ScrollBarCornerMaskProperty); }
-            set { SetValue(ScrollBarCornerMaskProperty, value); }
+            get => (CornerMask) GetValue(ScrollBarCornerMaskProperty);
+            set => SetValue(ScrollBarCornerMaskProperty, value);
         }
 
         [PublicAPI]
         public double ScrollBarOutlineThickness
         {
-            get { return (double) GetValue(ScrollBarOutlineThicknessProperty); }
-            set { SetValue(ScrollBarOutlineThicknessProperty, value); }
+            get => (double) GetValue(ScrollBarOutlineThicknessProperty);
+            set => SetValue(ScrollBarOutlineThicknessProperty, value);
         }
 
         [PublicAPI]
         public OutlineMask ScrollBarOutlineMask
         {
-            get { return (OutlineMask) GetValue(ScrollBarOutlineMaskProperty); }
-            set { SetValue(ScrollBarOutlineMaskProperty, value); }
+            get => (OutlineMask) GetValue(ScrollBarOutlineMaskProperty);
+            set => SetValue(ScrollBarOutlineMaskProperty, value);
         }
 
         [PublicAPI]
         public int ScrollBarSize
         {
-            get { return (int) GetValue(ScrollBarSizeProperty); }
-            set { SetValue(ScrollBarSizeProperty, value); }
+            get => (int) GetValue(ScrollBarSizeProperty);
+            set => SetValue(ScrollBarSizeProperty, value);
         }
 
         [PublicAPI]
         public bool ShouldShowScrollBar
         {
-            get { return (bool) GetValue(ShouldShowScrollBarProperty); }
-            set { SetValue(ShouldShowScrollBarProperty, value); }
+            get => (bool) GetValue(ShouldShowScrollBarProperty);
+            set => SetValue(ShouldShowScrollBarProperty, value);
         }
     }
 }

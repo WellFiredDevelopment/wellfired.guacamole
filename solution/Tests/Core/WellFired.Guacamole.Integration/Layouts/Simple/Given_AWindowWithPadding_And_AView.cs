@@ -5,7 +5,7 @@ using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Integration.Layouts.Simple
 {
-    public class Given_AWindowWithPadding_And_AView
+    public class GivenAWindowWithPaddingAndAView
     {
         [Test]
         public void That_IsLayedoutTwice_Then_LayoutIsDoneCorrectly()

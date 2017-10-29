@@ -6,7 +6,7 @@ using WellFired.Guacamole.Views;
 namespace WellFired.Guacamole.Integration.Layouts.Complex
 {
     [TestFixture]
-    public class Given_AnAdjacentLayout_WithAComplexSetup
+    public class GivenAnAdjacentLayoutWithAComplexSetup
     {
         [Test]
         public void When_Layout_Then_LayoutIsCorrect()

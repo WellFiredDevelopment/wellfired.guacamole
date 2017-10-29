@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
+using WellFired.Guacamole.DataBinding.Cells;
 using WellFired.Guacamole.Examples.Intermediate.Sorting.Helper;
-using WellFired.Guacamole.Views.BindingContexts;
 
 namespace WellFired.Guacamole.Examples.Intermediate.Sorting.ViewModel
 {

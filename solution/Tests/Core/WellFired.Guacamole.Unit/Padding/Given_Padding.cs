@@ -5,7 +5,7 @@ using WellFired.Guacamole.Views;
 namespace WellFired.Guacamole.Unit.Padding
 {
     [TestFixture]
-    public class Given_Padding
+    public class GivenPadding
     {
         [Test]
         public void When_AdjustingAViewWithHEVE_Then_ReturnedRectIsCorrect()

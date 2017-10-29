@@ -5,7 +5,7 @@ namespace WellFired.Guacamole.Views
 {
     public static class SizingHelper
     {
-        public static int GetImportantSize(OrientationOptions orientation, UIRect rectRequest)
+        public static float GetImportantSize(OrientationOptions orientation, UIRect rectRequest)
         {
             switch (orientation)
             {
@@ -31,7 +31,7 @@ namespace WellFired.Guacamole.Views
             }
         }
 
-        public static int GetImportantSize(OrientationOptions orientation, UISize size)
+        public static float GetImportantSize(OrientationOptions orientation, UISize size)
         {
             switch (orientation)
             {

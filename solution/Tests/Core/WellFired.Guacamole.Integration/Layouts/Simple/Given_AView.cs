@@ -4,7 +4,7 @@ using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Integration.Layouts.Simple
 {
-    public class Given_AView
+    public class GivenAView
     {
         [Test]
         public void That_IsHCVE_Then_LayoutIsDoneCorrectly()

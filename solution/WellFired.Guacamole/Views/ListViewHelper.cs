@@ -30,61 +30,62 @@ namespace WellFired.Guacamole.Views
 
         public static void Layout(IListView listView, UIRect availableSpace, UIPadding containerPadding)
         {
-            int entriesThatCanBeShownAtOnce;
+            float space;
             switch (listView.Orientation)
             {
                 case OrientationOptions.Vertical:
                     if (availableSpace.Height <= 0.0f)
                         return;
-                    entriesThatCanBeShownAtOnce = (int)Math.Ceiling((float)availableSpace.Height / listView.EntrySize);
+                    space = availableSpace.Height;
                     break;
                 case OrientationOptions.Horizontal:
                     if (availableSpace.Width <= 0.0f)
                         return;
-                    entriesThatCanBeShownAtOnce = (int)Math.Ceiling((float)availableSpace.Width / listView.EntrySize);
+                    space = availableSpace.Width;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
             
-            listView.NumberOfVisibleEntries = entriesThatCanBeShownAtOnce;
+            listView.AvailableSpace = space;
             
             var isVertical = listView.Orientation == OrientationOptions.Vertical;
             var runningPosition = listView.InitialOffset;
             foreach (var child in listView.Children)
             {
+                var entrySize = listView.GetEntrySizeFor(((View) child).BindingContext);
+                
                 if (isVertical)
                 {
                     child.X = 0;
-                    child.Y = (int) runningPosition;
+                    child.Y = runningPosition;
+
+                    runningPosition += entrySize + listView.Spacing;
                 }
                 else
                 {
-                    child.X = (int)runningPosition;
+                    child.X = runningPosition;
                     child.Y = 0;
-                }
 
-                runningPosition += listView.EntrySize + listView.Spacing;
+                    runningPosition += entrySize + listView.Spacing;
+                }
             }
         }
 
-        public static float ClampScroll(int totalAvailableSpace, int totalContentSize, float value)
+        public static float ClampScroll(float totalAvailableSpace, float totalContentSize, float value)
         {
-            if (value > 0.0f)
-                return 0.0f;
-            
             var maxValue = MaxScrollFor(totalAvailableSpace, totalContentSize);
 
             if (maxValue < 0.0f)
                 maxValue = 0.0f;
-            
-            if (value < -maxValue)
-                return -maxValue;
 
-            return value;
+            if (value < 0.0f)
+                value = 0.0f;
+            
+            return value > maxValue ? maxValue : value;
         }
 
-        public static float MaxScrollFor(int totalAvailableSpace, int totalContentSize)
+        public static float MaxScrollFor(float totalAvailableSpace, float totalContentSize)
         {
             return totalContentSize - totalAvailableSpace;
         }
@@ -96,7 +97,7 @@ namespace WellFired.Guacamole.Views
                 case OrientationOptions.Horizontal:
                     return value;
                 case OrientationOptions.Vertical:
-                    return -value;
+                    return value;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(orientation), orientation, null);
             }
@@ -106,43 +107,28 @@ namespace WellFired.Guacamole.Views
         {
             UIRect rectRequest;
             UIRect contentRectRequest;
+            
+            var entrySize = listView.GetEntrySizeFor(((View) child).BindingContext);
+            
             switch (listView.Orientation)
             {
                 case OrientationOptions.Horizontal:
                     rectRequest = child.RectRequest;
                     contentRectRequest = child.ContentRectRequest;
-                    rectRequest.Width = listView.EntrySize + listView.Spacing;
-                    contentRectRequest.Width = listView.EntrySize;
-                    if (child.VerticalLayout == LayoutOptions.Fill)
-                    {
-                        rectRequest.Height = listView.RectRequest.Height;
-                        contentRectRequest.Height = listView.RectRequest.Height;
-                    }
-                    if (child.VerticalLayout == LayoutOptions.Expand)
-                    {
-                        if(rectRequest.Height > listView.RectRequest.Height)
-                            rectRequest.Height = listView.RectRequest.Height;
-                        if(contentRectRequest.Height > listView.RectRequest.Height)
-                            contentRectRequest.Height = listView.RectRequest.Height;
-                    }
+                    rectRequest.Width = entrySize + listView.Spacing;
+                    contentRectRequest.Width = entrySize;
+                    
+                    rectRequest.Height = listView.RectRequest.Height;
+                    contentRectRequest.Height = listView.RectRequest.Height;
                     break;
                 case OrientationOptions.Vertical:
                     rectRequest = child.RectRequest;
                     contentRectRequest = child.ContentRectRequest;
-                    rectRequest.Height = listView.EntrySize + listView.Spacing;
-                    contentRectRequest.Height = listView.EntrySize;
-                    if (child.HorizontalLayout == LayoutOptions.Fill)
-                    {
-                        rectRequest.Width = listView.RectRequest.Width;
-                        contentRectRequest.Width = listView.RectRequest.Width;
-                    }
-                    if (child.HorizontalLayout == LayoutOptions.Expand)
-                    {
-                        if(rectRequest.Width > listView.RectRequest.Width)
-                            rectRequest.Width = listView.RectRequest.Width;
-                        if(contentRectRequest.Width > listView.RectRequest.Width)
-                            contentRectRequest.Width = listView.RectRequest.Width;
-                    }
+                    rectRequest.Height = entrySize + listView.Spacing;
+                    contentRectRequest.Height = entrySize;
+                    
+                    rectRequest.Width = listView.RectRequest.Width;
+                    contentRectRequest.Width = listView.RectRequest.Width;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

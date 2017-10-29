@@ -1,13 +1,13 @@
 ﻿using NUnit.Framework;
 using WellFired.Guacamole.Data;
+using WellFired.Guacamole.DataBinding.Cells;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
-using WellFired.Guacamole.Views.BindingContexts;
 
 namespace WellFired.Guacamole.Integration.ListView.ReOrdered
 {
     [TestFixture]
-    public class Given_AListView
+    public class GivenAListView
     {
         [Test]
         public void With_AnItemSource_When_Layout_Then_ChildrenAreCorrect()

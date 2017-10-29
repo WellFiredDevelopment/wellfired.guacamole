@@ -6,7 +6,7 @@ using WellFired.Guacamole.Views;
 namespace WellFired.Guacamole.Integration.Layouts.Simple
 {
     [TestFixture]
-    public class Given_AWindowWithPadding_And_Content
+    public class GivenAWindowWithPaddingAndContent
     {
         [Test]
         public void When_LayoutOccurs_Then_LayoutIsSuccessful()

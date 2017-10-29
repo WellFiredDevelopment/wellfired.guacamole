@@ -5,7 +5,7 @@ using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Integration.Layouts.Adjacent
 {
-    public class Given_AnAdjacentLayoutWithOneChildWithCenterAlign
+    public class GivenAnAdjacentLayoutWithOneChildWithCenterAlign
     {
         [Test]
         public void When_HorizontalLayout_WithoutSpacing_Then_LayoutIsCorrect()

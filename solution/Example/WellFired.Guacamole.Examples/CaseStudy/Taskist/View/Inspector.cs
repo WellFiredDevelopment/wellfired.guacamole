@@ -1,4 +1,4 @@
-﻿using WellFired.Guacamole.Collection;
+﻿using WellFired.Guacamole.Data.Collection;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Examples.CaseStudy.Taskist.View.Cells;

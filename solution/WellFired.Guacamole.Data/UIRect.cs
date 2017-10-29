@@ -6,29 +6,29 @@ namespace WellFired.Guacamole.Data
 	// ReSharper disable once InconsistentNaming
 	public struct UIRect
 	{
-		private int _x;
-		private int _y;
-		private int _width;
-		private int _height;
+		private float _x;
+		private float _y;
+		private float _width;
+		private float _height;
 		private UILocation _location;
 		private UISize _size;
 
 		[PublicAPI]
-		public static UIRect Min { get; } = With(0, 0, 0, 0);
+		public static UIRect Min { get; } = With(0.0f, 0.0f, 0.0f, 0.0f);
 
 		[PublicAPI]
-		public static UIRect Max { get; } = With(0, 0, int.MaxValue, int.MaxValue);
+		public static UIRect Max { get; } = With(0.0f, 0.0f, float.MaxValue, float.MaxValue);
 
 		[PublicAPI]
-		public static UIRect One { get; } = With(0, 0, 1, 1);
+		public static UIRect One { get; } = With(0.0f, 0.0f, 1.0f, 1.0f);
 
 		[PublicAPI]
-		public static UIRect Zero { get; } = With(0, 0, 0, 0);
+		public static UIRect Zero { get; } = With(0.0f, 0.0f, 0.0f, 0.0f);
 
 		[PublicAPI]
-		public int X
+		public float X
 		{
-			get { return _x; }
+			get => _x;
 			set
 			{
 				_x = value;
@@ -37,9 +37,9 @@ namespace WellFired.Guacamole.Data
 		}
 
 		[PublicAPI]
-		public int Y
+		public float Y
 		{
-			get { return _y; }
+			get => _y;
 			set
 			{
 				_y = value;
@@ -48,9 +48,9 @@ namespace WellFired.Guacamole.Data
 		}
 
 		[PublicAPI]
-		public int Width
+		public float Width
 		{
-			get { return _width; }
+			get => _width;
 			set
 			{
 				_width = value;
@@ -59,9 +59,9 @@ namespace WellFired.Guacamole.Data
 		}
 
 		[PublicAPI]
-		public int Height
+		public float Height
 		{
-			get { return _height; }
+			get => _height;
 			set
 			{
 				_height = value;
@@ -72,7 +72,7 @@ namespace WellFired.Guacamole.Data
 		[PublicAPI]
 		public UILocation Location
 		{
-			get { return _location; }
+			get => _location;
 			set
 			{
 				_location = value;
@@ -84,7 +84,7 @@ namespace WellFired.Guacamole.Data
 		[PublicAPI]
 		public UISize Size
 		{
-			get { return _size; }
+			get => _size;
 			set
 			{
 				_size = value;
@@ -93,7 +93,7 @@ namespace WellFired.Guacamole.Data
 			}
 		}
 
-		public UIRect(int x, int y, int width, int height)
+		public UIRect(float x, float y, float width, float height)
 		{
 			_x = x;
 			_y = y;
@@ -102,27 +102,27 @@ namespace WellFired.Guacamole.Data
 			_location = UILocation.Of(x, y);
 			_size = UISize.Of(width, height);
 		}
-
+		
 		public override bool Equals(object obj)
 		{
-			Debug.Assert(obj != null, "obj != null");
 			var compareTo = (UIRect)obj;
-			return (compareTo.X == X) && (compareTo.Y == Y) && (compareTo.Width == Width) && (compareTo.Height == Height);
+			Debug.Assert(obj != null, "obj != null");
+			return MathUtil.NearEqual(compareTo.X, X) && MathUtil.NearEqual(compareTo.Y, Y) && MathUtil.NearEqual(compareTo.Width, Width) && MathUtil.NearEqual(compareTo.Height, Height);
 		}
 
 		public override int GetHashCode()
 		{
-			return X ^ Y ^ Width ^ Height;
+			return X.GetHashCode() ^ Y.GetHashCode() ^ Width.GetHashCode() ^ Height.GetHashCode();
 		}
 
 		public static bool operator ==(UIRect a, UIRect b)
 		{
-			return (a.X == b.X) && (a.Y == b.Y) && (a.Width == b.Width) && (a.Height == b.Height);
+			return MathUtil.NearEqual(a.X, b.X) && MathUtil.NearEqual(a.Y, b.Y) && MathUtil.NearEqual(a.Width, b.Width) && MathUtil.NearEqual(a.Height, b.Height);
 		}
 
 		public static bool operator !=(UIRect a, UIRect b)
 		{
-			return a.X != b.X || a.Y != b.Y || a.Width != b.Width || a.Height != b.Height;
+			return !MathUtil.NearEqual(a.X, b.X) || !MathUtil.NearEqual(a.Y, b.Y) || !MathUtil.NearEqual(a.Width, b.Width) || !MathUtil.NearEqual(a.Height, b.Height);
 		}
 
 		public static UIRect operator +(UIRect rect, UIPadding padding)
@@ -148,12 +148,12 @@ namespace WellFired.Guacamole.Data
 			return $"x: {X}, y: {Y}, width: {Width}, height: {Height}";
 		}
 
-	    public static UIRect With(int x, int y, int width, int height)
+	    public static UIRect With(float x, float y, float width, float height)
 	    {
 	        return new UIRect(x, y, width, height);
 	    }
 
-	    public static UIRect With(int width, int height)
+	    public static UIRect With(float width, float height)
 	    {
 	        return new UIRect(0, 0, width, height);
 	    }

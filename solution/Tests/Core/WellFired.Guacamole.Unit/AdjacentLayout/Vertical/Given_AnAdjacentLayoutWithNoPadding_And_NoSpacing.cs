@@ -6,7 +6,7 @@ using WellFired.Guacamole.Layouts;
 namespace WellFired.Guacamole.Unit.AdjacentLayout.Vertical
 {
     [TestFixture]
-    public class Given_AnAdjacentLayoutWithNoPadding_And_NoSpacing
+    public class GivenAnAdjacentLayoutWithNoPaddingAndNoSpacing
     {
         [Test]
         public void OneChild()

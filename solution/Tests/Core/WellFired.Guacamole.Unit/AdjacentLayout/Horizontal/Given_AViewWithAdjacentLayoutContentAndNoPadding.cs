@@ -8,7 +8,7 @@ using WellFired.Guacamole.Views;
 namespace WellFired.Guacamole.Unit.AdjacentLayout.Horizontal
 {
     [TestFixture]
-    public class Given_AViewWithAdjacentLayoutContentAndNoPadding
+    public class GivenAViewWithAdjacentLayoutContentAndNoPadding
     {
         [Test]
         public void When_Layout_Then_LayoutIsCorrect()

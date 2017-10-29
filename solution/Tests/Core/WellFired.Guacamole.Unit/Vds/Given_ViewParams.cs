@@ -6,7 +6,7 @@ using WellFired.Guacamole.Views;
 namespace WellFired.Guacamole.Unit.Vds
 {
     [TestFixture]
-    public class Given_ViewParams
+    public class GivenViewParams
     {
         [Test]
         public void With_NoScrollShowingTwoElements_ExpectedResultIsCorrect()

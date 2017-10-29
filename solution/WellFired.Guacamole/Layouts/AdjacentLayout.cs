@@ -15,20 +15,20 @@ namespace WellFired.Guacamole.Layouts
 
         public void Layout(ICollection<ILayoutable> layoutables, UIRect availableSpace, UIPadding containerPadding)
         {
-            var x = containerPadding.Left;
-            var y = containerPadding.Top;
+            var x = (float)containerPadding.Left;
+            var y = (float)containerPadding.Top;
             
             if (HorizontalLayout == LayoutOptions.Center)
             {
                 var totalWidth = layoutables.Sum(o => o.RectRequest.Width) / 2;
-                var totalWidthWithSpacing = totalWidth + (layoutables.Count - 1) * Spacing / 2;
-                x = availableSpace.Width / 2 - totalWidthWithSpacing;
+                var totalWidthWithSpacing = totalWidth + (layoutables.Count - 1) * (float)Spacing / 2;
+                x = availableSpace.Width / 2.0f - totalWidthWithSpacing;
             }
             if (VerticalLayout == LayoutOptions.Center)
             {
                 var totalHeight = layoutables.Sum(o => o.RectRequest.Height) / 2;
-                var totalHeightWithSpacing = totalHeight + (layoutables.Count - 1) * Spacing / 2;
-                y = availableSpace.Height / 2 - totalHeightWithSpacing;
+                var totalHeightWithSpacing = totalHeight + (layoutables.Count - 1) * (float)Spacing / 2;
+                y = availableSpace.Height / 2.0f - totalHeightWithSpacing;
             }
             
             switch (Orientation)
@@ -56,8 +56,8 @@ namespace WellFired.Guacamole.Layouts
 
         public UIRect CalculateValidRectRequest(IEnumerable<ILayoutable> layoutables, UISize minSize)
         {
-            var totalWidth = 0;
-            var totalHeight = 0;
+            var totalWidth = 0.0f;
+            var totalHeight = 0.0f;
             foreach (var layoutable in layoutables)
             {
                 var size = layoutable.RectRequest;

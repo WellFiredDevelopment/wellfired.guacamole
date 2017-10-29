@@ -60,7 +60,7 @@
     <Compile Include="Extensions\TextViewExtensions.cs" />
     <Compile Include="Extensions\UIColorExtensions.cs" />
     <Compile Include="Extensions\UIPaddingExtensions.cs" />
-    <Compile Include="Extensions\UIRectExtensions.cs" />
+    <Compile Include="Extensions\UIExtensions.cs" />
     <Compile Include="Extensions\UISizeExtensions.cs" />
     <Compile Include="Extensions\UITextAlignExtensions.cs" />
     <Compile Include="Extensions\UITextClippingExtensions.cs" />

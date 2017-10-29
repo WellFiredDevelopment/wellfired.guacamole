@@ -9,7 +9,7 @@ using WellFired.Guacamole.Views;
 namespace WellFired.Guacamole.Unit.Styling
 {
     [TestFixture]
-    public class Given_ATrigger
+    public class GivenATrigger
     {
         [Test]
         public void When_ATriggerCanBeFired_Then_ShouldFireCheckReturnsTrue()

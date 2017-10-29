@@ -4,7 +4,7 @@ using WellFired.Guacamole.Data;
 namespace WellFired.Guacamole.Unit.Drawing.ImageData
 {
     [TestFixture]
-    public class Given_AnImageParameters
+    public class GivenAnImageParameters
     {
         [Test]
         public void When_AttemptingToBuildAnImageWith4RoundedCorners_Then_BuiltSuccessfully()

@@ -6,7 +6,7 @@ using WellFired.Guacamole.Views;
 namespace WellFired.Guacamole.Unit.AdjacentLayout.CenterAlign
 {
     [TestFixture]
-    public class Given_AViewWithVerticalCenterAlign
+    public class GivenAViewWithVerticalCenterAlign
     {
         [Test]
         public void When_Layout_InSquareParentView_Then_LayoutIsCorrect()

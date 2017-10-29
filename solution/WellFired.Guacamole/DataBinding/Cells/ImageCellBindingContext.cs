@@ -2,7 +2,7 @@
 using WellFired.Guacamole.Data.Annotations;
 using WellFired.Guacamole.Image;
 
-namespace WellFired.Guacamole.Views.BindingContexts
+namespace WellFired.Guacamole.DataBinding.Cells
 {
     public class ImageCellBindingContext : CellBindingContextBase
     {
@@ -11,8 +11,8 @@ namespace WellFired.Guacamole.Views.BindingContexts
         [PublicAPI]
         public IImageSource ImageSource
         {
-            get { return _imageSource; }
-            set { SetProperty(ref _imageSource, value); }
+            get => _imageSource;
+            set => SetProperty(ref _imageSource, value);
         }
 
         public ImageCellBindingContext(Uri uri)

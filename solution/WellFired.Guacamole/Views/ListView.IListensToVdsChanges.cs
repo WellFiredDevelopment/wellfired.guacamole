@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System;
 using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.Layouts;
 
@@ -6,17 +6,21 @@ namespace WellFired.Guacamole.Views
 {
     public partial class ListView : IListensToVdsChanges
     {
-        public void ItemLeftVds(int vdsIndex)
+        public void ItemLeftVds(int vdsIndex, bool front)
         {
-            var data = ItemSource[vdsIndex];
+            var data = GetItem(vdsIndex);
+            
+            if(front)
+                InitialOffset = 0;
+            
             foreach (var child in Children)
             {
                 var cell = (ICell) child;
                 if (!cell.BindingContext.Equals(data)) 
                     continue;
                 
-                _inactiveEntries.Add(cell);
-                _activeEntries.Remove(cell);
+                Cache(cell);
+                _activeCells.Remove(cell);
                 Children.Remove(child);
                 return;
             }                
@@ -24,19 +28,24 @@ namespace WellFired.Guacamole.Views
 
         public void ItemEnteredVds(int vdsIndex, bool front)
         {
-            var data = ItemSource[vdsIndex];
-            ICell cell;
-            if (_inactiveEntries.Any())
+            var data = GetItem(vdsIndex);
+            
+            if(front)
+                InitialOffset = -GetEntrySizeFor(data);
+            
+            if(data == null)
+                throw new Exception("Failed to find VDS data for given index.");
+            
+            var cell = Retrieve(data);
+            if (cell != default(ICell))
             {
-                cell = _inactiveEntries.First();
                 CellHelper.ReUseCell(cell, data);
-                _inactiveEntries.Remove(cell);
-                _activeEntries.Add(cell);
+                _activeCells.Add(cell);
             }
             else
             {
-                cell = GetNewCell(data);
-                _activeEntries.Add(cell);
+                cell = GetAReusableCell(data);
+                _activeCells.Add(cell);
             }
 
             var layoutable = (ILayoutable)cell;

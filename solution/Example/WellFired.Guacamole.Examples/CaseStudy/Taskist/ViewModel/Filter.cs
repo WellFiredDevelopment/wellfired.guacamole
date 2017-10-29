@@ -1,5 +1,5 @@
-﻿using WellFired.Guacamole.Image;
-using WellFired.Guacamole.Views.BindingContexts;
+﻿using WellFired.Guacamole.DataBinding.Cells;
+using WellFired.Guacamole.Image;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.ViewModel
 {

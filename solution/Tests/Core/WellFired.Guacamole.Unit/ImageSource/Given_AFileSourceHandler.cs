@@ -10,7 +10,7 @@ using WellFired.Guacamole.Image;
 namespace WellFired.Guacamole.Unit.ImageSource
 {
     [TestFixture]
-    public class Given_AFileSourceHandler
+    public class GivenAFileSourceHandler
     {
         [Test]
         public void When_AnInValidPathIsPassedAnExceptionIsThrown()

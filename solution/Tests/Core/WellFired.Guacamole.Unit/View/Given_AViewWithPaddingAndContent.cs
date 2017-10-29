@@ -5,7 +5,7 @@ using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Unit.View
 {
-    public class Given_AViewWithPaddingAndContent
+    public class GivenAViewWithPaddingAndContent
     {
         [Test]
         public void When_TheViewIsLayout_Then_LayoutIsCorrect()

@@ -101,29 +101,29 @@ namespace WellFired.Guacamole.Views
 		[PublicAPI]
 		public bool Enabled
 		{
-			get { return (bool) GetValue(EnabledProperty); }
-			set { SetValue(EnabledProperty, value); }
+			get => (bool) GetValue(EnabledProperty);
+			set => SetValue(EnabledProperty, value);
 		}
 
 		[PublicAPI]
 		public LayoutOptions HorizontalLayout
 		{
-			get { return (LayoutOptions) GetValue(HorizontalLayoutProperty); }
-			set { SetValue(HorizontalLayoutProperty, value); }
+			get => (LayoutOptions) GetValue(HorizontalLayoutProperty);
+			set => SetValue(HorizontalLayoutProperty, value);
 		}
 
 		[PublicAPI]
 		public LayoutOptions VerticalLayout
 		{
-			get { return (LayoutOptions) GetValue(VerticalLayoutProperty); }
-			set { SetValue(VerticalLayoutProperty, value); }
+			get => (LayoutOptions) GetValue(VerticalLayoutProperty);
+			set => SetValue(VerticalLayoutProperty, value);
 		}
 
 		[PublicAPI]
 		public UIPadding Padding
 		{
-			get { return (UIPadding) GetValue(PaddingProperty); }
-			set { SetValue(PaddingProperty, value); }
+			get => (UIPadding) GetValue(PaddingProperty);
+			set => SetValue(PaddingProperty, value);
 		}
 
 		[PublicAPI]
@@ -144,64 +144,64 @@ namespace WellFired.Guacamole.Views
 		[PublicAPI]
 		public UIColor BackgroundColor
 		{
-			get { return (UIColor) GetValue(BackgroundColorProperty); }
-			set { SetValue(BackgroundColorProperty, value); }
+			get => (UIColor) GetValue(BackgroundColorProperty);
+			set => SetValue(BackgroundColorProperty, value);
 		}
 
 		[PublicAPI]
 		public UIColor OutlineColor
 		{
-			get { return (UIColor) GetValue(OutlineColorProperty); }
-			set { SetValue(OutlineColorProperty, value); }
+			get => (UIColor) GetValue(OutlineColorProperty);
+			set => SetValue(OutlineColorProperty, value);
 		}
 
 		[PublicAPI]
 		public double OutlineThickness
 		{
-			get { return (double) GetValue(OutlineThicknessProperty); }
-			set { SetValue(OutlineThicknessProperty, value); }
+			get => (double) GetValue(OutlineThicknessProperty);
+			set => SetValue(OutlineThicknessProperty, value);
 		}
 
 		[PublicAPI]
 		public OutlineMask OutlineMask
 		{
-			get { return (OutlineMask) GetValue(OutlineMaskProperty); }
-			set { SetValue(OutlineMaskProperty, value); }
+			get => (OutlineMask) GetValue(OutlineMaskProperty);
+			set => SetValue(OutlineMaskProperty, value);
 		}
 
 		[PublicAPI]
 		public double CornerRadius
 		{
-			get { return (double) GetValue(CornerRadiusProperty); }
-			set { SetValue(CornerRadiusProperty, value); }
+			get => (double) GetValue(CornerRadiusProperty);
+			set => SetValue(CornerRadiusProperty, value);
 		}
 
 		[PublicAPI]
 		public CornerMask CornerMask
 		{
-			get { return (CornerMask) GetValue(CornerMaskProperty); }
-			set { SetValue(CornerMaskProperty, value); }
+			get => (CornerMask) GetValue(CornerMaskProperty);
+			set => SetValue(CornerMaskProperty, value);
 		}
 
 		[PublicAPI]
 		public UISize MinSize
 		{
-			get { return (UISize) GetValue(MinSizeProperty); }
-			set { SetValue(MinSizeProperty, value); }
+			get => (UISize) GetValue(MinSizeProperty);
+			set => SetValue(MinSizeProperty, value);
 		}
 
 		[PublicAPI]
 		public UISize MaxSize
 		{
-			get { return (UISize) GetValue(MaxSizeProperty); }
-			set { SetValue(MaxSizeProperty, value); }
+			get => (UISize) GetValue(MaxSizeProperty);
+			set => SetValue(MaxSizeProperty, value);
 		}
 
 		[PublicAPI]
 		public ControlState ControlState
 		{
-			get { return (ControlState) GetValue(ControlStateProperty); }
-			set { SetValue(ControlStateProperty, value); }
+			get => (ControlState) GetValue(ControlStateProperty);
+			set => SetValue(ControlStateProperty, value);
 		}
 	}
 }

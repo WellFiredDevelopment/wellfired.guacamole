@@ -4,16 +4,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace WellFired.Guacamole.Collection
+namespace WellFired.Guacamole.Data.Collection
 {
     [Serializable]
     public class ObservableCollection<T> : Collection<T>, INotifyCollectionChanged, INotifyPropertyChanged
     {
         // Fields
         private readonly SimpleMonitor _monitor;
-
-        public static string CountString => "Count";
-        public static string IndexerName => "Item[]";
 
         public PropertyChangedEventHandler PropertyChangedDelegate { get; private set; }
         private readonly object _propertyChangedDelegateLockObject = new object();
@@ -65,13 +62,13 @@ namespace WellFired.Guacamole.Collection
             }
         }
 
-        protected System.IDisposable BlockReentrancy()
+        private System.IDisposable BlockReentrancy()
         {
             _monitor.Enter();
             return _monitor;
         }
 
-        protected void CheckReentrancy()
+        private void CheckReentrancy()
         {
             if ((_monitor.Busy && (CollectionChanged != null)) && (CollectionChanged.GetInvocationList().Length > 1))
             {

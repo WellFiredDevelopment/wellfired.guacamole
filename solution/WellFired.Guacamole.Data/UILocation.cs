@@ -5,35 +5,38 @@ namespace WellFired.Guacamole.Data
 	// ReSharper disable once InconsistentNaming
 	public struct UILocation
 	{
-		public int X { get; set; }
-		public int Y { get; set; }
+		public float X { get; set; }
+		public float Y { get; set; }
 
 		[PublicAPI]
 		public static UILocation Min { get; } = Of(0);
 
-	    public UILocation(int x, int y) : this()
+		public UILocation(float x, float y) : this()
 		{
 			X = x;
 			Y = y;
 		}
-
+		
 		public override bool Equals(object obj)
 		{
 			var compareTo = (UILocation) obj;
-			return (compareTo.X == X) && (compareTo.Y == Y);
+			return MathUtil.NearEqual(compareTo.X, X) && MathUtil.NearEqual(compareTo.Y, Y);
 		}
 
 		[PublicAPI]
 		public bool Equals(UILocation other)
 		{
-			return (X == other.X) && (Y == other.Y);
+			return MathUtil.NearEqual(X, other.X) && MathUtil.NearEqual(Y, other.Y);
 		}
 
 		public override int GetHashCode()
 		{
 			unchecked
 			{
-				return (X*397) ^ Y;
+				// ReSharper disable once NonReadonlyMemberInGetHashCode
+				return (X.GetHashCode() * 397) ^ 
+				       // ReSharper disable once NonReadonlyMemberInGetHashCode
+				       Y.GetHashCode();
 			}
 		}
 
@@ -47,14 +50,14 @@ namespace WellFired.Guacamole.Data
 			return !(a == b);
 		}
 
-	    public static UILocation Of(int x, int y)
-	    {
-	        return new UILocation(x, y);
-	    }
+		public static UILocation Of(float x, float y)
+		{
+			return new UILocation(x, y);
+		}
 
-	    private static UILocation Of(int xAndy)
-	    {
-	        return Of(xAndy, xAndy);
-	    }
+		private static UILocation Of(float xAndy)
+		{
+			return Of(xAndy, xAndy);
+		}
 	}
 }

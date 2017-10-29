@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.ComponentModel;
-using WellFired.Guacamole.Collection;
+using WellFired.Guacamole.Data.Collection;
 
 namespace WellFired.Guacamole.Views
 {
@@ -47,6 +47,37 @@ namespace WellFired.Guacamole.Views
         /// <param name="newItem">The new item</param>
         /// <param name="index">The index into the ItemSource that you will find this item</param>
         protected abstract void ItemReplaced(object oldItem, object newItem, int index);
+
+        /// <summary>
+        /// This method allows an inheritted view to retrieve an item from the ItemsView's ItemSource
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        protected object GetItem(int index)
+        {
+            return _compositeCollection[index];
+        }
+
+        /// <summary>
+        /// Returns the index of the specified item in the CompositeCollection
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        protected int GetIndexOf(object item)
+        {
+            return _compositeCollection.IndexOf(item);
+        }
+
+        /// <summary>
+        /// This bool will return true if the ItemSource is built from a collection that is sequential, false if it is grouped
+        /// </summary>
+        protected bool IsItemSourceContiguous => _compositeCollection.IsContiguousCollection;
+
+        /// <summary>
+        /// Returns the count of our ItemSource
+        /// </summary>
+        /// <returns></returns>
+        protected int ItemSourceCount => _compositeCollection.Count;
 
         private void AddCollection(IEnumerable items, int index)
         {
@@ -105,16 +136,12 @@ namespace WellFired.Guacamole.Views
 
             if (e.PropertyName == ItemSourceProperty.PropertyName)
             {
-                if(ItemSource != null)
-                    ItemSourceChanged();
-                
+                ItemSourceChanged();
                 SetStyleDictionary(StyleDictionary);
             }
             else if (e.PropertyName == ItemTemplateProperty.PropertyName)
             {
-                if(ItemSource != null)
-                    ItemSourceChanged();
-                
+                ItemSourceChanged();
                 SetStyleDictionary(StyleDictionary);
             }
         }
