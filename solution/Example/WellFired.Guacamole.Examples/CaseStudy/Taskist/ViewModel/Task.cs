@@ -9,14 +9,14 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.ViewModel
 
         public string Description
         {
-            get { return _description; }
-            set { SetProperty(ref _description, value); }
+            get => _description;
+            set => SetProperty(ref _description, value);
         }
 
         public bool Done
         {
-            get { return _done; }
-            set { SetProperty(ref _done, value); }
+            get => _done;
+            set => SetProperty(ref _done, value);
         }
     }
 }

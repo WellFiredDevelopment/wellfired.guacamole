@@ -20,29 +20,29 @@ namespace WellFired.Guacamole.Examples.Intermediate.Sorting.ViewModel
         [PublicAPI]
         public List<BuiltAssetData> DisplayList
         {
-            get { return _displayList; }
-            set { SetProperty(ref _displayList, value); }
+            get => _displayList;
+            set => SetProperty(ref _displayList, value);
         }
         
         [PublicAPI]
         public Command SortByPath
         {
-            get { return _sortByPath; }
-            set { SetProperty(ref _sortByPath, value); }
+            get => _sortByPath;
+            set => SetProperty(ref _sortByPath, value);
         }
         
         [PublicAPI]
         public Command SortByBefore
         {
-            get { return _sortByBefore; }
-            set { SetProperty(ref _sortByBefore, value); }
+            get => _sortByBefore;
+            set => SetProperty(ref _sortByBefore, value);
         }
         
         [PublicAPI]
         public Command SortByAfter
         {
-            get { return _sortByAfter; }
-            set { SetProperty(ref _sortByAfter, value); }
+            get => _sortByAfter;
+            set => SetProperty(ref _sortByAfter, value);
         }
 
         public Breakdown()

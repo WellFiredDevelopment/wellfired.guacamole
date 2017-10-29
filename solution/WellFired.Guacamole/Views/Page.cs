@@ -14,8 +14,8 @@ namespace WellFired.Guacamole.Views
         
         public string Title 
         {
-            get { return (string) GetValue(TitleProperty); }
-            set { SetValue(TitleProperty, value); }
+            get => (string) GetValue(TitleProperty);
+            set => SetValue(TitleProperty, value);
         }
         
         public Page()

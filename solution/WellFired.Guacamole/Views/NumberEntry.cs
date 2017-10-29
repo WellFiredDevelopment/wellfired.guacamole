@@ -44,29 +44,29 @@ namespace WellFired.Guacamole.Views
 		[PublicAPI]
 		public float Number
 		{
-			get { return (float) GetValue(NumberProperty); }
-			set { SetValue(NumberProperty, value); }
+			get => (float) GetValue(NumberProperty);
+			set => SetValue(NumberProperty, value);
 		}
 
 		[PublicAPI]
 		public UIColor TextColor
 		{
-			get { return (UIColor) GetValue(TextColorProperty); }
-			set { SetValue(TextColorProperty, value); }
+			get => (UIColor) GetValue(TextColorProperty);
+			set => SetValue(TextColorProperty, value);
 		}
 
 		[PublicAPI]
 		public UITextAlign HorizontalTextAlign
 		{
-			get { return (UITextAlign) GetValue(HorizontalTextAlignProperty); }
-			set { SetValue(HorizontalTextAlignProperty, value); }
+			get => (UITextAlign) GetValue(HorizontalTextAlignProperty);
+			set => SetValue(HorizontalTextAlignProperty, value);
 		}
 
 		[PublicAPI]
 		public UITextAlign VerticalTextAlign
 		{
-			get { return (UITextAlign) GetValue(VerticalTextAlignProperty); }
-			set { SetValue(VerticalTextAlignProperty, value); }
+			get => (UITextAlign) GetValue(VerticalTextAlignProperty);
+			set => SetValue(VerticalTextAlignProperty, value);
 		}
 
 		public void Type(char key)

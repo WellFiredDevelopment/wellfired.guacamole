@@ -8,8 +8,8 @@ namespace WellFired.Guacamole.Integration.View.Page.Bindable
 
 		public string Title
 		{
-			get { return _title; }
-			set { SetProperty(ref _title, value, nameof(Title)); }
+			get => _title;
+			set => SetProperty(ref _title, value, nameof(Title));
 		}
 	}
 }

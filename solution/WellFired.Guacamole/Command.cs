@@ -18,8 +18,8 @@ namespace WellFired.Guacamole
 
 		public bool CanExecute
 		{
-			get { return _canExecute; }
-			set { SetProperty(ref _canExecute, value); }
+			get => _canExecute;
+			set => SetProperty(ref _canExecute, value);
 		}
 	}
 }

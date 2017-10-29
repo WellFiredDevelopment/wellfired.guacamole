@@ -12,8 +12,8 @@
 
 		public byte this[int i]
 		{
-			get { return Data[i]; }
-			set { Data[i] = value; }
+			get => Data[i];
+			set => Data[i] = value;
 		}
 
 		public ByteColor this[int x, int y]

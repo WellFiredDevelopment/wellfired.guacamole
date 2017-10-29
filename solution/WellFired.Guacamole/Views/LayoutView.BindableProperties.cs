@@ -15,8 +15,8 @@ namespace WellFired.Guacamole.Views
         [PublicAPI]
         public ILayoutChildren Layout
         {
-            get { return (ILayoutChildren) GetValue(LayoutProperty); }
-            set { SetValue(LayoutProperty, value); }
+            get => (ILayoutChildren) GetValue(LayoutProperty);
+            set => SetValue(LayoutProperty, value);
         }
     }
 }

@@ -60,46 +60,46 @@ namespace WellFired.Guacamole.Views
 		[PublicAPI]
 		public double MinValue
 		{
-			get { return (double) GetValue(MinValueProperty); }
-			set { SetValue(MinValueProperty, value); }
+			get => (double) GetValue(MinValueProperty);
+			set => SetValue(MinValueProperty, value);
 		}
 
 		[PublicAPI]
 		public double MaxValue
 		{
-			get { return (double) GetValue(MaxValueProperty); }
-			set { SetValue(MaxValueProperty, value); }
+			get => (double) GetValue(MaxValueProperty);
+			set => SetValue(MaxValueProperty, value);
 		}
 
 		[PublicAPI]
 		public double Value
 		{
-			get { return (double) GetValue(ValueProperty); }
-			set { SetValue(ValueProperty, value); }
+			get => (double) GetValue(ValueProperty);
+			set => SetValue(ValueProperty, value);
 		}
 
 		public UIColor ThumbBackgroundColor
 		{
-			get { return (UIColor) GetValue(ThumbBackgroundColorProperty); }
-			set { SetValue(ThumbBackgroundColorProperty, value); }
+			get => (UIColor) GetValue(ThumbBackgroundColorProperty);
+			set => SetValue(ThumbBackgroundColorProperty, value);
 		}
 
 		public UIColor ThumbOutlineColor
 		{
-			get { return (UIColor) GetValue(ThumbOutlineColorProperty); }
-			set { SetValue(ThumbOutlineColorProperty, value); }
+			get => (UIColor) GetValue(ThumbOutlineColorProperty);
+			set => SetValue(ThumbOutlineColorProperty, value);
 		}
 
 		public double ThumbCornerRadius
 		{
-			get { return (double) GetValue(ThumbCornerRadiusProperty); }
-			set { SetValue(ThumbCornerRadiusProperty, value); }
+			get => (double) GetValue(ThumbCornerRadiusProperty);
+			set => SetValue(ThumbCornerRadiusProperty, value);
 		}
 
 		public CornerMask ThumbCornerMask
 		{
-			get { return (CornerMask) GetValue(ThumbCornerMaskProperty); }
-			set { SetValue(ThumbCornerMaskProperty, value); }
+			get => (CornerMask) GetValue(ThumbCornerMaskProperty);
+			set => SetValue(ThumbCornerMaskProperty, value);
 		}
 	}
 }

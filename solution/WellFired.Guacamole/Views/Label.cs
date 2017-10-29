@@ -58,50 +58,50 @@ namespace WellFired.Guacamole.Views
 		[PublicAPI]
 		public int FontSize
 		{
-			get { return (int) GetValue(FontSizeProperty); }
-			set { SetValue(FontSizeProperty, value); }
+			get => (int) GetValue(FontSizeProperty);
+			set => SetValue(FontSizeProperty, value);
 		}
 
 		[PublicAPI]
 		public bool WordWrap
 		{
-			get { return (bool) GetValue(WordWrapProperty); }
-			set { SetValue(WordWrapProperty, value); }
+			get => (bool) GetValue(WordWrapProperty);
+			set => SetValue(WordWrapProperty, value);
 		}
 		
 		[PublicAPI]
 		public UITextClipping Clipping
 		{
-			get { return (UITextClipping) GetValue(ClippingProperty); }
-			set { SetValue(ClippingProperty, value); }
+			get => (UITextClipping) GetValue(ClippingProperty);
+			set => SetValue(ClippingProperty, value);
 		}
 
 		[PublicAPI]
 		public string Text
 		{
-			get { return (string) GetValue(TextProperty); }
-			set { SetValue(TextProperty, value); }
+			get => (string) GetValue(TextProperty);
+			set => SetValue(TextProperty, value);
 		}
 
 		[PublicAPI]
 		public UIColor TextColor
 		{
-			get { return (UIColor) GetValue(TextColorProperty); }
-			set { SetValue(TextColorProperty, value); }
+			get => (UIColor) GetValue(TextColorProperty);
+			set => SetValue(TextColorProperty, value);
 		}
 
 		[PublicAPI]
 		public UITextAlign HorizontalTextAlign
 		{
-			get { return (UITextAlign) GetValue(HorizontalTextAlignProperty); }
-			set { SetValue(HorizontalTextAlignProperty, value); }
+			get => (UITextAlign) GetValue(HorizontalTextAlignProperty);
+			set => SetValue(HorizontalTextAlignProperty, value);
 		}
 
 		[PublicAPI]
 		public UITextAlign VerticalTextAlign
 		{
-			get { return (UITextAlign) GetValue(VerticalTextAlignProperty); }
-			set { SetValue(VerticalTextAlignProperty, value); }
+			get => (UITextAlign) GetValue(VerticalTextAlignProperty);
+			set => SetValue(VerticalTextAlignProperty, value);
 		}
 	}
 }

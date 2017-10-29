@@ -15,8 +15,8 @@ namespace WellFired.Guacamole.Views
         [PublicAPI]
         public IList<ILayoutable> Children
         {
-            get { return (IList<ILayoutable>) GetValue(ChildrenProperty); }
-            set { SetValue(ChildrenProperty, value); }
+            get => (IList<ILayoutable>) GetValue(ChildrenProperty);
+            set => SetValue(ChildrenProperty, value);
         }
     }
 }

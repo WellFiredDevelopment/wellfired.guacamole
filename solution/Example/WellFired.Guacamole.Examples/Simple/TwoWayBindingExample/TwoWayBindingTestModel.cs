@@ -12,8 +12,8 @@ namespace WellFired.Guacamole.Examples.Simple.TwoWayBindingExample
 		[UsedImplicitly]
 		public string BoundText
 		{
-			get { return _boundText; }
-			set { SetProperty(ref _boundText, value); }
+			get => _boundText;
+			set => SetProperty(ref _boundText, value);
 		}
 	}
 }

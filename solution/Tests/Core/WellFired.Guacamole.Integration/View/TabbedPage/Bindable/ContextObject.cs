@@ -8,8 +8,8 @@ namespace WellFired.Guacamole.Integration.View.TabbedPage.Bindable
 
 		public string SelectedPage
 		{
-			get { return _selectedPage; }
-			set { SetProperty(ref _selectedPage, value, nameof(SelectedPage)); }
+			get => _selectedPage;
+			set => SetProperty(ref _selectedPage, value, nameof(SelectedPage));
 		}
 	}
 }

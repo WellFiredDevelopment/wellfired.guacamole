@@ -12,26 +12,26 @@ namespace WellFired.Guacamole.Integration.View.NumberEntry.Bindable
 
 		public float Number
 		{
-			get { return _number; }
-			set { SetProperty(ref _number, value); }
+			get => _number;
+			set => SetProperty(ref _number, value);
 		}
 
 		public UIColor TextColor
 		{
-			get { return _textColor; }
-			set { SetProperty(ref _textColor, value); }
+			get => _textColor;
+			set => SetProperty(ref _textColor, value);
 		}
 
 		public UITextAlign HorizontalTextAlign
 		{
-			get { return _horizontalTextAlign; }
-			set { SetProperty(ref _horizontalTextAlign, value); }
+			get => _horizontalTextAlign;
+			set => SetProperty(ref _horizontalTextAlign, value);
 		}
 
 		public UITextAlign VerticalTextAlign
 		{
-			get { return _verticalTextAlign; }
-			set { SetProperty(ref _verticalTextAlign, value); }
+			get => _verticalTextAlign;
+			set => SetProperty(ref _verticalTextAlign, value);
 		}
 	}
 }

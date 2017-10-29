@@ -15,20 +15,20 @@ namespace WellFired.Guacamole.Examples.CaseStudy.RedditBrowser.ViewModel
 
         public string SubReddit
         {
-            get { return _subReddit; }
-            set { SetProperty(ref _subReddit, value); }
+            get => _subReddit;
+            set => SetProperty(ref _subReddit, value);
         }
 
         public ICommand Search
         {
-            get { return _search; }
-            set { SetProperty(ref _search, value); }
+            get => _search;
+            set => SetProperty(ref _search, value);
         }
 
         public IList<Post> SearchResults
         {
-            get { return _searchResults; }
-            set { SetProperty(ref _searchResults, value); }
+            get => _searchResults;
+            set => SetProperty(ref _searchResults, value);
         }
 
         public SearchResult()

@@ -34,28 +34,28 @@ namespace WellFired.Guacamole.Views
         [PublicAPI]
         public bool On
         {
-            get { return (bool) GetValue(OnProperty); }
-            set { SetValue(OnProperty, value); }
+            get => (bool) GetValue(OnProperty);
+            set => SetValue(OnProperty, value);
         }
 
         [PublicAPI]
         public IImageSource OnImageSource
         {
-            get { return (IImageSource) GetValue(OnImageSourceProperty); }
-            set { SetValue(OnImageSourceProperty, value); }
+            get => (IImageSource) GetValue(OnImageSourceProperty);
+            set => SetValue(OnImageSourceProperty, value);
         }
 
         [PublicAPI]
         public IImageSource OffImageSource
         {
-            get { return (IImageSource) GetValue(OffImageSourceProperty); }
-            set { SetValue(OffImageSourceProperty, value); }
+            get => (IImageSource) GetValue(OffImageSourceProperty);
+            set => SetValue(OffImageSourceProperty, value);
         }
 
         [PublicAPI]
         public ICommand ButtonPressedCommand
         {
-            get { return (ICommand) GetValue(ButtonPressedCommandProperty); }
+            get => (ICommand) GetValue(ButtonPressedCommandProperty);
             set
             {
                 var previousValue = ButtonPressedCommand;

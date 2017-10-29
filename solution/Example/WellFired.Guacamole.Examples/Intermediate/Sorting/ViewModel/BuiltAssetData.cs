@@ -12,22 +12,22 @@ namespace WellFired.Guacamole.Examples.Intermediate.Sorting.ViewModel
         [PublicAPI]
         public string Path
         {
-            get { return _path; }
-            set { SetProperty(ref _path, value); }
+            get => _path;
+            set => SetProperty(ref _path, value);
         }
 
         [PublicAPI]
         public int BeforeSize
         {
-            get { return _beforeSize; }
-            set { SetProperty(ref _beforeSize, value); }
+            get => _beforeSize;
+            set => SetProperty(ref _beforeSize, value);
         }
 
         [PublicAPI]
         public int AfterSize
         {
-            get { return _afterSize; }
-            set { SetProperty(ref _afterSize, value); }
+            get => _afterSize;
+            set => SetProperty(ref _afterSize, value);
         }
 
         public BuiltAssetData(Model.BuildAssetData model)

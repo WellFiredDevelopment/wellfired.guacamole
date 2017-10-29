@@ -24,14 +24,14 @@ namespace WellFired.Guacamole.Views.MasterDetailPage
 
 		public string CellLabelText
 		{
-			get { return _cellLabelText; }
-			set { SetProperty(ref _cellLabelText, value); }
+			get => _cellLabelText;
+			set => SetProperty(ref _cellLabelText, value);
 		}
 
 		public bool IsSelected
 		{
-			get { return _isSelected; }
-			set { SetProperty(ref _isSelected, value); }
+			get => _isSelected;
+			set => SetProperty(ref _isSelected, value);
 		}
 
 		public Type TargetType

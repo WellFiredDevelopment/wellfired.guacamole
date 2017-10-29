@@ -14,7 +14,7 @@ namespace WellFired.Guacamole.Views
 
         public IImageSource ImageSource
         {
-            get { return (IImageSource) GetValue(ImageSourceProperty); }
+            get => (IImageSource) GetValue(ImageSourceProperty);
             set
             {
                 if (ImageSource != value)

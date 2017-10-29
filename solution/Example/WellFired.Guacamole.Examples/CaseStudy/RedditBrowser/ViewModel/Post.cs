@@ -15,20 +15,20 @@ namespace WellFired.Guacamole.Examples.CaseStudy.RedditBrowser.ViewModel
 
         public IImageSource Image
         {
-            get { return _image; }
-            set { SetProperty(ref _image, value); }
+            get => _image;
+            set => SetProperty(ref _image, value);
         }
 
         public string Author
         {
-            get { return _author; }
-            set { SetProperty(ref _author, value); }
+            get => _author;
+            set => SetProperty(ref _author, value);
         }
 
         public string Title
         {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
+            get => _title;
+            set => SetProperty(ref _title, value);
         }
 
         public Post(Child child)

@@ -16,8 +16,8 @@ namespace WellFired.Guacamole.Unit.Bindable
 
 			public float Value
 			{
-				get { return (float) GetValue(FloatProperty); }
-				set { SetValue(FloatProperty, value); }
+				get => (float) GetValue(FloatProperty);
+				set => SetValue(FloatProperty, value);
 			}
 		}
 
@@ -27,8 +27,8 @@ namespace WellFired.Guacamole.Unit.Bindable
 
 			public float Value
 			{
-				get { return _currentValue; }
-				set { SetProperty(ref _currentValue, value); }
+				get => _currentValue;
+				set => SetProperty(ref _currentValue, value);
 			}
 		}
 

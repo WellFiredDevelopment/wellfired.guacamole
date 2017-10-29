@@ -14,8 +14,8 @@ namespace WellFired.Guacamole.Views
         [PublicAPI]
         public object SelectedPage
         {
-            get { return GetValue(SelectedPageProperty); }
-            set { SetValue(SelectedPageProperty, value); }
+            get => GetValue(SelectedPageProperty);
+            set => SetValue(SelectedPageProperty, value);
         }
     }
 }
