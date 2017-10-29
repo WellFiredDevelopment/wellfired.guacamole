@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.ComponentModel;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Data.Collection;
 
 namespace WellFired.Guacamole.Views
@@ -136,7 +137,7 @@ namespace WellFired.Guacamole.Views
 
             if (e.PropertyName == ItemSourceProperty.PropertyName)
             {
-                ItemSourceChanged();
+                RegisterNewItemSource();   
                 SetStyleDictionary(StyleDictionary);
             }
             else if (e.PropertyName == ItemTemplateProperty.PropertyName)
@@ -144,6 +145,15 @@ namespace WellFired.Guacamole.Views
                 ItemSourceChanged();
                 SetStyleDictionary(StyleDictionary);
             }
+        }
+
+        private void RegisterNewItemSource()
+        {
+            // We internally build a CompositeCollection to house our entries, this allows us to provide complex NotifyCollectionChanged behavious with multiple collections.
+            _compositeCollection.CollectionChanged -= NotifyCollectionChangedOnCollectionChanged;
+            _compositeCollection = new CompositeCollection(ItemSource);
+            _compositeCollection.CollectionChanged += NotifyCollectionChangedOnCollectionChanged;
+            ItemSourceChanged();
         }
     }
 }

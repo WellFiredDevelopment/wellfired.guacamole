@@ -159,6 +159,8 @@
     <Compile Include="Simple\ListViewExample\ListViewTestWindow.cs" />
     <Compile Include="Simple\ListViewGroupExample\ListViewTestApplication.cs" />
     <Compile Include="Simple\ListViewGroupExample\ListViewTestWindow.cs" />
+    <Compile Include="Simple\ListViewWithBoundDataExample\ListViewTestApplication.cs" />
+    <Compile Include="Simple\ListViewWithBoundDataExample\ListViewTestWindow.cs" />
     <Compile Include="Simple\MasterDetailPageExample\MasterDetailPageApplication.cs" />
     <Compile Include="Simple\MasterDetailPageExample\MasterDetailPageWindow.cs" />
     <Compile Include="Simple\OneWayBindingExample\OneWayBindingTestApplication.cs" />

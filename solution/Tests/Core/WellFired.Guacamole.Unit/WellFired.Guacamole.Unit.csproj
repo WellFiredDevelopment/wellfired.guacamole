@@ -89,6 +89,7 @@
     <Compile Include="ImageSource\Given_AnImageSource_FromFile.cs" />
     <Compile Include="ImageSource\Given_AnImageSource_FromUri.cs" />
     <Compile Include="ImageSource\Given_AUriSourceHandler.cs" />
+    <Compile Include="ListView\AfterBind.cs" />
     <Compile Include="ListView\Given_ViewParams.cs" />
     <Compile Include="Padding\Given_NoPadding.cs" />
     <Compile Include="Padding\Given_Padding.cs" />

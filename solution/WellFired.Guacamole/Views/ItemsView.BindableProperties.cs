@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using WellFired.Guacamole.Data;
-using WellFired.Guacamole.Data.Collection;
 using WellFired.Guacamole.Data.Annotations;
 using WellFired.Guacamole.DataBinding;
 
@@ -20,15 +19,8 @@ namespace WellFired.Guacamole.Views
             get => (IList) GetValue(ItemSourceProperty);
             set
             {
-                _compositeCollection.CollectionChanged -= NotifyCollectionChangedOnCollectionChanged;
-
                 SetValue(ItemSourceProperty, value);
-
-                // We internally build a CompositeCollection to house our entries, this allows us to provide complex NotifyCollectionChanged behavious with multiple collections.
-                _compositeCollection = new CompositeCollection(ItemSource);
-                _compositeCollection.CollectionChanged += NotifyCollectionChangedOnCollectionChanged;
-                
-                ItemSourceChanged();
+                RegisterNewItemSource();
             }
         }
 
