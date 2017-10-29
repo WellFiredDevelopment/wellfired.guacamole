@@ -65,12 +65,12 @@ namespace WellFired.Guacamole.Integration.ListView.Grouping
 		{
 			ViewSizingExtensions.DoSizingAndLayout(_listView, UIRect.With(1000, 500));
 			
-			Assert.That(_listView.Children[0], Is.TypeOf<LabelCell>());
+			Assert.That(_listView.Children[0], Is.TypeOf<HeaderCell>());
 			Assert.That(_listView.Children[1], Is.TypeOf<LabelCell>());
 			Assert.That(_listView.Children[2], Is.TypeOf<LabelCell>());
 			Assert.That(_listView.Children[3], Is.TypeOf<LabelCell>());
 			Assert.That(_listView.Children[4], Is.TypeOf<LabelCell>());
-			Assert.That(_listView.Children[5], Is.TypeOf<LabelCell>());
+			Assert.That(_listView.Children[5], Is.TypeOf<HeaderCell>());
 			Assert.That(_listView.Children[6], Is.TypeOf<LabelCell>());
 			Assert.That(_listView.Children[7], Is.TypeOf<LabelCell>());
 			Assert.That(_listView.Children[8], Is.TypeOf<LabelCell>());
