@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using WellFired.Guacamole.Data.Collection;
 
 namespace WellFired.Guacamole.Data
@@ -63,6 +64,13 @@ namespace WellFired.Guacamole.Data
 		/// <param name="itemSource"></param>
 		private void BuildFrom(ICollection itemSource)
 		{
+			if (!itemSource.GetType().GetGenericArguments().Any())
+			{
+				_isGroupingEnabled = false;
+				_itemSource = new ArrayList(itemSource);
+				return;
+			}
+			
 			var genericType = itemSource.GetType().GetGenericArguments()[0];
 			_isGroupingEnabled = typeof(ICollection).IsAssignableFrom(genericType);
 
