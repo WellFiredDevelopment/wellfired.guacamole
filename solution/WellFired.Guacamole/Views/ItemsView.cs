@@ -151,7 +151,7 @@ namespace WellFired.Guacamole.Views
         {
             // We internally build a CompositeCollection to house our entries, this allows us to provide complex NotifyCollectionChanged behavious with multiple collections.
             CompositeCollection.CollectionChanged -= NotifyCollectionChangedOnCollectionChanged;
-            CompositeCollection = new CompositeCollection(ItemSource);
+            CompositeCollection = ItemSource != null ? new CompositeCollection(ItemSource) : new CompositeCollection();
             CompositeCollection.CollectionChanged += NotifyCollectionChangedOnCollectionChanged;
             ItemSourceChanged();
         }
