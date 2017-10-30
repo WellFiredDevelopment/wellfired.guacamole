@@ -64,11 +64,11 @@ namespace WellFired.Guacamole.Views
         }
 
         private void BuildFromItemSource()
-        {   
+        {
             _tabSelect.Children.Clear();
             _pages.Clear();
             
-            if (ItemTemplate == null)
+            if (ItemTemplate == null || ItemSource == null)
                 return;
             
             foreach (var bindingContext in ItemSource)
