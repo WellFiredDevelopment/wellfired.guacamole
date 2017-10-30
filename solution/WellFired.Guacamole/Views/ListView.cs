@@ -8,6 +8,7 @@ using WellFired.Guacamole.Data;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Exceptions;
+using WellFired.Guacamole.Layouts;
 
 namespace WellFired.Guacamole.Views
 {
@@ -102,38 +103,56 @@ namespace WellFired.Guacamole.Views
 
         protected override void ItemAdded(object item, int index)
         {
-            ReCalculateTotalContentSize();
+            CalculateVisualDataSet();
         }
 
         protected override void ItemRemoved(object item)
         {
-            ReCalculateTotalContentSize();
+            var removedCell = _activeCells.FirstOrDefault(o => Equals(o.BindingContext, item));
+            
+            // If we find a default cell it means we're not rendering this element, so we don't need to worry about this
+            if (removedCell == default(ICell))
+                return;
+            
+            Cache(removedCell);
+            _activeCells.Remove(removedCell);
+            Children.Remove((ILayoutable)removedCell);
+            _visualDataSet.RemoveAt(_visualDataSet.Count - 1);
         }
 
         protected override void ItemReplaced(object oldItem, object newItem, int index)
         {
+            // if we don't have this item in the VDS, we don't need to attempt to replace the binding context on it, since it's not rendering.
+            if (!_visualDataSet.Contains(index))
+                return;
+            
+            var replacedCell = _activeCells.FirstOrDefault(o => Equals(o.BindingContext, oldItem));
+            CellHelper.ReUseCell(replacedCell, newItem);
         }
 
         protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(sender, e);
 
-            if (e.PropertyName != AvailableSpaceProperty.PropertyName)
-                return;
+            if (e.PropertyName == SelectedItemProperty.PropertyName)
+                SetSelectedItem();
 
+            if (e.PropertyName != AvailableSpaceProperty.PropertyName) 
+                return;
+            
             var totalCurrentVisibleEntries = _activeCells.Count;
             if (totalCurrentVisibleEntries > AvailableSpace)
                 return;
 
             if (TotalContentSize <= 0)
                 return;
-            
+
             InvalidateRectRequest();
             var viewSize = SizingHelper.GetImportantSize(Orientation, RectRequest);
             CanScroll = viewSize < TotalContentSize;
-            if(CanScroll)
+            if (CanScroll)
                 ScrollOffset = ScrollOffset; // We do this here to reclamp the scroll value incase we've pulled the bottom of a listView too far.
-            
+
             CalculateVisualDataSet();
         }
         

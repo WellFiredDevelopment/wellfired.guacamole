@@ -62,6 +62,8 @@
     <Compile Include="ListView\Grouping\Given_AListView_WithDefaultHeaderAndCell.cs" />
     <Compile Include="ListView\Horizontal\Given_AListView.cs" />
     <Compile Include="ListView\ReOrdered\Given_AListView.cs" />
+    <Compile Include="ListView\SelectedObjectModification\Given_AListView_With_SelectedItem.cs" />
+    <Compile Include="ListView\SourceModification\GivenAListViewWithDefaultHeaderAndCell.cs" />
     <Compile Include="ListView\Vertical\Given_AListView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\Button\Bindable\ButtonButtonPressedTests.cs" />

@@ -116,26 +116,28 @@ namespace WellFired.Guacamole.Views
         public INotifyPropertyChanged SelectedItem
         {
             get => (INotifyPropertyChanged)GetValue(SelectedItemProperty);
-            set
+            set => SetValue(SelectedItemProperty, value);
+        }
+
+        /// <summary>
+        /// Migrates the Selected Items Status to all Children.
+        /// </summary>
+        private void SetSelectedItem()
+        {
+            var selectedItem = SelectedItem;
+            foreach (var itemSource in CompositeCollection)
             {
-                var oldItem = SelectedItem;
-                if (!SetValue(SelectedItemProperty, value)) 
-                    return;
+                if (!(itemSource is IDefaultCellContext))
+                    continue;
 
-                foreach (var itemSource in CompositeCollection)
-                {
-                    if (!(itemSource is IDefaultCellContext))
-                        break;
-                    
-                    var cellBindingContextBase = itemSource as IDefaultCellContext;
-                    if (cellBindingContextBase.Equals(oldItem))
-                        cellBindingContextBase.IsSelected = false;
-                    if (cellBindingContextBase.Equals(SelectedItem))
-                        cellBindingContextBase.IsSelected = true;
-                }
-
-                OnItemSelected(this, new SelectedItemChangedEventArgs(SelectedItem));
+                var cellBindingContextBase = itemSource as IDefaultCellContext;
+                if (cellBindingContextBase.IsSelected)
+                    cellBindingContextBase.IsSelected = false;
+                if (cellBindingContextBase.Equals(selectedItem))
+                    cellBindingContextBase.IsSelected = true;
             }
+
+            OnItemSelected(this, new SelectedItemChangedEventArgs(selectedItem));
         }
 
         /// <summary>
