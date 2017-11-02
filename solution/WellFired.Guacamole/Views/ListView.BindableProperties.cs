@@ -127,10 +127,10 @@ namespace WellFired.Guacamole.Views
             var selectedItem = SelectedItem;
             foreach (var itemSource in CompositeCollection)
             {
-                if (!(itemSource is IDefaultCellContext))
+                if (!(itemSource is ISelectableCell))
                     continue;
 
-                var cellBindingContextBase = itemSource as IDefaultCellContext;
+                var cellBindingContextBase = itemSource as ISelectableCell;
                 if (cellBindingContextBase.IsSelected)
                     cellBindingContextBase.IsSelected = false;
                 if (cellBindingContextBase.Equals(selectedItem))

@@ -2,9 +2,8 @@
 
 namespace WellFired.Guacamole.Cells
 {
-	public interface IDefaultCellContext : INotifyPropertyChanged
+	public interface IDefaultCellContext : ISelectableCell, INotifyPropertyChanged
 	{
-		bool IsSelected { get; set; }
 		string CellLabelText { get; set; }
 	}
 }

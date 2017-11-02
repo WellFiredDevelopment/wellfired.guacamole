@@ -56,6 +56,7 @@
     <Compile Include="Cells\IDefaultCellContext.cs" />
     <Compile Include="Cells\ImageCell.BindableProperties.cs" />
     <Compile Include="Cells\ImageCell.cs" />
+    <Compile Include="Cells\ISelectableCell.cs" />
     <Compile Include="Cells\LabelCell.BindableProperties.cs" />
     <Compile Include="Cells\LabelCell.cs" />
     <Compile Include="Command.cs" />
