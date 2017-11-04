@@ -81,7 +81,6 @@
     <Compile Include="DataBinding\ObservableBase.cs" />
     <Compile Include="DataBinding\ReflectExt.cs" />
     <Compile Include="DataBinding\SelectedItemChangedEventArgs.cs" />
-    <Compile Include="Device.cs" />
     <Compile Include="Diagnostics\DefaultLogger.cs" />
     <Compile Include="Diagnostics\ILogger.cs" />
     <Compile Include="Diagnostics\Logger.cs" />
@@ -135,7 +134,9 @@
     <Compile Include="Layouts\IVirtualCell.cs" />
     <Compile Include="Layouts\VirtualCell.cs" />
     <Compile Include="Platform\IDataStorageService.cs" />
+    <Compile Include="Platform\IMainThreadRunner.cs" />
     <Compile Include="Platform\IPlatformProvider.cs" />
+    <Compile Include="Platform\MainThreadRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer\INativeRenderer.cs" />
     <Compile Include="Renderer\NativeRendererHelper.cs" />

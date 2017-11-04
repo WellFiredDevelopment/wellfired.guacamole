@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using WellFired.Guacamole.Image;
+using WellFired.Guacamole.Platform;
 
 namespace WellFired.Guacamole.Unity.Editor.Extensions
 {
@@ -10,7 +11,7 @@ namespace WellFired.Guacamole.Unity.Editor.Extensions
         public static async Task<Texture2D> ToUnityTexture(this IImageSource source, LoadedImage loadedImage)
         {
             Texture2D image = null;
-            Device.ExecuteOnMainThread(() =>
+            MainThreadRunner.ExecuteOnMainThread(() =>
             {
                 switch (loadedImage.Type)
                 {

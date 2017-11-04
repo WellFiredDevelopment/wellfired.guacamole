@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using WellFired.Guacamole.DataBinding;
+using WellFired.Guacamole.Platform;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.RedditBrowser.ViewModel
 {
@@ -43,7 +44,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.RedditBrowser.ViewModel
                     {
                         Search.CanExecute = false;
                         var results = await DoSearch();
-                        Device.ExecuteOnMainThread(() => SearchResults = results);
+                        MainThreadRunner.ExecuteOnMainThread(() => SearchResults = results);
                     }
                     finally
                     {

@@ -10,7 +10,7 @@ namespace WellFired.Guacamole.Views
 {
 	public class Window : View
 	{
-		private readonly Device _device = new Device();
+		private readonly MainThreadRunner _mainThreadRunner = new MainThreadRunner();
 		private readonly ILogger _logger;
 
 		[PublicAPI]
@@ -44,7 +44,7 @@ namespace WellFired.Guacamole.Views
 		    var view = Content as View;
 		    Debug.Assert(view != null, "view != null");
 
-		    _device.ProcessActions();
+			_mainThreadRunner.ProcessActions();
 			NativeRenderer.Render(FinalRenderedRect);
 
 			var relativeParentRect = UIRect.With(0, 0, parentRect.Width, parentRect.Height);

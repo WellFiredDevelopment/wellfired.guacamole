@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using JetBrains.Annotations;
 using WellFired.Guacamole.DataBinding.Cells;
 using WellFired.Guacamole.Examples.Intermediate.Sorting.Helper;
+using WellFired.Guacamole.Platform;
 
 namespace WellFired.Guacamole.Examples.Intermediate.Sorting.ViewModel
 {
@@ -54,7 +55,7 @@ namespace WellFired.Guacamole.Examples.Intermediate.Sorting.ViewModel
                 for (var n = 0; n < 100000; n++)
                     _models.Add(new BuiltAssetData(BuiltAssetRandomizer.Create(random)));
                 
-                Device.ExecuteOnMainThread(() => DisplayList = new List<BuiltAssetData>(_models));
+                MainThreadRunner.ExecuteOnMainThread(() => DisplayList = new List<BuiltAssetData>(_models));
             });
             
             DisplayList = new List<BuiltAssetData>();
@@ -69,7 +70,7 @@ namespace WellFired.Guacamole.Examples.Intermediate.Sorting.ViewModel
             {
                 SortByPath.CanExecute = false;
                 _models.Sort((a, b) => string.Compare(a.Path, b.Path, StringComparison.Ordinal));
-                Device.ExecuteOnMainThread(() =>
+                MainThreadRunner.ExecuteOnMainThread(() =>
                 {
                     DisplayList = _models.ToList();
                     SortByPath.CanExecute = true;
@@ -83,7 +84,7 @@ namespace WellFired.Guacamole.Examples.Intermediate.Sorting.ViewModel
             {
                 SortByBefore.CanExecute = false;
                 _models.Sort((a, b) => a.BeforeSize.CompareTo(b.BeforeSize));
-                Device.ExecuteOnMainThread(() =>
+                MainThreadRunner.ExecuteOnMainThread(() =>
                 {
                     DisplayList = _models.ToList();
                     SortByBefore.CanExecute = true;
@@ -97,7 +98,7 @@ namespace WellFired.Guacamole.Examples.Intermediate.Sorting.ViewModel
             {
                 SortByAfter.CanExecute = false;
                 _models.Sort((a, b) => a.AfterSize.CompareTo(b.AfterSize));
-                Device.ExecuteOnMainThread(() =>
+                MainThreadRunner.ExecuteOnMainThread(() =>
                 {
                     DisplayList = _models.ToList();
                     SortByAfter.CanExecute = true;

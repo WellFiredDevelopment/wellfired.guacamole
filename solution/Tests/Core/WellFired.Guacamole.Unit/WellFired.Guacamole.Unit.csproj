@@ -101,6 +101,7 @@
     <Compile Include="CompositeCollection\WithTwoTierDataWithChildrenAndParentObservable.cs" />
     <Compile Include="CompositeCollection\WithTwoTierDataWithChildrenObservable.cs" />
     <Compile Include="CompositeCollection\WithTwoTierDataWithParentObservable.cs" />
+    <Compile Include="Platform\Given_A_MainThreadRunner.cs" />
     <Compile Include="TabbedPage\ConstructionOrder.cs" />
     <Compile Include="Vds\Given_AVariableHeightViewParams.cs" />
     <Compile Include="Vds\Given_AVds.cs" />

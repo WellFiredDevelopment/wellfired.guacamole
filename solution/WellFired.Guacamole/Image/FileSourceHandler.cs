@@ -10,13 +10,11 @@ namespace WellFired.Guacamole.Image
     public class FileSourceHandler : ISourceHandler
     {
         private readonly string _location;
-        private readonly string _adjustedPath;
         private readonly IFileSystem _fileSystem;
 
         public FileSourceHandler(string location, IFileSystem fileSystem)
         {
             _location = location;
-            _adjustedPath = Device.AdjustPath(_location);
             _fileSystem = fileSystem;
         }
 
@@ -24,7 +22,7 @@ namespace WellFired.Guacamole.Image
         {
             try
             {
-                var stream = await _fileSystem.GetStream(_adjustedPath, FileMode.Open, cancellationToken);
+                var stream = await _fileSystem.GetStream(_location, FileMode.Open, cancellationToken);
                 return new ImageSourceWrapper(stream, ImageType.Image);
             }
             catch (FileNotFoundException)

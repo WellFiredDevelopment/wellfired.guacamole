@@ -3,6 +3,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 using WellFired.Guacamole.Exceptions;
+using WellFired.Guacamole.Unity.Editor.Platform;
 
 namespace WellFired.Guacamole.Unity.Editor
 {
@@ -13,7 +14,7 @@ namespace WellFired.Guacamole.Unity.Editor
 		[SerializeField] private GuacamoleWindow _mainWindow;
 		public bool IsRunning => _mainWindow != null;
 
-		public IApplication Launch(ApplicationInitializationContext initializationContext, Type persistantType = null, Type platformProvider = null)
+		public IApplication Launch(ApplicationInitializationContext initializationContext, Type persistantType = null)
 		{
 			if (initializationContext == null)
 				throw new InitializationContextNull();
@@ -29,13 +30,14 @@ namespace WellFired.Guacamole.Unity.Editor
 
 		private static void ConfigurePersistentData(ApplicationInitializationContext initializationContext, Type persistantType)
 		{
-			var assetPath = Device.AdjustPath($"{initializationContext.ApplicationName}/{initializationContext.ApplicationName}.asset");
+			var unityPlatformProvider = new UnityPlatformProvider(initializationContext.ApplicationName);
+			var assetPath = $"{unityPlatformProvider.PlatformDataPath}/{initializationContext.ApplicationName}.asset";
 			var persistantData = AssetDatabase.LoadAssetAtPath(assetPath, persistantType);
 			
 			if (persistantData == null)
 			{
 				persistantData = ScriptableObject.CreateInstance(persistantType);
-				Directory.CreateDirectory(Device.AdjustPath(initializationContext.ApplicationName));
+				Directory.CreateDirectory(unityPlatformProvider.PlatformDataPath);
 				AssetDatabase.DeleteAsset(assetPath);
 				AssetDatabase.CreateAsset(persistantData, assetPath);
 				EditorUtility.SetDirty(persistantData);

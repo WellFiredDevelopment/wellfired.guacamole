@@ -5,11 +5,11 @@ namespace WellFired.Guacamole.Unity.Editor.Platform
 {
 	public class UnityTeamSharedDataStorageService : IDataStorageService
 	{
-		private readonly string _applicationName;
+		private readonly string _dataPath;
 
 		public UnityTeamSharedDataStorageService(string applicationName)
 		{
-			_applicationName = applicationName;
+			_dataPath = $"{new UnityPlatformProvider(applicationName).PlatformDataPath}";
 		}
 
 		/// <inheritdoc />
@@ -24,7 +24,7 @@ namespace WellFired.Guacamole.Unity.Editor.Platform
 		{
 			string content = null;
 			
-			var assetPath = Device.AdjustPath($"{_applicationName}/{key}.gdata");
+			var assetPath = $"{_dataPath}/{key}.gdata";
 			if (File.Exists(assetPath))
 			{
 				content = File.ReadAllText(assetPath);
@@ -43,10 +43,10 @@ namespace WellFired.Guacamole.Unity.Editor.Platform
 		/// <param name="key"></param>
 		public void Write(string data, string key)
 		{
-			var assetPath = Device.AdjustPath($"{_applicationName}/{key}.gdata");
+			var assetPath = $"{_dataPath}/{key}.gdata";
 			if (!File.Exists(assetPath))
 			{
-				Directory.CreateDirectory(Device.AdjustPath($"{_applicationName}"));
+				Directory.CreateDirectory(_dataPath);
 			}
 			
 			File.WriteAllText(assetPath, data);

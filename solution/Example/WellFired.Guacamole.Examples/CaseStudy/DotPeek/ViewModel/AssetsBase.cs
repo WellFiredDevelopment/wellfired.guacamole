@@ -8,6 +8,7 @@ using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model.Assets;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel.Utilities;
+using WellFired.Guacamole.Platform;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel
 {
@@ -189,7 +190,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel
 		private void DoSort<TKey>(State state, Func<AssetCell, TKey> keySelector)
 		{
 			TaskEx.Run(() => {
-				Device.ExecuteOnMainThread(() =>
+				MainThreadRunner.ExecuteOnMainThread(() =>
 				{
 					switch (state)
 					{
