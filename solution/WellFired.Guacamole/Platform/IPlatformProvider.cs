@@ -9,6 +9,11 @@
 		/// Path where data can be saved safely
 		/// </summary>
 		string PlatformDataPath { get; }
+		
+		/// <summary>
+		/// Path where the project assets are saved.
+		/// </summary>
+		string PlatformProjectPath { get; }
 
 		/// <summary>
 		/// With this, you can get some persistent data storage, you should be able to store strings of data in here.
