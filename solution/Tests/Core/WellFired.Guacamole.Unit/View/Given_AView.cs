@@ -1,4 +1,5 @@
-﻿using NSubstitute;
+﻿using System.Collections.Generic;
+using NSubstitute;
 using NUnit.Framework;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Views;
@@ -7,7 +8,7 @@ namespace WellFired.Guacamole.Unit.View
 {
     [TestFixture]
     public class GivenAView
-    {
+    {   
         [Test]
         public void That_IsLayedoutTwice_Then_LayoutIsDoneCorrectly()
         {
@@ -37,6 +38,19 @@ namespace WellFired.Guacamole.Unit.View
 
             ViewSizingExtensions.DoSizingAndLayout(view, UIRect.With(0, 0, 500, 100));
             Assert.That(view.RectRequest, Is.EqualTo(UIRect.With(0, 0, 50, 10)));
+        }
+        
+        [Test]
+        public void When_A_View_Is_Instanciated_It_Gets_A_Unitque_Identifier()
+        {
+            const int viewCount = 1000;
+            var hashset = new HashSet<string>();
+            for (int i = 0; i < viewCount; i++)
+            {
+                hashset.Add(new Views.View().Id);
+            }
+
+            Assert.AreEqual(viewCount, hashset.Count);
         }
     }
 }
