@@ -32,6 +32,20 @@ namespace WellFired.Guacamole.Views
 				BindingMode.TwoWay,
 				entry => entry.VerticalTextAlign
 			);
+		
+		[PublicAPI] public static readonly BindableProperty OnInputEnterProperty = BindableProperty
+			.Create<TextEntry, Command>(
+				new Command(),
+				BindingMode.TwoWay,
+				entry => entry.OnInputEnter
+			);
+		
+		[PublicAPI] public static readonly BindableProperty OnFocusLostProperty = BindableProperty
+			.Create<TextEntry, Command>(
+				new Command(),
+				BindingMode.TwoWay,
+				entry => entry.OnFocusLost
+			);
 
 		public TextEntry()
 		{
@@ -71,6 +85,20 @@ namespace WellFired.Guacamole.Views
 		{
 			get => (UITextAlign) GetValue(VerticalTextAlignProperty);
 			set => SetValue(VerticalTextAlignProperty, value);
+		}
+		
+		[PublicAPI]
+		public Command OnInputEnter
+		{
+			get => (Command) GetValue(OnInputEnterProperty);
+			set => SetValue(OnInputEnterProperty, value);
+		}
+		
+		[PublicAPI]
+		public Command OnFocusLost
+		{
+			get => (Command) GetValue(OnFocusLostProperty);
+			set => SetValue(OnFocusLostProperty, value);
 		}
 
 		public void Type(char key)

@@ -36,12 +36,27 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			Style.normal.textColor = entry.TextColor.ToUnityColor();
 		}
 
+		private bool _wasFocused;
 		public override void Render(UIRect renderRect)
 		{
 			base.Render(renderRect);
 
 			var entry = (TextEntry)Control;
 			entry.Text = EditorGUI.TextField(UnityRect, entry.Text, Style);
+
+			var isFocused = GUI.GetNameOfFocusedControl() == entry.Id;
+			if (!isFocused && _wasFocused)
+			{
+				entry.OnFocusLost?.Execute();
+			}
+			
+			if (isFocused &&
+			    UnityEngine.Event.current.isKey && UnityEngine.Event.current.keyCode == KeyCode.Return)
+			{
+				entry.OnInputEnter?.Execute();
+			}
+
+			_wasFocused = isFocused;
 		}
 
 		public override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
