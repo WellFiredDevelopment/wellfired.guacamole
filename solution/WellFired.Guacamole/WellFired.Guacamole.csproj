@@ -75,6 +75,8 @@
     <Compile Include="DataBinding\Converter\ValueConverter.cs" />
     <Compile Include="DataBinding\DataTemplate.cs" />
     <Compile Include="DataBinding\Exceptions\BindingExistsException.cs" />
+    <Compile Include="DataBinding\Exceptions\SetValueFromDestException.cs" />
+    <Compile Include="DataBinding\Exceptions\SetValueFromSourceException.cs" />
     <Compile Include="DataBinding\IBasicViewModel.cs" />
     <Compile Include="DataBinding\IBindableObject.cs" />
     <Compile Include="DataBinding\NotifyBase.cs" />
@@ -100,6 +102,7 @@
     <Compile Include="Exceptions\NoCompatibleCellInDataTemplate.cs" />
     <Compile Include="Exceptions\DataTemplateTypeIsNotBindableException.cs" />
     <Compile Include="Exceptions\TabbedPagePageShouldntAlreadyHaveBindingContext.cs" />
+    <Compile Include="Exceptions\ViewRenderingException.cs" />
     <Compile Include="Extensions\ColorExtensions.cs" />
     <Compile Include="Extensions\DelegateExtensions.cs" />
     <Compile Include="Extensions\FloatExtensions.cs" />

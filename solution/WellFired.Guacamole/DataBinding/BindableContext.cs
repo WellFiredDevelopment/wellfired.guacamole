@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
 using WellFired.Guacamole.DataBinding.Converter;
+using WellFired.Guacamole.DataBinding.Exceptions;
 
 namespace WellFired.Guacamole.DataBinding
 {
@@ -80,46 +81,60 @@ namespace WellFired.Guacamole.DataBinding
 		/// <exception cref="ArgumentOutOfRangeException"></exception>
 		public bool SetValueFromDest(object value)
 		{
-			if (Equals(Value, value))
-				return false;
-			
-			Value = _defaultConverter.Convert(value, Property.PropertyType, null, CultureInfo.CurrentCulture);;
-			
-			switch (InstancedBindingMode)
+			try
 			{
-				case BindingMode.OneWay:
-				case BindingMode.ReadOnly:
+				if (Equals(Value, value))
 					return false;
-				case BindingMode.TwoWay:
-					break;
-				default:
-					throw new ArgumentOutOfRangeException();
+				
+				Value = _defaultConverter.Convert(value, Property.PropertyType, null, CultureInfo.CurrentCulture);;				
+				switch (InstancedBindingMode)
+				{
+					case BindingMode.OneWay:
+					case BindingMode.ReadOnly:
+						return false;
+					case BindingMode.TwoWay:
+						break;
+					default:
+						throw new ArgumentOutOfRangeException();
+				}
+	
+				if (_propertySetMethod == null)
+					return true; // We return true here because we've got far enough to set our Value, even if we don't have a _propertySetMethod. Which means we're probably not bound to anything
+	
+				var converted = InstancedConverter != null ? InstancedConverter.Convert(value, _propertyInfo.PropertyType, null, CultureInfo.CurrentCulture) : value;
+				_propertySetMethod.Invoke(Object, new[] {converted});
+				return true;
 			}
-
-			if (_propertySetMethod == null)
-				return true; // We return true here because we've got far enough to set our Value, even if we don't have a _propertySetMethod. Which means we're probably not bound to anything
-
-			var converted = InstancedConverter != null ? InstancedConverter.Convert(value, _propertyInfo.PropertyType, null, CultureInfo.CurrentCulture) : value;
-			_propertySetMethod.Invoke(Object, new[] {converted});
-			return true;
+			catch (Exception)
+			{
+				throw new SetValueFromDestException(_bindableObject, Property.PropertyName, _targetProperty, value);
+			}
 		}
 
 		/// <summary>
 		/// In this context, source would typically be the backing store (VM)
 		/// </summary>
 		/// <param name="value"></param>
+		/// <exception cref="SetValueFromSourceException"></exception>
 		/// <returns></returns>
 		public bool SetValueFromSource(object value)
 		{
-			if (Equals(Value, value))
-				return false;
+			try
+			{
+				if (Equals(Value, value))
+					return false;
 
-			var converter = InstancedConverter ?? _defaultConverter;
+				var converter = InstancedConverter ?? _defaultConverter;
 
-			Value = converter.ConvertBack(value, Property.PropertyType, null, CultureInfo.CurrentCulture);
+				Value = converter.ConvertBack(value, Property.PropertyType, null, CultureInfo.CurrentCulture);
 
-			_propertySetMethod?.Invoke(Object, new[] {value});
-			return true;
+				_propertySetMethod?.Invoke(Object, new[] {value});
+				return true;
+			}
+			catch (Exception)
+			{
+				throw new SetValueFromSourceException(_bindableObject, Property.PropertyName, _targetProperty, value);
+			}
 		}
 	}
 }

@@ -129,8 +129,7 @@ namespace WellFired.Guacamole.Unity.Editor
 
 		private void DisplayUserError(Exception exception)
 		{
-			var targetInvocationException = exception as TargetInvocationException;
-			if (targetInvocationException != null)
+			if (exception is TargetInvocationException targetInvocationException)
 				exception = targetInvocationException.InnerException;
 			
 			var facingException = exception as GuacamoleUserFacingException;

@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using WellFired.Guacamole.Data;
+using WellFired.Guacamole.Exceptions;
 using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Styling;
 
@@ -16,18 +18,28 @@ namespace WellFired.Guacamole.Views
         public override void Render(UIRect parentRect)
         {
             base.Render(parentRect);
-            
-            var resetToOriginContentRenderRect = FinalContentRenderRect;
-            if (NativeRenderer.PushMaskStack(FinalRenderRect))
-            {
-                resetToOriginContentRenderRect.X = 0;
-                resetToOriginContentRenderRect.Y = 0;
-            }
 
-            foreach (var child in Children)
-                (child as View)?.Render(resetToOriginContentRenderRect);
-            
-            NativeRenderer.PopMaskStack();
+            try
+            {
+                var resetToOriginContentRenderRect = FinalContentRenderRect;
+                if (NativeRenderer.PushMaskStack(FinalRenderRect))
+                {
+                    resetToOriginContentRenderRect.X = 0;
+                    resetToOriginContentRenderRect.Y = 0;
+                }
+    
+                foreach (var child in Children)
+                    (child as View)?.Render(resetToOriginContentRenderRect);
+                
+                NativeRenderer.PopMaskStack();
+            }
+            catch (Exception e)
+            {
+                if (e is GuacamoleUserFacingException) throw;
+				
+                var renderingException = new ViewRenderingException(GetType(), Id, e.Message, e.StackTrace);
+                throw renderingException;
+            }
         }
 
         public override void InvalidateRectRequest()

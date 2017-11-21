@@ -1,5 +1,5 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using WellFired.Guacamole.DataBinding.Exceptions;
 
 namespace WellFired.Guacamole.Unit.Converter.Default
 {
@@ -26,7 +26,7 @@ namespace WellFired.Guacamole.Unit.Converter.Default
 			Assert.That(view.OutlineThickness, Is.EqualTo(1));
 
 			view.BindingContext = backingStore;
-			Assert.That(() => view.Bind(Views.View.OutlineThicknessProperty, "SomeNullObject"), Throws.TypeOf<SystemException>());
+			Assert.That(() => view.Bind(Views.View.OutlineThicknessProperty, "SomeNullObject"), Throws.TypeOf<SetValueFromSourceException>());
 		}
 		
 		[Test]
