@@ -10,10 +10,14 @@ namespace WellFired.Guacamole.Views.MasterDetailPage
     /// </summary>
     public class MasterDetailPage : Page
     {
-        public MasterDetailPage(ILayoutable master, ILayoutable detail)
-        {
+        private readonly ViewContainer _detailContainer;
+        
+        public MasterDetailPage(ILayoutable master, IView detail)
+        {    
             VerticalLayout = LayoutOptions.Fill;
             HorizontalLayout = LayoutOptions.Fill;
+            
+            _detailContainer = new ViewContainer{Content = detail};
             
             Content = new LayoutView {
                 HorizontalLayout = LayoutOptions.Fill, 
@@ -21,7 +25,7 @@ namespace WellFired.Guacamole.Views.MasterDetailPage
                 Layout = AdjacentLayout.Of(OrientationOptions.Horizontal, 0),
                 Children = {
                     master,
-                    detail
+                    _detailContainer
                 }
             };
         }
@@ -30,7 +34,7 @@ namespace WellFired.Guacamole.Views.MasterDetailPage
         {
             ((View)layoutable).SetStyleDictionary(StyleDictionary);
             InvalidateRectRequest();
-            ((LayoutView)Content).Children[1] = layoutable;
+            _detailContainer.Content = (IView) layoutable;
         }
     }
 }

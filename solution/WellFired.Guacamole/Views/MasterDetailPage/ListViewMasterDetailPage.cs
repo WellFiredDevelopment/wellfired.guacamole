@@ -1,12 +1,11 @@
 ﻿using System;
 using WellFired.Guacamole.DataBinding;
-using WellFired.Guacamole.Layouts;
 
 namespace WellFired.Guacamole.Views.MasterDetailPage
 {
 	public class ListViewMasterDetailPage : MasterDetailPage
 	{
-		public ListViewMasterDetailPage(ListView master, ILayoutable detail) : base(master, detail)
+		public ListViewMasterDetailPage(ListView master, IView detail) : base(master, detail)
 		{
 			master.OnItemSelected += OnItemSelected;
 		}

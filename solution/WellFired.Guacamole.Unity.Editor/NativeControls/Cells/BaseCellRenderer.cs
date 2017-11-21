@@ -33,6 +33,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Cells
 
 			base.Render(renderRect);
 
+			//todo : check with Terry if it is necessary here
 			GUI.SetNextControlName(Control.Id);
 		}
 	}
