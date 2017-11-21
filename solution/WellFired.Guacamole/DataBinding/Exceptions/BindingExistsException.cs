@@ -4,15 +4,17 @@ namespace WellFired.Guacamole.DataBinding.Exceptions
 {
 	public class BindingExistsException : Exception
 	{
-		public BindingExistsException(string bindablePropertyName, string targetProperty)
+		public BindingExistsException(string bindablePropertyName, string newTargetProperty, string originalTargetProperty)
 		{
 			BindablePropertyName = bindablePropertyName;
-			TargetProperty = targetProperty;
+			NewTargetProperty = newTargetProperty;
+			OriginalTargetProperty = originalTargetProperty;
 		}
 
 		private string BindablePropertyName { get; }
-		private string TargetProperty { get; }
+		private string NewTargetProperty { get; }
+		private string OriginalTargetProperty { get; }
 
-		public override string Message => $"Binding already exists for bindable property : {BindablePropertyName} and is bound to backstore property : {TargetProperty}, please check for duplicates";
+		public override string Message => $"Fail to bind to : {NewTargetProperty} . Binding already exists for bindable property : {BindablePropertyName} and is bound to backstore property : {OriginalTargetProperty}, please check for duplicates";
 	}
 }

@@ -20,7 +20,7 @@ namespace WellFired.Guacamole.DataBinding
 
 		public string TargetProperty
 		{
-			private get { return _targetProperty; }
+			get => _targetProperty;
 			set
 			{
 				_targetProperty = value;
