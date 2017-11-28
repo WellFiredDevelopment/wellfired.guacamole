@@ -13,6 +13,7 @@ using WellFired.Guacamole.Renderer;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.Platform;
 using WellFired.Guacamole.Views;
+using Debug = System.Diagnostics.Debug;
 using Logger = WellFired.Guacamole.Diagnostics.Logger;
 
 namespace WellFired.Guacamole.Unity.Editor
@@ -130,14 +131,17 @@ namespace WellFired.Guacamole.Unity.Editor
 		private void DisplayUserError(Exception exception)
 		{
 			if (exception is TargetInvocationException targetInvocationException)
+			{
 				exception = targetInvocationException.InnerException;
+				Debug.Assert(exception != null, nameof(exception) + " != null");	
+			}
 			
 			var facingException = exception as GuacamoleUserFacingException;
 			EditorUtility.DisplayDialog(
 				"Guacamole Crashed. :(",
 				facingException != null
 					? $"Your Guacamole window has crashed with the error : \n\n{facingException.UserFacingError()}"
-					: $"The window has thrown an exception, the error is \n\n{_exception.Message} \n\ncallstack was \n\n{_exception.StackTrace}",
+					: $"The window has thrown an exception, the error is \n\n{exception.Message} \n\ncallstack was \n\n{exception.StackTrace}",
 				"Close");
 		}
 
