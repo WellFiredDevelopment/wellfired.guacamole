@@ -139,6 +139,12 @@
     <Compile Include="CaseStudy\Taskist\View\Overview.cs" />
     <Compile Include="CaseStudy\Taskist\View\TaskistMainPage.cs" />
     <Compile Include="CaseStudy\Taskist\View\TaskistTopBar.cs" />
+    <Compile Include="Intermediate\KeyValueListViewExample\KeyValueListViewTestApplication.cs" />
+    <Compile Include="Intermediate\KeyValueListViewExample\KeyValueListViewTestWindow.cs" />
+    <Compile Include="Intermediate\KeyValueListViewExample\ViewModel\SettingBindingContext.cs" />
+    <Compile Include="Intermediate\KeyValueListViewExample\ViewModel\SettingsViewModel.cs" />
+    <Compile Include="Intermediate\KeyValueListViewExample\View\SettingCell.cs" />
+    <Compile Include="Intermediate\KeyValueListViewExample\View\SettingsListView.cs" />
     <Compile Include="Intermediate\Sorting\BreakdownPage.cs" />
     <Compile Include="Intermediate\Sorting\Cells\AssetBreakdownCell.cs" />
     <Compile Include="Intermediate\Sorting\SortingApplication.cs" />
