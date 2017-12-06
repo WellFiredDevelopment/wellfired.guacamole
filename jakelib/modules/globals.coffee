@@ -9,7 +9,10 @@ global.config = {
     nugetConfig:    'solution/NuGet.config',
     basecsproj:     'solution/WellFired.Guacamole/WellFired.Guacamole.csproj',
     unityEditor:    'solution/WellFired.Guacamole.Unity.Editor/WellFired.Guacamole.Unity.Editor.csproj',
-    unityRuntime:   'solution/WellFired.Guacamole.Unity.Runtime/WellFired.Guacamole.Unity.Runtime.csproj'
+    unityRuntime:   'solution/WellFired.Guacamole.Unity.Runtime/WellFired.Guacamole.Unity.Runtime.csproj',
+    doxyConfig:     'documentation/doxyconf',
+    sphinxInputDir: 'documentation/xml',
+    sphinxOutputDir:'documentation/sphinx'
 }
 
 module.exports = {
