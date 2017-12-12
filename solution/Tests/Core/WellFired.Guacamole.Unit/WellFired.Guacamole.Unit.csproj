@@ -85,6 +85,7 @@
     <Compile Include="Converter\YesNoBindingContext.cs" />
     <Compile Include="Converter\YesNoConverter.cs" />
     <Compile Include="Drawing\ImageData\Given_AnImageParameters.cs" />
+    <Compile Include="FilterView\Given_A_FilterView.cs" />
     <Compile Include="ImageSource\Given_AFileSourceHandler.cs" />
     <Compile Include="ImageSource\Given_AnImageSource_FromFile.cs" />
     <Compile Include="ImageSource\Given_AnImageSource_FromUri.cs" />

@@ -170,6 +170,7 @@
     <Compile Include="Views\Button.cs" />
     <Compile Include="Views\CellHelper.cs" />
     <Compile Include="Views\ControlState.cs" />
+    <Compile Include="Views\FilterView.cs" />
     <Compile Include="Views\IClickable.cs" />
     <Compile Include="Views\IItemsView.cs" />
     <Compile Include="Views\IListensToVdsChanges.cs" />

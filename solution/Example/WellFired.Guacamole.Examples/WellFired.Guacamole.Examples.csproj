@@ -157,6 +157,9 @@
     <Compile Include="Simple\AdjacentLayoutExample\AdjacentLayoutTestWindow.cs" />
     <Compile Include="Simple\ButtonExample\ButtonTestApplication.cs" />
     <Compile Include="Simple\ButtonExample\ButtonTestWindow.cs" />
+    <Compile Include="Simple\FilterExample\FilterTestApplication.cs" />
+    <Compile Include="Simple\FilterExample\FilterTestWindow.cs" />
+    <Compile Include="Simple\FilterExample\ViewModel.cs" />
     <Compile Include="Simple\ImageViewExample\ImageViewWindowApplication.cs" />
     <Compile Include="Simple\ImageViewExample\ImageViewWindow.cs" />
     <Compile Include="Simple\LabelExample\LabelTestApplication.cs" />

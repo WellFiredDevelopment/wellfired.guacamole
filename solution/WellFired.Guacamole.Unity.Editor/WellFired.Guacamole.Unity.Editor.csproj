@@ -81,6 +81,7 @@
     <Compile Include="NativeControls\Page\TabbedPageRenderer.cs" />
     <Compile Include="NativeControls\Views\BaseRenderer.cs" />
     <Compile Include="NativeControls\Views\ButtonRenderer.cs" />
+    <Compile Include="NativeControls\Views\FilterViewRenderer.cs" />
     <Compile Include="NativeControls\Views\ImageCreatorHandler.cs" />
     <Compile Include="NativeControls\Views\ImageViewRenderer.cs" />
     <Compile Include="NativeControls\Views\LabelRenderer.cs" />
