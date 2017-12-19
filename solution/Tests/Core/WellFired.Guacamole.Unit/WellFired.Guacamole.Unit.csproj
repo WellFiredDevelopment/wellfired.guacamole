@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BB8952BF-3212-4478-9E84-47158D53E12B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WellFired.Guacamole.Unit</RootNamespace>
+    <AssemblyName>WellFired.Guacamole.Unit</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <TargetFrameworkProfile />
+    <LangVersion>7</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AsyncBridge.Net35, Version=0.0.0.0, Culture=neutral, PublicKeyToken=b3b1c0202c0d6a87">
+      <HintPath>..\..\..\packages\AsyncBridge.Net35.0.2.0\lib\net35-Client\AsyncBridge.Net35.dll</HintPath>
+    </Reference>
+    <Reference Include="NSubstitute, Version=2.0.3.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca">
+      <HintPath>..\..\..\packages\NSubstitute.2.0.3\lib\net35\NSubstitute.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.8.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb">
+      <HintPath>..\..\..\packages\NUnit.3.8.1\lib\net35\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Threading, Version=1.0.2856.102, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\..\..\packages\TaskParallelLibrary.1.0.2856.0\lib\Net35\System.Threading.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AsyncHelper.cs" />
+    <Compile Include="Bindable\BooleanBindableObjectTests.cs" />
+    <Compile Include="Bindable\DoubleBindableObjectTests.cs" />
+    <Compile Include="Bindable\FloatBindableObjectTests.cs" />
+    <Compile Include="Bindable\GeneralBindableObjectTests.cs" />
+    <Compile Include="Bindable\IntBindableObjectTests.cs" />
+    <Compile Include="Bindable\StringBindableObjectTests.cs" />
+    <Compile Include="AdjacentLayout\CalculateValidRectRequest\Given_AnHorizontalAdacentLayoutWithFiveSpacing.cs" />
+    <Compile Include="AdjacentLayout\CalculateValidRectRequest\Given_AnVerticalsAdacentLayoutWithFiveSpacing.cs" />
+    <Compile Include="AdjacentLayout\CalculateValidRectRequest\Given_AnVerticalsAdacentLayoutWithNoSpacing.cs" />
+    <Compile Include="AdjacentLayout\CalculateValidRectRequest\Given_AnHorizontalAdacentLayoutWithNoSpacing.cs" />
+    <Compile Include="AdjacentLayout\CenterAlign\GivenAViewWithHorizontalAndVerticalCenterAlign.cs" />
+    <Compile Include="AdjacentLayout\CenterAlign\Given_AViewWithHorizontalCenterAlign.cs" />
+    <Compile Include="AdjacentLayout\CenterAlign\Given_AViewWithVerticalCenterAlign.cs" />
+    <Compile Include="AdjacentLayout\Horizontal\Given_AnAdjacentLayoutWithNoPadding_And_NoSpacing.cs" />
+    <Compile Include="AdjacentLayout\Horizontal\Given_AnAdjacentLayoutWithNoPadding.cs" />
+    <Compile Include="AdjacentLayout\Horizontal\Given_AnAdjacentLayoutWithNoSpacing.cs" />
+    <Compile Include="AdjacentLayout\Horizontal\Given_AnAdjacentLayout.cs" />
+    <Compile Include="AdjacentLayout\Horizontal\Given_AViewWithAdjacentLayoutContentAndNoPadding.cs" />
+    <Compile Include="AdjacentLayout\Horizontal\Given_AViewWithAdjacentLayoutContentAndPadding.cs" />
+    <Compile Include="AdjacentLayout\Vertical\Given_AnAdjacentLayoutWithNoPadding_And_NoSpacing.cs" />
+    <Compile Include="AdjacentLayout\Vertical\Given_AnAdjacentLayoutWithNoPadding.cs" />
+    <Compile Include="AdjacentLayout\Vertical\Given_AnAdjacentLayoutWithNoSpacing.cs" />
+    <Compile Include="AdjacentLayout\Vertical\AdjacentLayoutPaddingSpacing.cs" />
+    <Compile Include="Converter\ConvertTest.cs" />
+    <Compile Include="Converter\Default\BackingStore.cs" />
+    <Compile Include="Converter\Default\BindableObjectWithNullableProperty.cs" />
+    <Compile Include="Converter\Default\Given_TheDefaultConverter.cs" />
+    <Compile Include="Converter\YesNoBindingContext.cs" />
+    <Compile Include="Converter\YesNoConverter.cs" />
+    <Compile Include="Drawing\ImageData\Given_AnImageParameters.cs" />
+    <Compile Include="FilterView\Given_A_FilterView.cs" />
+    <Compile Include="ImageSource\Given_AFileSourceHandler.cs" />
+    <Compile Include="ImageSource\Given_AnImageSource_FromFile.cs" />
+    <Compile Include="ImageSource\Given_AnImageSource_FromUri.cs" />
+    <Compile Include="ImageSource\Given_AUriSourceHandler.cs" />
+    <Compile Include="ListView\AfterBind.cs" />
+    <Compile Include="ListView\Given_ViewParams.cs" />
+    <Compile Include="Padding\Given_NoPadding.cs" />
+    <Compile Include="Padding\Given_Padding.cs" />
+    <Compile Include="CompositeCollection\Group.cs" />
+    <Compile Include="CompositeCollection\IEventMockReciever.cs" />
+    <Compile Include="CompositeCollection\WithOneTierDataNoObservables.cs" />
+    <Compile Include="CompositeCollection\WithOneTierDataObservable.cs" />
+    <Compile Include="CompositeCollection\WithTwoTierDataNoObservables.cs" />
+    <Compile Include="CompositeCollection\WithTwoTierDataWithChildrenAndParentObservable.cs" />
+    <Compile Include="CompositeCollection\WithTwoTierDataWithChildrenObservable.cs" />
+    <Compile Include="CompositeCollection\WithTwoTierDataWithParentObservable.cs" />
+    <Compile Include="Platform\Given_A_MainThreadRunner.cs" />
+    <Compile Include="TabbedPage\ConstructionOrder.cs" />
+    <Compile Include="Vds\Given_AVariableHeightViewParams.cs" />
+    <Compile Include="Vds\Given_AVds.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Styling\Given_ATrigger.cs" />
+    <Compile Include="Vds\Given_ViewParams.cs" />
+    <Compile Include="View\Given_AView.cs" />
+    <Compile Include="View\Given_AViewWithNoPaddingAndWithContent.cs" />
+    <Compile Include="View\Given_AViewWithPaddingAndContent.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\WellFired.Guacamole.Data\WellFired.Guacamole.Data.csproj">
+      <Project>{0cbc8a3c-5a74-4441-ad8e-0047bafe5a6d}</Project>
+      <Name>WellFired.Guacamole.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\WellFired.Guacamole\WellFired.Guacamole.csproj">
+      <Project>{9804de8d-6d30-4fd7-adfe-4ec24a7adb6e}</Project>
+      <Name>WellFired.Guacamole</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

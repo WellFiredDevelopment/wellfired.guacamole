@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9566C64D-A98F-4202-BC77-01DF9AF1AEF2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WellFired.Guacamole.Examples</RootNamespace>
+    <AssemblyName>WellFired.Guacamole.Examples</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\unity\Assets\Code\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>../../../unity/Assets/Code/</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.3\lib\net35\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AsyncBridge.Net35, Version=0.0.0.0, Culture=neutral, PublicKeyToken=b3b1c0202c0d6a87">
+      <HintPath>..\..\packages\AsyncBridge.Net35.0.2.0\lib\net35-Client\AsyncBridge.Net35.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Threading, Version=1.0.2856.102, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\..\packages\TaskParallelLibrary.1.0.2856.0\lib\Net35\System.Threading.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\Assemblies\UnityEditor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\Assemblies\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CaseStudy\DotPeek\Application\Application.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\Assets\Anim.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\Assets\Asset.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\Assets\Audio.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\Assets\Dll.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\Assets\IAsset.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\Assets\IScene.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\Assets\Material.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\Assets\Model3D.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\Assets\Prefab.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\Assets\Scene.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\Assets\Script.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\Assets\ScriptableObject.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\Assets\Shader.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\Assets\Texture.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\Assets\UnknownAsset.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\BuildOverview.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\BuildReport.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\BuildSettings.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\FileSize.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\PreprocessorOrigin.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\ProjectSettings\Data.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\ProjectSettings\IAndroidSettings.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\ProjectSettings\IIOSSettings.cs" />
+    <Compile Include="CaseStudy\DotPeek\Model\ProjectSettings\IStandaloneSettings.cs" />
+    <Compile Include="CaseStudy\DotPeek\ViewModel\AssetCell.cs" />
+    <Compile Include="CaseStudy\DotPeek\ViewModel\AssetsBase.cs" />
+    <Compile Include="CaseStudy\DotPeek\ViewModel\AssetSplit.cs" />
+    <Compile Include="CaseStudy\DotPeek\ViewModel\ObservableScriptableObject.cs" />
+    <Compile Include="CaseStudy\DotPeek\ViewModel\Overview.cs" />
+    <Compile Include="CaseStudy\DotPeek\ViewModel\PersistentData.cs" />
+    <Compile Include="CaseStudy\DotPeek\ViewModel\PreprocessorCell.cs" />
+    <Compile Include="CaseStudy\DotPeek\ViewModel\ProjectSettings.cs" />
+    <Compile Include="CaseStudy\DotPeek\ViewModel\UnusedAssets.cs" />
+    <Compile Include="CaseStudy\DotPeek\ViewModel\UsedAssets.cs" />
+    <Compile Include="CaseStudy\DotPeek\ViewModel\Utilities\ColorCompare.cs" />
+    <Compile Include="CaseStudy\DotPeek\ViewModel\Utilities\Debug.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Buttons\HeaderButton.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Cells\AssetBreakdownCell.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Cells\AssetCell.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Cells\PreprocessorCell.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\DotPeekWindow.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Labels\BuildSizeLabel.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Labels\BuildTimeLabel.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Labels\CommitIdLabel.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Labels\PlatformLabel.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Labels\PreProcessorLabel.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Labels\ResourceAssetSizeLabel.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Labels\TotalSizeLabel.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Labels\UnityVersionLabel.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Lists\AssetBreakdownList.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Lists\DisplayedAssetList.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Lists\PreProcessorList.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Pages\AssetsPage.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Pages\DotPeekMainPage.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Pages\OverviewPage.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Pages\ProjectSettingsPage.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Styles\InformationLabel.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Styles\LayoutView.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Styles\ListView.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Styles\NoBackgroundNoOutline.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Styles\Page.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Styles\Shared.cs" />
+    <Compile Include="CaseStudy\DotPeek\View\Views\DotPeekLayoutView.cs" />
+    <Compile Include="CaseStudy\RedditBrowser\Cells\PostCell.cs" />
+    <Compile Include="CaseStudy\RedditBrowser\Model\SearchResult.cs" />
+    <Compile Include="CaseStudy\RedditBrowser\RedditBrowserApplication.cs" />
+    <Compile Include="CaseStudy\RedditBrowser\RedditBrowserWindow.cs" />
+    <Compile Include="CaseStudy\RedditBrowser\ViewModel\Post.cs" />
+    <Compile Include="CaseStudy\RedditBrowser\ViewModel\SearchResult.cs" />
+    <Compile Include="CaseStudy\Taskist\Styles\FilterCell.cs" />
+    <Compile Include="CaseStudy\Taskist\Styles\TaskCell.cs" />
+    <Compile Include="CaseStudy\Taskist\TaskistApplication.cs" />
+    <Compile Include="CaseStudy\Taskist\TaskistWindow.cs" />
+    <Compile Include="CaseStudy\Taskist\ViewModel\Filter.cs" />
+    <Compile Include="CaseStudy\Taskist\ViewModel\Task.cs" />
+    <Compile Include="CaseStudy\Taskist\View\Cells\FilterCell.cs" />
+    <Compile Include="CaseStudy\Taskist\View\Cells\TaskCell.cs" />
+    <Compile Include="CaseStudy\Taskist\View\Inspector.cs" />
+    <Compile Include="CaseStudy\Taskist\View\Overview.cs" />
+    <Compile Include="CaseStudy\Taskist\View\TaskistMainPage.cs" />
+    <Compile Include="CaseStudy\Taskist\View\TaskistTopBar.cs" />
+    <Compile Include="Intermediate\KeyValueListViewExample\KeyValueListViewTestApplication.cs" />
+    <Compile Include="Intermediate\KeyValueListViewExample\KeyValueListViewTestWindow.cs" />
+    <Compile Include="Intermediate\KeyValueListViewExample\ViewModel\SettingBindingContext.cs" />
+    <Compile Include="Intermediate\KeyValueListViewExample\ViewModel\SettingsViewModel.cs" />
+    <Compile Include="Intermediate\KeyValueListViewExample\View\SettingCell.cs" />
+    <Compile Include="Intermediate\KeyValueListViewExample\View\SettingsListView.cs" />
+    <Compile Include="Intermediate\Sorting\BreakdownPage.cs" />
+    <Compile Include="Intermediate\Sorting\Cells\AssetBreakdownCell.cs" />
+    <Compile Include="Intermediate\Sorting\SortingApplication.cs" />
+    <Compile Include="Intermediate\Sorting\SortingWindow.cs" />
+    <Compile Include="Intermediate\Sorting\Helper\BuiltAssetRandomizer.cs" />
+    <Compile Include="Intermediate\Sorting\Model\BuildAssetData.cs" />
+    <Compile Include="Intermediate\Sorting\ViewModel\Breakdown.cs" />
+    <Compile Include="Intermediate\Sorting\ViewModel\BuiltAssetData.cs" />
+    <Compile Include="Simple\AdjacentLayoutExample\AdjacentLayoutTestApplication.cs" />
+    <Compile Include="Simple\AdjacentLayoutExample\AdjacentLayoutTestWindow.cs" />
+    <Compile Include="Simple\ButtonExample\ButtonTestApplication.cs" />
+    <Compile Include="Simple\ButtonExample\ButtonTestWindow.cs" />
+    <Compile Include="Simple\FilterExample\FilterTestApplication.cs" />
+    <Compile Include="Simple\FilterExample\FilterTestWindow.cs" />
+    <Compile Include="Simple\FilterExample\ViewModel.cs" />
+    <Compile Include="Simple\ImageViewExample\ImageViewWindowApplication.cs" />
+    <Compile Include="Simple\ImageViewExample\ImageViewWindow.cs" />
+    <Compile Include="Simple\LabelExample\LabelTestApplication.cs" />
+    <Compile Include="Simple\LabelExample\LabelTestWindow.cs" />
+    <Compile Include="Simple\ListViewExample\ListViewTestApplication.cs" />
+    <Compile Include="Simple\ListViewExample\ListViewTestWindow.cs" />
+    <Compile Include="Simple\ListViewGroupExample\ListViewGroupTestApplication.cs" />
+    <Compile Include="Simple\ListViewGroupExample\ListViewGroupTestWindow.cs" />
+    <Compile Include="Simple\ListViewWithBoundDataExample\ListViewWithBoundDataTestApplication.cs" />
+    <Compile Include="Simple\ListViewWithBoundDataExample\ListViewWithBoundDataTestWindow.cs" />
+    <Compile Include="Simple\MasterDetailPageExample\MasterDetailPageApplication.cs" />
+    <Compile Include="Simple\MasterDetailPageExample\MasterDetailPageWindow.cs" />
+    <Compile Include="Simple\OneWayBindingExample\OneWayBindingTestApplication.cs" />
+    <Compile Include="Simple\OneWayBindingExample\OneWayBindingTestModel.cs" />
+    <Compile Include="Simple\OneWayBindingExample\OneWayBindingTestWindow.cs" />
+    <Compile Include="Simple\SliderExample\SliderTestApplication.cs" />
+    <Compile Include="Simple\SliderExample\SliderTestWindow.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Simple\TabbedPageExample\AdjacentLayoutTestApplication.cs" />
+    <Compile Include="Simple\TabbedPageExample\TabbedPageWindow.cs" />
+    <Compile Include="Simple\TabbedPageExample\ViewModel\FirstPage.cs" />
+    <Compile Include="Simple\TabbedPageExample\ViewModel\SecondPage.cs" />
+    <Compile Include="Simple\TabbedPageExample\ViewModel\ThirdPage.cs" />
+    <Compile Include="Simple\TextFieldExample\TextFieldTestApplication.cs" />
+    <Compile Include="Simple\TextFieldExample\TextFieldTestWindow.cs" />
+    <Compile Include="Simple\TwoWayBindingExample\TwoWayBindingTestApplication.cs" />
+    <Compile Include="Simple\TwoWayBindingExample\TwoWayBindingTestModel.cs" />
+    <Compile Include="Simple\TwoWayBindingExample\TwoWayBindingTestWindow.cs" />
+    <Compile Include="Simple\UIBindingExample\UIBindingTestApplication.cs" />
+    <Compile Include="Simple\UIBindingExample\UIBindingTestWindow.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\WellFired.Guacamole.Unity.Editor\WellFired.Guacamole.Unity.Editor.csproj">
+      <Project>{9f8c3651-0571-4a3b-a75a-2c7f2f08bda7}</Project>
+      <Name>WellFired.Guacamole.Unity.Editor</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WellFired.Guacamole.Unity.Runtime\WellFired.Guacamole.Unity.Runtime.csproj">
+      <Project>{e0dd069b-d631-40b6-9f5e-f515d9aeeccd}</Project>
+      <Name>WellFired.Guacamole.Unity.Runtime</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WellFired.Guacamole\WellFired.Guacamole.csproj">
+      <Project>{9804de8d-6d30-4fd7-adfe-4ec24a7adb6e}</Project>
+      <Name>WellFired.Guacamole</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WellFired.Guacamole.Data\WellFired.Guacamole.Data.csproj">
+      <Project>{0cbc8a3c-5a74-4441-ad8e-0047bafe5a6d}</Project>
+      <Name>WellFired.Guacamole.Data</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,23 @@
+{
+  "name": "WellFired.Platformer",
+  "version": "1.0.0",
+  "private": true,
+  "author": "WellFired",
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org/TerryDrever/wellfired.platformer.git"
+  },
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "coffee-script": "^1.12.2",
+    "fs-jetpack": "^0.7.1",
+    "jake": "^8.0.15",
+    "md5-node": "^1.0.1",
+    "squash-xml-json": "^0.1.0",
+    "string-format": "^0.2.1",
+    "targz": "^1.0.1",
+    "touch": "^1.0.0",
+    "underscore": "^1.8.3",
+    "yargs": "^3.31.0"
+  }
+}

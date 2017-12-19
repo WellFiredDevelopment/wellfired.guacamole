@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9804DE8D-6D30-4FD7-ADFE-4EC24A7ADB6E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WellFired.Guacamole</RootNamespace>
+    <AssemblyName>WellFired.Guacamole</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <LangVersion>7</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Unity\Assets\Code\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AsyncBridge.Net35, Version=0.0.0.0, Culture=neutral, PublicKeyToken=b3b1c0202c0d6a87">
+      <HintPath>..\packages\AsyncBridge.Net35.0.2.0\lib\net35-Client\AsyncBridge.Net35.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Threading, Version=1.0.2856.102, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\System.Threading.dll.1.0.2856.0\lib\net35\System.Threading.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\CustomRendererAttribute.cs" />
+    <Compile Include="AutoAction.cs" />
+    <Compile Include="Cells\Cell.BindableProperties.cs" />
+    <Compile Include="Cells\Cell.cs" />
+    <Compile Include="Cells\HeaderCell.BindableProperties.cs" />
+    <Compile Include="Cells\HeaderCell.cs" />
+    <Compile Include="Cells\ICell.cs" />
+    <Compile Include="Cells\IDefaultCellContext.cs" />
+    <Compile Include="Cells\ImageCell.BindableProperties.cs" />
+    <Compile Include="Cells\ImageCell.cs" />
+    <Compile Include="Cells\ISelectableCell.cs" />
+    <Compile Include="Cells\KeyValueCell.BindableProperties.cs" />
+    <Compile Include="Cells\KeyValueCell.cs" />
+    <Compile Include="Cells\LabelCell.BindableProperties.cs" />
+    <Compile Include="Cells\LabelCell.cs" />
+    <Compile Include="Command.cs" />
+    <Compile Include="DataBinding\BindableContext.cs" />
+    <Compile Include="DataBinding\BindableObject.cs" />
+    <Compile Include="DataBinding\BindableProperty.cs" />
+    <Compile Include="DataBinding\BindingMode.cs" />
+    <Compile Include="DataBinding\Cells\CellBindingContextBase.cs" />
+    <Compile Include="DataBinding\Cells\GroupHeaderBindingContexts.cs" />
+    <Compile Include="DataBinding\Cells\ImageCellBindingContext.cs" />
+    <Compile Include="DataBinding\Cells\LabelCellBindingContext.cs" />
+    <Compile Include="DataBinding\Cells\PageBindingContextBase.cs" />
+    <Compile Include="DataBinding\ConverterHelper.cs" />
+    <Compile Include="DataBinding\Converter\Extensions.cs" />
+    <Compile Include="DataBinding\Converter\IValueConverter.cs" />
+    <Compile Include="DataBinding\Converter\ValueConverter.cs" />
+    <Compile Include="DataBinding\DataTemplate.cs" />
+    <Compile Include="DataBinding\Exceptions\BindingExistsException.cs" />
+    <Compile Include="DataBinding\Exceptions\SetValueFromDestException.cs" />
+    <Compile Include="DataBinding\Exceptions\SetValueFromSourceException.cs" />
+    <Compile Include="DataBinding\IBasicViewModel.cs" />
+    <Compile Include="DataBinding\IBindableObject.cs" />
+    <Compile Include="DataBinding\NotifyBase.cs" />
+    <Compile Include="DataBinding\ObservableBase.cs" />
+    <Compile Include="DataBinding\ReflectExt.cs" />
+    <Compile Include="DataBinding\SelectedItemChangedEventArgs.cs" />
+    <Compile Include="Diagnostics\DefaultLogger.cs" />
+    <Compile Include="Diagnostics\ILogger.cs" />
+    <Compile Include="Diagnostics\Logger.cs" />
+    <Compile Include="Disposable.cs" />
+    <Compile Include="Event\ClickEvent.cs" />
+    <Compile Include="Event\TypeEvent.cs" />
+    <Compile Include="Exceptions\DataTemplateTypeDidntCreateAPage.cs" />
+    <Compile Include="Exceptions\GuacamoleUserFacingException.cs" />
+    <Compile Include="Exceptions\GuacamoleWindowCantBeCreated.cs" />
+    <Compile Include="Exceptions\ImageAlreadyLoadingException.cs" />
+    <Compile Include="Exceptions\ImageSourceCouldntFindFileException.cs" />
+    <Compile Include="Exceptions\ImageSourceDoesntHaveAccessException.cs" />
+    <Compile Include="Exceptions\ImageSourceHandlerProducedNoWrapperException.cs" />
+    <Compile Include="Exceptions\InitializationContextInvalid.cs" />
+    <Compile Include="Exceptions\InitializationContextNull.cs" />
+    <Compile Include="Exceptions\NativeRendererCannotBeFound.cs" />
+    <Compile Include="Exceptions\NoCompatibleCellInDataTemplate.cs" />
+    <Compile Include="Exceptions\DataTemplateTypeIsNotBindableException.cs" />
+    <Compile Include="Exceptions\TabbedPagePageShouldntAlreadyHaveBindingContext.cs" />
+    <Compile Include="Exceptions\ViewRenderingException.cs" />
+    <Compile Include="Extensions\ColorExtensions.cs" />
+    <Compile Include="Extensions\DelegateExtensions.cs" />
+    <Compile Include="Extensions\FloatExtensions.cs" />
+    <Compile Include="FileSystem\FileSystem.cs" />
+    <Compile Include="FileSystem\IFileSystem.cs" />
+    <Compile Include="IApplication.cs" />
+    <Compile Include="ICommand.cs" />
+    <Compile Include="Event\IEvent.cs" />
+    <Compile Include="Image\FileSourceHandler.cs" />
+    <Compile Include="Image\IImageSource.cs" />
+    <Compile Include="Image\IImageSourceWrapper.cs" />
+    <Compile Include="Image\LoadedImage.cs" />
+    <Compile Include="Image\ImageData.cs" />
+    <Compile Include="Image\ImageShape.cs" />
+    <Compile Include="Image\ImageShapeDefinition.cs" />
+    <Compile Include="Image\ImageShapeDefinitionHandler.cs" />
+    <Compile Include="Image\ImageSource.cs" />
+    <Compile Include="Image\ImageSourceWrapper.cs" />
+    <Compile Include="Image\ImageType.cs" />
+    <Compile Include="Image\ISourceHandler.cs" />
+    <Compile Include="Image\StreamSourceHandler.cs" />
+    <Compile Include="Image\UriSourceHandler.cs" />
+    <Compile Include="InitializationContext\IInitializationContext.cs" />
+    <Compile Include="IView.cs" />
+    <Compile Include="IWindow.cs" />
+    <Compile Include="Layouts\AdjacentLayout.cs" />
+    <Compile Include="Layouts\AdjacentLayoutCellCalculator.cs" />
+    <Compile Include="Layouts\ICanLayout.cs" />
+    <Compile Include="Layouts\IHasChildren.cs" />
+    <Compile Include="Layouts\ILayoutable.cs" />
+    <Compile Include="Layouts\ILayoutChildren.cs" />
+    <Compile Include="Layouts\IVirtualCell.cs" />
+    <Compile Include="Layouts\VirtualCell.cs" />
+    <Compile Include="Platform\IDataStorageService.cs" />
+    <Compile Include="Platform\IMainThreadRunner.cs" />
+    <Compile Include="Platform\IPlatformProvider.cs" />
+    <Compile Include="Platform\MainThreadRunner.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderer\INativeRenderer.cs" />
+    <Compile Include="Renderer\NativeRendererHelper.cs" />
+    <Compile Include="Styling\Conditional.cs" />
+    <Compile Include="Styling\IConditional.cs" />
+    <Compile Include="Styling\ISetter.cs" />
+    <Compile Include="Styling\IStyle.cs" />
+    <Compile Include="Styling\IStyleDictionary.cs" />
+    <Compile Include="Styling\ITrigger.cs" />
+    <Compile Include="Styling\Setter.cs" />
+    <Compile Include="Styling\Style.cs" />
+    <Compile Include="Styling\StyleDictionary.cs" />
+    <Compile Include="Styling\Styles\HeaderCell.cs" />
+    <Compile Include="Styling\Styles\ImageCell.cs" />
+    <Compile Include="Styling\Styles\ImageView.cs" />
+    <Compile Include="Styling\Styles\KeyValueCell.cs" />
+    <Compile Include="Styling\Styles\Label.cs" />
+    <Compile Include="Styling\Styles\Button.cs" />
+    <Compile Include="Styling\Styles\LabelCell.cs" />
+    <Compile Include="Styling\Styles\ListView.cs" />
+    <Compile Include="Styling\Styles\Slider.cs" />
+    <Compile Include="Styling\Styles\TabbedPageButton.cs" />
+    <Compile Include="Styling\Styles\ToggleView.cs" />
+    <Compile Include="Styling\Trigger.cs" />
+    <Compile Include="Types\ItemSource.cs" />
+    <Compile Include="Views\Button.cs" />
+    <Compile Include="Views\CellHelper.cs" />
+    <Compile Include="Views\ControlState.cs" />
+    <Compile Include="Views\FilterView.cs" />
+    <Compile Include="Views\IClickable.cs" />
+    <Compile Include="Views\IItemsView.cs" />
+    <Compile Include="Views\IListensToVdsChanges.cs" />
+    <Compile Include="Views\IListView.cs" />
+    <Compile Include="Views\ImageView.BindableProperties.cs" />
+    <Compile Include="Views\ImageView.cs" />
+    <Compile Include="Views\ItemsView.BindableProperties.cs" />
+    <Compile Include="Views\ItemsView.cs" />
+    <Compile Include="Views\ITypeable.cs" />
+    <Compile Include="Views\Label.cs" />
+    <Compile Include="Views\LayoutView.BindableProperties.cs" />
+    <Compile Include="Views\LayoutView.cs" />
+    <Compile Include="Views\ListView.BindableProperties.cs" />
+    <Compile Include="Views\ListView.cs" />
+    <Compile Include="Views\ListView.IListensToVdsChanges.cs" />
+    <Compile Include="Views\MasterDetailPage\ListViewMasterDetailPage.cs" />
+    <Compile Include="Views\MasterDetailPage\MasterDetailPage.cs" />
+    <Compile Include="Views\MasterDetailPage\MasterPageItem.cs" />
+    <Compile Include="Views\TabbedPage.BindableProperties.cs" />
+    <Compile Include="Views\TabbedPage.cs" />
+    <Compile Include="Views\TabbedPageButton.BindableProperties.cs" />
+    <Compile Include="Views\TabbedPageButton.cs" />
+    <Compile Include="Views\ToggleView.BindableProperties.cs" />
+    <Compile Include="Views\ToggleView.cs" />
+    <Compile Include="Views\VdsCalculator.cs" />
+    <Compile Include="Views\ListViewHelper.cs" />
+    <Compile Include="Views\NumberEntry.cs" />
+    <Compile Include="Views\Page.cs" />
+    <Compile Include="Views\SizingHelper.cs" />
+    <Compile Include="Views\Slider.cs" />
+    <Compile Include="Views\StyleHelper.cs" />
+    <Compile Include="Views\TextEntry.cs" />
+    <Compile Include="Views\View.cs" />
+    <Compile Include="Views\View.BindableProperties.cs" />
+    <Compile Include="Views\View.ILayoutable.cs" />
+    <Compile Include="Views\ViewContainer.cs" />
+    <Compile Include="Views\ViewSizingExtensions.cs" />
+    <Compile Include="Views\ViewWithChildren.BindableProperties.cs" />
+    <Compile Include="Views\ViewWithChildren.cs" />
+    <Compile Include="Views\Window.cs" />
+    <Compile Include="WebRequestHandler\IWebRequestHandler.cs" />
+    <Compile Include="WebRequestHandler\WebRequestHandler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WellFired.Guacamole.Data\WellFired.Guacamole.Data.csproj">
+      <Project>{0cbc8a3c-5a74-4441-ad8e-0047bafe5a6d}</Project>
+      <Name>WellFired.Guacamole.Data</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\WellFired.Guacamole.Drawing\WellFired.Guacamole.Drawing.csproj">
+      <Project>{71844acc-d2ec-4216-bd8d-ac63647ad6ac}</Project>
+      <Name>WellFired.Guacamole.Drawing</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WellFired.Guacamole.nuspec" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

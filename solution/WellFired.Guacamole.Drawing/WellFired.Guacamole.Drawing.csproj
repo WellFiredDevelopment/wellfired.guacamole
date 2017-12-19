@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{71844ACC-D2EC-4216-BD8D-AC63647AD6AC}</ProjectGuid>
+    <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WellFired.Guacamole.Drawing</RootNamespace>
+    <AssemblyName>WellFired.Guacamole.Drawing</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>../../Unity/Assets/Code/</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Algorithms\Circle.cs" />
+    <Compile Include="Algorithms\Line.cs" />
+    <Compile Include="Blend\Blend.cs" />
+    <Compile Include="Blend\BlendOperation.cs" />
+    <Compile Include="Blend\AlphaBlend.cs" />
+    <Compile Include="Blend\EraseAlphaBlend.cs" />
+    <Compile Include="Blend\MaxRGBBlendABlend.cs" />
+    <Compile Include="Blend\ReplaceAlphaBlend.cs" />
+    <Compile Include="ByteColor.cs" />
+    <Compile Include="Extensions\ArrayExtensions.cs" />
+    <Compile Include="Extensions\CornerMaskExtensions.cs" />
+    <Compile Include="Extensions\OutlineMaskExtensions.cs" />
+    <Compile Include="Extensions\UIColorExtensions.cs" />
+    <Compile Include="GraphicsPath.cs" />
+    <Compile Include="ImageFill.cs" />
+    <Compile Include="ImageFill.FillStyle.cs" />
+    <Compile Include="Layer\Layer.cs" />
+    <Compile Include="Layer\Operation.cs" />
+    <Compile Include="Pixel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rect.cs" />
+    <Compile Include="Shapes\Circle.cs" />
+    <Compile Include="Shapes\CircleFill.cs" />
+    <Compile Include="Shapes\CircleOutline.cs" />
+    <Compile Include="Shapes\DonutFill.cs" />
+    <Compile Include="Shapes\IRasterizableShape.cs" />
+    <Compile Include="Shapes\Line.cs" />
+    <Compile Include="Shapes\QuarterCircle.cs" />
+    <Compile Include="Shapes\QuarterDonutFill.cs" />
+    <Compile Include="Shapes\QuarterFill.cs" />
+    <Compile Include="Shapes\QuarterOutline.cs" />
+    <Compile Include="Shapes\RectDefinedEllipse.cs" />
+    <Compile Include="Shapes\RoundedCornerRect.cs" />
+    <Compile Include="Shapes\Quarter.cs" />
+    <Compile Include="Size.cs" />
+    <Compile Include="RawImage.cs" />
+    <Compile Include="SquareRect.cs" />
+    <Compile Include="Vector.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WellFired.Guacamole.Data\WellFired.Guacamole.Data.csproj">
+      <Project>{0cbc8a3c-5a74-4441-ad8e-0047bafe5a6d}</Project>
+      <Name>WellFired.Guacamole.Data</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WellFired.Guacamole.Drawing.nuspec" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0CBC8A3C-5A74-4441-AD8E-0047BAFE5A6D}</ProjectGuid>
+    <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WellFired.Guacamole.Data</RootNamespace>
+    <AssemblyName>WellFired.Guacamole.Data</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>../../Unity/Assets/Code/</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Annotations\CanBeNull.cs" />
+    <Compile Include="Annotations\ImplicitUseKindFlags.cs" />
+    <Compile Include="Annotations\ImplicitUseTargetFlags.cs" />
+    <Compile Include="Annotations\MeansImplicitUse.cs" />
+    <Compile Include="Annotations\NotNull.cs" />
+    <Compile Include="Annotations\PublicAPIAttribute.cs" />
+    <Compile Include="Annotations\UsedImplicityAttribute.cs" />
+    <Compile Include="Collection\ObservableCollection.cs" />
+    <Compile Include="Converters\UIPaddingConverter.cs" />
+    <Compile Include="CornerMask.cs" />
+    <Compile Include="LayoutOptions.cs" />
+    <Compile Include="MathUtil.cs" />
+    <Compile Include="OrientationOptions.cs" />
+    <Compile Include="OutlineMask.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CompositeCollection.cs" />
+    <Compile Include="UIColor.cs" />
+    <Compile Include="UIColorBlues.cs" />
+    <Compile Include="UIColorBrowns.cs" />
+    <Compile Include="UIColorGreens.cs" />
+    <Compile Include="UIColorGreys.cs" />
+    <Compile Include="UIColorOranges.cs" />
+    <Compile Include="UIColorPinks.cs" />
+    <Compile Include="UIColorWhites.cs" />
+    <Compile Include="UIColorYellows.cs" />
+    <Compile Include="UILocation.cs" />
+    <Compile Include="UIPadding.cs" />
+    <Compile Include="UIRect.cs" />
+    <Compile Include="UISize.cs" />
+    <Compile Include="UITextAlign.cs" />
+    <Compile Include="UITextClipping.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WellFired.Guacamole.Data.nuspec" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
