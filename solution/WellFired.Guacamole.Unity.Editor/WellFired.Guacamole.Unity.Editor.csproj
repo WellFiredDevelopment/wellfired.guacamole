@@ -98,6 +98,8 @@
     <Compile Include="Platform\UnityPlatformProvider.cs" />
     <Compile Include="Platform\UnityTeamSharedDataStorageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StoredData\TeamSharedDataAccessor.cs" />
+    <Compile Include="StoredData\TeamSharedDataWatcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
