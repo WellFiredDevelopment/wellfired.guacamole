@@ -106,9 +106,7 @@
     <Compile Include="StoredData\Given_A_DataAccess.cs" />
     <Compile Include="StoredData\Given_A_DataCacher.cs" />
     <Compile Include="StoredData\Given_A_DataProxy.cs" />
-    <Compile Include="StoredData\Given_A_FileSystemDataWatcher.cs" />
     <Compile Include="TabbedPage\ConstructionOrder.cs" />
-    <Compile Include="Utils.cs" />
     <Compile Include="Vds\Given_AVariableHeightViewParams.cs" />
     <Compile Include="Vds\Given_AVds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

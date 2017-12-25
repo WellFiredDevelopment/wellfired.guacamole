@@ -66,6 +66,8 @@
     <Compile Include="ListView\SourceModification\GivenAListViewWithDefaultHeaderAndCell.cs" />
     <Compile Include="ListView\Vertical\Given_AListView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StoredData\Given_A_FileSystemDataWatcher.cs" />
+    <Compile Include="StoredData\Utils.cs" />
     <Compile Include="View\Button\Bindable\ButtonButtonPressedTests.cs" />
     <Compile Include="View\Button\Bindable\ButtonContextObject.cs" />
     <Compile Include="View\Button\Bindable\ButtonHorizontalTextAlignTests.cs" />

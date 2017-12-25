@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using WellFired.Guacamole.Diagnostics;
+using WellFired.Guacamole.Platform;
 
 namespace WellFired.Guacamole.StoredData
 {
@@ -20,17 +22,25 @@ namespace WellFired.Guacamole.StoredData
 
 		public void Watch(string key)
 		{
-			_fileSystemWatchers.Add(key, null);
+			lock (_fileSystemWatchers)
+			{
+				_fileSystemWatchers.Add(key, null);
+			}
+			
 			Resume(key);
 		}
 
 		public void Suspend(string key)
 		{
-			_fileSystemWatchers[key].Changed -= File_OnChanged;
-			_fileSystemWatchers[key].Deleted -= File_OnChanged;
-			_fileSystemWatchers[key].Created -= File_OnChanged;
-			_fileSystemWatchers[key].Dispose();
-			_fileSystemWatchers[key] = null;
+			lock (_fileSystemWatchers)
+			{
+				_fileSystemWatchers[key].Changed -= File_OnChanged;
+				_fileSystemWatchers[key].Deleted -= File_OnChanged;
+				_fileSystemWatchers[key].Created -= File_OnChanged;
+				_fileSystemWatchers[key].Renamed -= File_OnChanged;
+				_fileSystemWatchers[key].Dispose();
+				_fileSystemWatchers[key] = null;
+			}
 		}
 
 		public void Resume(string key)
@@ -44,8 +54,12 @@ namespace WellFired.Guacamole.StoredData
 			fileSystemWatcher.Changed += File_OnChanged;
 			fileSystemWatcher.Deleted += File_OnChanged;
 			fileSystemWatcher.Created += File_OnChanged;
+			fileSystemWatcher.Renamed += File_OnChanged;
 
-			_fileSystemWatchers[key] = fileSystemWatcher;
+			lock (fileSystemWatcher)
+			{
+				_fileSystemWatchers[key] = fileSystemWatcher;
+			}
 		}
 
 		public void SetListener(IStoredDataWatcherListener listener)
@@ -54,12 +68,13 @@ namespace WellFired.Guacamole.StoredData
 		}
 
 		private void File_OnChanged(object sender, FileSystemEventArgs e)
-		{	
+		{			
 			switch (e.ChangeType)
 			{
 				case WatcherChangeTypes.Changed:
 				case WatcherChangeTypes.Created:
 				case WatcherChangeTypes.Deleted:
+				case WatcherChangeTypes.Renamed:
 					_listener?.DoStoredDataChanged(Path.GetFileNameWithoutExtension(e.Name));
 					break;
 				default:

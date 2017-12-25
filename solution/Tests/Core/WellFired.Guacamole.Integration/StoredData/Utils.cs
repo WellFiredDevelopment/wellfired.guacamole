@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace WellFired.Guacamole.Unit
+namespace WellFired.Guacamole.Integration.StoredData
 {
 	public static class Utils
 	{
