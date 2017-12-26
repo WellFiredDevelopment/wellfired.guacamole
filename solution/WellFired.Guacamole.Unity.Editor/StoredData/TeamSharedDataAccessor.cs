@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using WellFired.Guacamole.StoredData;
+using WellFired.Guacamole.StoredData.Synchronization;
+using WellFired.Guacamole.StoredData.VersionUpdater;
 using WellFired.Guacamole.Unity.Editor.Platform;
 
 namespace WellFired.Guacamole.Unity.Editor.StoredData

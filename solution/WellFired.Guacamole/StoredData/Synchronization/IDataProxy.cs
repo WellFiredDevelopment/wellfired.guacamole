@@ -1,4 +1,4 @@
-﻿namespace WellFired.Guacamole.StoredData
+﻿namespace WellFired.Guacamole.StoredData.Synchronization
 {
 	/// <summary>
 	/// Classes implementing this interface can be provided to <see cref="DataAccess"/> to synchronize data between your data proxy and any storage.

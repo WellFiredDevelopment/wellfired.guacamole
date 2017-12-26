@@ -2,6 +2,8 @@
 using NUnit.Framework;
 using WellFired.Guacamole.Platform;
 using WellFired.Guacamole.StoredData;
+using WellFired.Guacamole.StoredData.Synchronization;
+using WellFired.Guacamole.StoredData.VersionUpdater;
 
 namespace WellFired.Guacamole.Unit.StoredData
 {

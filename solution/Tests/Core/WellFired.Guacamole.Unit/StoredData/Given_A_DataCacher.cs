@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using WellFired.Guacamole.StoredData;
 using WellFired.Guacamole.StoredData.Exceptions;
+using WellFired.Guacamole.StoredData.Synchronization;
 
 namespace WellFired.Guacamole.Unit.StoredData
 {

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
 
-namespace WellFired.Guacamole.StoredData
+namespace WellFired.Guacamole.StoredData.Synchronization
 {
 	public class FieldReflector<T>
 	{

@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.StoredData.Serialization;
 
-namespace WellFired.Guacamole.StoredData
+namespace WellFired.Guacamole.StoredData.Synchronization
 {
 	/// <summary>
 	/// Any implementation of this class will have the possibility to have its properties to be synchronized with 

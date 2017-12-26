@@ -2,12 +2,10 @@
 using System.Linq;
 using WellFired.Guacamole.Diagnostics;
 
-namespace WellFired.Guacamole.StoredData
+namespace WellFired.Guacamole.StoredData.VersionUpdater
 {
 	public class StoredDataUpdater : IStoredDataUpdater
 	{
-		public int CurrentVersion => GetLatestVersionUpdater().VersionNo;
-		
 		private readonly IVersionUpdater[] _versionUpdaters;
 
 		public StoredDataUpdater(IEnumerable<IVersionUpdater> versionUpdaters)
@@ -26,7 +24,7 @@ namespace WellFired.Guacamole.StoredData
 		{
 			var startUpdate = false;
 
-			foreach (IVersionUpdater versionUpdater in _versionUpdaters)
+			foreach (var versionUpdater in _versionUpdaters)
 			{
 				if (startUpdate)
 				{
@@ -38,11 +36,6 @@ namespace WellFired.Guacamole.StoredData
 					startUpdate = true;
 				}
 			}
-		}
-
-		private IVersionUpdater GetLatestVersionUpdater()
-		{
-			return _versionUpdaters[_versionUpdaters.Length - 1];
 		}
 	}
 }

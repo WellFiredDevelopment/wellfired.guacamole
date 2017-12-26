@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using WellFired.Guacamole.StoredData.Exceptions;
 
-namespace WellFired.Guacamole.StoredData
+namespace WellFired.Guacamole.StoredData.Synchronization
 {
 	public class DataCacher : IDataCacher
 	{

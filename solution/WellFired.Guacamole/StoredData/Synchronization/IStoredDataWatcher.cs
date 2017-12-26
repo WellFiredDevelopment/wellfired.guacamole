@@ -1,4 +1,4 @@
-﻿namespace WellFired.Guacamole.StoredData
+﻿namespace WellFired.Guacamole.StoredData.Synchronization
 {
 	public interface IStoredDataWatcher
 	{

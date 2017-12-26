@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using WellFired.Guacamole.Diagnostics;
-using WellFired.Guacamole.Platform;
 
-namespace WellFired.Guacamole.StoredData
+namespace WellFired.Guacamole.StoredData.Synchronization
 {
 	public class FileSystemDataWatcher : IStoredDataWatcher
 	{

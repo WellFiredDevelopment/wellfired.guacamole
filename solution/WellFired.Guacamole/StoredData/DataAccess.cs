@@ -1,6 +1,8 @@
 ﻿using System;
 using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Platform;
+using WellFired.Guacamole.StoredData.Synchronization;
+using WellFired.Guacamole.StoredData.VersionUpdater;
 
 namespace WellFired.Guacamole.StoredData
 {

@@ -1,4 +1,6 @@
-﻿namespace WellFired.Guacamole.StoredData
+﻿using WellFired.Guacamole.StoredData.Synchronization;
+
+namespace WellFired.Guacamole.StoredData
 {
 	public interface IDataAccess
 	{
