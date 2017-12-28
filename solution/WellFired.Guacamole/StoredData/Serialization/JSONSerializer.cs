@@ -13,8 +13,8 @@ namespace WellFired.Guacamole.StoredData.Serialization
 			{
 				serializedData = JsonConvert.SerializeObject(data, Formatting.Indented, new JsonSerializerSettings
 				{
-					TypeNameHandling = TypeNameHandling.Objects,
-					TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple
+					TypeNameHandling = TypeNameHandling.Auto,
+					DateTimeZoneHandling = DateTimeZoneHandling.Utc
 				});
 			}
 			catch (Exception e)
@@ -31,7 +31,7 @@ namespace WellFired.Guacamole.StoredData.Serialization
 			{
 				return JsonConvert.DeserializeObject<T>(serializedData, new JsonSerializerSettings
 				{
-					TypeNameHandling = TypeNameHandling.Objects
+					TypeNameHandling = TypeNameHandling.Auto
 				});
 			}
 			catch (Exception e)

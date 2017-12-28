@@ -2,7 +2,6 @@
 using System.Threading;
 using NSubstitute;
 using NUnit.Framework;
-using WellFired.Guacamole.StoredData;
 using WellFired.Guacamole.StoredData.Synchronization;
 
 namespace WellFired.Guacamole.Integration.StoredData
