@@ -42,10 +42,10 @@ namespace WellFired.Guacamole.StoredData.Synchronization
 		private bool _injecting;
 
 		/// <inheritdoc />
-		public bool DataChanged { get; private set; }
+		public bool DataChanged { get; protected set; }
 
 		/// <inheritdoc />
-		public void InjectData(string data)
+		public virtual void InjectData(string data)
 		{
 			try
 			{

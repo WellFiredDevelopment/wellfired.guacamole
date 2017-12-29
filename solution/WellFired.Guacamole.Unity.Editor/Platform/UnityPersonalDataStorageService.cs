@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
 using WellFired.Guacamole.Platform;
 
 namespace WellFired.Guacamole.Unity.Editor.Platform
@@ -26,7 +26,7 @@ namespace WellFired.Guacamole.Unity.Editor.Platform
 		/// <returns></returns>
 		public string Read(string key)
 		{
-			return PlayerPrefs.GetString($"{_applicationName}:{key}");
+			return EditorPrefs.GetString($"{_applicationName}:{key}");
 		}
 
 		/// <inheritdoc />
@@ -39,7 +39,7 @@ namespace WellFired.Guacamole.Unity.Editor.Platform
 		/// <param name="key"></param>
 		public void Write(string data, string key)
 		{
-			PlayerPrefs.SetString($"{_applicationName}:{key}", data);
+			EditorPrefs.SetString($"{_applicationName}:{key}", data);
 		}
 	}
 }

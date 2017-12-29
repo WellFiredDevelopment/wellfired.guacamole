@@ -30,7 +30,7 @@ namespace WellFired.Guacamole.StoredData
 		private readonly IStoredDataWatcher _storedDataWatcher;
 
 		public DataAccess(IDataStorageService dataStorageService, IDataCacher dataCacher, IStoredDataUpdater storedDataUpdater,
-			IStoredDataWatcher storedDataWatcher)
+			IStoredDataWatcher storedDataWatcher = null)
 		{
 			_dataStorageService = dataStorageService;
 			_dataCacher = dataCacher;
@@ -49,7 +49,7 @@ namespace WellFired.Guacamole.StoredData
 		{
 			_dataCacher.Cache(key, dataProxy);
 			_dataCacher.UpdateData(key, _dataStorageService.Read(key));
-			_storedDataWatcher.Watch(key);
+			_storedDataWatcher?.Watch(key);
 		}
 
 		/// <summary>
@@ -63,16 +63,16 @@ namespace WellFired.Guacamole.StoredData
 				return;
 			}
 			
-			_storedDataWatcher.Suspend(key);
+			_storedDataWatcher?.Suspend(key);
 			_dataStorageService.Write(_dataCacher.GetData(key), key);
-			_storedDataWatcher.Resume(key);
+			_storedDataWatcher?.Resume(key);
 			
 			_dataCacher.ResetDataChanged(key);
 		}
 
 		private void Initialize()
 		{
-			_storedDataWatcher.SetListener(this);
+			_storedDataWatcher?.SetListener(this);
 			UpdateStoredData();
 		}
 
@@ -80,6 +80,9 @@ namespace WellFired.Guacamole.StoredData
 		{
 			UpdateStoredData();
 			_dataCacher.UpdateData(key, _dataStorageService.Read(key));
+			//we save the data in case the proxy modified it while loading it. This could be the case for a version file
+			//where the version number needs to be enforced.
+			Save(key);
 		}
 
 		private void UpdateStoredData()

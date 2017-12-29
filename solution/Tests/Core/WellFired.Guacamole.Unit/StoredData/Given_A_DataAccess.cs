@@ -69,7 +69,7 @@ namespace WellFired.Guacamole.Unit.StoredData
 		}
 
 		[Test]
-		public void When_Data_Changed_In_Storage_Then_Stored_Data_Is_Updated_And_Injected_In_Cached_Data()
+		public void When_Data_Changed_In_Storage_Then_Stored_Data_Is_Updated_And_Injected_In_Cached_Data_And_Data_Is_Saved()
 		{
 			var dataStorageService = Substitute.For<IDataStorageService>();
 			dataStorageService.Read("Options").Returns("Serialized data");
@@ -86,6 +86,7 @@ namespace WellFired.Guacamole.Unit.StoredData
 				{
 					storedDataUpdater.UpdateStoredData();
 					dataCacher.UpdateData("Options", "Serialized data");
+					dataAccess.Received(1).Save("Options");
 				});
 		}
 
@@ -96,7 +97,7 @@ namespace WellFired.Guacamole.Unit.StoredData
 			IStoredDataWatcher storedDataWatcher = null
 		)
 		{
-			return new DataAccess(
+			return Substitute.For<DataAccess>(
 				dataStorageService ?? Substitute.For<IDataStorageService>(),
 				dataCacher ?? Substitute.For<IDataCacher>(),
 				storedDataUpdated ?? Substitute.For<IStoredDataUpdater>(),

@@ -27,18 +27,20 @@ namespace WellFired.Guacamole.StoredData.Serialization
 
 		public T Unserialize<T>(string serializedData) where T : class
 		{
+			T unserializedData = null;
 			try
 			{
-				return JsonConvert.DeserializeObject<T>(serializedData, new JsonSerializerSettings
+				unserializedData = JsonConvert.DeserializeObject<T>(serializedData, new JsonSerializerSettings
 				{
 					TypeNameHandling = TypeNameHandling.Auto
 				});
 			}
 			catch (Exception e)
 			{
-				Logger.LogError($"An error happened while serializing the object : {e.Message}\n{e.StackTrace}");
-				throw;
+				Logger.LogError($"An error happened while unserializing the object : {e.Message}\n{e.StackTrace}");
 			}
+			
+			return unserializedData;
 		}
 	}
 }

@@ -161,11 +161,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer\INativeRenderer.cs" />
     <Compile Include="Renderer\NativeRendererHelper.cs" />
-    <Compile Include="StoredData\VersionUpdater\DefaultVersionUpdater.cs" />
     <Compile Include="StoredData\VersionUpdater\IStoredDataUpdater.cs" />
     <Compile Include="StoredData\VersionUpdater\IVersionUpdater.cs" />
     <Compile Include="StoredData\VersionUpdater\StoredDataUpdater.cs" />
-    <Compile Include="StoredData\VersionUpdater\Version.cs" />
     <Compile Include="Styling\Conditional.cs" />
     <Compile Include="Styling\IConditional.cs" />
     <Compile Include="Styling\ISetter.cs" />

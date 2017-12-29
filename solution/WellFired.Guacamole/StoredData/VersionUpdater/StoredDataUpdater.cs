@@ -8,7 +8,7 @@ namespace WellFired.Guacamole.StoredData.VersionUpdater
 	{
 		private readonly IVersionUpdater[] _versionUpdaters;
 
-		public StoredDataUpdater(IEnumerable<IVersionUpdater> versionUpdaters)
+		public StoredDataUpdater(IEnumerable<IVersionUpdater> versionUpdaters = null)
 		{
 			_versionUpdaters = 
 				versionUpdaters?.OrderBy(versionUpdater => versionUpdater.VersionNo).ToArray() 
