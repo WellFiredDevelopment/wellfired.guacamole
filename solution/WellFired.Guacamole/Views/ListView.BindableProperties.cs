@@ -3,7 +3,6 @@ using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Data.Annotations;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Cells;
-using WellFired.Guacamole.Diagnostics;
 
 namespace WellFired.Guacamole.Views
 {

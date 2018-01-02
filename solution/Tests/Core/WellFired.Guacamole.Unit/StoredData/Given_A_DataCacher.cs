@@ -1,13 +1,12 @@
 ﻿using NSubstitute;
 using NUnit.Framework;
-using WellFired.Guacamole.StoredData;
 using WellFired.Guacamole.StoredData.Exceptions;
 using WellFired.Guacamole.StoredData.Synchronization;
 
 namespace WellFired.Guacamole.Unit.StoredData
 {
 	[TestFixture]
-	public class Given_A_DataCacher
+	public class GivenADataCacher
 	{
 		[Test]
 		public void When_Cache_Twice_DataProxy_For_Same_Key_Exception_Is_Raised()

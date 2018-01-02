@@ -11,20 +11,17 @@ namespace WellFired.Guacamole.Views
 	public class Window : View
 	{
 		private readonly MainThreadRunner _mainThreadRunner = new MainThreadRunner();
-		private readonly ILogger _logger;
 
 		[PublicAPI]
 		public Window(ILogger logger, INotifyPropertyChanged persistantData, IPlatformProvider platformProvider)
 		{
-			_logger = logger;
-			StyleDictionary = new StyleDictionary(_logger);
+			StyleDictionary = new StyleDictionary(logger);
 		}
 
 		[PublicAPI]
 		public Window(ILogger logger, IPlatformProvider platformProvider)
 		{
-			_logger = logger;
-			StyleDictionary = new StyleDictionary(_logger);
+			StyleDictionary = new StyleDictionary(logger);
 		}
 
 		private UIRect FinalRenderedRect { get; set; }

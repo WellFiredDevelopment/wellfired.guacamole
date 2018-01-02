@@ -20,10 +20,6 @@ namespace WellFired.Guacamole.Styling.Styles
                 new Setter {Property = Views.ListView.ScrollBarCornerMaskProperty, Value = CornerMask.All},
                 new Setter {Property = Views.ListView.ScrollBarCornerRadiusProperty, Value = 6.0},
                 new Setter {Property = Views.ListView.ScrollBarSizeProperty, Value = 10},
-            },
-            Triggers =
-            {
-                
             }
         };
     }

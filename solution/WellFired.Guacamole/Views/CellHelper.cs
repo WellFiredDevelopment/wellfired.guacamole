@@ -41,7 +41,7 @@ namespace WellFired.Guacamole.Views
         {
             var instance = itemTemplate.Create(caller);
             var bindableObject = instance;
-            var cell = instance as ICell;
+            var cell = (ICell)instance;
             cell.SetStyleDictionary(styleDictionary);
             bindableObject.BindingContext = bindingContext as INotifyPropertyChanged;
             Debug.Assert(cell != null, "cell != null");

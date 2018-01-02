@@ -1,15 +1,11 @@
 ﻿using NUnit.Framework;
-using NUnit.Framework.Internal;
-using WellFired.Guacamole.Diagnostics;
-using WellFired.Guacamole.StoredData;
 using WellFired.Guacamole.StoredData.Serialization;
 using WellFired.Guacamole.StoredData.Synchronization;
-using Logger = WellFired.Guacamole.Diagnostics.Logger;
 
 namespace WellFired.Guacamole.Unit.StoredData
 {
 	[TestFixture]
-	public class Given_A_DataProxy
+	public class GivenADataProxy
 	{
 		[Test]
 		//When we inject data in the proxy, we should updates its properties, but we should not consider the data it holds

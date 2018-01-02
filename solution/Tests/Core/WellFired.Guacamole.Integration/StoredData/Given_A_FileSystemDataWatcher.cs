@@ -7,7 +7,7 @@ using WellFired.Guacamole.StoredData.Synchronization;
 namespace WellFired.Guacamole.Integration.StoredData
 {
 	[TestFixture]
-	public class Given_A_FileSystemDataWatcher
+	public class GivenAFileSystemDataWatcher
 	{
 		private const int TimeOut = 10000;
 		

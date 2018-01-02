@@ -5,7 +5,7 @@ using WellFired.Guacamole.DataBinding;
 namespace WellFired.Guacamole.Unit.FilterView
 {
 	[TestFixture]
-	public class Given_A_FilterView
+	public class GivenAFilterView
 	{
 		[Test]
 		public void When_Text_Input_Processed_Then_Search_Result_Is_Correct()

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.Linq;
+﻿using System.Linq;
 using NUnit.Framework;
 using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.Data;

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using WellFired.Guacamole.Data;
-using WellFired.Guacamole.Diagnostics;
 
 namespace WellFired.Guacamole.Views
 {

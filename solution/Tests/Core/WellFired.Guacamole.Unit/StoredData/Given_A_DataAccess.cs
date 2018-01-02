@@ -8,7 +8,7 @@ using WellFired.Guacamole.StoredData.VersionUpdater;
 namespace WellFired.Guacamole.Unit.StoredData
 {
 	[TestFixture]
-	public class Given_A_DataAccess
+	public class GivenADataAccess
 	{
 		[Test]
 		public void When_DataAccess_Is_Instanciated_Then_Stored_Data_Is_Updated_And_StoredDataWatcher_Listened()
