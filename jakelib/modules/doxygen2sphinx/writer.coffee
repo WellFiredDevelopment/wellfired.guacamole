@@ -22,7 +22,6 @@ class Writer
         this.injectNamespaceEntry data, graph[entry]
 
     write: ->
-        console.log 'write'
         this.apiDir = @sphinxOutDir + '/api'
         utils.createDir @sphinxOutDir
         utils.createDir this.apiDir
@@ -91,7 +90,6 @@ class Writer
 
         cb = new ContentBuffer
         writer = this.getWriter data.type
-
         writer.write data, cb
         utils.write rstPath, cb.buffer
 

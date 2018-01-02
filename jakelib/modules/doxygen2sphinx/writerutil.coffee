@@ -51,6 +51,9 @@ module.exports = {
         return (this.toString element for element in elements).join ''
   
     writeTable: (table, cb) ->
+        if(table.length == 0)
+            return
+
         width = table[0].length - 1 
         height = table.length - 1
         
@@ -105,6 +108,9 @@ module.exports = {
         cb.writeLine()
 
     toString: (data) ->
+        if data == undefined
+            return '';
+
         if data.type == 'text'
             return data.elements
         if data.type == 'para'
