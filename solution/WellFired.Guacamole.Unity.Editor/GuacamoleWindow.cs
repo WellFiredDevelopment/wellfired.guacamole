@@ -114,13 +114,13 @@ namespace WellFired.Guacamole.Unity.Editor
 		{
 			if (CloseAfterNextUpdate)
 			{
-				Close();
+				CloseWindow();
 				return;
 			}
 			
 			if (_exception != null)
 			{
-				Close();
+				CloseWindow();
 				DisplayUserError(_exception);
 				return;
 			}
@@ -220,6 +220,16 @@ namespace WellFired.Guacamole.Unity.Editor
 
 			if (_window == null)
 				throw new GuacamoleWindowCantBeCreated();
+		}
+		
+		private void CloseWindow()
+		{
+			if (_window.WindowCloseCommand != null && _window.WindowCloseCommand.CanExecute)
+			{
+				_window.WindowCloseCommand.Execute();
+			}
+			
+			Close();
 		}
 
 		public bool MatchesMainContent(Type mainContent)

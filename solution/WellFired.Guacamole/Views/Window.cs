@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Data.Annotations;
+using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Platform;
 using WellFired.Guacamole.Styling;
@@ -10,6 +11,20 @@ namespace WellFired.Guacamole.Views
 {
 	public class Window : View
 	{
+		[PublicAPI] public static readonly BindableProperty WindowCloseCommandProperty = BindableProperty
+			.Create<Window, ICommand>(
+				new Command(),
+				BindingMode.TwoWay,
+				window => window.WindowCloseCommand
+			);
+		
+		[PublicAPI]
+		public ICommand WindowCloseCommand
+		{
+			get => (ICommand) GetValue(WindowCloseCommandProperty);
+			set => SetValue(WindowCloseCommandProperty, value);
+		}
+		
 		private readonly MainThreadRunner _mainThreadRunner = new MainThreadRunner();
 
 		[PublicAPI]
