@@ -114,13 +114,13 @@ namespace WellFired.Guacamole.Unity.Editor
 		{
 			if (CloseAfterNextUpdate)
 			{
-				CloseWindow();
+				Close();
 				return;
 			}
 			
 			if (_exception != null)
 			{
-				CloseWindow();
+				Close();
 				DisplayUserError(_exception);
 				return;
 			}
@@ -221,20 +221,18 @@ namespace WellFired.Guacamole.Unity.Editor
 			if (_window == null)
 				throw new GuacamoleWindowCantBeCreated();
 		}
-		
-		private void CloseWindow()
+
+		public bool MatchesMainContent(Type mainContent)
+		{
+			return ApplicationInitializationContextScriptableObject.MainContent == mainContent;
+		}
+
+		private void OnDestroy()
 		{
 			if (_window.WindowCloseCommand != null && _window.WindowCloseCommand.CanExecute)
 			{
 				_window.WindowCloseCommand.Execute();
 			}
-			
-			Close();
-		}
-
-		public bool MatchesMainContent(Type mainContent)
-		{
-			return ApplicationInitializationContextScriptableObject.MainContent == mainContent;
 		}
 	}
 }
