@@ -81,13 +81,15 @@ namespace WellFired.Guacamole.StoredData.Synchronization
 			DataChanged = false;
 		}
 
-		protected void SetProperty<TY>(ref TY storage, TY value, [CallerMemberName] string propertyName = @"")
+	protected void SetProperty<TY>(ref TY storage, TY value, [CallerMemberName] string propertyName = @"")
+	{
+		try
 		{
 			if (Equals(storage, value))
 				return;
-
+	
 			storage = value;
-
+	
 			if (_injecting)
 			{
 				return;
@@ -96,5 +98,12 @@ namespace WellFired.Guacamole.StoredData.Synchronization
 			_fieldReflector.ReflectPropertyToFields(propertyName, value);
 			DataChanged = true;
 		}
+		catch (Exception e)
+		{
+			Logger.LogError($"Could not set the value of a property, a possible reason is that you did " +
+			                $"not inject any data in your proxy, so synchronization cannot happen : {e.Message}\n{e.StackTrace}. New data object will be instantiated.");
+			throw;
+		}
+	}
 	}
 }
