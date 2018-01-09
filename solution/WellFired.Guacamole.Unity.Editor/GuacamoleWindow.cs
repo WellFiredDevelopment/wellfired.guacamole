@@ -106,6 +106,12 @@ namespace WellFired.Guacamole.Unity.Editor
 		public void OnDisable()
 		{
 			Logger.UnregisterLogger(Diagnostics.Logger.UnityLogger);
+			if (_window.WindowCloseCommand != null && _window.WindowCloseCommand.CanExecute)
+			{
+				_window.WindowCloseCommand.Execute();
+				_window.WindowCloseCommand.CanExecute = false;
+			}
+			
 			// ReSharper disable once DelegateSubtraction
 			EditorApplication.update -= Update;
 		}
@@ -225,14 +231,6 @@ namespace WellFired.Guacamole.Unity.Editor
 		public bool MatchesMainContent(Type mainContent)
 		{
 			return ApplicationInitializationContextScriptableObject.MainContent == mainContent;
-		}
-
-		private void OnDestroy()
-		{
-			if (_window.WindowCloseCommand != null && _window.WindowCloseCommand.CanExecute)
-			{
-				_window.WindowCloseCommand.Execute();
-			}
 		}
 	}
 }
