@@ -41,5 +41,12 @@
 		/// <param name="defaultName">The default folder to return if no folder is selected</param>
 		/// <returns></returns>
 		string OpenFolderPicker(string title, string folder, string defaultName);
+
+		/// <summary>
+		/// Call this method to be returned the full path to a relative file
+		/// </summary>
+		/// <param name="file"></param>
+		/// <returns></returns>
+		string PathTo(string file);
 	}
 }

@@ -9,7 +9,7 @@ namespace WellFired.Guacamole.Unity.Editor.Platform
 	/// </summary>
 	public class UnityPlatformProvider : IPlatformProvider
 	{
-		private const string DataPath = "/GuacamoleApplication/Editor/";
+		private const string DataPath = "/GuacamoleApplication/Editor";
 		private readonly string _applicationName;
 
 		public UnityPlatformProvider(string applicationName)
@@ -27,6 +27,11 @@ namespace WellFired.Guacamole.Unity.Editor.Platform
 		public string OpenFolderPicker(string title, string folder, string defaultName)
 		{
 			return EditorUtility.OpenFolderPanel(title, folder, defaultName);
+		}
+
+		public string PathTo(string file)
+		{
+			return $"Assets{DataPath}/{_applicationName}/{file}";
 		}
 	}
 }
