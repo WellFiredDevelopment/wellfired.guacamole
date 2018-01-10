@@ -9,24 +9,24 @@ namespace WellFired.Guacamole.Integration.View.Label.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_labelView = new Views.Label();
+			_labelViewView = new Views.LabelView();
 			_labelContext = new LabelContextObject();
-			_labelView.BindingContext = _labelContext;
+			_labelViewView.BindingContext = _labelContext;
 		}
 
-		private Views.Label _labelView;
+		private Views.LabelView _labelViewView;
 		private LabelContextObject _labelContext;
 
 		[Test]
 		public void IsBindable()
 		{
-			_labelView.HorizontalTextAlign = UITextAlign.End;
+			_labelViewView.HorizontalTextAlign = UITextAlign.End;
 			_labelContext.HorizontalTextAlign = UITextAlign.Middle;
-			Assert.That(_labelContext.HorizontalTextAlign != _labelView.HorizontalTextAlign);
-			_labelView.Bind(Views.Label.HorizontalTextAlignProperty, nameof(_labelContext.HorizontalTextAlign));
-			Assert.That(_labelContext.HorizontalTextAlign == _labelView.HorizontalTextAlign);
+			Assert.That(_labelContext.HorizontalTextAlign != _labelViewView.HorizontalTextAlign);
+			_labelViewView.Bind(Views.LabelView.HorizontalTextAlignProperty, nameof(_labelContext.HorizontalTextAlign));
+			Assert.That(_labelContext.HorizontalTextAlign == _labelViewView.HorizontalTextAlign);
 			_labelContext.HorizontalTextAlign = UITextAlign.Start;
-			Assert.That(_labelContext.HorizontalTextAlign == _labelView.HorizontalTextAlign);
+			Assert.That(_labelContext.HorizontalTextAlign == _labelViewView.HorizontalTextAlign);
 		}
 	}
 }

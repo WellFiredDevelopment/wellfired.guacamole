@@ -4,12 +4,12 @@ using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Labels
 {
-	public class TotalSizeLabel : Label
+	public class UnityVersionLabelView : LabelView
 	{
-		public TotalSizeLabel()
+		public UnityVersionLabelView()
 		{
 			Style = NoBackgroundNoOutline.Style;
-			Bind(TextProperty, "TotalSize", BindingMode.ReadOnly);
+			Bind(TextProperty, "UnityVersion", BindingMode.ReadOnly);
 		}
 	}
 }

@@ -5,44 +5,44 @@ using WellFired.Guacamole.DataBinding;
 
 namespace WellFired.Guacamole.Views
 {
-	public class Button : View, IClickable
+	public class ButtonView : View, IClickable
 	{
 		[PublicAPI] public static readonly BindableProperty TextProperty = BindableProperty.Create<
-			Button, string>(
+			ButtonView, string>(
 			string.Empty,
 			BindingMode.TwoWay,
 			button => button.Text
 		);
 
 		[PublicAPI] public static readonly BindableProperty TextColorProperty = BindableProperty
-			.Create<Button, UIColor>(
+			.Create<ButtonView, UIColor>(
 				UIColor.Black,
 				BindingMode.TwoWay,
 				button => button.TextColor
 			);
 
 		[PublicAPI] public static readonly BindableProperty HorizontalTextAlignProperty = BindableProperty
-			.Create<Button, UITextAlign>(
+			.Create<ButtonView, UITextAlign>(
 				UITextAlign.Start,
 				BindingMode.TwoWay,
 				button => button.HorizontalTextAlign
 			);
 
 		[PublicAPI] public static readonly BindableProperty VerticalTextAlignProperty = BindableProperty
-			.Create<Button, UITextAlign>(
+			.Create<ButtonView, UITextAlign>(
 				UITextAlign.Middle,
 				BindingMode.TwoWay,
 				button => button.VerticalTextAlign
 			);
 
 		[PublicAPI] public static readonly BindableProperty ButtonPressedCommandProperty = BindableProperty
-			.Create<Button, ICommand>(
+			.Create<ButtonView, ICommand>(
 				new Command(),
 				BindingMode.TwoWay,
 				button => button.ButtonPressedCommand
 			);
 
-		public Button()
+		public ButtonView()
 		{
 			Style = Styling.Styles.Button.Style;
 		}

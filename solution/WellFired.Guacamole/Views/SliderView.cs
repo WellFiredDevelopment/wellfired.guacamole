@@ -4,21 +4,21 @@ using WellFired.Guacamole.DataBinding;
 
 namespace WellFired.Guacamole.Views
 {
-	public class Slider : View
+	public class SliderView : View
 	{
-		[PublicAPI] public static readonly BindableProperty MinValueProperty = BindableProperty.Create<Slider, double>(
+		[PublicAPI] public static readonly BindableProperty MinValueProperty = BindableProperty.Create<SliderView, double>(
 			0.0,
 			BindingMode.TwoWay,
 			slider => slider.MinValue
 		);
 
-		[PublicAPI] public static readonly BindableProperty MaxValueProperty = BindableProperty.Create<Slider, double>(
+		[PublicAPI] public static readonly BindableProperty MaxValueProperty = BindableProperty.Create<SliderView, double>(
 			1.0,
 			BindingMode.TwoWay,
 			slider => slider.MaxValue
 		);
 
-		[PublicAPI] public static readonly BindableProperty ValueProperty = BindableProperty.Create<Slider, double>(
+		[PublicAPI] public static readonly BindableProperty ValueProperty = BindableProperty.Create<SliderView, double>(
 			0.0,
 			BindingMode.TwoWay,
 			slider => slider.Value
@@ -39,20 +39,20 @@ namespace WellFired.Guacamole.Views
 			);
 
 		[PublicAPI] public static readonly BindableProperty ThumbCornerRadiusProperty = BindableProperty
-			.Create<TextEntry, double>(
+			.Create<TextEntryView, double>(
 				0.0,
 				BindingMode.TwoWay,
 				viewBase => viewBase.CornerRadius
 			);
 
 		[PublicAPI] public static readonly BindableProperty ThumbCornerMaskProperty = BindableProperty
-			.Create<TextEntry, CornerMask>(
+			.Create<TextEntryView, CornerMask>(
 				CornerMask.All,
 				BindingMode.TwoWay,
 				viewBase => viewBase.CornerMask
 			);
 
-		public Slider()
+		public SliderView()
 		{
 			Style = Styling.Styles.Slider.Style;
 		}

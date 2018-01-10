@@ -17,8 +17,8 @@ namespace WellFired.Guacamole.Integration.Layouts.Adjacent
 	            Padding = UIPadding.Of(10),
 	            Children =
 	            {
-	                new Label { MinSize = UISize.Of(50) },
-	                new Label { MinSize = UISize.Of(50) }
+	                new LabelView { MinSize = UISize.Of(50) },
+	                new LabelView { MinSize = UISize.Of(50) }
 	            }
 	        };
 
@@ -51,8 +51,8 @@ namespace WellFired.Guacamole.Integration.Layouts.Adjacent
 			    Layout = AdjacentLayout.Of(OrientationOptions.Vertical),
 				Children =
 				{
-					new Label {MinSize = UISize.Of(50)},
-					new Label {MinSize = UISize.Of(50)}
+					new LabelView {MinSize = UISize.Of(50)},
+					new LabelView {MinSize = UISize.Of(50)}
 				}
 			};
 
@@ -73,9 +73,9 @@ namespace WellFired.Guacamole.Integration.Layouts.Adjacent
 			    Layout = AdjacentLayout.Of(OrientationOptions.Vertical),
 				Children =
 				{
-					new Label {MinSize = UISize.Of(50)},
-					new Label {MinSize = UISize.Of(50)},
-					new Label {MinSize = UISize.Of(50)}
+					new LabelView {MinSize = UISize.Of(50)},
+					new LabelView {MinSize = UISize.Of(50)},
+					new LabelView {MinSize = UISize.Of(50)}
 				}
 			};
 

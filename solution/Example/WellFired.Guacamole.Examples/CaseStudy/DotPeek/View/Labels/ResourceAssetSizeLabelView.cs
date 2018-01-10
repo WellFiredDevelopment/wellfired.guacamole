@@ -4,9 +4,9 @@ using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Labels
 {
-	public class ResourceAssetSizeLabel : Label
+	public class ResourceAssetSizeLabelView : LabelView
 	{
-		public ResourceAssetSizeLabel()
+		public ResourceAssetSizeLabelView()
 		{
 			Style = NoBackgroundNoOutline.Style;
 			Bind(TextProperty, "ResourceAssetsSize", BindingMode.ReadOnly);

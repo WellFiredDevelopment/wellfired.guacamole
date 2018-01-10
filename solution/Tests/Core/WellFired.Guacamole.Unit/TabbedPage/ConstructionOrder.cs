@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.DataBinding;
+using WellFired.Guacamole.Pages;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Unit.TabbedPage
@@ -11,7 +12,7 @@ namespace WellFired.Guacamole.Unit.TabbedPage
 		[Test]
 		public void When_ConstructedInOrderTemplateFirst_Then_ConstructionIsComplete()
 		{
-			var tabbedPage = new Views.TabbedPage {
+			var tabbedPage = new Pages.TabbedPage {
 				ItemTemplate = DataTemplate.Of(o => new Page()),
 				ItemSource = new object [] { 1, 2, 3 }
 			};
@@ -24,7 +25,7 @@ namespace WellFired.Guacamole.Unit.TabbedPage
 		[Test]
 		public void When_ConstructedInOrderItemSourceFirst_Then_ConstructionIsComplete()
 		{
-			var tabbedPage = new Views.TabbedPage {
+			var tabbedPage = new Pages.TabbedPage {
 				ItemSource = new object [] { 1, 2, 3 },
 				ItemTemplate = DataTemplate.Of(o => new Page())
 			};

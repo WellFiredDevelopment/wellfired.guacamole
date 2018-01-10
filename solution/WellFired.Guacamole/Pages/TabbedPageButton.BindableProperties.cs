@@ -1,11 +1,11 @@
 ﻿using JetBrains.Annotations;
 using WellFired.Guacamole.DataBinding;
 
-namespace WellFired.Guacamole.Views
+namespace WellFired.Guacamole.Pages
 {
-    public partial class TabbedPageButton
+    public partial class TabbedPageButtonView
     {
-        [PublicAPI] public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create<TabbedPageButton, bool>(
+        [PublicAPI] public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create<TabbedPageButtonView, bool>(
             default(bool),
             BindingMode.TwoWay,
             v => v.IsSelected

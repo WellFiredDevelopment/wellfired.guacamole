@@ -5,8 +5,9 @@ using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Exceptions;
 using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Styling;
+using WellFired.Guacamole.Views;
 
-namespace WellFired.Guacamole.Views
+namespace WellFired.Guacamole.Pages
 {
     public partial class TabbedPage : ItemsView
     {
@@ -80,7 +81,7 @@ namespace WellFired.Guacamole.Views
                 
                 newPage.BindingContext = bindingContext as INotifyPropertyChanged;
                 
-                var button = new TabbedPageButton
+                var button = new TabbedPageButtonView
                 {
                     ButtonPressedCommand = new Command
                     {
@@ -138,9 +139,9 @@ namespace WellFired.Guacamole.Views
                 return;
             
             foreach (var item in _tabSelect.Children)
-                ((TabbedPageButton) item).IsSelected = false;
+                ((TabbedPageButtonView) item).IsSelected = false;
             
-            ((TabbedPageButton)_tabSelect.Children[index]).IsSelected = true;
+            ((TabbedPageButtonView)_tabSelect.Children[index]).IsSelected = true;
         }
 
         public override void SetStyleDictionary(IStyleDictionary styleDictionary)

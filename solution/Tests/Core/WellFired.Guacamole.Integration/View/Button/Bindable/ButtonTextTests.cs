@@ -8,24 +8,24 @@ namespace WellFired.Guacamole.Integration.View.Button.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_buttonView = new Views.Button();
+			_buttonViewView = new Views.ButtonView();
 			_buttonContext = new ButtonContextObject();
-			_buttonView.BindingContext = _buttonContext;
+			_buttonViewView.BindingContext = _buttonContext;
 		}
 
-		private Views.Button _buttonView;
+		private Views.ButtonView _buttonViewView;
 		private ButtonContextObject _buttonContext;
 
 		[Test]
 		public void IsBindable()
 		{
-			_buttonView.Text = "a";
+			_buttonViewView.Text = "a";
 			_buttonContext.Text = "b";
-			Assert.That(_buttonContext.Text != _buttonView.Text);
-			_buttonView.Bind(Views.Button.TextProperty, nameof(_buttonContext.Text));
-			Assert.That(_buttonContext.Text == _buttonView.Text);
+			Assert.That(_buttonContext.Text != _buttonViewView.Text);
+			_buttonViewView.Bind(Views.ButtonView.TextProperty, nameof(_buttonContext.Text));
+			Assert.That(_buttonContext.Text == _buttonViewView.Text);
 			_buttonContext.Text = "c";
-			Assert.That(_buttonContext.Text == _buttonView.Text);
+			Assert.That(_buttonContext.Text == _buttonViewView.Text);
 		}
 	}
 }

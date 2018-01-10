@@ -15,7 +15,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Cells
 			HorizontalLayout = LayoutOptions.Fill;
 			VerticalLayout = LayoutOptions.Expand;
 
-			var assetType = new Label
+			var assetType = new LabelView
 			{
 				Style = NoBackgroundNoOutline.Style,
 				HorizontalLayout = LayoutOptions.Fill,
@@ -23,7 +23,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Cells
 				HorizontalTextAlign = UITextAlign.Start
 			};
             
-			var size = new Label
+			var size = new LabelView
 			{
 				Style = NoBackgroundNoOutline.Style,
 				HorizontalLayout = LayoutOptions.Expand,
@@ -31,7 +31,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Cells
 				MinSize = UISize.Of(100, 0)
 			};
             
-			var percentage = new Label
+			var percentage = new LabelView
 			{
 				Style = NoBackgroundNoOutline.Style,
 				HorizontalLayout = LayoutOptions.Expand,
@@ -39,9 +39,9 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Cells
 				MinSize = UISize.Of(100, 0)
 			};
 
-			assetType.Bind(Label.TextProperty, "AssetType");
-			size.Bind(Label.TextProperty, "Size");
-			percentage.Bind(Label.TextProperty, "Percentage");
+			assetType.Bind(LabelView.TextProperty, "AssetType");
+			size.Bind(LabelView.TextProperty, "Size");
+			percentage.Bind(LabelView.TextProperty, "Percentage");
             
 			Content = new LayoutView
 			{

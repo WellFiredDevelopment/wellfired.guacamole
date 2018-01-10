@@ -14,7 +14,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			base.OnPropertyChanged(sender, e);
 			
 			var control = (FilterView) Control;
-			if (e.PropertyName == TextEntry.TextProperty.PropertyName)
+			if (e.PropertyName == TextEntryView.TextProperty.PropertyName)
 			{
 				control.Search();
 			}

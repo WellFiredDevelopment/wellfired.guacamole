@@ -4,53 +4,53 @@ using WellFired.Guacamole.DataBinding;
 
 namespace WellFired.Guacamole.Views
 {
-	public class Label : View
+	public class LabelView : View
 	{
-		[PublicAPI] public static readonly BindableProperty FontSizeProperty = BindableProperty.Create<Label, int>(
+		[PublicAPI] public static readonly BindableProperty FontSizeProperty = BindableProperty.Create<LabelView, int>(
 			12,
 			BindingMode.TwoWay,
 			v => v.FontSize
 		);
 		
-		[PublicAPI] public static readonly BindableProperty WordWrapProperty = BindableProperty.Create<Label, bool>(
+		[PublicAPI] public static readonly BindableProperty WordWrapProperty = BindableProperty.Create<LabelView, bool>(
 			true,
 			BindingMode.TwoWay,
 			v => v.WordWrap
 		);
 		
-		[PublicAPI] public static readonly BindableProperty ClippingProperty = BindableProperty.Create<Label, UITextClipping>(
+		[PublicAPI] public static readonly BindableProperty ClippingProperty = BindableProperty.Create<LabelView, UITextClipping>(
 			UITextClipping.Clip,
 			BindingMode.TwoWay,
 			v => v.Clipping
 		);
 		
-		[PublicAPI] public static readonly BindableProperty TextProperty = BindableProperty.Create<Label, string>(
+		[PublicAPI] public static readonly BindableProperty TextProperty = BindableProperty.Create<LabelView, string>(
 			string.Empty,
 			BindingMode.TwoWay,
 			v => v.Text
 		);
 
-		[PublicAPI] public static readonly BindableProperty TextColorProperty = BindableProperty.Create<Label, UIColor>(
+		[PublicAPI] public static readonly BindableProperty TextColorProperty = BindableProperty.Create<LabelView, UIColor>(
 			UIColor.Black,
 			BindingMode.TwoWay,
 			v => v.TextColor
 		);
 
 		[PublicAPI] public static readonly BindableProperty HorizontalTextAlignProperty = BindableProperty
-			.Create<Label, UITextAlign>(
+			.Create<LabelView, UITextAlign>(
 				UITextAlign.Start,
 				BindingMode.TwoWay,
 				v => v.HorizontalTextAlign
 			);
 
 		[PublicAPI] public static readonly BindableProperty VerticalTextAlignProperty = BindableProperty
-			.Create<Label, UITextAlign>(
+			.Create<LabelView, UITextAlign>(
 				UITextAlign.Middle,
 				BindingMode.TwoWay,
 				v => v.VerticalTextAlign
 			);
 
-		public Label()
+		public LabelView()
 		{
 			Style = Styling.Styles.Label.Style;
 		}

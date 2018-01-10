@@ -9,24 +9,24 @@ namespace WellFired.Guacamole.Integration.View.Label.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_labelView = new Views.Label();
+			_labelViewView = new Views.LabelView();
 			_labelContext = new LabelContextObject();
-			_labelView.BindingContext = _labelContext;
+			_labelViewView.BindingContext = _labelContext;
 		}
 
-		private Views.Label _labelView;
+		private Views.LabelView _labelViewView;
 		private LabelContextObject _labelContext;
 
 		[Test]
 		public void IsBindable()
 		{
-			_labelView.TextColor = UIColor.Aquamarine;
+			_labelViewView.TextColor = UIColor.Aquamarine;
 			_labelContext.TextColor = UIColor.Beige;
-			Assert.That(_labelContext.TextColor != _labelView.TextColor);
-			_labelView.Bind(Views.Label.TextColorProperty, nameof(_labelContext.TextColor));
-			Assert.That(_labelContext.TextColor == _labelView.TextColor);
+			Assert.That(_labelContext.TextColor != _labelViewView.TextColor);
+			_labelViewView.Bind(Views.LabelView.TextColorProperty, nameof(_labelContext.TextColor));
+			Assert.That(_labelContext.TextColor == _labelViewView.TextColor);
 			_labelContext.TextColor = UIColor.Blue;
-			Assert.That(_labelContext.TextColor == _labelView.TextColor);
+			Assert.That(_labelContext.TextColor == _labelViewView.TextColor);
 		}
 	}
 }

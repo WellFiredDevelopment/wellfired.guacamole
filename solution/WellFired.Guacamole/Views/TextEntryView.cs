@@ -4,50 +4,50 @@ using WellFired.Guacamole.DataBinding;
 
 namespace WellFired.Guacamole.Views
 {
-	public class TextEntry : View, ITypeable
+	public class TextEntryView : View, ITypeable
 	{
-		[PublicAPI] public static readonly BindableProperty TextProperty = BindableProperty.Create<TextEntry, string>(
+		[PublicAPI] public static readonly BindableProperty TextProperty = BindableProperty.Create<TextEntryView, string>(
 			string.Empty,
 			BindingMode.TwoWay,
 			entry => entry.Text
 		);
 
 		[PublicAPI] public static readonly BindableProperty TextColorProperty = BindableProperty
-			.Create<TextEntry, UIColor>(
+			.Create<TextEntryView, UIColor>(
 				UIColor.Black,
 				BindingMode.TwoWay,
 				entry => entry.TextColor
 			);
 
 		[PublicAPI] public static readonly BindableProperty HorizontalTextAlignProperty = BindableProperty
-			.Create<TextEntry, UITextAlign>(
+			.Create<TextEntryView, UITextAlign>(
 				UITextAlign.Start,
 				BindingMode.TwoWay,
 				entry => entry.HorizontalTextAlign
 			);
 
 		[PublicAPI] public static readonly BindableProperty VerticalTextAlignProperty = BindableProperty
-			.Create<TextEntry, UITextAlign>(
+			.Create<TextEntryView, UITextAlign>(
 				UITextAlign.Middle,
 				BindingMode.TwoWay,
 				entry => entry.VerticalTextAlign
 			);
 		
 		[PublicAPI] public static readonly BindableProperty OnInputEnterProperty = BindableProperty
-			.Create<TextEntry, Command>(
+			.Create<TextEntryView, Command>(
 				new Command(),
 				BindingMode.TwoWay,
 				entry => entry.OnInputEnter
 			);
 		
 		[PublicAPI] public static readonly BindableProperty OnFocusLostProperty = BindableProperty
-			.Create<TextEntry, Command>(
+			.Create<TextEntryView, Command>(
 				new Command(),
 				BindingMode.TwoWay,
 				entry => entry.OnFocusLost
 			);
 
-		public TextEntry()
+		public TextEntryView()
 		{
 			// Set some nice defaults
 			BackgroundColor = UIColor.FromRGB(66, 66, 66);

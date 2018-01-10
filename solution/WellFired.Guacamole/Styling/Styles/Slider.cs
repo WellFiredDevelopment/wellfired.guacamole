@@ -16,9 +16,9 @@ namespace WellFired.Guacamole.Styling.Styles
 				new Setter {Property = View.VerticalLayoutProperty, Value = LayoutOptions.Expand},
 				new Setter {Property = View.PaddingProperty, Value = 5},
 				new Setter {Property = View.CornerRadiusProperty, Value = 6.0},
-				new Setter {Property = Views.Slider.ThumbBackgroundColorProperty, Value = UIColor.FromRGB(64, 124, 191)},
-				new Setter {Property = Views.Slider.ThumbOutlineColorProperty, Value = UIColor.FromRGB(0, 0, 0)},
-				new Setter {Property = Views.Slider.ThumbCornerRadiusProperty, Value = 0.0}
+				new Setter {Property = SliderView.ThumbBackgroundColorProperty, Value = UIColor.FromRGB(64, 124, 191)},
+				new Setter {Property = SliderView.ThumbOutlineColorProperty, Value = UIColor.FromRGB(0, 0, 0)},
+				new Setter {Property = SliderView.ThumbCornerRadiusProperty, Value = 0.0}
 			},
 			Triggers =
 			{
@@ -29,7 +29,7 @@ namespace WellFired.Guacamole.Styling.Styles
 					Setters =
 					{
 						new Setter {Property = View.BackgroundColorProperty, Value = UIColor.FromRGB(125, 125, 125)},
-						new Setter {Property = Views.Slider.ThumbBackgroundColorProperty, Value = UIColor.FromRGB(125, 125, 125)}
+						new Setter {Property = SliderView.ThumbBackgroundColorProperty, Value = UIColor.FromRGB(125, 125, 125)}
 					}
 				},
 				new Trigger
@@ -39,7 +39,7 @@ namespace WellFired.Guacamole.Styling.Styles
 					Setters =
 					{
 						new Setter {Property = View.BackgroundColorProperty, Value = UIColor.FromRGB(158, 158, 158)},
-						new Setter {Property = Views.Slider.ThumbBackgroundColorProperty, Value = UIColor.FromRGB(158, 158, 158)}
+						new Setter {Property = SliderView.ThumbBackgroundColorProperty, Value = UIColor.FromRGB(158, 158, 158)}
 					}
 				},
 				new Trigger
@@ -49,7 +49,7 @@ namespace WellFired.Guacamole.Styling.Styles
 					Setters =
 					{
 						new Setter {Property = View.BackgroundColorProperty, Value = UIColor.FromRGB(64, 124, 191)},
-						new Setter {Property = Views.Slider.ThumbBackgroundColorProperty, Value = UIColor.FromRGB(64, 124, 191)}
+						new Setter {Property = SliderView.ThumbBackgroundColorProperty, Value = UIColor.FromRGB(64, 124, 191)}
 					}
 				},
 				new Trigger
@@ -59,7 +59,7 @@ namespace WellFired.Guacamole.Styling.Styles
 					Setters =
 					{
 						new Setter {Property = View.BackgroundColorProperty, Value = UIColor.FromRGB(100, 100, 100)},
-						new Setter {Property = Views.Slider.ThumbBackgroundColorProperty, Value = UIColor.FromRGB(100, 100, 100)}
+						new Setter {Property = SliderView.ThumbBackgroundColorProperty, Value = UIColor.FromRGB(100, 100, 100)}
 					}
 				}
 			}

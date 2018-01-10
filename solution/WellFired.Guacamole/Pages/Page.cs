@@ -1,8 +1,9 @@
-﻿using WellFired.Guacamole.Data;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
+using WellFired.Guacamole.Data;
 using WellFired.Guacamole.DataBinding;
+using WellFired.Guacamole.Views;
 
-namespace WellFired.Guacamole.Views
+namespace WellFired.Guacamole.Pages
 {
     public class Page : View
     {

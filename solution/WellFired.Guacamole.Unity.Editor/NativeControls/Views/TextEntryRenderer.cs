@@ -7,7 +7,7 @@ using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
 
-[assembly: CustomRenderer(typeof(TextEntry), typeof(TextEntryRenderer))]
+[assembly: CustomRenderer(typeof(TextEntryView), typeof(TextEntryRenderer))]
 
 namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 {
@@ -17,7 +17,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			get
 			{
-				var entry = Control as TextEntry;
+				var entry = Control as TextEntryView;
 				// ReSharper disable once PossibleNullReferenceException
 				return Style.CalcSize(new GUIContent(entry.Text)).ToUISize();
 			}
@@ -27,7 +27,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			base.SetupWithNewStyle();
 
-			var entry = (TextEntry)Control;
+			var entry = (TextEntryView)Control;
 			Style.alignment = UITextAlignExtensions.Combine(entry.HorizontalTextAlign, entry.VerticalTextAlign);
 			Style.focused.textColor = entry.TextColor.ToUnityColor();
 			Style.active.textColor = entry.TextColor.ToUnityColor();
@@ -40,7 +40,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			base.Render(renderRect);
 
-			var entry = (TextEntry)Control;
+			var entry = (TextEntryView)Control;
 			entry.Text = EditorGUI.TextField(UnityRect, entry.Text, Style);
 
 			var isFocused = GUI.GetNameOfFocusedControl() == entry.Id;
@@ -62,11 +62,11 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			base.OnPropertyChanged(sender, e);
 
-			var entry = (TextEntry)Control;
-			if (e.PropertyName == TextEntry.HorizontalTextAlignProperty.PropertyName || e.PropertyName == TextEntry.VerticalTextAlignProperty.PropertyName)
+			var entry = (TextEntryView)Control;
+			if (e.PropertyName == TextEntryView.HorizontalTextAlignProperty.PropertyName || e.PropertyName == TextEntryView.VerticalTextAlignProperty.PropertyName)
 				Style.alignment = UITextAlignExtensions.Combine(entry.HorizontalTextAlign, entry.VerticalTextAlign);
 
-			if (e.PropertyName == TextEntry.TextColorProperty.PropertyName)
+			if (e.PropertyName == TextEntryView.TextColorProperty.PropertyName)
 			{
 				Style.focused.textColor = entry.TextColor.ToUnityColor();
 				Style.active.textColor = entry.TextColor.ToUnityColor();

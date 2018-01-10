@@ -3,6 +3,7 @@ using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Examples.Intermediate.Sorting.Cells;
 using WellFired.Guacamole.Examples.Intermediate.Sorting.ViewModel;
 using WellFired.Guacamole.Layouts;
+using WellFired.Guacamole.Pages;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.Intermediate.Sorting
@@ -14,14 +15,14 @@ namespace WellFired.Guacamole.Examples.Intermediate.Sorting
             Padding = 0;
             BackgroundColor = UIColor.White;
 
-            var sortByPath = new Button
+            var sortByPath = new ButtonView
             {
                 Text = "Path",
                 HorizontalLayout = LayoutOptions.Fill,
                 VerticalLayout = LayoutOptions.Fill
             };
             
-            var sortByBefore = new Button
+            var sortByBefore = new ButtonView
             {
                 Text = "Before",
                 HorizontalLayout = LayoutOptions.Expand,
@@ -29,7 +30,7 @@ namespace WellFired.Guacamole.Examples.Intermediate.Sorting
                 MinSize = UISize.Of(80, 0)
             };
             
-            var sortByAfter = new Button
+            var sortByAfter = new ButtonView
             {
                 Text = "After",
                 HorizontalLayout = LayoutOptions.Expand,
@@ -70,9 +71,9 @@ namespace WellFired.Guacamole.Examples.Intermediate.Sorting
             BindingContext = new Breakdown();
             
             listView.Bind(ItemsView.ItemSourceProperty, "DisplayList");
-            sortByPath.Bind(Button.ButtonPressedCommandProperty, "SortByPath");
-            sortByBefore.Bind(Button.ButtonPressedCommandProperty, "SortByBefore");
-            sortByAfter.Bind(Button.ButtonPressedCommandProperty, "SortByAfter");
+            sortByPath.Bind(ButtonView.ButtonPressedCommandProperty, "SortByPath");
+            sortByBefore.Bind(ButtonView.ButtonPressedCommandProperty, "SortByBefore");
+            sortByAfter.Bind(ButtonView.ButtonPressedCommandProperty, "SortByAfter");
         }
     }
 }

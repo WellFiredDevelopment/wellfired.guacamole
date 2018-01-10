@@ -2,7 +2,7 @@
 
 namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Buttons
 {
-	public class HeaderButton : Button
+	public class HeaderButtonView : ButtonView
 	{
 	}
 }

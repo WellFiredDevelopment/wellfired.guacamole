@@ -15,9 +15,9 @@ namespace WellFired.Guacamole.Examples.Simple.UIBindingExample
 		{
 			Padding = UIPadding.Of(5);
 
-			var destinationElement = new TextEntry();
+			var destinationElement = new TextEntryView();
 
-			var sourceElement = new Slider
+			var sourceElement = new SliderView
 			{
 				MinValue = 0,
 				MaxValue = 32

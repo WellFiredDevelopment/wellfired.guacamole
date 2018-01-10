@@ -9,12 +9,12 @@ namespace WellFired.Guacamole.Integration.View.Page.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_view = new Views.Page();
+			_view = new Pages.Page();
 			_context = new ContextObject();
 			_view.BindingContext = _context;
 		}
 
-		private Views.Page _view;
+		private Pages.Page _view;
 		private ContextObject _context;
 
 		[Test]
@@ -23,14 +23,14 @@ namespace WellFired.Guacamole.Integration.View.Page.Bindable
 			_view.Title = "a";
 			_context.Title = "b";
 			Assert.That(_context.Title != _view.Title);
-			_view.Bind(Views.Page.TitleProperty, nameof(_context.Title));
+			_view.Bind(Pages.Page.TitleProperty, nameof(_context.Title));
 			Assert.That(_context.Title == _view.Title);
 		}
 
 		[Test]
 		public void ViewBaseBackgroundColorBindingDoesntWorkInTwoWayWithOneWayMode()
 		{
-			_view.Bind(Views.Page.TitleProperty, nameof(_context.Title), BindingMode.OneWay);
+			_view.Bind(Pages.Page.TitleProperty, nameof(_context.Title), BindingMode.OneWay);
 			Assert.That(_context.Title == _view.Title);
 			_context.Title = "a";
 			Assert.That(_context.Title == _view.Title);
@@ -41,7 +41,7 @@ namespace WellFired.Guacamole.Integration.View.Page.Bindable
 		[Test]
 		public void ViewBaseBackgroundColorBindingDoesntWorkInTwoWayWithReadOnlyMode()
 		{
-			_view.Bind(Views.Page.TitleProperty, nameof(_context.Title), BindingMode.ReadOnly);
+			_view.Bind(Pages.Page.TitleProperty, nameof(_context.Title), BindingMode.ReadOnly);
 			Assert.That(_context.Title == _view.Title);
 			_context.Title = "a";
 			Assert.That(_context.Title == _view.Title);
@@ -53,7 +53,7 @@ namespace WellFired.Guacamole.Integration.View.Page.Bindable
 		[Test]
 		public void ViewBaseBackgroundColorBindingWorksInOneWay()
 		{
-			_view.Bind(Views.Page.TitleProperty, nameof(_context.Title));
+			_view.Bind(Pages.Page.TitleProperty, nameof(_context.Title));
 			Assert.That(_context.Title == _view.Title);
 			_context.Title = "a";
 			Assert.That(_context.Title == _view.Title);
@@ -62,7 +62,7 @@ namespace WellFired.Guacamole.Integration.View.Page.Bindable
 		[Test]
 		public void ViewBaseBackgroundColorBindingWorksInTwoWay()
 		{
-			_view.Bind(Views.Page.TitleProperty, nameof(_context.Title),
+			_view.Bind(Pages.Page.TitleProperty, nameof(_context.Title),
 				BindingMode.TwoWay);
 			Assert.That(_context.Title == _view.Title);
 			_context.Title = "a";

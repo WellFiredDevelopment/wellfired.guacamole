@@ -6,7 +6,7 @@ using WellFired.Guacamole.DataBinding;
 
 namespace WellFired.Guacamole.Views
 {
-	public class FilterView : TextEntry
+	public class FilterView : TextEntryView
 	{
 		[PublicAPI] public static readonly BindableProperty KeyValueSearchProperty = BindableProperty.Create<FilterView, Dictionary<string, string>>(
 			default(Dictionary<string, string>),

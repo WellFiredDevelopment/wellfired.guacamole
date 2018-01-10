@@ -13,7 +13,7 @@ namespace WellFired.Guacamole.Examples.Simple.TextFieldExample
 		{
 			Padding = UIPadding.Of(5);
 
-			Content = new TextEntry
+			Content = new TextEntryView
 			{
 				Text = "Test"
 			};

@@ -18,12 +18,12 @@ namespace WellFired.Guacamole.Integration.Layouts.Complex
                 VerticalLayout = LayoutOptions.Fill,
                 Children =
                 {
-                    new Label { HorizontalLayout = LayoutOptions.Fill, VerticalLayout = LayoutOptions.Fill },
-                    new Label { HorizontalLayout = LayoutOptions.Fill, VerticalLayout = LayoutOptions.Fill }
+                    new LabelView { HorizontalLayout = LayoutOptions.Fill, VerticalLayout = LayoutOptions.Fill },
+                    new LabelView { HorizontalLayout = LayoutOptions.Fill, VerticalLayout = LayoutOptions.Fill }
                 }
             };
 
-            var label = new Label {HorizontalLayout = LayoutOptions.Fill, MinSize = UISize.Of(500, 50)};
+            var label = new LabelView {HorizontalLayout = LayoutOptions.Fill, MinSize = UISize.Of(500, 50)};
 
             var verticalLayout = new LayoutView
             {

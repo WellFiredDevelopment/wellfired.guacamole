@@ -3,6 +3,7 @@ using WellFired.Guacamole.Data;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Examples.Simple.TabbedPageExample.ViewModel;
+using WellFired.Guacamole.Pages;
 using WellFired.Guacamole.Platform;
 using WellFired.Guacamole.Views;
 

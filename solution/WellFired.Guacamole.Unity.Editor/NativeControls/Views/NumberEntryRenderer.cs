@@ -8,7 +8,7 @@ using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
 
-[assembly: CustomRenderer(typeof(NumberEntry), typeof(NumberEntryRenderer))]
+[assembly: CustomRenderer(typeof(NumberEntryView), typeof(NumberEntryRenderer))]
 
 namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 {
@@ -18,7 +18,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			get
 			{
-				var numberEntry = Control as NumberEntry;
+				var numberEntry = Control as NumberEntryView;
 				// ReSharper disable once PossibleNullReferenceException
 				return Style.CalcSize(new GUIContent(numberEntry.Number.ToString(CultureInfo.InvariantCulture))).ToUISize();
 			}
@@ -28,7 +28,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			base.SetupWithNewStyle();
 
-			var entry = (NumberEntry) Control;
+			var entry = (NumberEntryView) Control;
 			Style.alignment = UITextAlignExtensions.Combine(entry.HorizontalTextAlign, entry.VerticalTextAlign);
 			Style.focused.textColor = entry.TextColor.ToUnityColor();
 			Style.active.textColor = entry.TextColor.ToUnityColor();
@@ -40,7 +40,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			base.Render(renderRect);
 
-			var entry = (NumberEntry)Control;
+			var entry = (NumberEntryView)Control;
 			var newNumber = EditorGUI.FloatField(UnityRect, entry.Number, Style);
 			if (Equals(newNumber, entry.Number))
 				entry.Number = newNumber;
@@ -50,12 +50,12 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			base.OnPropertyChanged(sender, e);
 
-			var entry = (NumberEntry)Control;
+			var entry = (NumberEntryView)Control;
 
-			if (e.PropertyName == NumberEntry.HorizontalTextAlignProperty.PropertyName || e.PropertyName == NumberEntry.VerticalTextAlignProperty.PropertyName)
+			if (e.PropertyName == NumberEntryView.HorizontalTextAlignProperty.PropertyName || e.PropertyName == NumberEntryView.VerticalTextAlignProperty.PropertyName)
 				Style.alignment = UITextAlignExtensions.Combine(entry.HorizontalTextAlign, entry.VerticalTextAlign);
 
-			if (e.PropertyName != NumberEntry.TextColorProperty.PropertyName) 
+			if (e.PropertyName != NumberEntryView.TextColorProperty.PropertyName) 
 				return;
 			
 			Style.focused.textColor = entry.TextColor.ToUnityColor();

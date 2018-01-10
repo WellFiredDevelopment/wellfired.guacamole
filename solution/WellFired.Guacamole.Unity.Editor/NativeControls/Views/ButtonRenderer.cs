@@ -7,7 +7,7 @@ using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
 
-[assembly: CustomRenderer(typeof(Button), typeof(ButtonRenderer))]
+[assembly: CustomRenderer(typeof(ButtonView), typeof(ButtonRenderer))]
 
 namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 {
@@ -17,7 +17,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			get
 			{
-				var button = Control as Button;
+				var button = Control as ButtonView;
 				// ReSharper disable once PossibleNullReferenceException
 				return Style.CalcSize(new GUIContent(button.Text)).ToUISize();
 			}
@@ -27,7 +27,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			base.Render(renderRect);
 
-			var button = (Button)Control;
+			var button = (ButtonView)Control;
 
 			EditorGUIUtility.AddCursorRect(UnityRect, MouseCursor.Link);
 
@@ -53,7 +53,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			base.SetupWithNewStyle();
 			
-			var button = (Button)Control;
+			var button = (ButtonView)Control;
 			Style.alignment = UITextAlignExtensions.Combine(button.HorizontalTextAlign, button.VerticalTextAlign);
 			Style.focused.textColor = button.TextColor.ToUnityColor();
 			Style.active.textColor = button.TextColor.ToUnityColor();
@@ -65,11 +65,11 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			base.OnPropertyChanged(sender, e);
 			
-			var button = (Button)Control;
-			if (e.PropertyName == Button.HorizontalTextAlignProperty.PropertyName || e.PropertyName == Button.VerticalTextAlignProperty.PropertyName)
+			var button = (ButtonView)Control;
+			if (e.PropertyName == ButtonView.HorizontalTextAlignProperty.PropertyName || e.PropertyName == ButtonView.VerticalTextAlignProperty.PropertyName)
 				Style.alignment = UITextAlignExtensions.Combine(button.HorizontalTextAlign, button.VerticalTextAlign);
 
-			if (e.PropertyName == Button.TextColorProperty.PropertyName)
+			if (e.PropertyName == ButtonView.TextColorProperty.PropertyName)
 			{
 				Style.focused.textColor = button.TextColor.ToUnityColor();
 				Style.active.textColor = button.TextColor.ToUnityColor();

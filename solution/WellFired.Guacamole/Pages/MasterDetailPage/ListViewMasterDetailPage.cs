@@ -1,7 +1,8 @@
 ﻿using System;
 using WellFired.Guacamole.DataBinding;
+using WellFired.Guacamole.Views;
 
-namespace WellFired.Guacamole.Views.MasterDetailPage
+namespace WellFired.Guacamole.Pages.MasterDetailPage
 {
 	public class ListViewMasterDetailPage : MasterDetailPage
 	{

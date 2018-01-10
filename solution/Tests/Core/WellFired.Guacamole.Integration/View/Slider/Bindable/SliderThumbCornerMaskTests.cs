@@ -9,12 +9,12 @@ namespace WellFired.Guacamole.Integration.View.Slider.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_sliderView = new Views.Slider();
+			_sliderView = new Views.SliderView();
 			_sliderContext = new SliderContextObject();
 			_sliderView.BindingContext = _sliderContext;
 		}
 
-		private Views.Slider _sliderView;
+		private Views.SliderView _sliderView;
 		private SliderContextObject _sliderContext;
 
 		[Test]
@@ -23,7 +23,7 @@ namespace WellFired.Guacamole.Integration.View.Slider.Bindable
 			_sliderView.ThumbCornerMask = CornerMask.BottomLeft;
 			_sliderContext.ThumbCornerMask = CornerMask.Bottom;
 			Assert.That(_sliderContext.ThumbCornerMask != _sliderView.ThumbCornerMask);
-			_sliderView.Bind(Views.Slider.ThumbCornerMaskProperty, nameof(_sliderContext.ThumbCornerMask));
+			_sliderView.Bind(Views.SliderView.ThumbCornerMaskProperty, nameof(_sliderContext.ThumbCornerMask));
 			Assert.That(_sliderContext.ThumbCornerMask == _sliderView.ThumbCornerMask);
 			_sliderContext.ThumbCornerMask = CornerMask.Left;
 			Assert.That(_sliderContext.ThumbCornerMask == _sliderView.ThumbCornerMask);

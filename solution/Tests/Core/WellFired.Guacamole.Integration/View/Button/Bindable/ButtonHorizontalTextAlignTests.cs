@@ -9,24 +9,24 @@ namespace WellFired.Guacamole.Integration.View.Button.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_buttonView = new Views.Button();
+			_buttonViewView = new Views.ButtonView();
 			_buttonContext = new ButtonContextObject();
-			_buttonView.BindingContext = _buttonContext;
+			_buttonViewView.BindingContext = _buttonContext;
 		}
 
-		private Views.Button _buttonView;
+		private Views.ButtonView _buttonViewView;
 		private ButtonContextObject _buttonContext;
 
 		[Test]
 		public void IsBindable()
 		{
-			_buttonView.HorizontalTextAlign = UITextAlign.End;
+			_buttonViewView.HorizontalTextAlign = UITextAlign.End;
 			_buttonContext.HorizontalTextAlign = UITextAlign.Middle;
-			Assert.That(_buttonContext.HorizontalTextAlign != _buttonView.HorizontalTextAlign);
-			_buttonView.Bind(Views.Button.HorizontalTextAlignProperty, nameof(_buttonContext.HorizontalTextAlign));
-			Assert.That(_buttonContext.HorizontalTextAlign == _buttonView.HorizontalTextAlign);
+			Assert.That(_buttonContext.HorizontalTextAlign != _buttonViewView.HorizontalTextAlign);
+			_buttonViewView.Bind(Views.ButtonView.HorizontalTextAlignProperty, nameof(_buttonContext.HorizontalTextAlign));
+			Assert.That(_buttonContext.HorizontalTextAlign == _buttonViewView.HorizontalTextAlign);
 			_buttonContext.HorizontalTextAlign = UITextAlign.Start;
-			Assert.That(_buttonContext.HorizontalTextAlign == _buttonView.HorizontalTextAlign);
+			Assert.That(_buttonContext.HorizontalTextAlign == _buttonViewView.HorizontalTextAlign);
 		}
 	}
 }

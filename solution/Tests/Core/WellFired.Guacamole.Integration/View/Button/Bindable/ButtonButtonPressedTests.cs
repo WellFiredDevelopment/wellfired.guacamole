@@ -8,12 +8,12 @@ namespace WellFired.Guacamole.Integration.View.Button.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_buttonView = new Views.Button();
+			_buttonViewView = new Views.ButtonView();
 			_labelContext = new ButtonContextObject();
-			_buttonView.BindingContext = _labelContext;
+			_buttonViewView.BindingContext = _labelContext;
 		}
 
-		private Views.Button _buttonView;
+		private Views.ButtonView _buttonViewView;
 		private ButtonContextObject _labelContext;
 
 		[Test]
@@ -22,13 +22,13 @@ namespace WellFired.Guacamole.Integration.View.Button.Bindable
 			var buttonPressed1 = new Command();
 			var buttonPressed2 = new Command();
 			var buttonPressed3 = new Command();
-			_buttonView.ButtonPressedCommand = buttonPressed1;
+			_buttonViewView.ButtonPressedCommand = buttonPressed1;
 			_labelContext.ButtonPressedCommand = buttonPressed2;
-			Assert.That(_labelContext.ButtonPressedCommand != _buttonView.ButtonPressedCommand);
-			_buttonView.Bind(Views.Button.ButtonPressedCommandProperty, nameof(_labelContext.ButtonPressedCommand));
-			Assert.That(_labelContext.ButtonPressedCommand == _buttonView.ButtonPressedCommand);
+			Assert.That(_labelContext.ButtonPressedCommand != _buttonViewView.ButtonPressedCommand);
+			_buttonViewView.Bind(Views.ButtonView.ButtonPressedCommandProperty, nameof(_labelContext.ButtonPressedCommand));
+			Assert.That(_labelContext.ButtonPressedCommand == _buttonViewView.ButtonPressedCommand);
 			_labelContext.ButtonPressedCommand = buttonPressed3;
-			Assert.That(_labelContext.ButtonPressedCommand == _buttonView.ButtonPressedCommand);
+			Assert.That(_labelContext.ButtonPressedCommand == _buttonViewView.ButtonPressedCommand);
 		}
 	}
 }

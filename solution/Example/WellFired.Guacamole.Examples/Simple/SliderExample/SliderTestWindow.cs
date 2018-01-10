@@ -13,7 +13,7 @@ namespace WellFired.Guacamole.Examples.Simple.SliderExample
 		{
 			Padding = UIPadding.Of(5);
 
-			Content = new Slider
+			Content = new SliderView
 			{
 				MinValue = 0.0,
 				MaxValue = 10.0,

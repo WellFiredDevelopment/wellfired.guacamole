@@ -1,7 +1,7 @@
 ﻿using JetBrains.Annotations;
 using WellFired.Guacamole.DataBinding;
 
-namespace WellFired.Guacamole.Views
+namespace WellFired.Guacamole.Pages
 {
     public partial class TabbedPage
     {

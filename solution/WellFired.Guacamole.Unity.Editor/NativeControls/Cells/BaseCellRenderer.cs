@@ -23,7 +23,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Cells
 			if (Control.ControlState != ControlState.Disabled)
 			{
 				if (UnityEngine.Event.current.isMouse &&
-				    UnityEngine.Event.current.rawType == EventType.mouseUp &&
+				    UnityEngine.Event.current.rawType == EventType.MouseUp &&
 				    renderRect.ToUnityRect().Contains(UnityEngine.Event.current.mousePosition))
 				{
 					Debug.Assert(cell != null, nameof(cell) + " != null");

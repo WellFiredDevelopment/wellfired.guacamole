@@ -13,7 +13,7 @@ namespace WellFired.Guacamole.Examples.Simple.ButtonExample
 		{
 			Padding = UIPadding.Of(5);
 
-			var button = new Button {
+			var button = new ButtonView {
 				Text = "Press Me Please."
 			};
 

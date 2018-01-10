@@ -20,7 +20,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.View.Cells
                 MinSize = UISize.Of(24, 24)
             };
 
-            var filterName = new Label
+            var filterName = new LabelView
             {
                 BackgroundColor = UIColor.Clear,
                 HorizontalTextAlign = UITextAlign.Start,
@@ -51,7 +51,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.View.Cells
 
             Content = layoutView;
             
-            filterName.Bind(Label.TextProperty, "Description");
+            filterName.Bind(LabelView.TextProperty, "Description");
             filterName.Bind(ToggleView.OnProperty, "Done", BindingMode.TwoWay);
         }
     }

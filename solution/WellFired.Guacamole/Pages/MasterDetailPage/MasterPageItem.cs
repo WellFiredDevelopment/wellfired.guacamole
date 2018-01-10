@@ -2,7 +2,7 @@
 using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.DataBinding;
 
-namespace WellFired.Guacamole.Views.MasterDetailPage
+namespace WellFired.Guacamole.Pages.MasterDetailPage
 {
 	public class MasterPageItem : ObservableBase, IDefaultCellContext
 	{

@@ -11,7 +11,7 @@ namespace WellFired.Guacamole.Integration.Layouts.Adjacent
 	    [Test]
 	    public void When_Layout_Then_LayoutIsCorrect()
 	    {
-		    var child0 = new Label
+		    var child0 = new LabelView
 		    {
 			    MinSize = UISize.Of(50),
 			    Padding = UIPadding.Of(5),
@@ -19,7 +19,7 @@ namespace WellFired.Guacamole.Integration.Layouts.Adjacent
 			    VerticalLayout = LayoutOptions.Expand
 		    };
 		    
-		    var child1 = new Label
+		    var child1 = new LabelView
 		    {
 			    MinSize = UISize.Of(50),
 			    Padding = UIPadding.Of(5),
@@ -60,7 +60,7 @@ namespace WellFired.Guacamole.Integration.Layouts.Adjacent
 		[Test]
 		public void With_Spacing_When_Layout_Then_LayoutIsCorrect()
 		{
-			var child0 = new Label
+			var child0 = new LabelView
 			{
 				MinSize = UISize.Of(50),
 				Padding = UIPadding.Of(5),
@@ -68,7 +68,7 @@ namespace WellFired.Guacamole.Integration.Layouts.Adjacent
 				VerticalLayout = LayoutOptions.Expand
 			};
 		    
-			var child1 = new Label
+			var child1 = new LabelView
 			{
 				MinSize = UISize.Of(50),
 				Padding = UIPadding.Of(5),

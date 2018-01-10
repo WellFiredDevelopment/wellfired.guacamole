@@ -1,5 +1,5 @@
 using WellFired.Guacamole.DataBinding;
-using WellFired.Guacamole.Views;
+using WellFired.Guacamole.Pages;
 
 namespace WellFired.Guacamole.Exceptions
 {

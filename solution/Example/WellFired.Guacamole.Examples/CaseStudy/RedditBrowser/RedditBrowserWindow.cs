@@ -15,8 +15,8 @@ namespace WellFired.Guacamole.Examples.CaseStudy.RedditBrowser
         public RedditBrowserWindow(ILogger logger, INotifyPropertyChanged persistantData, IPlatformProvider platformProvider) 
             : base(logger, persistantData, platformProvider)
         {
-            var textEntry = new TextEntry { CornerRadius = 0 };
-            var searchButton = new Button {Text = "Search", CornerRadius = 0};
+            var textEntry = new TextEntryView { CornerRadius = 0 };
+            var searchButton = new ButtonView {Text = "Search", CornerRadius = 0};
             
             var listView = new ListView {
                 HorizontalLayout = LayoutOptions.Fill,
@@ -49,10 +49,10 @@ namespace WellFired.Guacamole.Examples.CaseStudy.RedditBrowser
             };
             
             // Bind the text entry to the SubReddit Property on the bindingContext SearchResult.
-            textEntry.Bind(TextEntry.TextProperty, "SubReddit", BindingMode.TwoWay);
+            textEntry.Bind(TextEntryView.TextProperty, "SubReddit", BindingMode.TwoWay);
             
             // Bind the Button's command to the Search Property on the bindingContext SearchResult.
-            searchButton.Bind(Button.ButtonPressedCommandProperty, "Search");
+            searchButton.Bind(ButtonView.ButtonPressedCommandProperty, "Search");
             
             // Bind the ListViews Items to the SearchResult Property on the bindingContext SearchResult.
             listView.Bind(ItemsView.ItemSourceProperty, "SearchResults");

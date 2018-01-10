@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel;
 using WellFired.Guacamole.Attributes;
+using WellFired.Guacamole.Pages;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
-using WellFired.Guacamole.Views;
 
-[assembly: CustomRenderer(typeof(TabbedPageButton), typeof(TabbedPageButtonRenderer))]
+[assembly: CustomRenderer(typeof(TabbedPageButtonView), typeof(TabbedPageButtonRenderer))]
 namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 {
     public class TabbedPageButtonRenderer : ButtonRenderer
@@ -12,9 +12,9 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
         {
             base.OnPropertyChanged(sender, e);
 
-            var tabbedPageButton = (TabbedPageButton)Control;
+            var tabbedPageButton = (TabbedPageButtonView)Control;
             
-            if (e.PropertyName == TabbedPageButton.IsSelectedProperty.PropertyName)
+            if (e.PropertyName == TabbedPageButtonView.IsSelectedProperty.PropertyName)
             {
                 if (tabbedPageButton.IsSelected)
                 {

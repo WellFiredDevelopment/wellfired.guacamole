@@ -4,7 +4,7 @@ using WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Styles;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Views;
 using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Views;
-using Page = WellFired.Guacamole.Views.Page;
+using Page = WellFired.Guacamole.Pages.Page;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages
 {
@@ -17,7 +17,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages
 			Content = new DotPeekLayoutView
 			{
 				HorizontalLayout = LayoutOptions.Fill,
-				Children = { new Label { Style = NoBackgroundNoOutline.Style, Text = "PreProcessors :" }, new PreProcessorList() },
+				Children = { new LabelView { Style = NoBackgroundNoOutline.Style, Text = "PreProcessors :" }, new PreProcessorList() },
 				Layout = new AdjacentLayout()
 			};
 		}

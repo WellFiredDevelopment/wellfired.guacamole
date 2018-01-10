@@ -6,7 +6,7 @@ using WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Styles;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Views;
 using WellFired.Guacamole.Layouts;
 using WellFired.Guacamole.Views;
-using Page = WellFired.Guacamole.Views.Page;
+using Page = WellFired.Guacamole.Pages.Page;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages
 {
@@ -16,20 +16,20 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages
 		{
 			Style = NoBackgroundNoOutline.Style;
 			
-			var pathHeader = new HeaderButton { Style = NoBackgroundNoOutline.Style, Text = "Path", HorizontalLayout = LayoutOptions.Fill, VerticalLayout = LayoutOptions.Fill };
-			var importedSizeHeader = new HeaderButton { Style = NoBackgroundNoOutline.Style, Text = "Imp. Size", HorizontalLayout = LayoutOptions.Expand, MaxSize = UISize.Of(110, 1000) };
-			var rawSizeHeader = new HeaderButton { Style = NoBackgroundNoOutline.Style, Text = "Raw Size", HorizontalLayout = LayoutOptions.Expand, MaxSize = UISize.Of(110, 1000) };
-			var percentageHeader = new HeaderButton { Style = NoBackgroundNoOutline.Style, Text = "Per.", HorizontalLayout = LayoutOptions.Expand, MaxSize = UISize.Of(110, 1000) };
+			var pathHeader = new HeaderButtonView { Style = NoBackgroundNoOutline.Style, Text = "Path", HorizontalLayout = LayoutOptions.Fill, VerticalLayout = LayoutOptions.Fill };
+			var importedSizeHeader = new HeaderButtonView { Style = NoBackgroundNoOutline.Style, Text = "Imp. Size", HorizontalLayout = LayoutOptions.Expand, MaxSize = UISize.Of(110, 1000) };
+			var rawSizeHeader = new HeaderButtonView { Style = NoBackgroundNoOutline.Style, Text = "Raw Size", HorizontalLayout = LayoutOptions.Expand, MaxSize = UISize.Of(110, 1000) };
+			var percentageHeader = new HeaderButtonView { Style = NoBackgroundNoOutline.Style, Text = "Per.", HorizontalLayout = LayoutOptions.Expand, MaxSize = UISize.Of(110, 1000) };
             
-			pathHeader.Bind(Button.ButtonPressedCommandProperty, "SortByAssetPath");
-			importedSizeHeader.Bind(Button.ButtonPressedCommandProperty, "SortByImportedSize");
-			rawSizeHeader.Bind(Button.ButtonPressedCommandProperty, "SortByRawSize");
-			percentageHeader.Bind(Button.ButtonPressedCommandProperty, "SortByPercentage");
+			pathHeader.Bind(ButtonView.ButtonPressedCommandProperty, "SortByAssetPath");
+			importedSizeHeader.Bind(ButtonView.ButtonPressedCommandProperty, "SortByImportedSize");
+			rawSizeHeader.Bind(ButtonView.ButtonPressedCommandProperty, "SortByRawSize");
+			percentageHeader.Bind(ButtonView.ButtonPressedCommandProperty, "SortByPercentage");
             
-			pathHeader.Bind(Button.TextProperty, "AssetPathText");
-			importedSizeHeader.Bind(Button.TextProperty, "ImportedSizeText");
-			rawSizeHeader.Bind(Button.TextProperty, "RawSizeText");
-			percentageHeader.Bind(Button.TextProperty, "PercentageText");
+			pathHeader.Bind(ButtonView.TextProperty, "AssetPathText");
+			importedSizeHeader.Bind(ButtonView.TextProperty, "ImportedSizeText");
+			rawSizeHeader.Bind(ButtonView.TextProperty, "RawSizeText");
+			percentageHeader.Bind(ButtonView.TextProperty, "PercentageText");
 
 			var listHeader = new DotPeekLayoutView
 			{
@@ -46,7 +46,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages
 				{
 					new DotPeekLayoutView {
 						HorizontalLayout = LayoutOptions.Fill,
-						Children = { new Label { Style = NoBackgroundNoOutline.Style, Text = "Total Size" }, new TotalSizeLabel() },
+						Children = { new LabelView { Style = NoBackgroundNoOutline.Style, Text = "Total Size" }, new TotalSizeLabelView() },
 						Layout = new AdjacentLayout()
 					}, 
 					new DotPeekLayoutView {

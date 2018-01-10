@@ -7,7 +7,7 @@ using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
 
-[assembly: CustomRenderer(typeof(Label), typeof(LabelRenderer))]
+[assembly: CustomRenderer(typeof(LabelView), typeof(LabelRenderer))]
 
 namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 {
@@ -17,7 +17,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			get
 			{
-				var label = (Label)Control;
+				var label = (LabelView)Control;
 				var content = new GUIContent(label.Text);
 				var size = Style.CalcSize(content);
 				
@@ -30,7 +30,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			base.SetupWithNewStyle();
 			
-			var label = (Label)Control;
+			var label = (LabelView)Control;
 			Style.alignment = UITextAlignExtensions.Combine(label.HorizontalTextAlign, label.VerticalTextAlign);
 			Style.clipping = label.Clipping.ToUnityClipping();
 			Style.focused.textColor = label.TextColor.ToUnityColor();
@@ -46,7 +46,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			base.Render(renderRect);
 
-			var label = (Label)Control;
+			var label = (LabelView)Control;
 			
 			EditorGUI.LabelField(UnityRect, label.Text, Style);
 
@@ -62,22 +62,22 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			base.OnPropertyChanged(sender, e);
 
-			var label = (Label)Control;
+			var label = (LabelView)Control;
 			
-			if (e.PropertyName == Label.TextColorProperty.PropertyName)
+			if (e.PropertyName == LabelView.TextColorProperty.PropertyName)
 			{
 				Style.focused.textColor = label.TextColor.ToUnityColor();
 				Style.active.textColor = label.TextColor.ToUnityColor();
 				Style.hover.textColor = label.TextColor.ToUnityColor();
 				Style.normal.textColor = label.TextColor.ToUnityColor();
 			}
-			if(e.PropertyName == Label.HorizontalTextAlignProperty.PropertyName || e.PropertyName == Label.VerticalTextAlignProperty.PropertyName)
+			if(e.PropertyName == LabelView.HorizontalTextAlignProperty.PropertyName || e.PropertyName == LabelView.VerticalTextAlignProperty.PropertyName)
 				Style.alignment = UITextAlignExtensions.Combine(label.HorizontalTextAlign, label.VerticalTextAlign);
-			if (e.PropertyName == Label.WordWrapProperty.PropertyName)
+			if (e.PropertyName == LabelView.WordWrapProperty.PropertyName)
 				Style.wordWrap = label.WordWrap;
-			if (e.PropertyName == Label.ClippingProperty.PropertyName)
+			if (e.PropertyName == LabelView.ClippingProperty.PropertyName)
 				Style.clipping = label.Clipping.ToUnityClipping();
-			if (e.PropertyName == Label.FontSizeProperty.PropertyName)
+			if (e.PropertyName == LabelView.FontSizeProperty.PropertyName)
 				Style.fontSize = label.FontSize;
 		}
 	}

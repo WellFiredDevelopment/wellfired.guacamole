@@ -9,12 +9,12 @@ namespace WellFired.Guacamole.Integration.View.TextEntry.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_textEntryView = new Views.TextEntry();
+			_textEntryView = new Views.TextEntryView();
 			_context = new ContextObject();
 			_textEntryView.BindingContext = _context;
 		}
 
-		private Views.TextEntry _textEntryView;
+		private Views.TextEntryView _textEntryView;
 		private ContextObject _context;
 
 		[Test]
@@ -23,7 +23,7 @@ namespace WellFired.Guacamole.Integration.View.TextEntry.Bindable
 			_textEntryView.VerticalTextAlign = UITextAlign.End;
 			_context.VerticalTextAlign = UITextAlign.Middle;
 			Assert.That(_context.VerticalTextAlign != _textEntryView.VerticalTextAlign);
-			_textEntryView.Bind(Views.TextEntry.VerticalTextAlignProperty, nameof(_context.VerticalTextAlign));
+			_textEntryView.Bind(Views.TextEntryView.VerticalTextAlignProperty, nameof(_context.VerticalTextAlign));
 			Assert.That(_context.VerticalTextAlign == _textEntryView.VerticalTextAlign);
 			_context.VerticalTextAlign = UITextAlign.Start;
 			Assert.That(_context.VerticalTextAlign == _textEntryView.VerticalTextAlign);

@@ -13,29 +13,29 @@ namespace WellFired.Guacamole.Examples.Intermediate.Sorting.Cells
             VerticalLayout = LayoutOptions.Expand;
             BackgroundColor = UIColor.Black;
 
-            var path = new Label
+            var path = new LabelView
             {
                 HorizontalLayout = LayoutOptions.Fill,
                 VerticalLayout = LayoutOptions.Fill,
             };
             
-            var beforeSize = new Label
+            var beforeSize = new LabelView
             {
                 HorizontalLayout = LayoutOptions.Expand,
                 VerticalLayout = LayoutOptions.Fill,
                 MinSize = UISize.Of(80, 0)
             };
             
-            var afterSize = new Label
+            var afterSize = new LabelView
             {
                 HorizontalLayout = LayoutOptions.Expand,
                 VerticalLayout = LayoutOptions.Fill,
                 MinSize = UISize.Of(80, 0)
             };
 
-            path.Bind(Label.TextProperty, "Path");
-            beforeSize.Bind(Label.TextProperty, "BeforeSize");
-            afterSize.Bind(Label.TextProperty, "AfterSize");
+            path.Bind(LabelView.TextProperty, "Path");
+            beforeSize.Bind(LabelView.TextProperty, "BeforeSize");
+            afterSize.Bind(LabelView.TextProperty, "AfterSize");
             
             Content = new LayoutView
             {

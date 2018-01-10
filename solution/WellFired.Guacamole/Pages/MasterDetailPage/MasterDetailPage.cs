@@ -1,7 +1,8 @@
 ﻿using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Layouts;
+using WellFired.Guacamole.Views;
 
-namespace WellFired.Guacamole.Views.MasterDetailPage
+namespace WellFired.Guacamole.Pages.MasterDetailPage
 {
     /// <summary>
     /// The master detail page is a typical MasterDetail page. It allows you to specify a LayoutableView for the Master and a layoutable view for the Detail.

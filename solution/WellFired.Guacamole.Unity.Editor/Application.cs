@@ -31,8 +31,14 @@ namespace WellFired.Guacamole.Unity.Editor
 		private static void ConfigurePersistentData(ApplicationInitializationContext initializationContext, Type persistantType)
 		{
 			var unityPlatformProvider = new UnityPlatformProvider(initializationContext.ApplicationName);
-			var assetPath = $"Assets/{unityPlatformProvider.DataPathWithApplicationName}/data.asset";
+			var assetPath = $"Assets{unityPlatformProvider.DataPathWithApplicationName}/data.asset";
+			
+			Debug.Log(assetPath);
+			Debug.Log(persistantType);
+
 			var persistantData = AssetDatabase.LoadAssetAtPath(assetPath, persistantType);
+			
+			Debug.Log(persistantData);
 			
 			if (persistantData == null)
 			{

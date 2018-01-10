@@ -4,12 +4,12 @@ using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Labels
 {
-	public class BuildSizeLabel : Label
+	public class CommitIdLabelView : LabelView
 	{
-		public BuildSizeLabel()
+		public CommitIdLabelView()
 		{
 			Style = NoBackgroundNoOutline.Style;
-			Bind(TextProperty, "BuildSize", BindingMode.ReadOnly);
+			Bind(TextProperty, "CommitId", BindingMode.ReadOnly);
 		}
 	}
 }

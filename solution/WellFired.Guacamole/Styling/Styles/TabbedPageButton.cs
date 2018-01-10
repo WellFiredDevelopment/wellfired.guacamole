@@ -1,4 +1,5 @@
 ﻿using WellFired.Guacamole.Data;
+using WellFired.Guacamole.Pages;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Styling.Styles
@@ -13,11 +14,11 @@ namespace WellFired.Guacamole.Styling.Styles
                 new Setter {Property = View.HorizontalLayoutProperty, Value = LayoutOptions.Fill},
                 new Setter {Property = View.VerticalLayoutProperty, Value = LayoutOptions.Expand},
                 new Setter {Property = View.PaddingProperty, Value = 5},
-                new Setter {Property = Views.Button.TextColorProperty, Value = UIColor.White},
+                new Setter {Property = ButtonView.TextColorProperty, Value = UIColor.White},
                 new Setter {Property = View.CornerRadiusProperty, Value = 0.0},
-                new Setter {Property = Views.Button.HorizontalTextAlignProperty, Value = UITextAlign.Middle},
-                new Setter {Property = Views.Button.VerticalTextAlignProperty, Value = UITextAlign.Middle},
-                new Setter {Property = Views.Button.TextColorProperty, Value = UIColor.Black},
+                new Setter {Property = ButtonView.HorizontalTextAlignProperty, Value = UITextAlign.Middle},
+                new Setter {Property = ButtonView.VerticalTextAlignProperty, Value = UITextAlign.Middle},
+                new Setter {Property = ButtonView.TextColorProperty, Value = UIColor.Black},
                 new Setter {Property = View.OutlineMaskProperty, Value = OutlineMask.Bottom},
                 new Setter {Property = View.OutlineThicknessProperty, Value = 1},
             },
@@ -25,7 +26,7 @@ namespace WellFired.Guacamole.Styling.Styles
             {
                 new Trigger
                 {
-                    Property = Views.TabbedPageButton.IsSelectedProperty,
+                    Property = TabbedPageButtonView.IsSelectedProperty,
                     Value = true,
                     Setters =
                     {
@@ -36,7 +37,7 @@ namespace WellFired.Guacamole.Styling.Styles
                 },
                 new Trigger
                 {
-                    Property = Views.TabbedPageButton.IsSelectedProperty,
+                    Property = TabbedPageButtonView.IsSelectedProperty,
                     Value = false,
                     Setters =
                     {
@@ -49,7 +50,7 @@ namespace WellFired.Guacamole.Styling.Styles
                 {
                     Property = View.ControlStateProperty,
                     Value = ControlState.Hover,
-                    Conditionals = {new Conditional {Property = Views.TabbedPageButton.IsSelectedProperty, Value = true}},
+                    Conditionals = {new Conditional {Property = TabbedPageButtonView.IsSelectedProperty, Value = true}},
                     Setters =
                     {
                         new Setter {Property = View.OutlineMaskProperty, Value = OutlineMask.Left | OutlineMask.Top | OutlineMask.Right},
@@ -61,7 +62,7 @@ namespace WellFired.Guacamole.Styling.Styles
                 {
                     Property = View.ControlStateProperty,
                     Value = ControlState.Hover,
-                    Conditionals = {new Conditional {Property = Views.TabbedPageButton.IsSelectedProperty, Value = false}},
+                    Conditionals = {new Conditional {Property = TabbedPageButtonView.IsSelectedProperty, Value = false}},
                     Setters =
                     {
                         new Setter {Property = View.OutlineMaskProperty, Value = OutlineMask.Bottom},
@@ -73,7 +74,7 @@ namespace WellFired.Guacamole.Styling.Styles
                 {
                     Property = View.ControlStateProperty,
                     Value = ControlState.Normal,
-                    Conditionals = {new Conditional {Property = Views.TabbedPageButton.IsSelectedProperty, Value = false}},
+                    Conditionals = {new Conditional {Property = TabbedPageButtonView.IsSelectedProperty, Value = false}},
                     Setters =
                     {
                         new Setter {Property = View.OutlineMaskProperty, Value = OutlineMask.Bottom},
@@ -85,7 +86,7 @@ namespace WellFired.Guacamole.Styling.Styles
                 {
                     Property = View.ControlStateProperty,
                     Value = ControlState.Normal,
-                    Conditionals = {new Conditional {Property = Views.TabbedPageButton.IsSelectedProperty, Value = true}},
+                    Conditionals = {new Conditional {Property = TabbedPageButtonView.IsSelectedProperty, Value = true}},
                     Setters =
                     {
                         new Setter {Property = View.OutlineMaskProperty, Value = OutlineMask.Left | OutlineMask.Top | OutlineMask.Right},

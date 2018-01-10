@@ -14,12 +14,12 @@ namespace WellFired.Guacamole.Examples.Simple.TwoWayBindingExample
 		{
 			Padding = UIPadding.Of(5);
 
-			var boundTextEntry = new TextEntry();
+			var boundTextEntry = new TextEntryView();
 
 			Content = boundTextEntry;
 			BindingContext = persistantData;
 
-			boundTextEntry.Bind(TextEntry.TextProperty, "BoundText", BindingMode.TwoWay);
+			boundTextEntry.Bind(TextEntryView.TextProperty, "BoundText", BindingMode.TwoWay);
 		}
 	}
 }

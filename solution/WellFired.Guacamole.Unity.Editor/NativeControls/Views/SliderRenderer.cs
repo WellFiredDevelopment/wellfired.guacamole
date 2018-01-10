@@ -7,7 +7,7 @@ using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
 using Debug = System.Diagnostics.Debug;
 
-[assembly: CustomRenderer(typeof(Slider), typeof(SliderRenderer))]
+[assembly: CustomRenderer(typeof(SliderView), typeof(SliderRenderer))]
 
 namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 {
@@ -20,7 +20,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 	    {
 	        get
 	        {
-	            var slider = Control as Slider;
+	            var slider = Control as SliderView;
 	            Debug.Assert(slider != null, $"{nameof(slider)} != null");
 	            return Style.CalcSize(new GUIContent()).ToUISize();
 	        }
@@ -46,7 +46,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 
 			UpdateThumbIfNeeded();
 
-			var slider = (Slider)Control;
+			var slider = (SliderView)Control;
 			
 			CreateThumbStyleWith();
 
@@ -61,9 +61,9 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		{
 			base.OnPropertyChanged(sender, e);
 
-			if (e.PropertyName == Slider.ThumbCornerRadiusProperty.PropertyName ||
-			    e.PropertyName == Slider.ThumbOutlineColorProperty.PropertyName ||
-			    e.PropertyName == Slider.ThumbBackgroundColorProperty.PropertyName ||
+			if (e.PropertyName == SliderView.ThumbCornerRadiusProperty.PropertyName ||
+			    e.PropertyName == SliderView.ThumbOutlineColorProperty.PropertyName ||
+			    e.PropertyName == SliderView.ThumbBackgroundColorProperty.PropertyName ||
 			    e.PropertyName == View.ControlStateProperty.PropertyName)
 				CreateThumbBackgroundTexture();
 		}
@@ -76,7 +76,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 
 		private void CreateThumbBackgroundTexture()
 		{
-			var slider = Control as Slider;
+			var slider = Control as SliderView;
 			// ReSharper disable once PossibleNullReferenceException
 			ThumbBackgroundTexture = Texture2DExtensions.CreateRoundedTexture(32, 32, slider.ThumbBackgroundColor, slider.ThumbOutlineColor, slider.ThumbCornerRadius, 1, slider.ThumbCornerMask, OutlineMask.All);
 		}

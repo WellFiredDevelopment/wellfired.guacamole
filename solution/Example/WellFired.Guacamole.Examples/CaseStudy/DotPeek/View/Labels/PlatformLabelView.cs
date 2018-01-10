@@ -4,12 +4,12 @@ using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Labels
 {
-	public class PreProcessorLabel : Label
+	public class PlatformLabelView : LabelView
 	{
-		public PreProcessorLabel()
+		public PlatformLabelView()
 		{
 			Style = NoBackgroundNoOutline.Style;
-			Bind(TextProperty, "PreProcessor", BindingMode.ReadOnly);
+			Bind(TextProperty, "Platform", BindingMode.ReadOnly);
 		}
 	}
 }

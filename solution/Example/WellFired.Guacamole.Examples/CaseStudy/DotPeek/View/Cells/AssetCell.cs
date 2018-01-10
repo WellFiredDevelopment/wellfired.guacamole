@@ -15,7 +15,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Cells
             HorizontalLayout = LayoutOptions.Fill;
             VerticalLayout = LayoutOptions.Expand;
 
-            var assetPath = new Label
+            var assetPath = new LabelView
             {
                 Style = NoBackgroundNoOutline.Style,
                 HorizontalLayout = LayoutOptions.Fill,
@@ -23,7 +23,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Cells
                 HorizontalTextAlign = UITextAlign.Start
             };
             
-            var importedSize = new Label
+            var importedSize = new LabelView
             {
                 Style = NoBackgroundNoOutline.Style,
                 HorizontalLayout = LayoutOptions.Expand,
@@ -31,7 +31,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Cells
                 MinSize = UISize.Of(80, 0)
             };
             
-            var rawSize = new Label
+            var rawSize = new LabelView
             {
                 Style = NoBackgroundNoOutline.Style,
                 HorizontalLayout = LayoutOptions.Expand,
@@ -39,7 +39,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Cells
                 MinSize = UISize.Of(80, 0)
             };
             
-            var percentage = new Label
+            var percentage = new LabelView
             {
                 Style = NoBackgroundNoOutline.Style,
                 HorizontalLayout = LayoutOptions.Expand,
@@ -47,10 +47,10 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Cells
                 MinSize = UISize.Of(80, 0)
             };
 
-            assetPath.Bind(Label.TextProperty, "AssetPath", BindingMode.ReadOnly);
-            importedSize.Bind(Label.TextProperty, "ImportedSize", BindingMode.ReadOnly);
-            rawSize.Bind(Label.TextProperty, "RawSize", BindingMode.ReadOnly);
-            percentage.Bind(Label.TextProperty, "Percentage", BindingMode.ReadOnly);
+            assetPath.Bind(LabelView.TextProperty, "AssetPath", BindingMode.ReadOnly);
+            importedSize.Bind(LabelView.TextProperty, "ImportedSize", BindingMode.ReadOnly);
+            rawSize.Bind(LabelView.TextProperty, "RawSize", BindingMode.ReadOnly);
+            percentage.Bind(LabelView.TextProperty, "Percentage", BindingMode.ReadOnly);
             
             Content = new LayoutView
             {
