@@ -6,7 +6,6 @@ using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Cells;
-using Debug = System.Diagnostics.Debug;
 
 [assembly: CustomRenderer(typeof(LabelCell), typeof(LabelCellRenderer))]
 
@@ -19,7 +18,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Cells
             get
             {
                 var labelCell = Control as LabelCell;
-                Debug.Assert(labelCell != null, $"{nameof(labelCell)} != null");
+                // ReSharper disable once PossibleNullReferenceException
                 return Style.CalcSize(new GUIContent(labelCell.Text)).ToUISize();
             }
         }

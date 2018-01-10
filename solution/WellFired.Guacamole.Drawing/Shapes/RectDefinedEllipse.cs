@@ -6,18 +6,14 @@ namespace WellFired.Guacamole.Drawing.Shapes
     public class RectDefinedEllipse : IRasterizableShape
     {
         private readonly Rect _rect;
-        //private readonly double _thickness;
 
         public RectDefinedEllipse(Rect rect, double thickness)
         {
             _rect = rect;
-            //_thickness = thickness;
         }
 
         public void Rasterize(RawImage image, UIColor color)
         {
-            var width = image.Width;
-            var height = image.Height;
             var x0 = _rect.X;
             var x1 = _rect.X + _rect.Width;
             var y0 = _rect.Y;
@@ -25,16 +21,7 @@ namespace WellFired.Guacamole.Drawing.Shapes
 
             Do((int) x0, (int) x1, (int) y0, (int) y1, (x, y) =>
             {
-                if (x > width)
-                    return;
-                if (y > height)
-                    return;
-                if (x < 0)
-                    return;
-                if (y < 0)
-                    return;
-                //var index = width * y + x;
-                //image[index] = color;
+                
             });
         }
 
@@ -49,17 +36,7 @@ namespace WellFired.Guacamole.Drawing.Shapes
 
             DoAA((int) x0, (int) x1, (int) y0, (int) y1, width, height, image, color, (x, y, a) =>
             {
-                if (x > width)
-                    return;
-                if (y > height)
-                    return;
-                if (x < 0)
-                    return;
-                if (y < 0)
-                    return;
-                //var index = width * (height - y - 1) + x;
-                //color.A = 1.0f - a / 255.0f;
-                //image[index] = color;
+                
             });
         }
 
@@ -85,7 +62,6 @@ namespace WellFired.Guacamole.Drawing.Shapes
             var dx = 4.0 * (1.0 - a) * b * b;
             var dy = 4.0 * (b1 + 1.0) * a * a;
             var error = dx + dy + b1 * a * a;
-            double e2 = 0;
 
             if (x0 > x1)
             {
@@ -108,7 +84,7 @@ namespace WellFired.Guacamole.Drawing.Shapes
                 plot(x0, y1);
                 plot(x1, y1);
 
-                e2 = 2.0 * error;
+                var e2 = 2.0 * error;
 
                 if (e2 <= dy)
                 {

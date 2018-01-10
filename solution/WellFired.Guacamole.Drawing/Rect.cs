@@ -1,5 +1,5 @@
 ﻿using System;
-using WellFired.Guacamole.Data.Annotations;
+using JetBrains.Annotations;
 
 namespace WellFired.Guacamole.Drawing
 {
@@ -47,12 +47,13 @@ namespace WellFired.Guacamole.Drawing
 
 		public override bool Equals(object obj)
 		{
+			// ReSharper disable once PossibleNullReferenceException
 			var compareTo = (Rect) obj;
 			return
-				(Math.Abs(compareTo.X - X) < 0.0001) &&
-				(Math.Abs(compareTo.Y - Y) < 0.0001) &&
-				(Math.Abs(compareTo.Width - Width) < 0.0001) &&
-				(Math.Abs(compareTo.Height - Height) < 0.0001);
+				Math.Abs(compareTo.X - X) < 0.0001 &&
+				Math.Abs(compareTo.Y - Y) < 0.0001 &&
+				Math.Abs(compareTo.Width - Width) < 0.0001 &&
+				Math.Abs(compareTo.Height - Height) < 0.0001;
 		}
 
 		public override int GetHashCode()
@@ -60,9 +61,13 @@ namespace WellFired.Guacamole.Drawing
 			unchecked
 			{
 				var hash = 17;
+				// ReSharper disable once NonReadonlyMemberInGetHashCode
 				hash = hash*23 + X.GetHashCode();
+				// ReSharper disable once NonReadonlyMemberInGetHashCode
 				hash = hash*23 + Y.GetHashCode();
+				// ReSharper disable once NonReadonlyMemberInGetHashCode
 				hash = hash*23 + Width.GetHashCode();
+				// ReSharper disable once NonReadonlyMemberInGetHashCode
 				hash = hash*23 + Height.GetHashCode();
 				return hash;
 			}

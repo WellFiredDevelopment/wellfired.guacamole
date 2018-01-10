@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
 using WellFired.Guacamole.Data;
-using WellFired.Guacamole.Data.Annotations;
+using JetBrains.Annotations;
+using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Platform;
 using WellFired.Guacamole.Styling;
@@ -10,21 +11,32 @@ namespace WellFired.Guacamole.Views
 {
 	public class Window : View
 	{
+		[PublicAPI] public static readonly BindableProperty WindowCloseCommandProperty = BindableProperty
+			.Create<Window, ICommand>(
+				new Command(),
+				BindingMode.TwoWay,
+				window => window.WindowCloseCommand
+			);
+		
+		[PublicAPI]
+		public ICommand WindowCloseCommand
+		{
+			get => (ICommand) GetValue(WindowCloseCommandProperty);
+			set => SetValue(WindowCloseCommandProperty, value);
+		}
+		
 		private readonly MainThreadRunner _mainThreadRunner = new MainThreadRunner();
-		private readonly ILogger _logger;
 
 		[PublicAPI]
 		public Window(ILogger logger, INotifyPropertyChanged persistantData, IPlatformProvider platformProvider)
 		{
-			_logger = logger;
-			StyleDictionary = new StyleDictionary(_logger);
+			StyleDictionary = new StyleDictionary(logger);
 		}
 
 		[PublicAPI]
 		public Window(ILogger logger, IPlatformProvider platformProvider)
 		{
-			_logger = logger;
-			StyleDictionary = new StyleDictionary(_logger);
+			StyleDictionary = new StyleDictionary(logger);
 		}
 
 		private UIRect FinalRenderedRect { get; set; }
@@ -42,12 +54,12 @@ namespace WellFired.Guacamole.Views
 		public override void Render(UIRect parentRect)
 		{
 		    var view = Content as View;
-		    Debug.Assert(view != null, "view != null");
 
 			_mainThreadRunner.ProcessActions();
 			NativeRenderer.Render(FinalRenderedRect);
 
 			var relativeParentRect = UIRect.With(0, 0, parentRect.Width, parentRect.Height);
+			// ReSharper disable once PossibleNullReferenceException
 		    view.Render(relativeParentRect);
 		}
 
@@ -56,9 +68,9 @@ namespace WellFired.Guacamole.Views
 			base.OnPropertyChanged(sender, e);
 
 		    var view = Content as View;
-		    Debug.Assert(view != null, "view != null");
 
 		    if (e.PropertyName == BindingContextProperty.PropertyName)
+			    // ReSharper disable once PossibleNullReferenceException
 			    view.BindingContext = BindingContext;
 		}
 		

@@ -8,16 +8,17 @@ class doxygen2sphinx
 
     emitter = new EventEmitter
 
-    constructor: (@sphinxInDir, @sphinxOutDir) ->
+    constructor: (@sphinxInDir, @sphinxOutDir, @projectName) ->
     
     convert: ->
         _outputDir = @sphinxOutDir
+        _projectName = @projectName
         utils.delete "#{_outputDir}/api"
 
         doxyReader = new reader @sphinxInDir
         doxyReader.read()
         .then (results) ->
-            sphinxWriter = new writer _outputDir, results, '.Profile'
+            sphinxWriter = new writer _outputDir, results, _projectName
             sphinxWriter.write()
         .catch (error) ->
             emitter.emit 'error', error

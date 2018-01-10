@@ -1,4 +1,4 @@
-﻿using WellFired.Guacamole.Data.Annotations;
+﻿using JetBrains.Annotations;
 using WellFired.Guacamole.DataBinding.Cells;
 
 namespace WellFired.Guacamole.Examples.Intermediate.KeyValueListViewExample.ViewModel

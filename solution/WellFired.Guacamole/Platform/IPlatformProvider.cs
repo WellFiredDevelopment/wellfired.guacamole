@@ -8,7 +8,12 @@
 		/// <summary>
 		/// Path where data can be saved safely
 		/// </summary>
-		string PlatformDataPath { get; }
+		string FullPlatformDataPath { get; }
+		
+		/// <summary>
+		/// The data path plus the application name
+		/// </summary>
+		string DataPathWithApplicationName { get; }
 		
 		/// <summary>
 		/// Path where the project assets are saved.

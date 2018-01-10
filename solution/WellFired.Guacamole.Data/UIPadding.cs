@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using WellFired.Guacamole.Data.Annotations;
+using JetBrains.Annotations;
 using WellFired.Guacamole.Data.Converters;
 
 namespace WellFired.Guacamole.Data
@@ -67,7 +67,7 @@ namespace WellFired.Guacamole.Data
 		[PublicAPI]
 		public bool Equals(UIPadding other)
 		{
-			var result = (Left == other.Left) && (Top == other.Top) && (Right == other.Right) && (Bottom == other.Bottom);
+			var result = Left == other.Left && Top == other.Top && Right == other.Right && Bottom == other.Bottom;
 			return result;
 		}
 
@@ -75,9 +75,13 @@ namespace WellFired.Guacamole.Data
 		{
 			unchecked
 			{
+				// ReSharper disable once NonReadonlyMemberInGetHashCode
 				var hashCode = Left;
+				// ReSharper disable once NonReadonlyMemberInGetHashCode
 				hashCode = (hashCode*397) ^ Top;
+				// ReSharper disable once NonReadonlyMemberInGetHashCode
 				hashCode = (hashCode*397) ^ Right;
+				// ReSharper disable once NonReadonlyMemberInGetHashCode
 				hashCode = (hashCode*397) ^ Bottom;
 				return hashCode;
 			}

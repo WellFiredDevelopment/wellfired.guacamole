@@ -5,7 +5,7 @@ using WellFired.Guacamole.Platform;
 namespace WellFired.Guacamole.Unit.Platform
 {
 	[TestFixture]
-	public class Given_A_MainThreadRunner
+	public class GivenAMainThreadRunner
 	{
 		[Test]
 		public void When_ProcessAction_Then_ActionsAreExecuted_InRightOrder()

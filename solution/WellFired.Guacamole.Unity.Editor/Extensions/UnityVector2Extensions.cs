@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using WellFired.Guacamole.Data;
-using WellFired.Guacamole.Data.Annotations;
+using JetBrains.Annotations;
 
 namespace WellFired.Guacamole.Unity.Editor.Extensions
 {

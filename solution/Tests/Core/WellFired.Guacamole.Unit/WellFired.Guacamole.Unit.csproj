@@ -42,6 +42,9 @@
     <Reference Include="AsyncBridge.Net35, Version=0.0.0.0, Culture=neutral, PublicKeyToken=b3b1c0202c0d6a87">
       <HintPath>..\..\..\packages\AsyncBridge.Net35.0.2.0\lib\net35-Client\AsyncBridge.Net35.dll</HintPath>
     </Reference>
+    <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325">
+      <HintPath>..\..\..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="NSubstitute, Version=2.0.3.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca">
       <HintPath>..\..\..\packages\NSubstitute.2.0.3\lib\net35\NSubstitute.dll</HintPath>
     </Reference>
@@ -103,6 +106,9 @@
     <Compile Include="CompositeCollection\WithTwoTierDataWithChildrenObservable.cs" />
     <Compile Include="CompositeCollection\WithTwoTierDataWithParentObservable.cs" />
     <Compile Include="Platform\Given_A_MainThreadRunner.cs" />
+    <Compile Include="StoredData\Given_A_DataAccess.cs" />
+    <Compile Include="StoredData\Given_A_DataCacher.cs" />
+    <Compile Include="StoredData\Given_A_DataProxy.cs" />
     <Compile Include="TabbedPage\ConstructionOrder.cs" />
     <Compile Include="Vds\Given_AVariableHeightViewParams.cs" />
     <Compile Include="Vds\Given_AVds.cs" />

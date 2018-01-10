@@ -5,6 +5,6 @@ solution: solution/WellFired.Guacamole.sln
 install:
   - nuget restore solution/WellFired.Guacamole.sln
 script:
-  - xbuild /p:Configuration=Release solution/WellFired.Guacamole.sln
-  - mono solution/packages/NUnit.ConsoleRunner.3.7.0/tools/nunit3-console.exe ./solution/Tests/Core/WellFired.Guacamole.Unit/bin/Release/WellFired.Guacamole.Unit.dll
-  - mono solution/packages/NUnit.ConsoleRunner.3.7.0/tools/nunit3-console.exe ./solution/Tests/Core/WellFired.Guacamole.Integration/bin/Release/WellFired.Guacamole.Integration.dll
+  - xbuild /p:Configuration=Debug solution/WellFired.Guacamole.sln
+  - mono solution/packages/NUnit.ConsoleRunner.3.7.0/tools/nunit3-console.exe ./solution/Tests/Core/WellFired.Guacamole.Unit/bin/Debug/WellFired.Guacamole.Unit.dll
+  - mono solution/packages/NUnit.ConsoleRunner.3.7.0/tools/nunit3-console.exe ./solution/Tests/Core/WellFired.Guacamole.Integration/bin/Debug/WellFired.Guacamole.Integration.dll

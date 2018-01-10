@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using JetBrains.Annotations;
 using WellFired.Guacamole.DataBinding;
 
 namespace WellFired.Guacamole.Unit.Bindable
@@ -38,6 +39,7 @@ namespace WellFired.Guacamole.Unit.Bindable
 
 			public object Value
 			{
+				[UsedImplicitly]
 				get => _currentValue;
 				set => SetProperty(ref _currentValue, value);
 			}

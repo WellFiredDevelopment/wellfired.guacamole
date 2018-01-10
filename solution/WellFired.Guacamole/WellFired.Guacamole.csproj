@@ -39,6 +39,13 @@
       <HintPath>..\packages\AsyncBridge.Net35.0.2.0\lib\net35-Client\AsyncBridge.Net35.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325">
+      <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1-beta1\lib\net35\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Threading, Version=1.0.2856.102, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <HintPath>..\packages\System.Threading.dll.1.0.2856.0\lib\net35\System.Threading.dll</HintPath>
@@ -62,6 +69,19 @@
     <Compile Include="Cells\LabelCell.BindableProperties.cs" />
     <Compile Include="Cells\LabelCell.cs" />
     <Compile Include="Command.cs" />
+    <Compile Include="Diagnostics\ConsoleLogger.cs" />
+    <Compile Include="StoredData\DataAccess.cs" />
+    <Compile Include="StoredData\IDataAccess.cs" />
+    <Compile Include="StoredData\Synchronization\DataCacher.cs" />
+    <Compile Include="StoredData\Synchronization\DataProxy.cs" />
+    <Compile Include="StoredData\Synchronization\FieldReflector.cs" />
+    <Compile Include="StoredData\Synchronization\FileSystemDataWatcher.cs" />
+    <Compile Include="StoredData\Synchronization\IDataCacher.cs" />
+    <Compile Include="StoredData\Synchronization\IDataProxy.cs" />
+    <Compile Include="StoredData\Synchronization\IStoredDataWatcher.cs" />
+    <Compile Include="StoredData\Exceptions\ProxyDataAlreadyAssignedException.cs" />
+    <Compile Include="StoredData\Serialization\ISerializer.cs" />
+    <Compile Include="StoredData\Serialization\JSONSerializer.cs" />
     <Compile Include="DataBinding\BindableContext.cs" />
     <Compile Include="DataBinding\BindableObject.cs" />
     <Compile Include="DataBinding\BindableProperty.cs" />
@@ -145,6 +165,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer\INativeRenderer.cs" />
     <Compile Include="Renderer\NativeRendererHelper.cs" />
+    <Compile Include="StoredData\VersionUpdater\IStoredDataUpdater.cs" />
+    <Compile Include="StoredData\VersionUpdater\IVersionUpdater.cs" />
+    <Compile Include="StoredData\VersionUpdater\StoredDataUpdater.cs" />
     <Compile Include="Styling\Conditional.cs" />
     <Compile Include="Styling\IConditional.cs" />
     <Compile Include="Styling\ISetter.cs" />

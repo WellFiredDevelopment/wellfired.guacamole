@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -66,7 +67,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.RedditBrowser.ViewModel
                 httpWebRequest.Accept = "application/json";
 
                 var response = httpWebRequest.GetResponse();
-                using (var sr = new StreamReader(response.GetResponseStream()))
+                using (var sr = new StreamReader(response.GetResponseStream() ?? throw new Exception()))
                     jsonResponse = sr.ReadToEnd();
             });
             

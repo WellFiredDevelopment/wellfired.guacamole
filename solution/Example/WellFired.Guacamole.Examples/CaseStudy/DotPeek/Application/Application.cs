@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 using WellFired.Guacamole.Data;
-using WellFired.Guacamole.Data.Annotations;
+using JetBrains.Annotations;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.View;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel;
 using WellFired.Guacamole.Unity.Editor;

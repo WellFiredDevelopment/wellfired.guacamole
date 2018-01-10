@@ -4,7 +4,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using WellFired.Guacamole.Data;
-using WellFired.Guacamole.Data.Annotations;
+using JetBrains.Annotations;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Exceptions;
 using WellFired.Guacamole.InitializationContext;
@@ -106,6 +106,12 @@ namespace WellFired.Guacamole.Unity.Editor
 		public void OnDisable()
 		{
 			Logger.UnregisterLogger(Diagnostics.Logger.UnityLogger);
+			if (_window.WindowCloseCommand != null && _window.WindowCloseCommand.CanExecute)
+			{
+				_window.WindowCloseCommand.Execute();
+				_window.WindowCloseCommand.CanExecute = false;
+			}
+			
 			// ReSharper disable once DelegateSubtraction
 			EditorApplication.update -= Update;
 		}
@@ -135,14 +141,14 @@ namespace WellFired.Guacamole.Unity.Editor
 				exception = targetInvocationException.InnerException;
 				Debug.Assert(exception != null, nameof(exception) + " != null");	
 			}
-			
-			var facingException = exception as GuacamoleUserFacingException;
-			EditorUtility.DisplayDialog(
+
+			if(exception is GuacamoleUserFacingException facingException)
+			{
+				EditorUtility.DisplayDialog(
 				"Guacamole Crashed. :(",
-				facingException != null
-					? $"Your Guacamole window has crashed with the error : \n\n{facingException.UserFacingError()}"
-					: $"The window has thrown an exception, the error is \n\n{exception.Message} \n\ncallstack was \n\n{exception.StackTrace}",
+				$"Your Guacamole window has crashed with the error : \n\n{facingException.UserFacingError()}",
 				"Close");
+			}
 		}
 
 		[UsedImplicitly]

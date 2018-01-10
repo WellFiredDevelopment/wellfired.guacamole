@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using WellFired.Guacamole.Data.Annotations;
+using JetBrains.Annotations;
 
 namespace WellFired.Guacamole.Extensions
 {

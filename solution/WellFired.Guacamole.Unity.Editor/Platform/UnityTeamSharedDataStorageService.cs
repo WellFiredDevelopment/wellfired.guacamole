@@ -9,7 +9,7 @@ namespace WellFired.Guacamole.Unity.Editor.Platform
 
 		public UnityTeamSharedDataStorageService(string applicationName)
 		{
-			_dataPath = $"{new UnityPlatformProvider(applicationName).PlatformDataPath}";
+			_dataPath = $"{new UnityPlatformProvider(applicationName).FullPlatformDataPath}";
 		}
 
 		/// <inheritdoc />

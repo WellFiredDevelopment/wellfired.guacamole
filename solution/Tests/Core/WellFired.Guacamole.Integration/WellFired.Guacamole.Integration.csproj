@@ -66,6 +66,8 @@
     <Compile Include="ListView\SourceModification\GivenAListViewWithDefaultHeaderAndCell.cs" />
     <Compile Include="ListView\Vertical\Given_AListView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StoredData\Given_A_FileSystemDataWatcher.cs" />
+    <Compile Include="StoredData\Utils.cs" />
     <Compile Include="View\Button\Bindable\ButtonButtonPressedTests.cs" />
     <Compile Include="View\Button\Bindable\ButtonContextObject.cs" />
     <Compile Include="View\Button\Bindable\ButtonHorizontalTextAlignTests.cs" />
@@ -117,6 +119,9 @@
     <Compile Include="View\View\Binding\ContextObject.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325">
+      <HintPath>..\..\..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="NSubstitute, Version=2.0.3.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca">
       <HintPath>..\..\..\packages\NSubstitute.2.0.3\lib\net35\NSubstitute.dll</HintPath>
     </Reference>

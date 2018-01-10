@@ -12,7 +12,8 @@ global.config = {
     unityRuntime:   'solution/WellFired.Guacamole.Unity.Runtime/WellFired.Guacamole.Unity.Runtime.csproj',
     doxyConfig:     'documentation/doxyconf',
     sphinxInputDir: 'documentation/xml',
-    sphinxOutputDir:'documentation/sphinx'
+    sphinxOutputDir:'documentation/sphinx',
+    sphinxProjectName: 'dotGuacamole'
 }
 
 module.exports = {

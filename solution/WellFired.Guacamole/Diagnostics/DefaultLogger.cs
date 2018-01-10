@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using WellFired.Guacamole.Data.Annotations;
+using JetBrains.Annotations;
 
 namespace WellFired.Guacamole.Diagnostics
 {
