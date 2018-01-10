@@ -67,7 +67,7 @@ namespace WellFired.Guacamole.Layouts
             {
                 var total = 0;
                 var processedCounter = 0;
-                var ordered = staticElements.OrderBy(o => getImportantSize(o.RectRequest));
+                var ordered = staticElements.OrderBy(o => getImportantSize(o.RectRequest)).ToArray();
                 foreach (var entry in ordered)
                 {
                     total += (int)getImportantSize(entry.RectRequest);

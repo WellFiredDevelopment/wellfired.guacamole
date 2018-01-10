@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
 using WellFired.Guacamole.Data;
-using WellFired.Guacamole.Data.Annotations;
+using JetBrains.Annotations;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Platform;
@@ -54,12 +54,12 @@ namespace WellFired.Guacamole.Views
 		public override void Render(UIRect parentRect)
 		{
 		    var view = Content as View;
-		    Debug.Assert(view != null, "view != null");
 
 			_mainThreadRunner.ProcessActions();
 			NativeRenderer.Render(FinalRenderedRect);
 
 			var relativeParentRect = UIRect.With(0, 0, parentRect.Width, parentRect.Height);
+			// ReSharper disable once PossibleNullReferenceException
 		    view.Render(relativeParentRect);
 		}
 
@@ -68,9 +68,9 @@ namespace WellFired.Guacamole.Views
 			base.OnPropertyChanged(sender, e);
 
 		    var view = Content as View;
-		    Debug.Assert(view != null, "view != null");
 
 		    if (e.PropertyName == BindingContextProperty.PropertyName)
+			    // ReSharper disable once PossibleNullReferenceException
 			    view.BindingContext = BindingContext;
 		}
 		

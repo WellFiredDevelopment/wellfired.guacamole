@@ -12,7 +12,7 @@ namespace WellFired.Guacamole.Unit.CompositeCollection
 			CellLabelText = name;
 		}
 
-		public event PropertyChangedEventHandler PropertyChanged = delegate(object sender, PropertyChangedEventArgs args) {  };
+		public event PropertyChangedEventHandler PropertyChanged = delegate {  };
 		public bool IsSelected { get; set; }
 		public string CellLabelText { get; set; }
 	}
@@ -24,7 +24,7 @@ namespace WellFired.Guacamole.Unit.CompositeCollection
 			CellLabelText = name;
 		}
 
-		public event PropertyChangedEventHandler PropertyChanged = delegate(object sender, PropertyChangedEventArgs args) {  };
+		public event PropertyChangedEventHandler PropertyChanged = delegate {  };
 		public bool IsSelected { get; set; }
 		public string CellLabelText { get; set; }
 	}

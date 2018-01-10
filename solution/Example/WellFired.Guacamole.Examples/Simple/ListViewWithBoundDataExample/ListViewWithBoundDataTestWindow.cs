@@ -16,12 +16,10 @@ namespace WellFired.Guacamole.Examples.Simple.ListViewWithBoundDataExample
 	
 	public class ListViewWithBoundDataTestWindow : Window
 	{
-		private readonly ListView _listView;
-
 		public ListViewWithBoundDataTestWindow(ILogger logger, INotifyPropertyChanged persistantData, IPlatformProvider platformProvider) 
 			: base(logger, persistantData, platformProvider)
 		{
-			_listView = new ListView
+			var listView = new ListView
 			{
 				HorizontalLayout = LayoutOptions.Fill,
 				VerticalLayout = LayoutOptions.Fill,
@@ -31,10 +29,10 @@ namespace WellFired.Guacamole.Examples.Simple.ListViewWithBoundDataExample
 				ItemSource = ItemSource.From("Sausage")
 			};
 
-			Content = _listView;
+			Content = listView;
 
-			_listView.BindingContext = new BoundObject();
-			_listView.Bind(ItemsView.ItemSourceProperty, "Data", BindingMode.ReadOnly);
+			listView.BindingContext = new BoundObject();
+			listView.Bind(ItemsView.ItemSourceProperty, "Data", BindingMode.ReadOnly);
 		}
 	}
 }

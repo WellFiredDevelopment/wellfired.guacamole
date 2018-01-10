@@ -1,5 +1,5 @@
 ﻿using System;
-using WellFired.Guacamole.Data.Annotations;
+using JetBrains.Annotations;
 
 namespace WellFired.Guacamole.Data
 {
@@ -47,9 +47,10 @@ namespace WellFired.Guacamole.Data
 
 		public override bool Equals(object obj)
 		{
+			// ReSharper disable once PossibleNullReferenceException
 			var compareTo = (UIColor) obj;
-			return (Math.Abs(compareTo.R - R) < 0.01f) && (Math.Abs(compareTo.G - G) < 0.01f) &&
-			       (Math.Abs(compareTo.B - B) < 0.01f) && (Math.Abs(compareTo.A - A) < 0.01f);
+			return Math.Abs(compareTo.R - R) < 0.01f && Math.Abs(compareTo.G - G) < 0.01f &&
+			       Math.Abs(compareTo.B - B) < 0.01f && Math.Abs(compareTo.A - A) < 0.01f;
 		}
 
 		[PublicAPI]
@@ -62,9 +63,13 @@ namespace WellFired.Guacamole.Data
 		{
 			unchecked
 			{
+				// ReSharper disable once NonReadonlyMemberInGetHashCode
 				var hashCode = R.GetHashCode();
+				// ReSharper disable once NonReadonlyMemberInGetHashCode
 				hashCode = (hashCode*397) ^ G.GetHashCode();
+				// ReSharper disable once NonReadonlyMemberInGetHashCode
 				hashCode = (hashCode*397) ^ B.GetHashCode();
+				// ReSharper disable once NonReadonlyMemberInGetHashCode
 				hashCode = (hashCode*397) ^ A.GetHashCode();
 				return hashCode;
 			}

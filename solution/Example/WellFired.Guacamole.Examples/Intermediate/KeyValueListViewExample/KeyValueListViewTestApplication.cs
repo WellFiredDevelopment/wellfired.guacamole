@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 using WellFired.Guacamole.Data;
-using WellFired.Guacamole.Data.Annotations;
+using JetBrains.Annotations;
 using WellFired.Guacamole.Examples.Intermediate.KeyValueListViewExample.ViewModel;
 using WellFired.Guacamole.Unity.Editor;
 

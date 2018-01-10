@@ -15,13 +15,14 @@ namespace WellFired.Guacamole.Drawing
 
 		public override bool Equals(object obj)
 		{
+			// ReSharper disable once PossibleNullReferenceException
 			var compareTo = (Pixel) obj;
-			return (compareTo.X == X) && (compareTo.Y == Y);
+			return compareTo.X == X && compareTo.Y == Y;
 		}
 
 		public bool Equals(Pixel other)
 		{
-			return (X == other.X) && (Y == other.Y);
+			return X == other.X && Y == other.Y;
 		}
 
 		public override int GetHashCode()

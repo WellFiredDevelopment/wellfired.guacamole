@@ -2,7 +2,7 @@
 using System.Reflection;
 using UnityEngine;
 using WellFired.Guacamole.Data;
-using WellFired.Guacamole.Data.Annotations;
+using JetBrains.Annotations;
 using WellFired.Guacamole.Exceptions;
 using WellFired.Guacamole.InitializationContext;
 using Logger = WellFired.Guacamole.Unity.Editor.Diagnostics.Logger;

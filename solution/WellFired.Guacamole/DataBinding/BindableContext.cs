@@ -54,7 +54,7 @@ namespace WellFired.Guacamole.DataBinding
 
 		private void ConfigureSet()
 		{
-			if ((Object == null) || (Property == null) || (TargetProperty == null))
+			if (Object == null || Property == null || TargetProperty == null)
 			{
 				_propertyInfo = null;
 				_propertySetMethod = null;
@@ -63,6 +63,7 @@ namespace WellFired.Guacamole.DataBinding
 			{
 				var type = Object.GetType();
 				_propertyInfo = type.GetProperty(TargetProperty, BindingFlags.Public | BindingFlags.Instance);
+				// ReSharper disable once PossibleNullReferenceException
 				_propertySetMethod = _propertyInfo.GetSetMethod();
 				_propertyGetMethod = _propertyInfo.GetGetMethod();
 			}
@@ -86,7 +87,7 @@ namespace WellFired.Guacamole.DataBinding
 				if (Equals(Value, value))
 					return false;
 				
-				Value = _defaultConverter.Convert(value, Property.PropertyType, null, CultureInfo.CurrentCulture);;				
+				Value = _defaultConverter.Convert(value, Property.PropertyType, null, CultureInfo.CurrentCulture);		
 				switch (InstancedBindingMode)
 				{
 					case BindingMode.OneWay:

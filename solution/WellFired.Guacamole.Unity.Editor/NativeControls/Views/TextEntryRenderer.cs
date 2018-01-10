@@ -6,7 +6,6 @@ using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
-using Debug = System.Diagnostics.Debug;
 
 [assembly: CustomRenderer(typeof(TextEntry), typeof(TextEntryRenderer))]
 
@@ -19,7 +18,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			get
 			{
 				var entry = Control as TextEntry;
-				Debug.Assert(entry != null, $"{nameof(entry)} != null");
+				// ReSharper disable once PossibleNullReferenceException
 				return Style.CalcSize(new GUIContent(entry.Text)).ToUISize();
 			}
 		}

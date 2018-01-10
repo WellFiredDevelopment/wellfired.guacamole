@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using WellFired.Guacamole.Data.Annotations;
+using JetBrains.Annotations;
 
 namespace WellFired.Guacamole.Data
 {
@@ -105,6 +105,7 @@ namespace WellFired.Guacamole.Data
 		
 		public override bool Equals(object obj)
 		{
+			// ReSharper disable once PossibleNullReferenceException
 			var compareTo = (UIRect)obj;
 			Debug.Assert(obj != null, "obj != null");
 			return MathUtil.NearEqual(compareTo.X, X) && MathUtil.NearEqual(compareTo.Y, Y) && MathUtil.NearEqual(compareTo.Width, Width) && MathUtil.NearEqual(compareTo.Height, Height);

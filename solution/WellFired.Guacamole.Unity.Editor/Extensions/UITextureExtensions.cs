@@ -5,7 +5,7 @@ using System.IO;
 using System;
 using UnityEngine;
 using WellFired.Guacamole.Data;
-using WellFired.Guacamole.Data.Annotations;
+using JetBrains.Annotations;
 using WellFired.Guacamole.Image;
 
 namespace WellFired.Guacamole.Unity.Editor.Extensions

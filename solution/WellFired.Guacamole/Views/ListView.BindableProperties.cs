@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using WellFired.Guacamole.Data;
-using WellFired.Guacamole.Data.Annotations;
+using JetBrains.Annotations;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Cells;
 

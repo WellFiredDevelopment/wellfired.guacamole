@@ -1,9 +1,11 @@
 ﻿using System;
+using JetBrains.Annotations;
 
 namespace WellFired.Guacamole.Drawing.Blend
 {
     public static class Blend
     {
+        [UsedImplicitly]
         private delegate byte BlendMethod(byte source, byte destination, byte alpha);
 
         /// <summary>
@@ -13,18 +15,22 @@ namespace WellFired.Guacamole.Drawing.Blend
         /// <param name="source">The source layer should be the layer you're trying to render on top.</param>
         /// <param name="destination">The destination layer should be the layer that already exists</param>
         /// <param name="blendOperation">The blend operation we will perform between these two layers.</param>
-        public static Layer.Layer Perform(Layer.Layer source, Layer.Layer destination, BlendOperation blendOperation)
+        public static void Perform(Layer.Layer source, Layer.Layer destination, BlendOperation blendOperation)
         {
             switch (blendOperation)
             {
                 case BlendOperation.Normal:
-                    return AlphaBlend.Blend(source, destination);
+                    AlphaBlend.Blend(source, destination);
+                    return;
                 case BlendOperation.Erase:
-                    return EraseAlphaBlend.Blend(source, destination);
+                    EraseAlphaBlend.Blend(source, destination);
+                    return;
                 case BlendOperation.Replace:
-                    return ReplaceAlphaBlend.Blend(source, destination);
+                    ReplaceAlphaBlend.Blend(source, destination);
+                    return;
                 case BlendOperation.MaxRgbBlendABlend:
-                    return MaxRgbBlendABlend.Blend(source, destination);
+                    MaxRgbBlendABlend.Blend(source, destination);
+                    return;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(blendOperation), blendOperation, null);
             }

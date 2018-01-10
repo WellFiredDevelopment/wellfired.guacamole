@@ -1,4 +1,4 @@
-﻿using WellFired.Guacamole.Data.Annotations;
+﻿using JetBrains.Annotations;
 
 namespace WellFired.Guacamole.Drawing.Blend
 {
@@ -45,7 +45,7 @@ namespace WellFired.Guacamole.Drawing.Blend
         {
             // Optimised version of the AlphaBlend, without conversion to float data, with no divide.
             // http://www.codeguru.com/cpp/cpp/algorithms/general/article.php/c15989/Tip-An-Optimized-Formula-for-Alpha-Blending-Pixels.htm
-            var result = (((source * alpha) + (destination * (255 - alpha))) >> 8);
+            var result = (source * alpha + destination * (255 - alpha)) >> 8;
 
             if (result > 255)
                 result = 255;

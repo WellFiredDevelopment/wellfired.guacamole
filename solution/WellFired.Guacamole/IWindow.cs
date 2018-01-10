@@ -1,5 +1,5 @@
 ﻿using WellFired.Guacamole.Data;
-using WellFired.Guacamole.Data.Annotations;
+using JetBrains.Annotations;
 using WellFired.Guacamole.InitializationContext;
 using WellFired.Guacamole.Views;
 

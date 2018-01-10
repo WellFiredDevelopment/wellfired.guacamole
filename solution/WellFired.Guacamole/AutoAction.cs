@@ -1,5 +1,5 @@
 ﻿using System;
-using WellFired.Guacamole.Data.Annotations;
+using JetBrains.Annotations;
 using WellFired.Guacamole.Extensions;
 
 namespace WellFired.Guacamole
@@ -31,7 +31,7 @@ namespace WellFired.Guacamole
 
 		public void Add(IDisposable disposable, Action action)
 		{
-			if ((_handlers != null) && _handlers.AlreadyHasSubscriber(action))
+			if (_handlers != null && _handlers.AlreadyHasSubscriber(action))
 				return;
 
 			disposable.AddDisposedCallback(() => Remove(action));
@@ -49,9 +49,10 @@ namespace WellFired.Guacamole
 		{
 			var length = _handlers?.GetInvocationList().Length ?? 0;
 
+			// ReSharper disable once DelegateSubtraction
 			_handlers -= action;
 
-			if ((length <= 0) || ((_handlers != null) && (_handlers.GetInvocationList().Length != 0)))
+			if (length <= 0 || _handlers != null && _handlers.GetInvocationList().Length != 0)
 				return;
 
 			_handlers = null;

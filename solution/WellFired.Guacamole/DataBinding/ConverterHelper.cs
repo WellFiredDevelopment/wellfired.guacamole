@@ -1,5 +1,5 @@
 using System;
-using WellFired.Guacamole.Data.Annotations;
+using JetBrains.Annotations;
 
 namespace WellFired.Guacamole.DataBinding
 {
@@ -17,7 +17,7 @@ namespace WellFired.Guacamole.DataBinding
 			if (paramater == null)
 				return null;
 
-			if ((desiredType == null) || desiredType.IsAssignable(paramater))
+			if (desiredType == null || desiredType.IsAssignable(paramater))
 				return paramater;
 
 			if (desiredType.IsEnum())

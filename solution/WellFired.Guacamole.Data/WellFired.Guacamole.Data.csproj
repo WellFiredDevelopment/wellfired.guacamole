@@ -35,16 +35,13 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325">
+      <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Annotations\CanBeNull.cs" />
-    <Compile Include="Annotations\ImplicitUseKindFlags.cs" />
-    <Compile Include="Annotations\ImplicitUseTargetFlags.cs" />
-    <Compile Include="Annotations\MeansImplicitUse.cs" />
-    <Compile Include="Annotations\NotNull.cs" />
-    <Compile Include="Annotations\PublicAPIAttribute.cs" />
-    <Compile Include="Annotations\UsedImplicityAttribute.cs" />
     <Compile Include="Collection\ObservableCollection.cs" />
     <Compile Include="Converters\UIPaddingConverter.cs" />
     <Compile Include="CornerMask.cs" />
@@ -72,6 +69,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="WellFired.Guacamole.Data.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

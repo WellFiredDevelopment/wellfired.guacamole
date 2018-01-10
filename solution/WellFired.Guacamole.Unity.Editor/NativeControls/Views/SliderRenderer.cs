@@ -77,7 +77,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		private void CreateThumbBackgroundTexture()
 		{
 			var slider = Control as Slider;
-			Debug.Assert(slider != null, "slider != null");
+			// ReSharper disable once PossibleNullReferenceException
 			ThumbBackgroundTexture = Texture2DExtensions.CreateRoundedTexture(32, 32, slider.ThumbBackgroundColor, slider.ThumbOutlineColor, slider.ThumbCornerRadius, 1, slider.ThumbCornerMask, OutlineMask.All);
 		}
 	}

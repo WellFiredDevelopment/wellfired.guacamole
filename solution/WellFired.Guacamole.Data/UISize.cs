@@ -1,4 +1,4 @@
-﻿using WellFired.Guacamole.Data.Annotations;
+﻿using JetBrains.Annotations;
 
 namespace WellFired.Guacamole.Data
 {
@@ -28,6 +28,7 @@ namespace WellFired.Guacamole.Data
 		
 		public override bool Equals(object obj)
 		{
+			// ReSharper disable once PossibleNullReferenceException
 			var compareTo = (UISize) obj;
 			return MathUtil.NearEqual(compareTo.Width, Width) && MathUtil.NearEqual(compareTo.Height, Height);
 		}

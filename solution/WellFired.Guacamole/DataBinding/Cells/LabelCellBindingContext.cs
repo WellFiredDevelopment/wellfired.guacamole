@@ -1,5 +1,5 @@
 ﻿using WellFired.Guacamole.Cells;
-using WellFired.Guacamole.Data.Annotations;
+using JetBrains.Annotations;
 
 namespace WellFired.Guacamole.DataBinding.Cells
 {

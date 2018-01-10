@@ -16,7 +16,6 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Cells
 		public override void Render(UIRect renderRect)
 		{
 			var cell = Control as Cell;
-			Debug.Assert(cell != null, "cell != null");
 
 			if(CanMouseOver)
 				EditorGUIUtility.AddCursorRect(UnityRect, MouseCursor.Link);
@@ -27,6 +26,8 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Cells
 				    UnityEngine.Event.current.rawType == EventType.mouseUp &&
 				    renderRect.ToUnityRect().Contains(UnityEngine.Event.current.mousePosition))
 				{
+					Debug.Assert(cell != null, nameof(cell) + " != null");
+					// ReSharper disable once PossibleNullReferenceException
 					cell.Container.SelectedItem = cell.BindingContext;
 				}
 			}

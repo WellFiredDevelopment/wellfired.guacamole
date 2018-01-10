@@ -1,4 +1,4 @@
-﻿using WellFired.Guacamole.Data.Annotations;
+﻿using JetBrains.Annotations;
 
 namespace WellFired.Guacamole.Data
 {
@@ -19,6 +19,7 @@ namespace WellFired.Guacamole.Data
 		
 		public override bool Equals(object obj)
 		{
+			// ReSharper disable once PossibleNullReferenceException
 			var compareTo = (UILocation) obj;
 			return MathUtil.NearEqual(compareTo.X, X) && MathUtil.NearEqual(compareTo.Y, Y);
 		}

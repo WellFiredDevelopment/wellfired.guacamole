@@ -1,4 +1,4 @@
-﻿using WellFired.Guacamole.Data.Annotations;
+﻿using JetBrains.Annotations;
 using WellFired.Guacamole.DataBinding;
 
 namespace WellFired.Guacamole.Unit.Converter.Default

@@ -7,7 +7,6 @@ using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
-using Debug = System.Diagnostics.Debug;
 
 [assembly: CustomRenderer(typeof(ListView), typeof(ListViewRenderer))]
 
@@ -76,8 +75,8 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			base.PushMaskStack(maskRect);
 			
 			var listView = Control as ListView;
-			Debug.Assert(listView != null, "listView != null");
 			
+			// ReSharper disable once PossibleNullReferenceException
 			if (listView.ShouldShowScrollBar && listView.CanScroll)
 			{
 				switch (listView.Orientation)
@@ -107,7 +106,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		private void CreateScrollBarBackgroundTexture()
 		{
 			var listView = Control as ListView;
-			Debug.Assert(listView != null, "listView != null");
+			// ReSharper disable once PossibleNullReferenceException
 			ScrollBarBackgroundTexture = Texture2DExtensions.CreateRoundedTexture(64, 64, listView.ScrollBarBackgroundColor, listView.ScrollBarOutlineColor, listView.ScrollBarCornerRadius, listView.ScrollBarOutlineThickness, listView.ScrollBarCornerMask, listView.ScrollBarOutlineMask);
 		}
 

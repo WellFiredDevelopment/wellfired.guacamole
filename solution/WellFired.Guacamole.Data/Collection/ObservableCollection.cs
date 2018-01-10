@@ -50,7 +50,7 @@ namespace WellFired.Guacamole.Data.Collection
         {
             _monitor = new SimpleMonitor();
             var items = Items;
-            if (list == null || items == null)
+            if (list == null)
                 return;
 
             using (IEnumerator<T> enumerator = list.GetEnumerator())
@@ -62,7 +62,7 @@ namespace WellFired.Guacamole.Data.Collection
             }
         }
 
-        private System.IDisposable BlockReentrancy()
+        private IDisposable BlockReentrancy()
         {
             _monitor.Enter();
             return _monitor;
@@ -70,7 +70,7 @@ namespace WellFired.Guacamole.Data.Collection
 
         private void CheckReentrancy()
         {
-            if ((_monitor.Busy && (CollectionChanged != null)) && (CollectionChanged.GetInvocationList().Length > 1))
+            if (_monitor.Busy && CollectionChanged != null && CollectionChanged.GetInvocationList().Length > 1)
             {
                 throw new InvalidOperationException("ObservableCollection Reentrancy Not Allowed");
             }
@@ -171,7 +171,7 @@ namespace WellFired.Guacamole.Data.Collection
 
         // Nested Types
         [Serializable]
-        private class SimpleMonitor : System.IDisposable
+        private class SimpleMonitor : IDisposable
         {
             // Fields
             private int _busyCount;
@@ -212,7 +212,7 @@ namespace WellFired.Guacamole.Data.Collection
         {
             NewStartingIndex = -1;
             OldStartingIndex = -1;
-            if (((action != NotifyCollectionChangedAction.Add) && (action != NotifyCollectionChangedAction.Remove)) && (action != NotifyCollectionChangedAction.Reset))
+            if (action != NotifyCollectionChangedAction.Add && action != NotifyCollectionChangedAction.Remove && action != NotifyCollectionChangedAction.Reset)
             {
                 throw new ArgumentException("MustBeResetAddOrRemoveActionForCtor", nameof(action));
             }
@@ -238,7 +238,7 @@ namespace WellFired.Guacamole.Data.Collection
         {
             NewStartingIndex = -1;
             OldStartingIndex = -1;
-            if (((action != NotifyCollectionChangedAction.Add) && (action != NotifyCollectionChangedAction.Remove)) && (action != NotifyCollectionChangedAction.Reset))
+            if (action != NotifyCollectionChangedAction.Add && action != NotifyCollectionChangedAction.Remove && action != NotifyCollectionChangedAction.Reset)
             {
                 throw new ArgumentException("MustBeResetAddOrRemoveActionForCtor", nameof(action));
             }
@@ -279,7 +279,7 @@ namespace WellFired.Guacamole.Data.Collection
         {
             NewStartingIndex = -1;
             OldStartingIndex = -1;
-            if (((action != NotifyCollectionChangedAction.Add) && (action != NotifyCollectionChangedAction.Remove)) && (action != NotifyCollectionChangedAction.Reset))
+            if (action != NotifyCollectionChangedAction.Add && action != NotifyCollectionChangedAction.Remove && action != NotifyCollectionChangedAction.Reset)
             {
                 throw new ArgumentException("MustBeResetAddOrRemoveActionForCtor", nameof(action));
             }
@@ -313,7 +313,7 @@ namespace WellFired.Guacamole.Data.Collection
         {
             NewStartingIndex = -1;
             OldStartingIndex = -1;
-            if (((action != NotifyCollectionChangedAction.Add) && (action != NotifyCollectionChangedAction.Remove)) && (action != NotifyCollectionChangedAction.Reset))
+            if (action != NotifyCollectionChangedAction.Add && action != NotifyCollectionChangedAction.Remove && action != NotifyCollectionChangedAction.Reset)
             {
                 throw new ArgumentException("MustBeResetAddOrRemoveActionForCtor", nameof(action));
             }
@@ -410,7 +410,7 @@ namespace WellFired.Guacamole.Data.Collection
         private void InitializeAdd(NotifyCollectionChangedAction action, IList newItems, int newStartingIndex)
         {
             Action = action;
-            NewItems = (newItems == null) ? null : ArrayList.ReadOnly(newItems);
+            NewItems = newItems == null ? null : ArrayList.ReadOnly(newItems);
             NewStartingIndex = newStartingIndex;
         }
 
@@ -438,7 +438,7 @@ namespace WellFired.Guacamole.Data.Collection
         private void InitializeRemove(NotifyCollectionChangedAction action, IList oldItems, int oldStartingIndex)
         {
             Action = action;
-            OldItems = (oldItems == null) ? null : ArrayList.ReadOnly(oldItems);
+            OldItems = oldItems == null ? null : ArrayList.ReadOnly(oldItems);
             OldStartingIndex = oldStartingIndex;
         }
 

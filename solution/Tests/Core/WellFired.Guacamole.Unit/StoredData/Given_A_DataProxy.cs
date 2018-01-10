@@ -5,7 +5,7 @@ using WellFired.Guacamole.StoredData.Synchronization;
 namespace WellFired.Guacamole.Unit.StoredData
 {
 	[TestFixture]
-	public class Given_A_DataProxy
+	public class GivenADataProxy
 	{
 		[Test]
 		//When we inject data in the proxy, we should updates its properties, but we should not consider the data it holds

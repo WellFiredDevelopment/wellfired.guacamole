@@ -6,7 +6,6 @@ using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
-using Debug = System.Diagnostics.Debug;
 
 [assembly: CustomRenderer(typeof(Button), typeof(ButtonRenderer))]
 
@@ -19,7 +18,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			get
 			{
 				var button = Control as Button;
-				Debug.Assert(button != null, $"{nameof(button)} != null");
+				// ReSharper disable once PossibleNullReferenceException
 				return Style.CalcSize(new GUIContent(button.Text)).ToUISize();
 			}
 		}

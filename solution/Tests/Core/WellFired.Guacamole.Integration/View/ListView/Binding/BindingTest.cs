@@ -20,7 +20,7 @@ namespace WellFired.Guacamole.Integration.View.ListView.Binding
                 EntrySize = 50,
                 Spacing = 5,
                 ItemSource = ItemSource.From("One")
-            };;
+            };
             
             ViewSizingExtensions.DoSizingAndLayout(view, UIRect.With(0, 0, 300, 300));
             

@@ -1,9 +1,11 @@
 ﻿using System;
+using JetBrains.Annotations;
 
 namespace WellFired.Guacamole.Drawing.Algorithms
 {
     public class Line
     {
+	    [PublicAPI]
 		private static void Swap<T>(ref T lhs, ref T rhs)
 		{
 			var temp = lhs; lhs = rhs; rhs = temp;
@@ -41,7 +43,6 @@ namespace WellFired.Guacamole.Drawing.Algorithms
 			var dy = Math.Abs(y1 - y0);
 			var sy = y0 < y1 ? 1 : -1;
 
-			var x2 = 0;
 			var e2 = 0;
 			var error = dx - dy;
 			var ed = dx + dy == 0 ? 1 : Math.Sqrt((float) dx * dx + (float) dy * dy);
@@ -50,7 +51,7 @@ namespace WellFired.Guacamole.Drawing.Algorithms
 			{
 				plot(x0, y0, (byte)(255 * Math.Abs(e2 + dy / ed)));
 				e2 = error;
-				x2 = x0;
+				var x2 = x0;
 				if (e2 * 2 >= -dx)
 				{
 					if (x0 == x1)
