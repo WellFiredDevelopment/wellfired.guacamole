@@ -52,7 +52,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="WellFired.Json.Unity, Version=9.0.1.22, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\WellFired.Json.Unity.9.0.1.22\lib\WellFired.Json.Unity.dll</HintPath>
+      <HintPath>..\..\Assemblies\WellFired.Json.Unity.9.0.1.22\WellFired.Json.Unity.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
