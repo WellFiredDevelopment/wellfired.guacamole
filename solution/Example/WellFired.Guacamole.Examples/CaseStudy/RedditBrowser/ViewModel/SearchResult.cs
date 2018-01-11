@@ -6,6 +6,7 @@ using System.Net;
 using System.Threading.Tasks;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Platform;
+using WellFired.Json;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.RedditBrowser.ViewModel
 {
@@ -72,7 +73,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.RedditBrowser.ViewModel
             });
             
             // The returned data from the web API is converted here into our view models.
-            var result = Newtonsoft.Json.JsonConvert.DeserializeObject<Model.SearchResult>(jsonResponse);
+            var result = JsonConvert.DeserializeObject<Model.SearchResult>(jsonResponse);
             return result.Data.Children.Select(o => new Post(o)).ToList();
         }
     }

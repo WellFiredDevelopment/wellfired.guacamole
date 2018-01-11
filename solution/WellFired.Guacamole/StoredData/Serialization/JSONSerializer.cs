@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using WellFired.Json;
 using WellFired.Guacamole.Diagnostics;
 
 namespace WellFired.Guacamole.StoredData.Serialization

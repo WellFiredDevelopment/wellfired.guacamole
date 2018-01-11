@@ -43,13 +43,13 @@
       <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1-beta1\lib\net35\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Threading, Version=1.0.2856.102, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <HintPath>..\packages\System.Threading.dll.1.0.2856.0\lib\net35\System.Threading.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="WellFired.Json.Unity, Version=9.0.1.22, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\WellFired.Json.Unity.9.0.1.22\lib\WellFired.Json.Unity.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
