@@ -9,7 +9,7 @@ namespace WellFired.Guacamole.Unity.Editor.Platform
 	/// </summary>
 	public class UnityPlatformProvider : IPlatformProvider
 	{
-		private const string DataPath = "/GuacamoleApplication/Editor";
+		private const string DataPath = "/GuacamoleApplication/Editor/";
 		private readonly string _applicationName;
 
 		public UnityPlatformProvider(string applicationName)
@@ -18,8 +18,8 @@ namespace WellFired.Guacamole.Unity.Editor.Platform
 		}
 
 		public string PlatformProjectPath => UnityEngine.Application.dataPath;
-		public string FullPlatformDataPath => PlatformProjectPath + DataPath + _applicationName;
-		public string DataPathWithApplicationName => DataPath + _applicationName;
+		public string ApplicationDataRootedPath => PlatformProjectPath + DataPath + _applicationName;
+		public string ApplicationDataRelativePath => DataPath + _applicationName;
 		public IDataStorageService GetPersonalDataStorage() => new UnityPersonalDataStorageService(_applicationName);
 		public IDataStorageService GetTeamSharedDataStorage() => new UnityTeamSharedDataStorageService(_applicationName);
 		

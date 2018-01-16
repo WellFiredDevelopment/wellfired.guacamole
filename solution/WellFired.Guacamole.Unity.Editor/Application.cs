@@ -31,13 +31,13 @@ namespace WellFired.Guacamole.Unity.Editor
 		private static void ConfigurePersistentData(InitializationContext initializationContext, Type persistantType)
 		{
 			var unityPlatformProvider = new UnityPlatformProvider(initializationContext.ApplicationName);
-			var assetPath = $"Assets{unityPlatformProvider.DataPathWithApplicationName}/data.asset";
+			var assetPath = $"Assets{unityPlatformProvider.ApplicationDataRelativePath}/data.asset";
 			var persistantData = AssetDatabase.LoadAssetAtPath(assetPath, persistantType);
 
 			if (persistantData == null)
 			{
 				persistantData = ScriptableObject.CreateInstance(persistantType);
-				Directory.CreateDirectory(unityPlatformProvider.FullPlatformDataPath);
+				Directory.CreateDirectory(unityPlatformProvider.ApplicationDataRootedPath);
 				AssetDatabase.DeleteAsset(assetPath);
 				AssetDatabase.CreateAsset(persistantData, assetPath);
 				EditorUtility.SetDirty(persistantData);
