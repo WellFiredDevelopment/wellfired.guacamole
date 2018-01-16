@@ -45,3 +45,6 @@ sysinfo.txt
 
 /node_modules/
 /.idea/
+unity/.idea
+unity/Assembly-CSharp-Editor-firstpass.csproj
+unity/unity.sln
