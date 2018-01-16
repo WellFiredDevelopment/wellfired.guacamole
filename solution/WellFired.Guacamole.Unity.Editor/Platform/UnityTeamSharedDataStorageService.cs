@@ -51,5 +51,11 @@ namespace WellFired.Guacamole.Unity.Editor.Platform
 			
 			File.WriteAllText(assetPath, data);
 		}
+
+		public void Delete(string key)
+		{
+			var assetPath = $"{_dataPath}/{key}.gdata";
+			File.Delete(assetPath);
+		}
 	}
 }

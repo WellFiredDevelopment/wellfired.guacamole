@@ -1,11 +1,21 @@
 ﻿using System;
 using WellFired.Json;
 using WellFired.Guacamole.Diagnostics;
+using WellFired.Json.Serialization;
 
 namespace WellFired.Guacamole.StoredData.Serialization
 {
 	public class JSONSerializer : ISerializer
 	{
+		private readonly IContractResolver _contractResolver;
+
+		public JSONSerializer(){}
+		
+		public JSONSerializer(IContractResolver contractResolver) : this()
+		{
+			_contractResolver = contractResolver;
+		}
+
 		public string Serialize(object data)
 		{
 			string serializedData = null;
@@ -14,7 +24,8 @@ namespace WellFired.Guacamole.StoredData.Serialization
 				serializedData = JsonConvert.SerializeObject(data, Formatting.Indented, new JsonSerializerSettings
 				{
 					TypeNameHandling = TypeNameHandling.Auto,
-					DateTimeZoneHandling = DateTimeZoneHandling.Utc
+					DateTimeZoneHandling = DateTimeZoneHandling.Utc,
+					ContractResolver = _contractResolver
 				});
 			}
 			catch (Exception e)

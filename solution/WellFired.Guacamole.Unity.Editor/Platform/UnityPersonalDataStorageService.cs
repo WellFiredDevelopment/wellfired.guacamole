@@ -41,5 +41,10 @@ namespace WellFired.Guacamole.Unity.Editor.Platform
 		{
 			EditorPrefs.SetString($"{_applicationName}:{key}", data);
 		}
+
+		public void Delete(string key)
+		{
+			EditorPrefs.DeleteKey($"{_applicationName}:{key}");
+		}
 	}
 }

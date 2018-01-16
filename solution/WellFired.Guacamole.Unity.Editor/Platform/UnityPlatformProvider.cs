@@ -20,9 +20,8 @@ namespace WellFired.Guacamole.Unity.Editor.Platform
 		public string PlatformProjectPath => UnityEngine.Application.dataPath;
 		public string FullPlatformDataPath => PlatformProjectPath + DataPath + _applicationName;
 		public string DataPathWithApplicationName => DataPath + _applicationName;
-		public IMainThreadRunner MainThreadRunner { get; } = new MainThreadRunner();
-		public IDataStorageService GetPersonalDataStorage(string applicationName) => new UnityPersonalDataStorageService(_applicationName);
-		public IDataStorageService GetTeamSharedDataStorage(string applicationName) => new UnityTeamSharedDataStorageService(_applicationName);
+		public IDataStorageService GetPersonalDataStorage() => new UnityPersonalDataStorageService(_applicationName);
+		public IDataStorageService GetTeamSharedDataStorage() => new UnityTeamSharedDataStorageService(_applicationName);
 		
 		public string OpenFolderPicker(string title, string folder, string defaultName)
 		{

@@ -48,10 +48,12 @@
       <HintPath>..\Assemblies\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="WellFired.Json.Unity, Version=9.0.1.22, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\WellFired.Json.Unity.9.0.1.22\lib\WellFired.Json.Unity.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application.cs" />
-    <Compile Include="ApplicationInitializationContextScriptableObject.cs" />
     <Compile Include="DataBinding\ExposePropertyAttribute.cs" />
     <Compile Include="DataBinding\ObservableScriptableObject.cs" />
     <Compile Include="DataBinding\ObservableScriptableObjectEditor.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="Extensions\UnityVector2Extensions.cs" />
     <Compile Include="GuacamoleWindow.cs" />
     <Compile Include="GuacamoleWindowLauncher.cs" />
+    <Compile Include="InitializationContext.cs" />
     <Compile Include="LaunchableApplication.cs" />
     <Compile Include="NativeControls\Cells\BaseCellRenderer.cs" />
     <Compile Include="NativeControls\Cells\HeaderCellRenderer.cs" />

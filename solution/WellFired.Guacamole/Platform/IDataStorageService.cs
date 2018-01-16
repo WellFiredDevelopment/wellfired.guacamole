@@ -18,5 +18,11 @@
 		/// <param name="data"></param>
 		/// <param name="key"></param>
 		void Write(string data, string key);
+
+		/// <summary>
+		/// Delete the data associated to a given key
+		/// </summary>
+		/// <param name="key"></param>
+		void Delete(string key);
 	}
 }

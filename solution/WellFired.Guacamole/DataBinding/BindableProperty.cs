@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq.Expressions;
-using System.Reflection;
 
 namespace WellFired.Guacamole.DataBinding
 {
@@ -16,22 +15,12 @@ namespace WellFired.Guacamole.DataBinding
 
 		public static BindableProperty Create<TA, TB>(TB defaultValue, BindingMode bindingMode, Expression<Func<TA, TB>> getter)
 		{
-			var expression = getter.Body;
-
-			var unaryExpression = expression as UnaryExpression;
-			if (unaryExpression != null)
-				expression = unaryExpression.Operand;
-
-			var memberExpression = expression as MemberExpression;
-			if (memberExpression == null)
-				throw new ArgumentException("getter must be a MemberExpression", nameof(getter));
-
-			var propertyInfo = (PropertyInfo) memberExpression.Member;
-
+			GetterInfo.GetInfo(getter, out var propertyName, out var propertyType);
+			
 			var property = new BindableProperty
 			{
-				PropertyName = propertyInfo.Name,
-				PropertyType = propertyInfo.PropertyType,
+				PropertyName = propertyName,
+				PropertyType = propertyType,
 				DefaultValue = defaultValue,
 				BindingMode = bindingMode
 			};

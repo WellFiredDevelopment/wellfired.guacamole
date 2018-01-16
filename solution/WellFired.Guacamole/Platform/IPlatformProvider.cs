@@ -22,15 +22,16 @@
 
 		/// <summary>
 		/// With this, you can get some persistent data storage, you should be able to store strings of data in here.
-		/// Think of it as a Key Value Store.
+		/// Think of it as a Key Value Store. This storage is personal because only used by a specific user/machine
 		/// </summary>
-		IDataStorageService GetPersonalDataStorage(string applicationName);
+		IDataStorageService GetPersonalDataStorage();
 
 		/// <summary>
 		/// With this, you can get some persistent data storage, you should be able to store strings of data in here.
-		/// Think of it as a Key Value Store.
+		/// Think of it as a Key Value Store. This storage is team shared because can be shared with the whole team through
+		/// a vcs for example.
 		/// </summary>
-		IDataStorageService GetTeamSharedDataStorage(string applicationName);
+		IDataStorageService GetTeamSharedDataStorage();
 
 		/// <summary>
 		/// Allow you to open a folder picker. Since it involves UI, for most platform this function should be called on

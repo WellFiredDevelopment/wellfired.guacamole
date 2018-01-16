@@ -10,9 +10,11 @@ using WellFired.Guacamole.Exceptions;
 using WellFired.Guacamole.InitializationContext;
 using WellFired.Guacamole.Platform;
 using WellFired.Guacamole.Renderer;
+using WellFired.Guacamole.StoredData.Serialization;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.Platform;
 using WellFired.Guacamole.Views;
+using WellFired.Guacamole.WindowContext;
 using Debug = System.Diagnostics.Debug;
 using Logger = WellFired.Guacamole.Diagnostics.Logger;
 
@@ -21,20 +23,18 @@ namespace WellFired.Guacamole.Unity.Editor
 	[UsedImplicitly]
 	public class GuacamoleWindow : EditorWindow, IWindow
 	{
-		[SerializeField] private ApplicationInitializationContextScriptableObject _applicationInitializationContextScriptableObject;
+		private const string GuacamoleAppsSharedStorageLocation = "Guacamole";
+		
 		[SerializeField] private Window _window;
+		
+		private InitializationContext _initializationContext;
+		private ContextStorage _contextStorage;
 
 		private Exception _exception;
 		private float _prevLayoutTime;
 		private const float MaxLayoutInterval = 1.0f / 90.0f; // Clamp the update at 90 fps for silky smooth lists.
 
 		public bool CloseAfterNextUpdate { get; set; }
-
-		private ApplicationInitializationContextScriptableObject ApplicationInitializationContextScriptableObject
-		{
-			get { return _applicationInitializationContextScriptableObject; }
-			set { _applicationInitializationContextScriptableObject = value; }
-		}
 
 		public string Title
 		{
@@ -60,7 +60,7 @@ namespace WellFired.Guacamole.Unity.Editor
 			set { maxSize = value.ToUnityVector2(); }
 		}
 
-		public bool AllowMultiple => _applicationInitializationContextScriptableObject.AllowMultiple;
+		public bool AllowMultiple => _initializationContext.AllowMultiple;
 
 		public Window MainContent
 		{
@@ -75,17 +75,16 @@ namespace WellFired.Guacamole.Unity.Editor
 
 		public void Launch(IInitializationContext initializationContext)
 		{
+			_initializationContext = initializationContext as InitializationContext;
+			if (_initializationContext == null)
+				throw new InitializationContextNull();
+			
 			initializationContext.ValidateSetup();
 
-			ApplicationInitializationContextScriptableObject = initializationContext as ApplicationInitializationContextScriptableObject;
-
-			if (ApplicationInitializationContextScriptableObject == null)
-				throw new InitializationContextNull();
-
-			Title = ApplicationInitializationContextScriptableObject.Title;
-			MinSize = ApplicationInitializationContextScriptableObject.MinSize;
-			MaxSize = ApplicationInitializationContextScriptableObject.MaxSize;
-			Rect = ApplicationInitializationContextScriptableObject.UIRect;
+			Title = _initializationContext.Title;
+			MinSize = _initializationContext.MinSize;
+			MaxSize = _initializationContext.MaxSize;
+			Rect = _initializationContext.UIRect;
 
 			if (MaxSize == UISize.Min)
 				MaxSize = UISize.Of(100000);
@@ -98,6 +97,12 @@ namespace WellFired.Guacamole.Unity.Editor
 		public void OnEnable()
 		{
 			Logger.RegisterLogger(Diagnostics.Logger.UnityLogger);
+
+			_contextStorage = new ContextStorage(
+				new UnityPlatformProvider(GuacamoleAppsSharedStorageLocation).GetPersonalDataStorage(), 
+				new JSONSerializer(new ContextCustomSerialization())
+			);
+			
 			EditorApplication.update += Update;
 		}
 
@@ -105,12 +110,16 @@ namespace WellFired.Guacamole.Unity.Editor
 		[Obfuscation(Feature = "renaming")]
 		public void OnDisable()
 		{
-			Logger.UnregisterLogger(Diagnostics.Logger.UnityLogger);
 			if (_window.WindowCloseCommand != null && _window.WindowCloseCommand.CanExecute)
 			{
 				_window.WindowCloseCommand.Execute();
 				_window.WindowCloseCommand.CanExecute = false;
 			}
+
+			_initializationContext.UIRect = Rect;
+			_contextStorage.Save(name, _initializationContext.Context);
+			
+			Logger.UnregisterLogger(Diagnostics.Logger.UnityLogger);
 			
 			// ReSharper disable once DelegateSubtraction
 			EditorApplication.update -= Update;
@@ -129,6 +138,14 @@ namespace WellFired.Guacamole.Unity.Editor
 				Close();
 				DisplayUserError(_exception);
 				return;
+			}
+
+			//ideally, context id should be saved only if the window was opened when Unity Editor quitted.
+			//Did not find a way to detect that. So instead, we consider that when Unity editor calls update it has already started all the
+			//windows that were opened last time Unity quits. We clean the context storage at that moment.
+			if (!ContextStorage.WasCleanedUp)
+			{
+				_contextStorage.CleanUpStoredContexts();
 			}
 			
 			Repaint();
@@ -189,26 +206,35 @@ namespace WellFired.Guacamole.Unity.Editor
 		{
 			NativeRendererHelper.LaunchedAssembly = Assembly.GetExecutingAssembly();
 
-			var contentType = ApplicationInitializationContextScriptableObject.MainContent;
-			var viewModelType = ApplicationInitializationContextScriptableObject.MainViewModel;
-			
-			var platformProvider = new UnityPlatformProvider(_applicationInitializationContextScriptableObject.ApplicationName);
+			if (_initializationContext == null)
+			{
+				_initializationContext = new InitializationContext(_contextStorage.Load(name));
+				_contextStorage.Delete(name);
 
-			var constructorInfo = contentType.GetConstructor(new[] {typeof(Guacamole.Diagnostics.ILogger), typeof(INotifyPropertyChanged), typeof(IPlatformProvider)});
+				Rect = _initializationContext.UIRect;
+			}
+
+			var contentType = _initializationContext.MainContentType;
+			var viewModelType = _initializationContext.MainViewModelType;
+			
+			var platformProvider = new UnityPlatformProvider(_initializationContext.ApplicationName);
+			var logger = new Diagnostics.Logger();
+			
+			var constructorInfo = contentType?.GetConstructor(new[] {typeof(Guacamole.Diagnostics.ILogger), typeof(INotifyPropertyChanged), typeof(IPlatformProvider)});
 			if (constructorInfo != null)
 				_window = (Window) constructorInfo.Invoke(new object[]
 				{
-					ApplicationInitializationContextScriptableObject.Logger,
-					ApplicationInitializationContextScriptableObject.PersistantData,
+					logger,
+					_initializationContext.PersistantData,
 					platformProvider
 				});
 			else
 			{
-				var paramLessCsonstructorInfo = contentType.GetConstructor(new[] {typeof(ILogger), typeof(IPlatformProvider)});
+				var paramLessCsonstructorInfo = contentType?.GetConstructor(new[] {typeof(ILogger), typeof(IPlatformProvider)});
 				if (paramLessCsonstructorInfo != null)
 					_window = (Window) paramLessCsonstructorInfo.Invoke(new object[]
 					{
-						ApplicationInitializationContextScriptableObject.Logger,
+						logger,
 						platformProvider
 					});
 			}
@@ -217,8 +243,8 @@ namespace WellFired.Guacamole.Unity.Editor
 			{
 				var viewModel = (IBasicViewModel)Activator.CreateInstance(viewModelType);
 				viewModel.Inject(
-					ApplicationInitializationContextScriptableObject.Logger,
-					(INotifyPropertyChanged)ApplicationInitializationContextScriptableObject.PersistantData,
+					logger,
+					(INotifyPropertyChanged) _initializationContext.PersistantData,
 					platformProvider);
 
 				_window.BindingContext = viewModel;
@@ -226,11 +252,13 @@ namespace WellFired.Guacamole.Unity.Editor
 
 			if (_window == null)
 				throw new GuacamoleWindowCantBeCreated();
+			
+			name = _window.Id;
 		}
 
 		public bool MatchesMainContent(Type mainContent)
 		{
-			return ApplicationInitializationContextScriptableObject.MainContent == mainContent;
+			return _initializationContext.MainContentType == mainContent;
 		}
 	}
 }

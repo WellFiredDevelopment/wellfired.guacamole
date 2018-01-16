@@ -2,6 +2,7 @@
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Views;
+using WellFired.Guacamole.WindowContext;
 
 namespace WellFired.Guacamole.Unity.Editor
 {
@@ -22,9 +23,9 @@ namespace WellFired.Guacamole.Unity.Editor
 		{
 			var application = new Application();
 
-			var context = new ApplicationInitializationContext
+			var context = new Context
 			{
-				MainContent = typeof(TWindow),
+				MainContentType = typeof(TWindow),
 				UIRect = uiRect,
 				MinSize = minSize,
 				Title = title,
@@ -32,7 +33,7 @@ namespace WellFired.Guacamole.Unity.Editor
 				ApplicationName = applicationName
 			};
 
-			return application.Launch(context, persistantType);
+			return application.Launch(new InitializationContext(context), persistantType);
 		}
 		
 		/// <summary>
@@ -53,10 +54,10 @@ namespace WellFired.Guacamole.Unity.Editor
 		{
 			var application = new Application();
 
-			var context = new ApplicationInitializationContext
+			var context = new Context
 			{
-				MainContent = typeof(TWindow),
-				MainViewModel = typeof(TViewModel),
+				MainContentType = typeof(TWindow),
+				MainViewModelType = typeof(TViewModel),
 				UIRect = uiRect,
 				MinSize = minSize,
 				Title = title,
@@ -64,7 +65,7 @@ namespace WellFired.Guacamole.Unity.Editor
 				ApplicationName = applicationName
 			};
 
-			return application.Launch(context, persistantType);
+			return application.Launch(new InitializationContext(context), persistantType);
 		}
 	}
 }
