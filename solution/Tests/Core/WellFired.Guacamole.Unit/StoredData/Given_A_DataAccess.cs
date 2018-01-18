@@ -1,9 +1,9 @@
 ﻿using NSubstitute;
 using NUnit.Framework;
-using WellFired.Guacamole.Platform;
-using WellFired.Guacamole.StoredData;
-using WellFired.Guacamole.StoredData.Synchronization;
-using WellFired.Guacamole.StoredData.VersionUpdater;
+using WellFired.Guacamole.DataStorage.Data;
+using WellFired.Guacamole.DataStorage.Data.Synchronization;
+using WellFired.Guacamole.DataStorage.Data.VersionUpdater;
+using WellFired.Guacamole.DataStorage.Storages;
 
 namespace WellFired.Guacamole.Unit.StoredData
 {

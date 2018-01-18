@@ -6,11 +6,12 @@ using UnityEngine;
 using WellFired.Guacamole.Data;
 using JetBrains.Annotations;
 using WellFired.Guacamole.DataBinding;
+using WellFired.Guacamole.DataStorage.Data.Serialization;
+using WellFired.Guacamole.DataStorage.Storages;
 using WellFired.Guacamole.Exceptions;
 using WellFired.Guacamole.InitializationContext;
 using WellFired.Guacamole.Platform;
 using WellFired.Guacamole.Renderer;
-using WellFired.Guacamole.StoredData.Serialization;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.Platform;
 using WellFired.Guacamole.Views;
@@ -23,7 +24,7 @@ namespace WellFired.Guacamole.Unity.Editor
 	[UsedImplicitly]
 	public class GuacamoleWindow : EditorWindow, IWindow
 	{
-		private const string GuacamoleAppsSharedStorageLocation = "Guacamole";
+		private const string GuamoleApplicationName = "Guacamole";
 		
 		[SerializeField] private Window _window;
 		
@@ -99,7 +100,7 @@ namespace WellFired.Guacamole.Unity.Editor
 			Logger.RegisterLogger(Diagnostics.Logger.UnityLogger);
 
 			_contextStorage = new ContextStorage(
-				new UnityPlatformProvider(GuacamoleAppsSharedStorageLocation).GetPersonalDataStorage(), 
+				new ComputerDataStorage(GuamoleApplicationName, GuamoleApplicationName), 
 				new JSONSerializer(new ContextCustomSerialization())
 			);
 			
@@ -217,7 +218,7 @@ namespace WellFired.Guacamole.Unity.Editor
 			var contentType = _initializationContext.MainContentType;
 			var viewModelType = _initializationContext.MainViewModelType;
 			
-			var platformProvider = new UnityPlatformProvider(_initializationContext.ApplicationName);
+			var platformProvider = new UnityPlatformProvider(_initializationContext.ApplicationName, _initializationContext.CompanyName);
 			var logger = new Diagnostics.Logger();
 			
 			var constructorInfo = contentType?.GetConstructor(new[] {typeof(Guacamole.Diagnostics.ILogger), typeof(INotifyPropertyChanged), typeof(IPlatformProvider)});

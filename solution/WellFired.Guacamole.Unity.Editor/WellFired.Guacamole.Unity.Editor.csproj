@@ -97,9 +97,7 @@
     <Compile Include="NativeControls\Views\ViewContainerRenderer.cs" />
     <Compile Include="NativeControls\Views\ViewRenderer.cs" />
     <Compile Include="NativeControls\Views\WindowRenderer.cs" />
-    <Compile Include="Platform\UnityPersonalDataStorageService.cs" />
     <Compile Include="Platform\UnityPlatformProvider.cs" />
-    <Compile Include="Platform\UnityTeamSharedDataStorageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

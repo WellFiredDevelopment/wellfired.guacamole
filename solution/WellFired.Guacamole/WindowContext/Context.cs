@@ -11,6 +11,7 @@ namespace WellFired.Guacamole.WindowContext
 		public UISize MinSize;
 		public string Title;
 		public string ApplicationName;
+		public string CompanyName;
 		public UIRect UIRect;
 		public bool AllowMultiple;
 		

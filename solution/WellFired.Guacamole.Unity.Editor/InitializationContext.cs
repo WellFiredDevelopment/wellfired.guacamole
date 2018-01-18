@@ -43,6 +43,8 @@ namespace WellFired.Guacamole.Unity.Editor
 
 		public string ApplicationName => Context.ApplicationName;
 
+		public string CompanyName => Context.CompanyName;
+
 		public UIRect UIRect
 		{
 			get => Context.UIRect;

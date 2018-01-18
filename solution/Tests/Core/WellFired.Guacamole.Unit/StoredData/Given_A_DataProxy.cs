@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
-using WellFired.Guacamole.StoredData.Serialization;
-using WellFired.Guacamole.StoredData.Synchronization;
+using WellFired.Guacamole.DataStorage.Data.Serialization;
+using WellFired.Guacamole.DataStorage.Data.Synchronization;
 
 namespace WellFired.Guacamole.Unit.StoredData
 {

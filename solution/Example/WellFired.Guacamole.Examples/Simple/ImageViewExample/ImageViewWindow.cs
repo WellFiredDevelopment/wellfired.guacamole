@@ -17,7 +17,7 @@ namespace WellFired.Guacamole.Examples.Simple.ImageViewExample
 			var imageView = new ImageView
 			{	
 				// Display an image from the hard drive.
-				ImageSource = ImageSource.From(platformProvider.PathTo("Images/doge.jpg"))
+				ImageSource = ImageSource.From(platformProvider.PathToPersonalData("Images/doge.jpg"))
 				
 				// Display a programmatic image
 				//ImageSource = ImageSource.From(ImageShape.Circle, UIColor.Blue, UIColor.Black)

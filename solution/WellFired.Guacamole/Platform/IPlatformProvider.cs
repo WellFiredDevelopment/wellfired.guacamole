@@ -1,4 +1,6 @@
-﻿namespace WellFired.Guacamole.Platform
+﻿using WellFired.Guacamole.DataStorage.Storages;
+
+namespace WellFired.Guacamole.Platform
 {
 	/// <summary>
 	/// Provides some platform specific implementations of certain functionalities.
@@ -6,19 +8,14 @@
 	public interface IPlatformProvider
 	{
 		/// <summary>
-		/// Path where data can be saved safely
-		/// </summary>
-		string ApplicationDataRootedPath { get; }
-		
-		/// <summary>
-		/// The data path plus the application name
-		/// </summary>
-		string ApplicationDataRelativePath { get; }
-		
-		/// <summary>
 		/// Path where the project assets are saved.
 		/// </summary>
-		string PlatformProjectPath { get; }
+		string AssetsPath { get; }
+
+		/// <summary>
+		/// Path where the project is saved.
+		/// </summary>
+		string ProjectPath { get; }
 
 		/// <summary>
 		/// With this, you can get some persistent data storage, you should be able to store strings of data in here.
@@ -44,10 +41,17 @@
 		string OpenFolderPicker(string title, string folder, string defaultName);
 
 		/// <summary>
-		/// Call this method to be returned the full path to a relative file
+		/// Call this method to be returned the full path to a relative team-shared file
 		/// </summary>
 		/// <param name="file"></param>
 		/// <returns></returns>
-		string PathTo(string file);
+		string PathToSharedData(string file);
+		
+		/// <summary>
+		/// Call this method to be returned the full path to a relative personal file
+		/// </summary>
+		/// <param name="file"></param>
+		/// <returns></returns>
+		string PathToPersonalData(string file);
 	}
 }

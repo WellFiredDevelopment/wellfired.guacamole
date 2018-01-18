@@ -118,6 +118,7 @@
     <Compile Include="View\Given_AView.cs" />
     <Compile Include="View\Given_AViewWithNoPaddingAndWithContent.cs" />
     <Compile Include="View\Given_AViewWithPaddingAndContent.cs" />
+    <Compile Include="WindowContext\GivenAContextStorage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
