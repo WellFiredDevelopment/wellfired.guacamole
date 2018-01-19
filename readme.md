@@ -1,6 +1,6 @@
 [![dotGuacamole Logo](/logo.png)](https://wellfireddevelopment-2c791.firebaseapp.com/dotguacamole/dotguacamole)
 
-[![Travis Build Status](https://travis-ci.org/ArtOfSettling/guacamole.svg?branch=master)](https://travis-ci.org/ArtOfSettling/guacamole)
+[![Travis Build Status](https://travis-ci.org/ArtOfSettling/.Guacamole.svg?branch=master)](https://travis-ci.org/ArtOfSettling/.Guacamole)
 
 ## .Guacamole
 
