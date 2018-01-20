@@ -27,6 +27,7 @@ namespace WellFired.Guacamole.Unit.StoredData
 		public void When_Track_Data_Located_At_Specific_Key_ThenFirstly_Data_Proxy_Cached_Then_Data_Loaded_In_Proxy_Then_StoredData_Changed_Are_Tracked()
 		{
 			var dataStorageService = Substitute.For<IDataStorageService>();
+			dataStorageService.Exists("Options").Returns(true);
 			dataStorageService.Read("Options").Returns("Serialized data");
 			var dataCacher = Substitute.For<IDataCacher>();
 			var storedDataWatcher = Substitute.For<IStoredDataWatcher>();
