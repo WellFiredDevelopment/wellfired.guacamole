@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using JetBrains.Annotations;
 using WellFired.Guacamole.DataBinding.Cells;
 using WellFired.Guacamole.Examples.Intermediate.Sorting.Helper;
-using WellFired.Guacamole.Platform;
+using WellFired.Guacamole.Platforms;
 
 namespace WellFired.Guacamole.Examples.Intermediate.Sorting.ViewModel
 {

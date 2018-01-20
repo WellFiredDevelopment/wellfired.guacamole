@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using UnityEditor;
 using WellFired.Guacamole.DataStorage.Storages;
-using WellFired.Guacamole.Platform;
+using WellFired.Guacamole.Platforms;
 
 namespace WellFired.Guacamole.Unity.Editor.Platform
 {
@@ -20,10 +20,9 @@ namespace WellFired.Guacamole.Unity.Editor.Platform
 			_companyName = companyName;
 		}
 
-		public string AssetsPath => UnityEngine.Application.dataPath;
-		public string ProjectPath => Path.GetFullPath($"{AssetsPath}/..");
-		public IDataStorageService GetPersonalDataStorage() => new PersonalDataStorage(_applicationName, _companyName, ProjectPath);
-		public IDataStorageService GetTeamSharedDataStorage() => new TeamSharedDataStorage(_applicationName, _companyName, ProjectPath);
+		public string ProjectPath => Path.GetFullPath($"{UnityEngine.Application.dataPath}/..");
+		public IDataStorageService GetPersonalDataStorage() => new FileStorageService(PathToPersonalData(".keys"));
+		public IDataStorageService GetTeamSharedDataStorage() => new FileStorageService(PathToSharedData("Keys"));
 		
 		public string OpenFolderPicker(string title, string folder, string defaultName)
 		{
@@ -32,12 +31,12 @@ namespace WellFired.Guacamole.Unity.Editor.Platform
 
 		public string PathToSharedData(string file)
 		{
-			return $"{TeamSharedDataStorage.Location(ProjectPath, _applicationName, _companyName)}/{file}";
+			return $"{ProjectPath}/{_companyName}/{_applicationName}/Teamshared/{file}";
 		}
 
 		public string PathToPersonalData(string file)
 		{
-			return $"{PersonalDataStorage.Location(ProjectPath, _applicationName, _companyName)}/{file}";
+			return $"{ProjectPath}/.{_companyName.ToLower()}/.{_applicationName}/.personalData/{file}";
 		}
 	}
 }

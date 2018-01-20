@@ -8,7 +8,7 @@ using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.Model.Assets;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel.Utilities;
-using WellFired.Guacamole.Platform;
+using WellFired.Guacamole.Platforms;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel
 {

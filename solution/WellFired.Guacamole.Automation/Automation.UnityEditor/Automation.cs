@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using WellFired.Guacamole.Automation.Extensions;
 using WellFired.Guacamole.Event;
-using WellFired.Guacamole.Platform;
+using WellFired.Guacamole.Platforms;
 
 namespace WellFired.Guacamole.Automation.UnityEditor
 {

@@ -5,7 +5,7 @@ using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Examples.CaseStudy.RedditBrowser.Cells;
 using WellFired.Guacamole.Examples.CaseStudy.RedditBrowser.ViewModel;
 using WellFired.Guacamole.Layouts;
-using WellFired.Guacamole.Platform;
+using WellFired.Guacamole.Platforms;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.RedditBrowser

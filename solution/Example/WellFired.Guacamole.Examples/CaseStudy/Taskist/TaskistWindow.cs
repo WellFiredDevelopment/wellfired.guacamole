@@ -4,7 +4,7 @@ using System.ComponentModel;
 using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Examples.CaseStudy.Taskist.View;
 using WellFired.Guacamole.Examples.CaseStudy.Taskist.View.Cells;
-using WellFired.Guacamole.Platform;
+using WellFired.Guacamole.Platforms;
 using WellFired.Guacamole.Styling;
 using WellFired.Guacamole.Views;
 

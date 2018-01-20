@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WellFired.Guacamole.Platform
+namespace WellFired.Guacamole.Platforms
 {
 	public class MainThreadRunner : IMainThreadRunner
 	{

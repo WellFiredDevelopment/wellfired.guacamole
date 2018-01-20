@@ -73,9 +73,6 @@
     <Compile Include="DataStorage\Storages\ComputerDataStorage.cs" />
     <Compile Include="DataStorage\Storages\FileStorageService.cs" />
     <Compile Include="DataStorage\Storages\IDataStorageService.cs" />
-    <Compile Include="DataStorage\Storages\LocationDoesNotExistException.cs" />
-    <Compile Include="DataStorage\Storages\PersonalDataStorage.cs" />
-    <Compile Include="DataStorage\Storages\TeamSharedDataStorage.cs" />
     <Compile Include="Diagnostics\ConsoleLogger.cs" />
     <Compile Include="Pages\MasterDetailPage\ListViewMasterDetailPage.cs" />
     <Compile Include="Pages\MasterDetailPage\MasterDetailPage.cs" />
@@ -176,9 +173,10 @@
     <Compile Include="Layouts\ILayoutChildren.cs" />
     <Compile Include="Layouts\IVirtualCell.cs" />
     <Compile Include="Layouts\VirtualCell.cs" />
-    <Compile Include="Platform\IMainThreadRunner.cs" />
-    <Compile Include="Platform\IPlatformProvider.cs" />
-    <Compile Include="Platform\MainThreadRunner.cs" />
+    <Compile Include="Platforms\IMainThreadRunner.cs" />
+    <Compile Include="Platforms\IPlatformProvider.cs" />
+    <Compile Include="Platforms\MainThreadRunner.cs" />
+    <Compile Include="Platforms\Platform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer\INativeRenderer.cs" />
     <Compile Include="Renderer\NativeRendererHelper.cs" />

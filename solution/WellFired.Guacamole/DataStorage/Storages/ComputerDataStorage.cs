@@ -1,4 +1,5 @@
 ﻿using System;
+using WellFired.Guacamole.Platforms;
 
 namespace WellFired.Guacamole.DataStorage.Storages
 {
@@ -10,10 +11,10 @@ namespace WellFired.Guacamole.DataStorage.Storages
 	/// </summary>
 	public class ComputerDataStorage : FileStorageService
 	{
-		private const string Location = "Keys";
+		private const string Folder = "Keys";
 		private static readonly string  DataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
-		public ComputerDataStorage(string applicationName, string companyName) : base($"{DataFolder}/{companyName}/{applicationName}/{Location}")
+		public ComputerDataStorage(string applicationName, string companyName, Platform platform) : base($"{DataFolder}/{companyName}/{applicationName}/{platform.ToString()}/{Folder}")
 		{
 		}
 	}

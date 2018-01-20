@@ -4,7 +4,7 @@ using WellFired.Guacamole.Data;
 using JetBrains.Annotations;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Diagnostics;
-using WellFired.Guacamole.Platform;
+using WellFired.Guacamole.Platforms;
 using WellFired.Guacamole.Styling;
 
 namespace WellFired.Guacamole.Views

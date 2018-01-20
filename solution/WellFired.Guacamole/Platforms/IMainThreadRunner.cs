@@ -1,4 +1,4 @@
-﻿namespace WellFired.Guacamole.Platform
+﻿namespace WellFired.Guacamole.Platforms
 {
 	public interface IMainThreadRunner
 	{

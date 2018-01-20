@@ -45,7 +45,7 @@ namespace WellFired.Guacamole.DataStorage.Data.Synchronization
 		{
 			var fileSystemWatcher = new FileSystemWatcher {
 				Path = _dataPath,
-				Filter = $"{key}.gdata",
+				Filter = key,
 				EnableRaisingEvents = true
 			};
 			

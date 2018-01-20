@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using WellFired.Guacamole.DataBinding;
-using WellFired.Guacamole.Platform;
+using WellFired.Guacamole.Platforms;
 using WellFired.Json;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.RedditBrowser.ViewModel

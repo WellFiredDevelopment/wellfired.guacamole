@@ -6,6 +6,11 @@
 	public interface IDataStorageService
 	{
 		/// <summary>
+		/// Indicate the location of the storage.
+		/// </summary>
+		string Location { get; }
+		
+		/// <summary>
 		/// Reads the data that is associated with the given key.
 		/// </summary>
 		/// <param name="key"></param>
@@ -30,6 +35,6 @@
 		/// </summary>
 		/// <param name="key"></param>
 		/// <returns></returns>
-		bool Exists(string key);
+		bool Exists(string key);	
 	}
 }

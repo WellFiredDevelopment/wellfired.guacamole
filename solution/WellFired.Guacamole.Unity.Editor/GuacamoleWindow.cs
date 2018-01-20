@@ -10,7 +10,7 @@ using WellFired.Guacamole.DataStorage.Data.Serialization;
 using WellFired.Guacamole.DataStorage.Storages;
 using WellFired.Guacamole.Exceptions;
 using WellFired.Guacamole.InitializationContext;
-using WellFired.Guacamole.Platform;
+using WellFired.Guacamole.Platforms;
 using WellFired.Guacamole.Renderer;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.Platform;
@@ -100,7 +100,7 @@ namespace WellFired.Guacamole.Unity.Editor
 			Logger.RegisterLogger(Diagnostics.Logger.UnityLogger);
 
 			_contextStorage = new ContextStorage(
-				new ComputerDataStorage(GuamoleApplicationName, GuamoleApplicationName), 
+				new ComputerDataStorage(GuamoleApplicationName, GuamoleApplicationName, Platforms.Platform.Unity), 
 				new JSONSerializer(new ContextCustomSerialization())
 			);
 			

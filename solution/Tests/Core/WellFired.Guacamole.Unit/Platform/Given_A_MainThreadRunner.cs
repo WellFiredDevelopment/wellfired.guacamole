@@ -1,6 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
-using WellFired.Guacamole.Platform;
+using WellFired.Guacamole.Platforms;
 
 namespace WellFired.Guacamole.Unit.Platform
 {

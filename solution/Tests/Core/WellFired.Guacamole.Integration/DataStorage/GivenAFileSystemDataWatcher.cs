@@ -15,7 +15,7 @@ namespace WellFired.Guacamole.Integration.DataStorage
 		public void When_Watch_A_Data_At_Specific_Key_And_Data_Is_Modified_Then_Get_Notified()
 		{
 			var dataLocation = Utils.GetTestDllRepository();
-			var watchedData = dataLocation + "/options.gdata";
+			var watchedData = dataLocation + "/options";
 
 			try
 			{
@@ -59,7 +59,7 @@ namespace WellFired.Guacamole.Integration.DataStorage
 		public void When_Watch_A_Data_At_Specific_Key_And_Data_Is_Created_Then_Get_Notified()
 		{
 			var dataLocation = Utils.GetTestDllRepository();
-			var watchedData = dataLocation + "/options.gdata";
+			var watchedData = dataLocation + "/options";
 			
 			try
 			{
@@ -98,7 +98,7 @@ namespace WellFired.Guacamole.Integration.DataStorage
 		public void When_Watch_A_Data_At_Specific_Key_And_Data_Is_Deleted_Then_Get_Notified()
 		{
 			var dataLocation = Utils.GetTestDllRepository();
-			var watchedData = dataLocation + "/options.gdata";
+			var watchedData = dataLocation + "/options";
 			
 			try
 			{
