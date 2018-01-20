@@ -1,4 +1,6 @@
-﻿using NSubstitute;
+﻿using System;
+using NSubstitute;
+using NSubstitute.ExceptionExtensions;
 using NUnit.Framework;
 using WellFired.Guacamole.DataStorage.Data;
 using WellFired.Guacamole.DataStorage.Data.Synchronization;
@@ -41,6 +43,22 @@ namespace WellFired.Guacamole.Unit.StoredData
 					dataCacher.UpdateData("Options", "Serialized data");
 					storedDataWatcher.Watch("Options");
 				});
+		}
+
+		[Test]
+		public void When_Track_Data_And_Data_Does_Not_Exist_Then_Cache_Initialize_With_Null_Value_And_Unexisting_Key_Is_Not_Read()
+		{
+			var dataStorageService = Substitute.For<IDataStorageService>();
+			dataStorageService.Read("Options").Throws(new Exception("Data does not exists"));
+			var dataCacher = Substitute.For<IDataCacher>();
+			var storedDataWatcher = Substitute.For<IStoredDataWatcher>();
+
+			var dataAccess = GetDataAccess(dataStorageService, dataCacher, storedDataWatcher: storedDataWatcher);
+			var proxy = Substitute.For<IDataProxy>();
+
+			dataAccess.Track("Options", proxy);
+			
+			Assert.That(() => dataCacher.Received(1).UpdateData("Options", null), Throws.Nothing);
 		}
 
 		[Test]

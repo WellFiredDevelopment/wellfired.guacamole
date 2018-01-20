@@ -48,7 +48,14 @@ namespace WellFired.Guacamole.DataStorage.Data
 		public void Track(string key, IDataProxy dataProxy)
 		{
 			_dataCacher.Cache(key, dataProxy);
-			_dataCacher.UpdateData(key, _dataStorageService.Read(key));
+
+			string storedData = null;
+			if (_dataStorageService.Exists(key))
+			{
+				storedData = _dataStorageService.Read(key);
+			}
+			
+			_dataCacher.UpdateData(key, storedData);
 			_storedDataWatcher?.Watch(key);
 		}
 
