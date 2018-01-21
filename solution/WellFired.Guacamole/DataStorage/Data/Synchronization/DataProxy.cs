@@ -49,7 +49,13 @@ namespace WellFired.Guacamole.DataStorage.Data.Synchronization
 		{
 			try
 			{
-				_cachedData = _serializer.Unserialize<T>(data);
+				_cachedData = null;
+				
+				if (!string.IsNullOrEmpty(data))
+				{
+					_cachedData = _serializer.Unserialize<T>(data);
+				}
+				
 				if (_cachedData == null)
 				{
 					_cachedData = Activator.CreateInstance<T>();
