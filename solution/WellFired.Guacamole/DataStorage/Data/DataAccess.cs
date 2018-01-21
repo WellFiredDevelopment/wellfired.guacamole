@@ -65,7 +65,7 @@ namespace WellFired.Guacamole.DataStorage.Data
 		/// <param name="key">The key where is located the data</param>
 		public void Save(string key)
 		{
-			if (!_dataCacher.DidDataChanged(key))
+			if (_dataStorageService.Exists(key) && !_dataCacher.DidDataChanged(key))
 			{
 				return;
 			}

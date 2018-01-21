@@ -64,6 +64,32 @@ namespace WellFired.Guacamole.Unit.StoredData
 
 		[Test]
 		public void
+			When_SaveData_For_Specific_Key_And_CachedData_DidNotChanged_But_Key_Already_Exists_In_Storage_ThenFirstly_Suspend_DataWatcher_Then_Write_CachedData_To_Storage_Then_Resume_DataWatcher_Finally_Ensure_CachedData_Changed_State_Reset()
+		{
+			var dataStorageService = Substitute.For<IDataStorageService>();
+			dataStorageService.Exists("Options").Returns(false);
+
+			var dataCacher = Substitute.For<IDataCacher>();
+			dataCacher.DidDataChanged("Options").Returns(false);
+			dataCacher.GetData("Options").Returns("Serialized data");
+
+			var storedDataWatcher = Substitute.For<IStoredDataWatcher>();
+
+			var dataAccess = GetDataAccess(dataCacher: dataCacher, storedDataWatcher: storedDataWatcher, dataStorageService: dataStorageService);
+			dataAccess.Save("Options");
+
+			Received.InOrder(
+				() =>
+				{
+					storedDataWatcher.Suspend("Options");
+					dataStorageService.Write("Serialized data", "Options");
+					storedDataWatcher.Resume("Options");
+					dataCacher.ResetDataChanged("Options");
+				});
+		}
+
+		[Test]
+		public void
 			When_SaveData_For_Specific_Key_And_CachedData_WasChanged_ThenFirstly_Suspend_DataWatcher_Then_Write_CachedData_To_Storage_Then_Resume_DataWatcher_Finally_Ensure_CachedData_Changed_State_Reset()
 		{
 			var dataStorageService = Substitute.For<IDataStorageService>();
