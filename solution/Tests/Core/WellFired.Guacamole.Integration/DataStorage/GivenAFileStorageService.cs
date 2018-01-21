@@ -8,13 +8,13 @@ namespace WellFired.Guacamole.Integration.DataStorage
 	public class GivenAFileStorageService
 	{
 		[Test]
-		public void When_Write_To_Unexisting_Directory_Then_Create_Directory_And_Save_Data_Inside()
+		public void When_Instantiate_With_Unexisting_Directory_Then_Create_Directory_And_Successfully_Save_Data_Inside()
 		{
 			var dllPath = Utils.GetTestDllRepository();
-			var fileStorageService = new FileStorageService(dllPath + "/UnexistingFolder");
 
 			try
 			{
+				var fileStorageService = new FileStorageService(dllPath + "/UnexistingFolder");
 				fileStorageService.Write("some data", "Options");
 				Assert.That(fileStorageService.Read("Options"), Is.EqualTo("some data"));
 			}

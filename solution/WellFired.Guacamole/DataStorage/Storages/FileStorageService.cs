@@ -9,7 +9,11 @@ namespace WellFired.Guacamole.DataStorage.Storages
 	/// </summary>
 	public class FileStorageService : IDataStorageService
 	{
-		public FileStorageService(string savingFolder) => Location = savingFolder;
+		public FileStorageService(string savingFolder)
+		{
+			Location = savingFolder;
+			Directory.CreateDirectory(Location);
+		}
 
 		/// <inheritdoc />
 		public string Location { get; }
@@ -24,7 +28,6 @@ namespace WellFired.Guacamole.DataStorage.Storages
 		/// <param name="key"></param>
 		public void Write(string data, string key)
 		{
-			Directory.CreateDirectory(Path.GetDirectoryName($"{Location}/{key}") ?? throw new Exception($"The path {Location}/{key} is invalid."));
 			File.WriteAllText($"{Location}/{key}", data);
 		}
 
