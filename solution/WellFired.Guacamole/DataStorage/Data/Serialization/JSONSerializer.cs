@@ -1,6 +1,4 @@
-﻿using System;
-using WellFired.Guacamole.Diagnostics;
-using WellFired.Json;
+﻿using WellFired.Json;
 using WellFired.Json.Serialization;
 
 namespace WellFired.Guacamole.DataStorage.Data.Serialization
@@ -18,39 +16,22 @@ namespace WellFired.Guacamole.DataStorage.Data.Serialization
 
 		public string Serialize(object data)
 		{
-			string serializedData = null;
-			try
+			var serializedData = JsonConvert.SerializeObject(data, Formatting.Indented, new JsonSerializerSettings
 			{
-				serializedData = JsonConvert.SerializeObject(data, Formatting.Indented, new JsonSerializerSettings
-				{
-					TypeNameHandling = TypeNameHandling.Auto,
-					DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-					ContractResolver = _contractResolver
-				});
-			}
-			catch (Exception e)
-			{
-				Logger.LogError($"An error happened while serializing the object : {e.Message}\n{e.StackTrace}");
-			}
+				TypeNameHandling = TypeNameHandling.Auto,
+				DateTimeZoneHandling = DateTimeZoneHandling.Utc,
+				ContractResolver = _contractResolver
+			});
 
 			return serializedData;
 		}
 
 		public T Unserialize<T>(string serializedData) where T : class
 		{
-			T unserializedData = null;
-			try
-			{
-				unserializedData = JsonConvert.DeserializeObject<T>(serializedData, new JsonSerializerSettings
-				{
-					TypeNameHandling = TypeNameHandling.Auto
-				});
-			}
-			catch (Exception e)
-			{
-				Logger.LogError($"An error happened while unserializing the object : {e.Message}\n{e.StackTrace}");
-			}
-			
+			var unserializedData = JsonConvert.DeserializeObject<T>(serializedData, new JsonSerializerSettings {
+				TypeNameHandling = TypeNameHandling.Auto
+			});
+
 			return unserializedData;
 		}
 	}
