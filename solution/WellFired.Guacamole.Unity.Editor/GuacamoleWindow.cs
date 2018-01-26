@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Reflection;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 using WellFired.Guacamole.Data;
@@ -25,9 +26,9 @@ namespace WellFired.Guacamole.Unity.Editor
 	public class GuacamoleWindow : EditorWindow, IWindow
 	{
 		private const string GuamoleApplicationName = "Guacamole";
-		
+
 		[SerializeField] private Window _window;
-		
+
 		private InitializationContext _initializationContext;
 		private ContextStorage _contextStorage;
 
@@ -79,7 +80,7 @@ namespace WellFired.Guacamole.Unity.Editor
 			_initializationContext = initializationContext as InitializationContext;
 			if (_initializationContext == null)
 				throw new InitializationContextNull();
-			
+
 			initializationContext.ValidateSetup();
 
 			Title = _initializationContext.Title;
@@ -100,30 +101,47 @@ namespace WellFired.Guacamole.Unity.Editor
 			Logger.RegisterLogger(Diagnostics.Logger.UnityLogger);
 
 			_contextStorage = new ContextStorage(
-				new ComputerDataStorage(GuamoleApplicationName, GuamoleApplicationName, Platforms.Platform.Unity), 
+				new ComputerDataStorage(GuamoleApplicationName, GuamoleApplicationName, Platforms.Platform.Unity),
 				new JSONSerializer(new ContextCustomSerialization())
 			);
-			
+
 			EditorApplication.update += Update;
+			
+			//Ideally, context should be saved only if the window was opened when Unity Editor quitted.
+			//I did not find a way to detect that. So instead, we always save the context when a window is disabled.
+			//When a windows is enable for enough time for Unity to load all the windows that was disabled when it quits,
+			//we can clean up the contexts.
+			TaskEx.Run(DelayContextStorageCleanup);
+		}
+		
+		private async Task DelayContextStorageCleanup()
+		{
+			await TaskEx.Delay(10000);
+			_contextStorage.CleanUpStoredContexts();
 		}
 
 		[UsedImplicitly]
 		[Obfuscation(Feature = "renaming")]
 		public void OnDisable()
 		{
-			if (_window.WindowCloseCommand != null && _window.WindowCloseCommand.CanExecute)
+			try
 			{
-				_window.WindowCloseCommand.Execute();
-				_window.WindowCloseCommand.CanExecute = false;
+				if (_window.WindowCloseCommand != null && _window.WindowCloseCommand.CanExecute)
+				{
+					_window.WindowCloseCommand.Execute();
+					_window.WindowCloseCommand.CanExecute = false;
+				}
+	
+				_initializationContext.UIRect = Rect;
+				_contextStorage.Save(name, _initializationContext.Context);
 			}
+			finally
+			{
+				Logger.UnregisterLogger(Diagnostics.Logger.UnityLogger);
 
-			_initializationContext.UIRect = Rect;
-			_contextStorage.Save(name, _initializationContext.Context);
-			
-			Logger.UnregisterLogger(Diagnostics.Logger.UnityLogger);
-			
-			// ReSharper disable once DelegateSubtraction
-			EditorApplication.update -= Update;
+				// ReSharper disable once DelegateSubtraction
+				EditorApplication.update -= Update;
+			}
 		}
 
 		private void Update()
@@ -133,7 +151,7 @@ namespace WellFired.Guacamole.Unity.Editor
 				Close();
 				return;
 			}
-			
+
 			if (_exception != null)
 			{
 				Close();
@@ -141,14 +159,6 @@ namespace WellFired.Guacamole.Unity.Editor
 				return;
 			}
 
-			//ideally, context id should be saved only if the window was opened when Unity Editor quitted.
-			//Did not find a way to detect that. So instead, we consider that when Unity editor calls update it has already started all the
-			//windows that were opened last time Unity quits. We clean the context storage at that moment.
-			if (!ContextStorage.WasCleanedUp)
-			{
-				_contextStorage.CleanUpStoredContexts();
-			}
-			
 			Repaint();
 		}
 
@@ -157,15 +167,15 @@ namespace WellFired.Guacamole.Unity.Editor
 			if (exception is TargetInvocationException targetInvocationException)
 			{
 				exception = targetInvocationException.InnerException;
-				Debug.Assert(exception != null, nameof(exception) + " != null");	
+				Debug.Assert(exception != null, nameof(exception) + " != null");
 			}
 
-			if(exception is GuacamoleUserFacingException facingException)
+			if (exception is GuacamoleUserFacingException facingException)
 			{
 				EditorUtility.DisplayDialog(
-				"Guacamole Crashed. :(",
-				$"Your Guacamole window has crashed with the error : \n\n{facingException.UserFacingError()}",
-				"Close");
+					"Guacamole Crashed. :(",
+					$"Your Guacamole window has crashed with the error : \n\n{facingException.UserFacingError()}",
+					"Close");
 			}
 		}
 
@@ -217,14 +227,13 @@ namespace WellFired.Guacamole.Unity.Editor
 
 			var contentType = _initializationContext.MainContentType;
 			var viewModelType = _initializationContext.MainViewModelType;
-			
+
 			var platformProvider = new UnityPlatformProvider(_initializationContext.ApplicationName, _initializationContext.CompanyName);
 			var logger = new Diagnostics.Logger();
-			
+
 			var constructorInfo = contentType?.GetConstructor(new[] {typeof(Guacamole.Diagnostics.ILogger), typeof(INotifyPropertyChanged), typeof(IPlatformProvider)});
 			if (constructorInfo != null)
-				_window = (Window) constructorInfo.Invoke(new object[]
-				{
+				_window = (Window) constructorInfo.Invoke(new object[] {
 					logger,
 					_initializationContext.PersistantData,
 					platformProvider
@@ -233,8 +242,7 @@ namespace WellFired.Guacamole.Unity.Editor
 			{
 				var paramLessCsonstructorInfo = contentType?.GetConstructor(new[] {typeof(ILogger), typeof(IPlatformProvider)});
 				if (paramLessCsonstructorInfo != null)
-					_window = (Window) paramLessCsonstructorInfo.Invoke(new object[]
-					{
+					_window = (Window) paramLessCsonstructorInfo.Invoke(new object[] {
 						logger,
 						platformProvider
 					});
@@ -242,7 +250,7 @@ namespace WellFired.Guacamole.Unity.Editor
 
 			if (viewModelType != default(Type))
 			{
-				var viewModel = (IBasicViewModel)Activator.CreateInstance(viewModelType);
+				var viewModel = (IBasicViewModel) Activator.CreateInstance(viewModelType);
 				viewModel.Inject(
 					logger,
 					(INotifyPropertyChanged) _initializationContext.PersistantData,
@@ -253,7 +261,7 @@ namespace WellFired.Guacamole.Unity.Editor
 
 			if (_window == null)
 				throw new GuacamoleWindowCantBeCreated();
-			
+
 			name = _window.Id;
 		}
 

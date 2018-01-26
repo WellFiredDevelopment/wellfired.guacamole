@@ -14,8 +14,6 @@ namespace WellFired.Guacamole.WindowContext
 	{
 		private const string StoredContextsKey = "StoredContexts";
 		
-		public static bool WasCleanedUp { get; private set; }
-		
 		private readonly IDataStorageService _storage;
 		private readonly ISerializer _serializer;
 
@@ -46,8 +44,6 @@ namespace WellFired.Guacamole.WindowContext
 
 		public void CleanUpStoredContexts()
 		{
-			WasCleanedUp = true;
-			
 			var storedContexts = _serializer.Unserialize<StoredContexts>(_storage.Read(StoredContextsKey));
 			
 			foreach (var windowId in storedContexts.ContextIds)
