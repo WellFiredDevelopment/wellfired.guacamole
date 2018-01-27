@@ -177,6 +177,8 @@ namespace WellFired.Guacamole.Unity.Editor
 					$"Your Guacamole window has crashed with the error : \n\n{facingException.UserFacingError()}",
 					"Close");
 			}
+			
+			Logger.LogError("Exception occurred : " + _exception.Message + "\n" + _exception.StackTrace);
 		}
 
 		[UsedImplicitly]
