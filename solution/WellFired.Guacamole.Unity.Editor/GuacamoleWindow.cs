@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
@@ -31,6 +32,7 @@ namespace WellFired.Guacamole.Unity.Editor
 
 		private InitializationContext _initializationContext;
 		private ContextStorage _contextStorage;
+		private CancellationTokenSource _tokenSource;
 
 		private Exception _exception;
 		private float _prevLayoutTime;
@@ -109,12 +111,17 @@ namespace WellFired.Guacamole.Unity.Editor
 			//I did not find a way to detect that. So instead, we always save the context when a window is disabled.
 			//When a windows is enable for enough time for Unity to load all the windows that was disabled when it quits,
 			//we can clean up the contexts.
-			TaskEx.Run(DelayContextStorageCleanup);
+			_tokenSource = new CancellationTokenSource();
+			TaskEx.Run(() => DelayContextStorageCleanup(_tokenSource.Token), _tokenSource.Token);
 		}
 		
-		private async Task DelayContextStorageCleanup()
+		private async Task DelayContextStorageCleanup(CancellationToken cancellationToken)
 		{
-			await TaskEx.Delay(10000);
+			await TaskEx.Delay(10000, cancellationToken);
+
+			if (cancellationToken.IsCancellationRequested)
+				return;
+			
 			_contextStorage.CleanUpStoredContexts();
 		}
 
@@ -131,6 +138,7 @@ namespace WellFired.Guacamole.Unity.Editor
 				}
 	
 				_initializationContext.UIRect = Rect;
+				_tokenSource.Cancel();
 				_contextStorage.Save(name, _initializationContext.Context);
 			}
 			finally
