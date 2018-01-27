@@ -98,8 +98,6 @@ namespace WellFired.Guacamole.Unity.Editor
 		[Obfuscation(Feature = "renaming")]
 		public void OnEnable()
 		{
-			Logger.RegisterLogger(Diagnostics.Logger.UnityLogger);
-
 			_contextStorage = new ContextStorage(
 				new ComputerDataStorage(GuamoleApplicationName, GuamoleApplicationName, Platforms.Platform.Unity),
 				new JSONSerializer(new ContextCustomSerialization())
@@ -137,8 +135,6 @@ namespace WellFired.Guacamole.Unity.Editor
 			}
 			finally
 			{
-				Logger.UnregisterLogger(Diagnostics.Logger.UnityLogger);
-
 				// ReSharper disable once DelegateSubtraction
 				EditorApplication.update -= Update;
 			}
