@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using WellFired.Guacamole.DataStorage.Data.Synchronization;
 using WellFired.Guacamole.DataStorage.Data.VersionUpdater;
 using WellFired.Guacamole.DataStorage.Storages;
@@ -29,6 +30,8 @@ namespace WellFired.Guacamole.DataStorage.Data
 		private readonly IStoredDataUpdater _storedDataUpdater;
 		private readonly IStoredDataWatcher _storedDataWatcher;
 
+		private readonly Dictionary<string, object> _lockers = new Dictionary<string, object>();
+
 		public DataAccess(IDataStorageService dataStorageService, IDataCacher dataCacher, IStoredDataUpdater storedDataUpdater,
 			IStoredDataWatcher storedDataWatcher = null)
 		{
@@ -47,6 +50,14 @@ namespace WellFired.Guacamole.DataStorage.Data
 		/// <param name="dataProxy">Your data proxy. An implementation of the proxy is provided by <see cref="DataProxy{T}"/></param>
 		public void Track(string key, IDataProxy dataProxy)
 		{
+			lock (_lockers)
+			{
+				if (!_lockers.ContainsKey(key))
+				{
+					_lockers.Add(key, new object());
+				}
+			}
+			
 			_dataCacher.Cache(key, dataProxy);
 
 			string storedData = null;
@@ -65,16 +76,19 @@ namespace WellFired.Guacamole.DataStorage.Data
 		/// <param name="key">The key where is located the data</param>
 		public void Save(string key)
 		{
-			if (_dataStorageService.Exists(key) && !_dataCacher.DidDataChanged(key))
+			lock (_lockers[key])
 			{
-				return;
+				if (_dataStorageService.Exists(key) && !_dataCacher.DidDataChanged(key))
+				{
+					return;
+				}
+				
+				_storedDataWatcher?.Suspend(key);
+				_dataStorageService.Write(_dataCacher.GetData(key), key);
+				_storedDataWatcher?.Resume(key);
+				
+				_dataCacher.ResetDataChanged(key);
 			}
-			
-			_storedDataWatcher?.Suspend(key);
-			_dataStorageService.Write(_dataCacher.GetData(key), key);
-			_storedDataWatcher?.Resume(key);
-			
-			_dataCacher.ResetDataChanged(key);
 		}
 
 		private void Initialize()

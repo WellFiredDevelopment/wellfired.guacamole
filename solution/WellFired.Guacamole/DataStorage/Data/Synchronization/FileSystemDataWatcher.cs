@@ -33,9 +33,6 @@ namespace WellFired.Guacamole.DataStorage.Data.Synchronization
 			lock (_fileSystemWatchers)
 			{
 				_fileSystemWatchers[key].Changed -= File_OnChanged;
-				_fileSystemWatchers[key].Deleted -= File_OnChanged;
-				_fileSystemWatchers[key].Created -= File_OnChanged;
-				_fileSystemWatchers[key].Renamed -= File_OnChanged;
 				_fileSystemWatchers[key].Dispose();
 				_fileSystemWatchers[key] = null;
 			}
@@ -50,9 +47,6 @@ namespace WellFired.Guacamole.DataStorage.Data.Synchronization
 			};
 			
 			fileSystemWatcher.Changed += File_OnChanged;
-			fileSystemWatcher.Deleted += File_OnChanged;
-			fileSystemWatcher.Created += File_OnChanged;
-			fileSystemWatcher.Renamed += File_OnChanged;
 
 			lock (fileSystemWatcher)
 			{
@@ -70,9 +64,6 @@ namespace WellFired.Guacamole.DataStorage.Data.Synchronization
 			switch (e.ChangeType)
 			{
 				case WatcherChangeTypes.Changed:
-				case WatcherChangeTypes.Created:
-				case WatcherChangeTypes.Deleted:
-				case WatcherChangeTypes.Renamed:
 					_listener?.DoStoredDataChanged(Path.GetFileNameWithoutExtension(e.Name));
 					break;
 				default:
