@@ -76,6 +76,13 @@ namespace WellFired.Guacamole.Unit.StoredData
 			var storedDataWatcher = Substitute.For<IStoredDataWatcher>();
 
 			var dataAccess = GetDataAccess(dataCacher: dataCacher, storedDataWatcher: storedDataWatcher, dataStorageService: dataStorageService);
+			
+			dataAccess.Track("Options", new OptionsProxy());
+			
+			storedDataWatcher.ClearReceivedCalls();
+			dataStorageService.ClearReceivedCalls();
+			dataCacher.ClearReceivedCalls();
+			
 			dataAccess.Save("Options");
 
 			Received.InOrder(
@@ -101,6 +108,13 @@ namespace WellFired.Guacamole.Unit.StoredData
 			var storedDataWatcher = Substitute.For<IStoredDataWatcher>();
 
 			var dataAccess = GetDataAccess(dataCacher: dataCacher, storedDataWatcher: storedDataWatcher, dataStorageService: dataStorageService);
+			
+			dataAccess.Track("Options", new OptionsProxy());
+			
+			storedDataWatcher.ClearReceivedCalls();
+			dataStorageService.ClearReceivedCalls();
+			dataCacher.ClearReceivedCalls();
+			
 			dataAccess.Save("Options");
 
 			Received.InOrder(
@@ -122,7 +136,10 @@ namespace WellFired.Guacamole.Unit.StoredData
 			var storedDataUpdater = Substitute.For<IStoredDataUpdater>();
 
 			var dataAccess = GetDataAccess(dataStorageService, dataCacher, storedDataUpdater);
+			dataAccess.Track("Options", new OptionsProxy());
+			
 			storedDataUpdater.ClearReceivedCalls();
+			dataStorageService.ClearReceivedCalls();
 			
 			dataAccess.DoStoredDataChanged("Options");
 
@@ -131,7 +148,7 @@ namespace WellFired.Guacamole.Unit.StoredData
 				{
 					storedDataUpdater.UpdateStoredData();
 					dataCacher.UpdateData("Options", "Serialized data");
-					dataAccess.Received(1).Save("Options");
+					dataAccess.Save("Options");
 				});
 		}
 
@@ -148,6 +165,16 @@ namespace WellFired.Guacamole.Unit.StoredData
 				storedDataUpdated ?? Substitute.For<IStoredDataUpdater>(),
 				storedDataWatcher ?? Substitute.For<IStoredDataWatcher>()
 			);
+		}
+
+		private class Options
+		{
+			
+		}
+
+		private class OptionsProxy : DataProxy<Options>
+		{
+			
 		}
 	}
 }
