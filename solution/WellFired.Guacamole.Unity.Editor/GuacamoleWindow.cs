@@ -131,12 +131,14 @@ namespace WellFired.Guacamole.Unity.Editor
 		{
 			try
 			{
-				if (_window.WindowCloseCommand != null && _window.WindowCloseCommand.CanExecute)
+				if (_window?.WindowCloseCommand != null && _window.WindowCloseCommand.CanExecute)
 				{
 					_window.WindowCloseCommand.Execute();
 					_window.WindowCloseCommand.CanExecute = false;
 				}
-	
+
+				if (_initializationContext == null) return;
+				
 				_initializationContext.UIRect = Rect;
 				_tokenSource.Cancel();
 				_contextStorage.Save(name, _initializationContext.Context);
