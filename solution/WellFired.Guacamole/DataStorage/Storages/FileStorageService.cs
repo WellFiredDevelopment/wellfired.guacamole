@@ -4,12 +4,12 @@ namespace WellFired.Guacamole.DataStorage.Storages
 {
 	/// <summary>
 	/// Store textual data in a key/value fashion, key being the file and value the data saved inside. This file is saved a the path
-	/// indicated in the constructor. The class is thread safe, therefore different instances of <see cref="FileStorageSynchronizer"/>
+	/// indicated in the constructor. The class is thread safe, therefore different instances of <see cref="KeyBasedReadWriteLock"/>
 	/// can read and write at the same location on different threads.
 	/// </summary>
 	public class FileStorageService : IDataStorageService
 	{
-		private static readonly FileStorageSynchronizer FileStorageSynchronizer = new FileStorageSynchronizer();
+		private static readonly KeyBasedReadWriteLock KeyBasedReadWriteLock = new KeyBasedReadWriteLock();
 		
 		public FileStorageService(string savingFolder)
 		{
@@ -23,14 +23,14 @@ namespace WellFired.Guacamole.DataStorage.Storages
 		/// <inheritdoc />
 		public string Read(string key)
 		{
-			FileStorageSynchronizer.EnterReadLock(Location + key);
+			KeyBasedReadWriteLock.EnterReadLock(Location + key);
 			try
 			{
 				return File.ReadAllText($"{Location}/{key}");
 			}
 			finally
 			{
-				FileStorageSynchronizer.ExitReadLock(Location + key);
+				KeyBasedReadWriteLock.ExitReadLock(Location + key);
 			}
 		}
 
@@ -41,35 +41,35 @@ namespace WellFired.Guacamole.DataStorage.Storages
 		/// <param name="key"></param>
 		public void Write(string data, string key)
 		{
-			FileStorageSynchronizer.EnterWriteLock(Location + key);
+			KeyBasedReadWriteLock.EnterWriteLock(Location + key);
 			try
 			{
 				File.WriteAllText($"{Location}/{key}", data);
 			}
 			finally
 			{
-				FileStorageSynchronizer.ExitWriteLock(Location + key);
+				KeyBasedReadWriteLock.ExitWriteLock(Location + key);
 			}
 		}
 
 		/// <inheritdoc />
 		public void Delete(string key)
 		{
-			FileStorageSynchronizer.EnterReadLock(Location + key);
+			KeyBasedReadWriteLock.EnterReadLock(Location + key);
 			try
 			{
 				File.Delete($"{Location}/{key}");
 			}
 			finally
 			{
-				FileStorageSynchronizer.ExitReadLock(Location + key);
+				KeyBasedReadWriteLock.ExitReadLock(Location + key);
 			}
 		}
 
 		/// <inheritdoc />
 		public bool Exists(string key)
 		{
-			FileStorageSynchronizer.EnterReadLock(Location + key);
+			KeyBasedReadWriteLock.EnterReadLock(Location + key);
 			
 			try
 			{
@@ -77,7 +77,7 @@ namespace WellFired.Guacamole.DataStorage.Storages
 			}
 			finally
 			{
-				FileStorageSynchronizer.ExitReadLock(Location + key);
+				KeyBasedReadWriteLock.ExitReadLock(Location + key);
 			}
 		}
 	}

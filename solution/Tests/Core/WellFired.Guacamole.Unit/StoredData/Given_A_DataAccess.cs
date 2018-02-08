@@ -163,7 +163,7 @@ namespace WellFired.Guacamole.Unit.StoredData
 				dataStorageService ?? Substitute.For<IDataStorageService>(),
 				dataCacher ?? Substitute.For<IDataCacher>(),
 				storedDataUpdated ?? Substitute.For<IStoredDataUpdater>(),
-				storedDataWatcher ?? Substitute.For<IStoredDataWatcher>()
+				storedDataWatcher ?? Substitute.For<IStoredDataWatcher>(), null
 			);
 		}
 

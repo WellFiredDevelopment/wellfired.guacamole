@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace WellFired.Guacamole.DataStorage.Storages
+namespace WellFired.Guacamole.DataStorage
 {
-	public class FileStorageSynchronizer : System.IDisposable
+	public class KeyBasedReadWriteLock : System.IDisposable
 	{
 		private readonly Dictionary<string, ReaderWriterLockSlim> _storageLocks = new Dictionary<string, ReaderWriterLockSlim>();
 
@@ -93,7 +93,7 @@ namespace WellFired.Guacamole.DataStorage.Storages
 			}
 		}
 
-		~FileStorageSynchronizer()
+		~KeyBasedReadWriteLock()
 		{
 			Dispose();
 		}
