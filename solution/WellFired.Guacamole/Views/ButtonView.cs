@@ -44,7 +44,7 @@ namespace WellFired.Guacamole.Views
 
 		public ButtonView()
 		{
-			Style = Styling.Styles.Button.Style;
+			Style = Styling.Styles.ButtonView.Style;
 		}
 
 		[PublicAPI]

@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\Unity\Assets\Code\</OutputPath>
+    <OutputPath>../../unity/Assets/Code/</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -194,12 +194,13 @@
     <Compile Include="Styling\Styles\ImageCell.cs" />
     <Compile Include="Styling\Styles\ImageView.cs" />
     <Compile Include="Styling\Styles\KeyValueCell.cs" />
-    <Compile Include="Styling\Styles\Label.cs" />
-    <Compile Include="Styling\Styles\Button.cs" />
+    <Compile Include="Styling\Styles\LabelView.cs" />
+    <Compile Include="Styling\Styles\ButtonView.cs" />
     <Compile Include="Styling\Styles\LabelCell.cs" />
     <Compile Include="Styling\Styles\ListView.cs" />
-    <Compile Include="Styling\Styles\Slider.cs" />
+    <Compile Include="Styling\Styles\SliderView.cs" />
     <Compile Include="Styling\Styles\TabbedPageButton.cs" />
+    <Compile Include="Styling\Styles\TextEntryView.cs" />
     <Compile Include="Styling\Styles\ToggleView.cs" />
     <Compile Include="Styling\Trigger.cs" />
     <Compile Include="Types\ItemSource.cs" />

@@ -3,11 +3,11 @@ using WellFired.Guacamole.Attributes;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
 
-[assembly: CustomRenderer(typeof(FilterView), typeof(FilterViewRenderer))]
+[assembly: CustomRenderer(typeof(FilterView), typeof(FilterViewViewRenderer))]
 
 namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 {
-	public class FilterViewRenderer : TextEntryRenderer
+	public class FilterViewViewRenderer : TextEntryViewRenderer
 	{
 		public override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{

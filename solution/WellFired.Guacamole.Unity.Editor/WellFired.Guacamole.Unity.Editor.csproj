@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>../../Unity/Assets/Code/Editor</OutputPath>
+    <OutputPath>../../unity/Assets/Code/Editor</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -27,7 +27,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>../../Unity/Assets/Code/Editor</OutputPath>
+    <OutputPath>../../unity/Assets/Code/Editor</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -58,6 +58,7 @@
     <Compile Include="DataBinding\ObservableScriptableObject.cs" />
     <Compile Include="DataBinding\ObservableScriptableObjectEditor.cs" />
     <Compile Include="Diagnostics\Logger.cs" />
+    <Compile Include="Extensions\EditorGUIExtensions.cs" />
     <Compile Include="Extensions\IImageSourceExtensions.cs" />
     <Compile Include="Extensions\TextViewExtensions.cs" />
     <Compile Include="Extensions\UIColorExtensions.cs" />
@@ -83,16 +84,16 @@
     <Compile Include="NativeControls\Page\PageRenderer.cs" />
     <Compile Include="NativeControls\Page\TabbedPageRenderer.cs" />
     <Compile Include="NativeControls\Views\BaseRenderer.cs" />
-    <Compile Include="NativeControls\Views\ButtonRenderer.cs" />
-    <Compile Include="NativeControls\Views\FilterViewRenderer.cs" />
+    <Compile Include="NativeControls\Views\ButtonViewRenderer.cs" />
+    <Compile Include="NativeControls\Views\FilterViewViewRenderer.cs" />
     <Compile Include="NativeControls\Views\ImageCreatorHandler.cs" />
     <Compile Include="NativeControls\Views\ImageViewRenderer.cs" />
-    <Compile Include="NativeControls\Views\LabelRenderer.cs" />
+    <Compile Include="NativeControls\Views\LabelViewRenderer.cs" />
     <Compile Include="NativeControls\Views\ListViewRenderer.cs" />
-    <Compile Include="NativeControls\Views\NumberEntryRenderer.cs" />
-    <Compile Include="NativeControls\Views\SliderRenderer.cs" />
-    <Compile Include="NativeControls\Views\TabbedPageButtonRenderer.cs" />
-    <Compile Include="NativeControls\Views\TextEntryRenderer.cs" />
+    <Compile Include="NativeControls\Views\NumberEntryViewRenderer.cs" />
+    <Compile Include="NativeControls\Views\SliderViewRenderer.cs" />
+    <Compile Include="NativeControls\Views\TabbedPageButtonViewRenderer.cs" />
+    <Compile Include="NativeControls\Views\TextEntryViewRenderer.cs" />
     <Compile Include="NativeControls\Views\ToggleViewRenderer.cs" />
     <Compile Include="NativeControls\Views\ViewContainerRenderer.cs" />
     <Compile Include="NativeControls\Views\ViewRenderer.cs" />

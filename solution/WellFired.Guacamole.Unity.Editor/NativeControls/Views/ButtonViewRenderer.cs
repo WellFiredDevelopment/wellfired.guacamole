@@ -7,11 +7,11 @@ using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
 
-[assembly: CustomRenderer(typeof(ButtonView), typeof(ButtonRenderer))]
+[assembly: CustomRenderer(typeof(ButtonView), typeof(ButtonViewRenderer))]
 
 namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 {
-	public class ButtonRenderer : BaseRenderer
+	public class ButtonViewRenderer : BaseRenderer
 	{
 		public override UISize? NativeSize
 		{

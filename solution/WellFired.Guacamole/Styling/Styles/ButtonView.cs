@@ -3,7 +3,7 @@ using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Styling.Styles
 {
-	internal static class Button
+	internal static class ButtonView
 	{
 		public static readonly Style Style = new Style
 		{
@@ -14,11 +14,11 @@ namespace WellFired.Guacamole.Styling.Styles
 				new Setter {Property = View.HorizontalLayoutProperty, Value = LayoutOptions.Fill},
 				new Setter {Property = View.VerticalLayoutProperty, Value = LayoutOptions.Expand},
 				new Setter {Property = View.PaddingProperty, Value = 5},
-				new Setter {Property = ButtonView.TextColorProperty, Value = UIColor.White},
+				new Setter {Property = Views.ButtonView.TextColorProperty, Value = UIColor.White},
 				new Setter {Property = View.CornerRadiusProperty, Value = 8.0},
 				new Setter {Property = View.OutlineThicknessProperty, Value = 6.0},
-				new Setter {Property = ButtonView.HorizontalTextAlignProperty, Value = UITextAlign.Middle},
-				new Setter {Property = ButtonView.VerticalTextAlignProperty, Value = UITextAlign.Middle}
+				new Setter {Property = Views.ButtonView.HorizontalTextAlignProperty, Value = UITextAlign.Middle},
+				new Setter {Property = Views.ButtonView.VerticalTextAlignProperty, Value = UITextAlign.Middle}
 			},
 			Triggers =
 			{

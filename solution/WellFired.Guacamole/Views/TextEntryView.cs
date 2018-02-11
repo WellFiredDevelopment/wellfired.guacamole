@@ -33,6 +33,33 @@ namespace WellFired.Guacamole.Views
 				entry => entry.VerticalTextAlign
 			);
 		
+		[PublicAPI] public static readonly BindableProperty PlaceholderTextProperty = BindableProperty.Create<TextEntryView, string>(
+			string.Empty,
+			BindingMode.TwoWay,
+			entry => entry.PlaceholderText
+		);
+
+		[PublicAPI] public static readonly BindableProperty PlaceholderTextColorProperty = BindableProperty
+			.Create<TextEntryView, UIColor>(
+				UIColor.Black,
+				BindingMode.TwoWay,
+				entry => entry.PlaceholderTextColor
+			);
+
+		[PublicAPI] public static readonly BindableProperty PlaceholderHorizontalTextAlignProperty = BindableProperty
+			.Create<TextEntryView, UITextAlign>(
+				UITextAlign.Start,
+				BindingMode.TwoWay,
+				entry => entry.PlaceholderHorizontalTextAlign
+			);
+
+		[PublicAPI] public static readonly BindableProperty PlaceholderVerticalTextAlignProperty = BindableProperty
+			.Create<TextEntryView, UITextAlign>(
+				UITextAlign.Middle,
+				BindingMode.TwoWay,
+				entry => entry.PlaceholderVerticalTextAlign
+			);
+		
 		[PublicAPI] public static readonly BindableProperty OnInputEnterProperty = BindableProperty
 			.Create<TextEntryView, Command>(
 				new Command(),
@@ -50,13 +77,7 @@ namespace WellFired.Guacamole.Views
 		public TextEntryView()
 		{
 			// Set some nice defaults
-			BackgroundColor = UIColor.FromRGB(66, 66, 66);
-			OutlineColor = UIColor.Black;
-			TextColor = UIColor.White;
-			HorizontalLayout = LayoutOptions.Fill;
-			CornerRadius = 8;
-			Padding = UIPadding.Of(5);
-			VerticalTextAlign = UITextAlign.Middle;
+			Style = Styling.Styles.TextEntryView.Style;
 		}
 
 		[PublicAPI]
@@ -85,6 +106,34 @@ namespace WellFired.Guacamole.Views
 		{
 			get => (UITextAlign) GetValue(VerticalTextAlignProperty);
 			set => SetValue(VerticalTextAlignProperty, value);
+		}
+
+		[PublicAPI]
+		public string PlaceholderText
+		{
+			get => (string) GetValue(PlaceholderTextProperty);
+			set => SetValue(PlaceholderTextProperty, value);
+		}
+
+		[PublicAPI]
+		public UIColor PlaceholderTextColor
+		{
+			get => (UIColor) GetValue(PlaceholderTextColorProperty);
+			set => SetValue(PlaceholderTextColorProperty, value);
+		}
+
+		[PublicAPI]
+		public UITextAlign PlaceholderHorizontalTextAlign
+		{
+			get => (UITextAlign) GetValue(PlaceholderHorizontalTextAlignProperty);
+			set => SetValue(PlaceholderHorizontalTextAlignProperty, value);
+		}
+
+		[PublicAPI]
+		public UITextAlign PlaceholderVerticalTextAlign
+		{
+			get => (UITextAlign) GetValue(PlaceholderVerticalTextAlignProperty);
+			set => SetValue(PlaceholderVerticalTextAlignProperty, value);
 		}
 		
 		[PublicAPI]

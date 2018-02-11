@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Drawing
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Data", "WellFired.Guacamole.Data\WellFired.Guacamole.Data.csproj", "{0CBC8A3C-5A74-4441-AD8E-0047BAFE5A6D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellFired.Guacamole.Unity.Editor.Test.Unit", "Tests\Core\WellFired.Guacamole.Unity.Editor.Test.Unit\WellFired.Guacamole.Unity.Editor.Test.Unit.csproj", "{DA3C2BDD-FFA3-45C0-96CD-578072C34AE2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{0CBC8A3C-5A74-4441-AD8E-0047BAFE5A6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CBC8A3C-5A74-4441-AD8E-0047BAFE5A6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CBC8A3C-5A74-4441-AD8E-0047BAFE5A6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA3C2BDD-FFA3-45C0-96CD-578072C34AE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA3C2BDD-FFA3-45C0-96CD-578072C34AE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA3C2BDD-FFA3-45C0-96CD-578072C34AE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA3C2BDD-FFA3-45C0-96CD-578072C34AE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,5 +102,6 @@ Global
 		{BAB03372-0CE8-4693-93B7-5BFFB29466B8} = {7436DA95-14F8-4B8F-9D04-E0EFEF0F2EFC}
 		{BB8952BF-3212-4478-9E84-47158D53E12B} = {7436DA95-14F8-4B8F-9D04-E0EFEF0F2EFC}
 		{DCFECFBB-D2FC-4722-A5A2-2DE278853725} = {C2567451-ABD5-42BD-A45F-3425B34AE783}
+		{DA3C2BDD-FFA3-45C0-96CD-578072C34AE2} = {7436DA95-14F8-4B8F-9D04-E0EFEF0F2EFC}
 	EndGlobalSection
 EndGlobal

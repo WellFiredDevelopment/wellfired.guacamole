@@ -7,11 +7,11 @@ using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
 using Debug = System.Diagnostics.Debug;
 
-[assembly: CustomRenderer(typeof(SliderView), typeof(SliderRenderer))]
+[assembly: CustomRenderer(typeof(SliderView), typeof(SliderViewRenderer))]
 
 namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 {
-	public class SliderRenderer : BaseRenderer
+	public class SliderViewRenderer : BaseRenderer
 	{
 		private GUIStyle ThumbStyle { get; set; }
 		private Texture2D ThumbBackgroundTexture { get; set; }

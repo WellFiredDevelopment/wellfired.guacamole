@@ -3,10 +3,10 @@ using WellFired.Guacamole.Attributes;
 using WellFired.Guacamole.Pages;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 
-[assembly: CustomRenderer(typeof(TabbedPageButtonView), typeof(TabbedPageButtonRenderer))]
+[assembly: CustomRenderer(typeof(TabbedPageButtonView), typeof(TabbedPageButtonViewRenderer))]
 namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 {
-    public class TabbedPageButtonRenderer : ButtonRenderer
+    public class TabbedPageButtonViewRenderer : ButtonViewRenderer
     {
         public override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {

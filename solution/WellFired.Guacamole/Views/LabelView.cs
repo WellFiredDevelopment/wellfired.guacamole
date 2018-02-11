@@ -52,7 +52,7 @@ namespace WellFired.Guacamole.Views
 
 		public LabelView()
 		{
-			Style = Styling.Styles.Label.Style;
+			Style = Styling.Styles.LabelView.Style;
 		}
 
 		[PublicAPI]

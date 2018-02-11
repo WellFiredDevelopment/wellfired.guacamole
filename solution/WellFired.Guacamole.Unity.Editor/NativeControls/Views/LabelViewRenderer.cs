@@ -7,11 +7,11 @@ using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
 
-[assembly: CustomRenderer(typeof(LabelView), typeof(LabelRenderer))]
+[assembly: CustomRenderer(typeof(LabelView), typeof(LabelViewRenderer))]
 
 namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 {
-	public class LabelRenderer : BaseRenderer
+	public class LabelViewRenderer : BaseRenderer
 	{
 		public override UISize? NativeSize
 		{

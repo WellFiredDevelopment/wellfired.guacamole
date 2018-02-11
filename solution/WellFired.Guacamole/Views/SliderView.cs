@@ -54,7 +54,7 @@ namespace WellFired.Guacamole.Views
 
 		public SliderView()
 		{
-			Style = Styling.Styles.Slider.Style;
+			Style = Styling.Styles.SliderView.Style;
 		}
 
 		[PublicAPI]

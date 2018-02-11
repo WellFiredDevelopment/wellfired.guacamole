@@ -8,11 +8,11 @@ using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
 
-[assembly: CustomRenderer(typeof(NumberEntryView), typeof(NumberEntryRenderer))]
+[assembly: CustomRenderer(typeof(NumberEntryView), typeof(NumberEntryViewRenderer))]
 
 namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 {
-	public class NumberEntryRenderer : BaseRenderer
+	public class NumberEntryViewRenderer : BaseRenderer
 	{
 		public override UISize? NativeSize
 		{

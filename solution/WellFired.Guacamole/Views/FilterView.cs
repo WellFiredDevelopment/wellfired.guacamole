@@ -34,6 +34,11 @@ namespace WellFired.Guacamole.Views
 			set => SetValue(SimpleSearchProperty, value);
 		}
 
+		public FilterView()
+		{
+			PlaceholderText = "Type here to Search";
+		}
+
 		public void Search()
 		{
 			KeyValueSearch = Text
