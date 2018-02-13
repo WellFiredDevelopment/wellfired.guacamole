@@ -6,6 +6,7 @@ using WellFired.Guacamole.DataStorage.Data;
 using WellFired.Guacamole.DataStorage.Data.Synchronization;
 using WellFired.Guacamole.DataStorage.Data.VersionUpdater;
 using WellFired.Guacamole.DataStorage.Storages;
+using WellFired.Guacamole.DataStorage.Synchronization;
 
 namespace WellFired.Guacamole.Unit.StoredData
 {
@@ -58,7 +59,7 @@ namespace WellFired.Guacamole.Unit.StoredData
 			var proxy = Substitute.For<IDataProxy>();
 
 			dataAccess.Track("Options", proxy);
-			
+
 			Assert.That(() => dataCacher.Received(1).UpdateData("Options", null), Throws.Nothing);
 		}
 
@@ -76,13 +77,13 @@ namespace WellFired.Guacamole.Unit.StoredData
 			var storedDataWatcher = Substitute.For<IStoredDataWatcher>();
 
 			var dataAccess = GetDataAccess(dataCacher: dataCacher, storedDataWatcher: storedDataWatcher, dataStorageService: dataStorageService);
-			
+
 			dataAccess.Track("Options", new OptionsProxy());
-			
+
 			storedDataWatcher.ClearReceivedCalls();
 			dataStorageService.ClearReceivedCalls();
 			dataCacher.ClearReceivedCalls();
-			
+
 			dataAccess.Save("Options");
 
 			Received.InOrder(
@@ -108,13 +109,13 @@ namespace WellFired.Guacamole.Unit.StoredData
 			var storedDataWatcher = Substitute.For<IStoredDataWatcher>();
 
 			var dataAccess = GetDataAccess(dataCacher: dataCacher, storedDataWatcher: storedDataWatcher, dataStorageService: dataStorageService);
-			
+
 			dataAccess.Track("Options", new OptionsProxy());
-			
+
 			storedDataWatcher.ClearReceivedCalls();
 			dataStorageService.ClearReceivedCalls();
 			dataCacher.ClearReceivedCalls();
-			
+
 			dataAccess.Save("Options");
 
 			Received.InOrder(
@@ -137,10 +138,10 @@ namespace WellFired.Guacamole.Unit.StoredData
 
 			var dataAccess = GetDataAccess(dataStorageService, dataCacher, storedDataUpdater);
 			dataAccess.Track("Options", new OptionsProxy());
-			
+
 			storedDataUpdater.ClearReceivedCalls();
 			dataStorageService.ClearReceivedCalls();
-			
+
 			dataAccess.DoStoredDataChanged("Options");
 
 			Received.InOrder(
@@ -152,29 +153,85 @@ namespace WellFired.Guacamole.Unit.StoredData
 				});
 		}
 
+		[Test]
+		public void When_Track_Data_Synchronization_Is_Correct()
+		{
+			var keyBasedLocker = Substitute.For<IKeyBasedReadWriteLock>();
+			ThreadSynchronizer.InitializeSharedInstance(keyBasedLocker, true);
+			var dataAccess = GetDataAccess(synchronizationID: "synchroID");
+			var proxy = Substitute.For<IDataProxy>();
+			dataAccess.Track("Options", proxy);
+
+			//We block access to other threads that wants to save the same data, but allows several thread to read the data.
+			Assert.That(() => keyBasedLocker.Received(1).EnterReadLock("OptionssynchroID"), Throws.Nothing);
+			Assert.That(() => keyBasedLocker.Received(1).ExitReadLock("OptionssynchroID"), Throws.Nothing);
+
+			//We block access to other threads that wants to update the data
+			Assert.That(() => keyBasedLocker.Received(1).EnterReadLock("synchroID"), Throws.Nothing);
+			Assert.That(() => keyBasedLocker.Received(1).ExitReadLock("synchroID"), Throws.Nothing);
+		}
+
+		[Test]
+		public void When_Save_Data_Synchronization_Is_Correct()
+		{
+			var keyBasedLocker = Substitute.For<IKeyBasedReadWriteLock>();
+			ThreadSynchronizer.InitializeSharedInstance(keyBasedLocker, true);
+			var dataAccess = GetDataAccess(synchronizationID: "synchroID");
+			dataAccess.Save("Options");
+
+			//We block access to other threads that wants to save the same data.
+			Assert.That(() => keyBasedLocker.Received(1).EnterWriteLock("OptionssynchroID"), Throws.Nothing);
+			Assert.That(() => keyBasedLocker.Received(1).ExitWriteLock("OptionssynchroID"), Throws.Nothing);
+
+			//We block access to other threads that wants to update the data
+			Assert.That(() => keyBasedLocker.Received(1).EnterReadLock("synchroID"), Throws.Nothing);
+			Assert.That(() => keyBasedLocker.Received(1).ExitReadLock("synchroID"), Throws.Nothing);
+		}
+
+		[Test]
+		public void When_Update_Data_Synchronization_Is_Correct()
+		{
+			var keyBasedLocker = Substitute.For<IKeyBasedReadWriteLock>();
+			ThreadSynchronizer.InitializeSharedInstance(keyBasedLocker, true);
+			var dataAccess = GetDataAccess(synchronizationID: "synchroID");
+			dataAccess.DoStoredDataChanged("Options");
+
+			Received.InOrder(() =>
+				{
+					//We block access to saving and reading threads for any key while updating the data
+					keyBasedLocker.EnterWriteLock("synchroID");
+					keyBasedLocker.ExitWriteLock("synchroID");
+
+					//lock calls when saving the updated data
+					keyBasedLocker.EnterWriteLock("synchroID");
+					keyBasedLocker.ExitWriteLock("synchroID");
+				}
+			);
+		}
+
 		private static DataAccess GetDataAccess(
 			IDataStorageService dataStorageService = null,
 			IDataCacher dataCacher = null,
 			IStoredDataUpdater storedDataUpdated = null,
-			IStoredDataWatcher storedDataWatcher = null
+			IStoredDataWatcher storedDataWatcher = null,
+			string synchronizationID = null
 		)
 		{
 			return Substitute.For<DataAccess>(
 				dataStorageService ?? Substitute.For<IDataStorageService>(),
 				dataCacher ?? Substitute.For<IDataCacher>(),
 				storedDataUpdated ?? Substitute.For<IStoredDataUpdater>(),
-				storedDataWatcher ?? Substitute.For<IStoredDataWatcher>(), null
+				storedDataWatcher ?? Substitute.For<IStoredDataWatcher>(),
+				synchronizationID
 			);
 		}
 
 		private class Options
 		{
-			
 		}
 
 		private class OptionsProxy : DataProxy<Options>
 		{
-			
 		}
 	}
 }

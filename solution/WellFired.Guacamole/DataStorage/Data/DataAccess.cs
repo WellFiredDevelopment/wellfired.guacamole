@@ -2,6 +2,7 @@
 using WellFired.Guacamole.DataStorage.Data.Synchronization;
 using WellFired.Guacamole.DataStorage.Data.VersionUpdater;
 using WellFired.Guacamole.DataStorage.Storages;
+using WellFired.Guacamole.DataStorage.Synchronization;
 using WellFired.Guacamole.Diagnostics;
 
 namespace WellFired.Guacamole.DataStorage.Data
@@ -31,8 +32,20 @@ namespace WellFired.Guacamole.DataStorage.Data
 		private readonly IStoredDataUpdater _storedDataUpdater;
 		private readonly IStoredDataWatcher _storedDataWatcher;
 		private readonly string _synchronizeID;
-
-		private static readonly KeyBasedReadWriteLock KeyBasedReadWriteLock = new KeyBasedReadWriteLock();
+		
+		public static IKeyBasedReadWriteLock SharedLock
+		{
+			get => _sharedLock;
+			set
+			{
+				if (_sharedLock != null)
+				{
+				}
+				
+				_sharedLock = value;
+			}
+		}
+		private static IKeyBasedReadWriteLock _sharedLock;
 
 		/// <summary>
 		/// Constructor of <see cref="DataAccess"/>
@@ -65,8 +78,8 @@ namespace WellFired.Guacamole.DataStorage.Data
 		/// <param name="dataProxy">Your data proxy. An implementation of the proxy is provided by <see cref="DataProxy{T}"/></param>
 		public void Track(string key, IDataProxy dataProxy)
 		{
-			KeyBasedReadWriteLock.EnterWriteLock(key + _synchronizeID);
-			KeyBasedReadWriteLock.EnterReadLock(_synchronizeID);
+			ThreadSynchronizer.SharedInstance.EnterReadLock(key + _synchronizeID);
+			ThreadSynchronizer.SharedInstance.EnterReadLock(_synchronizeID);
 
 			try
 			{
@@ -83,8 +96,8 @@ namespace WellFired.Guacamole.DataStorage.Data
 			}
 			finally 
 			{
-				KeyBasedReadWriteLock.ExitWriteLock(key + _synchronizeID);
-				KeyBasedReadWriteLock.ExitReadLock(_synchronizeID);
+				ThreadSynchronizer.SharedInstance.ExitReadLock(key + _synchronizeID);
+				ThreadSynchronizer.SharedInstance.ExitReadLock(_synchronizeID);
 			}
 		}
 
@@ -94,8 +107,8 @@ namespace WellFired.Guacamole.DataStorage.Data
 		/// <param name="key">The key where is located the data</param>
 		public void Save(string key)
 		{
-			KeyBasedReadWriteLock.EnterWriteLock(key + _synchronizeID);
-			KeyBasedReadWriteLock.EnterReadLock(_synchronizeID);
+			ThreadSynchronizer.SharedInstance.EnterWriteLock(key + _synchronizeID);
+			ThreadSynchronizer.SharedInstance.EnterReadLock(_synchronizeID);
 		
 			try
 			{
@@ -112,8 +125,8 @@ namespace WellFired.Guacamole.DataStorage.Data
 			}
 			finally 
 			{
-				KeyBasedReadWriteLock.ExitWriteLock(key + _synchronizeID);
-				KeyBasedReadWriteLock.ExitReadLock(_synchronizeID);
+				ThreadSynchronizer.SharedInstance.ExitWriteLock(key + _synchronizeID);
+				ThreadSynchronizer.SharedInstance.ExitReadLock(_synchronizeID);
 			}
 		}
 
@@ -134,7 +147,7 @@ namespace WellFired.Guacamole.DataStorage.Data
 
 		private void UpdateStoredData()
 		{
-			KeyBasedReadWriteLock.EnterWriteLock(_synchronizeID);
+			ThreadSynchronizer.SharedInstance.EnterWriteLock(_synchronizeID);
 			
 			try
 			{
@@ -147,7 +160,7 @@ namespace WellFired.Guacamole.DataStorage.Data
 			}
 			finally 
 			{
-				KeyBasedReadWriteLock.ExitWriteLock(_synchronizeID);
+				ThreadSynchronizer.SharedInstance.ExitWriteLock(_synchronizeID);
 			}
 		}
 	}

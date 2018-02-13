@@ -70,10 +70,13 @@
     <Compile Include="Cells\LabelCell.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="DataBinding\GetterInfo.cs" />
-    <Compile Include="DataStorage\KeyBasedReadWriteLock.cs" />
+    <Compile Include="DataStorage\Synchronization\AlreadyInitializeException.cs" />
+    <Compile Include="DataStorage\Synchronization\IKeyBasedReadWriteLock.cs" />
+    <Compile Include="DataStorage\Synchronization\KeyBasedReadWriteLock.cs" />
     <Compile Include="DataStorage\Storages\ComputerDataStorage.cs" />
     <Compile Include="DataStorage\Storages\FileStorageService.cs" />
     <Compile Include="DataStorage\Storages\IDataStorageService.cs" />
+    <Compile Include="DataStorage\Synchronization\ThreadSynchronizer.cs" />
     <Compile Include="Diagnostics\ConsoleLogger.cs" />
     <Compile Include="Pages\MasterDetailPage\ListViewMasterDetailPage.cs" />
     <Compile Include="Pages\MasterDetailPage\MasterDetailPage.cs" />
