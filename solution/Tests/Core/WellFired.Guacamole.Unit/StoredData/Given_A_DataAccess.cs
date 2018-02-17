@@ -157,7 +157,7 @@ namespace WellFired.Guacamole.Unit.StoredData
 		public void When_Track_Data_Synchronization_Is_Correct()
 		{
 			var keyBasedLocker = Substitute.For<IKeyBasedReadWriteLock>();
-			ThreadSynchronizer.InitializeSharedInstance(keyBasedLocker, true);
+			DataAccess.InitializeSharedThreadLock(keyBasedLocker, true);
 			var dataAccess = GetDataAccess(synchronizationID: "synchroID");
 			var proxy = Substitute.For<IDataProxy>();
 			dataAccess.Track("Options", proxy);
@@ -175,7 +175,7 @@ namespace WellFired.Guacamole.Unit.StoredData
 		public void When_Save_Data_Synchronization_Is_Correct()
 		{
 			var keyBasedLocker = Substitute.For<IKeyBasedReadWriteLock>();
-			ThreadSynchronizer.InitializeSharedInstance(keyBasedLocker, true);
+			DataAccess.InitializeSharedThreadLock(keyBasedLocker, true);
 			var dataAccess = GetDataAccess(synchronizationID: "synchroID");
 			dataAccess.Save("Options");
 
@@ -192,7 +192,7 @@ namespace WellFired.Guacamole.Unit.StoredData
 		public void When_Update_Data_Synchronization_Is_Correct()
 		{
 			var keyBasedLocker = Substitute.For<IKeyBasedReadWriteLock>();
-			ThreadSynchronizer.InitializeSharedInstance(keyBasedLocker, true);
+			DataAccess.InitializeSharedThreadLock(keyBasedLocker, true);
 			var dataAccess = GetDataAccess(synchronizationID: "synchroID");
 			dataAccess.DoStoredDataChanged("Options");
 

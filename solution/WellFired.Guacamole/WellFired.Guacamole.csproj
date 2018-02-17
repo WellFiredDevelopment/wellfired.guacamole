@@ -70,7 +70,7 @@
     <Compile Include="Cells\LabelCell.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="DataBinding\GetterInfo.cs" />
-    <Compile Include="DataStorage\Synchronization\AlreadyInitializeException.cs" />
+    <Compile Include="DataStorage\Exceptions\AlreadyInitializeException.cs" />
     <Compile Include="DataStorage\Synchronization\IKeyBasedReadWriteLock.cs" />
     <Compile Include="DataStorage\Synchronization\KeyBasedReadWriteLock.cs" />
     <Compile Include="DataStorage\Storages\ComputerDataStorage.cs" />

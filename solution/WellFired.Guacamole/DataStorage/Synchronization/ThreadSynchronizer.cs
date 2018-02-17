@@ -2,22 +2,9 @@
 {
 	public class ThreadSynchronizer
 	{
-		public static void InitializeSharedInstance(IKeyBasedReadWriteLock readWriteLock, bool forceReinitialization = false)
-		{
-			if (_sharedInstance != null && !forceReinitialization)
-			{
-				throw new AlreadyInitializeException();
-			}
-			
-			_sharedInstance = new ThreadSynchronizer(readWriteLock);
-		}
-
-		public static ThreadSynchronizer SharedInstance => _sharedInstance ?? (_sharedInstance = new ThreadSynchronizer(new KeyBasedReadWriteLock()));
-
 		private readonly IKeyBasedReadWriteLock _readWriteLock;
-		private static ThreadSynchronizer _sharedInstance;
 
-		private ThreadSynchronizer(IKeyBasedReadWriteLock readWriteLock)
+		public ThreadSynchronizer(IKeyBasedReadWriteLock readWriteLock)
 		{
 			_readWriteLock = readWriteLock;
 		}

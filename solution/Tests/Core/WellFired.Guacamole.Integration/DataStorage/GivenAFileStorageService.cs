@@ -57,7 +57,7 @@ namespace WellFired.Guacamole.Integration.DataStorage
 		public void When_Read_Then_Synchronization_Is_Correct()
 		{
 			var keyBasedLocker = Substitute.For<IKeyBasedReadWriteLock>();
-			ThreadSynchronizer.InitializeSharedInstance(keyBasedLocker, true);
+			FileStorageService.InitializeSharedThreadLock(keyBasedLocker, true);
 
 			var dllPath = Utils.GetTestDllRepository();
 
@@ -89,7 +89,7 @@ namespace WellFired.Guacamole.Integration.DataStorage
 		public void When_Write_Then_Synchronization_Is_Correct()
 		{
 			var keyBasedLocker = Substitute.For<IKeyBasedReadWriteLock>();
-			ThreadSynchronizer.InitializeSharedInstance(keyBasedLocker, true);
+			FileStorageService.InitializeSharedThreadLock(keyBasedLocker, true);
 
 			var dllPath = Utils.GetTestDllRepository();
 
@@ -110,7 +110,7 @@ namespace WellFired.Guacamole.Integration.DataStorage
 		public void When_Check_Exists_Then_Synchronization_Is_Correct()
 		{
 			var keyBasedLocker = Substitute.For<IKeyBasedReadWriteLock>();
-			ThreadSynchronizer.InitializeSharedInstance(keyBasedLocker, true);
+			FileStorageService.InitializeSharedThreadLock(keyBasedLocker, true);
 
 			var dllPath = Utils.GetTestDllRepository();
 			var fileStorageService = new FileStorageService($"{dllPath}");
@@ -125,7 +125,7 @@ namespace WellFired.Guacamole.Integration.DataStorage
 		public void When_Delete_Then_Synchronization_Is_Correct()
 		{
 			var keyBasedLocker = Substitute.For<IKeyBasedReadWriteLock>();
-			ThreadSynchronizer.InitializeSharedInstance(keyBasedLocker, true);
+			FileStorageService.InitializeSharedThreadLock(keyBasedLocker, true);
 
 			var dllPath = Utils.GetTestDllRepository();
 

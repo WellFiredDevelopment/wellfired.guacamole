@@ -10,6 +10,23 @@ namespace WellFired.Guacamole.DataStorage.Storages
 	/// </summary>
 	public class FileStorageService : IDataStorageService
 	{
+		#region Thread Synchronization
+		
+		public static void InitializeSharedThreadLock(IKeyBasedReadWriteLock readWriteLock, bool forceReinitialization = false)
+		{
+			if (_sharedThreadLock != null && !forceReinitialization)
+			{
+				throw new AlreadyInitializeException();
+			}
+			
+			_sharedThreadLock = new ThreadSynchronizer(readWriteLock);
+		}
+
+		private static ThreadSynchronizer SharedThreadLock => _sharedThreadLock ?? (_sharedThreadLock = new ThreadSynchronizer(new KeyBasedReadWriteLock()));
+		private static ThreadSynchronizer _sharedThreadLock;
+		
+		#endregion
+		
 		public FileStorageService(string savingFolder)
 		{
 			Location = savingFolder;
@@ -22,14 +39,14 @@ namespace WellFired.Guacamole.DataStorage.Storages
 		/// <inheritdoc />
 		public string Read(string key)
 		{
-			ThreadSynchronizer.SharedInstance.EnterReadLock(Location + key);
+			SharedThreadLock.EnterReadLock(Location + key);
 			try
 			{
 				return File.ReadAllText($"{Location}/{key}");
 			}
 			finally
 			{
-				ThreadSynchronizer.SharedInstance.ExitReadLock(Location + key);
+				SharedThreadLock.ExitReadLock(Location + key);
 			}
 		}
 
@@ -40,35 +57,35 @@ namespace WellFired.Guacamole.DataStorage.Storages
 		/// <param name="key"></param>
 		public void Write(string data, string key)
 		{
-			ThreadSynchronizer.SharedInstance.EnterWriteLock(Location + key);
+			SharedThreadLock.EnterWriteLock(Location + key);
 			try
 			{
 				File.WriteAllText($"{Location}/{key}", data);
 			}
 			finally
 			{
-				ThreadSynchronizer.SharedInstance.ExitWriteLock(Location + key);
+				SharedThreadLock.ExitWriteLock(Location + key);
 			}
 		}
 
 		/// <inheritdoc />
 		public void Delete(string key)
 		{
-			ThreadSynchronizer.SharedInstance.EnterWriteLock(Location + key);
+			SharedThreadLock.EnterWriteLock(Location + key);
 			try
 			{
 				File.Delete($"{Location}/{key}");
 			}
 			finally
 			{
-				ThreadSynchronizer.SharedInstance.ExitWriteLock(Location + key);
+				SharedThreadLock.ExitWriteLock(Location + key);
 			}
 		}
 
 		/// <inheritdoc />
 		public bool Exists(string key)
 		{
-			ThreadSynchronizer.SharedInstance.EnterReadLock(Location + key);
+			SharedThreadLock.EnterReadLock(Location + key);
 			
 			try
 			{
@@ -76,7 +93,7 @@ namespace WellFired.Guacamole.DataStorage.Storages
 			}
 			finally
 			{
-				ThreadSynchronizer.SharedInstance.ExitReadLock(Location + key);
+				SharedThreadLock.ExitReadLock(Location + key);
 			}
 		}
 	}
