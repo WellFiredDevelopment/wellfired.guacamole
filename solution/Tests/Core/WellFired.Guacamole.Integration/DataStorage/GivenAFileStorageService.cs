@@ -61,17 +61,27 @@ namespace WellFired.Guacamole.Integration.DataStorage
 
 			var dllPath = Utils.GetTestDllRepository();
 
-			//we try to save in an unexisting location to throw exception and ensure read lock still get released.
-			var fileStorageService = new FileStorageService($"{dllPath}/an/unexisting/path");
+			var fileStorageService = new FileStorageService($"{dllPath}/storage");
 
+			var exceptionNotThrown = false;
 			try
 			{
 				fileStorageService.Read("aKey");
+				exceptionNotThrown = true;
 			}
 			catch (Exception)
 			{
-				Assert.That(() => keyBasedLocker.Received(1).EnterReadLock($"{dllPath}/an/unexisting/path" + "aKey"), Throws.Nothing);
-				Assert.That(() => keyBasedLocker.Received(1).ExitReadLock($"{dllPath}/an/unexisting/path" + "aKey"), Throws.Nothing);
+				Assert.That(() => keyBasedLocker.Received(1).EnterReadLock($"{dllPath}/storage" + "aKey"), Throws.Nothing);
+				Assert.That(() => keyBasedLocker.Received(1).ExitReadLock($"{dllPath}/storage" + "aKey"), Throws.Nothing);
+			}
+			finally
+			{
+				Directory.Delete($"{dllPath}/storage", true);
+			}
+
+			if (exceptionNotThrown)
+			{
+				Assert.Fail("An exception should be thrown when reading a non existing key.");
 			}
 		}
 
@@ -83,17 +93,16 @@ namespace WellFired.Guacamole.Integration.DataStorage
 
 			var dllPath = Utils.GetTestDllRepository();
 
-			//we try to save in an unexisting location to throw exception and ensure read lock still get released.
-			var fileStorageService = new FileStorageService($"{dllPath}/an/unexisting/path");
-
 			try
 			{
+				var fileStorageService = new FileStorageService($"{dllPath}/storage");
 				fileStorageService.Write("Cow", "aKey");
+				Assert.That(() => keyBasedLocker.Received(1).EnterWriteLock($"{dllPath}/storage" + "aKey"), Throws.Nothing);
+				Assert.That(() => keyBasedLocker.Received(1).ExitWriteLock($"{dllPath}/storage" + "aKey"), Throws.Nothing);
 			}
-			catch (Exception)
+			finally
 			{
-				Assert.That(() => keyBasedLocker.Received(1).EnterWriteLock($"{dllPath}/an/unexisting/path" + "aKey"), Throws.Nothing);
-				Assert.That(() => keyBasedLocker.Received(1).ExitWriteLock($"{dllPath}/an/unexisting/path" + "aKey"), Throws.Nothing);
+				Directory.Delete($"{dllPath}/storage", true);
 			}
 		}
 
@@ -106,15 +115,10 @@ namespace WellFired.Guacamole.Integration.DataStorage
 			var dllPath = Utils.GetTestDllRepository();
 			var fileStorageService = new FileStorageService($"{dllPath}");
 
-			try
-			{
-				fileStorageService.Exists("aKey");
-			}
-			catch (Exception)
-			{
-				Assert.That(() => keyBasedLocker.Received(1).EnterReadLock($"{dllPath}aKey"), Throws.Nothing);
-				Assert.That(() => keyBasedLocker.Received(1).ExitReadLock($"{dllPath}aKey"), Throws.Nothing);
-			}
+			fileStorageService.Exists("aKey");
+
+			Assert.That(() => keyBasedLocker.Received(1).EnterReadLock($"{dllPath}aKey"), Throws.Nothing);
+			Assert.That(() => keyBasedLocker.Received(1).ExitReadLock($"{dllPath}aKey"), Throws.Nothing);
 		}
 
 		[Test]
@@ -125,17 +129,17 @@ namespace WellFired.Guacamole.Integration.DataStorage
 
 			var dllPath = Utils.GetTestDllRepository();
 
-			//we try to save in an unexisting location to throw exception and ensure read lock still get released.
-			var fileStorageService = new FileStorageService($"{dllPath}/an/unexisting/path");
-
 			try
 			{
+				var fileStorageService = new FileStorageService($"{dllPath}/storage");
 				fileStorageService.Delete("aKey");
+				
+				Assert.That(() => keyBasedLocker.Received(1).EnterWriteLock($"{dllPath}/storage" + "aKey"), Throws.Nothing);
+				Assert.That(() => keyBasedLocker.Received(1).ExitWriteLock($"{dllPath}/storage" + "aKey"), Throws.Nothing);
 			}
-			catch (Exception)
+			finally
 			{
-				Assert.That(() => keyBasedLocker.Received(1).EnterWriteLock($"{dllPath}/an/unexisting/path" + "aKey"), Throws.Nothing);
-				Assert.That(() => keyBasedLocker.Received(1).ExitWriteLock($"{dllPath}/an/unexisting/path" + "aKey"), Throws.Nothing);
+				Directory.Delete($"{dllPath}/storage", true);
 			}
 		}
 	}

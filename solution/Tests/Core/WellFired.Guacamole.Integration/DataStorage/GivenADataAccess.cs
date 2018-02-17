@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.IO;
+using System.Threading;
 using JetBrains.Annotations;
 using NUnit.Framework;
 using WellFired.Guacamole.DataStorage.Data;
@@ -18,37 +19,45 @@ namespace WellFired.Guacamole.Integration.DataStorage
 		public void Test_Potential_DeadLock()
 		{
 			var dataLocation = Utils.GetTestDllRepository();
-			const string synchroId = "synchroID";
 			
-			var dataAccess1 = new DataAccess(
-				new FileStorageService(dataLocation), 
-				new DataCacher(), 
-				new StoredDataUpdater(), 
-				new FileSystemDataWatcher(dataLocation), 
-				synchroId);
-			
-			var dataAccess2 = new DataAccess(
-				new FileStorageService(dataLocation), 
-				new DataCacher(), 
-				new StoredDataUpdater(), 
-				new FileSystemDataWatcher(dataLocation), 
-				synchroId);
-
-			var proxy1 = new OptionsProxy();
-			var proxy2 = new OptionsProxy();
-			
-			dataAccess1.Track("Options", proxy1);
-			dataAccess2.Track("Options", proxy2);
-
-			var thread = GetSavingThread(dataAccess1, dataAccess2, proxy1, proxy2);
-			thread.Start();
-			if (!thread.Join(TimeOut))
+			try
 			{
-				Assert.Fail("Deadlock detected");
+				const string synchroId = "synchroID";
+
+				var dataAccess1 = new DataAccess(
+					new FileStorageService(dataLocation),
+					new DataCacher(),
+					new StoredDataUpdater(),
+					new FileSystemDataWatcher(dataLocation),
+					synchroId);
+
+				var dataAccess2 = new DataAccess(
+					new FileStorageService(dataLocation),
+					new DataCacher(),
+					new StoredDataUpdater(),
+					new FileSystemDataWatcher(dataLocation),
+					synchroId);
+
+				var proxy1 = new OptionsProxy();
+				var proxy2 = new OptionsProxy();
+
+				dataAccess1.Track("Options", proxy1);
+				dataAccess2.Track("Options", proxy2);
+
+				var thread = GetSavingThread(dataAccess1, dataAccess2, proxy1, proxy2);
+				thread.Start();
+				if (!thread.Join(TimeOut))
+				{
+					Assert.Fail("Deadlock detected");
+				}
+				else
+				{
+					Assert.Pass();
+				}
 			}
-			else
+			finally
 			{
-				Assert.Pass();
+				File.Delete(dataLocation + "/Options");
 			}
 		}
 
