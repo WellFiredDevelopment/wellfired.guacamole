@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 using WellFired.Guacamole.DataStorage.Data.Synchronization;
 using WellFired.Guacamole.DataStorage.Data.VersionUpdater;
 using WellFired.Guacamole.DataStorage.Storages;
@@ -25,6 +26,7 @@ namespace WellFired.Guacamole.DataStorage.Data
 	/// in the same emplacement, you may want to make use of the possibility of assigning a thread synchronizer id in the constructor method.
 	/// <seealso cref="IDataProxy"/><seealso cref="DataProxy{T}"/>
 	/// </summary>
+	[PublicAPI]
 	public class DataAccess : IDataAccess, IStoredDataWatcherListener
 	{
 		private readonly IDataStorageService _dataStorageService;
@@ -32,20 +34,6 @@ namespace WellFired.Guacamole.DataStorage.Data
 		private readonly IStoredDataUpdater _storedDataUpdater;
 		private readonly IStoredDataWatcher _storedDataWatcher;
 		private readonly string _synchronizeID;
-		
-		public static IKeyBasedReadWriteLock SharedLock
-		{
-			get => _sharedLock;
-			set
-			{
-				if (_sharedLock != null)
-				{
-				}
-				
-				_sharedLock = value;
-			}
-		}
-		private static IKeyBasedReadWriteLock _sharedLock;
 
 		/// <summary>
 		/// Constructor of <see cref="DataAccess"/>

@@ -35,6 +35,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DataStorage\GivenADataAccess.cs" />
     <Compile Include="DataStorage\GivenAFileStorageService.cs" />
     <Compile Include="Layouts\Adjacent\Given_AnAdjacentLayoutWithAdjecentLayoutChildren.cs" />
     <Compile Include="Layouts\Adjacent\Given_AnAdjacentLayoutWithChildrenWithPadding.cs" />
