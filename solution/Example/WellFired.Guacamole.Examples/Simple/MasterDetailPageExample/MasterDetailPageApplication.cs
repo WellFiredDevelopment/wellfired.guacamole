@@ -12,9 +12,9 @@ namespace WellFired.Guacamole.Examples.Simple.MasterDetailPageExample
         private static void OpenWindow()
         {
             Launch<MasterDetailPageWindow>(
-                uiRect: UIRect.With(50, 50, 200, 600),
-                minSize: UISize.Of(200, 600),
-                title: "ListViewTest");
+                uiRect: UIRect.With(50, 50, 800, 600),
+                minSize: UISize.Of(800, 600),
+                title: "Master Detail Example");
         }
     }
 }

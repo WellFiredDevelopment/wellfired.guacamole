@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Diagnostics;
@@ -21,11 +22,28 @@ namespace WellFired.Guacamole.Examples.Simple.TabbedPageExample
 					switch (o)
 					{
 						case FirstPage _:
-							return new Page {Title = "First", BackgroundColor = UIColor.Aquamarine, OutlineThickness = 0};
+							return new Page {
+								Title = "First", 
+								BackgroundColor = UIColor.Aquamarine, 
+								OutlineThickness = 0, 
+								Content = PageContent.Create()
+							};
 						case SecondPage _:
-							return new Page {Title = "Second", BackgroundColor = UIColor.Beige, OutlineThickness = 0};
+							return new Page {
+								Title = "Second", 
+								BackgroundColor = UIColor.Beige, 
+								OutlineThickness = 0, 
+								Content = PageContent.Create()
+							};
+						case ThirdPage _:
+							return new Page {
+								Title = "Third",
+								BackgroundColor = UIColor.Brown,
+								OutlineThickness = 0,
+								Content = PageContent.Create()
+							};
 					}
-					return new Page {Title = "Third", BackgroundColor = UIColor.Brown, OutlineThickness = 0};
+					throw new NotImplementedException();
 				})
 			};
 		}

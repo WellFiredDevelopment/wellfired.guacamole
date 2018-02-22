@@ -1,5 +1,6 @@
 ﻿using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Layouts;
+using WellFired.Guacamole.Platforms;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Pages.MasterDetailPage
@@ -34,8 +35,18 @@ namespace WellFired.Guacamole.Pages.MasterDetailPage
         protected void SetDetail(ILayoutable layoutable)
         {
             ((View)layoutable).SetStyleDictionary(StyleDictionary);
-            InvalidateRectRequest();
             _detailContainer.Content = (IView) layoutable;
+            InvalidateRectRequest();
+           
+            MainThreadRunner.ExecuteOnMainThread(() => ViewSizingExtensions.DoSizingAndLayout(this, RectRequest));
+        }
+
+        public override void InvalidateRectRequest()
+        {
+            base.InvalidateRectRequest();
+            
+            _detailContainer?.InvalidateRectRequest();
+            ((View)_detailContainer?.Content)?.InvalidateRectRequest();
         }
     }
 }
