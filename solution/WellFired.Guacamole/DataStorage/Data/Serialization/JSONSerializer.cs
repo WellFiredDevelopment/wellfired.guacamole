@@ -14,9 +14,9 @@ namespace WellFired.Guacamole.DataStorage.Data.Serialization
 			_contractResolver = contractResolver;
 		}
 
-		public string Serialize(object data)
+		public string Serialize(object data, bool indented = true)
 		{
-			var serializedData = JsonConvert.SerializeObject(data, Formatting.Indented, new JsonSerializerSettings
+			var serializedData = JsonConvert.SerializeObject(data, indented? Formatting.Indented : Formatting.None, new JsonSerializerSettings
 			{
 				TypeNameHandling = TypeNameHandling.Auto,
 				DateTimeZoneHandling = DateTimeZoneHandling.Utc,
