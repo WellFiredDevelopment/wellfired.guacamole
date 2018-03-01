@@ -28,7 +28,7 @@ namespace WellFired.Guacamole.DataStorage.Data.VersionUpdater
 			{
 				if (startUpdate)
 				{
-					Logger.LogMessage($"Update settings data file to version {versionUpdater.VersionNo}");
+					Logger.LogMessage($"Update data to version {versionUpdater.VersionNo}");
 					versionUpdater.UpdatePreviousVersion();
 				}
 				else if (versionUpdater.IsCompatibleWithCurrentVersion())
