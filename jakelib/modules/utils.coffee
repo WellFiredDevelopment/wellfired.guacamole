@@ -43,6 +43,9 @@ module.exports = {
     find: (path, opts) ->
         jetpack.find(path, opts)
 
+    getFileName: (srcFile) ->
+        srcFile.replace(/^.*[\\\/]/, '')
+
     createDir: (path, opts) ->
         jetpack.dir(path, opts)
 
