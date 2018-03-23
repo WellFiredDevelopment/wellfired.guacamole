@@ -6,12 +6,18 @@ namespace WellFired.Guacamole.Views
 {
     public partial class ListView : IListensToVdsChanges
     {
+        /// <summary>
+        /// When an item becomes invisible, we cache the cell and remove it from the children.
+        /// </summary>
+        /// <param name="vdsIndex"></param>
+        /// <param name="front">indicate if the item added is on the top of already visible children, or if it is at the bottom
+        /// (left or right for horizontal list view)</param>
         public void ItemLeftVds(int vdsIndex, bool front)
         {
             var data = GetItem(vdsIndex);
             
             if(front)
-                InitialOffset = 0;
+                InitialOffset += GetEntrySizeFor(data) + Spacing;
             
             foreach (var child in Children)
             {
@@ -26,12 +32,19 @@ namespace WellFired.Guacamole.Views
             }                
         }
 
+        /// <summary>
+        /// When an item becomes visible, we get a cell from the cache and we inject the data in it.
+        /// </summary>
+        /// <param name="vdsIndex"></param>
+        /// <param name="front">indicate if the item added is on the top of already visible children, or if it is at the bottom
+        /// (left or right for horizontal list view)</param>
+        /// <exception cref="Exception"></exception>
         public void ItemEnteredVds(int vdsIndex, bool front)
         {
             var data = GetItem(vdsIndex);
             
             if(front)
-                InitialOffset = -GetEntrySizeFor(data);
+                InitialOffset -= GetEntrySizeFor(data) + Spacing;
             
             if(data == null)
                 throw new Exception("Failed to find VDS data for given index.");

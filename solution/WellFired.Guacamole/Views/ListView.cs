@@ -32,8 +32,19 @@ namespace WellFired.Guacamole.Views
         private readonly List<ICell> _activeCells = new List<ICell>();
         private readonly Dictionary<Type, List<ICell>> _inactiveCells = new Dictionary<Type, List<ICell>>();
         
+        /// <summary>
+        /// The total width for horizontal list view, or the total height for vertical list view, after suming up the size of each
+        /// items.
+        /// </summary>
         public int TotalContentSize { get; private set; }
+
+        /// <summary>
+        /// The position where the first child should be rendered. A negative value indicate that the first child is rendered above the
+        /// list view position (or on the left for a horizontal list view), meaning part of it is outside of the list view. This happens
+        /// when scrolling, or when adding and removing children from the list of cells to render.
+        /// </summary>
         public float InitialOffset { get; private set; }
+
         private int _headersCount;
         private int _itemsCount;
         public Action<INotifyPropertyChanged, SelectedItemChangedEventArgs> OnItemSelected { get; set; } = delegate {  };

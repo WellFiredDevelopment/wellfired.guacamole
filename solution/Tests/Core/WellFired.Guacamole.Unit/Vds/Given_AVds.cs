@@ -53,7 +53,7 @@ namespace WellFired.Guacamole.Unit.Vds
             VdsCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
             
             Received.InOrder(() => {
-                listensToVdsChanges.ItemLeftVds(0, Arg.Any<bool>());
+                listensToVdsChanges.ItemLeftVds(0, true);
                 listensToVdsChanges.ItemEnteredVds(1, false);
                 listensToVdsChanges.ItemEnteredVds(2, false);
                 listensToVdsChanges.ItemEnteredVds(3, false);
@@ -91,8 +91,8 @@ namespace WellFired.Guacamole.Unit.Vds
             listensToVdsChanges.DidNotReceive().ItemEnteredVds(2, Arg.Any<bool>());
             
             Received.InOrder(() => {
-                listensToVdsChanges.ItemLeftVds(3, Arg.Any<bool>());
-                listensToVdsChanges.ItemLeftVds(4, Arg.Any<bool>());
+                listensToVdsChanges.ItemLeftVds(3, false);
+                listensToVdsChanges.ItemLeftVds(4, false);
                 listensToVdsChanges.ItemEnteredVds(1, true);
                 listensToVdsChanges.ItemEnteredVds(0, true);
             });
@@ -108,8 +108,8 @@ namespace WellFired.Guacamole.Unit.Vds
             VdsCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
             
             Received.InOrder(() => {
-                listensToVdsChanges.ItemLeftVds(3, Arg.Any<bool>());
-                listensToVdsChanges.ItemLeftVds(4, Arg.Any<bool>());
+                listensToVdsChanges.ItemLeftVds(3, true);
+                listensToVdsChanges.ItemLeftVds(4, true);
                 listensToVdsChanges.ItemEnteredVds(6, false);
                 listensToVdsChanges.ItemEnteredVds(7, false);
             });
@@ -125,8 +125,8 @@ namespace WellFired.Guacamole.Unit.Vds
             VdsCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
             
             Received.InOrder(() => {
-                listensToVdsChanges.ItemLeftVds(3, Arg.Any<bool>());
-                listensToVdsChanges.ItemLeftVds(4, Arg.Any<bool>());
+                listensToVdsChanges.ItemLeftVds(3, false);
+                listensToVdsChanges.ItemLeftVds(4, false);
                 listensToVdsChanges.ItemEnteredVds(1, true);
                 listensToVdsChanges.ItemEnteredVds(0, true);
             });

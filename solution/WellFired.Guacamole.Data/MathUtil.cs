@@ -5,7 +5,7 @@ namespace WellFired.Guacamole.Data
 	public class MathUtil
 	{
 		/// <summary>
-		/// Returns tru if a is almost the same value as b, using a d of 0.0001f
+		/// Returns true if a is almost the same value as b, using a d of 0.0001f
 		/// </summary>
 		/// <param name="a"></param>
 		/// <param name="b"></param>

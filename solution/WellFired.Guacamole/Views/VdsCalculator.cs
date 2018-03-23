@@ -34,9 +34,6 @@ namespace WellFired.Guacamole.Views
 
             var firstEntry = focusedEntry;
             var focusedHeight = obtainHeight(firstEntry) + scrollOffset;
-
-            if (firstEntry > maxEntries)
-                return;
             
             visibleDataSet.Add(firstEntry);
 
@@ -63,6 +60,7 @@ namespace WellFired.Guacamole.Views
         /// <param name="estimatedContentSize">The visual total size of all of the content.</param>
         /// <param name="spacing"></param>
         /// <returns></returns>
+        //todo : seems to be used only in tests, not in production code
         public static IEnumerable<int> CalculateVisualDataSet(float virtualScrollPosition, int visibleControlSize, int estimatedElementSize, int estimatedContentSize, int spacing)
         {
             var visibleDataSet = new List<int>();
@@ -116,7 +114,7 @@ namespace WellFired.Guacamole.Views
             for (var index = 0; index < Removals.Count; index++)
             {
                 var removal = Removals[index];
-                var front = oldVds.Any() && removal < oldVds.Last();
+                var front = oldVds.Any() && removal < newVds.First();
                 listensToVdsChanges.ItemLeftVds(removal, front);
             }
 
@@ -129,16 +127,14 @@ namespace WellFired.Guacamole.Views
             {
                 for (var index = Additions.Count - 1; index >= 0; index--)
                 {
-                    var front = oldVds.Any() && Additions[index] < oldVds.First();
-                    listensToVdsChanges.ItemEnteredVds(Additions[index], front);       
+                    listensToVdsChanges.ItemEnteredVds(Additions[index], true);       
                 }
             }
             else
             {
                 for (var index = 0; index < Additions.Count; index++)
                 {
-                    var front = oldVds.Any() && Additions[index] < oldVds.First();
-                    listensToVdsChanges.ItemEnteredVds(Additions[index], front);       
+                    listensToVdsChanges.ItemEnteredVds(Additions[index], false);       
                 }
             }
         }
