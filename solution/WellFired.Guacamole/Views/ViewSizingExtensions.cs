@@ -52,8 +52,7 @@ namespace WellFired.Guacamole.Views
 
             var hasInvalidated = false;
 
-            var hasChildren = view as IHasChildren;
-            if (hasChildren != null)
+            if (view is IHasChildren hasChildren)
             {
                 foreach (var child in hasChildren.Children)
                 {
@@ -88,8 +87,7 @@ namespace WellFired.Guacamole.Views
         /// <returns></returns>
         private static UIRect CalculateValidRectRequest(IView view)
         {
-            var canLayout = view as ICanLayout;
-            if (canLayout != null)
+            if (view is ICanLayout canLayout)
             {
                 var rectRequest = canLayout.Layout.CalculateValidRectRequest(canLayout.Children, view.MinSize);
                 var totalSize = UISize.Of(rectRequest.Width, rectRequest.Height);
@@ -97,8 +95,7 @@ namespace WellFired.Guacamole.Views
                 return UIRect.With(rectRequest.X, rectRequest.Y, adjustedForPadding.Width, adjustedForPadding.Height);
             }
 
-            var listView = view as IListView;
-            if (listView != null)
+            if (view is IListView listView)
             {
                 var requestedSize = ListViewHelper.CalculateValidRectRequest(listView);
                 
@@ -215,8 +212,7 @@ namespace WellFired.Guacamole.Views
              if (bindable.BindingContext == null)
                  bindable.BindingContext = bindable.BindingContext;
 
-            var children = bindable as IHasChildren;
-            if (children == null)
+            if (!(bindable is IHasChildren children))
                 return;
 
             foreach(var child in children.Children)
@@ -230,16 +226,14 @@ namespace WellFired.Guacamole.Views
 
             var layout = view as ICanLayout;
             layout?.Layout.Layout(layout.Children, view.RectRequest, view.Padding);
-            
-            var listView = view as IListView;
-            if (listView != null)
+
+            if (view is IListView listView)
                 ListViewHelper.Layout(listView, view.RectRequest, view.Padding);
 
             if(view.Content != null)
                 DoLayout(view.Content);
 
-            var hasChildren = view as IHasChildren;
-            if (hasChildren == null)
+            if (!(view is IHasChildren hasChildren))
                 return;
 
             foreach(var child in hasChildren.Children)
@@ -273,7 +267,7 @@ namespace WellFired.Guacamole.Views
         }
     }
 
-    public class ViewPaddingCalculation
+    public static class ViewPaddingCalculation
     {
         public static UISize AdjustForPadding(LayoutOptions horizontalLayout, LayoutOptions verticalLayout, UIPadding padding, UISize size)
         {

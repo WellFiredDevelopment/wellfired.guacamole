@@ -38,30 +38,30 @@ namespace WellFired.Guacamole.Unity.Editor
 		private float _prevLayoutTime;
 		private const float MaxLayoutInterval = 1.0f / 90.0f; // Clamp the update at 90 fps for silky smooth lists.
 
-		public bool CloseAfterNextUpdate { get; set; }
+		public bool CloseAfterNextUpdate { private get; set; }
 
 		public string Title
 		{
-			get { return titleContent.text; }
-			set { titleContent.text = value; }
+			get => titleContent.text;
+			set => titleContent.text = value;
 		}
 
 		public UIRect Rect
 		{
-			get { return position.ToUIRect(); }
-			set { position = value.ToUnityRect(); }
+			get => position.ToUIRect();
+			set => position = value.ToUnityRect();
 		}
 
 		public UISize MinSize
 		{
-			get { return minSize.ToUISize(); }
-			set { minSize = value.ToUnityVector2(); }
+			get => minSize.ToUISize();
+			set => minSize = value.ToUnityVector2();
 		}
 
 		public UISize MaxSize
 		{
-			get { return maxSize.ToUISize(); }
-			set { maxSize = value.ToUnityVector2(); }
+			get => maxSize.ToUISize();
+			set => maxSize = value.ToUnityVector2();
 		}
 
 		public bool AllowMultiple => _initializationContext.AllowMultiple;
@@ -210,7 +210,6 @@ namespace WellFired.Guacamole.Unity.Editor
 					_exception = e;
 					return;
 				}
-
 			try
 			{
 				MainContent.Render(Rect);
