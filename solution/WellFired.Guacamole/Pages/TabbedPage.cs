@@ -68,9 +68,13 @@ namespace WellFired.Guacamole.Pages
         {
             _tabSelect.Children.Clear();
             _pages.Clear();
-            
+
             if (ItemTemplate == null || ItemSource == null)
+            {
+                //To release memory, we ensure we don't keep reference to a selected page which is not relevant anymore.
+                SelectedPage = null;
                 return;
+            }
             
             foreach (var bindingContext in ItemSource)
             {
@@ -89,7 +93,6 @@ namespace WellFired.Guacamole.Pages
                         ExecuteAction = () =>
                         {
                             SelectedPage = bindingContext;
-                            Selected(SelectedPage);
                         }
                     }
                 };
@@ -104,11 +107,17 @@ namespace WellFired.Guacamole.Pages
                 _pages.Add(page);
             }
 
-            Selected(SelectedPage);
-            _tabSelect.InvalidateRectRequest();
+            if (ItemSource.Contains(SelectedPage))
+            {
+                Selected(SelectedPage);
+            }
+            else
+            {
+                SelectedPage = ItemSource[0];
+            }
         }
 
-        public void Selected(object bindingContext)
+        private void Selected(object bindingContext)
         {   
             if (_pages.Count == 0)
                 return;
@@ -126,6 +135,8 @@ namespace WellFired.Guacamole.Pages
                 return;
             
             _tabbedPageContent.Content = selectedEntry;
+            
+            _tabbedPageContent.InvalidateRectRequest();
         }
 
         private void TabbedButtonSelect(object bindingContext)
