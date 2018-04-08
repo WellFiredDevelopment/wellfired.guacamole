@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using NSubstitute;
+using NUnit.Framework;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Types;
 using WellFired.Guacamole.Views;
@@ -59,6 +60,44 @@ namespace WellFired.Guacamole.Unit.ListView
             Assert.That(listView.AvailableSpace, Is.EqualTo(250));
             Assert.That(listView.CanScroll, Is.False);
             Assert.That(listView.ScrollOffset, Is.EqualTo(0));
+        }
+        
+        [Test]
+        public void When_ScrollShouldBeShown_Then_List_Items_Are_Correctly_Sized()
+        {
+            //Vertical orientation
+            var verticalListView = Substitute.For<IListView>();
+            verticalListView.ShouldShowScrollBar.Returns(true);
+            verticalListView.ScrollBarSize.Returns(10);
+            
+            //spacing should not have any impact. We set it here to test undesired coupling.
+            verticalListView.Spacing.Returns(5);
+            
+            verticalListView.Orientation.Returns(OrientationOptions.Vertical);
+
+            verticalListView.RectRequest = UIRect.With(0, 0, 180, 200);
+
+            var view = new Views.View();
+
+            ListViewHelper.ConstrainToCell(verticalListView, view);
+            
+            Assert.That(view.RectRequest.Width, Is.EqualTo(180 - 10));
+            
+            //Horizontal orientation
+            var horizontalListView = Substitute.For<IListView>();
+            horizontalListView.ShouldShowScrollBar.Returns(true);
+            horizontalListView.ScrollBarSize.Returns(10);
+            
+            //spacing should not have any impact. We set it here to test undesired coupling.
+            horizontalListView.Spacing.Returns(5);
+            
+            horizontalListView.Orientation.Returns(OrientationOptions.Horizontal);
+
+            horizontalListView.RectRequest = UIRect.With(0, 0, 180, 200);
+
+            ListViewHelper.ConstrainToCell(horizontalListView, view);
+            
+            Assert.That(view.RectRequest.Height, Is.EqualTo(200 - 10));
         }
     }
 }

@@ -118,8 +118,8 @@ namespace WellFired.Guacamole.Views
                     rectRequest.Width = entrySize + listView.Spacing;
                     contentRectRequest.Width = entrySize;
                     
-                    rectRequest.Height = listView.RectRequest.Height;
-                    contentRectRequest.Height = listView.RectRequest.Height;
+                    rectRequest.Height = listView.RectRequest.Height - (listView.ShouldShowScrollBar ? listView.ScrollBarSize : 0f);
+                    contentRectRequest.Height = rectRequest.Height;
                     break;
                 case OrientationOptions.Vertical:
                     rectRequest = child.RectRequest;
@@ -127,8 +127,8 @@ namespace WellFired.Guacamole.Views
                     rectRequest.Height = entrySize + listView.Spacing;
                     contentRectRequest.Height = entrySize;
                     
-                    rectRequest.Width = listView.RectRequest.Width;
-                    contentRectRequest.Width = listView.RectRequest.Width;
+                    rectRequest.Width = listView.RectRequest.Width - (listView.ShouldShowScrollBar ? listView.ScrollBarSize : 0f);
+                    contentRectRequest.Width = rectRequest.Width;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
