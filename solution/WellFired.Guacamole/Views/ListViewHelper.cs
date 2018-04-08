@@ -19,7 +19,7 @@ namespace WellFired.Guacamole.Views
                     break;
                 case OrientationOptions.Vertical:
                     request.Height = size;
-                    request.Width = (!listView.Children.Any() ? 0 : listView.Children[0].RectRequest.Width) + listView.ScrollBarSize;
+                    request.Width = !listView.Children.Any() ? 0 : listView.Children[0].RectRequest.Width + listView.ScrollBarSize;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
