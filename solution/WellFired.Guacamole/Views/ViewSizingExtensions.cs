@@ -91,7 +91,7 @@ namespace WellFired.Guacamole.Views
             {
                 var rectRequest = canLayout.Layout.CalculateValidRectRequest(canLayout.Children, view.MinSize);
                 var totalSize = UISize.Of(rectRequest.Width, rectRequest.Height);
-                var adjustedForPadding = ViewPaddingCalculation.AdjustForPadding(view.HorizontalLayout, view.VerticalLayout, view.Padding, totalSize);
+                var adjustedForPadding = ViewPaddingCalculation.AdjustRectRequestForPadding(view.Padding, totalSize);
                 return UIRect.With(rectRequest.X, rectRequest.Y, adjustedForPadding.Width, adjustedForPadding.Height);
             }
 
@@ -113,7 +113,7 @@ namespace WellFired.Guacamole.Views
                 defaultSize = content.RectRequest.Size;
 
             // If the native renderer returns null, we simply use our own layoutting system.
-            var nativeSize = ViewPaddingCalculation.AdjustForPadding(view.HorizontalLayout, view.VerticalLayout, view.Padding, view.NativeRenderer?.NativeSize ?? defaultSize);
+            var nativeSize = ViewPaddingCalculation.AdjustRectRequestForPadding(view.Padding, view.NativeRenderer?.NativeSize ?? defaultSize);
 
             // Constrain
             nativeSize = ConstrainUnder(nativeSize, view.MinSize);
@@ -138,7 +138,7 @@ namespace WellFired.Guacamole.Views
 
             rectRequest.X = availableSpace.X;
             rectRequest.Y = availableSpace.Y;
-
+            
             switch (view.HorizontalLayout)
             {
                 case LayoutOptions.Fill:
@@ -269,14 +269,9 @@ namespace WellFired.Guacamole.Views
 
     public static class ViewPaddingCalculation
     {
-        public static UISize AdjustForPadding(LayoutOptions horizontalLayout, LayoutOptions verticalLayout, UIPadding padding, UISize size)
+        public static UISize AdjustRectRequestForPadding(UIPadding padding, UISize size)
         {
-            var flexibleWidth = horizontalLayout == LayoutOptions.Expand;
-            var flexibleHeight = verticalLayout == LayoutOptions.Expand;
-
-            return UISize.Of(
-                flexibleWidth ? size.Width + padding.Right + padding.Left : size.Width,
-                flexibleHeight ? size.Height + padding.Bottom + padding.Top : size.Height);
+            return UISize.Of(size.Width + padding.Right + padding.Left, size.Height + padding.Bottom + padding.Top);
         }
     }
 }
