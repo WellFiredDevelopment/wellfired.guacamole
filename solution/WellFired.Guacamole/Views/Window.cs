@@ -45,7 +45,9 @@ namespace WellFired.Guacamole.Views
 		{
 		    var view = Content as View;
 		    Debug.Assert(view != null, "view != null");
-
+			
+			_mainThreadRunner.ProcessActions();
+			
 		    ViewSizingExtensions.DoSizingAndLayout(view, rect - Padding);
 			FinalRenderedRect = rect;
 		    ViewSizingExtensions.UpdateContextIfNeeded(view);
@@ -54,8 +56,7 @@ namespace WellFired.Guacamole.Views
 		public override void Render(UIRect parentRect)
 		{
 		    var view = Content as View;
-
-			_mainThreadRunner.ProcessActions();
+			
 			NativeRenderer.Render(FinalRenderedRect);
 
 			var relativeParentRect = UIRect.With(0, 0, parentRect.Width, parentRect.Height);

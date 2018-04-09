@@ -2,6 +2,7 @@
 using UnityEngine;
 using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.Data;
+using WellFired.Guacamole.Platforms;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
@@ -28,7 +29,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Cells
 				{
 					Debug.Assert(cell != null, nameof(cell) + " != null");
 					// ReSharper disable once PossibleNullReferenceException
-					cell.Container.SelectedItem = cell.BindingContext;
+					MainThreadRunner.ExecuteOnMainThread(() => cell.Container.SelectedItem = cell.BindingContext);
 				}
 			}
 

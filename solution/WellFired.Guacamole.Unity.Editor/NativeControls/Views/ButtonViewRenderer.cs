@@ -3,6 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using WellFired.Guacamole.Attributes;
 using WellFired.Guacamole.Data;
+using WellFired.Guacamole.Platforms;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
@@ -46,7 +47,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			if (!GUI.Button(UnityRect, button.Text, Style))
 				return;
 			
-			button.Click(0);
+			MainThreadRunner.ExecuteOnMainThread(() => button.Click(0));
 		}
 
 		protected override void SetupWithNewStyle()
