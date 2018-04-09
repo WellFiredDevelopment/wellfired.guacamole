@@ -65,11 +65,11 @@ namespace WellFired.Guacamole.Layouts
                 switch (Orientation)
                 {
                     case OrientationOptions.Horizontal:
-                        totalWidth += size.X + size.Width + Spacing;
+                        totalWidth += size.Width + Spacing;
                         totalHeight = Math.Max(totalHeight, size.Height);
                         break;
                     case OrientationOptions.Vertical:
-                        totalHeight += size.Y + size.Height + Spacing;
+                        totalHeight += size.Height + Spacing;
                         totalWidth = Math.Max(totalWidth, size.Width);
                         break;
                     default:
