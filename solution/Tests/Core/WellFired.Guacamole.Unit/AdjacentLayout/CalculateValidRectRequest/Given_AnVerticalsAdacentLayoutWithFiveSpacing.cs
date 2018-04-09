@@ -12,7 +12,10 @@ namespace WellFired.Guacamole.Unit.AdjacentLayout.CalculateValidRectRequest
         public void With_OneChild_And_NoMinSize()
         {
             var child0 = Substitute.For<ILayoutable>();
-            child0.RectRequest.Returns(UIRect.With(0, 0, 10, 10));
+            //In theory, the position of layoutable should be resetted to 0,0 when their ValidRectRequest is being
+            //calculated. But it may happens that for some views the position was not set back to 0,0 after layouting.
+            //So we test with a value different than 0,0 to be sure it does not influence the result.
+            child0.RectRequest.Returns(UIRect.With(20, 12, 10, 10));
             
             var adjacentLayout = Layouts.AdjacentLayout.Of(OrientationOptions.Vertical, 5);
             var rectRequest = adjacentLayout.CalculateValidRectRequest(new[] {child0}, UISize.Zero);
