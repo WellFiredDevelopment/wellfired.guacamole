@@ -6,13 +6,24 @@ namespace WellFired.Guacamole
 {
 	public interface IView
 	{
+		/// <summary>
+		/// Child view usually rendered inside the bound of the parent view and on top of it.
+		/// </summary>
 	    IView Content { get; }
+		/// <summary>
+		/// Padding between the view <see cref="RectRequest"/> and its <see cref="Content"/>.
+		/// </summary>
 	    UIPadding Padding { get; }
 		/// <summary>
-		/// In one rendering loop, this value will be the size and position that the view is requesting, then the size and position
-		/// that could be assigned to it based on the available space.
+		/// Value used to place a view when rendering it. It is calculated while doing layouting of the different views. When layouting, we first
+		/// set this value to the size requested by the view, this requested size includes the padding of the view.
+		/// Then based on the available space we clamp it.
 		/// </summary>
 	    UIRect RectRequest { get; set; }
+		/// <summary>
+		/// Define the space available to the content. It may be different from <see cref="RectRequest"/> if for example the content of the
+		/// view is centered, or if the parent view has some padding. 
+		/// </summary>
 		UIRect ContentRectRequest { get; set; }
 		/// <summary>
 		/// This is the id of the view. Most algorithm using it will consider this value to be unique for each views.
@@ -25,11 +36,30 @@ namespace WellFired.Guacamole
 		/// the size requested by a view if there is no reason for it to have changed.
 		/// </summary>
 	    bool ValidRectRequest { get; set; }
+		/// <summary>
+		/// This is the renderer used to render the view based on its <see cref="RectRequest"/>.
+		/// </summary>
 	    INativeRenderer NativeRenderer { get; }
+		/// <summary>
+		/// The minimum size a view can have.
+		/// </summary>
 	    UISize MinSize { get; }
+		/// <summary>
+		/// The maximum size a view can have.
+		/// </summary>
 		UISize MaxSize { get; }
+		/// <summary>
+		/// How the view fills the available space on its horizontal axis
+		/// </summary>
 	    LayoutOptions HorizontalLayout { get; }
-	    LayoutOptions VerticalLayout { get; }
+		/// <summary>
+		/// How the view fills the available space on its vertical axis
+		/// </summary>
+		LayoutOptions VerticalLayout { get; }
+		/// <summary>
+		/// Applies the styles defined by a dictionary to the view's content and all its children. 
+		/// </summary>
+		/// <param name="styleDictionary"></param>
 		void SetStyleDictionary(IStyleDictionary styleDictionary);
 	}
 }
