@@ -46,7 +46,10 @@ namespace WellFired.Guacamole.Views
 		    var view = Content as View;
 		    Debug.Assert(view != null, "view != null");
 			
-			_mainThreadRunner.ProcessActions();
+			_mainThreadRunner.ProcessMainThreadActions();
+			
+			//We process actions that have impact on the UI content so should be executed before layouting is done.
+			_mainThreadRunner.ProcessPreLayoutActions();
 			
 		    ViewSizingExtensions.DoSizingAndLayout(view, rect - Padding);
 			FinalRenderedRect = rect;

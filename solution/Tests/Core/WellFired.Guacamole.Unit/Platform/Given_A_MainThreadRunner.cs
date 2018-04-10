@@ -20,7 +20,7 @@ namespace WellFired.Guacamole.Unit.Platform
 			MainThreadRunner.ExecuteOnMainThread(action2);
 			MainThreadRunner.ExecuteOnMainThread(action3);
 
-			mainThreadRunner.ProcessActions();
+			mainThreadRunner.ProcessMainThreadActions();
 			
 			Assert.AreEqual(5.5f, actionResult);
 		}
@@ -38,10 +38,10 @@ namespace WellFired.Guacamole.Unit.Platform
 			MainThreadRunner.ExecuteOnMainThread(action2);
 			MainThreadRunner.ExecuteOnMainThread(action3);
 
-			mainThreadRunner.ProcessActions();
+			mainThreadRunner.ProcessMainThreadActions();
 			Assert.AreEqual(5.5f, actionResult);
 			
-			mainThreadRunner.ProcessActions();
+			mainThreadRunner.ProcessMainThreadActions();
 			Assert.AreEqual(5.5f, actionResult);
 		}
 	}

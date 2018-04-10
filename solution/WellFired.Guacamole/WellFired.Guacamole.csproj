@@ -181,7 +181,6 @@
     <Compile Include="Layouts\ILayoutChildren.cs" />
     <Compile Include="Layouts\IVirtualCell.cs" />
     <Compile Include="Layouts\VirtualCell.cs" />
-    <Compile Include="Platforms\IMainThreadRunner.cs" />
     <Compile Include="Platforms\IPlatformProvider.cs" />
     <Compile Include="Platforms\MainThreadRunner.cs" />
     <Compile Include="Platforms\Platform.cs" />
