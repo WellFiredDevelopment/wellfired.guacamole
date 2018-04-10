@@ -87,39 +87,31 @@ namespace WellFired.Guacamole.Views
         /// <returns></returns>
         private static UIRect CalculateValidRectRequest(IView view)
         {
-            if (view is ICanLayout canLayout)
-            {
-                var rectRequest = canLayout.Layout.CalculateValidRectRequest(canLayout.Children, view.MinSize);
-                var totalSize = UISize.Of(rectRequest.Width, rectRequest.Height);
-                var adjustedForPadding = ViewPaddingCalculation.AdjustRectRequestForPadding(view.Padding, totalSize);
-                return UIRect.With(rectRequest.X, rectRequest.Y, adjustedForPadding.Width, adjustedForPadding.Height);
-            }
-
-            if (view is IListView listView)
-            {
-                var requestedSize = ListViewHelper.CalculateValidRectRequest(listView);
+            UIRect requestedSize;
                 
-                var size = ConstrainUnder(requestedSize.Size, listView.MinSize);
-                size = ConstrainOver(size, listView.MaxSize);
-                requestedSize.Size = size;
+            switch (view)
+            {
+                case ICanLayout canLayout:
+                    requestedSize = canLayout.Layout.CalculateValidRectRequest(canLayout.Children, view.MinSize);
+                    break;
+                case IListView listView:
+                    requestedSize = ListViewHelper.CalculateValidRectRequest(listView);
+                    break;
+                default:
+                    var defaultSize = UISize.Of(view.MinSize.Width, view.MinSize.Height);
 
-                return requestedSize;
+                    var content = view.Content;
+                    if (content != null)
+                        defaultSize = content.RectRequest.Size;
+
+                    requestedSize = UIRect.From(view.NativeRenderer?.NativeSize ?? defaultSize);
+                    break;
             }
-
-            var defaultSize = UISize.Of(view.MinSize.Width, view.MinSize.Height);
             
-            var content = view.Content;
-            if (content != null)
-                defaultSize = content.RectRequest.Size;
-
-            // If the native renderer returns null, we simply use our own layoutting system.
-            var nativeSize = ViewPaddingCalculation.AdjustRectRequestForPadding(view.Padding, view.NativeRenderer?.NativeSize ?? defaultSize);
-
-            // Constrain
-            nativeSize = ConstrainUnder(nativeSize, view.MinSize);
-            nativeSize = ConstrainOver(nativeSize, view.MaxSize);
-
-            return UIRect.With(0, 0, nativeSize.Width, nativeSize.Height);
+            var adjustedForPadding = ViewPaddingCalculation.AdjustRectRequestForPadding(view.Padding, requestedSize.Size);
+            var size = ConstrainUnder(adjustedForPadding, view.MinSize);
+            size = ConstrainOver(size, view.MaxSize);
+            return UIRect.With(requestedSize.X, requestedSize.Y, size.Width, size.Height);
         }
 
         /// <summary>
@@ -131,8 +123,6 @@ namespace WellFired.Guacamole.Views
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public static void AttemptToFullfillRequests(IView view, UIRect availableSpace)
         {
-            var isCell = view is ICell;
-            
             var rectRequest = view.RectRequest;
             var contentRectRequest = view.ContentRectRequest;
 
@@ -179,6 +169,7 @@ namespace WellFired.Guacamole.Views
                     throw new ArgumentOutOfRangeException();
             }
 
+            var isCell = view is ICell;
             if (!isCell)
             {
                 view.RectRequest = rectRequest;
@@ -189,10 +180,9 @@ namespace WellFired.Guacamole.Views
                 AttemptToFullfillRequests(view.Content, UIRect.With(view.ContentRectRequest.Width, view.ContentRectRequest.Height) - view.Padding);
 
             var layout = view as ICanLayout;
-            var listView = view as IListView;
-
             layout?.Layout.AttemptToFullfillRequests(layout.Children, UIRect.With(view.ContentRectRequest.Width, view.ContentRectRequest.Height) - view.Padding, view.Padding, view.HorizontalLayout, view.VerticalLayout);
 
+            var listView = view as IListView;
             if (listView == null) 
                 return;
 

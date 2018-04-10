@@ -41,11 +41,11 @@ namespace WellFired.Guacamole
 		/// </summary>
 	    INativeRenderer NativeRenderer { get; }
 		/// <summary>
-		/// The minimum size a view can have.
+		/// The minimum size a view can have with padding included.
 		/// </summary>
 	    UISize MinSize { get; }
 		/// <summary>
-		/// The maximum size a view can have.
+		/// The maximum size a view can have with padding included.
 		/// </summary>
 		UISize MaxSize { get; }
 		/// <summary>
