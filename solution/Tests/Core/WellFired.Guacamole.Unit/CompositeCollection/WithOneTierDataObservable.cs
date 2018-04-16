@@ -41,19 +41,19 @@ namespace WellFired.Guacamole.Unit.CompositeCollection
 		public void When_Cleared_Then_ModificationIsPropogated()
 		{
 			var reciever = Substitute.For<IEventMockReciever>();
-			_compositeCollection.CollectionChanged += reciever.Recieve;
+			_compositeCollection.CollectionChanged += reciever.Receive;
 
 			_rawItemSource.Clear();
 			Assert.That(_compositeCollection.Count, Is.EqualTo(0));
 			
-			reciever.Received(1).Recieve(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.Action == NotifyCollectionChangedAction.Reset));
+			reciever.Received(1).Receive(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.Action == NotifyCollectionChangedAction.Reset));
 		}
 
 		[Test]
 		public void When_TheCollectionIsModified_Then_ModificationIsPropogated()
 		{
 			var reciever = Substitute.For<IEventMockReciever>();
-			_compositeCollection.CollectionChanged += reciever.Recieve;
+			_compositeCollection.CollectionChanged += reciever.Receive;
 			
 			// Test child insert
 			var newEntry = new GroupEntry("Some Test");
@@ -61,10 +61,10 @@ namespace WellFired.Guacamole.Unit.CompositeCollection
 			Assert.That(_compositeCollection[3], Is.EqualTo(newEntry));
 			
 			// Test delegates
-			reciever.Received(1).Recieve(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.Action == NotifyCollectionChangedAction.Add));
-			reciever.Received(1).Recieve(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.NewItems.Count == 1));
-			reciever.Received(1).Recieve(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.NewStartingIndex == 3));
-			reciever.Received(1).Recieve(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => ((IDefaultCellContext)o.NewItems[0]).CellLabelText == "Some Test"));
+			reciever.Received(1).Receive(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.Action == NotifyCollectionChangedAction.Add));
+			reciever.Received(1).Receive(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.NewItems.Count == 1));
+			reciever.Received(1).Receive(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.NewStartingIndex == 3));
+			reciever.Received(1).Receive(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => ((IDefaultCellContext)o.NewItems[0]).CellLabelText == "Some Test"));
 			reciever.ClearReceivedCalls();
 			
 			// Test Child Add
@@ -72,10 +72,10 @@ namespace WellFired.Guacamole.Unit.CompositeCollection
 			Assert.That(_compositeCollection[_compositeCollection.Count - 1], Is.EqualTo(newEntry));
 			
 			// Test delegates
-			reciever.Received(1).Recieve(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.Action == NotifyCollectionChangedAction.Add));
-			reciever.Received(1).Recieve(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.NewItems.Count == 1));
-			reciever.Received(1).Recieve(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.NewStartingIndex == 18));
-			reciever.Received(1).Recieve(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => ((IDefaultCellContext)o.NewItems[0]).CellLabelText == "Some Test"));
+			reciever.Received(1).Receive(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.Action == NotifyCollectionChangedAction.Add));
+			reciever.Received(1).Receive(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.NewItems.Count == 1));
+			reciever.Received(1).Receive(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.NewStartingIndex == 18));
+			reciever.Received(1).Receive(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => ((IDefaultCellContext)o.NewItems[0]).CellLabelText == "Some Test"));
 			reciever.ClearReceivedCalls();
 			
 			// Test child Remove
@@ -83,10 +83,10 @@ namespace WellFired.Guacamole.Unit.CompositeCollection
 			Assert.That(((IDefaultCellContext)_compositeCollection[1]).CellLabelText, Is.Not.EqualTo("Alfie"));
 			
 			// Test delegates
-			reciever.Received(1).Recieve(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.Action == NotifyCollectionChangedAction.Remove));
-			reciever.Received(1).Recieve(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.OldItems.Count == 1));
-			reciever.Received(1).Recieve(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.OldStartingIndex == 1));
-			reciever.Received(1).Recieve(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => ((IDefaultCellContext)o.OldItems[0]).CellLabelText == "Alfie"));
+			reciever.Received(1).Receive(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.Action == NotifyCollectionChangedAction.Remove));
+			reciever.Received(1).Receive(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.OldItems.Count == 1));
+			reciever.Received(1).Receive(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.OldStartingIndex == 1));
+			reciever.Received(1).Receive(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => ((IDefaultCellContext)o.OldItems[0]).CellLabelText == "Alfie"));
 			reciever.ClearReceivedCalls();
 			
 			// Test child Replace (Replace Bobby with Collin)
@@ -94,10 +94,10 @@ namespace WellFired.Guacamole.Unit.CompositeCollection
 			Assert.That(((IDefaultCellContext)_compositeCollection[5]).CellLabelText, Is.EqualTo("Collin"));
 			
 			// Test delegates
-			reciever.Received(1).Recieve(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.Action == NotifyCollectionChangedAction.Replace));
-			reciever.Received(1).Recieve(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.NewStartingIndex == 5));
-			reciever.Received(1).Recieve(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.NewItems.Count == 1));
-			reciever.Received(1).Recieve(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => ((IDefaultCellContext)o.NewItems[0]).CellLabelText == "Collin"));
+			reciever.Received(1).Receive(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.Action == NotifyCollectionChangedAction.Replace));
+			reciever.Received(1).Receive(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.NewStartingIndex == 5));
+			reciever.Received(1).Receive(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.NewItems.Count == 1));
+			reciever.Received(1).Receive(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => ((IDefaultCellContext)o.NewItems[0]).CellLabelText == "Collin"));
 			reciever.ClearReceivedCalls();
 		}
 	}

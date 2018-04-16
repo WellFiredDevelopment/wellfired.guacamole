@@ -368,17 +368,16 @@ namespace WellFired.Guacamole.Data
 				case NotifyCollectionChangedAction.Add:
 					for (var index = 0; index < e.NewItems.Count; index++)
 						_itemSource.Insert(senderIndex + e.NewStartingIndex + index + 1, e.NewItems[index]);
-					
 					data.Add(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, e.NewItems, senderIndex + 1 + e.NewStartingIndex));
 					break;
 				case NotifyCollectionChangedAction.Remove:
 				{
-					var startIndex = e.OldStartingIndex + 1;
-					var endIndex = senderIndex + startIndex + e.OldItems.Count - 1;
+					var startIndex = senderIndex + e.OldStartingIndex + 1;
+					var endIndex = startIndex + e.OldItems.Count - 1;
 					for (; endIndex >= startIndex; endIndex--)
 						_itemSource.RemoveAt(endIndex);
 					
-					data.Add(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, e.OldItems, senderIndex + startIndex));
+					data.Add(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, e.OldItems, startIndex));
 					break;
 				}
 				case NotifyCollectionChangedAction.Replace:
