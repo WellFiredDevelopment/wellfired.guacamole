@@ -50,5 +50,10 @@ namespace WellFired.Guacamole.Platforms
 		/// <param name="file"></param>
 		/// <returns></returns>
 		string PathToPersonalData(string file);
+		
+		/// <summary>
+		/// Indicate if the platform application is focused or not.
+		/// </summary>
+		bool PlatformHasFocus { get; }
 	}
 }

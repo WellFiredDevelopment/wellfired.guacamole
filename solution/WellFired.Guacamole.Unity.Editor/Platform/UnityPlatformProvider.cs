@@ -38,5 +38,7 @@ namespace WellFired.Guacamole.Unity.Editor.Platform
 		{
 			return $"{ProjectPath}/.{_companyName.ToLower()}/.{_applicationName}/.personalData/{file}";
 		}
+
+		public bool PlatformHasFocus => EditorWindow.focusedWindow != null;
 	}
 }

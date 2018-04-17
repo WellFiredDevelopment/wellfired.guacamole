@@ -8,11 +8,14 @@ namespace WellFired.Guacamole.DataStorage.Data.Synchronization
 	{
 		private readonly string _dataPath;
 		private readonly Dictionary<string, FileSystemWatcher> _fileSystemWatchers = new Dictionary<string, FileSystemWatcher>();
+		private readonly Func<bool> _isFocusedFunc;
+		
 		private IStoredDataWatcherListener _listener;
 
-		public FileSystemDataWatcher(string dataPath)
+		public FileSystemDataWatcher(string dataPath, Func<bool> isFocusedFunc = null)
 		{
 			_dataPath = dataPath;
+			_isFocusedFunc = isFocusedFunc;
 
 			//FileSystemWatcher needs that to work in Mono CRT
 			Environment.SetEnvironmentVariable("MONO_MANAGED_WATCHER", "enabled");
@@ -60,7 +63,11 @@ namespace WellFired.Guacamole.DataStorage.Data.Synchronization
 		}
 
 		private void File_OnChanged(object sender, FileSystemEventArgs e)
-		{			
+		{
+			if(_isFocusedFunc != null)
+				while (!_isFocusedFunc())
+				{}
+			
 			switch (e.ChangeType)
 			{
 				case WatcherChangeTypes.Changed:
