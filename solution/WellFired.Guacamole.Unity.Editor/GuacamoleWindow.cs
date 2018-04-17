@@ -38,7 +38,7 @@ namespace WellFired.Guacamole.Unity.Editor
 		private float _prevLayoutTime;
 		private const float MaxLayoutInterval = 1.0f / 90.0f; // Clamp the update at 90 fps for silky smooth lists.
 
-		private UIRect _previousRect;
+		private UISize _previousRectSize;
 
 		public bool CloseAfterNextUpdate { private get; set; }
 
@@ -109,7 +109,7 @@ namespace WellFired.Guacamole.Unity.Editor
 
 			EditorApplication.update += Update;
 
-			_previousRect = Rect;
+			_previousRectSize = Rect.Size;
 			
 			//Ideally, context should be saved only if the window was opened when Unity Editor quitted.
 			//I did not find a way to detect that. So instead, we always save the context when a window is disabled.
@@ -206,10 +206,10 @@ namespace WellFired.Guacamole.Unity.Editor
 						var layoutRect = Rect;
 						layoutRect.Location = UILocation.Min;
 						
-						if(_previousRect != Rect)
+						if(_previousRectSize != Rect.Size)
 						{
 							MainContent.InvalidateRectRequest();
-							_previousRect = Rect;
+							_previousRectSize = Rect.Size;
 						}
 						
 						MainContent.Layout(layoutRect);
