@@ -10,11 +10,15 @@ namespace WellFired.Guacamole.Views
         /// When an item becomes invisible, we cache the cell and remove it from the children.
         /// </summary>
         /// <param name="vdsIndex"></param>
-        /// <param name="front">indicate if the item added is on the top of already visible children, or if it is at the bottom
+        /// <param name="front">indicate if the item added is on the top of already visible children (front is equal to true), or if it is at the bottom
         /// (left or right for horizontal list view)</param>
         public void ItemLeftVds(int vdsIndex, bool front)
         {
             var data = GetItem(vdsIndex);
+
+            //the data may not exist anymore because was removed from the list.
+            if (data == null)
+                return;
             
             if(front)
                 InitialOffset += GetEntrySizeFor(data) + Spacing;

@@ -62,6 +62,7 @@
     <Compile Include="ListView\Grouping\Given_AListView_WithCustomHeaderAndCell.cs" />
     <Compile Include="ListView\Grouping\Given_AListView_WithCustomHeaderAndCell_Scroll.cs" />
     <Compile Include="ListView\Grouping\Given_AListView_WithDefaultHeaderAndCell.cs" />
+    <Compile Include="ListView\Grouping\Given_AListView_WithObservableHeaderAndCell.cs" />
     <Compile Include="ListView\Horizontal\Given_AListView.cs" />
     <Compile Include="ListView\ReOrdered\Given_AListView.cs" />
     <Compile Include="ListView\SelectedObjectModification\Given_AListView_With_SelectedItem.cs" />

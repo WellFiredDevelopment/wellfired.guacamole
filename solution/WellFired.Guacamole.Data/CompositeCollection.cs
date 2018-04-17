@@ -392,11 +392,12 @@ namespace WellFired.Guacamole.Data
 					var endIndex = startIndex + e.OldItems.Count - 1;
 					for (; endIndex >= startIndex; endIndex--)
 						_itemSource.RemoveAt(endIndex);
-					
+
+					var newStartingIndex = senderIndex + 1 + e.NewStartingIndex;
 					for (var index = 0; index < e.NewItems.Count; index++)
-						_itemSource.Insert(senderIndex + 1 + e.NewStartingIndex + index, e.NewItems[index]);
+						_itemSource.Insert(newStartingIndex + index, e.NewItems[index]);
 					
-					data.Add(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Move, e.NewItems, endIndex, startIndex));
+					data.Add(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Move, e.NewItems, newStartingIndex, startIndex));
 					break;
 				}
 				case NotifyCollectionChangedAction.Reset:
