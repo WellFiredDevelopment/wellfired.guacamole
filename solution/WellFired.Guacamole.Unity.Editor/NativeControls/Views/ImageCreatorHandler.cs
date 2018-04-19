@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
+using WellFired.Guacamole.Exceptions;
 using WellFired.Guacamole.Image;
 using WellFired.Guacamole.Platforms;
 using WellFired.Guacamole.Unity.Editor.Extensions;
@@ -23,6 +24,9 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
             }
             catch (Exception ex)
             {
+                if (ex is ImageAlreadyLoadingException)
+                    throw;
+                
                 try
                 {
                     Logger.UnityLogger.LogMessage($"Failed to load Image {imageSource} Loaded default instead. Exception was {ex}");
@@ -31,7 +35,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
                 }
                 catch (Exception e)
                 {
-                    MainThreadRunner.ExecuteOnMainThread(() => { throw e; });
+                    MainThreadRunner.ExecuteOnMainThread(() => throw e);
                     return default(Texture2D);
                 }
             }

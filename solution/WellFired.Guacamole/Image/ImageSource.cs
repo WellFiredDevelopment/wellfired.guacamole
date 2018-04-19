@@ -14,9 +14,9 @@ namespace WellFired.Guacamole.Image
         private readonly CancellationTokenSource _cancellationTokenSource;
         private readonly ISourceHandler _handler;
         private LoadedImage _loadedImage;
-        private bool _isLoading;
 
-        public bool InProgress => _cancellationTokenSource != default(CancellationTokenSource);
+        public bool InProgress { get; private set; }
+
         public Action<LoadedImage> OnComplete { get; set; } = delegate {};
 
         private ImageSource(string location, IFileSystem fileSystem)
@@ -49,26 +49,31 @@ namespace WellFired.Guacamole.Image
                 return _loadedImage;
             
             // we're already loading, so return immediately.
-            if (_isLoading)
+            if (InProgress)
                 throw new ImageAlreadyLoadingException();
 
-            _isLoading = true;
+            InProgress = true;
             var wrapper = await _handler.Handle(_cancellationTokenSource.Token);
             
             if (wrapper == null)
             {
-                _isLoading = false;
+                InProgress = false;
                 throw new ImageSourceHandlerProducedNoWrapperException();
             }
             
-            _isLoading = false;
             _loadedImage = LoadedImage.From(wrapper);
+            InProgress = false;
+            
             return _loadedImage;
         }
 
+        /// <summary>
+        /// Cancel the current loading process. We can cancel our async tasks at any time, but when it is cancelled exactly the task depends on how the different
+        /// handlers handle the cancellation token. Therefore, it's very possible that <see cref="InProgress"/> still return true while the task
+        /// is not fully cancelled yet.
+        /// </summary>
         public void Cancel()
         {
-            // We can cancel our async tasks at any time.
             _cancellationTokenSource.Cancel();
         }
 
