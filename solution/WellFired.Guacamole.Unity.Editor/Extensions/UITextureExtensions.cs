@@ -3,6 +3,7 @@
 using System.IO;
 #endif
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using WellFired.Guacamole.Data;
 using JetBrains.Annotations;
@@ -12,6 +13,8 @@ namespace WellFired.Guacamole.Unity.Editor.Extensions
 {
 	public static class Texture2DExtensions
 	{
+		private static readonly Dictionary<ShapeParameters, Texture2D> Map = new Dictionary<ShapeParameters, Texture2D>();
+		
 		[PublicAPI]
 		public static Texture2D CreateTexture(int width, int height, Color colour)
 		{
@@ -46,6 +49,11 @@ namespace WellFired.Guacamole.Unity.Editor.Extensions
 			CornerMask cornerMask,
 			OutlineMask outlineMask)
 		{
+			var parameters = ShapeParameters.Create(width, height, backgroundColor, outlineColor, radius, thickness, cornerMask, outlineMask);
+
+			if (Map.TryGetValue(parameters, out var textureResult))
+				return textureResult;
+			
 			var result = new Texture2D(width, height) {
 				wrapMode = TextureWrapMode.Clamp
 			};
@@ -81,7 +89,8 @@ namespace WellFired.Guacamole.Unity.Editor.Extensions
 			_counter++;
 #endif
 
-			return result;
+			Map[parameters] = result;
+			return Map[parameters];
 		}
 	}
 }

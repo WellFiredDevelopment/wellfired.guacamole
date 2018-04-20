@@ -64,6 +64,7 @@
     <Compile Include="Diagnostics\Logger.cs" />
     <Compile Include="Extensions\EditorGUIExtensions.cs" />
     <Compile Include="Extensions\IImageSourceExtensions.cs" />
+    <Compile Include="Extensions\ShapeParameters.cs" />
     <Compile Include="Extensions\TextViewExtensions.cs" />
     <Compile Include="Extensions\UIColorExtensions.cs" />
     <Compile Include="Extensions\UIPaddingExtensions.cs" />
