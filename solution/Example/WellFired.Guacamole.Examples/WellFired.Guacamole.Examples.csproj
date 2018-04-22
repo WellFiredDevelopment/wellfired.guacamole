@@ -187,6 +187,8 @@
     <Compile Include="Simple\TabbedPageExample\ViewModel\ThirdPage.cs" />
     <Compile Include="Simple\TextFieldExample\TextFieldTestApplication.cs" />
     <Compile Include="Simple\TextFieldExample\TextFieldTestWindow.cs" />
+    <Compile Include="Simple\ToggleViewExample\ToggleViewTestApplication.cs"/>
+    <Compile Include="Simple\ToggleViewExample\ToggleViewTestWindow.cs"/>
     <Compile Include="Simple\TwoWayBindingExample\TwoWayBindingTestApplication.cs" />
     <Compile Include="Simple\TwoWayBindingExample\TwoWayBindingTestModel.cs" />
     <Compile Include="Simple\TwoWayBindingExample\TwoWayBindingTestWindow.cs" />

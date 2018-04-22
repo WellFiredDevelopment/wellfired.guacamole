@@ -2,6 +2,7 @@
 using JetBrains.Annotations;
 using WellFired.Guacamole.DataStorage.Data.Synchronization;
 using WellFired.Guacamole.DataStorage.Data.VersionUpdater;
+using WellFired.Guacamole.DataStorage.Exceptions;
 using WellFired.Guacamole.DataStorage.Storages;
 using WellFired.Guacamole.DataStorage.Synchronization;
 using WellFired.Guacamole.Diagnostics;

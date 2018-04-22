@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using WellFired.Guacamole.DataStorage.Exceptions;
 using WellFired.Guacamole.DataStorage.Synchronization;
 
 namespace WellFired.Guacamole.DataStorage.Storages

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WellFired.Guacamole.DataStorage.Synchronization
+namespace WellFired.Guacamole.DataStorage.Exceptions
 {
 	public class AlreadyInitializeException : Exception
 	{
