@@ -6,7 +6,7 @@ namespace WellFired.Guacamole.Unity.Editor.Extensions
 	{
 		private bool Equals(ShapeParameters other)
 		{
-			return _width == other._width && _height == other._height && _backgroundColor.Equals(other._backgroundColor) && _outlineColor.Equals(other._outlineColor) && _radius.Equals(other._radius) && _thickness.Equals(other._thickness) && _cornerMask == other._cornerMask && _outlineMask == other._outlineMask;
+			return _width == other._width && _height == other._height && _backgroundColor == other._backgroundColor && _outlineColor == other._outlineColor && _radius.Equals(other._radius) && _thickness.Equals(other._thickness) && _cornerMask == other._cornerMask && _outlineMask == other._outlineMask;
 		}
 
 		public override bool Equals(object obj)
