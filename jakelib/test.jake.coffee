@@ -1,7 +1,7 @@
 nunit = require('./modules/nunit')
 utils = require('./modules/utils')
-globals = require('./modules/globals')
-wtask = require('./modules/globals').wtask
+globals = require('../globals')
+wtask = require('../globals').wtask
 
 namespace 'test', ->
 
@@ -43,8 +43,7 @@ namespace 'test', ->
 
 
     run = (p) ->
-
-        runner = new nunit p
+        runner = new nunit p.join(" ")
 
         runner.on 'done', ->
             complete()

@@ -2,7 +2,8 @@ dgram  = require('dgram');
 utils = require('./modules/utils')
 unitypackage = require('./modules/unitypackage')
 stringformat = require('string-format')
-wtask = require('./modules/globals').wtask
+wtask = require('../globals').wtask
+globals = require('../globals')
 
 
 namespace 'unity', ->
@@ -36,9 +37,29 @@ namespace 'unity', ->
         utils.copy "WellFired.Platformer.Solution/Assemblies/Unity/#{platform}/UnityEngine.dll",        'WellFired.Platformer.Solution/Assemblies/UnityEngine.dll',         { clean: true }
         utils.copy "WellFired.Platformer.Solution/Assemblies/Unity/#{platform}/UnityEngine.UI.dll",     'WellFired.Platformer.Solution/Assemblies/UnityEngine.UI.dll',      { clean: true }
 
+    desc 'Move shared libraries to WellFired/Shared.'
+    wtask 'processSharedTools', { async: true }, ->
+
+      unityAssets = globals.config().unityAssets
+      projectName = globals.config().name
+      sharedTools = globals.config().sharedTools
+
+      cleanerLibs = utils.find("#{ unityAssets }/WellFired/#{ projectName }", { matching: ["**/WellFired.Broom*"] })
+      utils.move "#{file}", "#{ unityAssets }/WellFired/WellFired.Shared/Editor/#{utils.getFileName(file)}" for file in cleanerLibs
+
+      files = utils.find("#{ unityAssets }/WellFired/#{ projectName }", { matching: sharedTools })
+
+      runtimeFiles = files.filter((file) -> !file.includes("/Editor/"))
+      utils.move "#{file}", "#{ unityAssets }/WellFired/WellFired.Shared/#{utils.getFileName(file)}" for file in runtimeFiles
+
+      editorFiles = files.filter((file) -> file.includes("/Editor/"))
+      utils.move "#{file}", "#{ unityAssets }/WellFired/WellFired.Shared/Editor/#{utils.getFileName(file)}" for file in editorFiles
+    
+      complete()
+
 
     namespace 'package', ->
-    
+
         desc 'Extracts the given .unitypackage to the given directory. Requires an inFile and an outDir, eg. [a/file.unitypackage,out]'
         wtask 'extract', { async: true }, (inFile, outDir) ->
             uPackage = new unitypackage
@@ -69,7 +90,6 @@ namespace 'unity', ->
 
             uPackage.build inDir, outFile
 
-
     namespace 'editor', ->
 
         desc 'Sends the BUILD command to the Unity editor. Requires platform and config, eg. platform=macos config=release'
@@ -96,7 +116,7 @@ namespace 'unity', ->
         desc 'Sends the PLAY command to the Unity editor'
         wtask 'play', { async: true },  ->
             sendCommand('play')
-        
+
 
         desc 'Sends the REFRESH command to the Unity editor and waits for it to finish'
         wtask 'refresh', { async: true },  ->
@@ -106,7 +126,7 @@ namespace 'unity', ->
         desc 'Sends the REFRESH-PLAY command to the Unity editor'
         wtask 'refresh-play', { async: true },  ->
             sendCommand('refresh-play')
-        
+
 
         desc 'Sends the STOP command to the Unity editor'
         wtask 'stop', { async: true },  ->
@@ -115,10 +135,10 @@ namespace 'unity', ->
 
         desc 'Sends the TOGGLE-PAUSE command to the Unity editor'
         wtask 'toggle-pause', { async: true },  ->
-            sendCommand('toggle-pause')        
+            sendCommand('toggle-pause')
 
 
-        sendCommand = (cmd) -> 
+        sendCommand = (cmd) ->
             host = '127.0.0.1'
             port = 9050
 
@@ -138,7 +158,7 @@ namespace 'unity', ->
                     client.close()
                     complete()
 
-        sendSyncCommand = (cmd, oc) -> 
+        sendSyncCommand = (cmd, oc) ->
             host = '127.0.0.1'
             port = 9050
 

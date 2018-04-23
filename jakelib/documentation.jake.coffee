@@ -1,7 +1,7 @@
 doxygen = require('./modules/doxygen')
 doxygen2sphinx = require('./modules/doxygen2sphinx/doxygen2sphinx')
-globals = require('./modules/globals')
-wtask = require('./modules/globals').wtask
+globals = require('../globals')
+wtask = require('../globals').wtask
 
 namespace 'documentation', ->
     

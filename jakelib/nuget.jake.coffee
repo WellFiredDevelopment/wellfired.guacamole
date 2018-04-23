@@ -1,7 +1,7 @@
 nugetRestore = require('./modules/nugetrestore')
 nugetProject = require('./modules/nugetproject')
-globals = require('./modules/globals')
-wtask = require('./modules/globals').wtask
+globals = require('../globals')
+wtask = require('../globals').wtask
 
 namespace 'nuget', ->
     

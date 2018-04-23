@@ -8,12 +8,10 @@ class nunit
     constructor: (@path, @where) ->
 
     run: ->
-        
-        args = ['--debug', 'solution/packages/NUnit.ConsoleRunner.3.7.0/tools/nunit3-console.exe']
 
-        @path.map((path) ->
-         args.push path
-        )
+        args = ['--debug', 'solution/packages/NUnit.ConsoleRunner.3.6.0/tools/nunit3-console.exe']
+
+        args.push @path
 
         if @where?
             args.push @where

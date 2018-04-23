@@ -1,7 +1,7 @@
 xbuild = require('./modules/xbuild')
 utils = require('./modules/utils')
-globals = require('./modules/globals')
-wtask = require('./modules/globals').wtask
+globals = require('../globals')
+wtask = require('../globals').wtask
 
 
 namespace 'core', ->     
