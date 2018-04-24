@@ -42,26 +42,14 @@ namespace WellFired.Guacamole.Views
         public IImageSource OnImageSource
         {
             get => (IImageSource) GetValue(OnImageSourceProperty);
-            set
-            {
-                if(OnImageSource != null && OnImageSource.InProgress)
-                    OnImageSource.Cancel();
-                
-                SetValue(OnImageSourceProperty, value);
-            }
+            set => SetValue(OnImageSourceProperty, value);
         }
 
         [PublicAPI]
         public IImageSource OffImageSource
         {
             get => (IImageSource) GetValue(OffImageSourceProperty);
-            set
-            {
-                if(OffImageSource != null && OffImageSource.InProgress)
-                    OffImageSource.Cancel();
-                
-                SetValue(OffImageSourceProperty, value);
-            }
+            set => SetValue(OffImageSourceProperty, value);
         }
 
         [PublicAPI]
