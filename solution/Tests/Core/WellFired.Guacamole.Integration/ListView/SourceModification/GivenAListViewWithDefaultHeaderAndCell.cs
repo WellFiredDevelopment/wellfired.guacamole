@@ -96,5 +96,16 @@ namespace WellFired.Guacamole.Integration.ListView.SourceModification
 			Assert.That(((Views.View)_listView.Children[1]).BindingContext, Is.EqualTo(_data[1][1]));
 			Assert.That(((Views.View)_listView.Children[7]).BindingContext, Is.EqualTo(_data[1][1]));
 		}
+		
+		[Test]
+		public void When_ItemSource_Is_Changed_Then_ScrollOffset_And_InitialOffset_Are_Set_To_Zero()
+		{
+			_listView.ScrollOffset = 50;
+			
+			_listView.ItemSource = new ObservableCollection<Group>();
+			
+			Assert.That(_listView.ScrollOffset, Is.EqualTo(0));
+			Assert.That(_listView.InitialOffset, Is.EqualTo(0));
+		}
 	}
 }

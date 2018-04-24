@@ -15,7 +15,6 @@ namespace WellFired.Guacamole.Views
     {
         /// <summary>
         /// This is called when the whole ItemSource is changed. I.E. ItemSource = new collection();
-        /// Note : This is only called if ItemSource is an ObservableCollection.
         /// </summary>
         protected abstract void ItemSourceChanged();
         
