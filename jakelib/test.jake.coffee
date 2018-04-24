@@ -43,7 +43,8 @@ namespace 'test', ->
 
 
     run = (p) ->
-        runner = new nunit p.join(" ")
+
+        runner = new nunit p
 
         runner.on 'done', ->
             complete()

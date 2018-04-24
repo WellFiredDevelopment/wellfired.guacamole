@@ -9,9 +9,11 @@ class nunit
 
     run: ->
 
-        args = ['--debug', 'solution/packages/NUnit.ConsoleRunner.3.6.0/tools/nunit3-console.exe']
+        args = ['--debug', 'solution/packages/NUnit.ConsoleRunner.3.7.0/tools/nunit3-console.exe']
 
-        args.push @path
+        @path.map((path) ->
+         args.push path
+        )
 
         if @where?
             args.push @where
