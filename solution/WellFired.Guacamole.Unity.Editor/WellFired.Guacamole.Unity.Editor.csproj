@@ -92,6 +92,7 @@
     <Compile Include="NativeControls\Views\ButtonViewRenderer.cs" />
     <Compile Include="NativeControls\Views\FilterViewViewRenderer.cs" />
     <Compile Include="NativeControls\Views\ImageCreatorHandler.cs" />
+    <Compile Include="NativeControls\Views\ImageLoader.cs" />
     <Compile Include="NativeControls\Views\ImageViewRenderer.cs" />
     <Compile Include="NativeControls\Views\LabelViewRenderer.cs" />
     <Compile Include="NativeControls\Views\ListViewRenderer.cs" />
