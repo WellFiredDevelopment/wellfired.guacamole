@@ -1,11 +1,11 @@
 ﻿﻿using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using UnityEngine;
+ using UnityEditor;
+ using UnityEngine;
 using WellFired.Guacamole.Attributes;
 using WellFired.Guacamole.Data;
-using WellFired.Guacamole.Image;
-using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
+ using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
 
 [assembly: CustomRenderer(typeof(ToggleView), typeof(ToggleViewRenderer))]
@@ -20,11 +20,10 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			Off
 		}
 		
-		private readonly ImageCreatorHandler _handler = new ImageCreatorHandler();
+		private readonly ImageLoader _imageLoader = new ImageLoader();
 		private Texture2D _onTexture;
 		private Texture2D _offTexture;
 		private Texture2D _currentTexture;
-		private readonly object _textureLoadingLock = new object();
 		public override UISize? NativeSize => UISize.Of(18);
 
 		public override void Create()
@@ -45,6 +44,8 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			base.Render(renderRect);
 
 			var toggleView = (ToggleView)Control;
+			
+			EditorGUIUtility.AddCursorRect(UnityRect, MouseCursor.Link);
 
 			var controlState = toggleView.ControlState;
 			if (!toggleView.ButtonPressedCommand.CanExecute)
@@ -80,20 +81,19 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 				TaskEx.Run(() => UpdateTexture(ToggleState.Off));
 		}
 
-		
-
 		private async void UpdateTexture(ToggleState toggleState)
 		{
 			var onState = toggleState == ToggleState.On;
 			var toggleView = (ToggleView) Control;
 
-			var getCurrentSource = onState ? (Func<IImageSource>) (() => toggleView.OnImageSource) : (() => toggleView.OffImageSource);
+			var imageSource = onState ? toggleView.OnImageSource : toggleView.OffImageSource;
+			var isStillAwaited = onState ? (Func<bool>) (() => toggleView.OnImageSource == imageSource) : () => toggleView.OffImageSource == imageSource;
 
-			var texture = await LoadTexture(getCurrentSource);
+			var texture = await _imageLoader.LoadImage(imageSource, isStillAwaited);
 			
 			if (texture == default(Texture2D)) 
 				return;
-			
+			 
 			if(onState)
 				_onTexture = texture;
 			else
@@ -102,25 +102,6 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			}
 				
 			_currentTexture = toggleView.On ? _onTexture : _offTexture;
-		}
-		
-		private async Task<Texture2D> LoadTexture(Func<IImageSource> getCurrentSource)
-		{
-			var source = getCurrentSource();
-			
-			//if the texture is already loading, then we return a null texture.
-			if (source.InProgress)
-				return default(Texture2D);
-
-			var texture = await _handler.UpdatedImageSource(source);
-			
-			lock (_textureLoadingLock)
-			{
-				//If the source of the toggle changed while we were loading it, then we return a null texture.
-				return source != getCurrentSource() ? 
-					default(Texture2D) : 
-					texture;
-			}
 		}
 	}
 }
