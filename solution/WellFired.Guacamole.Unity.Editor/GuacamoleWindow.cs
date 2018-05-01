@@ -245,6 +245,7 @@ namespace WellFired.Guacamole.Unity.Editor
 
 			var contentType = _initializationContext.MainContentType;
 			var viewModelType = _initializationContext.MainViewModelType;
+			NativeRendererHelper.ImportExternalRenderers(_initializationContext.ExternalRenderersAssemblies);
 
 			var platformProvider = new UnityPlatformProvider(_initializationContext.ApplicationName, _initializationContext.CompanyName);
 			var logger = new Diagnostics.Logger();

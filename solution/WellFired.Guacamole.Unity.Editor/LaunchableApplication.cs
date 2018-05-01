@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Reflection;
+using WellFired.Guacamole.Attributes;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Views;
@@ -18,9 +20,10 @@ namespace WellFired.Guacamole.Unity.Editor
 		/// <param name="applicationName">The application name is used internally to cache application specific data</param>
 		/// <param name="companyName">The company name is used internally to cache application specific data</param>
 		/// <param name="persistantType">The type of Persistent data we want to provide to this window. Guacamole will handle instantiation and passing the data. Ensure you have a parameterless constructor on this type</param>
+		/// <param name="externalRenderersAssemblies">Assemblies providing the attributes <see cref="CustomRendererAttribute"/> to import renderers external to Guacamole</param>
 		/// <typeparam name="TWindow">The type of window to Launch. Should be of type Window</typeparam>
 		/// <returns></returns>
-		protected static IApplication Launch<TWindow>(UIRect uiRect, UISize minSize, string title = null, bool allowMultiple = true, string applicationName = "Guacamole", string companyName = "Guacamole", Type persistantType = null) where TWindow : Window
+		protected static IApplication Launch<TWindow>(UIRect uiRect, UISize minSize, string title = null, bool allowMultiple = true, string applicationName = "Guacamole", string companyName = "Guacamole", Type persistantType = null, Assembly[] externalRenderersAssemblies = null) where TWindow : Window
 		{
 			var application = new Application();
 
@@ -32,7 +35,8 @@ namespace WellFired.Guacamole.Unity.Editor
 				Title = title,
 				AllowMultiple = allowMultiple,
 				ApplicationName = applicationName,
-				CompanyName = companyName
+				CompanyName = companyName,
+				ExternalRendererAssemblies = externalRenderersAssemblies
 			};
 
 			return application.Launch(new InitializationContext(context), persistantType);

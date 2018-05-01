@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 using WellFired.Guacamole.Data;
 
 namespace WellFired.Guacamole.WindowContext
@@ -14,6 +16,7 @@ namespace WellFired.Guacamole.WindowContext
 		public string CompanyName;
 		public UIRect UIRect;
 		public bool AllowMultiple;
+		public string[] ExternalRenderersAssembliesStrings;
 		
 		public Type MainContentType
 		{
@@ -23,6 +26,11 @@ namespace WellFired.Guacamole.WindowContext
 		public Type MainViewModelType
 		{
 			set => MainViewModelTypeString = value.AssemblyQualifiedName;
+		}
+
+		public Assembly[] ExternalRendererAssemblies
+		{
+			set => ExternalRenderersAssembliesStrings = value?.Select(assembly => assembly.GetName().Name).ToArray();
 		}
 	}
 }

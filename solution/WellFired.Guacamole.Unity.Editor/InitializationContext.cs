@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Exceptions;
@@ -12,6 +14,7 @@ namespace WellFired.Guacamole.Unity.Editor
 		private readonly Context _context;
 		private Type _mainContentType;
 		private Type _mainViewModelType;
+		private Assembly[] _externalRendererAssemblies;
 
 		public Type MainContentType
 		{
@@ -32,6 +35,22 @@ namespace WellFired.Guacamole.Unity.Editor
 					_mainViewModelType = Type.GetType(Context.MainViewModelTypeString);
 
 				return _mainViewModelType;
+			}
+		}
+
+		public Assembly[] ExternalRenderersAssemblies
+		{
+			get
+			{
+				if (_externalRendererAssemblies == null && Context.ExternalRenderersAssembliesStrings != null)
+				{
+					_externalRendererAssemblies = 
+						AppDomain.CurrentDomain.GetAssemblies().Where(
+							assembly => Context.ExternalRenderersAssembliesStrings.Contains(assembly.GetName().Name)
+						).ToArray();
+				}
+
+				return _externalRendererAssemblies;
 			}
 		}
 

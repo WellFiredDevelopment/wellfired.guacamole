@@ -22,7 +22,7 @@ namespace WellFired.Guacamole.WindowContext
 
 		protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
 		{
-			IList<JsonProperty> properties = base.CreateProperties(type, memberSerialization);
+			var properties = base.CreateProperties(type, memberSerialization);
 			properties = properties.Where(p => !_invalidProperties.Contains(p.PropertyName)).ToList();
 
 			return properties;
