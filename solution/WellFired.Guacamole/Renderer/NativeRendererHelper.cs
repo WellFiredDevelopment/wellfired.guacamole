@@ -11,26 +11,24 @@ namespace WellFired.Guacamole.Renderer
 		public static Assembly LaunchedAssembly { private get; set; }
 		
 		private static readonly Dictionary<Type, ConstructorInfo> TypeMap = new Dictionary<Type, ConstructorInfo>();
+		private static readonly List<string> AssemblyImported = new List<string>();
 		private static bool _defaultAttributesLoaded;
-		private static bool _externalAttributesLoaded;
 
-		public static void ImportExternalRenderers(Assembly[] assemblies)
+		public static void ImportExternalRenderers(Assembly assembly)
 		{
-			if (_externalAttributesLoaded)
+			if (AssemblyImported.Contains(assembly.FullName))
 				return;
 			
-			if (assemblies != null)
-			{
-				var externalAttributes =
-					assemblies.Select(
-						assembly => assembly.GetCustomAttributes(typeof(CustomRendererAttribute), false).Cast<CustomRendererAttribute>()
-					).SelectMany(attributes => attributes);
-				
-				foreach (var attribute in externalAttributes)
-					TypeMap[attribute.ControlType] = attribute.RendererType.GetConstructor(Type.EmptyTypes);
-			}
+			AssemblyImported.Add(assembly.FullName);
+			
+			var externalAttributes = assembly
+				.GetCustomAttributes(typeof(CustomRendererAttribute), false)
+				.Cast<CustomRendererAttribute>();
 
-			_externalAttributesLoaded = true;
+			foreach (var attribute in externalAttributes)
+			{
+				TypeMap[attribute.ControlType] = attribute.RendererType.GetConstructor(Type.EmptyTypes);
+			}
 		}
 
 		public static INativeRenderer CreateNativeRendererFor(Type controlType)

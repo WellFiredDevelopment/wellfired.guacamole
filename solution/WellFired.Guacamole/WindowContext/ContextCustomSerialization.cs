@@ -14,8 +14,8 @@ namespace WellFired.Guacamole.WindowContext
 
 		public ContextCustomSerialization()
 		{
-			GetterInfo.GetInfo<UIRect, UILocation>(rec => rec.Location, out var locationProperty, out var _);
-			GetterInfo.GetInfo<UIRect, UISize>(rec => rec.Size, out var sizeProperty, out var _);
+			GetterInfo.GetInfo<UIRect, UILocation>(rec => rec.Location, out var locationProperty, out _);
+			GetterInfo.GetInfo<UIRect, UISize>(rec => rec.Size, out var sizeProperty, out _);
 
 			_invalidProperties = new[] {locationProperty, sizeProperty};
 		}

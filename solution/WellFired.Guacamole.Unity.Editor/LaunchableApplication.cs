@@ -55,8 +55,9 @@ namespace WellFired.Guacamole.Unity.Editor
 		/// <param name="persistantType">The type of Persistent data we want to provide to this window. Guacamole will handle instantiation and passing the data. Ensure you have a parameterless constructor on this type</param>
 		/// <typeparam name="TWindow">The type of window to Launch. Should be of type Window</typeparam>
 		/// <typeparam name="TViewModel">The type of ViewModel to construct, Should implement the IBasicViewModel interface</typeparam>
+		/// <param name="externalRenderersAssemblies">Assemblies providing the attributes <see cref="CustomRendererAttribute"/> to import renderers external to Guacamole</param>
 		/// <returns></returns>
-		protected static IApplication Launch<TWindow, TViewModel>(UIRect uiRect, UISize minSize, string title = null, bool allowMultiple = true, string applicationName = "Guacamole", string companyName = "WellFired", Type persistantType = null) 
+		protected static IApplication Launch<TWindow, TViewModel>(UIRect uiRect, UISize minSize, string title = null, bool allowMultiple = true, string applicationName = "Guacamole", string companyName = "WellFired", Type persistantType = null,  Assembly[] externalRenderersAssemblies = null) 
 			where TWindow : Window where TViewModel : IBasicViewModel
 		{
 			var application = new Application();
@@ -70,7 +71,8 @@ namespace WellFired.Guacamole.Unity.Editor
 				Title = title,
 				AllowMultiple = allowMultiple,
 				ApplicationName = applicationName,
-				CompanyName = companyName
+				CompanyName = companyName,
+				ExternalRendererAssemblies = externalRenderersAssemblies
 			};
 
 			return application.Launch(new InitializationContext(context), persistantType);
