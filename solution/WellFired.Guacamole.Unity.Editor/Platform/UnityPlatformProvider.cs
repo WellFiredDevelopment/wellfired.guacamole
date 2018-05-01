@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using UnityEditor;
 using WellFired.Guacamole.DataStorage.Storages;
 using WellFired.Guacamole.Platforms;
@@ -21,6 +22,8 @@ namespace WellFired.Guacamole.Unity.Editor.Platform
 		}
 
 		public string ProjectPath => Path.GetFullPath($"{UnityEngine.Application.dataPath}/..");
+		public string AssetPath => $"{ProjectPath}/Assets";
+		
 		public IDataStorageService GetPersonalDataStorage() => new FileStorageService(PathToPersonalData(".keys"));
 		public IDataStorageService GetTeamSharedDataStorage() => new FileStorageService(PathToSharedData("Keys"));
 		
@@ -37,6 +40,16 @@ namespace WellFired.Guacamole.Unity.Editor.Platform
 		public string PathToPersonalData(string file)
 		{
 			return $"{ProjectPath}/.{_companyName.ToLower()}/.{_applicationName}/.personalData/{file}";
+		}
+
+		public string[] FindAssets(string search)
+		{
+			AssetDatabase.FindAssets(search);
+
+			var assetsPath = AssetDatabase.FindAssets(search).Select(AssetDatabase.GUIDToAssetPath)
+				.Select(path => ProjectPath + "/" + path);
+
+			return assetsPath.ToArray();
 		}
 
 		public bool PlatformHasFocus => EditorWindow.focusedWindow != null;

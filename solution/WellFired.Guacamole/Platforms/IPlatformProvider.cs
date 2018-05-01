@@ -11,6 +11,11 @@ namespace WellFired.Guacamole.Platforms
 		/// Path where the project is saved.
 		/// </summary>
 		string ProjectPath { get; }
+		
+		/// <summary>
+		/// Path where the project assets are saved.
+		/// </summary>
+		string AssetPath { get; }
 
 		/// <summary>
 		/// With this, you can get some persistent data storage, you should be able to store strings of data in here.
@@ -50,6 +55,15 @@ namespace WellFired.Guacamole.Platforms
 		/// <param name="file"></param>
 		/// <returns></returns>
 		string PathToPersonalData(string file);
+
+		/// <summary>
+		/// This method allows to search through the assets of the project.
+		/// </summary>
+		/// <param name="search">String specifying how to filter the result. On some platforms such as Unity, it's possible to specify the
+		/// type and the label of the asset. For example, "co l:concrete l:architecture t:texture2D" will return all the textures
+		/// containing "co" in their name and with labels concrete and architecture.</param>
+		/// <returns></returns>
+		string[] FindAssets(string search);
 		
 		/// <summary>
 		/// Indicate if the platform application is focused or not.
