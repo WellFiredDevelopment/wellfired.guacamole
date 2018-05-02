@@ -1,4 +1,6 @@
-﻿namespace WellFired.Guacamole.Cells
+﻿using WellFired.Guacamole.DataBinding;
+
+namespace WellFired.Guacamole.Cells
 {
     public partial class LabelCell : Cell
     {

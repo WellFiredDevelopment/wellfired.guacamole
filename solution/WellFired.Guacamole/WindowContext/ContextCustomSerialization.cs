@@ -8,6 +8,11 @@ using WellFired.Json.Serialization;
 
 namespace WellFired.Guacamole.WindowContext
 {
+	/// <summary>
+	/// This class has for only purpose to serialize some of the <see cref="Context"/> properties in a custom way.
+	/// For example, UIRect location and size has a direct influence on the value X, Y, Width, Height. We don't want
+	/// to serialize them.
+	/// </summary>
 	public class ContextCustomSerialization : DefaultContractResolver
 	{
 		private readonly string[] _invalidProperties;

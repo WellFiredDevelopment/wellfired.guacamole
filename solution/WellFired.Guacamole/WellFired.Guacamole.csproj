@@ -61,7 +61,6 @@
     <Compile Include="AutoAction.cs" />
     <Compile Include="Cells\Cell.BindableProperties.cs" />
     <Compile Include="Cells\Cell.cs" />
-    <Compile Include="Cells\HeaderCell.BindableProperties.cs" />
     <Compile Include="Cells\HeaderCell.cs" />
     <Compile Include="Cells\ICell.cs" />
     <Compile Include="Cells\IDefaultCellContext.cs" />

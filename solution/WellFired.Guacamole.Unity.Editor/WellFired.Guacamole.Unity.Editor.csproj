@@ -81,7 +81,6 @@
     <Compile Include="InitializationContext.cs" />
     <Compile Include="LaunchableApplication.cs" />
     <Compile Include="NativeControls\Cells\BaseCellRenderer.cs" />
-    <Compile Include="NativeControls\Cells\HeaderCellRenderer.cs" />
     <Compile Include="NativeControls\Cells\ImageCellRenderer.cs" />
     <Compile Include="NativeControls\Cells\KeyValueCellRenderer.cs" />
     <Compile Include="NativeControls\Cells\LabelCellRenderer.cs" />

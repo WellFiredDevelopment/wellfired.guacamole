@@ -14,7 +14,8 @@ namespace WellFired.Guacamole.Styling.Styles
                 new Setter {Property = View.BackgroundColorProperty, Value = DarkerColor},
                 new Setter {Property = View.OutlineColorProperty, Value = DarkerColor},
                 new Setter {Property = View.OutlineThicknessProperty, Value = 0.0},
-                new Setter {Property = Cells.HeaderCell.TextColorProperty, Value = UIColor.Black}
+                new Setter {Property = Cells.LabelCell.TextColorProperty, Value = UIColor.Black},
+                new Setter {Property = Cells.Cell.CanMouseOverProperty, Value = false}
             }
         };
     }

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
-using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.Data;
 using JetBrains.Annotations;
+using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.DataBinding;
 
 namespace WellFired.Guacamole.Views

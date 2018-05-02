@@ -2,13 +2,11 @@
 
 namespace WellFired.Guacamole.Cells
 {
-    public partial class HeaderCell : Cell
+    public class HeaderCell : LabelCell
     {
         public HeaderCell()
         {
             Style = Styling.Styles.HeaderCell.Style;
-            
-            Bind(TextProperty, "CellLabelText", BindingMode.ReadOnly);
         }
     }
 }
