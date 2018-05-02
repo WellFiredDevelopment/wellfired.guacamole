@@ -6,31 +6,26 @@ using WellFired.Guacamole.Platforms;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
-using Debug = System.Diagnostics.Debug;
 
 namespace WellFired.Guacamole.Unity.Editor.NativeControls.Cells
 {
 	public abstract class BaseCellRenderer : BaseRenderer
 	{
-		protected virtual bool CanMouseOver { get; } = true;
-		
 		public override void Render(UIRect renderRect)
 		{
-			var cell = Control as Cell;
+			var cell = (Cell) Control;
 
-			if(CanMouseOver)
+			if (cell.CanMouseOver)
 				EditorGUIUtility.AddCursorRect(UnityRect, MouseCursor.Link);
 
-			if (Control.ControlState != ControlState.Disabled)
+			if (Control.ControlState != ControlState.Disabled && cell.CanMouseOver)
 			{
-if (UnityEngine.Event.current.isMouse &&
-	UnityEngine.Event.current.rawType == EventType.MouseUp &&
-	renderRect.ToUnityRect().Contains(UnityEngine.Event.current.mousePosition))
-{
-	Debug.Assert(cell != null, nameof(cell) + " != null");
-	// ReSharper disable once PossibleNullReferenceException
-	MainThreadRunner.ExecuteBeforeLayout(() => cell.Container.SelectedItem = cell.BindingContext);
-}
+				if (UnityEngine.Event.current.isMouse &&
+				    UnityEngine.Event.current.rawType == EventType.MouseUp &&
+				    renderRect.ToUnityRect().Contains(UnityEngine.Event.current.mousePosition))
+				{
+					MainThreadRunner.ExecuteBeforeLayout(() => cell.Container.SelectedItem = cell.BindingContext);
+				}
 			}
 
 			base.Render(renderRect);
