@@ -188,7 +188,7 @@ namespace WellFired.Guacamole.Unity.Editor
 					"Close");
 			}
 			
-			Logger.LogError("Exception occurred : " + _exception.Message + "\n" + _exception.StackTrace);
+			Logger.LogError("Exception occurred : " + exception.Message + "\n" + exception.StackTrace);
 		}
 
 		[UsedImplicitly]

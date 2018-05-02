@@ -15,6 +15,6 @@ namespace WellFired.Guacamole.DataBinding.Exceptions
 		private string NewTargetProperty { get; }
 		private string OriginalTargetProperty { get; }
 
-		public override string Message => $"Fail to bind to : {NewTargetProperty} . Binding already exists for bindable property : {BindablePropertyName} and is bound to backstore property : {OriginalTargetProperty}, please check for duplicates";
+		public override string Message => $"Failed binding to <{NewTargetProperty}>. Binding already exists for bindable property <{BindablePropertyName}> and is bound to backstore property <{OriginalTargetProperty}>, please check for duplicates";
 	}
 }

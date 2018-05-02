@@ -73,6 +73,7 @@
     <Compile Include="Cells\LabelCell.BindableProperties.cs" />
     <Compile Include="Cells\LabelCell.cs" />
     <Compile Include="Command.cs" />
+    <Compile Include="DataBinding\Exceptions\PropertyNotFoundException.cs" />
     <Compile Include="DataBinding\GetterInfo.cs" />
     <Compile Include="DataStorage\Exceptions\AlreadyInitializeException.cs" />
     <Compile Include="DataStorage\Synchronization\IKeyBasedReadWriteLock.cs" />
