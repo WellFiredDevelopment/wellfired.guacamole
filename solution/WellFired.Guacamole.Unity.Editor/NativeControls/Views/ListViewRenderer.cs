@@ -116,6 +116,10 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 				return;
 			
 			var scrollDelta = SizingHelper.GetImportantValue(listView.Orientation, UnityEngine.Event.current.delta.x, UnityEngine.Event.current.delta.y);
+			
+			// Adjust for scroll too slow.
+			scrollDelta *= 4.0f;
+			
 			scrollDelta = ListViewHelper.CorrectScroll(listView.Orientation, scrollDelta);
 			listView.ScrollOffset += scrollDelta;
 		}
