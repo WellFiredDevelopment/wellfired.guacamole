@@ -1,6 +1,4 @@
-﻿using WellFired.Guacamole.DataBinding;
-
-namespace WellFired.Guacamole.Cells
+﻿namespace WellFired.Guacamole.Cells
 {
     public class HeaderCell : LabelCell
     {

@@ -6,7 +6,6 @@ using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
-using Debug = System.Diagnostics.Debug;
 
 [assembly: CustomRenderer(typeof(ImageView), typeof(ImageViewRenderer))]
 
@@ -17,15 +16,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
         private Texture _texture;
         private readonly ImageCreatorHandler _handler = new ImageCreatorHandler();
 
-        public override UISize? NativeSize
-        {
-            get
-            {
-                var imageView = Control as ImageView;
-                Debug.Assert(imageView != null, $"{nameof(imageView)} != null");
-                return _texture == null ? UISize.Zero : Style.CalcSize(new GUIContent(_texture)).ToUISize();
-            }
-        }
+        public override UISize? NativeSize => _texture == null ? UISize.Zero : Style.CalcSize(new GUIContent(_texture)).ToUISize();
 
         public override void Render(UIRect renderRect)
         {

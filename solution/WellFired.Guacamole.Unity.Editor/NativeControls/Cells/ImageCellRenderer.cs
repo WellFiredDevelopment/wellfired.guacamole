@@ -7,7 +7,6 @@ using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Cells;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
-using Debug = System.Diagnostics.Debug;
 
 [assembly: CustomRenderer(typeof(ImageCell), typeof(ImageCellRenderer))]
 
@@ -18,15 +17,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Cells
         private Texture _texture;
         private readonly ImageCreatorHandler _handler = new ImageCreatorHandler();
 
-        public override UISize? NativeSize
-        {
-            get
-            {
-                var imageCell = Control as ImageCell;
-                Debug.Assert(imageCell != null, $"{nameof(imageCell)} != null");
-                return _texture == null ? UISize.Zero : Style.CalcSize(new GUIContent(_texture)).ToUISize();
-            }
-        }
+        public override UISize? NativeSize => _texture == null ? UISize.Zero : Style.CalcSize(new GUIContent(_texture)).ToUISize();
 
         public override void Render(UIRect renderRect)
         {

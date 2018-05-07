@@ -5,7 +5,6 @@ using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
-using Debug = System.Diagnostics.Debug;
 
 [assembly: CustomRenderer(typeof(SliderView), typeof(SliderViewRenderer))]
 
@@ -16,15 +15,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		private GUIStyle ThumbStyle { get; set; }
 		private Texture2D ThumbBackgroundTexture { get; set; }
 
-	    public override UISize? NativeSize
-	    {
-	        get
-	        {
-	            var slider = Control as SliderView;
-	            Debug.Assert(slider != null, $"{nameof(slider)} != null");
-	            return Style.CalcSize(new GUIContent()).ToUISize();
-	        }
-	    }
+	    public override UISize? NativeSize => Style.CalcSize(new GUIContent()).ToUISize();
 
 		private void CreateThumbStyleWith()
 		{
