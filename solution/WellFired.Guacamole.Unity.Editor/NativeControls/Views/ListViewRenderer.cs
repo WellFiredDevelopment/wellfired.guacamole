@@ -14,6 +14,8 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 {
 	public class ListViewRenderer : BaseRenderer
 	{
+		private bool _draggingScrollBar;
+		private Vector2 _previousMousePosition;
 		private Texture2D ScrollBarBackgroundTexture { get; set; }
 		private GUIStyle ScrollBarStyle { get; set; }
 
@@ -39,6 +41,29 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			ScrollBarStyle.border = new RectOffset(smallest, smallest, smallest, smallest);
 			
 			EditorGUI.LabelField(scrollBarRect, string.Empty, ScrollBarStyle);
+
+			if (UnityEngine.Event.current.type == EventType.MouseDown && scrollBarRect.Contains(UnityEngine.Event.current.mousePosition))
+			{
+				_draggingScrollBar = true;
+				_previousMousePosition = UnityEngine.Event.current.mousePosition;
+			}
+			if (UnityEngine.Event.current.rawType == EventType.MouseUp)
+			{
+				_draggingScrollBar = false;
+			}
+
+			if (_draggingScrollBar && UnityEngine.Event.current.isMouse)
+			{
+				var currentMousePosition = UnityEngine.Event.current.mousePosition;
+				var delta = _previousMousePosition - currentMousePosition;
+				
+				var scrollDelta = SizingHelper.GetImportantValue(listView.Orientation, -delta.x, -delta.y);
+				scrollDelta = ListViewHelper.CorrectScroll(listView.Orientation, scrollDelta);
+
+				var sizeRatio = listView.TotalContentSize / listView.RectRequest.Width;
+				listView.ScrollOffset += scrollDelta * sizeRatio;
+				_previousMousePosition = currentMousePosition;
+			}
 		}
 
 		protected override void SetupWithNewStyle()
@@ -124,7 +149,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			listView.ScrollOffset += scrollDelta;
 		}
 
-		private static Rect CalculateScrollBarRect(Rect unityRect, ListView listView)
+		private static Rect CalculateScrollBarRect(Rect unityRect, IListView listView)
 		{
 			if (!listView.CanScroll)
 				return Rect.zero;
