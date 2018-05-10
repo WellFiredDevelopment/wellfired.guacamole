@@ -12,7 +12,7 @@ namespace WellFired.Guacamole.Integration.ListView.SelectedObjectModification
 	[TestFixture]
 	public class GivenAListViewWithSelectedItem
 	{
-		public class Group : ObservableCollection<LabelCellBindingContext>
+		public class Group : ObservableCollection<LabelCellBindingContext>, IDefaultCellContext
 		{
 			public Group(string name)
 			{
@@ -20,6 +20,7 @@ namespace WellFired.Guacamole.Integration.ListView.SelectedObjectModification
 			}
 
 			public string CellLabelText { get; set; }
+			public bool IsSelected { get; set; }
 		}
 		
 		[Test]

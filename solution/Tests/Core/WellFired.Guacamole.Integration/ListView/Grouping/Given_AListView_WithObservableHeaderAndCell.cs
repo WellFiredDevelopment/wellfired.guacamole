@@ -7,7 +7,7 @@ using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Integration.ListView.Grouping
 {
-	public class Group : ObservableCollection<LabelCellBindingContext>
+	public class Group : ObservableCollection<LabelCellBindingContext>, IDefaultCellContext
 	{
 		public Group(string name)
 		{
@@ -15,6 +15,7 @@ namespace WellFired.Guacamole.Integration.ListView.Grouping
 		}
 
 		public string CellLabelText { get; set; }
+		public bool IsSelected { get; set; }
 	}
 	
 	[TestFixture]
@@ -37,7 +38,7 @@ namespace WellFired.Guacamole.Integration.ListView.Grouping
 					_toRemove,
 					new LabelCellBindingContext("Archie")
 				},
-				new Group("B") 
+				new Group("B")
 				{
 					new LabelCellBindingContext("Brooke"),
 					new LabelCellBindingContext("Bobby"),
@@ -59,7 +60,7 @@ namespace WellFired.Guacamole.Integration.ListView.Grouping
 		[Test]
 		public void When_AddItem_Then_ScrollOffset_And_TotalContentSize_Are_Correct()
 		{
-			//We display the list in an available space of 140, and set up scrol to 100
+			//We display the list in an available space of 140, and set up scroll offset to 100
 			//in order to display only items from Archie to Ben
 
 			ViewSizingExtensions.DoSizingAndLayout(_listView, UIRect.With(140, 500));

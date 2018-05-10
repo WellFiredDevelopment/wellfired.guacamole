@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections;
+using System.ComponentModel;
 using System.Diagnostics;
 using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.DataBinding;
@@ -12,9 +13,8 @@ namespace WellFired.Guacamole.Views
         {
             if (bindingContext is IDefaultCellContext defaultCellContext)
             {
-                var labelCell = new LabelCell {
-                    Container = container
-                };
+                var labelCell = bindingContext is ICollection ? new HeaderCell() : new LabelCell();
+                labelCell.Container = container;
 
                 labelCell.SetStyleDictionary(styleDictionary);
                 labelCell.BindingContext = defaultCellContext;

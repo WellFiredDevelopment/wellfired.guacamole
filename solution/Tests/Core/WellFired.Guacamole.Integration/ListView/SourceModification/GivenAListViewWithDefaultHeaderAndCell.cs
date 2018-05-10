@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Data.Collection;
 using WellFired.Guacamole.DataBinding.Cells;
@@ -6,7 +7,7 @@ using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Integration.ListView.SourceModification
 {
-	public class Group : ObservableCollection<LabelCellBindingContext>
+	public class Group : ObservableCollection<LabelCellBindingContext>, IDefaultCellContext
 	{
 		public Group(string name)
 		{
@@ -14,6 +15,7 @@ namespace WellFired.Guacamole.Integration.ListView.SourceModification
 		}
 
 		public string CellLabelText { get; set; }
+		public bool IsSelected { get; set; }
 	}
 	
 	[TestFixture]
