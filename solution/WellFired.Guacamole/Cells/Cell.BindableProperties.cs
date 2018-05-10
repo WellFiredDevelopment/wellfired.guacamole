@@ -24,6 +24,9 @@ namespace WellFired.Guacamole.Cells
             set => SetValue(IsSelectedProperty, value);
         }
         
+        /// <summary>
+        /// If true and the view is not disabled, then the cell can be selected.
+        /// </summary>
         [PublicAPI]
         public bool CanMouseOver
         {
