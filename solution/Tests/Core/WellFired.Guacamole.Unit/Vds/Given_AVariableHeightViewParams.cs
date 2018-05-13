@@ -18,7 +18,8 @@ namespace WellFired.Guacamole.Unit.Vds
 				visibleControlSize: 100, 
 				maxEntries: 5, 
 				obtainHeight: o => 10,
-				visibleDataSet: ref returnedVds);
+				visibleDataSet: ref returnedVds,
+				initialOffset: out _);
             
 			Assert.That(actual: returnedVds, expression: Is.EquivalentTo(expected: expectedVds));
 		}
@@ -34,7 +35,8 @@ namespace WellFired.Guacamole.Unit.Vds
 				visibleControlSize: 100,  
 				maxEntries: 5, 
 				obtainHeight: o => 10,
-				visibleDataSet: ref returnedVds);
+				visibleDataSet: ref returnedVds,
+				initialOffset: out _);
             
 			Assert.That(actual: returnedVds, expression: Is.EquivalentTo(expected: expectedVds));
 		}
@@ -50,7 +52,8 @@ namespace WellFired.Guacamole.Unit.Vds
 				visibleControlSize: 100,  
 				maxEntries: 10, 
 				obtainHeight: QuickMapping,
-				visibleDataSet: ref returnedVds);
+				visibleDataSet: ref returnedVds,
+				initialOffset: out _);
             
 			Assert.That(actual: returnedVds, expression: Is.EquivalentTo(expected: expectedVds));
 		}
@@ -66,7 +69,8 @@ namespace WellFired.Guacamole.Unit.Vds
 				visibleControlSize: 100,  
 				maxEntries: 10, 
 				obtainHeight: QuickMapping,
-				visibleDataSet: ref returnedVds);
+				visibleDataSet: ref returnedVds,
+				initialOffset: out _);
             
 			Assert.That(actual: returnedVds, expression: Is.EquivalentTo(expected: expectedVds));
 		}
@@ -82,7 +86,8 @@ namespace WellFired.Guacamole.Unit.Vds
 				visibleControlSize: 100,  
 				maxEntries: 10, 
 				obtainHeight: QuickMapping,
-				visibleDataSet: ref returnedVds);
+				visibleDataSet: ref returnedVds,
+				initialOffset: out _);
             
 			Assert.That(actual: returnedVds, expression: Is.EquivalentTo(expected: expectedVds));
 		}

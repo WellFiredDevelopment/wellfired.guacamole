@@ -90,19 +90,6 @@ namespace WellFired.Guacamole.Views
             return totalContentSize - totalAvailableSpace;
         }
 
-        public static float CorrectScroll(OrientationOptions orientation, float value)
-        {
-            switch (orientation)
-            {
-                case OrientationOptions.Horizontal:
-                    return value;
-                case OrientationOptions.Vertical:
-                    return value;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(orientation), orientation, null);
-            }
-        }
-
         public static void ConstrainToCell(IListView listView, ILayoutable child)
         {
             UIRect rectRequest;

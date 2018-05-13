@@ -58,9 +58,8 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 				var delta = _previousMousePosition - currentMousePosition;
 				
 				var scrollDelta = SizingHelper.GetImportantValue(listView.Orientation, -delta.x, -delta.y);
-				scrollDelta = ListViewHelper.CorrectScroll(listView.Orientation, scrollDelta);
-
-				var sizeRatio = listView.TotalContentSize / listView.RectRequest.Width;
+				
+				var sizeRatio = listView.TotalContentSize / SizingHelper.GetImportantSize(listView.Orientation, listView.RectRequest);
 				listView.ScrollOffset += scrollDelta * sizeRatio;
 				_previousMousePosition = currentMousePosition;
 			}
@@ -145,7 +144,6 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			// Adjust for scroll too slow.
 			scrollDelta *= 4.0f;
 			
-			scrollDelta = ListViewHelper.CorrectScroll(listView.Orientation, scrollDelta);
 			listView.ScrollOffset += scrollDelta;
 		}
 

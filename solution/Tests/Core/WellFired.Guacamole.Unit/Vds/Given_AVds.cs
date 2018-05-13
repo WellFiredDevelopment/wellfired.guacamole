@@ -17,7 +17,7 @@ namespace WellFired.Guacamole.Unit.Vds
             
             VdsCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
             
-            listensToVdsChanges.DidNotReceive().ItemLeftVds(Arg.Any<int>(), Arg.Any<bool>());
+            listensToVdsChanges.DidNotReceive().ItemLeftVds(Arg.Any<int>());
             Received.InOrder(() => {
                 listensToVdsChanges.ItemEnteredVds(0, false);
                 listensToVdsChanges.ItemEnteredVds(1, false);
@@ -35,7 +35,7 @@ namespace WellFired.Guacamole.Unit.Vds
             
             VdsCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
             
-            listensToVdsChanges.DidNotReceive().ItemLeftVds(Arg.Any<int>(), Arg.Any<bool>());
+            listensToVdsChanges.DidNotReceive().ItemLeftVds(Arg.Any<int>());
             Received.InOrder(() => {
                 listensToVdsChanges.ItemEnteredVds(1, false);
                 listensToVdsChanges.ItemEnteredVds(2, false);
@@ -53,7 +53,7 @@ namespace WellFired.Guacamole.Unit.Vds
             VdsCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
             
             Received.InOrder(() => {
-                listensToVdsChanges.ItemLeftVds(0, true);
+                listensToVdsChanges.ItemLeftVds(0);
                 listensToVdsChanges.ItemEnteredVds(1, false);
                 listensToVdsChanges.ItemEnteredVds(2, false);
                 listensToVdsChanges.ItemEnteredVds(3, false);
@@ -69,11 +69,11 @@ namespace WellFired.Guacamole.Unit.Vds
             
             VdsCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
             
-            listensToVdsChanges.DidNotReceive().ItemLeftVds(2, Arg.Any<bool>());
+            listensToVdsChanges.DidNotReceive().ItemLeftVds(2);
             listensToVdsChanges.DidNotReceive().ItemEnteredVds(2, Arg.Any<bool>());
             Received.InOrder(() => {
-                listensToVdsChanges.ItemLeftVds(0, true);
-                listensToVdsChanges.ItemLeftVds(1, true);
+                listensToVdsChanges.ItemLeftVds(0);
+                listensToVdsChanges.ItemLeftVds(1);
                 listensToVdsChanges.ItemEnteredVds(3, false);
             });
         }
@@ -87,12 +87,12 @@ namespace WellFired.Guacamole.Unit.Vds
             
             VdsCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
             
-            listensToVdsChanges.DidNotReceive().ItemLeftVds(2, Arg.Any<bool>());
+            listensToVdsChanges.DidNotReceive().ItemLeftVds(2);
             listensToVdsChanges.DidNotReceive().ItemEnteredVds(2, Arg.Any<bool>());
             
             Received.InOrder(() => {
-                listensToVdsChanges.ItemLeftVds(3, false);
-                listensToVdsChanges.ItemLeftVds(4, false);
+                listensToVdsChanges.ItemLeftVds(3);
+                listensToVdsChanges.ItemLeftVds(4);
                 listensToVdsChanges.ItemEnteredVds(1, true);
                 listensToVdsChanges.ItemEnteredVds(0, true);
             });
@@ -108,8 +108,8 @@ namespace WellFired.Guacamole.Unit.Vds
             VdsCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
             
             Received.InOrder(() => {
-                listensToVdsChanges.ItemLeftVds(3, true);
-                listensToVdsChanges.ItemLeftVds(4, true);
+                listensToVdsChanges.ItemLeftVds(3);
+                listensToVdsChanges.ItemLeftVds(4);
                 listensToVdsChanges.ItemEnteredVds(6, false);
                 listensToVdsChanges.ItemEnteredVds(7, false);
             });
@@ -125,8 +125,8 @@ namespace WellFired.Guacamole.Unit.Vds
             VdsCalculator.AdjustForNewVds(oldVds, newVds, listensToVdsChanges);
             
             Received.InOrder(() => {
-                listensToVdsChanges.ItemLeftVds(3, false);
-                listensToVdsChanges.ItemLeftVds(4, false);
+                listensToVdsChanges.ItemLeftVds(3);
+                listensToVdsChanges.ItemLeftVds(4);
                 listensToVdsChanges.ItemEnteredVds(1, true);
                 listensToVdsChanges.ItemEnteredVds(0, true);
             });

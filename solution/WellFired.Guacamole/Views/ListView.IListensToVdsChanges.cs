@@ -10,18 +10,13 @@ namespace WellFired.Guacamole.Views
         /// When an item becomes invisible, we cache the cell and remove it from the children.
         /// </summary>
         /// <param name="vdsIndex"></param>
-        /// <param name="front">indicate if the item added is on the top of already visible children (front is equal to true), or if it is at the bottom
-        /// (left or right for horizontal list view)</param>
-        public void ItemLeftVds(int vdsIndex, bool front)
+        public void ItemLeftVds(int vdsIndex)
         {
             var data = GetItem(vdsIndex);
 
             //the data may not exist anymore because was removed from the list.
             if (data == null)
                 return;
-            
-            if(front)
-                InitialOffset += GetEntrySizeFor(data) + Spacing;
             
             foreach (var child in Children)
             {
@@ -46,9 +41,6 @@ namespace WellFired.Guacamole.Views
         public void ItemEnteredVds(int vdsIndex, bool front)
         {
             var data = GetItem(vdsIndex);
-            
-            if(front)
-                InitialOffset -= GetEntrySizeFor(data) + Spacing;
             
             if(data == null)
                 throw new Exception("Failed to find VDS data for given index.");

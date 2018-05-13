@@ -10,8 +10,11 @@ namespace WellFired.Guacamole.Views
         /// <summary>
         /// </summary>
         /// <returns></returns>
-        public static void CalculateVisualDataSetWithVariableHeight(float scrollOffset, float visibleControlSize, int maxEntries, Func<int, int> obtainHeight, ref List<int> visibleDataSet)
-        {   
+        public static void CalculateVisualDataSetWithVariableHeight(float scrollOffset, float visibleControlSize, int maxEntries, Func<int, int> obtainHeight, ref List<int> visibleDataSet,
+            out float initialOffset)
+        {
+            initialOffset = 0;
+            
             if (MathUtil.NearEqual(Math.Abs(visibleControlSize), 0.0f))
                 return;
 
@@ -25,7 +28,7 @@ namespace WellFired.Guacamole.Views
 
                 if (scrollOffset >= start && scrollOffset < end)
                 {
-                    scrollOffset = start - scrollOffset;
+                    initialOffset = start - scrollOffset;
                     break;
                 }
 
@@ -33,7 +36,7 @@ namespace WellFired.Guacamole.Views
             }
 
             var firstEntry = focusedEntry;
-            var focusedHeight = obtainHeight(firstEntry) + scrollOffset;
+            var focusedHeight = obtainHeight(firstEntry) + initialOffset;
             
             visibleDataSet.Add(firstEntry);
 
@@ -114,8 +117,7 @@ namespace WellFired.Guacamole.Views
             for (var index = 0; index < Removals.Count; index++)
             {
                 var removal = Removals[index];
-                var front = oldVds.Any() && removal < newVds.First();
-                listensToVdsChanges.ItemLeftVds(removal, front);
+                listensToVdsChanges.ItemLeftVds(removal);
             }
 
             // We do this in reverse, so the insertion callbacks get fired in the correct order. Otherwise, we'd insert as such.
