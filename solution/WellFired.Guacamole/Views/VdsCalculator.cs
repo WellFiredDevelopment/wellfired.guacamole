@@ -7,52 +7,22 @@ namespace WellFired.Guacamole.Views
 {
     public static class VdsCalculator
     {
-        /// <summary>
-        /// </summary>
-        /// <returns></returns>
-        public static void CalculateVisualDataSetWithVariableHeight(float scrollOffset, float visibleControlSize, int maxEntries, Func<int, int> obtainHeight, ref List<int> visibleDataSet,
-            out float initialOffset)
+        public static void CalculateVisualDataSet(float scrollOffset, float visibleControlSize, CompositeCollection collection, float headerSize, float entrySize, 
+	        ref List<int> visibleDataSet, out float initialOffset)
         {
             initialOffset = 0;
-            
-            if (MathUtil.NearEqual(Math.Abs(visibleControlSize), 0.0f))
-                return;
-
-            var focusedEntry = 0;
-            var runningHeight = 0.0f;
-            for (; focusedEntry < maxEntries; focusedEntry++)
-            {
-                var height = obtainHeight(focusedEntry);
-                var start = runningHeight;
-                var end = runningHeight + height;
-
-                if (scrollOffset >= start && scrollOffset < end)
-                {
-                    initialOffset = start - scrollOffset;
-                    break;
-                }
-
-                runningHeight += height;
-            }
-
-            var firstEntry = focusedEntry;
-            var focusedHeight = obtainHeight(firstEntry) + initialOffset;
-            
-            visibleDataSet.Add(firstEntry);
-
-            var runningTotal = focusedHeight;
-            for (var index = firstEntry + 1; index < maxEntries; index++)
-            {
-                runningTotal += obtainHeight(index);
-                
-                visibleDataSet.Add(index);
-                
-                if (runningTotal >= visibleControlSize)
-                    break;
-            }
+			
+			if (collection.IsContiguousCollection)
+			{
+				CalculateForContiguousCollection(collection, scrollOffset, visibleControlSize, entrySize, visibleDataSet, out initialOffset);
+			}
+			else
+			{
+				CalculateForNonContiguousCollection(collection, scrollOffset, visibleControlSize, headerSize, entrySize, visibleDataSet, out initialOffset);
+			}
         }
-        
-        /// <summary>
+
+	    /// <summary>
         /// Given some data that defines a visible control, we can calculate a potentially visible data set, 
         /// this VDS will simply be a series of indicies into the data that are currently on visible.
         /// We calculate this data set using the params that define our view.
@@ -93,9 +63,159 @@ namespace WellFired.Guacamole.Views
             return visibleDataSet;
         }
 
-        private static readonly List<int> Removals = new List<int>();
-        private static readonly List<int> Additions = new List<int>();
-        public static void AdjustForNewVds(List<int> oldVds, List<int> newVds, IListensToVdsChanges listensToVdsChanges)
+	    private static readonly List<int> Removals = new List<int>();
+	    private static readonly List<int> Additions = new List<int>();
+
+	    private static void CalculateForContiguousCollection(CompositeCollection collection, float scrollOffset, float visibleControlSize, float entrySize, List<int> visibleDataSet, out float initialOffset)
+	    {
+		    initialOffset = GetOffsetOfFirstVisibleItem(scrollOffset, entrySize, out var firstItem);
+
+		    var numberOfVisibleItem = Math.Ceiling(visibleControlSize / entrySize);
+		    for (var i = 0; i < numberOfVisibleItem; i++)
+		    {
+			    if (firstItem + i >= collection.Count)
+				    break;
+
+			    visibleDataSet.Add(firstItem + i);
+		    }
+	    }
+
+	    /// <summary>
+	    /// We use the composite collection utility functions to find what is the first visible group in our composite collecction.
+	    /// Then we keep going through groups to find out which one is the last visible and which of its element is the last
+	    /// visible one. This function allowed pretty good performance to scroll grouped list view, but it should be noted that
+	    /// the more group the list view has, the slower it will be.
+	    /// </summary>
+	    /// <param name="collection"></param>
+	    /// <param name="scrollOffset"></param>
+	    /// <param name="visibleControlSize"></param>
+	    /// <param name="headerSize"></param>
+	    /// <param name="entrySize"></param>
+	    /// <param name="visibleDataSet"></param>
+	    /// <param name="initialOffset"></param>
+	    private static void CalculateForNonContiguousCollection(CompositeCollection collection, float scrollOffset, float visibleControlSize, float headerSize, float entrySize, List<int> visibleDataSet, out float initialOffset)
+	    {
+		    var runningHeight = 0f;
+		    var group = 0;
+		    var firstVisibleEntry = -1;
+		    float groupEndPosition;
+		    initialOffset = 0;
+		    var firstVisibleItemIndex = 0;
+
+		    for (; group < collection.GroupCount; group++)
+		    {
+			    var start = runningHeight + headerSize;
+
+			    //only the bottom part of the header is inside our control view
+			    if (start > scrollOffset)
+			    {
+				    initialOffset = -(scrollOffset - runningHeight);
+				    break;
+			    }
+
+			    var entryCountInGroup = collection.GetEntryCountInGroup(group);
+
+			    groupEndPosition = start + entryCountInGroup * entrySize;
+
+			    //only the bottom part of the group (excluding header) is inside our control view
+			    if (groupEndPosition >= scrollOffset)
+			    {
+				    initialOffset = GetOffsetOfFirstVisibleItem(scrollOffset - start, entrySize, out firstVisibleEntry);
+				    firstVisibleItemIndex += firstVisibleEntry + 1;
+				    break;
+			    }
+
+			    //The whole group is above the visible part of our control view.
+			    
+			    firstVisibleItemIndex += entryCountInGroup + 1;
+			    runningHeight = groupEndPosition;
+		    }
+
+		    var visibleHeight = 0f;
+		    var visibleItemCount = 0;
+		    var offsetToRemove = -initialOffset;
+		    while (visibleHeight < visibleControlSize && group < collection.GroupCount)
+		    {
+			    //The visible part of our control starts with an entry partly visible
+			    if (firstVisibleEntry > -1)
+			    {
+				    visibleHeight = entrySize - offsetToRemove;
+				    offsetToRemove = 0;
+				    visibleItemCount++;
+
+				    var remainingItem = collection.GetEntryCountInGroup(group) - firstVisibleEntry - 1;
+				    groupEndPosition = visibleHeight + remainingItem * entrySize;
+
+				    //The group ends below the visible part of our control
+				    if (groupEndPosition >= visibleControlSize)
+				    {
+					    var numberOfRemainingVisibleItem = Math.Ceiling((visibleControlSize - visibleHeight) / entrySize);
+
+					    visibleItemCount += (int) numberOfRemainingVisibleItem;
+					    break;
+				    }
+
+				    //Another group below the current one is also visible.
+				    visibleHeight = groupEndPosition;
+				    visibleItemCount += remainingItem;
+				    firstVisibleEntry = -1;
+				    group++;
+
+				    continue;
+			    }
+
+			    //The visible height we are at in the visible part of our control starts with a group header.
+			    visibleHeight += headerSize - offsetToRemove;
+			    offsetToRemove = 0;
+			    visibleItemCount++;
+
+			    if (visibleHeight < visibleControlSize)
+			    {
+				    var entryCountInGroup = collection.GetEntryCountInGroup(group);
+				    
+				    groupEndPosition = visibleHeight + entryCountInGroup * entrySize;
+
+				    if (groupEndPosition >= visibleControlSize)
+				    {
+					    var numberOfRemainingVisibleItem = Math.Ceiling((visibleControlSize - visibleHeight) / entrySize);
+
+					    visibleItemCount += (int) numberOfRemainingVisibleItem;
+
+					    break;
+				    }
+
+				    visibleHeight = groupEndPosition;
+				    visibleItemCount += entryCountInGroup;
+				    group++;
+			    }
+		    }
+
+		    for (var i = 0; i < visibleItemCount; i++)
+		    {
+			    if (firstVisibleItemIndex + i >= collection.Count)
+				    break;
+
+			    visibleDataSet.Add(firstVisibleItemIndex + i);
+		    }
+	    }
+	    
+	    /// <summary>
+	    /// Return offset of the first visible item.
+	    /// </summary>
+	    /// <param name="invisibleAreaSize">Size of the area hidding the entries</param>
+	    /// <param name="entriesSize">size of entries</param>
+	    /// <param name="firstVisibleEntryIndex">index from 0 of the first visible entry</param>
+	    /// <returns></returns>
+	    private static float GetOffsetOfFirstVisibleItem(float invisibleAreaSize, float entriesSize, out int firstVisibleEntryIndex)
+	    {
+		    var itemCount = invisibleAreaSize / entriesSize;
+		    firstVisibleEntryIndex = (int) Math.Truncate(itemCount);
+		    var decimalPart = itemCount - firstVisibleEntryIndex;
+
+		    return -(decimalPart * entriesSize);
+	    }
+
+	    public static void AdjustForNewVds(List<int> oldVds, List<int> newVds, IListensToVdsChanges listensToVdsChanges)
         {
             Removals.Clear();
             Additions.Clear();

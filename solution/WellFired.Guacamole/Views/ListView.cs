@@ -225,12 +225,17 @@ namespace WellFired.Guacamole.Views
             _newVds.Clear();
             
             var scrollOffset = ScrollOffset;
-            VdsCalculator.CalculateVisualDataSetWithVariableHeight(scrollOffset, AvailableSpace, ItemSourceCount, GetEntrySizeFor, ref _newVds, out var initialOffset);
+            
+            VdsCalculator.CalculateVisualDataSet(scrollOffset, AvailableSpace, CompositeCollection, HeaderSize + Spacing, EntrySize + Spacing, ref _newVds, out var initialOffset);
             InitialOffset = initialOffset;
             VdsCalculator.AdjustForNewVds(_visualDataSet, _newVds, this);
             
             // Here we clone this so we can compare on the next CalculateVisualDataSet
-            _visualDataSet = _newVds.ToList();
+            _visualDataSet.Clear();
+            foreach (var item in _newVds)
+            {
+                _visualDataSet.Add(item);
+            }
         }
 
         /// <summary>

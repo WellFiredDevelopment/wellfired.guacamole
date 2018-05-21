@@ -30,8 +30,8 @@ namespace WellFired.Guacamole.Data
 		/// i : 8		g : 2
 		/// Our Group mapping would contain quick mapping index between g 2 and index 8
 		/// </summary>
-		private readonly Dictionary<int, int> _groupToIndexMapping = new Dictionary<int, int>(); 
-		
+		private readonly Dictionary<int, int> _groupToIndexMapping = new Dictionary<int, int>();
+
 		/// <summary>
 		/// The enumerator for this data type simply returns our internal representation
 		/// </summary>
@@ -43,6 +43,26 @@ namespace WellFired.Guacamole.Data
 		/// </summary>
 		public bool IsContiguousCollection => !_isGroupingEnabled;
 
+		/// <summary>
+		/// Return the number of item in one group.
+		/// </summary>
+		/// <param name="group">index of the group starting from 0.</param>
+		/// <returns></returns>
+		public int GetEntryCountInGroup(int group)
+		{
+			if (group < _groupToIndexMapping.Count - 1)
+			{
+				return _groupToIndexMapping[group + 1] - _groupToIndexMapping[group] - 1;
+			}
+
+			return _itemSource.Count - _groupToIndexMapping[group];
+		}
+
+		/// <summary>
+		/// Number of group in the composite collection.
+		/// </summary>
+		public int GroupCount => !_isGroupingEnabled ? 0 : _groupToIndexMapping.Count;
+		
 		/// <summary>
 		/// Constructs a new instance of TwoTieredCollection from a List. This list can be an observable Collection, it's children can also be 
 		/// ObservableCollection.

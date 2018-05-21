@@ -43,7 +43,7 @@ namespace WellFired.Guacamole.Views
             var data = GetItem(vdsIndex);
             
             if(data == null)
-                throw new Exception("Failed to find VDS data for given index.");
+                throw new Exception("Failed to find VDS data for given index " + vdsIndex);
             
             var cell = Retrieve(data);
             if (cell != default(ICell))

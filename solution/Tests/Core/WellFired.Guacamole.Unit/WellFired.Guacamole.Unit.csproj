@@ -111,10 +111,11 @@
     <Compile Include="StoredData\Given_A_DataProxy.cs" />
     <Compile Include="TabbedPage\ConstructionOrder.cs" />
     <Compile Include="TabbedPage\PageSelection.cs" />
-    <Compile Include="Vds\Given_AVariableHeightViewParams.cs" />
+    <Compile Include="Vds\Given_A_Contiguous_Collection.cs" />
     <Compile Include="Vds\Given_AVds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Styling\Given_ATrigger.cs" />
+    <Compile Include="Vds\Given_A_NonContiguous_Collection.cs" />
     <Compile Include="Vds\Given_ViewParams.cs" />
     <Compile Include="View\Given_AView.cs" />
     <Compile Include="View\Given_AViewWithNoPaddingAndWithContent.cs" />
