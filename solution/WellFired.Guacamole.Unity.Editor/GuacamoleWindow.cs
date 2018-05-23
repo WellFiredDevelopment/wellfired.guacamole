@@ -244,8 +244,6 @@ namespace WellFired.Guacamole.Unity.Editor
 			{
 				_initializationContext = new InitializationContext(_contextStorage.Load(name));
 				_contextStorage.Delete(name);
-
-				Rect = _initializationContext.UIRect;
 			}
 
 			var contentType = _initializationContext.MainContentType;
