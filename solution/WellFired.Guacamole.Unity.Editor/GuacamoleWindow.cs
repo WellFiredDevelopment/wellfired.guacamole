@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -36,7 +37,8 @@ namespace WellFired.Guacamole.Unity.Editor
 
 		private Exception _exception;
 		private float _prevLayoutTime;
-		private const float MaxLayoutInterval = 1.0f / 90.0f; // Clamp the update at 90 fps for silky smooth lists.
+		private readonly Stopwatch _stopwatch = new Stopwatch();
+		private const float MaxLayoutIntervalMs = 1.0f / 90.0f * 1000f; // Clamp the update at 90 fps for silky smooth lists.
 
 		private UISize _previousRectSize;
 
@@ -110,6 +112,9 @@ namespace WellFired.Guacamole.Unity.Editor
 			EditorApplication.update += Update;
 
 			_previousRectSize = Rect.Size;
+
+			_prevLayoutTime = 0;
+			_stopwatch.Start();
 			
 			//Ideally, context should be saved only if the window was opened when Unity Editor quitted.
 			//I did not find a way to detect that. So instead, we always save the context when a window is disabled.
@@ -201,7 +206,7 @@ namespace WellFired.Guacamole.Unity.Editor
 			if (UnityEngine.Event.current.type == EventType.Layout)
 				try
 				{
-					if (Time.realtimeSinceStartup - _prevLayoutTime > MaxLayoutInterval)
+					if (_stopwatch.ElapsedMilliseconds - _prevLayoutTime > MaxLayoutIntervalMs)
 					{
 						var layoutRect = Rect;
 						layoutRect.Location = UILocation.Min;
@@ -213,7 +218,7 @@ namespace WellFired.Guacamole.Unity.Editor
 						}
 						
 						MainContent.Layout(layoutRect);
-						_prevLayoutTime = Time.realtimeSinceStartup;
+						_prevLayoutTime = _stopwatch.ElapsedMilliseconds;
 					}
 				}
 				catch (Exception e)
