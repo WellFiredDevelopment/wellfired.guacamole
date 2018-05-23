@@ -15,6 +15,8 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 {
 	public class ListViewRenderer : BaseRenderer
 	{
+		private const float MinScrollBarSize = 30f;
+		
 		private bool _draggingScrollBar;
 		private Vector2 _previousMousePosition;
 		private Texture2D ScrollBarBackgroundTexture { get; set; }
@@ -163,7 +165,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 					scrollBarRect.y += scrollBarRect.height - listView.ScrollBarSize;
 					scrollBarRect.height = listView.ScrollBarSize;
 					sizeRatio = listView.RectRequest.Width / listView.TotalContentSize;
-					scrollBarRect.width = (int)(scrollBarRect.width * sizeRatio);
+					scrollBarRect.width = Math.Max((int)(scrollBarRect.width * sizeRatio), MinScrollBarSize);
 					portionAvailableToMove = (int)(unityRect.width - scrollBarRect.width);
 					scrollRatio = listView.ScrollOffset / ListViewHelper.MaxScrollFor((int)unityRect.width, listView.TotalContentSize);
 					scrollBarRect.x += (int)(portionAvailableToMove * scrollRatio);
@@ -174,7 +176,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 					scrollBarRect.x += scrollBarRect.width - listView.ScrollBarSize;
 					scrollBarRect.width = listView.ScrollBarSize;
 					sizeRatio = listView.RectRequest.Height / listView.TotalContentSize;
-					scrollBarRect.height = (int)(scrollBarRect.height * sizeRatio);
+					scrollBarRect.height = Math.Max((int)(scrollBarRect.height * sizeRatio), MinScrollBarSize);
 					portionAvailableToMove = (int)(unityRect.height - scrollBarRect.height);
 					scrollRatio = listView.ScrollOffset / ListViewHelper.MaxScrollFor((int)unityRect.height, listView.TotalContentSize);
 					scrollBarRect.y += (int)(portionAvailableToMove * scrollRatio);

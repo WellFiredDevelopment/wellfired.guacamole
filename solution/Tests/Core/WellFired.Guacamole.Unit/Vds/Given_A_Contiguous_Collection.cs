@@ -35,7 +35,7 @@ namespace WellFired.Guacamole.Unit.Vds
 		[Test]
 		public void With_NoScrolling_ViewSizeSmallerThanTotalSize_ExpectedResultIsCorrect()
 		{
-			var expectedVds = new[] { 0, 1, 2, 3 };
+			var expectedVds = new[] { 0, 1, 2, 3, 4 };
 
 			var returnedVds = new List<int>();
 			VdsCalculator.CalculateVisualDataSet(
@@ -54,7 +54,7 @@ namespace WellFired.Guacamole.Unit.Vds
 		[Test]
 		public void With_Scrolling_ViewSizeSmallerThanTotalSize_ExpectedResultIsCorrect()
 		{
-			var expectedVds = new[] { 1, 2, 3, 4 };
+			var expectedVds = new[] { 1, 2, 3, 4, 5 };
             
 			var returnedVds = new List<int>();
 			VdsCalculator.CalculateVisualDataSet(

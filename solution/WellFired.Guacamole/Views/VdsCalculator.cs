@@ -70,7 +70,7 @@ namespace WellFired.Guacamole.Views
 	    {
 		    initialOffset = GetOffsetOfFirstVisibleItem(scrollOffset, entrySize, out var firstItem);
 
-		    var numberOfVisibleItem = Math.Ceiling(visibleControlSize / entrySize);
+		    var numberOfVisibleItem = Math.Ceiling(visibleControlSize / entrySize) + 1;
 		    for (var i = 0; i < numberOfVisibleItem; i++)
 		    {
 			    if (firstItem + i >= collection.Count)
