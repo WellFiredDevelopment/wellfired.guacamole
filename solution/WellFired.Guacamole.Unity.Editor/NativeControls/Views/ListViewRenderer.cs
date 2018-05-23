@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using WellFired.Guacamole.Attributes;
 using WellFired.Guacamole.Data;
+using WellFired.Guacamole.Platforms;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
@@ -60,7 +61,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 				var scrollDelta = SizingHelper.GetImportantValue(listView.Orientation, -delta.x, -delta.y);
 				
 				var sizeRatio = listView.TotalContentSize / SizingHelper.GetImportantSize(listView.Orientation, listView.RectRequest);
-				listView.ScrollOffset += scrollDelta * sizeRatio;
+				MainThreadRunner.ExecuteBeforeLayout(() => listView.ScrollOffset += scrollDelta * sizeRatio);
 				_previousMousePosition = currentMousePosition;
 			}
 		}
@@ -144,7 +145,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			// Adjust for scroll too slow.
 			scrollDelta *= 4.0f;
 			
-			listView.ScrollOffset += scrollDelta;
+			MainThreadRunner.ExecuteBeforeLayout(() => listView.ScrollOffset += scrollDelta);
 		}
 
 		private static Rect CalculateScrollBarRect(Rect unityRect, IListView listView)
