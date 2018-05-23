@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 using WellFired.Guacamole.Attributes;
@@ -14,7 +15,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
     public class ImageViewRenderer : BaseRenderer
     {
         private Texture _texture;
-        private readonly ImageCreatorHandler _handler = new ImageCreatorHandler();
+        private readonly ImageLoader _imageLoader = new ImageLoader();
 
         public override UISize? NativeSize => _texture == null ? UISize.Zero : Style.CalcSize(new GUIContent(_texture)).ToUISize();
 
@@ -28,17 +29,27 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
                 GUI.DrawTexture(UnityRect, _texture, ScaleMode.ScaleToFit);
         }
 
-        public override async void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        public override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(sender, e);
-
-            var imageView = (ImageView) Control;
 
             if (e.PropertyName != ImageView.ImageSourceProperty.PropertyName)
                 return;
 
-            _texture = null;
-            _texture = await _handler.UpdatedImageSource(imageView.ImageSource);
+            TaskEx.Run(() => UpdateTexture());
+        }
+        
+        private async void UpdateTexture()
+        {
+            var imageView = (ImageView) Control;
+
+            var imageSource = imageView.ImageSource;
+            var texture = await _imageLoader.LoadImage(imageSource, () => imageView.ImageSource == imageSource);
+			
+            if (texture == default(Texture2D)) 
+                return;
+				
+            _texture = texture;
         }
     }
 }
