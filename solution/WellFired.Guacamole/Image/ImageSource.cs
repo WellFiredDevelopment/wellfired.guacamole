@@ -14,13 +14,13 @@ namespace WellFired.Guacamole.Image
         private readonly CancellationTokenSource _cancellationTokenSource;
         private readonly ISourceHandler _handler;
         private LoadedImage _loadedImage;
-        private bool _isLoading;
 
-        public bool InProgress => _cancellationTokenSource != default(CancellationTokenSource);
+        private readonly Semaphore _loadingSemaphore = new Semaphore(1, 1);
+
         public Action<LoadedImage> OnComplete { get; set; } = delegate {};
 
         private ImageSource(string location, IFileSystem fileSystem)
-        {   
+        {
             _cancellationTokenSource = new CancellationTokenSource();
             _handler = new FileSourceHandler(location, fileSystem);
         }
@@ -43,32 +43,45 @@ namespace WellFired.Guacamole.Image
             _handler = new ImageShapeDefinitionHandler(imageShapeDefinition);
         }
 
+        /// <summary>
+        /// Load the image. If loading is cancelled, then the task will most probably returns a null value when cancellation
+        /// finished.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="ImageSourceHandlerProducedNoWrapperException"></exception>
         public async Task<LoadedImage> Load()
         {
-            if (_loadedImage != null)
-                return _loadedImage;
-            
-            // we're already loading, so return immediately.
-            if (_isLoading)
-                throw new ImageAlreadyLoadingException();
-
-            _isLoading = true;
-            var wrapper = await _handler.Handle(_cancellationTokenSource.Token);
-            
-            if (wrapper == null)
+            try
             {
-                _isLoading = false;
-                throw new ImageSourceHandlerProducedNoWrapperException();
-            }
+                _loadingSemaphore.WaitOne();
+                
+                if (_loadedImage != null)
+                    return _loadedImage;
+
+                var wrapper = await _handler.Handle(_cancellationTokenSource.Token);
             
-            _isLoading = false;
-            _loadedImage = LoadedImage.From(wrapper);
-            return _loadedImage;
+                if (wrapper == null)
+                {
+                    throw new ImageSourceHandlerProducedNoWrapperException();
+                }
+            
+                _loadedImage = LoadedImage.From(wrapper);
+                
+            
+                return _loadedImage; 
+            }
+            finally
+            {
+                _loadingSemaphore.Release();
+            }
         }
 
+        /// <summary>
+        /// Cancel the current loading process. We can cancel our async tasks at any time, but when it is cancelled exactly the task depends on how the different
+        /// handlers handle the cancellation token.
+        /// </summary>
         public void Cancel()
         {
-            // We can cancel our async tasks at any time.
             _cancellationTokenSource.Cancel();
         }
 

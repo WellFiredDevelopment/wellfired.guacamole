@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using WellFired.Guacamole.Data;
-using WellFired.Guacamole.Platform;
+using WellFired.Guacamole.Platforms;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Integration.Layouts.Simple
@@ -11,7 +11,7 @@ namespace WellFired.Guacamole.Integration.Layouts.Simple
         [Test]
         public void When_LayoutOccurs_Then_LayoutIsSuccessful()
         {
-            var content = new Label
+            var content = new LabelView
             {
                 Text = "Sausages",
                 MinSize = UISize.Of(80, 13)

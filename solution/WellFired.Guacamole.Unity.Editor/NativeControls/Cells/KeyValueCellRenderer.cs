@@ -13,8 +13,6 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Cells
 {
 	public class KeyValueCellRenderer : BaseCellRenderer
 	{
-		protected override bool CanMouseOver { get; } = false;
-
 		public override UISize? NativeSize
 		{
 			get

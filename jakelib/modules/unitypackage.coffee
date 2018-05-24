@@ -95,17 +95,22 @@ class unitypackage
         for child in filteredChildren
             utils.writeJson tmpDir + '/' + child.internalmd5 + '/pathname', child.pathname
 
-        # Step 3 - Sort out source and destination paths
+        # Step 3 - Write out missing meta files
+        for child in filteredChildren
+            if !metaChildren.some((metaChild) -> metaChild.relativePath.slice(0, -5) == child.relativePath)
+                utils.writeJson tmpDir + '/' + child.internalmd5 + '/asset.meta', createMetaFile child.internalmd5
+
+        # Step 4 - Sort out source and destination paths for assets
         for child in filteredChildren
             child.sourcePath = resDir + child.cleanRelativePath
             child.destinationPath = tmpDir + '/' + child.internalmd5 + '/asset'
 
-        # Step 4 - Sort out meta file source and destination paths
+        # Step 5 - Sort out source and destination paths for meta files
         for metaChild in metaChildren
-            metaName = metaChild.name
+            metaPath = metaChild.relativePath
 
             for child in filteredChildren
-                if child.name + '.meta' == metaName
+                if child.relativePath + '.meta' == metaPath
                     metaChild.internalmd5 = child.internalmd5
 
             metaChild.sourcePath = resDir + metaChild.cleanRelativePath
@@ -114,12 +119,12 @@ class unitypackage
         utils.writeJson tmpDir + '/info.json', filteredChildren
         utils.writeJson tmpDir + '/meta.json', metaChildren
 
-        # step 5 - Copy Assets
+        # step 6 - Copy Assets
         for child in filteredChildren
             if(child.type == "file")
                 utils.copy child.sourcePath, child.destinationPath
-
-        # step 5 - Copy Metas
+        
+        # step 7 - Copy Metas file and use our generated GUID
         for child in metaChildren
             if(child.type == "file")
                 utils.copy child.sourcePath, child.destinationPath
@@ -139,13 +144,23 @@ class unitypackage
         children = filter children, isNotHiddenFile
         return filter children, isNotMetaFile
 
+    createMetaFile = (guid) -> [
+        "fileFormatVersion: 2"
+        "guid: " + guid
+        "timeCreated: 1514950942"
+        "licenseType: Free"
+        "DefaultImporter:"
+        "  userData:"
+        "  assetBundleName:"
+        "  assetBundleVariant:"
+        ].join("\n");
 
     filter = (list, func) -> x for x in list when func(x)
 
 
     createInternalMD5 = (list) ->
         for x in list
-            do (x) -> x.internalmd5 = md5(JSON.stringify(x))
+            do (x) -> x.internalmd5 = md5(x.relativePath)
 
 
     on: (name, cb) ->

@@ -15,7 +15,8 @@ namespace WellFired.Guacamole.Examples.Simple.ImageViewExample
 			Launch<ImageViewWindow>(
 				uiRect: UIRect.With(50, 50, 400, 400),
 				minSize: UISize.Of(400, 400),
-				title: "ImageView");
+				title: "ImageView",
+				applicationName: "ImageViewTest");
 		}
 	}
 }

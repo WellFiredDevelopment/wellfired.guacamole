@@ -11,7 +11,7 @@ namespace WellFired.Guacamole.Integration.Layouts.Adjacent
         [Test]
         public void When_TheFirstChildHasPadding_AndLayoutHappens_Then_LayoutIsPerformedSuccessfully()
         {
-            var firstLabel = new Label {
+            var firstLabel = new LabelView {
                 MinSize = UISize.Of(0, 10),
                 HorizontalTextAlign = UITextAlign.Middle,
                 VerticalLayout = LayoutOptions.Fill,
@@ -19,7 +19,7 @@ namespace WellFired.Guacamole.Integration.Layouts.Adjacent
                 Text = "a"
             };
 
-            var secondLabel = new Label {
+            var secondLabel = new LabelView {
                 MinSize = UISize.Of(0, 10),
                 HorizontalTextAlign = UITextAlign.Middle,
                 VerticalLayout = LayoutOptions.Fill,
@@ -27,7 +27,7 @@ namespace WellFired.Guacamole.Integration.Layouts.Adjacent
                 Text = "b"
             };
 
-            var thirdLabel = new Label {
+            var thirdLabel = new LabelView {
                 MinSize = UISize.Of(0, 10),
                 HorizontalTextAlign = UITextAlign.Middle,
                 VerticalLayout = LayoutOptions.Fill,
@@ -35,7 +35,7 @@ namespace WellFired.Guacamole.Integration.Layouts.Adjacent
                 Text = "c"
             };
 
-            var fourthLabel = new Label {
+            var fourthLabel = new LabelView {
                 MinSize = UISize.Of(0, 10),
                 HorizontalTextAlign = UITextAlign.Middle,
                 VerticalLayout = LayoutOptions.Fill,

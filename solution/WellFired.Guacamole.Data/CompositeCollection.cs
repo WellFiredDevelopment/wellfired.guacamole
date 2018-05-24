@@ -30,8 +30,8 @@ namespace WellFired.Guacamole.Data
 		/// i : 8		g : 2
 		/// Our Group mapping would contain quick mapping index between g 2 and index 8
 		/// </summary>
-		private readonly Dictionary<int, int> _groupToIndexMapping = new Dictionary<int, int>(); 
-		
+		private readonly Dictionary<int, int> _groupToIndexMapping = new Dictionary<int, int>();
+
 		/// <summary>
 		/// The enumerator for this data type simply returns our internal representation
 		/// </summary>
@@ -43,6 +43,26 @@ namespace WellFired.Guacamole.Data
 		/// </summary>
 		public bool IsContiguousCollection => !_isGroupingEnabled;
 
+		/// <summary>
+		/// Return the number of item in one group.
+		/// </summary>
+		/// <param name="group">index of the group starting from 0.</param>
+		/// <returns></returns>
+		public int GetEntryCountInGroup(int group)
+		{
+			if (group < _groupToIndexMapping.Count - 1)
+			{
+				return _groupToIndexMapping[group + 1] - _groupToIndexMapping[group] - 1;
+			}
+
+			return _itemSource.Count - _groupToIndexMapping[group];
+		}
+
+		/// <summary>
+		/// Number of group in the composite collection.
+		/// </summary>
+		public int GroupCount => !_isGroupingEnabled ? 0 : _groupToIndexMapping.Count;
+		
 		/// <summary>
 		/// Constructs a new instance of TwoTieredCollection from a List. This list can be an observable Collection, it's children can also be 
 		/// ObservableCollection.
@@ -368,17 +388,16 @@ namespace WellFired.Guacamole.Data
 				case NotifyCollectionChangedAction.Add:
 					for (var index = 0; index < e.NewItems.Count; index++)
 						_itemSource.Insert(senderIndex + e.NewStartingIndex + index + 1, e.NewItems[index]);
-					
 					data.Add(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, e.NewItems, senderIndex + 1 + e.NewStartingIndex));
 					break;
 				case NotifyCollectionChangedAction.Remove:
 				{
-					var startIndex = e.OldStartingIndex + 1;
-					var endIndex = senderIndex + startIndex + e.OldItems.Count - 1;
+					var startIndex = senderIndex + e.OldStartingIndex + 1;
+					var endIndex = startIndex + e.OldItems.Count - 1;
 					for (; endIndex >= startIndex; endIndex--)
 						_itemSource.RemoveAt(endIndex);
 					
-					data.Add(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, e.OldItems, senderIndex + startIndex));
+					data.Add(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, e.OldItems, startIndex));
 					break;
 				}
 				case NotifyCollectionChangedAction.Replace:
@@ -393,11 +412,12 @@ namespace WellFired.Guacamole.Data
 					var endIndex = startIndex + e.OldItems.Count - 1;
 					for (; endIndex >= startIndex; endIndex--)
 						_itemSource.RemoveAt(endIndex);
-					
+
+					var newStartingIndex = senderIndex + 1 + e.NewStartingIndex;
 					for (var index = 0; index < e.NewItems.Count; index++)
-						_itemSource.Insert(senderIndex + 1 + e.NewStartingIndex + index, e.NewItems[index]);
+						_itemSource.Insert(newStartingIndex + index, e.NewItems[index]);
 					
-					data.Add(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Move, e.NewItems, endIndex, startIndex));
+					data.Add(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Move, e.NewItems, newStartingIndex, startIndex));
 					break;
 				}
 				case NotifyCollectionChangedAction.Reset:

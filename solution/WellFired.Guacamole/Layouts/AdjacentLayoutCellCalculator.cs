@@ -57,7 +57,7 @@ namespace WellFired.Guacamole.Layouts
             }).ToArray();
 
             var staticSpace = staticElements.Select(o => o.RectRequest).Sum(getImportantSize);
-            var dynamicSpace = !dynamicElements.Any() ? 0.0f : getImportantSize(availableSpace) - totalLostBySpacing - staticSpace;
+            var dynamicSpace = !dynamicElements.Any() ? 0.0f : Math.Max(0, getImportantSize(availableSpace) - totalLostBySpacing - staticSpace);
             var dynamicSharedSpace = !dynamicElements.Any() ? 0 : dynamicSpace / dynamicElements.Length;
 
             // If the statically allocated space is greater than the space available to static entries

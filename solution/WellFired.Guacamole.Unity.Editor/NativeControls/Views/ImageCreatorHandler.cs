@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using WellFired.Guacamole.Image;
-using WellFired.Guacamole.Platform;
+using WellFired.Guacamole.Platforms;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using Logger = WellFired.Guacamole.Unity.Editor.Diagnostics.Logger;
 
@@ -31,7 +31,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
                 }
                 catch (Exception e)
                 {
-                    MainThreadRunner.ExecuteOnMainThread(() => { throw e; });
+                    MainThreadRunner.ExecuteOnMainThread(() => throw e);
                     return default(Texture2D);
                 }
             }

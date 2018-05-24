@@ -9,7 +9,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Cells
 		public PreProcessorCell()
 		{
 			Style = NoBackgroundNoOutline.Style;
-			Content = new PreProcessorLabel();
+			Content = new PreProcessorLabelView();
 		}
 	}
 }

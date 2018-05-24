@@ -1,0 +1,5 @@
+Versioning of .Guacamole is based on https://semver.org/
+
+Version 1.0.0
+
+- Initial release.

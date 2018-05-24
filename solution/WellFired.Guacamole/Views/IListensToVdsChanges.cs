@@ -2,7 +2,7 @@
 {
     public interface IListensToVdsChanges
     {
-        void ItemLeftVds(int vdsIndex, bool front);
+        void ItemLeftVds(int vdsIndex);
         void ItemEnteredVds(int vdsIndex, bool front);
     }
 }

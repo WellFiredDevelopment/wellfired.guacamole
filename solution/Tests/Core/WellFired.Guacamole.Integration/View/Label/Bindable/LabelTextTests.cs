@@ -8,24 +8,24 @@ namespace WellFired.Guacamole.Integration.View.Label.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_labelView = new Views.Label();
+			_labelViewView = new Views.LabelView();
 			_labelContext = new LabelContextObject();
-			_labelView.BindingContext = _labelContext;
+			_labelViewView.BindingContext = _labelContext;
 		}
 
-		private Views.Label _labelView;
+		private Views.LabelView _labelViewView;
 		private LabelContextObject _labelContext;
 
 		[Test]
 		public void IsBindable()
 		{
-			_labelView.Text = "a";
+			_labelViewView.Text = "a";
 			_labelContext.Text = "b";
-			Assert.That(_labelContext.Text != _labelView.Text);
-			_labelView.Bind(Views.Label.TextProperty, nameof(_labelContext.Text));
-			Assert.That(_labelContext.Text == _labelView.Text);
+			Assert.That(_labelContext.Text != _labelViewView.Text);
+			_labelViewView.Bind(Views.LabelView.TextProperty, nameof(_labelContext.Text));
+			Assert.That(_labelContext.Text == _labelViewView.Text);
 			_labelContext.Text = "c";
-			Assert.That(_labelContext.Text == _labelView.Text);
+			Assert.That(_labelContext.Text == _labelViewView.Text);
 		}
 	}
 }

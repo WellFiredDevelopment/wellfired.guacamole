@@ -32,8 +32,19 @@ namespace WellFired.Guacamole.Views
         private readonly List<ICell> _activeCells = new List<ICell>();
         private readonly Dictionary<Type, List<ICell>> _inactiveCells = new Dictionary<Type, List<ICell>>();
         
+        /// <summary>
+        /// The total width for horizontal list view, or the total height for vertical list view, after suming up the size of each
+        /// items.
+        /// </summary>
         public int TotalContentSize { get; private set; }
+
+        /// <summary>
+        /// The position where the first child should be rendered. A negative value indicate that the first child is rendered above the
+        /// list view position (or on the left for a horizontal list view), meaning part of it is outside of the list view. This happens
+        /// when scrolling, or when adding and removing children from the list of cells to render.
+        /// </summary>
         public float InitialOffset { get; private set; }
+
         private int _headersCount;
         private int _itemsCount;
         public Action<INotifyPropertyChanged, SelectedItemChangedEventArgs> OnItemSelected { get; set; } = delegate {  };
@@ -66,12 +77,16 @@ namespace WellFired.Guacamole.Views
             _activeCells.Clear();
             _visualDataSet = new List<int>();
             ReCalculateTotalContentSize();
+            
+            ScrollOffset = 0;
+            InitialOffset = 0;
 
+            var viewSize = SizingHelper.GetImportantSize(Orientation, RectRequest);
+            CanScroll = viewSize < TotalContentSize;
+            
             if (TotalContentSize <= 0) 
                 return;
             
-            var viewSize = SizingHelper.GetImportantSize(Orientation, RectRequest);
-            CanScroll = viewSize < TotalContentSize;
             CalculateVisualDataSet();
         }
 
@@ -102,6 +117,33 @@ namespace WellFired.Guacamole.Views
 
         protected override void ItemAdded(object item, int index)
         {
+            var headerAdded = 0;
+            var itemAdded = 0;
+            
+            if (item is ICollection)
+            {
+                _headersCount++;
+                headerAdded = 1;
+            }
+            else
+            {
+                _itemsCount++;
+                itemAdded = 1;
+            }
+
+            ReCalculateTotalContentSize();
+            var viewSize = SizingHelper.GetImportantSize(Orientation, RectRequest);
+            CanScroll = viewSize < TotalContentSize;
+
+            if (CanScroll)
+            {
+                if (_visualDataSet.Count > 0 && _visualDataSet[0] >= index)
+                {
+                    var spacing = (headerAdded + itemAdded) * Spacing;
+                    ScrollOffset += headerAdded * HeaderSize + itemAdded * EntrySize + spacing;
+                }
+            }
+            
             CalculateVisualDataSet();
         }
 
@@ -110,13 +152,30 @@ namespace WellFired.Guacamole.Views
             var removedCell = _activeCells.FirstOrDefault(o => Equals(o.BindingContext, item));
             
             // If we find a default cell it means we're not rendering this element, so we don't need to worry about this
-            if (removedCell == default(ICell))
-                return;
+            if (removedCell != default(ICell))
+            {
+                Cache(removedCell);
+                _activeCells.Remove(removedCell);
+                Children.Remove((ILayoutable)removedCell);    
+            }
             
-            Cache(removedCell);
-            _activeCells.Remove(removedCell);
-            Children.Remove((ILayoutable)removedCell);
-            _visualDataSet.RemoveAt(_visualDataSet.Count - 1);
+            if (item is ICollection)
+            {
+                _headersCount--;
+            }
+            else
+            {
+                _itemsCount--;
+            }
+            
+            ReCalculateTotalContentSize();
+            var viewSize = SizingHelper.GetImportantSize(Orientation, RectRequest);
+            CanScroll = viewSize < TotalContentSize;
+            
+            // We do this here to reclamp the scroll value in case item being removed place us outside of the scrolling limits.
+            ScrollOffset = CanScroll ? ScrollOffset : 0;
+            
+            CalculateVisualDataSet();
         }
 
         protected override void ItemReplaced(object oldItem, object newItem, int index)
@@ -149,8 +208,9 @@ namespace WellFired.Guacamole.Views
             InvalidateRectRequest();
             var viewSize = SizingHelper.GetImportantSize(Orientation, RectRequest);
             CanScroll = viewSize < TotalContentSize;
-            if (CanScroll)
-                ScrollOffset = ScrollOffset; // We do this here to reclamp the scroll value incase we've pulled the bottom of a listView too far.
+            
+            // We do this here to reclamp the scroll value incase we've pulled the bottom of a listView too far.
+            ScrollOffset = CanScroll ? ScrollOffset : 0;
 
             CalculateVisualDataSet();
         }
@@ -165,11 +225,17 @@ namespace WellFired.Guacamole.Views
             _newVds.Clear();
             
             var scrollOffset = ScrollOffset;
-            VdsCalculator.CalculateVisualDataSetWithVariableHeight(scrollOffset, AvailableSpace, ItemSourceCount, GetEntrySizeFor, ref _newVds);
+            
+            VdsCalculator.CalculateVisualDataSet(scrollOffset, AvailableSpace, CompositeCollection, HeaderSize + Spacing, EntrySize + Spacing, ref _newVds, out var initialOffset);
+            InitialOffset = initialOffset;
             VdsCalculator.AdjustForNewVds(_visualDataSet, _newVds, this);
             
             // Here we clone this so we can compare on the next CalculateVisualDataSet
-            _visualDataSet = _newVds.ToList();
+            _visualDataSet.Clear();
+            foreach (var item in _newVds)
+            {
+                _visualDataSet.Add(item);
+            }
         }
 
         /// <summary>

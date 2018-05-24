@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using WellFired.Guacamole.Image;
-using WellFired.Guacamole.Platform;
+using WellFired.Guacamole.Platforms;
 
 namespace WellFired.Guacamole.Unity.Editor.Extensions
 {

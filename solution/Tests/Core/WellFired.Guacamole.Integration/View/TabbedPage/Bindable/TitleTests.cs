@@ -9,12 +9,12 @@ namespace WellFired.Guacamole.Integration.View.TabbedPage.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_view = new Views.TabbedPage();
+			_view = new Pages.TabbedPage();
 			_context = new ContextObject();
 			_view.BindingContext = _context;
 		}
 
-		private Views.TabbedPage _view;
+		private Pages.TabbedPage _view;
 		private ContextObject _context;
 
 		[Test]
@@ -23,14 +23,14 @@ namespace WellFired.Guacamole.Integration.View.TabbedPage.Bindable
 			_view.SelectedPage = "a";
 			_context.SelectedPage = "b";
 			Assert.That(_context.SelectedPage != (string) _view.SelectedPage);
-			_view.Bind(Views.TabbedPage.SelectedPageProperty, nameof(_context.SelectedPage));
+			_view.Bind(Pages.TabbedPage.SelectedPageProperty, nameof(_context.SelectedPage));
 			Assert.That(_context.SelectedPage == (string) _view.SelectedPage);
 		}
 
 		[Test]
 		public void ViewBaseBackgroundColorBindingDoesntWorkInTwoWayWithOneWayMode()
 		{
-			_view.Bind(Views.TabbedPage.SelectedPageProperty, nameof(_context.SelectedPage), BindingMode.OneWay);
+			_view.Bind(Pages.TabbedPage.SelectedPageProperty, nameof(_context.SelectedPage), BindingMode.OneWay);
 			Assert.That(_context.SelectedPage == (string) _view.SelectedPage);
 			_context.SelectedPage = "a";
 			Assert.That(_context.SelectedPage == (string) _view.SelectedPage);
@@ -41,7 +41,7 @@ namespace WellFired.Guacamole.Integration.View.TabbedPage.Bindable
 		[Test]
 		public void ViewBaseBackgroundColorBindingDoesntWorkInTwoWayWithReadOnlyMode()
 		{
-			_view.Bind(Views.TabbedPage.SelectedPageProperty, nameof(_context.SelectedPage), BindingMode.ReadOnly);
+			_view.Bind(Pages.TabbedPage.SelectedPageProperty, nameof(_context.SelectedPage), BindingMode.ReadOnly);
 			Assert.That(_context.SelectedPage == (string) _view.SelectedPage);
 			_context.SelectedPage = "a";
 			Assert.That(_context.SelectedPage == (string) _view.SelectedPage);
@@ -53,7 +53,7 @@ namespace WellFired.Guacamole.Integration.View.TabbedPage.Bindable
 		[Test]
 		public void ViewBaseBackgroundColorBindingWorksInOneWay()
 		{
-			_view.Bind(Views.TabbedPage.SelectedPageProperty, nameof(_context.SelectedPage));
+			_view.Bind(Pages.TabbedPage.SelectedPageProperty, nameof(_context.SelectedPage));
 			Assert.That(_context.SelectedPage == (string) _view.SelectedPage);
 			_context.SelectedPage = "a";
 			Assert.That(_context.SelectedPage == (string) _view.SelectedPage);
@@ -62,7 +62,7 @@ namespace WellFired.Guacamole.Integration.View.TabbedPage.Bindable
 		[Test]
 		public void ViewBaseBackgroundColorBindingWorksInTwoWay()
 		{
-			_view.Bind(Views.TabbedPage.SelectedPageProperty, nameof(_context.SelectedPage),
+			_view.Bind(Pages.TabbedPage.SelectedPageProperty, nameof(_context.SelectedPage),
 				BindingMode.TwoWay);
 			Assert.That(_context.SelectedPage == (string) _view.SelectedPage);
 			_context.SelectedPage = "a";

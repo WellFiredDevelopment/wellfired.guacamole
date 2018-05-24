@@ -4,7 +4,7 @@ using WellFired.Guacamole.Data;
 using JetBrains.Annotations;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Diagnostics;
-using WellFired.Guacamole.Platform;
+using WellFired.Guacamole.Platforms;
 using WellFired.Guacamole.Styling;
 
 namespace WellFired.Guacamole.Views
@@ -45,7 +45,12 @@ namespace WellFired.Guacamole.Views
 		{
 		    var view = Content as View;
 		    Debug.Assert(view != null, "view != null");
-
+			
+			_mainThreadRunner.ProcessMainThreadActions();
+			
+			//We process actions that have impact on the UI content so should be executed before layouting is done.
+			_mainThreadRunner.ProcessPreLayoutActions();
+			
 		    ViewSizingExtensions.DoSizingAndLayout(view, rect - Padding);
 			FinalRenderedRect = rect;
 		    ViewSizingExtensions.UpdateContextIfNeeded(view);
@@ -54,8 +59,7 @@ namespace WellFired.Guacamole.Views
 		public override void Render(UIRect parentRect)
 		{
 		    var view = Content as View;
-
-			_mainThreadRunner.ProcessActions();
+			
 			NativeRenderer.Render(FinalRenderedRect);
 
 			var relativeParentRect = UIRect.With(0, 0, parentRect.Width, parentRect.Height);

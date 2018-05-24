@@ -193,12 +193,10 @@ namespace WellFired.Guacamole.Views
             {
                 var viewSize = SizingHelper.GetImportantSize(Orientation, RectRequest);
                 var clampedValue = ListViewHelper.ClampScroll(viewSize,  TotalContentSize, value);
-                var previousValue = ScrollOffset;
 
                 if (!SetValue(ScrollOffsetProperty, clampedValue)) 
                     return;
                 
-                InitialOffset -= ScrollOffset - previousValue;
                 CalculateVisualDataSet();
             }
         }

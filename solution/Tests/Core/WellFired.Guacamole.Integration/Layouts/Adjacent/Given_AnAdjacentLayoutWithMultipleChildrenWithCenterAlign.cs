@@ -10,14 +10,14 @@ namespace WellFired.Guacamole.Integration.Layouts.Adjacent
         [Test]
         public void When_HorizontalLayout_WithoutSpacing_Then_LayoutIsCorrect()
         {
-            var child0 = new Label {
+            var child0 = new LabelView {
                 Padding = UIPadding.Zero,
                 HorizontalLayout = LayoutOptions.Expand,
                 VerticalLayout = LayoutOptions.Expand,
                 MinSize = UISize.Of(40, 40)
             };
             
-            var child1 = new Label {
+            var child1 = new LabelView {
                 Padding = UIPadding.Zero,
                 HorizontalLayout = LayoutOptions.Expand,
                 VerticalLayout = LayoutOptions.Expand,
@@ -54,14 +54,14 @@ namespace WellFired.Guacamole.Integration.Layouts.Adjacent
         [Test]
         public void When_HorizontalLayout_WithSpacing_Then_LayoutIsCorrect()
         {
-            var child0 = new Label {
+            var child0 = new LabelView {
                 Padding = UIPadding.Zero,
                 HorizontalLayout = LayoutOptions.Expand,
                 VerticalLayout = LayoutOptions.Expand,
                 MinSize = UISize.Of(40, 40)
             };
             
-            var child1 = new Label {
+            var child1 = new LabelView {
                 Padding = UIPadding.Zero,
                 HorizontalLayout = LayoutOptions.Expand,
                 VerticalLayout = LayoutOptions.Expand,
@@ -98,14 +98,14 @@ namespace WellFired.Guacamole.Integration.Layouts.Adjacent
         [Test]
         public void When_VerticalLayout_WithoutSpacing_Then_LayoutIsCorrect()
         {
-            var child0 = new Label {
+            var child0 = new LabelView {
                 Padding = UIPadding.Zero,
                 HorizontalLayout = LayoutOptions.Expand,
                 VerticalLayout = LayoutOptions.Expand,
                 MinSize = UISize.Of(40, 40)
             };
             
-            var child1 = new Label {
+            var child1 = new LabelView {
                 Padding = UIPadding.Zero,
                 HorizontalLayout = LayoutOptions.Expand,
                 VerticalLayout = LayoutOptions.Expand,
@@ -142,14 +142,14 @@ namespace WellFired.Guacamole.Integration.Layouts.Adjacent
         [Test]
         public void When_VerticalLayout_WithSpacing_Then_LayoutIsCorrect()
         {
-            var child0 = new Label {
+            var child0 = new LabelView {
                 Padding = UIPadding.Zero,
                 HorizontalLayout = LayoutOptions.Expand,
                 VerticalLayout = LayoutOptions.Expand,
                 MinSize = UISize.Of(40, 40)
             };
             
-            var child1 = new Label {
+            var child1 = new LabelView {
                 Padding = UIPadding.Zero,
                 HorizontalLayout = LayoutOptions.Expand,
                 VerticalLayout = LayoutOptions.Expand,

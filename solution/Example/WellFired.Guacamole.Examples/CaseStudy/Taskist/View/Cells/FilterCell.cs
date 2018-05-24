@@ -21,7 +21,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.View.Cells
                 HorizontalLayout = LayoutOptions.Expand,
             };
 
-            var filterName = new Label
+            var filterName = new LabelView
             {
                 BackgroundColor = UIColor.Clear,
                 OutlineColor = UIColor.Clear,
@@ -52,7 +52,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.View.Cells
             Content = layoutView;
             
             filterBall.Bind(ImageView.ImageSourceProperty, "FilterImage");
-            filterName.Bind(Label.TextProperty, "FilterName");
+            filterName.Bind(LabelView.TextProperty, "FilterName");
         }
     }
 }

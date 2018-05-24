@@ -8,18 +8,38 @@ namespace WellFired.Guacamole.Renderer
 {
 	public static class NativeRendererHelper
 	{
-		private static Dictionary<Type, ConstructorInfo> _typeMap;
 		public static Assembly LaunchedAssembly { private get; set; }
+		
+		private static readonly Dictionary<Type, ConstructorInfo> TypeMap = new Dictionary<Type, ConstructorInfo>();
+		private static readonly List<string> AssemblyImported = new List<string>();
+		private static bool _defaultAttributesLoaded;
+
+		public static void ImportExternalRenderers(Assembly assembly)
+		{
+			if (AssemblyImported.Contains(assembly.FullName))
+				return;
+			
+			AssemblyImported.Add(assembly.FullName);
+			
+			var externalAttributes = assembly
+				.GetCustomAttributes(typeof(CustomRendererAttribute), false)
+				.Cast<CustomRendererAttribute>();
+
+			foreach (var attribute in externalAttributes)
+			{
+				TypeMap[attribute.ControlType] = attribute.RendererType.GetConstructor(Type.EmptyTypes);
+			}
+		}
 
 		public static INativeRenderer CreateNativeRendererFor(Type controlType)
 		{
-			if (_typeMap == null)
+			if (!_defaultAttributesLoaded)
 			{
 				// This is shit.
 				var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 				var exampleAssembly = assemblies.FirstOrDefault(o => o.FullName.Contains("WellFired.Guacamole.Examples.Unity.Editor"));
 				
-				var attributes = LaunchedAssembly
+				var launchedAssemblyAttributes = LaunchedAssembly
 					.GetCustomAttributes(typeof(CustomRendererAttribute), false)
 					.Cast<CustomRendererAttribute>();
 				
@@ -27,17 +47,18 @@ namespace WellFired.Guacamole.Renderer
 					.GetCustomAttributes(typeof(CustomRendererAttribute), false)
 					.Cast<CustomRendererAttribute>();
 
-				_typeMap = new Dictionary<Type, ConstructorInfo>();
-				foreach (var attribute in attributes)
-					_typeMap[attribute.ControlType] = attribute.RendererType.GetConstructor(Type.EmptyTypes);
+				foreach (var attribute in launchedAssemblyAttributes)
+					TypeMap[attribute.ControlType] = attribute.RendererType.GetConstructor(Type.EmptyTypes);
 				
 				if (exampleAttributes != null)
 					foreach (var attribute in exampleAttributes)
-						_typeMap[attribute.ControlType] = attribute.RendererType.GetConstructor(Type.EmptyTypes);
+						TypeMap[attribute.ControlType] = attribute.RendererType.GetConstructor(Type.EmptyTypes);
+
+				_defaultAttributesLoaded = true;
 			}
 
 			var checkType = controlType;
-			while (!_typeMap.ContainsKey(checkType))
+			while (!TypeMap.ContainsKey(checkType))
 			{
 				checkType = checkType.BaseType;
 				if (checkType == null)
@@ -46,7 +67,7 @@ namespace WellFired.Guacamole.Renderer
 
 			// ReSharper disable once CoVariantArrayConversion
 			// ReSharper disable once AssignNullToNotNullAttribute
-			return _typeMap[checkType].Invoke(Type.EmptyTypes) as INativeRenderer;
+			return TypeMap[checkType].Invoke(Type.EmptyTypes) as INativeRenderer;
 		}
 	}
 }

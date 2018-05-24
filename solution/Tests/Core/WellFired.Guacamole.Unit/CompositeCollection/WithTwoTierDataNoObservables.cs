@@ -51,7 +51,7 @@ namespace WellFired.Guacamole.Unit.CompositeCollection
 		public void When_NewGroupAdded_Then_ModificationIsNotPropogated()
 		{		
 			var reciever = Substitute.For<IEventMockReciever>();
-			_compositeCollection.CollectionChanged += reciever.Recieve;
+			_compositeCollection.CollectionChanged += reciever.Receive;
 			
 			var group = new Group("F") {
 				new GroupEntry("Fanny"),
@@ -61,26 +61,26 @@ namespace WellFired.Guacamole.Unit.CompositeCollection
 			_rawItemSource.Add(group);
 			Assert.That(_compositeCollection.Count, Is.EqualTo(22));
 			
-			reciever.DidNotReceive().Recieve(_compositeCollection, Arg.Any<NotifyCollectionChangedEventArgs>());
+			reciever.DidNotReceive().Receive(_compositeCollection, Arg.Any<NotifyCollectionChangedEventArgs>());
 		}
 
 		[Test]
 		public void When_GroupRemoved_Then_ModificationIsNotPropogated()
 		{
 			var reciever = Substitute.For<IEventMockReciever>();
-			_compositeCollection.CollectionChanged += reciever.Recieve;
+			_compositeCollection.CollectionChanged += reciever.Receive;
 			
 			_rawItemSource.Remove(_rawItemSource[2]);
 			Assert.That(_compositeCollection.Count, Is.EqualTo(22));
 			
-			reciever.DidNotReceive().Recieve(_compositeCollection, Arg.Any<NotifyCollectionChangedEventArgs>());
+			reciever.DidNotReceive().Receive(_compositeCollection, Arg.Any<NotifyCollectionChangedEventArgs>());
 		}
 
 		[Test]
 		public void When_GroupInserted_Then_ModificationIsNotPropogated()
 		{
 			var reciever = Substitute.For<IEventMockReciever>();
-			_compositeCollection.CollectionChanged += reciever.Recieve;
+			_compositeCollection.CollectionChanged += reciever.Receive;
 			
 			var group = new Group("F") {
 				new GroupEntry("Fanny"),
@@ -89,14 +89,14 @@ namespace WellFired.Guacamole.Unit.CompositeCollection
 			_rawItemSource.Insert(2, group);
 			Assert.That(_compositeCollection.Count, Is.EqualTo(22));
 			
-			reciever.DidNotReceive().Recieve(_compositeCollection, Arg.Any<NotifyCollectionChangedEventArgs>());
+			reciever.DidNotReceive().Receive(_compositeCollection, Arg.Any<NotifyCollectionChangedEventArgs>());
 		}
 
 		[Test]
 		public void When_GroupReplaced_Then_ModificationIsNotPropogated()
 		{
 			var reciever = Substitute.For<IEventMockReciever>();
-			_compositeCollection.CollectionChanged += reciever.Recieve;
+			_compositeCollection.CollectionChanged += reciever.Receive;
 			
 			var group = new Group("F") {
 				new GroupEntry("Fanny"),
@@ -106,26 +106,26 @@ namespace WellFired.Guacamole.Unit.CompositeCollection
 			_rawItemSource[2] = group;
 			Assert.That(_compositeCollection.Count, Is.EqualTo(22));
 			
-			reciever.DidNotReceive().Recieve(_compositeCollection, Arg.Any<NotifyCollectionChangedEventArgs>());
+			reciever.DidNotReceive().Receive(_compositeCollection, Arg.Any<NotifyCollectionChangedEventArgs>());
 		}
 
 		[Test]
 		public void When_Cleared_Then_ModificationIsPropogated()
 		{
 			var reciever = Substitute.For<IEventMockReciever>();
-			_compositeCollection.CollectionChanged += reciever.Recieve;
+			_compositeCollection.CollectionChanged += reciever.Receive;
 			
 			_rawItemSource.Clear();
 			Assert.That(_compositeCollection.Count, Is.EqualTo(22));
 			
-			reciever.DidNotReceive().Recieve(_compositeCollection, Arg.Any<NotifyCollectionChangedEventArgs>());
+			reciever.DidNotReceive().Receive(_compositeCollection, Arg.Any<NotifyCollectionChangedEventArgs>());
 		}
 
 		[Test]
 		public void When_TheCollectionIsModified_Then_ModificationIsPropogated()
 		{
 			var reciever = Substitute.For<IEventMockReciever>();
-			_compositeCollection.CollectionChanged += reciever.Recieve;
+			_compositeCollection.CollectionChanged += reciever.Receive;
 			
 			// Test child insert
 			var newEntry = new GroupEntry("Some Test");
@@ -133,7 +133,7 @@ namespace WellFired.Guacamole.Unit.CompositeCollection
 			Assert.That(_compositeCollection.Count, Is.EqualTo(22));
 			
 			// Test delegates
-			reciever.DidNotReceive().Recieve(_compositeCollection, Arg.Any<NotifyCollectionChangedEventArgs>());
+			reciever.DidNotReceive().Receive(_compositeCollection, Arg.Any<NotifyCollectionChangedEventArgs>());
 			reciever.ClearReceivedCalls();
 			
 			// Test Child Add
@@ -141,7 +141,7 @@ namespace WellFired.Guacamole.Unit.CompositeCollection
 			Assert.That(_compositeCollection.Count, Is.EqualTo(22));
 			
 			// Test delegates
-			reciever.DidNotReceive().Recieve(_compositeCollection, Arg.Any<NotifyCollectionChangedEventArgs>());
+			reciever.DidNotReceive().Receive(_compositeCollection, Arg.Any<NotifyCollectionChangedEventArgs>());
 			reciever.ClearReceivedCalls();
 			
 			// Test child Remove
@@ -149,7 +149,7 @@ namespace WellFired.Guacamole.Unit.CompositeCollection
 			Assert.That(_compositeCollection.Count, Is.EqualTo(22));
 			
 			// Test delegates
-			reciever.DidNotReceive().Recieve(_compositeCollection, Arg.Any<NotifyCollectionChangedEventArgs>());
+			reciever.DidNotReceive().Receive(_compositeCollection, Arg.Any<NotifyCollectionChangedEventArgs>());
 			reciever.ClearReceivedCalls();
 			
 			// Test child Replace (Replace Bobby with Collin)
@@ -157,7 +157,7 @@ namespace WellFired.Guacamole.Unit.CompositeCollection
 			Assert.That(_compositeCollection.Count, Is.EqualTo(22));
 			
 			// Test delegates
-			reciever.DidNotReceive().Recieve(_compositeCollection, Arg.Any<NotifyCollectionChangedEventArgs>());
+			reciever.DidNotReceive().Receive(_compositeCollection, Arg.Any<NotifyCollectionChangedEventArgs>());
 			reciever.ClearReceivedCalls();
 		}
 	}

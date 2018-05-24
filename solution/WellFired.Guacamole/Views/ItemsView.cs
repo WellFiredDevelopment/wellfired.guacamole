@@ -15,7 +15,6 @@ namespace WellFired.Guacamole.Views
     {
         /// <summary>
         /// This is called when the whole ItemSource is changed. I.E. ItemSource = new collection();
-        /// Note : This is only called if ItemSource is an ObservableCollection.
         /// </summary>
         protected abstract void ItemSourceChanged();
         
@@ -32,7 +31,7 @@ namespace WellFired.Guacamole.Views
         /// <param name="item">The new item</param>
         /// <param name="index">The new position this element was added at.</param>
         protected abstract void ItemAdded(object item, int index);
-        
+
         /// <summary>
         /// This is called when an item is removed from the ItemSource
         /// Note : This is only called if ItemSource is an ObservableCollection.
@@ -56,7 +55,7 @@ namespace WellFired.Guacamole.Views
         /// <returns></returns>
         protected object GetItem(int index)
         {
-            return CompositeCollection[index];
+            return index >= CompositeCollection.Count ? null : CompositeCollection[index];
         }
 
         /// <summary>

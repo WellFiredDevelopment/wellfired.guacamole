@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Examples.Intermediate.KeyValueListViewExample.View;
-using WellFired.Guacamole.Platform;
+using WellFired.Guacamole.Platforms;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.Intermediate.KeyValueListViewExample

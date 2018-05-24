@@ -2,7 +2,7 @@
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Layouts;
-using WellFired.Guacamole.Platform;
+using WellFired.Guacamole.Platforms;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.Simple.AdjacentLayoutExample
@@ -14,57 +14,57 @@ namespace WellFired.Guacamole.Examples.Simple.AdjacentLayoutExample
 		{
 			Padding = UIPadding.Of(5);
 
-			var textEntryStartStart = new TextEntry
+			var textEntryStartStart = new TextEntryView
 			{
 				Text = "h:Start v:Start Align"
 			};
 
-			var textEntryMiddleStart = new TextEntry
+			var textEntryMiddleStart = new TextEntryView
 			{
 				HorizontalTextAlign = UITextAlign.Middle,
 				Text = "h:Middle v:Start Align"
 			};
 
-			var textEntryEndStart = new TextEntry
+			var textEntryEndStart = new TextEntryView
 			{
 				HorizontalTextAlign = UITextAlign.End,
 				Text = "h:Right v:Start Align"
 			};
 
-			var textEntryStartMiddle = new TextEntry
+			var textEntryStartMiddle = new TextEntryView
 			{
 				VerticalTextAlign = UITextAlign.Middle,
 				Text = "h:Start v:Middle Align"
 			};
 
-			var textEntryMiddleMiddle = new TextEntry
+			var textEntryMiddleMiddle = new TextEntryView
 			{
 				HorizontalTextAlign = UITextAlign.Middle,
 				VerticalTextAlign = UITextAlign.Middle,
 				Text = "h:Middle v:Middle Align"
 			};
 
-			var textEntryEndMiddle = new TextEntry
+			var textEntryEndMiddle = new TextEntryView
 			{
 				HorizontalTextAlign = UITextAlign.End,
 				VerticalTextAlign = UITextAlign.Middle,
 				Text = "h:Right v:Middle Align"
 			};
 
-			var textEntryStartEnd = new TextEntry
+			var textEntryStartEnd = new TextEntryView
 			{
 				VerticalTextAlign = UITextAlign.End,
 				Text = "h:Start v:End Align"
 			};
 
-			var textEntryMiddleEnd = new TextEntry
+			var textEntryMiddleEnd = new TextEntryView
 			{
 				HorizontalTextAlign = UITextAlign.Middle,
 				VerticalTextAlign = UITextAlign.End,
 				Text = "h:Middle v:End Align"
 			};
 
-			var textEntryEndEnd = new TextEntry
+			var textEntryEndEnd = new TextEntryView
 			{
 				HorizontalTextAlign = UITextAlign.End,
 				VerticalTextAlign = UITextAlign.End,

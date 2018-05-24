@@ -57,7 +57,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.View
                         ItemTemplate = DataTemplate.Of(typeof(FilterCell)),
                         ItemSource = collection
                     },
-                    new Button
+                    new ButtonView
                     {
                         Text = "New"
                     }

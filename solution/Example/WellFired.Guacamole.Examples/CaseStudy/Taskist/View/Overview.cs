@@ -42,7 +42,7 @@ namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.View
                         ItemTemplate = DataTemplate.Of(typeof(TaskCell)),
                         ItemSource = collection
                     },
-                    new Button
+                    new ButtonView
                     {
                         Text = "Add Task"
                     }

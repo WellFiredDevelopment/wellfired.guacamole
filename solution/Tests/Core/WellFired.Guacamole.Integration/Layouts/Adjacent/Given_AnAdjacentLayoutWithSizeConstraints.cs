@@ -34,7 +34,7 @@ namespace WellFired.Guacamole.Integration.Layouts.Adjacent
                 MinSize = UISize.Of(100),
                 Children =
                 {
-                    new Label { MinSize = UISize.Of(50) }
+                    new LabelView { MinSize = UISize.Of(50) }
                 }
             };
 
@@ -54,9 +54,9 @@ namespace WellFired.Guacamole.Integration.Layouts.Adjacent
                 MinSize = UISize.Of(100),
                 Children =
                 {
-                    new Label { MinSize = UISize.Of(50) },
-                    new Label { MinSize = UISize.Of(50) },
-                    new Label { MinSize = UISize.Of(50) }
+                    new LabelView { MinSize = UISize.Of(50) },
+                    new LabelView { MinSize = UISize.Of(50) },
+                    new LabelView { MinSize = UISize.Of(50) }
                 }
             };
 

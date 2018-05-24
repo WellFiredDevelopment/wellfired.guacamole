@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Reflection;
+using WellFired.Guacamole.Attributes;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Views;
+using WellFired.Guacamole.WindowContext;
 
 namespace WellFired.Guacamole.Unity.Editor
 {
@@ -15,26 +18,30 @@ namespace WellFired.Guacamole.Unity.Editor
 		/// <param name="title">The title of this window</param>
 		/// <param name="allowMultiple">Can we allow multiple of these windows to be opened?</param>
 		/// <param name="applicationName">The application name is used internally to cache application specific data</param>
+		/// <param name="companyName">The company name is used internally to cache application specific data</param>
 		/// <param name="persistantType">The type of Persistent data we want to provide to this window. Guacamole will handle instantiation and passing the data. Ensure you have a parameterless constructor on this type</param>
+		/// <param name="externalRenderersAssemblies">Assemblies providing the attributes <see cref="CustomRendererAttribute"/> to import renderers external to Guacamole</param>
 		/// <typeparam name="TWindow">The type of window to Launch. Should be of type Window</typeparam>
 		/// <returns></returns>
-		protected static IApplication Launch<TWindow>(UIRect uiRect, UISize minSize, string title = null, bool allowMultiple = true, string applicationName = "Guacamole", Type persistantType = null) where TWindow : Window
+		protected static IApplication Launch<TWindow>(UIRect uiRect, UISize minSize, string title = null, bool allowMultiple = true, string applicationName = "Guacamole", string companyName = "Guacamole", Type persistantType = null, Assembly[] externalRenderersAssemblies = null) where TWindow : Window
 		{
 			var application = new Application();
 
-			var context = new ApplicationInitializationContext
+			var context = new Context
 			{
-				MainContent = typeof(TWindow),
+				MainContentType = typeof(TWindow),
 				UIRect = uiRect,
 				MinSize = minSize,
 				Title = title,
 				AllowMultiple = allowMultiple,
-				ApplicationName = applicationName
+				ApplicationName = applicationName,
+				CompanyName = companyName,
+				ExternalRendererAssemblies = externalRenderersAssemblies
 			};
 
-			return application.Launch(context, persistantType);
+			return application.Launch(new InitializationContext(context), persistantType);
 		}
-		
+
 		/// <summary>
 		/// Will launch a window with the passed parameters, This method will also cause Guacamole to construct an object of Type TViewModel and inject any systemic services. This ViewModel will be
 		/// automatically assigned to the window as a binding context.
@@ -44,27 +51,31 @@ namespace WellFired.Guacamole.Unity.Editor
 		/// <param name="title">The title of this window</param>
 		/// <param name="allowMultiple">Can we allow multiple of these windows to be opened?</param>
 		/// <param name="applicationName">The application name is used internally to cache application specific data</param>
+		/// <param name="companyName">The company name is used internally to cache application specific data</param>
 		/// <param name="persistantType">The type of Persistent data we want to provide to this window. Guacamole will handle instantiation and passing the data. Ensure you have a parameterless constructor on this type</param>
 		/// <typeparam name="TWindow">The type of window to Launch. Should be of type Window</typeparam>
 		/// <typeparam name="TViewModel">The type of ViewModel to construct, Should implement the IBasicViewModel interface</typeparam>
+		/// <param name="externalRenderersAssemblies">Assemblies providing the attributes <see cref="CustomRendererAttribute"/> to import renderers external to Guacamole</param>
 		/// <returns></returns>
-		protected static IApplication Launch<TWindow, TViewModel>(UIRect uiRect, UISize minSize, string title = null, bool allowMultiple = true, string applicationName = "Guacamole", Type persistantType = null) 
+		protected static IApplication Launch<TWindow, TViewModel>(UIRect uiRect, UISize minSize, string title = null, bool allowMultiple = true, string applicationName = "Guacamole", string companyName = "WellFired", Type persistantType = null,  Assembly[] externalRenderersAssemblies = null) 
 			where TWindow : Window where TViewModel : IBasicViewModel
 		{
 			var application = new Application();
 
-			var context = new ApplicationInitializationContext
+			var context = new Context
 			{
-				MainContent = typeof(TWindow),
-				MainViewModel = typeof(TViewModel),
+				MainContentType = typeof(TWindow),
+				MainViewModelType = typeof(TViewModel),
 				UIRect = uiRect,
 				MinSize = minSize,
 				Title = title,
 				AllowMultiple = allowMultiple,
-				ApplicationName = applicationName
+				ApplicationName = applicationName,
+				CompanyName = companyName,
+				ExternalRendererAssemblies = externalRenderersAssemblies
 			};
 
-			return application.Launch(context, persistantType);
+			return application.Launch(new InitializationContext(context), persistantType);
 		}
 	}
 }

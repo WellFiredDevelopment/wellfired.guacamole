@@ -2,7 +2,7 @@
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Diagnostics;
 using WellFired.Guacamole.Layouts;
-using WellFired.Guacamole.Platform;
+using WellFired.Guacamole.Platforms;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.Simple.UIBindingExample
@@ -15,9 +15,9 @@ namespace WellFired.Guacamole.Examples.Simple.UIBindingExample
 		{
 			Padding = UIPadding.Of(5);
 
-			var destinationElement = new TextEntry();
+			var destinationElement = new TextEntryView();
 
-			var sourceElement = new Slider
+			var sourceElement = new SliderView
 			{
 				MinValue = 0,
 				MaxValue = 32

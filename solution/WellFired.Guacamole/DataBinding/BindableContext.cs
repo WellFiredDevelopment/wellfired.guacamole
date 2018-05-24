@@ -63,7 +63,9 @@ namespace WellFired.Guacamole.DataBinding
 			{
 				var type = Object.GetType();
 				_propertyInfo = type.GetProperty(TargetProperty, BindingFlags.Public | BindingFlags.Instance);
-				// ReSharper disable once PossibleNullReferenceException
+
+				if (_propertyInfo == null)
+					throw new PropertyNotFoundException(Property.PropertyName, type.Name, TargetProperty);
 				_propertySetMethod = _propertyInfo.GetSetMethod();
 				_propertyGetMethod = _propertyInfo.GetGetMethod();
 			}

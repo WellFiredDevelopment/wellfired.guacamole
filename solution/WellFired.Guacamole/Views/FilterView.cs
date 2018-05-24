@@ -6,7 +6,7 @@ using WellFired.Guacamole.DataBinding;
 
 namespace WellFired.Guacamole.Views
 {
-	public class FilterView : TextEntry
+	public class FilterView : TextEntryView
 	{
 		[PublicAPI] public static readonly BindableProperty KeyValueSearchProperty = BindableProperty.Create<FilterView, Dictionary<string, string>>(
 			default(Dictionary<string, string>),
@@ -34,18 +34,39 @@ namespace WellFired.Guacamole.Views
 			set => SetValue(SimpleSearchProperty, value);
 		}
 
+		public FilterView()
+		{
+			PlaceholderText = "Type here to Search";
+		}
+
 		public void Search()
 		{
 			KeyValueSearch = Text
 				.Split(new[]{' ', ','}, StringSplitOptions.RemoveEmptyEntries)
 				.Select(search => search.Split(new[]{':'}, StringSplitOptions.RemoveEmptyEntries))
-				.Where(search => search.Length == 2).
+				.Where(search => search.Length == 2).Distinct(new DistinctKeyComparer()).
 				ToDictionary(keyValueSearch => keyValueSearch[0], keyValueEntry => keyValueEntry[1]);
 
 			SimpleSearch = Text
 				.Split(new[]{' ', ','}, StringSplitOptions.RemoveEmptyEntries)
 				.Where(search => search.Split(':').Length == 1)
 				.ToList();
+		}
+	}
+
+	public class DistinctKeyComparer : IEqualityComparer<string[]>
+	{
+		public bool Equals(string[] x, string[] y)
+		{
+			if (x == null || y == null)
+				return false;
+			
+			return x[0] == y[0];
+		}
+
+		public int GetHashCode(string[] obj)
+		{
+			return obj[0].GetHashCode();
 		}
 	}
 }

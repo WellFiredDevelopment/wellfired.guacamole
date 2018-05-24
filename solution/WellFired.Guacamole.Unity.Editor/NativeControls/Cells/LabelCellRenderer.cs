@@ -41,6 +41,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Cells
             Style.active.textColor = labelCell.TextColor.ToUnityColor();
             Style.hover.textColor = labelCell.TextColor.ToUnityColor();
             Style.normal.textColor = labelCell.TextColor.ToUnityColor();
+            Style.fontSize = labelCell.FontSize;
         }
 
         public override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)

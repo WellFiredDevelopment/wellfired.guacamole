@@ -23,12 +23,12 @@ namespace WellFired.Guacamole.Examples.CaseStudy.RedditBrowser.Cells
                 MinSize = UISize.Of(100)
             };
             
-            var title = new Label {
+            var title = new LabelView {
                 HorizontalLayout = LayoutOptions.Fill,
                 VerticalLayout = LayoutOptions.Fill 
             };
             
-            title.Bind(Label.TextProperty, "Title");
+            title.Bind(LabelView.TextProperty, "Title");
             image.Bind(ImageView.ImageSourceProperty, "Image");
             
             Content = new LayoutView

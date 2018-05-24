@@ -25,7 +25,7 @@ module.exports = {
             return
 
         opt = {
-            overwrite: options.clean if options?,
+            overwrite: options.clean if options?
             matching:  options.pattern if options?
         }
 
@@ -33,6 +33,12 @@ module.exports = {
         dst = jetpack.dir(dstPath)
 
         src.copy('.', dst.path(), opt)
+
+    move: (srcPath, dstPath) ->
+        jetpack.move(srcPath, dstPath)
+
+    getFileName: (srcFile) ->
+        srcFile.replace(/^.*[\\\/]/, '')
 
     delete: (path) ->
         jetpack.remove(path)

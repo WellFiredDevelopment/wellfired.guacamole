@@ -7,7 +7,6 @@ namespace WellFired.Guacamole.Image
     {
         Task<LoadedImage> Load();
         void Cancel();
-        bool InProgress { get; }
         Action<LoadedImage> OnComplete { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace WellFired.Guacamole.Views
         INotifyPropertyChanged SelectedItem { set; }
         float InitialOffset { get; }
         int ScrollBarSize { get; }
+        bool ShouldShowScrollBar { get; set; }
         bool CanScroll { get; }
         float ScrollOffset { get; }
 

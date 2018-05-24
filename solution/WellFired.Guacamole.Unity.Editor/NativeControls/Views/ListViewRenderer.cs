@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using WellFired.Guacamole.Attributes;
 using WellFired.Guacamole.Data;
+using WellFired.Guacamole.Platforms;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
@@ -14,6 +15,10 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 {
 	public class ListViewRenderer : BaseRenderer
 	{
+		private const float MinScrollBarSize = 30f;
+		
+		private bool _draggingScrollBar;
+		private Vector2 _previousMousePosition;
 		private Texture2D ScrollBarBackgroundTexture { get; set; }
 		private GUIStyle ScrollBarStyle { get; set; }
 
@@ -39,6 +44,28 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			ScrollBarStyle.border = new RectOffset(smallest, smallest, smallest, smallest);
 			
 			EditorGUI.LabelField(scrollBarRect, string.Empty, ScrollBarStyle);
+
+			if (UnityEngine.Event.current.type == EventType.MouseDown && scrollBarRect.Contains(UnityEngine.Event.current.mousePosition))
+			{
+				_draggingScrollBar = true;
+				_previousMousePosition = UnityEngine.Event.current.mousePosition;
+			}
+			if (UnityEngine.Event.current.rawType == EventType.MouseUp)
+			{
+				_draggingScrollBar = false;
+			}
+
+			if (_draggingScrollBar && UnityEngine.Event.current.isMouse)
+			{
+				var currentMousePosition = UnityEngine.Event.current.mousePosition;
+				var delta = _previousMousePosition - currentMousePosition;
+				
+				var scrollDelta = SizingHelper.GetImportantValue(listView.Orientation, -delta.x, -delta.y);
+				
+				var sizeRatio = listView.TotalContentSize / SizingHelper.GetImportantSize(listView.Orientation, listView.RectRequest);
+				MainThreadRunner.ExecuteBeforeLayout(() => listView.ScrollOffset += scrollDelta * sizeRatio);
+				_previousMousePosition = currentMousePosition;
+			}
 		}
 
 		protected override void SetupWithNewStyle()
@@ -116,11 +143,14 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 				return;
 			
 			var scrollDelta = SizingHelper.GetImportantValue(listView.Orientation, UnityEngine.Event.current.delta.x, UnityEngine.Event.current.delta.y);
-			scrollDelta = ListViewHelper.CorrectScroll(listView.Orientation, scrollDelta);
-			listView.ScrollOffset += scrollDelta;
+			
+			// Adjust for scroll too slow.
+			scrollDelta *= 4.0f;
+			
+			MainThreadRunner.ExecuteBeforeLayout(() => listView.ScrollOffset += scrollDelta);
 		}
 
-		private static Rect CalculateScrollBarRect(Rect unityRect, ListView listView)
+		private static Rect CalculateScrollBarRect(Rect unityRect, IListView listView)
 		{
 			if (!listView.CanScroll)
 				return Rect.zero;
@@ -135,7 +165,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 					scrollBarRect.y += scrollBarRect.height - listView.ScrollBarSize;
 					scrollBarRect.height = listView.ScrollBarSize;
 					sizeRatio = listView.RectRequest.Width / listView.TotalContentSize;
-					scrollBarRect.width = (int)(scrollBarRect.width * sizeRatio);
+					scrollBarRect.width = Math.Max((int)(scrollBarRect.width * sizeRatio), MinScrollBarSize);
 					portionAvailableToMove = (int)(unityRect.width - scrollBarRect.width);
 					scrollRatio = listView.ScrollOffset / ListViewHelper.MaxScrollFor((int)unityRect.width, listView.TotalContentSize);
 					scrollBarRect.x += (int)(portionAvailableToMove * scrollRatio);
@@ -146,7 +176,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 					scrollBarRect.x += scrollBarRect.width - listView.ScrollBarSize;
 					scrollBarRect.width = listView.ScrollBarSize;
 					sizeRatio = listView.RectRequest.Height / listView.TotalContentSize;
-					scrollBarRect.height = (int)(scrollBarRect.height * sizeRatio);
+					scrollBarRect.height = Math.Max((int)(scrollBarRect.height * sizeRatio), MinScrollBarSize);
 					portionAvailableToMove = (int)(unityRect.height - scrollBarRect.height);
 					scrollRatio = listView.ScrollOffset / ListViewHelper.MaxScrollFor((int)unityRect.height, listView.TotalContentSize);
 					scrollBarRect.y += (int)(portionAvailableToMove * scrollRatio);

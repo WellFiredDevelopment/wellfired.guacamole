@@ -9,24 +9,24 @@ namespace WellFired.Guacamole.Integration.View.Button.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_buttonView = new Views.Button();
+			_buttonViewView = new Views.ButtonView();
 			_buttonContext = new ButtonContextObject();
-			_buttonView.BindingContext = _buttonContext;
+			_buttonViewView.BindingContext = _buttonContext;
 		}
 
-		private Views.Button _buttonView;
+		private Views.ButtonView _buttonViewView;
 		private ButtonContextObject _buttonContext;
 
 		[Test]
 		public void IsBindable()
 		{
-			_buttonView.VerticalTextAlign = UITextAlign.End;
+			_buttonViewView.VerticalTextAlign = UITextAlign.End;
 			_buttonContext.VerticalTextAlign = UITextAlign.Middle;
-			Assert.That(_buttonContext.VerticalTextAlign != _buttonView.VerticalTextAlign);
-			_buttonView.Bind(Views.Button.VerticalTextAlignProperty, nameof(_buttonContext.VerticalTextAlign));
-			Assert.That(_buttonContext.VerticalTextAlign == _buttonView.VerticalTextAlign);
+			Assert.That(_buttonContext.VerticalTextAlign != _buttonViewView.VerticalTextAlign);
+			_buttonViewView.Bind(Views.ButtonView.VerticalTextAlignProperty, nameof(_buttonContext.VerticalTextAlign));
+			Assert.That(_buttonContext.VerticalTextAlign == _buttonViewView.VerticalTextAlign);
 			_buttonContext.VerticalTextAlign = UITextAlign.Start;
-			Assert.That(_buttonContext.VerticalTextAlign == _buttonView.VerticalTextAlign);
+			Assert.That(_buttonContext.VerticalTextAlign == _buttonViewView.VerticalTextAlign);
 		}
 	}
 }

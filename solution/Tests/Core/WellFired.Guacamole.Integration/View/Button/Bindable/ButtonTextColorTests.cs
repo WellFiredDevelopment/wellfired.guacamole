@@ -9,24 +9,24 @@ namespace WellFired.Guacamole.Integration.View.Button.Bindable
 		[SetUp]
 		public void Setup()
 		{
-			_buttonView = new Views.Button();
+			_buttonViewView = new Views.ButtonView();
 			_buttonContext = new ButtonContextObject();
-			_buttonView.BindingContext = _buttonContext;
+			_buttonViewView.BindingContext = _buttonContext;
 		}
 
-		private Views.Button _buttonView;
+		private Views.ButtonView _buttonViewView;
 		private ButtonContextObject _buttonContext;
 
 		[Test]
 		public void IsBindable()
 		{
-			_buttonView.TextColor = UIColor.Black;
+			_buttonViewView.TextColor = UIColor.Black;
 			_buttonContext.TextColor = UIColor.Blue;
-			Assert.That(_buttonContext.TextColor != _buttonView.TextColor);
-			_buttonView.Bind(Views.Button.TextColorProperty, nameof(_buttonContext.TextColor));
-			Assert.That(_buttonContext.TextColor == _buttonView.TextColor);
+			Assert.That(_buttonContext.TextColor != _buttonViewView.TextColor);
+			_buttonViewView.Bind(Views.ButtonView.TextColorProperty, nameof(_buttonContext.TextColor));
+			Assert.That(_buttonContext.TextColor == _buttonViewView.TextColor);
 			_buttonContext.TextColor = UIColor.Brown;
-			Assert.That(_buttonContext.TextColor == _buttonView.TextColor);
+			Assert.That(_buttonContext.TextColor == _buttonViewView.TextColor);
 		}
 	}
 }

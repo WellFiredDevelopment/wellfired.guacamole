@@ -1,7 +1,7 @@
 ﻿using System;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Examples.CaseStudy.DotPeek.ViewModel;
-using WellFired.Guacamole.Views;
+using WellFired.Guacamole.Pages;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.DotPeek.View.Pages
 {

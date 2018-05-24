@@ -6,6 +6,12 @@ namespace WellFired.Guacamole.Cells
 {
     public partial class LabelCell
     {
+        [PublicAPI] public static readonly BindableProperty FontSizeProperty = BindableProperty.Create<LabelCell, int>(
+            12,
+            BindingMode.TwoWay,
+            v => v.FontSize
+        );
+
         [PublicAPI] public static readonly BindableProperty TextProperty = BindableProperty.Create<LabelCell, string>(
             string.Empty,
             BindingMode.TwoWay,
@@ -31,6 +37,13 @@ namespace WellFired.Guacamole.Cells
                 BindingMode.TwoWay,
                 cell => cell.VerticalTextAlign
             );
+
+        [PublicAPI]
+        public int FontSize
+        {
+            get => (int) GetValue(FontSizeProperty);
+            set => SetValue(FontSizeProperty, value);
+        }
 
         [PublicAPI]
         public string Text

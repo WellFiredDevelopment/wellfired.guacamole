@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Diagnostics;
-using WellFired.Guacamole.Platform;
+using WellFired.Guacamole.Platforms;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.Simple.OneWayBindingExample
@@ -13,12 +13,12 @@ namespace WellFired.Guacamole.Examples.Simple.OneWayBindingExample
 		{
 			Padding = UIPadding.Of(5);
 
-			var boundTextEntry = new TextEntry();
+			var boundTextEntry = new TextEntryView();
 
 			Content = boundTextEntry;
 
 			BindingContext = persistantData;
-			boundTextEntry.Bind(TextEntry.TextProperty, "BoundText");
+			boundTextEntry.Bind(TextEntryView.TextProperty, "BoundText");
 		}
 	}
 }

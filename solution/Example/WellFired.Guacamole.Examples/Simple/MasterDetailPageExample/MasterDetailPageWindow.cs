@@ -2,9 +2,10 @@
 using System.ComponentModel;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Diagnostics;
-using WellFired.Guacamole.Platform;
+using WellFired.Guacamole.Pages;
+using WellFired.Guacamole.Pages.MasterDetailPage;
+using WellFired.Guacamole.Platforms;
 using WellFired.Guacamole.Views;
-using WellFired.Guacamole.Views.MasterDetailPage;
 
 namespace WellFired.Guacamole.Examples.Simple.MasterDetailPageExample
 {

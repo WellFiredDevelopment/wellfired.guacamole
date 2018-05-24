@@ -26,6 +26,11 @@ namespace WellFired.Guacamole.Unit.FilterView
 			filterView.Search();
 			Assert.That(filterView.SimpleSearch, Is.EquivalentTo(new []{"piccola","Assets/Prefab/"}));
 			Assert.That(filterView.KeyValueSearch, Is.EquivalentTo(new Dictionary<string, string>{{"texture", "car"}}));
+			
+			filterView.Text = "piccola,texture:car, Assets/Prefab/ type:martini type:cola";
+			filterView.Search();
+			Assert.That(filterView.SimpleSearch, Is.EquivalentTo(new[] {"piccola", "Assets/Prefab/"}));
+			Assert.That(filterView.KeyValueSearch, Is.EquivalentTo(new Dictionary<string, string>{{"texture", "car"}, {"type","martini"}}));
 		}
 
 		[Test]

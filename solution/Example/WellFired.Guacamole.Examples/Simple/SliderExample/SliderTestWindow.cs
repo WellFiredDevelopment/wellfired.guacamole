@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Diagnostics;
-using WellFired.Guacamole.Platform;
+using WellFired.Guacamole.Platforms;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.Simple.SliderExample
@@ -13,7 +13,7 @@ namespace WellFired.Guacamole.Examples.Simple.SliderExample
 		{
 			Padding = UIPadding.Of(5);
 
-			Content = new Slider
+			Content = new SliderView
 			{
 				MinValue = 0.0,
 				MaxValue = 10.0,

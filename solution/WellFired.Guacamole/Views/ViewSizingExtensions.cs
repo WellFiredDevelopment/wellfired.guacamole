@@ -52,8 +52,7 @@ namespace WellFired.Guacamole.Views
 
             var hasInvalidated = false;
 
-            var hasChildren = view as IHasChildren;
-            if (hasChildren != null)
+            if (view is IHasChildren hasChildren)
             {
                 foreach (var child in hasChildren.Children)
                 {
@@ -88,41 +87,31 @@ namespace WellFired.Guacamole.Views
         /// <returns></returns>
         private static UIRect CalculateValidRectRequest(IView view)
         {
-            var canLayout = view as ICanLayout;
-            if (canLayout != null)
-            {
-                var rectRequest = canLayout.Layout.CalculateValidRectRequest(canLayout.Children, view.MinSize);
-                var totalSize = UISize.Of(rectRequest.Width, rectRequest.Height);
-                var adjustedForPadding = ViewPaddingCalculation.AdjustForPadding(view.HorizontalLayout, view.VerticalLayout, view.Padding, totalSize);
-                return UIRect.With(rectRequest.X, rectRequest.Y, adjustedForPadding.Width, adjustedForPadding.Height);
-            }
-
-            var listView = view as IListView;
-            if (listView != null)
-            {
-                var requestedSize = ListViewHelper.CalculateValidRectRequest(listView);
+            UIRect requestedSize;
                 
-                var size = ConstrainUnder(requestedSize.Size, listView.MinSize);
-                size = ConstrainOver(size, listView.MaxSize);
-                requestedSize.Size = size;
+            switch (view)
+            {
+                case ICanLayout canLayout:
+                    requestedSize = canLayout.Layout.CalculateValidRectRequest(canLayout.Children, view.MinSize);
+                    break;
+                case IListView listView:
+                    requestedSize = ListViewHelper.CalculateValidRectRequest(listView);
+                    break;
+                default:
+                    var defaultSize = UISize.Of(view.MinSize.Width, view.MinSize.Height);
 
-                return requestedSize;
+                    var content = view.Content;
+                    if (content != null)
+                        defaultSize = content.RectRequest.Size;
+
+                    requestedSize = UIRect.From(view.NativeRenderer?.NativeSize ?? defaultSize);
+                    break;
             }
-
-            var defaultSize = UISize.Of(view.MinSize.Width, view.MinSize.Height);
             
-            var content = view.Content;
-            if (content != null)
-                defaultSize = content.RectRequest.Size;
-
-            // If the native renderer returns null, we simply use our own layoutting system.
-            var nativeSize = ViewPaddingCalculation.AdjustForPadding(view.HorizontalLayout, view.VerticalLayout, view.Padding, view.NativeRenderer?.NativeSize ?? defaultSize);
-
-            // Constrain
-            nativeSize = ConstrainUnder(nativeSize, view.MinSize);
-            nativeSize = ConstrainOver(nativeSize, view.MaxSize);
-
-            return UIRect.With(0, 0, nativeSize.Width, nativeSize.Height);
+            var adjustedForPadding = ViewPaddingCalculation.AdjustRectRequestForPadding(view.Padding, requestedSize.Size);
+            var size = ConstrainUnder(adjustedForPadding, view.MinSize);
+            size = ConstrainOver(size, view.MaxSize);
+            return UIRect.With(requestedSize.X, requestedSize.Y, size.Width, size.Height);
         }
 
         /// <summary>
@@ -134,14 +123,12 @@ namespace WellFired.Guacamole.Views
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public static void AttemptToFullfillRequests(IView view, UIRect availableSpace)
         {
-            var isCell = view is ICell;
-            
             var rectRequest = view.RectRequest;
             var contentRectRequest = view.ContentRectRequest;
 
             rectRequest.X = availableSpace.X;
             rectRequest.Y = availableSpace.Y;
-
+            
             switch (view.HorizontalLayout)
             {
                 case LayoutOptions.Fill:
@@ -182,6 +169,7 @@ namespace WellFired.Guacamole.Views
                     throw new ArgumentOutOfRangeException();
             }
 
+            var isCell = view is ICell;
             if (!isCell)
             {
                 view.RectRequest = rectRequest;
@@ -192,10 +180,9 @@ namespace WellFired.Guacamole.Views
                 AttemptToFullfillRequests(view.Content, UIRect.With(view.ContentRectRequest.Width, view.ContentRectRequest.Height) - view.Padding);
 
             var layout = view as ICanLayout;
-            var listView = view as IListView;
-
             layout?.Layout.AttemptToFullfillRequests(layout.Children, UIRect.With(view.ContentRectRequest.Width, view.ContentRectRequest.Height) - view.Padding, view.Padding, view.HorizontalLayout, view.VerticalLayout);
 
+            var listView = view as IListView;
             if (listView == null) 
                 return;
 
@@ -215,8 +202,7 @@ namespace WellFired.Guacamole.Views
              if (bindable.BindingContext == null)
                  bindable.BindingContext = bindable.BindingContext;
 
-            var children = bindable as IHasChildren;
-            if (children == null)
+            if (!(bindable is IHasChildren children))
                 return;
 
             foreach(var child in children.Children)
@@ -230,16 +216,14 @@ namespace WellFired.Guacamole.Views
 
             var layout = view as ICanLayout;
             layout?.Layout.Layout(layout.Children, view.RectRequest, view.Padding);
-            
-            var listView = view as IListView;
-            if (listView != null)
+
+            if (view is IListView listView)
                 ListViewHelper.Layout(listView, view.RectRequest, view.Padding);
 
             if(view.Content != null)
                 DoLayout(view.Content);
 
-            var hasChildren = view as IHasChildren;
-            if (hasChildren == null)
+            if (!(view is IHasChildren hasChildren))
                 return;
 
             foreach(var child in hasChildren.Children)
@@ -273,16 +257,11 @@ namespace WellFired.Guacamole.Views
         }
     }
 
-    public class ViewPaddingCalculation
+    public static class ViewPaddingCalculation
     {
-        public static UISize AdjustForPadding(LayoutOptions horizontalLayout, LayoutOptions verticalLayout, UIPadding padding, UISize size)
+        public static UISize AdjustRectRequestForPadding(UIPadding padding, UISize size)
         {
-            var flexibleWidth = horizontalLayout == LayoutOptions.Expand;
-            var flexibleHeight = verticalLayout == LayoutOptions.Expand;
-
-            return UISize.Of(
-                flexibleWidth ? size.Width + padding.Right + padding.Left : size.Width,
-                flexibleHeight ? size.Height + padding.Bottom + padding.Top : size.Height);
+            return UISize.Of(size.Width + padding.Right + padding.Left, size.Height + padding.Bottom + padding.Top);
         }
     }
 }

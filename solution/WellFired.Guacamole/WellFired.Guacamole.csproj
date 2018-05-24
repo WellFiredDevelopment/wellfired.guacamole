@@ -19,20 +19,24 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\Unity\Assets\Code\</OutputPath>
+    <OutputPath>../../unity/Assets/WellFired/WellFired.Guacamole/Code/Editor/</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>../../unity/Assets/WellFired/WellFired.Guacamole/Code/Editor/\WellFired.Guacamole.xml</DocumentationFile>
+    <NoWarn>CS1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin</OutputPath>
+    <OutputPath>../../unity/Assets/WellFired/WellFired.Guacamole/Code/Editor/</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>../../unity/Assets/WellFired/WellFired.Guacamole/Code/Editor/\WellFired.Guacamole.xml</DocumentationFile>
+    <NoWarn>CS1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AsyncBridge.Net35, Version=0.0.0.0, Culture=neutral, PublicKeyToken=b3b1c0202c0d6a87">
@@ -43,13 +47,13 @@
       <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1-beta1\lib\net35\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Threading, Version=1.0.2856.102, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <HintPath>..\packages\System.Threading.dll.1.0.2856.0\lib\net35\System.Threading.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="WellFired.Json.Unity, Version=9.0.1.22, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\Assemblies\WellFired.Json.Unity.9.0.1.22\WellFired.Json.Unity.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -57,7 +61,6 @@
     <Compile Include="AutoAction.cs" />
     <Compile Include="Cells\Cell.BindableProperties.cs" />
     <Compile Include="Cells\Cell.cs" />
-    <Compile Include="Cells\HeaderCell.BindableProperties.cs" />
     <Compile Include="Cells\HeaderCell.cs" />
     <Compile Include="Cells\ICell.cs" />
     <Compile Include="Cells\IDefaultCellContext.cs" />
@@ -69,19 +72,39 @@
     <Compile Include="Cells\LabelCell.BindableProperties.cs" />
     <Compile Include="Cells\LabelCell.cs" />
     <Compile Include="Command.cs" />
+    <Compile Include="DataBinding\Exceptions\PropertyNotFoundException.cs" />
+    <Compile Include="DataBinding\GetterInfo.cs" />
+    <Compile Include="DataStorage\Exceptions\AlreadyInitializeException.cs" />
+    <Compile Include="DataStorage\Synchronization\IKeyBasedReadWriteLock.cs" />
+    <Compile Include="DataStorage\Synchronization\KeyBasedReadWriteLock.cs" />
+    <Compile Include="DataStorage\Storages\ComputerDataStorage.cs" />
+    <Compile Include="DataStorage\Storages\FileStorageService.cs" />
+    <Compile Include="DataStorage\Storages\IDataStorageService.cs" />
+    <Compile Include="DataStorage\Synchronization\ThreadSynchronizer.cs" />
     <Compile Include="Diagnostics\ConsoleLogger.cs" />
-    <Compile Include="StoredData\DataAccess.cs" />
-    <Compile Include="StoredData\IDataAccess.cs" />
-    <Compile Include="StoredData\Synchronization\DataCacher.cs" />
-    <Compile Include="StoredData\Synchronization\DataProxy.cs" />
-    <Compile Include="StoredData\Synchronization\FieldReflector.cs" />
-    <Compile Include="StoredData\Synchronization\FileSystemDataWatcher.cs" />
-    <Compile Include="StoredData\Synchronization\IDataCacher.cs" />
-    <Compile Include="StoredData\Synchronization\IDataProxy.cs" />
-    <Compile Include="StoredData\Synchronization\IStoredDataWatcher.cs" />
-    <Compile Include="StoredData\Exceptions\ProxyDataAlreadyAssignedException.cs" />
-    <Compile Include="StoredData\Serialization\ISerializer.cs" />
-    <Compile Include="StoredData\Serialization\JSONSerializer.cs" />
+    <Compile Include="Pages\MasterDetailPage\ListViewMasterDetailPage.cs" />
+    <Compile Include="Pages\MasterDetailPage\MasterDetailPage.cs" />
+    <Compile Include="Pages\MasterDetailPage\MasterPageItem.cs" />
+    <Compile Include="Pages\Page.cs" />
+    <Compile Include="Pages\TabbedPage.BindableProperties.cs" />
+    <Compile Include="Pages\TabbedPage.cs" />
+    <Compile Include="Pages\TabbedPageButton.BindableProperties.cs" />
+    <Compile Include="Pages\TabbedPageButtonView.cs" />
+    <Compile Include="DataStorage\Data\DataAccess.cs" />
+    <Compile Include="DataStorage\Data\Exceptions\ProxyDataAlreadyAssignedException.cs" />
+    <Compile Include="DataStorage\Data\IDataAccess.cs" />
+    <Compile Include="DataStorage\Data\Serialization\ISerializer.cs" />
+    <Compile Include="DataStorage\Data\Serialization\JSONSerializer.cs" />
+    <Compile Include="DataStorage\Data\Synchronization\DataCacher.cs" />
+    <Compile Include="DataStorage\Data\Synchronization\DataProxy.cs" />
+    <Compile Include="DataStorage\Data\Synchronization\FieldReflector.cs" />
+    <Compile Include="DataStorage\Data\Synchronization\FileSystemDataWatcher.cs" />
+    <Compile Include="DataStorage\Data\Synchronization\IDataCacher.cs" />
+    <Compile Include="DataStorage\Data\Synchronization\IDataProxy.cs" />
+    <Compile Include="DataStorage\Data\Synchronization\IStoredDataWatcher.cs" />
+    <Compile Include="DataStorage\Data\VersionUpdater\IStoredDataUpdater.cs" />
+    <Compile Include="DataStorage\Data\VersionUpdater\IVersionUpdater.cs" />
+    <Compile Include="DataStorage\Data\VersionUpdater\StoredDataUpdater.cs" />
     <Compile Include="DataBinding\BindableContext.cs" />
     <Compile Include="DataBinding\BindableObject.cs" />
     <Compile Include="DataBinding\BindableProperty.cs" />
@@ -114,7 +137,6 @@
     <Compile Include="Exceptions\DataTemplateTypeDidntCreateAPage.cs" />
     <Compile Include="Exceptions\GuacamoleUserFacingException.cs" />
     <Compile Include="Exceptions\GuacamoleWindowCantBeCreated.cs" />
-    <Compile Include="Exceptions\ImageAlreadyLoadingException.cs" />
     <Compile Include="Exceptions\ImageSourceCouldntFindFileException.cs" />
     <Compile Include="Exceptions\ImageSourceDoesntHaveAccessException.cs" />
     <Compile Include="Exceptions\ImageSourceHandlerProducedNoWrapperException.cs" />
@@ -158,16 +180,12 @@
     <Compile Include="Layouts\ILayoutChildren.cs" />
     <Compile Include="Layouts\IVirtualCell.cs" />
     <Compile Include="Layouts\VirtualCell.cs" />
-    <Compile Include="Platform\IDataStorageService.cs" />
-    <Compile Include="Platform\IMainThreadRunner.cs" />
-    <Compile Include="Platform\IPlatformProvider.cs" />
-    <Compile Include="Platform\MainThreadRunner.cs" />
+    <Compile Include="Platforms\IPlatformProvider.cs" />
+    <Compile Include="Platforms\MainThreadRunner.cs" />
+    <Compile Include="Platforms\Platform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer\INativeRenderer.cs" />
     <Compile Include="Renderer\NativeRendererHelper.cs" />
-    <Compile Include="StoredData\VersionUpdater\IStoredDataUpdater.cs" />
-    <Compile Include="StoredData\VersionUpdater\IVersionUpdater.cs" />
-    <Compile Include="StoredData\VersionUpdater\StoredDataUpdater.cs" />
     <Compile Include="Styling\Conditional.cs" />
     <Compile Include="Styling\IConditional.cs" />
     <Compile Include="Styling\ISetter.cs" />
@@ -181,16 +199,17 @@
     <Compile Include="Styling\Styles\ImageCell.cs" />
     <Compile Include="Styling\Styles\ImageView.cs" />
     <Compile Include="Styling\Styles\KeyValueCell.cs" />
-    <Compile Include="Styling\Styles\Label.cs" />
-    <Compile Include="Styling\Styles\Button.cs" />
+    <Compile Include="Styling\Styles\LabelView.cs" />
+    <Compile Include="Styling\Styles\ButtonView.cs" />
     <Compile Include="Styling\Styles\LabelCell.cs" />
     <Compile Include="Styling\Styles\ListView.cs" />
-    <Compile Include="Styling\Styles\Slider.cs" />
+    <Compile Include="Styling\Styles\SliderView.cs" />
     <Compile Include="Styling\Styles\TabbedPageButton.cs" />
+    <Compile Include="Styling\Styles\TextEntryView.cs" />
     <Compile Include="Styling\Styles\ToggleView.cs" />
     <Compile Include="Styling\Trigger.cs" />
     <Compile Include="Types\ItemSource.cs" />
-    <Compile Include="Views\Button.cs" />
+    <Compile Include="Views\ButtonView.cs" />
     <Compile Include="Views\CellHelper.cs" />
     <Compile Include="Views\ControlState.cs" />
     <Compile Include="Views\FilterView.cs" />
@@ -203,29 +222,21 @@
     <Compile Include="Views\ItemsView.BindableProperties.cs" />
     <Compile Include="Views\ItemsView.cs" />
     <Compile Include="Views\ITypeable.cs" />
-    <Compile Include="Views\Label.cs" />
+    <Compile Include="Views\LabelView.cs" />
     <Compile Include="Views\LayoutView.BindableProperties.cs" />
     <Compile Include="Views\LayoutView.cs" />
     <Compile Include="Views\ListView.BindableProperties.cs" />
     <Compile Include="Views\ListView.cs" />
     <Compile Include="Views\ListView.IListensToVdsChanges.cs" />
-    <Compile Include="Views\MasterDetailPage\ListViewMasterDetailPage.cs" />
-    <Compile Include="Views\MasterDetailPage\MasterDetailPage.cs" />
-    <Compile Include="Views\MasterDetailPage\MasterPageItem.cs" />
-    <Compile Include="Views\TabbedPage.BindableProperties.cs" />
-    <Compile Include="Views\TabbedPage.cs" />
-    <Compile Include="Views\TabbedPageButton.BindableProperties.cs" />
-    <Compile Include="Views\TabbedPageButton.cs" />
     <Compile Include="Views\ToggleView.BindableProperties.cs" />
     <Compile Include="Views\ToggleView.cs" />
     <Compile Include="Views\VdsCalculator.cs" />
     <Compile Include="Views\ListViewHelper.cs" />
-    <Compile Include="Views\NumberEntry.cs" />
-    <Compile Include="Views\Page.cs" />
+    <Compile Include="Views\NumberEntryView.cs" />
     <Compile Include="Views\SizingHelper.cs" />
-    <Compile Include="Views\Slider.cs" />
+    <Compile Include="Views\SliderView.cs" />
     <Compile Include="Views\StyleHelper.cs" />
-    <Compile Include="Views\TextEntry.cs" />
+    <Compile Include="Views\TextEntryView.cs" />
     <Compile Include="Views\View.cs" />
     <Compile Include="Views\View.BindableProperties.cs" />
     <Compile Include="Views\View.ILayoutable.cs" />
@@ -236,6 +247,10 @@
     <Compile Include="Views\Window.cs" />
     <Compile Include="WebRequestHandler\IWebRequestHandler.cs" />
     <Compile Include="WebRequestHandler\WebRequestHandler.cs" />
+    <Compile Include="WindowContext\Context.cs" />
+    <Compile Include="WindowContext\ContextCustomSerialization.cs" />
+    <Compile Include="WindowContext\ContextStorage.cs" />
+    <Compile Include="WindowContext\StoredContexts.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WellFired.Guacamole.Data\WellFired.Guacamole.Data.csproj">

@@ -1,5 +1,6 @@
 ﻿using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Layouts;
+using WellFired.Guacamole.Pages;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.CaseStudy.Taskist.View

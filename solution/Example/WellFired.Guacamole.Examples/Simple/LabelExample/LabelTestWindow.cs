@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Diagnostics;
-using WellFired.Guacamole.Platform;
+using WellFired.Guacamole.Platforms;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Examples.Simple.LabelExample
@@ -12,7 +12,7 @@ namespace WellFired.Guacamole.Examples.Simple.LabelExample
 			: base(logger, persistantData, platformProvider)
 		{
 			Padding = UIPadding.Of(5);
-		    Content = new Label { Padding = UIPadding.Of(5), Text = "Sausages" };
+		    Content = new LabelView { Padding = UIPadding.Of(5), Text = "Sausages" };
 		}
 	}
 }

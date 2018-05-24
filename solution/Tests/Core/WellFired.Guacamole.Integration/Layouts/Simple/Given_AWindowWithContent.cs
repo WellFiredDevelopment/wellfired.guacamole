@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using WellFired.Guacamole.Data;
-using WellFired.Guacamole.Platform;
+using WellFired.Guacamole.Platforms;
 using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Integration.Layouts.Simple
@@ -10,7 +10,7 @@ namespace WellFired.Guacamole.Integration.Layouts.Simple
         [Test]
         public void That_IsLayedoutTwice_Then_LayoutIsDoneCorrectly()
         {
-            var view = new Slider {
+            var view = new SliderView {
                 MinSize = UISize.Of(50, 10),
                 MaxSize = UISize.Of(100, 10),
                 MinValue = 0.0,
@@ -35,7 +35,7 @@ namespace WellFired.Guacamole.Integration.Layouts.Simple
         [Test]
         public void That_HasASpecifiedMinSize_And_IsLayedoutTwice_Then_LayoutIsDoneCorrectly()
         {
-            var view = new Slider {
+            var view = new SliderView {
                 MinSize = UISize.Of(50, 10),
                 MaxSize = UISize.Of(500, 10),
                 MinValue = 0.0,

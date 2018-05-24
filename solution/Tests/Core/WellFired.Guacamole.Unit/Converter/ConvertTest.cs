@@ -9,11 +9,11 @@ namespace WellFired.Guacamole.Unit.Converter
 		public void Test()
 		{
 			var bindableObject = new YesNoBindingContext();
-			var label = new Label { Text = "Invalid" };
+			var label = new LabelView { Text = "Invalid" };
 			Assert.That(label.Text, Is.EqualTo("Invalid"));
 
 			label.BindingContext = bindableObject;
-			label.Bind(Label.TextProperty, "YesNo", new YesNoConverter());
+			label.Bind(LabelView.TextProperty, "YesNo", new YesNoConverter());
 			Assert.That(label.Text, Is.EqualTo("no"));
 
 			bindableObject.YesNo = true;
