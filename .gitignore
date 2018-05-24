@@ -40,7 +40,6 @@ dlldata.c
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
-*.meta
 *.DS_Store
 
 /node_modules/
@@ -48,3 +47,12 @@ sysinfo.txt
 unity/.idea
 unity/Assembly-CSharp-Editor-firstpass.csproj
 unity/unity.sln
+unity/Assets/GuacamoleApplication
+unity/Assets/Test
+unity/Assets/WellFired/WellFired.Guacamole/Code
+GuacamoleApplication.meta
+Test.meta
+Assembly-CSharp-Editor.csproj
+unity/Assets/WellFired/WellFired.Shared
+unity/Assets/WellFired/WellFired.Shared.meta
+Code.meta

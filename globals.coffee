@@ -10,6 +10,11 @@ global.config = {
     basecsproj:     'solution/WellFired.Guacamole/WellFired.Guacamole.csproj',
     unityEditor:    'solution/WellFired.Guacamole.Unity.Editor/WellFired.Guacamole.Unity.Editor.csproj',
     unityRuntime:   'solution/WellFired.Guacamole.Unity.Runtime/WellFired.Guacamole.Unity.Runtime.csproj',
+    sharedTools:    [
+                        '**/AsyncBridge.Net35.*'
+                        '**/System.Threading.*'
+                        "**/WellFired.Json.Unity*"
+                    ],
     doxyConfig:     'documentation/doxyconf',
     sphinxInputDir: 'documentation/xml',
     sphinxOutputDir:'documentation/sphinx',
