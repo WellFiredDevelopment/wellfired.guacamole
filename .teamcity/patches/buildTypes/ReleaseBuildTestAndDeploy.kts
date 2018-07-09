@@ -10,6 +10,12 @@ accordingly, and delete the patch script.
 */
 changeBuildType(RelativeId("ReleaseBuildTestAndDeploy")) {
     vcs {
+
+        check(cleanCheckout == false) {
+            "Unexpected option value: cleanCheckout = $cleanCheckout"
+        }
+        cleanCheckout = true
+
         add(RelativeId("WellFiredGuacamoleMaster"))
     }
 }
