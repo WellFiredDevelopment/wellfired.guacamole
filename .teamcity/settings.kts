@@ -35,11 +35,12 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2018.1"
 
 project {
+
     vcsRoot(WellFiredGuacamoleMaster)
     vcsRoot(WellFiredGuacamoleDevelop)
 
-    buildType(ContinuousBuildAndTest)
     buildType(ReleaseBuildTestAndDeploy)
+    buildType(ContinuousBuildAndTest)
 
     template(ManualBuildTestRelease)
 
@@ -54,9 +55,139 @@ project {
             param("providerType", "GitHub")
         }
     }
-    
+
     subProject(Documentation)
 }
+
+object ContinuousBuildAndTest : BuildType({
+    templates(AbsoluteId("WellFiredUnityProduct_ContinuousBuildTestAndPublish"))
+    name = "Continuous Build And Test"
+
+    params {
+        param("ProjectName", "WellFired.Guacamole")
+        param("AssemblyVersion", "2018.0.0")
+    }
+
+    vcs {
+        root(WellFiredGuacamoleDevelop)
+    }
+
+    triggers {
+        vcs {
+            id = "vcsTrigger"
+            triggerRules = """
+                -:user=wellfiredbuildmachine:**
+                -:user=admin:**
+            """.trimIndent()
+        }
+    }
+})
+
+object ReleaseBuildTestAndDeploy : BuildType({
+    templates(ManualBuildTestRelease)
+    name = "Build Test And Release"
+
+    artifactRules = """
+        %ProjectName%.unitypackage
+        +:documentation/xml => documentation.tar.gz
+    """.trimIndent()
+    buildNumberPattern = "%AssemblyVersion%.%build.counter%"
+
+    params {
+        param("ProjectName", "WellFired.Guacamole")
+        param("AssemblyVersion", "0.0.1")
+    }
+
+    steps {
+        script {
+            name = "NPM Install"
+            id = "RUNNER_3"
+            scriptContent = "npm install"
+        }
+        step {
+            name = "NuGet Restore"
+            id = "RUNNER_4"
+            type = "jb.nuget.installer"
+            param("nuget.path", "%teamcity.tool.NuGet.CommandLine.DEFAULT%")
+            param("nuget.updatePackages.mode", "sln")
+            param("sln.path", "solution/%ProjectName%.sln")
+        }
+        msBuild {
+            name = "Build Debug"
+            id = "RUNNER_8"
+            path = "solution/%ProjectName%.sln"
+            version = MSBuildStep.MSBuildVersion.MONO_v4_5
+            toolsVersion = MSBuildStep.MSBuildToolsVersion.V4_0
+            platform = MSBuildStep.Platform.x64
+            args = "/p:Configuration=Debug"
+        }
+        script {
+            name = "Run Unit Tests"
+            id = "RUNNER_12"
+            scriptContent = "jake test:unit"
+        }
+        script {
+            name = "Run Integration Tests"
+            id = "RUNNER_14"
+            scriptContent = "jake test:integration"
+        }
+        msBuild {
+            name = "Build Release"
+            id = "RUNNER_7"
+            path = "solution/%ProjectName%.sln"
+            version = MSBuildStep.MSBuildVersion.MONO_v4_5
+            toolsVersion = MSBuildStep.MSBuildToolsVersion.V4_0
+            platform = MSBuildStep.Platform.x64
+            args = "/p:Configuration=Release"
+        }
+        script {
+            name = "Process Shared Tools"
+            id = "RUNNER_24"
+            scriptContent = "jake unity:processSharedTools"
+        }
+        script {
+            name = "Build Unity Package"
+            id = "RUNNER_13"
+            executionMode = BuildStep.ExecutionMode.RUN_ON_SUCCESS
+            scriptContent = "jake unity:package:build[unity/Assets/WellFired,%ProjectName%.unitypackage]"
+        }
+        step {
+            name = "NuGet Pack"
+            id = "RUNNER_11"
+            type = "jb.nuget.pack"
+            param("nuget.pack.specFile", """
+                solution/WellFired.Guacamole.Data/WellFired.Guacamole.Data.csproj
+                solution/WellFired.Guacamole.Drawing/WellFired.Guacamole.Drawing.csproj
+                solution/WellFired.Guacamole/WellFired.Guacamole.csproj
+                solution/WellFired.Guacamole.Unity.Editor/WellFired.Guacamole.Unity.Editor.csproj
+            """.trimIndent())
+            param("nuget.pack.output.directory", "build/packages")
+            param("nuget.pack.commandline", "-MsbuildPath /usr/lib/mono/msbuild/15.0/bin/ -verbosity detailed -IncludeReferencedProjects")
+            param("nuget.path", "%teamcity.tool.NuGet.CommandLine.DEFAULT%")
+            param("nuget.pack.as.artifact", "true")
+            param("nuget.pack.prefer.project", "true")
+        }
+        script {
+            name = "Generate Documentation"
+            id = "RUNNER_20"
+            executionMode = BuildStep.ExecutionMode.RUN_ON_SUCCESS
+            scriptContent = "jake documentation:generate"
+        }
+    }
+
+    features {
+        swabra {
+            id = "swabra"
+            forceCleanCheckout = true
+        }
+        feature {
+            id = "JetBrains.AssemblyInfo"
+            type = "JetBrains.AssemblyInfo"
+            param("file-format", "%system.build.number%")
+            param("info-format", "%system.build.number%")
+        }
+    }
+})
 
 object ManualBuildTestRelease : Template({
     name = "Build Test And Release Template"
@@ -153,19 +284,6 @@ object ManualBuildTestRelease : Template({
         }
     }
 
-    features {
-        swabra {
-            id = "swabra"
-            forceCleanCheckout = true
-        }
-        feature {
-            id = "JetBrains.AssemblyInfo"
-            type = "JetBrains.AssemblyInfo"
-            param("file-format", "%system.build.number%")
-            param("info-format", "%system.build.number%")
-        }
-    }
-    
     failureConditions {
         failOnMetricChange {
             id = "BUILD_EXT_4"
@@ -186,127 +304,6 @@ object ManualBuildTestRelease : Template({
             param("anchorBuild", "lastSuccessful")
         }
     }
-})
-
-object ContinuousBuildAndTest : BuildType({
-    templates(AbsoluteId("WellFiredUnityProduct_ContinuousBuildTestAndPublish"))
-    name = "Continuous Build And Test"
-
-    params {
-        param("ProjectName", "WellFired.Guacamole")
-        param("AssemblyVersion", "2018.0.0")
-    }
-
-    vcs {
-        root(WellFiredGuacamoleDevelop)
-    }
-
-    triggers {
-        vcs {
-            id = "vcsTrigger"
-            triggerRules = """
-                -:user=wellfiredbuildmachine:**
-                -:user=admin:**
-            """.trimIndent()
-        }
-    }
-})
-
-object ReleaseBuildTestAndDeploy : BuildType({
-    templates(ManualBuildTestRelease)
-    name = "Build Test And Release"
-
-    artifactRules = """
-        %ProjectName%.unitypackage
-        +:documentation/xml => documentation.tar.gz
-    """.trimIndent()
-    buildNumberPattern = "%AssemblyVersion%.%build.counter%"
-
-    params {
-        param("ProjectName", "WellFired.Guacamole")
-        param("AssemblyVersion", "0.0.1")
-    }
-
-    vcs {
-        root(WellFiredGuacamoleMaster)
-    }
-
-    steps {
-        script {
-            name = "NPM Install"
-            id = "RUNNER_3"
-            scriptContent = "npm install"
-        }
-        step {
-            name = "NuGet Restore"
-            id = "RUNNER_4"
-            type = "jb.nuget.installer"
-            param("nuget.path", "%teamcity.tool.NuGet.CommandLine.DEFAULT%")
-            param("nuget.updatePackages.mode", "sln")
-            param("sln.path", "solution/%ProjectName%.sln")
-        }
-        msBuild {
-            name = "Build Debug"
-            id = "RUNNER_8"
-            path = "solution/%ProjectName%.sln"
-            version = MSBuildStep.MSBuildVersion.MONO_v4_5
-            toolsVersion = MSBuildStep.MSBuildToolsVersion.V4_0
-            platform = MSBuildStep.Platform.x64
-            args = "/p:Configuration=Debug"
-        }
-        script {
-            name = "Run Unit Tests"
-            id = "RUNNER_12"
-            scriptContent = "jake test:unit"
-        }
-        script {
-            name = "Run Integration Tests"
-            id = "RUNNER_14"
-            scriptContent = "jake test:integration"
-        }
-        msBuild {
-            name = "Build Release"
-            id = "RUNNER_7"
-            path = "solution/%ProjectName%.sln"
-            version = MSBuildStep.MSBuildVersion.MONO_v4_5
-            toolsVersion = MSBuildStep.MSBuildToolsVersion.V4_0
-            platform = MSBuildStep.Platform.x64
-            args = "/p:Configuration=Release"
-        }
-        script {
-            name = "Process Shared Tools"
-            id = "RUNNER_24"
-            scriptContent = "jake unity:processSharedTools"
-        }
-        script {
-            name = "Build Unity Package"
-            id = "RUNNER_13"
-            executionMode = BuildStep.ExecutionMode.RUN_ON_SUCCESS
-            scriptContent = "jake unity:package:build[unity/Assets/WellFired,%ProjectName%.unitypackage]"
-        }
-        step {
-            name = "NuGet Pack"
-            id = "RUNNER_11"
-            type = "jb.nuget.pack"
-            param("nuget.pack.specFile", """
-                solution/WellFired.Guacamole.Data/WellFired.Guacamole.Data.csproj
-                solution/WellFired.Guacamole.Drawing/WellFired.Guacamole.Drawing.csproj
-                solution/WellFired.Guacamole/WellFired.Guacamole.csproj
-                solution/WellFired.Guacamole.Unity.Editor/WellFired.Guacamole.Unity.Editor.csproj
-            """.trimIndent())
-            param("nuget.pack.output.directory", "build/packages")
-            param("nuget.pack.commandline", "-MsbuildPath /usr/lib/mono/msbuild/15.0/bin/ -verbosity detailed -IncludeReferencedProjects")
-            param("nuget.path", "%teamcity.tool.NuGet.CommandLine.DEFAULT%")
-            param("nuget.pack.as.artifact", "true")
-            param("nuget.pack.prefer.project", "true")
-        }
-        script {
-            name = "Generate Documentation"
-            id = "RUNNER_20"
-            executionMode = BuildStep.ExecutionMode.RUN_ON_SUCCESS
-            scriptContent = "jake documentation:generate"
-        }
-    }
 
     features {
         swabra {
@@ -322,13 +319,40 @@ object ReleaseBuildTestAndDeploy : BuildType({
     }
 })
 
+object WellFiredGuacamoleDevelop : GitVcsRoot({
+    name = "WellFired.Guacamole (+all, -master)er"
+    url = "https://github.com/WellFiredDevelopment/wellfired.guacamole.git"
+    branch = "refs/heads/develop"
+    branchSpec = """
+        +:refs/heads/*
+        -:refs/heads/master
+    """.trimIndent()
+    agentCleanPolicy = GitVcsRoot.AgentCleanPolicy.ALWAYS
+    authMethod = password {
+        userName = "buildmachine@wellfired.com"
+        password = "credentialsJSON:99549e2f-03cb-476e-91d7-154304817f5e"
+    }
+})
+
+object WellFiredGuacamoleMaster : GitVcsRoot({
+    name = "WellFired.Guacamole (+master)"
+    url = "https://github.com/WellFiredDevelopment/wellfired.guacamole.git"
+    branchSpec = "+:refs/heads/(master)"
+    agentCleanPolicy = GitVcsRoot.AgentCleanPolicy.ALWAYS
+    authMethod = password {
+        userName = "buildmachine@wellfired.com"
+        password = "credentialsJSON:99549e2f-03cb-476e-91d7-154304817f5e"
+    }
+})
+
+
 object Documentation : Project({
     name = "Documentation"
 
     vcsRoot(WellFiredGuacamoleDocumentation)
 
-    buildType(DocumentationContinuousBuild)
     buildType(DocumentationReleaseBuild)
+    buildType(DocumentationContinuousBuild)
 })
 
 object DocumentationContinuousBuild : BuildType({
@@ -381,15 +405,6 @@ object DocumentationReleaseBuild : BuildType({
         }
     }
 
-    dependencies {
-        artifacts(RelativeId("ReleaseBuildTestAndDeploy")) {
-            id = "ARTIFACT_DEPENDENCY_2"
-            buildRule = lastSuccessful()
-            cleanDestination = true
-            artifactRules = "+:documentation.tar.gz!**/*=>xml"
-        }
-    }
-
     features {
         vcsLabeling {
             id = "BUILD_EXT_7"
@@ -397,6 +412,15 @@ object DocumentationReleaseBuild : BuildType({
             labelingPattern = "%dep.WellFiredUnityProduct_DotGuacamole_ReleaseBuildTestAndDeploy.env.BUILD_NUMBER%"
             successfulOnly = true
             branchFilter = ""
+        }
+    }
+
+    dependencies {
+        artifacts(ReleaseBuildTestAndDeploy) {
+            id = "ARTIFACT_DEPENDENCY_2"
+            buildRule = lastSuccessful()
+            cleanDestination = true
+            artifactRules = "+:documentation.tar.gz!**/*=>xml"
         }
     }
 })
@@ -408,31 +432,5 @@ object WellFiredGuacamoleDocumentation : GitVcsRoot({
     authMethod = password {
         userName = "WellFiredDevelopment"
         password = "credentialsJSON:dc06a2d5-db89-4121-88a8-9cff2984b59a"
-    }
-})
-
-object WellFiredGuacamoleDevelop : GitVcsRoot({
-    name = "WellFired.Guacamole (+all, -master)er"
-    url = "https://github.com/WellFiredDevelopment/wellfired.guacamole.git"
-    branch = "refs/heads/develop"
-    branchSpec = """
-        +:refs/heads/*
-        -:refs/heads/master
-    """.trimIndent()
-    agentCleanPolicy = GitVcsRoot.AgentCleanPolicy.ALWAYS
-    authMethod = password {
-        userName = "buildmachine@wellfired.com"
-        password = "credentialsJSON:99549e2f-03cb-476e-91d7-154304817f5e"
-    }
-})
-
-object WellFiredGuacamoleMaster : GitVcsRoot({
-    name = "WellFired.Guacamole (+master)"
-    url = "https://github.com/WellFiredDevelopment/wellfired.guacamole.git"
-    branchSpec = "+:refs/heads/(master)"
-    agentCleanPolicy = GitVcsRoot.AgentCleanPolicy.ALWAYS
-    authMethod = password {
-        userName = "buildmachine@wellfired.com"
-        password = "credentialsJSON:99549e2f-03cb-476e-91d7-154304817f5e"
     }
 })
