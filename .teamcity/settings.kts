@@ -3,6 +3,7 @@ import jetbrains.buildServer.configs.kotlin.v2018_1.buildFeatures.swabra
 import jetbrains.buildServer.configs.kotlin.v2018_1.buildFeatures.vcsLabeling
 import jetbrains.buildServer.configs.kotlin.v2018_1.buildSteps.MSBuildStep
 import jetbrains.buildServer.configs.kotlin.v2018_1.buildSteps.msBuild
+import jetbrains.buildServer.configs.kotlin.v2018_1.buildFeatures.nuGetPackagesIndexer
 import jetbrains.buildServer.configs.kotlin.v2018_1.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2018_1.failureConditions.BuildFailureOnMetric
 import jetbrains.buildServer.configs.kotlin.v2018_1.failureConditions.failOnMetricChange
@@ -64,6 +65,7 @@ object ContinuousBuildAndTest : BuildType({
 
     params {
         param("ProjectName", "WellFired.Guacamole")
+        param("AssemblyVersion", "2018.0.0")
     }
 
     vcs {
@@ -100,96 +102,6 @@ object ReleaseBuildTestAndDeploy : BuildType({
         root(WellFiredGuacamoleMaster)
 
         cleanCheckout = true
-    }
-
-    steps {
-        script {
-            name = "NPM Install"
-            id = "RUNNER_3"
-            scriptContent = "npm install"
-        }
-        step {
-            name = "NuGet Restore"
-            id = "RUNNER_4"
-            type = "jb.nuget.installer"
-            param("nuget.path", "%teamcity.tool.NuGet.CommandLine.DEFAULT%")
-            param("nuget.updatePackages.mode", "sln")
-            param("sln.path", "solution/%ProjectName%.sln")
-        }
-        msBuild {
-            name = "Build Debug"
-            id = "RUNNER_8"
-            path = "solution/%ProjectName%.sln"
-            version = MSBuildStep.MSBuildVersion.MONO_v4_5
-            toolsVersion = MSBuildStep.MSBuildToolsVersion.V4_0
-            platform = MSBuildStep.Platform.x64
-            args = "/p:Configuration=Debug"
-        }
-        script {
-            name = "Run Unit Tests"
-            id = "RUNNER_12"
-            scriptContent = "jake test:unit"
-        }
-        script {
-            name = "Run Integration Tests"
-            id = "RUNNER_14"
-            scriptContent = "jake test:integration"
-        }
-        msBuild {
-            name = "Build Release"
-            id = "RUNNER_7"
-            path = "solution/%ProjectName%.sln"
-            version = MSBuildStep.MSBuildVersion.MONO_v4_5
-            toolsVersion = MSBuildStep.MSBuildToolsVersion.V4_0
-            platform = MSBuildStep.Platform.x64
-            args = "/p:Configuration=Release"
-        }
-        script {
-            name = "Process Shared Tools"
-            id = "RUNNER_24"
-            scriptContent = "jake unity:processSharedTools"
-        }
-        script {
-            name = "Build Unity Package"
-            id = "RUNNER_13"
-            executionMode = BuildStep.ExecutionMode.RUN_ON_SUCCESS
-            scriptContent = "jake unity:package:build[unity/Assets/WellFired,%ProjectName%.unitypackage]"
-        }
-        step {
-            name = "NuGet Pack"
-            id = "RUNNER_11"
-            type = "jb.nuget.pack"
-            param("nuget.pack.specFile", """
-                solution/WellFired.Guacamole.Data/WellFired.Guacamole.Data.csproj
-                solution/WellFired.Guacamole.Drawing/WellFired.Guacamole.Drawing.csproj
-                solution/WellFired.Guacamole/WellFired.Guacamole.csproj
-                solution/WellFired.Guacamole.Unity.Editor/WellFired.Guacamole.Unity.Editor.csproj
-            """.trimIndent())
-            param("nuget.pack.output.directory", "build/packages")
-            param("nuget.pack.commandline", "-MsbuildPath /usr/lib/mono/msbuild/15.0/bin/ -verbosity detailed -IncludeReferencedProjects")
-            param("nuget.path", "%teamcity.tool.NuGet.CommandLine.DEFAULT%")
-            param("nuget.pack.as.artifact", "true")
-            param("nuget.pack.prefer.project", "true")
-        }
-        script {
-            name = "Generate Documentation"
-            id = "RUNNER_20"
-            executionMode = BuildStep.ExecutionMode.RUN_ON_SUCCESS
-            scriptContent = "jake documentation:generate"
-        }
-    }
-
-    features {
-        swabra {
-            id = "swabra"
-            forceCleanCheckout = true
-        }
-        feature {
-            id = "JetBrains.AssemblyInfo"
-            type = "JetBrains.AssemblyInfo"
-            param("file-format", "%system.build.number%")
-            param("info-format", "%system.build.number%")
-        }
     }
 })
 
@@ -323,8 +235,13 @@ object ManualBuildTestRelease : Template({
             param("file-format", "%system.build.number%")
             param("info-format", "%system.build.number%")
         }
+        nuGetPackagesIndexer {
+            id = "BUILD_EXT_31"
+            feed = "_Root/default"
+        }
     }
 })
+
 
 object WellFiredGuacamoleMaster : GitVcsRoot({
     name = "WellFired.Guacamole (+master)"
