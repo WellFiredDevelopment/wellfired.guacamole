@@ -1,13 +1,14 @@
 doxygen = require('./modules/doxygen')
 doxygen2sphinx = require('./modules/doxygen2sphinx/doxygen2sphinx')
-globals = require('../globals')
-wtask = require('../globals').wtask
+wtask = require('./tasks').wtask
+
 
 namespace 'documentation', ->
     
     desc 'Generates our API documentation using doxygen'
     wtask 'generate', { async: true }, (c) ->
-        runner = new doxygen globals.config().doxyConfig
+        doxyConf = config.doxyConfig || 'documentation/doxyconf'
+        runner = new doxygen doxyConf
 
         runner.on 'data', (data) ->
             WellFired.info data
@@ -23,7 +24,11 @@ namespace 'documentation', ->
 
     desc 'Converts our API documentation from doxygen format into a format that sphinx understands'
     wtask 'convert', { async: true }, (c) ->
-        runner = new doxygen2sphinx globals.config().sphinxInputDir, globals.config().sphinxOutputDir, globals.config().sphinxProjectName
+        sphinxInputDir = config.sphinxInputDir || 'documentation/xml'
+        sphinxOutputDir = config.sphinxOutputDir || 'documentation/sphinx'
+        sphinxProjectName = config.sphinxProjectName || 'Invalid'
+
+        runner = new doxygen2sphinx sphinxInputDir, sphinxOutputDir, sphinxProjectName
 
         runner.on 'data', (data) ->
             WellFired.info data

@@ -34,9 +34,9 @@ class WellFired
         jake.logger.error(chalk.red(message.format(args)))
 
     fail: (message) ->
-        fail(chalk.red(message))
+        fail('\n' + chalk.red(message)) # There is a bug in the Jake Runner just now that requires a newline on Fail, it assumes a callstack
     failF: (message, args) ->
-        fail(message.format(args))
+        fail('\n' + message.format(args)) # There is a bug in the Jake Runner just now that requires a newline on Fail, it assumes a callstack
 
 
     logStart: (task) ->
@@ -78,9 +78,7 @@ class WellFired
             return false
         
         switch platform.toLowerCase()
-            when 'android' then return true
             when 'editor'  then return true
-            when 'ios'     then return true
             else 
                 @errorF('Unrecognised platform {0}.', process.env.platform)
                 return false

@@ -2,8 +2,7 @@ dgram  = require('dgram');
 utils = require('./modules/utils')
 unitypackage = require('./modules/unitypackage')
 stringformat = require('string-format')
-wtask = require('../globals').wtask
-globals = require('../globals')
+wtask = require('./tasks').wtask
 
 
 namespace 'unity', ->
@@ -40,23 +39,33 @@ namespace 'unity', ->
     desc 'Move shared libraries to WellFired/Shared.'
     wtask 'processSharedTools', { async: true }, ->
 
-      unityAssets = globals.config().unityAssets
-      projectName = globals.config().name
-      sharedTools = globals.config().sharedTools
+        unityAssets = config.unityAssets || 'unity/Assets'
+        projectName = config.name
+        sharedTools = config.sharedTools || []
 
-      cleanerLibs = utils.find("#{ unityAssets }/WellFired/#{ projectName }", { matching: ["**/WellFired.Broom*"] })
-      utils.move "#{file}", "#{ unityAssets }/WellFired/WellFired.Shared/Editor/#{utils.getFileName(file)}" for file in cleanerLibs
+        if sharedTools.length == 0
+            WellFired.info 'No shared tools to process'
+        else
+            cleanerLibs = utils.find("#{ unityAssets }/WellFired/#{ projectName }", { matching: ["**/WellFired.Broom*"] })
+            utils.move "#{file}", "#{ unityAssets }/WellFired/WellFired.Shared/Editor/#{utils.getFileName(file)}" for file in cleanerLibs
 
-      files = utils.find("#{ unityAssets }/WellFired/#{ projectName }", { matching: sharedTools })
+            files = utils.find("#{ unityAssets }/WellFired/#{ projectName }", { matching: sharedTools })
 
-      runtimeFiles = files.filter((file) -> !file.includes("/Editor/"))
-      utils.move "#{file}", "#{ unityAssets }/WellFired/WellFired.Shared/#{utils.getFileName(file)}" for file in runtimeFiles
+            runtimeFiles = files.filter((file) -> !file.includes("/Editor/"))
+            utils.move "#{file}", "#{ unityAssets }/WellFired/WellFired.Shared/#{utils.getFileName(file)}" for file in runtimeFiles
 
-      editorFiles = files.filter((file) -> file.includes("/Editor/"))
-      utils.move "#{file}", "#{ unityAssets }/WellFired/WellFired.Shared/Editor/#{utils.getFileName(file)}" for file in editorFiles
+            editorFiles = files.filter((file) -> file.includes("/Editor/"))
+            utils.move "#{file}", "#{ unityAssets }/WellFired/WellFired.Shared/Editor/#{utils.getFileName(file)}" for file in editorFiles
     
-      complete()
+        complete()
 
+
+    desc 'Move changelog.txt to the unity project'
+    wtask 'updateChangelog', { async: true }, ->
+        changelogFile = config.changelog || 'changelog.txt'
+        unityAssets = config.unityAssets || 'unity/Assets'
+
+        utils.copy changelogFile, "#{unityAssets}/WellFired/#{config.name}/#{utils.getFileName(changelogFile)}", {clean: true}
 
     namespace 'package', ->
 
