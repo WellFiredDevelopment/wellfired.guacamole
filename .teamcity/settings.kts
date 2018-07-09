@@ -203,10 +203,6 @@ object ManualBuildTestRelease : Template({
         param("AssemblyVersion", "2018.0.0")
     }
 
-    vcs {
-        root(WellFiredGuacamoleMaster)
-    }
-
     steps {
         script {
             name = "NPM Install"
