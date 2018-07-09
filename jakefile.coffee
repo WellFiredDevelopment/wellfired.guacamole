@@ -1,4 +1,5 @@
 require('string-format')
+require('./config')
 
 jake.addListener 'start', ->
     jake.logger.log('\n{0} jake file starting ...'.format(config.name))

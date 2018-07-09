@@ -1,7 +1,6 @@
 xbuild = require('./modules/xbuild')
 utils = require('./modules/utils')
-globals = require('../globals')
-wtask = require('../globals').wtask
+wtask = require('./tasks').wtask
 
 
 namespace 'core', ->     
@@ -16,11 +15,12 @@ namespace 'core', ->
 
 
     build = (c, t) ->
-
-        config = utils.getConfig(c, 'debug', 'release')
+        buildConfig = utils.getConfig(c, 'debug', 'release')
         target = if t == 'r' or t == 'rebuild' then 'Rebuild' else 'Build'
 
-        xb = new xbuild globals.config().slnPath, target, config
+        slnPath = config.slnPath || "solution/#{config.name}.sln"
+
+        xb = new xbuild slnPath, target, buildConfig
 
         xb.on 'data', (data) ->
             WellFired.info data
@@ -32,3 +32,33 @@ namespace 'core', ->
             complete()
 
         xb.run()
+
+    desc 'Update version number, eg. [2018.1.0]'
+    wtask 'updateversion', { async: true }, (ver) ->
+        if !ver?
+            WellFired.error 'Requires version to be provided, eg. [2018.1.0]'
+            return
+
+        UpdateChangeLog ver
+        UpdateTCSetting ver
+
+        complete()
+
+    UpdateChangeLog = (version) ->
+        regex = /\nVersion ([0-9]+\.[0-9]+\.[0-9]+(?:[a-zA-Z-+][a-zA-Z0-9-\.:]*)?)\n/
+        logFileLocation = config.changelog || 'changelog.txt'
+        logFile = utils.read logFileLocation
+        currentVersion = regex.exec(logFile);
+
+        if version != currentVersion[1]
+            logFile = logFile.slice(0, currentVersion.index) + "\nVersion #{version}\n\n##### Tell the world what changed in this new version ! #####\n\n" +
+            logFile.slice(currentVersion.index + 1)
+            utils.write(logFileLocation, logFile)
+        else
+            WellFired.fail 'Version number is the same'
+
+    UpdateTCSetting = (version) ->
+        tcConfigFileLocation = config.tcConfigFile || '.teamcity/settings.kts'
+        tcConfigFile = utils.read tcConfigFileLocation
+        tcConfigFile = tcConfigFile.replace(/param\("AssemblyVersion", ".*"\)/g, "param(\"AssemblyVersion\", \"#{ version}\")")
+        utils.write(tcConfigFileLocation, tcConfigFile)

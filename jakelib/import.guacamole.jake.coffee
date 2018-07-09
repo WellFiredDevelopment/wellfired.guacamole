@@ -1,5 +1,5 @@
 utils = require('./modules/utils')
-wtask = require('../globals').wtask
+wtask = require('./tasks').wtask
 
 namespace 'guacamole', ->     
 
