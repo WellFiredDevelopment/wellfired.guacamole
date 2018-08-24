@@ -1,15 +1,19 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using WellFired.Guacamole.Attributes;
 using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Platforms;
 using WellFired.Guacamole.Unity.Editor.Extensions;
+using WellFired.Guacamole.Unity.Editor.NativeControls.Cells;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
 
+[assembly: CustomRenderer(typeof(Cell), typeof(BaseCellRenderer))]
+
 namespace WellFired.Guacamole.Unity.Editor.NativeControls.Cells
 {
-	public abstract class BaseCellRenderer : BaseRenderer
+	public class BaseCellRenderer : BaseRenderer
 	{
 		public override void Render(UIRect renderRect)
 		{

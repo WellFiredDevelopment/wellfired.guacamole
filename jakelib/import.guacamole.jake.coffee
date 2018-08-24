@@ -9,7 +9,7 @@ namespace 'guacamole', ->
             "!**/WellFired.Guacamole.Examples.*"
         ]
 
-    codeLocation = 'unity/Assets/Code/Editor'
+    codeLocation = 'unity/Assets/WellFired/WellFired.Guacamole/Code/Editor'
     defaultDestination = '../wellfired.peek/unity/Assets/WellFired/WellFired.Shared/Editor'
 
     desc 'Copy guacamole libraries to the specified path'
