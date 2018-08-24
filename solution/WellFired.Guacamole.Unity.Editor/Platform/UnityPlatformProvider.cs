@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 using UnityEditor;
+using UnityEngine;
 using WellFired.Guacamole.DataStorage.Storages;
 using WellFired.Guacamole.Platforms;
 
@@ -44,8 +45,6 @@ namespace WellFired.Guacamole.Unity.Editor.Platform
 
 		public string[] FindAssets(string search)
 		{
-			AssetDatabase.FindAssets(search);
-
 			var assetsPath = AssetDatabase.FindAssets(search).Select(AssetDatabase.GUIDToAssetPath)
 				.Select(path => ProjectPath + "/" + path);
 
@@ -53,5 +52,12 @@ namespace WellFired.Guacamole.Unity.Editor.Platform
 		}
 
 		public bool PlatformHasFocus => EditorWindow.focusedWindow != null;
+		
+		public void SelectAsset(string assetPath)
+		{
+			var objectToSelect = AssetDatabase.LoadAssetAtPath<Object>(assetPath);
+			if (objectToSelect != null)
+				Selection.activeObject = objectToSelect;
+		}
 	}
 }

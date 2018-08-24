@@ -69,5 +69,11 @@ namespace WellFired.Guacamole.Platforms
 		/// Indicate if the platform application is focused or not.
 		/// </summary>
 		bool PlatformHasFocus { get; }
+
+		/// <summary>
+		/// This method allows to select a specific asset in the project.
+		/// </summary>
+		/// <param name="assetPath"></param>
+		void SelectAsset(string assetPath);
 	}
 }
