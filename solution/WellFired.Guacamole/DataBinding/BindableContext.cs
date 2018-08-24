@@ -108,9 +108,9 @@ namespace WellFired.Guacamole.DataBinding
 				_propertySetMethod.Invoke(Object, new[] {converted});
 				return true;
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-				throw new SetValueFromDestException(_bindableObject, Property.PropertyName, _targetProperty, value);
+				throw new SetValueFromDestException(_bindableObject, Property.PropertyName, _targetProperty, value, e);
 			}
 		}
 
@@ -134,9 +134,9 @@ namespace WellFired.Guacamole.DataBinding
 				_propertySetMethod?.Invoke(Object, new[] {value});
 				return true;
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-				throw new SetValueFromSourceException(_bindableObject, Property.PropertyName, _targetProperty, value);
+				throw new SetValueFromSourceException(_bindableObject, Property.PropertyName, _targetProperty, value, e);
 			}
 		}
 	}
