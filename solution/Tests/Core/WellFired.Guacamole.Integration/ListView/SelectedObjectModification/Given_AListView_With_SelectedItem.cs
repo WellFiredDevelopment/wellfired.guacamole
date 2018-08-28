@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.ComponentModel;
+using System.Linq;
 using NUnit.Framework;
 using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.Data;
@@ -60,6 +61,15 @@ namespace WellFired.Guacamole.Integration.ListView.SelectedObjectModification
 			listView.SelectedItem = null;
 			
 			Assert.That(listView.Children.Cast<Cell>().Count(o => o.IsSelected), Is.EqualTo(0));
+			
+			listView.SelectedItems.Add(data[0][0]);
+			listView.SelectedItems.Add(data[0][1]);
+			
+			Assert.That(listView.Children.Cast<Cell>().Count(o => o.IsSelected), Is.EqualTo(2));
+			
+			listView.SelectedItems.Remove(data[0][1]);
+			
+			Assert.That(listView.Children.Cast<Cell>().Count(o => o.IsSelected), Is.EqualTo(1));
 		}
 		
 		[Test]
@@ -91,8 +101,8 @@ namespace WellFired.Guacamole.Integration.ListView.SelectedObjectModification
 			ViewSizingExtensions.DoSizingAndLayout(listView, UIRect.With(1000, 1000));
 
 			var boundObject = new ListBoundObject();
-			
 			listView.Bind(Views.ListView.SelectedItemProperty, "SelectedItem", BindingMode.TwoWay);
+			listView.Bind(Views.ListView.SelectedItemsProperty, "SelectedItems", BindingMode.TwoWay);
 			listView.BindingContext = boundObject;
 			
 			Assert.That(listView.Children.Cast<Cell>().Count(o => o.IsSelected), Is.EqualTo(0));
@@ -100,9 +110,30 @@ namespace WellFired.Guacamole.Integration.ListView.SelectedObjectModification
 			boundObject.SelectedItem = data[1][1];
 			
 			Assert.That(listView.Children.Cast<Cell>().Count(o => o.IsSelected), Is.EqualTo(1));
+			Assert.That(boundObject.SelectedItems.Count, Is.EqualTo(1));
+			Assert.That(boundObject.SelectedItems[0], Is.EqualTo(boundObject.SelectedItem));
 			
 			boundObject.SelectedItem = null;
 			
+			Assert.That(listView.Children.Cast<Cell>().Count(o => o.IsSelected), Is.EqualTo(0));
+			
+			boundObject.SelectedItems.Add(data[0][0]);
+			
+			Assert.That(listView.Children.Cast<LabelCell>().Where(o => o.IsSelected).Select(o => o.Text), 
+				Is.EquivalentTo(new []{"Amelia"}));
+			
+			boundObject.SelectedItems.Add(data[1][0]);
+			boundObject.SelectedItems.Add(data[1][1]);
+			
+			Assert.That(listView.Children.Cast<LabelCell>().Where(o => o.IsSelected).Select(o => o.Text), 
+				Is.EquivalentTo(new []{"Amelia", "Brooke", "Bobby"}));
+
+			boundObject.SelectedItems.Remove(data[1][1]);
+			
+			Assert.That(listView.Children.Cast<LabelCell>().Where(o => o.IsSelected).Select(o => o.Text), 
+				Is.EquivalentTo(new []{"Amelia", "Brooke"}));
+
+			boundObject.SelectedItems = null;
 			Assert.That(listView.Children.Cast<Cell>().Count(o => o.IsSelected), Is.EqualTo(0));
 		}
 	}
@@ -110,6 +141,7 @@ namespace WellFired.Guacamole.Integration.ListView.SelectedObjectModification
 	public class ListBoundObject : ObservableBase, IDefaultCellContext
 	{
 		private object _selectedItem;
+		private ObservableCollection<INotifyPropertyChanged> _selectedItems;
 		private bool _isSelected;
 		private string _cellLabelText;
 
@@ -117,6 +149,12 @@ namespace WellFired.Guacamole.Integration.ListView.SelectedObjectModification
 		{
 			get => _selectedItem;
 			set => SetProperty(ref _selectedItem, value);
+		}
+
+		public ObservableCollection<INotifyPropertyChanged> SelectedItems
+		{
+			get => _selectedItems;
+			set => SetProperty(ref _selectedItems, value);
 		}
 
 		public bool IsSelected { 

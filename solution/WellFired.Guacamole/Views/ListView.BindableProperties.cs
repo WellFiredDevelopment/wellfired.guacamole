@@ -2,7 +2,7 @@
 using WellFired.Guacamole.Data;
 using JetBrains.Annotations;
 using WellFired.Guacamole.DataBinding;
-using WellFired.Guacamole.Cells;
+using WellFired.Guacamole.Data.Collection;
 
 namespace WellFired.Guacamole.Views
 {
@@ -14,10 +14,22 @@ namespace WellFired.Guacamole.Views
             v => v.Spacing
         );
         
+        [PublicAPI] public static readonly BindableProperty CanMultiSelectProperty = BindableProperty.Create<ListView, bool>(
+            false,
+            BindingMode.TwoWay,
+            v => v.CanMultiSelect
+        );
+        
         [PublicAPI] public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create<ListView, INotifyPropertyChanged>(
             default(INotifyPropertyChanged),
             BindingMode.TwoWay,
             v => v.SelectedItem
+        );
+        
+        [PublicAPI] public static readonly BindableProperty SelectedItemsProperty = BindableProperty.Create<ListView, ObservableCollection<INotifyPropertyChanged>>(
+            default(ObservableCollection<INotifyPropertyChanged>),
+            BindingMode.TwoWay,
+            v => v.SelectedItems
         );
         
         [PublicAPI] public static readonly BindableProperty EntrySizeProperty = BindableProperty.Create<ListView, int>(
@@ -110,6 +122,14 @@ namespace WellFired.Guacamole.Views
             get => (int) GetValue(SpacingProperty);
             set => SetValue(SpacingProperty, value);
         }
+        
+        
+        [PublicAPI]
+        public bool CanMultiSelect
+        {
+            get => (bool) GetValue(CanMultiSelectProperty);
+            set => SetValue(CanMultiSelectProperty, value);
+        }
 
         [PublicAPI]
         public INotifyPropertyChanged SelectedItem
@@ -118,25 +138,11 @@ namespace WellFired.Guacamole.Views
             set => SetValue(SelectedItemProperty, value);
         }
 
-        /// <summary>
-        /// Migrates the Selected Items Status to all Children.
-        /// </summary>
-        private void SetSelectedItem()
+        [PublicAPI]
+        public ObservableCollection<INotifyPropertyChanged> SelectedItems
         {
-            var selectedItem = SelectedItem;
-            foreach (var itemSource in CompositeCollection)
-            {
-                if (!(itemSource is ISelectableCell))
-                    continue;
-
-                var cellBindingContextBase = itemSource as ISelectableCell;
-                if (cellBindingContextBase.IsSelected)
-                    cellBindingContextBase.IsSelected = false;
-                if (cellBindingContextBase.Equals(selectedItem))
-                    cellBindingContextBase.IsSelected = true;
-            }
-
-            OnItemSelected(this, new SelectedItemChangedEventArgs(selectedItem));
+            get => (ObservableCollection<INotifyPropertyChanged>) GetValue(SelectedItemsProperty);
+            set => SetValue(SelectedItemsProperty, value);
         }
 
         /// <summary>
@@ -193,7 +199,7 @@ namespace WellFired.Guacamole.Views
             {
                 var viewSize = SizingHelper.GetImportantSize(Orientation, RectRequest);
                 var clampedValue = ListViewHelper.ClampScroll(viewSize,  TotalContentSize, value);
-
+        
                 if (!SetValue(ScrollOffsetProperty, clampedValue)) 
                     return;
                 

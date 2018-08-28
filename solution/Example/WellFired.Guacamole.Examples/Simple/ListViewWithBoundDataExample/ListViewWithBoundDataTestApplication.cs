@@ -12,7 +12,7 @@ namespace WellFired.Guacamole.Examples.Simple.ListViewWithBoundDataExample
         private static void OpenWindow()
         {
             Launch<ListViewWithBoundDataTestWindow>(
-                uiRect: UIRect.With(50, 50, 200, 600),
+                uiRect: UIRect.With(50, 50, 600, 600),
                 minSize: UISize.Of(200, 600),
                 title: "ListViewWithBoundDataTest");
         }

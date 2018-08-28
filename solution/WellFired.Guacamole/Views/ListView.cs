@@ -23,6 +23,8 @@ namespace WellFired.Guacamole.Views
     /// </summary>
     public partial class ListView : ItemsView, IListView
     {
+        private readonly ItemSelector _itemSelector;
+        
         // This is our currently displayed VDS
         private List<int> _visualDataSet = new List<int>();
         
@@ -52,6 +54,9 @@ namespace WellFired.Guacamole.Views
         public ListView()
         {
             Style = Styling.Styles.ListView.Style;
+
+            _itemSelector = new ItemSelector(this);
+            _itemSelector.ResetSelectedItems();
         }
 
         /// <summary>
@@ -187,13 +192,16 @@ namespace WellFired.Guacamole.Views
             var replacedCell = _activeCells.FirstOrDefault(o => Equals(o.BindingContext, oldItem));
             CellHelper.ReUseCell(replacedCell, newItem);
         }
-
+        
         protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(sender, e);
-
+            
             if (e.PropertyName == SelectedItemProperty.PropertyName)
-                SetSelectedItem();
+                _itemSelector.SelectItem();
+
+            if (e.PropertyName == SelectedItemsProperty.PropertyName)
+                _itemSelector.RegisterNewSelectedItems();
 
             if (e.PropertyName != AvailableSpaceProperty.PropertyName) 
                 return;
@@ -215,6 +223,8 @@ namespace WellFired.Guacamole.Views
             CalculateVisualDataSet();
         }
         
+        
+
         /// <summary>
         /// This methods works internally and mathmatically to work out which indicies this list should be rendering. We will
         /// generate a list of indiciest o display and compare this to our previous update, if anything needs adding or removing

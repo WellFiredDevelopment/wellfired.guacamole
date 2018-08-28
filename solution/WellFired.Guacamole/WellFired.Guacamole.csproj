@@ -219,6 +219,7 @@
     <Compile Include="Views\IListView.cs" />
     <Compile Include="Views\ImageView.BindableProperties.cs" />
     <Compile Include="Views\ImageView.cs" />
+    <Compile Include="Views\ListView.ItemSelector.cs" />
     <Compile Include="Views\ItemsView.BindableProperties.cs" />
     <Compile Include="Views\ItemsView.cs" />
     <Compile Include="Views\ITypeable.cs" />
