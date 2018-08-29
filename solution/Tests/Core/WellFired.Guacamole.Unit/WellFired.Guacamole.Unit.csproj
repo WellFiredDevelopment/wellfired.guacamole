@@ -85,6 +85,8 @@
     <Compile Include="Converter\Default\BackingStore.cs" />
     <Compile Include="Converter\Default\BindableObjectWithNullableProperty.cs" />
     <Compile Include="Converter\Default\Given_TheDefaultConverter.cs" />
+    <Compile Include="Converter\PlurialBindingContext.cs" />
+    <Compile Include="Converter\PlurialConverter.cs" />
     <Compile Include="Converter\YesNoBindingContext.cs" />
     <Compile Include="Converter\YesNoConverter.cs" />
     <Compile Include="Drawing\ImageData\Given_AnImageParameters.cs" />

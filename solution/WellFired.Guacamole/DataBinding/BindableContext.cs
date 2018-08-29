@@ -9,15 +9,16 @@ namespace WellFired.Guacamole.DataBinding
 {
 	public class BindableContext
 	{
-		private static IValueConverter _defaultConverter = new ValueConverter(); 
+		private static readonly IValueConverter DefaultConverter = new ValueConverter(); 
 		
-		private INotifyPropertyChanged _bindableObject;
-		private MethodInfo _propertyGetMethod;
-		private PropertyInfo _propertyInfo;
-		private MethodInfo _propertySetMethod;
-		private string _targetProperty;
+		/// <summary>
+		/// View property which is bound to the VM.
+		/// </summary>
 		public BindableProperty Property;
 
+		/// <summary>
+		/// This is the property on the VM
+		/// </summary>
 		public string TargetProperty
 		{
 			get => _targetProperty;
@@ -28,8 +29,14 @@ namespace WellFired.Guacamole.DataBinding
 			}
 		}
 
+		/// <summary>
+		/// This is the value set on the view or sent to the VM after being converted.
+		/// </summary>
 		public object Value { private set; get; }
 
+		/// <summary>
+		/// Object is the backing store (VM)
+		/// </summary>
 		public INotifyPropertyChanged Object
 		{
 			private get { return _bindableObject; }
@@ -40,17 +47,31 @@ namespace WellFired.Guacamole.DataBinding
 			}
 		}
 
+		/// <summary>
+		/// This describe in which way the VM and View are bound. If it is not specified, the bindable property default
+		/// <see cref="BindingMode"/> is used.
+		/// </summary>
 		public BindingMode InstancedBindingMode
 		{
-			get; 
+			get;
 			set;
 		}
 
+		/// <summary>
+		/// This can be specify to apply a custom conversion to the value. If not specified, the default <see cref="ValueConverter"/>
+		/// is used.
+		/// </summary>
 		public IValueConverter InstancedConverter
 		{
 			get; 
 			set;
 		}
+		
+		private INotifyPropertyChanged _bindableObject;
+		private MethodInfo _propertyGetMethod;
+		private PropertyInfo _propertyInfo;
+		private MethodInfo _propertySetMethod;
+		private string _targetProperty;
 
 		private void ConfigureSet()
 		{
@@ -89,7 +110,7 @@ namespace WellFired.Guacamole.DataBinding
 				if (Equals(Value, value))
 					return false;
 				
-				Value = _defaultConverter.Convert(value, Property.PropertyType, null, CultureInfo.CurrentCulture);		
+				Value = DefaultConverter.Convert(value, Property.PropertyType, null, CultureInfo.CurrentCulture);		
 				switch (InstancedBindingMode)
 				{
 					case BindingMode.OneWay:
@@ -124,12 +145,12 @@ namespace WellFired.Guacamole.DataBinding
 		{
 			try
 			{
-				if (Equals(Value, value))
+				var converter = InstancedConverter ?? DefaultConverter;
+				var convertedValue = converter.ConvertBack(value, Property.PropertyType, null, CultureInfo.CurrentCulture);
+				if (Equals(Value, convertedValue))
 					return false;
 
-				var converter = InstancedConverter ?? _defaultConverter;
-
-				Value = converter.ConvertBack(value, Property.PropertyType, null, CultureInfo.CurrentCulture);
+				Value = convertedValue;
 
 				_propertySetMethod?.Invoke(Object, new[] {value});
 				return true;
