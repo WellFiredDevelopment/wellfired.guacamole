@@ -67,9 +67,9 @@ namespace WellFired.Guacamole.Views
 		    view.Render(relativeParentRect);
 		}
 
-		protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+		protected override void OnViewPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
-			base.OnPropertyChanged(sender, e);
+			base.OnViewPropertyChanged(sender, e);
 
 		    var view = Content as View;
 

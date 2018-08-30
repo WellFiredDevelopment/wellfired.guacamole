@@ -94,7 +94,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			GUI.SetNextControlName(Control.Id);
 		}
 
-		public virtual void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+		public virtual void OnViewPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
 			if (e.PropertyName == View.CornerRadiusProperty.PropertyName ||
 			    e.PropertyName == View.OutlineColorProperty.PropertyName ||

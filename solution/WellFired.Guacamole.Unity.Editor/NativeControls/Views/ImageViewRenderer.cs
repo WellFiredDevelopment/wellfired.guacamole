@@ -29,9 +29,9 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
                 GUI.DrawTexture(UnityRect, _texture, ScaleMode.ScaleToFit);
         }
 
-        public override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        public override void OnViewPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            base.OnPropertyChanged(sender, e);
+            base.OnViewPropertyChanged(sender, e);
 
             if (e.PropertyName != ImageView.ImageSourceProperty.PropertyName)
                 return;

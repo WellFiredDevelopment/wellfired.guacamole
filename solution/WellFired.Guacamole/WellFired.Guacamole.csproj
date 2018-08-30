@@ -124,7 +124,6 @@
     <Compile Include="DataBinding\Exceptions\SetValueFromSourceException.cs" />
     <Compile Include="DataBinding\IBasicViewModel.cs" />
     <Compile Include="DataBinding\IBindableObject.cs" />
-    <Compile Include="DataBinding\NotifyBase.cs" />
     <Compile Include="DataBinding\ObservableBase.cs" />
     <Compile Include="DataBinding\ReflectExt.cs" />
     <Compile Include="DataBinding\SelectedItemChangedEventArgs.cs" />

@@ -3,7 +3,7 @@ using WellFired.Guacamole.DataBinding;
 
 namespace WellFired.Guacamole.Integration.View.Slider.Bindable
 {
-	public class SliderContextObject : NotifyBase
+	public class SliderContextObject : ObservableBase
 	{
 		private double _maxValue;
 		private double _minValue;

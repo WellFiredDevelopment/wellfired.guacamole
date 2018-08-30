@@ -3,7 +3,7 @@ using WellFired.Guacamole.DataBinding;
 
 namespace WellFired.Guacamole
 {
-	public class Command : NotifyBase, ICommand
+	public class Command : ObservableBase, ICommand
 	{
 		public delegate bool CanExecuteDelegate();
 

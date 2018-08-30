@@ -12,43 +12,40 @@ namespace WellFired.Guacamole.DataBinding
 		private static readonly IValueConverter DefaultConverter = new ValueConverter(); 
 		
 		/// <summary>
-		/// View property which is bound to the VM.
+		/// This is the property on the destination side.
 		/// </summary>
-		public BindableProperty Property;
+		public BindableProperty BindableProperty;
 
-		/// <summary>
-		/// This is the property on the VM
-		/// </summary>
-		public string TargetProperty
+		public string SourceProperty
 		{
-			get => _targetProperty;
+			get => _sourcePropertyName;
 			set
 			{
-				_targetProperty = value;
+				_sourcePropertyName = value;
 				ConfigureSet();
 			}
 		}
 
 		/// <summary>
-		/// This is the value set on the view or sent to the VM after being converted.
+		/// This is the current value of the destination property.
 		/// </summary>
 		public object Value { private set; get; }
 
 		/// <summary>
-		/// Object is the backing store (VM)
+		/// This is the source object destination is bound to.
 		/// </summary>
-		public INotifyPropertyChanged Object
+		public INotifyPropertyChanged SourceObject
 		{
-			private get { return _bindableObject; }
+			private get { return _sourceObject; }
 			set
 			{
-				_bindableObject = value;
+				_sourceObject = value;
 				ConfigureSet();
 			}
 		}
 
 		/// <summary>
-		/// This describe in which way the VM and View are bound. If it is not specified, the bindable property default
+		/// This describe in which way the source and destination are bound. If it is not specified, the bindable property default
 		/// <see cref="BindingMode"/> is used.
 		/// </summary>
 		public BindingMode InstancedBindingMode
@@ -67,38 +64,38 @@ namespace WellFired.Guacamole.DataBinding
 			set;
 		}
 		
-		private INotifyPropertyChanged _bindableObject;
-		private MethodInfo _propertyGetMethod;
-		private PropertyInfo _propertyInfo;
-		private MethodInfo _propertySetMethod;
-		private string _targetProperty;
+		private INotifyPropertyChanged _sourceObject;
+		private MethodInfo _srcPropertyGetMethod;
+		private PropertyInfo _srcPropertyInfo;
+		private MethodInfo _srcPropertySetMethod;
+		private string _sourcePropertyName;
 
 		private void ConfigureSet()
 		{
-			if (Object == null || Property == null || TargetProperty == null)
+			if (SourceObject == null || BindableProperty == null || SourceProperty == null)
 			{
-				_propertyInfo = null;
-				_propertySetMethod = null;
+				_srcPropertyInfo = null;
+				_srcPropertySetMethod = null;
 			}
 			else
 			{
-				var type = Object.GetType();
-				_propertyInfo = type.GetProperty(TargetProperty, BindingFlags.Public | BindingFlags.Instance);
+				var type = SourceObject.GetType();
+				_srcPropertyInfo = type.GetProperty(SourceProperty, BindingFlags.Public | BindingFlags.Instance);
 
-				if (_propertyInfo == null)
-					throw new PropertyNotFoundException(Property.PropertyName, type.Name, TargetProperty);
-				_propertySetMethod = _propertyInfo.GetSetMethod();
-				_propertyGetMethod = _propertyInfo.GetGetMethod();
+				if (_srcPropertyInfo == null)
+					throw new PropertyNotFoundException(BindableProperty.PropertyName, type.Name, SourceProperty);
+				_srcPropertySetMethod = _srcPropertyInfo.GetSetMethod();
+				_srcPropertyGetMethod = _srcPropertyInfo.GetGetMethod();
 			}
 		}
 
 		public object GetValue()
 		{
-			return _propertyGetMethod == null ? Value : _propertyGetMethod?.Invoke(Object, null);
+			return _srcPropertyGetMethod == null ? Value : _srcPropertyGetMethod?.Invoke(SourceObject, null);
 		}
 
 		/// <summary>
-		/// In this context, dest would typically be the UI (View)
+		/// This is called when the value on the destination was changed (In a VMMV context it would be the View).
 		/// </summary>
 		/// <param name="value"></param>
 		/// <returns></returns>
@@ -110,7 +107,7 @@ namespace WellFired.Guacamole.DataBinding
 				if (Equals(Value, value))
 					return false;
 				
-				Value = DefaultConverter.Convert(value, Property.PropertyType, null, CultureInfo.CurrentCulture);		
+				Value = DefaultConverter.Convert(value, BindableProperty.PropertyType, null, CultureInfo.CurrentCulture);		
 				switch (InstancedBindingMode)
 				{
 					case BindingMode.OneWay:
@@ -122,21 +119,21 @@ namespace WellFired.Guacamole.DataBinding
 						throw new ArgumentOutOfRangeException();
 				}
 	
-				if (_propertySetMethod == null)
+				if (_srcPropertySetMethod == null)
 					return true; // We return true here because we've got far enough to set our Value, even if we don't have a _propertySetMethod. Which means we're probably not bound to anything
 	
-				var converted = InstancedConverter != null ? InstancedConverter.Convert(value, _propertyInfo.PropertyType, null, CultureInfo.CurrentCulture) : value;
-				_propertySetMethod.Invoke(Object, new[] {converted});
+				var converted = InstancedConverter != null ? InstancedConverter.Convert(value, _srcPropertyInfo.PropertyType, null, CultureInfo.CurrentCulture) : value;
+				_srcPropertySetMethod.Invoke(SourceObject, new[] {converted});
 				return true;
 			}
 			catch (Exception e)
 			{
-				throw new SetValueFromDestException(_bindableObject, Property.PropertyName, _targetProperty, value, e);
+				throw new SetValueFromDestException(_sourceObject, BindableProperty.PropertyName, _sourcePropertyName, value, e);
 			}
 		}
 
 		/// <summary>
-		/// In this context, source would typically be the backing store (VM)
+		/// This is called when the value on the source was changed (In a VMMV context it would be the VM).
 		/// </summary>
 		/// <param name="value"></param>
 		/// <exception cref="SetValueFromSourceException"></exception>
@@ -146,18 +143,18 @@ namespace WellFired.Guacamole.DataBinding
 			try
 			{
 				var converter = InstancedConverter ?? DefaultConverter;
-				var convertedValue = converter.ConvertBack(value, Property.PropertyType, null, CultureInfo.CurrentCulture);
+				var convertedValue = converter.ConvertBack(value, BindableProperty.PropertyType, null, CultureInfo.CurrentCulture);
 				if (Equals(Value, convertedValue))
 					return false;
 
 				Value = convertedValue;
 
-				_propertySetMethod?.Invoke(Object, new[] {value});
+				_srcPropertySetMethod?.Invoke(SourceObject, new[] {value});
 				return true;
 			}
 			catch (Exception e)
 			{
-				throw new SetValueFromSourceException(_bindableObject, Property.PropertyName, _targetProperty, value, e);
+				throw new SetValueFromSourceException(_sourceObject, BindableProperty.PropertyName, _sourcePropertyName, value, e);
 			}
 		}
 	}

@@ -2,7 +2,7 @@
 
 namespace WellFired.Guacamole.Integration.View.TabbedPage.Bindable
 {
-	public class ContextObject : NotifyBase
+	public class ContextObject : ObservableBase
 	{
 		private string _selectedPage;
 

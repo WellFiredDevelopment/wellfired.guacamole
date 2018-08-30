@@ -111,9 +111,9 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			_wasFocused = isFocused;
 		}
 
-		public override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+		public override void OnViewPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
-			base.OnPropertyChanged(sender, e);
+			base.OnViewPropertyChanged(sender, e);
 
 			var entry = (TextEntryView)Control;
 

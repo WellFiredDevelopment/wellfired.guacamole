@@ -193,9 +193,9 @@ namespace WellFired.Guacamole.Views
             CellHelper.ReUseCell(replacedCell, newItem);
         }
         
-        protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override void OnViewPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            base.OnPropertyChanged(sender, e);
+            base.OnViewPropertyChanged(sender, e);
             
             if (e.PropertyName == SelectedItemProperty.PropertyName)
                 _itemSelector.SelectItem();

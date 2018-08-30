@@ -50,9 +50,9 @@ namespace WellFired.Guacamole.Views
                 (child as View)?.InvalidateRectRequest();
         }
 
-        protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override void OnViewPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            base.OnPropertyChanged(sender, e);
+            base.OnViewPropertyChanged(sender, e);
 
             if (e.PropertyName == ChildrenProperty.PropertyName || e.PropertyName == BindingContextProperty.PropertyName)
                 SetupChildBindingContext();
