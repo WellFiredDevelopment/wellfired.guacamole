@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.Exceptions;
 using WellFired.Guacamole.FileSystem;
@@ -19,16 +20,32 @@ namespace WellFired.Guacamole.Image
 
         public Action<LoadedImage> OnComplete { get; set; } = delegate {};
 
+        public UIPadding? NineSliceDefinition { get; }
+
         private ImageSource(string location, IFileSystem fileSystem)
         {
             _cancellationTokenSource = new CancellationTokenSource();
             _handler = new FileSourceHandler(location, fileSystem);
         }
 
+        private ImageSource(string location, UIPadding nineSliceDefinition, IFileSystem fileSystem)
+        {
+            _cancellationTokenSource = new CancellationTokenSource();
+            _handler = new FileSourceHandler(location, fileSystem);
+            NineSliceDefinition = nineSliceDefinition;
+        }
+
         private ImageSource(Uri location, IWebRequestHandler webRequestHandler)
         {   
             _cancellationTokenSource = new CancellationTokenSource();
             _handler = new UriSourceHandler(location, webRequestHandler);
+        }
+
+        private ImageSource(Uri location, UIPadding nineSliceDefinition, IWebRequestHandler webRequestHandler)
+        {
+            _cancellationTokenSource = new CancellationTokenSource();
+            _handler = new UriSourceHandler(location, webRequestHandler);
+            NineSliceDefinition = nineSliceDefinition;
         }
 
         private ImageSource(Stream stream)
@@ -94,8 +111,9 @@ namespace WellFired.Guacamole.Image
         /// The image passed should be a per platform image location, see the documentation for your desired platform for more information.
         /// </summary>
         /// <param name="location"></param>
-        /// <param name="fileSystem"></param>
+        /// <param name="fileSystem">An optional IFileSystem can be used if you require custom behaviour</param>
         /// <returns></returns>
+        [PublicAPI]
         public static IImageSource From(string location, IFileSystem fileSystem = default(IFileSystem))
         {
             if (fileSystem == default(IFileSystem))
@@ -105,11 +123,30 @@ namespace WellFired.Guacamole.Image
         }
 
         /// <summary>
+        /// The image passed should be a per platform image location, see the documentation for your desired platform for more information.
+        /// Users can provide Nine Slice Data if needed when loading a texture from disk. I.E. We have a texture of 64 x 64, but decide to slice at (2,2) -> (62, 62),
+        /// you would use UIPadding.Of(6)
+        /// </summary>
+        /// <param name="location"></param>
+        /// <param name="nineSliceDefinition"></param>
+        /// <param name="fileSystem">An optional IFileSystem can be used if you require custom behaviour</param>
+        /// <returns></returns>
+        [PublicAPI]
+        public static IImageSource From(string location, UIPadding nineSliceDefinition, IFileSystem fileSystem = default(IFileSystem))
+        {
+            if (fileSystem == default(IFileSystem))
+                fileSystem = new FileSystem.FileSystem();
+            
+            return new ImageSource(location, nineSliceDefinition, fileSystem);
+        }
+
+        /// <summary>
         /// Here you can pass a URI to load an image from. Any URI should be valid.
         /// </summary>
         /// <param name="location"></param>
         /// <param name="webRequestHandler"></param>
         /// <returns></returns>
+        [PublicAPI]
         public static IImageSource From(Uri location, IWebRequestHandler webRequestHandler = default(IWebRequestHandler))
         {
             if(webRequestHandler == default(IWebRequestHandler))
@@ -119,10 +156,29 @@ namespace WellFired.Guacamole.Image
         }
 
         /// <summary>
+        /// Here you can pass a URI to load an image from. Any URI should be valid.
+        /// Users can provide Nine Slice Data if needed when loading a texture from disk. I.E. We have a texture of 64 x 64, but decide to slice at (2,2) -> (62, 62),
+        /// you would use UIPadding.Of(6)
+        /// </summary>
+        /// <param name="location"></param>
+        /// <param name="nineSliceDefinition"></param>
+        /// <param name="webRequestHandler">An optional IWebRequestHandler can be used if you require custom behaviour</param>
+        /// <returns></returns>
+        [PublicAPI]
+        public static IImageSource From(Uri location, UIPadding nineSliceDefinition, IWebRequestHandler webRequestHandler = default(IWebRequestHandler))
+        {
+            if(webRequestHandler == default(IWebRequestHandler))
+                webRequestHandler = new WebRequestHandler.WebRequestHandler();
+            
+            return new ImageSource(location, nineSliceDefinition, webRequestHandler);
+        }
+
+        /// <summary>
         /// Load an image from a stream.
         /// </summary>
         /// <param name="stream"></param>
         /// <returns></returns>
+        [PublicAPI]
         public static IImageSource From(Stream stream)
         {
             return new ImageSource(stream);
@@ -135,6 +191,7 @@ namespace WellFired.Guacamole.Image
         /// <param name="thickness"></param>
         /// <param name="color"></param>
         /// <returns></returns>
+        [PublicAPI]
         public static IImageSource From(ImageShape imageShape, double thickness, UIColor color)
         {
             return new ImageSource(new ImageShapeDefinition { Shape = imageShape, Size = 64, Color = color, OutlineColor = color, Thickness = thickness });
@@ -148,6 +205,7 @@ namespace WellFired.Guacamole.Image
         /// <param name="color"></param>
         /// <param name="outlineColor"></param>
         /// <returns></returns>
+        [PublicAPI]
         public static IImageSource From(ImageShape imageShape, double thickness, UIColor color, UIColor outlineColor)
         {
             return new ImageSource(new ImageShapeDefinition { Shape = imageShape, Size = 64, Color = color, OutlineColor = outlineColor, Thickness = thickness });

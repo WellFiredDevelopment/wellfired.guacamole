@@ -19,6 +19,9 @@ namespace WellFired.Guacamole.Examples.Simple.ImageViewExample
 				// Display an image from the hard drive.
 				ImageSource = ImageSource.From(platformProvider.PathToPersonalData("Images/doge.jpg"))
 				
+				// Display a nine-sliced image
+				//ImageSource = ImageSource.From(platformProvider.PathToPersonalData("Images/sliced.jpg"), UIPadding.Of(53))
+				
 				// Display a programmatic image
 				//ImageSource = ImageSource.From(ImageShape.Circle, UIColor.Blue, UIColor.Black)
 				

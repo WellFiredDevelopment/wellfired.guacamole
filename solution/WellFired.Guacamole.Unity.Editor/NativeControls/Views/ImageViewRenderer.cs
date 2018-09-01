@@ -14,8 +14,13 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 {
     public class ImageViewRenderer : BaseRenderer
     {
-        private Texture _texture;
+        private Texture2D _texture;
         private readonly ImageLoader _imageLoader = new ImageLoader();
+
+        private bool _isNineSlice;
+        private bool _instantiateNineSliceData;
+        private GUIStyle _nineSliceStyle;
+        private UIPadding _nineSliceRect;
 
         public override UISize? NativeSize => _texture == null ? UISize.Zero : Style.CalcSize(new GUIContent(_texture)).ToUISize();
 
@@ -24,8 +29,32 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
             base.Render(renderRect);
 			
             EditorGUI.LabelField(UnityRect, "", Style);
-            
-            if(_texture != null)
+
+            if (_texture == null) 
+                return;
+
+            if (_isNineSlice)
+            {
+                // Instantiation must happen in Unity's UI thread, so we need to postpone this from the load ASync process
+                if (_instantiateNineSliceData)
+                {
+                    _instantiateNineSliceData = false;
+                    _nineSliceStyle = new GUIStyle(Style) {
+                        focused = {background = _texture},
+                        active = {background = _texture},
+                        normal = {background = _texture},
+                        hover = {background = _texture},
+                        border = new RectOffset(
+                            _nineSliceRect.Left,
+                            _nineSliceRect.Top,
+                            _nineSliceRect.Right,
+                            _nineSliceRect.Bottom)
+                    };
+                }
+                
+                EditorGUI.LabelField(UnityRect, "", _nineSliceStyle);
+            }
+            else
                 GUI.DrawTexture(UnityRect, _texture, ScaleMode.ScaleToFit);
         }
 
@@ -48,8 +77,17 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			
             if (texture == default(Texture2D)) 
                 return;
-				
+            
             _texture = texture;
+            _isNineSlice = false;
+
+            var nineSliceDefinition = imageSource.NineSliceDefinition;
+            if (!nineSliceDefinition.HasValue) 
+                return;
+
+            _isNineSlice = true;
+            _instantiateNineSliceData = true;
+            _nineSliceRect = nineSliceDefinition.Value;
         }
     }
 }

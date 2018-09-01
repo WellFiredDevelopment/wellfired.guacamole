@@ -25,6 +25,12 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 		private Texture2D _offTexture;
 		private Texture2D _currentTexture;
 		public override UISize? NativeSize => UISize.Of(18);
+		
+		private bool _instantiateNineSliceData;
+		private UIPadding _nineSliceRect;
+		
+		private UIPadding? _onNineSliceRect;
+		private UIPadding? _offNineSliceRect;
 
 		public override void Create()
 		{
@@ -58,6 +64,16 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 				if(controlState == ControlState.Disabled)
 					toggleView.ControlState = ControlState.Normal;
 			}
+
+			if (_instantiateNineSliceData)
+			{
+				_instantiateNineSliceData = false;
+				Style.border = new RectOffset(
+					_nineSliceRect.Left,
+					_nineSliceRect.Top,
+					_nineSliceRect.Right,
+					_nineSliceRect.Bottom);
+			}
 			
 			if (!GUI.Button(UnityRect, _currentTexture, Style))
 				return;
@@ -70,9 +86,9 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			base.OnViewPropertyChanged(sender, e);
 			
 			var toggleView = (ToggleView)Control;
-			
-			if(e.PropertyName == ToggleView.OnProperty.PropertyName)
-				_currentTexture = toggleView.On ? _onTexture : _offTexture;
+
+			if (e.PropertyName == ToggleView.OnProperty.PropertyName)
+				UpdateCurrentTexture(toggleView);
 
 			if (e.PropertyName == ToggleView.OnImageSourceProperty.PropertyName)
 				TaskEx.Run(() => UpdateTexture(ToggleState.On));
@@ -97,11 +113,35 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			if(onState)
 				_onTexture = texture;
 			else
-			{
 				_offTexture = texture;
-			}
-				
+
+			if (onState)
+				_onNineSliceRect = imageSource.NineSliceDefinition;
+			else
+				_offNineSliceRect = imageSource.NineSliceDefinition;
+
+			UpdateCurrentTexture(toggleView);
 			_currentTexture = toggleView.On ? _onTexture : _offTexture;
+		}
+
+		private void UpdateCurrentTexture(ToggleView toggleView)
+		{
+			var previousTexture = _currentTexture;
+			_currentTexture = toggleView.On ? _onTexture : _offTexture;
+
+			if (previousTexture == _currentTexture)
+				return;
+
+			if (toggleView.On && _onNineSliceRect.HasValue)
+			{
+				_instantiateNineSliceData = true;
+				_nineSliceRect = _onNineSliceRect.Value;	
+			}
+			else if (!toggleView.On && _offNineSliceRect.HasValue)
+			{
+				_instantiateNineSliceData = true;
+				_nineSliceRect = _offNineSliceRect.Value;	
+			}
 		}
 	}
 }
