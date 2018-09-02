@@ -106,6 +106,10 @@
     <Compile Include="View\TextEntry\Bindable\HorizontalTextAlignTests.cs" />
     <Compile Include="View\TextEntry\Bindable\TextTests.cs" />
     <Compile Include="View\TextEntry\Bindable\VerticalTextAlignTests.cs" />
+    <Compile Include="View\ViewContent\Binding\BindingTests.cs" />
+    <Compile Include="View\ViewContent\Binding\ContextObject.cs" />
+    <Compile Include="View\ViewContent\ContentEnabledTests.cs" />
+    <Compile Include="View\ViewContent\NotifyPropertyChangedTests.cs" />
     <Compile Include="View\View\Bindable\BackgroundColorTests.cs" />
     <Compile Include="View\View\Bindable\ContextObject.cs" />
     <Compile Include="View\View\Bindable\ControlStateTests.cs" />
