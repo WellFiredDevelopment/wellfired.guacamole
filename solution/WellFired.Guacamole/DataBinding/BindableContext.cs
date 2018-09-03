@@ -160,7 +160,7 @@ namespace WellFired.Guacamole.DataBinding
 		
 		private object GetValueFromSource()
 		{
-			var value = _srcPropertyGetMethod?.Invoke(SourceObject, null);
+			var value = _srcPropertyGetMethod.Invoke(SourceObject, null);
 			var converter = InstancedConverter ?? DefaultConverter;
 			return converter.ConvertBack(value, BindableProperty.PropertyType, null, CultureInfo.CurrentCulture);
 		}
