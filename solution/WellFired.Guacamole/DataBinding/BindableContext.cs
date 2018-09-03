@@ -70,6 +70,11 @@ namespace WellFired.Guacamole.DataBinding
 		private MethodInfo _srcPropertySetMethod;
 		private string _sourcePropertyName;
 
+		public BindableContext(object initialValue)
+		{
+			Value = initialValue;
+		}
+
 		private void ConfigureSet()
 		{
 			if (SourceObject == null || BindableProperty == null || SourcePropertyName == null)
@@ -87,17 +92,6 @@ namespace WellFired.Guacamole.DataBinding
 				_srcPropertySetMethod = _srcPropertyInfo.GetSetMethod();
 				_srcPropertyGetMethod = _srcPropertyInfo.GetGetMethod();
 			}
-		}
-
-		private object GetValue()
-		{
-			if (_srcPropertyGetMethod == null) 
-				return Value;
-			
-			var value = _srcPropertyGetMethod?.Invoke(SourceObject, null);
-			var converter = InstancedConverter ?? DefaultConverter;
-			return converter.ConvertBack(value, BindableProperty.PropertyType, null, CultureInfo.CurrentCulture);
-
 		}
 
 		/// <summary>
@@ -137,16 +131,6 @@ namespace WellFired.Guacamole.DataBinding
 				throw new SetValueFromDestException(SourceObject, BindableProperty.PropertyName, _sourcePropertyName, value, e);
 			}
 		}
-		
-		/// <summary>
-		/// This initialize the value of the source. It is called before binding occurs.
-		/// </summary>
-		/// <param name="value"></param>
-		public void InitializeSourceValue(object value)
-		{
-			Value = value;
-			SetValueFromSource();
-		}
 
 		/// <summary>
 		/// This is called when the value on the source was changed (In a VMMV context it would be the VM).
@@ -159,7 +143,7 @@ namespace WellFired.Guacamole.DataBinding
 			
 			try
 			{
-				value = GetValue();
+				value = GetValueFromSource();
 				
 				if (Equals(Value, value))
 					return false;
@@ -172,6 +156,13 @@ namespace WellFired.Guacamole.DataBinding
 			{
 				throw new SetValueFromSourceException(SourceObject, BindableProperty.PropertyName, SourcePropertyName, value, e);
 			}
+		}
+		
+		private object GetValueFromSource()
+		{
+			var value = _srcPropertyGetMethod?.Invoke(SourceObject, null);
+			var converter = InstancedConverter ?? DefaultConverter;
+			return converter.ConvertBack(value, BindableProperty.PropertyType, null, CultureInfo.CurrentCulture);
 		}
 	}
 }
