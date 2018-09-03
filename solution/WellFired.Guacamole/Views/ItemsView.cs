@@ -130,9 +130,9 @@ namespace WellFired.Guacamole.Views
             }
         }
 
-        protected override void OnViewPropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override void OnBindablePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            base.OnViewPropertyChanged(sender, e);
+            base.OnBindablePropertyChanged(sender, e);
 
             if (e.PropertyName == ItemSourceProperty.PropertyName)
             {
