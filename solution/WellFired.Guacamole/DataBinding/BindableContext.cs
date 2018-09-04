@@ -111,7 +111,6 @@ namespace WellFired.Guacamole.DataBinding
 				switch (InstancedBindingMode)
 				{
 					case BindingMode.OneWay:
-					case BindingMode.ReadOnly:
 						return false;
 					case BindingMode.TwoWay:
 						break;
