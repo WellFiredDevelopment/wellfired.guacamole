@@ -56,7 +56,6 @@ namespace WellFired.Guacamole.Views
             Style = Styling.Styles.ListView.Style;
 
             _itemSelector = new ItemSelector(this);
-            _itemSelector.ResetSelectedItems();
         }
 
         /// <summary>
