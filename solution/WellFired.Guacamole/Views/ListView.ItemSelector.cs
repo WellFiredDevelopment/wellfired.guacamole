@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.Data.Collection;
@@ -10,7 +11,14 @@ namespace WellFired.Guacamole.Views
 	{
 		private readonly IListView _listView;
 
-		private ObservableCollection<INotifyPropertyChanged> _selectedItems;
+		private ObservableCollection<INotifyPropertyChanged> _previousObservableCollection;
+		
+		
+		/// <summary>
+		/// ObservableCollection Clear() does not send event with removed items for performance reason to our CollectionChanged event.
+		/// This is why we keep a reference to items that needs to be unselected. 
+		/// </summary>
+		private readonly List<INotifyPropertyChanged> _selectedItems = new List<INotifyPropertyChanged>();
 
 		public ItemSelector(IListView listView)
 		{
@@ -19,55 +27,45 @@ namespace WellFired.Guacamole.Views
 
 		public void SelectItem()
 		{
-			//ObservableCollection Clear() does not send event with removed items for performance reason. This is why we set elements
-			//manually before to clear the list.
-			foreach (INotifyPropertyChanged item in _listView.SelectedItems)
-			{
-				if (item is ISelectableCell selectableCell)
-					selectableCell.IsSelected = false;
-			}
-
-			_listView.SelectedItems.Clear();
+			_listView.SelectedItems?.Clear();
 
 			if (_listView.SelectedItem == null)
 				return;
 
-			_listView.SelectedItems.Add(_listView.SelectedItem);
-
-			if (_listView.SelectedItem is ISelectableCell selectedCell)
-				selectedCell.IsSelected = true;
-		}
-
-		public void RegisterNewSelectedItems()
-		{
 			if (_listView.SelectedItems == null)
 			{
-				ResetSelectedItems();
-				return;
+				_listView.SelectedItems = new ObservableCollection<INotifyPropertyChanged>();
 			}
+			
+			_listView.SelectedItems.Add(_listView.SelectedItem);
+		}
 
-			if (_selectedItems != null)
+		/// <summary>
+		/// Called when the observable collection of selected items is replaced by a new one
+		/// </summary>
+		public void RegisterNewSelectedItems()
+		{
+			UnselectPreviousItems();
+			
+			if (_previousObservableCollection != null)
 			{
-				foreach (INotifyPropertyChanged item in _selectedItems)
-				{
-					if (item is ISelectableCell cell)
-						cell.IsSelected = false;
-				}
+				_previousObservableCollection.CollectionChanged -= SelectedItems_OnCollectionChanged;
 			}
+			
+			_previousObservableCollection = _listView.SelectedItems;
 
-			_selectedItems = _listView.SelectedItems;
-
-			foreach (INotifyPropertyChanged item in _listView.SelectedItems)
+			if (_listView.SelectedItems == null)
+				return;
+			
+			_listView.SelectedItems.CollectionChanged += SelectedItems_OnCollectionChanged;			
+			
+			CopySelectedItems();
+			
+			foreach (var item in _listView.SelectedItems)
 			{
 				if (item is ISelectableCell cell)
 					cell.IsSelected = true;
 			}
-		}
-
-		public void ResetSelectedItems()
-		{
-			_listView.SelectedItems = new ObservableCollection<INotifyPropertyChanged>();
-			_listView.SelectedItems.CollectionChanged += SelectedItems_OnCollectionChanged;
 		}
 
 		private void SelectedItems_OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -87,6 +85,8 @@ namespace WellFired.Guacamole.Views
 								cell.IsSelected = true;
 							}
 
+							_selectedItems.Add((INotifyPropertyChanged) item);
+							
 							_listView.OnItemSelected(_listView, new SelectedItemChangedEventArgs(item));
 						}
 					}
@@ -97,6 +97,8 @@ namespace WellFired.Guacamole.Views
 						{
 							if (item is ISelectableCell cell)
 								cell.IsSelected = false;
+							
+							_selectedItems.Remove((INotifyPropertyChanged) item);
 						}
 					}
 
@@ -104,10 +106,32 @@ namespace WellFired.Guacamole.Views
 				case NotifyCollectionChangedAction.Move:
 					break;
 				case NotifyCollectionChangedAction.Reset:
+					UnselectPreviousItems();
 					break;
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
+		}
+
+		private void CopySelectedItems()
+		{
+			_selectedItems.Clear();
+			
+			foreach (var item in _listView.SelectedItems)
+			{
+				_selectedItems.Add(item);
+			}
+		}
+
+		private void UnselectPreviousItems()
+		{
+			foreach (var item in _selectedItems)
+			{
+				if (item is ISelectableCell cell)
+					cell.IsSelected = false;
+			}
+			
+			_selectedItems.Clear();
 		}
 	}
 }

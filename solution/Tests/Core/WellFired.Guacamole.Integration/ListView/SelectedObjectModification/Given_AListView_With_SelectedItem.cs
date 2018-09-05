@@ -25,7 +25,7 @@ namespace WellFired.Guacamole.Integration.ListView.SelectedObjectModification
 		}
 		
 		[Test]
-		public void When_SelectedItemIsSetToNull_Then_NoLongerSelected()
+		public void When_Items_Are_Selected_FromView_Then_RightCell_Are_Selected()
 		{
 			var data = new ObservableCollection<Group> 
 			{
@@ -73,7 +73,7 @@ namespace WellFired.Guacamole.Integration.ListView.SelectedObjectModification
 		}
 		
 		[Test]
-		public void When_BoundToAnObjectAndSelectedItemIsSetToNull_Then_NoLongerSelected()
+		public void When_Items_Are_Selected_FromContext_Then_RightCell_Are_Selected()
 		{
 			var data = new ObservableCollection<Group> 
 			{
@@ -134,6 +134,12 @@ namespace WellFired.Guacamole.Integration.ListView.SelectedObjectModification
 				Is.EquivalentTo(new []{"Amelia", "Brooke"}));
 
 			boundObject.SelectedItems = null;
+			Assert.That(listView.Children.Cast<Cell>().Count(o => o.IsSelected), Is.EqualTo(0));
+
+			boundObject.SelectedItems = new ObservableCollection<INotifyPropertyChanged> {data[1][0], data[1][1]};
+			Assert.That(listView.Children.Cast<Cell>().Count(o => o.IsSelected), Is.EqualTo(2));
+			
+			boundObject.SelectedItems.Clear();
 			Assert.That(listView.Children.Cast<Cell>().Count(o => o.IsSelected), Is.EqualTo(0));
 		}
 	}
