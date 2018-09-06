@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using UnityEngine;
 using WellFired.Guacamole.Data;
+using WellFired.Guacamole.Platforms;
 using WellFired.Guacamole.Renderer;
 using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Views;
@@ -78,11 +79,12 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 						newControlState = ControlState.Normal;
 				}
 
+
 				if (UnityEngine.Event.current.rawType == EventType.MouseUp && controlState != ControlState.Normal)
 					newControlState = ControlState.Normal;
 
 				if (controlState != newControlState)
-					Control.ControlState = newControlState;
+					MainThreadRunner.ExecuteBeforeLayout(() => Control.ControlState = newControlState);
 			}
 
 			var thickness = (int) Control.OutlineThickness;
