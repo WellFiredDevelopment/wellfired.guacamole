@@ -34,6 +34,8 @@ namespace WellFired.Guacamole.Views
 
 			if (_listView.SelectedItems == null)
 			{
+				//Ensure you don't listen to the list here, the bindable object already take care of it when
+				//this property change.
 				_listView.SelectedItems = new ObservableCollection<INotifyPropertyChanged>();
 			}
 			
