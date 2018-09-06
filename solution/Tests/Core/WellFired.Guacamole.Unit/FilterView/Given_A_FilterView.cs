@@ -50,7 +50,7 @@ namespace WellFired.Guacamole.Unit.FilterView
 			Assert.That(contextObject.KeyValueSearch, Is.EquivalentTo(filterView.KeyValueSearch));
 		}
 		
-		private class ContextObject : NotifyBase
+		private class ContextObject : ObservableBase
 		{
 			private List<string> _simpleSearch;
 			private Dictionary<string, string> _keyValueSearch;

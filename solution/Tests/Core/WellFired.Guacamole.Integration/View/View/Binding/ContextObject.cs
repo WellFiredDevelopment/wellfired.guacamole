@@ -2,7 +2,7 @@
 
 namespace WellFired.Guacamole.Integration.View.View.Binding
 {
-	public class ContextObject : NotifyBase
+	public class ContextObject : ObservableBase
 	{
 		
 	}

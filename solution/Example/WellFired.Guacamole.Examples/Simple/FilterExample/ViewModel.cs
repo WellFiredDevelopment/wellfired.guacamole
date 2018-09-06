@@ -4,7 +4,7 @@ using WellFired.Guacamole.DataBinding;
 
 namespace WellFired.Guacamole.Examples.Simple.FilterExample
 {
-	public class ViewModel : NotifyBase
+	public class ViewModel : ObservableBase
 	{
 		private List<string> _simpleSearch;
 		private Dictionary<string, string> _keyValueSearch;

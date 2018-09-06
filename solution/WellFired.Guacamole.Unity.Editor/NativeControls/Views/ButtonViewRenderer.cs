@@ -62,9 +62,9 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			Style.normal.textColor = button.TextColor.ToUnityColor();
 		}
 
-		public override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+		public override void OnViewPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
-			base.OnPropertyChanged(sender, e);
+			base.OnViewPropertyChanged(sender, e);
 			
 			var button = (ButtonView)Control;
 			if (e.PropertyName == ButtonView.HorizontalTextAlignProperty.PropertyName || e.PropertyName == ButtonView.VerticalTextAlignProperty.PropertyName)

@@ -9,9 +9,9 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 {
 	public class FilterViewViewRenderer : TextEntryViewRenderer
 	{
-		public override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+		public override void OnViewPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
-			base.OnPropertyChanged(sender, e);
+			base.OnViewPropertyChanged(sender, e);
 			
 			var control = (FilterView) Control;
 			if (e.PropertyName == TextEntryView.TextProperty.PropertyName)

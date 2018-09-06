@@ -3,7 +3,7 @@ using WellFired.Guacamole.DataBinding;
 
 namespace WellFired.Guacamole.Integration.View.Button.Bindable
 {
-	public class ButtonContextObject : NotifyBase
+	public class ButtonContextObject : ObservableBase
 	{
 		private ICommand _buttonPressedCommand;
 		private UITextAlign _horizontalTextAlign;

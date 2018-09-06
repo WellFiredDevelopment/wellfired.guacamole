@@ -3,7 +3,7 @@ using WellFired.Guacamole.DataBinding;
 
 namespace WellFired.Guacamole.Integration.View.NumberEntry.Bindable
 {
-	public class NumberEntryContextObject : NotifyBase
+	public class NumberEntryContextObject : ObservableBase
 	{
 		private UITextAlign _horizontalTextAlign;
 		private float _number;

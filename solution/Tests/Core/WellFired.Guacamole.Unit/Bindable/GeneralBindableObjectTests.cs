@@ -22,7 +22,7 @@ namespace WellFired.Guacamole.Unit.Bindable
 			}
 		}
 
-		private class FirstContext : NotifyBase
+		private class FirstContext : ObservableBase
 		{
 			private object _currentValue;
 
@@ -33,7 +33,7 @@ namespace WellFired.Guacamole.Unit.Bindable
 			}
 		}
 		
-		private class SecondContext : NotifyBase
+		private class SecondContext : ObservableBase
 		{
 			private object _currentValue;
 

@@ -3,7 +3,7 @@ using WellFired.Guacamole.DataBinding;
 
 namespace WellFired.Guacamole.Integration.View.Label.Bindable
 {
-	public class LabelContextObject : NotifyBase
+	public class LabelContextObject : ObservableBase
 	{
 		private UITextAlign _horizontalTextAlign;
 		private string _text;

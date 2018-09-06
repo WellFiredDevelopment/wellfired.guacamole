@@ -2,7 +2,7 @@
 
 namespace WellFired.Guacamole.Integration.View.Page.Bindable
 {
-	public class ContextObject : NotifyBase
+	public class ContextObject : ObservableBase
 	{
 		private string _title;
 

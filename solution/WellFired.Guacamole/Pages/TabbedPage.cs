@@ -166,9 +166,9 @@ namespace WellFired.Guacamole.Pages
                 (layoutable as View)?.SetStyleDictionary(styleDictionary);
         }
 
-        protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override void OnBindablePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            base.OnPropertyChanged(sender, e);
+            base.OnBindablePropertyChanged(sender, e);
 
             if (e.PropertyName == SelectedPageProperty.PropertyName)
                 Selected(SelectedPage);

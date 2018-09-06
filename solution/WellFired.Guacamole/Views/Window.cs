@@ -66,17 +66,6 @@ namespace WellFired.Guacamole.Views
 			// ReSharper disable once PossibleNullReferenceException
 		    view.Render(relativeParentRect);
 		}
-
-		protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
-		{
-			base.OnPropertyChanged(sender, e);
-
-		    var view = Content as View;
-
-		    if (e.PropertyName == BindingContextProperty.PropertyName)
-			    // ReSharper disable once PossibleNullReferenceException
-			    view.BindingContext = BindingContext;
-		}
 		
 		public void SetContent(IView content)
 		{

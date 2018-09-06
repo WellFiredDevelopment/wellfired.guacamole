@@ -29,9 +29,9 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Cells
                 GUI.DrawTexture(UnityRect, _texture, ScaleMode.ScaleToFit);
         }
 
-        public override async void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        public override async void OnViewPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            base.OnPropertyChanged(sender, e);
+            base.OnViewPropertyChanged(sender, e);
 
             var imageCell = (ImageCell) Control;
             if (e.PropertyName != ImageCell.ImageSourceProperty.PropertyName)

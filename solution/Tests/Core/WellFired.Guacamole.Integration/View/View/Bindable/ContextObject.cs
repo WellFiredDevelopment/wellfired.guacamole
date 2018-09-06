@@ -4,7 +4,7 @@ using WellFired.Guacamole.Views;
 
 namespace WellFired.Guacamole.Integration.View.View.Bindable
 {
-	public class ContextObject : NotifyBase
+	public class ContextObject : ObservableBase
 	{
 		private UIColor _backgroundColor;
 		private ControlState _controlState;

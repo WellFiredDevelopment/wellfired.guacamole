@@ -21,7 +21,7 @@ namespace WellFired.Guacamole.Unit.Bindable
 			}
 		}
 
-		private class ContextObject : NotifyBase
+		private class ContextObject : ObservableBase
 		{
 			private string _currentValue = string.Empty;
 

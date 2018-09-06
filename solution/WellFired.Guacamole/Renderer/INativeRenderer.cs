@@ -11,7 +11,7 @@ namespace WellFired.Guacamole.Renderer
 
 		void Create();
 		void Render(UIRect renderRect);
-		void OnPropertyChanged(object sender, PropertyChangedEventArgs e);
+		void OnViewPropertyChanged(object sender, PropertyChangedEventArgs e);
 		void FocusControl();
 		
 		/// <summary>
