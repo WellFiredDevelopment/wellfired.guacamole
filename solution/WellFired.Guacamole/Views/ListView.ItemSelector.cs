@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.Data.Collection;
 using WellFired.Guacamole.DataBinding;
