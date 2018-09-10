@@ -7,7 +7,6 @@ using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.Data;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.Exceptions;
-using WellFired.Guacamole.Layouts;
 
 namespace WellFired.Guacamole.Views
 {
@@ -71,6 +70,14 @@ namespace WellFired.Guacamole.Views
 
         protected override void ItemSourceChanged()
         {
+            ScrollOffset = 0;
+            InitialOffset = 0;
+
+            RecalculateDisplayedChildren();
+        }
+
+        private void RecalculateDisplayedChildren()
+        {
             FigureOutGroup();
             
             Children.Clear();
@@ -79,14 +86,15 @@ namespace WellFired.Guacamole.Views
                 Cache(cell);
             
             _activeCells.Clear();
-            _visualDataSet = new List<int>();
+
+            _visualDataSet.Clear();
             ReCalculateTotalContentSize();
-            
-            ScrollOffset = 0;
-            InitialOffset = 0;
 
             var viewSize = SizingHelper.GetImportantSize(Orientation, RectRequest);
             CanScroll = viewSize < TotalContentSize;
+            
+            // We do this here to reclamp the scroll value in case item being removed place us outside of the scrolling limits.
+            ScrollOffset = CanScroll ? ScrollOffset : 0;
             
             if (TotalContentSize <= 0) 
                 return;
@@ -121,65 +129,12 @@ namespace WellFired.Guacamole.Views
 
         protected override void ItemAdded(object item, int index)
         {
-            var headerAdded = 0;
-            var itemAdded = 0;
-            
-            if (item is ICollection)
-            {
-                _headersCount++;
-                headerAdded = 1;
-            }
-            else
-            {
-                _itemsCount++;
-                itemAdded = 1;
-            }
-
-            ReCalculateTotalContentSize();
-            var viewSize = SizingHelper.GetImportantSize(Orientation, RectRequest);
-            CanScroll = viewSize < TotalContentSize;
-
-            if (CanScroll)
-            {
-                if (_visualDataSet.Count > 0 && _visualDataSet[0] >= index)
-                {
-                    var spacing = (headerAdded + itemAdded) * Spacing;
-                    ScrollOffset += headerAdded * HeaderSize + itemAdded * EntrySize + spacing;
-                }
-            }
-            
-            CalculateVisualDataSet();
+            RecalculateDisplayedChildren();
         }
 
         protected override void ItemRemoved(object item)
         {
-            var removedCell = _activeCells.FirstOrDefault(o => Equals(o.BindingContext, item));
-            
-            // If we find a default cell it means we're not rendering this element, so we don't need to worry about this
-            if (removedCell != default(ICell))
-            {
-                Cache(removedCell);
-                _activeCells.Remove(removedCell);
-                Children.Remove((ILayoutable)removedCell);    
-            }
-            
-            if (item is ICollection)
-            {
-                _headersCount--;
-            }
-            else
-            {
-                _itemsCount--;
-            }
-            
-            ReCalculateTotalContentSize();
-            var viewSize = SizingHelper.GetImportantSize(Orientation, RectRequest);
-            CanScroll = viewSize < TotalContentSize;
-            
-            // We do this here to reclamp the scroll value in case item being removed place us outside of the scrolling limits.
-            ScrollOffset = CanScroll ? ScrollOffset : 0;
-            
-            CalculateVisualDataSet();
+            RecalculateDisplayedChildren();
         }
 
         protected override void ItemReplaced(object oldItem, object newItem, int index)
