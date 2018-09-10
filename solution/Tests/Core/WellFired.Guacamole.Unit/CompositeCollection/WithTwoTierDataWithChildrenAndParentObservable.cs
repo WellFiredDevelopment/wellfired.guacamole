@@ -76,6 +76,8 @@ namespace WellFired.Guacamole.Unit.CompositeCollection
 			
 			_rawItemSource.Add(group);
 			Assert.That(_compositeCollection.Count, Is.EqualTo(25));
+			Assert.That(_compositeCollection.GroupCount, Is.EqualTo(6));
+			
 			Assert.That(((IDefaultCellContext) _compositeCollection[22]).CellLabelText, Is.EqualTo("F"));
 			Assert.That(((IDefaultCellContext) _compositeCollection[23]).CellLabelText, Is.EqualTo("Fanny"));
 			Assert.That(((IDefaultCellContext) _compositeCollection[24]).CellLabelText, Is.EqualTo("Farrah"));
@@ -86,6 +88,8 @@ namespace WellFired.Guacamole.Unit.CompositeCollection
 			reciever.Received(1).Receive(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => ((IDefaultCellContext)o.NewItems[0]).CellLabelText == "F"));
 			reciever.Received(1).Receive(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => ((IDefaultCellContext)o.NewItems[1]).CellLabelText == "Fanny"));
 			reciever.Received(1).Receive(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => ((IDefaultCellContext)o.NewItems[2]).CellLabelText == "Farrah"));
+			
+			
 		}
 
 		[Test]
@@ -96,6 +100,8 @@ namespace WellFired.Guacamole.Unit.CompositeCollection
 			
 			_rawItemSource.Remove(_rawItemSource[2]);
 			Assert.That(_compositeCollection.Count, Is.EqualTo(17));
+			Assert.That(_compositeCollection.GroupCount, Is.EqualTo(4));
+			
 			Assert.That(((IDefaultCellContext) _compositeCollection[8]).CellLabelText, Is.EqualTo("Ben"));
 			Assert.That(((IDefaultCellContext) _compositeCollection[9]).CellLabelText, Is.EqualTo("Bump"));
 			Assert.That(((IDefaultCellContext) _compositeCollection[10]).CellLabelText, Is.EqualTo("D"));
@@ -124,6 +130,8 @@ namespace WellFired.Guacamole.Unit.CompositeCollection
 			_rawItemSource.Insert(2, group);
 			
 			Assert.That(_compositeCollection.Count, Is.EqualTo(25));
+			Assert.That(_compositeCollection.GroupCount, Is.EqualTo(6));
+			
 			Assert.That(((IDefaultCellContext) _compositeCollection[8]).CellLabelText, Is.EqualTo("Ben"));
 			Assert.That(((IDefaultCellContext) _compositeCollection[9]).CellLabelText, Is.EqualTo("Bump"));
 			Assert.That(((IDefaultCellContext) _compositeCollection[10]).CellLabelText, Is.EqualTo("F"));
@@ -152,6 +160,8 @@ namespace WellFired.Guacamole.Unit.CompositeCollection
 			
 			_rawItemSource[2] = group;
 			Assert.That(_compositeCollection.Count, Is.EqualTo(20));
+			Assert.That(_compositeCollection.GroupCount, Is.EqualTo(5));
+			
 			Assert.That(((IDefaultCellContext) _compositeCollection[8]).CellLabelText, Is.EqualTo("Ben"));
 			Assert.That(((IDefaultCellContext) _compositeCollection[9]).CellLabelText, Is.EqualTo("Bump"));
 			Assert.That(((IDefaultCellContext) _compositeCollection[10]).CellLabelText, Is.EqualTo("F"));
@@ -189,6 +199,7 @@ namespace WellFired.Guacamole.Unit.CompositeCollection
 			
 			_rawItemSource.Clear();
 			Assert.That(_compositeCollection, Is.Empty);
+			Assert.That(_compositeCollection.GroupCount, Is.EqualTo(0));
 			
 			reciever.Received(1).Receive(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.Action == NotifyCollectionChangedAction.Reset));
 		}
@@ -203,6 +214,7 @@ namespace WellFired.Guacamole.Unit.CompositeCollection
 			var newEntry = new GroupEntry("Some Test");
 			_rawItemSource[0].Insert(3, newEntry);
 			Assert.That(_compositeCollection[4], Is.EqualTo(newEntry));
+			Assert.That(_compositeCollection.GroupCount, Is.EqualTo(5));
 			
 			// Test delegates
 			receiver.Received(1).Receive(_compositeCollection, Arg.Is<NotifyCollectionChangedEventArgs>(o => o.Action == NotifyCollectionChangedAction.Add));
