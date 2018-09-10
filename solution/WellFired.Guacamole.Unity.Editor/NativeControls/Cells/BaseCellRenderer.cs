@@ -24,8 +24,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Cells
 
 			if (Control.ControlState != ControlState.Disabled && cell.CanMouseOver)
 			{	
-				if (UnityEngine.Event.current.isMouse &&
-				    UnityEngine.Event.current.rawType == EventType.MouseUp &&
+				if (UnityEngine.Event.current.LeftMouseUp() &&
 				    renderRect.ToUnityRect().Contains(UnityEngine.Event.current.mousePosition))
 				{
 					if (!cell.Container.CanMultiSelect ||
