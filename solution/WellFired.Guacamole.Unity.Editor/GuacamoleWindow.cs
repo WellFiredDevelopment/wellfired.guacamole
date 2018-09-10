@@ -156,6 +156,7 @@ namespace WellFired.Guacamole.Unity.Editor
 			{
 				// ReSharper disable once DelegateSubtraction
 				EditorApplication.update -= Update;
+				DisposeBindingContext();
 			}
 		}
 
@@ -238,6 +239,8 @@ namespace WellFired.Guacamole.Unity.Editor
 
 		private void ResetForSomeReason()
 		{
+			DisposeBindingContext();
+			
 			NativeRendererHelper.LaunchedAssembly = Assembly.GetExecutingAssembly();
 
 			if (_initializationContext == null)
@@ -296,6 +299,14 @@ namespace WellFired.Guacamole.Unity.Editor
 		public bool MatchesMainContent(Type mainContent)
 		{
 			return _initializationContext.MainContentType == mainContent;
+		}
+
+		private void DisposeBindingContext()
+		{
+			if (_window != null && _window.BindingContext is System.IDisposable disposable)
+			{
+				disposable.Dispose();
+			}
 		}
 	}
 }
