@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using WellFired.Guacamole.Cells;
 using WellFired.Guacamole.Data.Collection;
 using WellFired.Guacamole.DataBinding;
@@ -25,9 +26,12 @@ namespace WellFired.Guacamole.Views
 			_listView = listView;
 		}
 
+		private bool _itemBeingSelected;
 		public void SelectItem()
 		{
+			_itemBeingSelected = true;
 			_listView.SelectedItems?.Clear();
+			_itemBeingSelected = false;
 
 			if (_listView.SelectedItem == null)
 				return;
@@ -109,6 +113,10 @@ namespace WellFired.Guacamole.Views
 					break;
 				case NotifyCollectionChangedAction.Reset:
 					UnselectPreviousItems();
+					
+					if (!_itemBeingSelected)
+						_listView.SelectedItem = null;
+					
 					break;
 				default:
 					throw new ArgumentOutOfRangeException();
