@@ -75,5 +75,11 @@ namespace WellFired.Guacamole.Platforms
 		/// </summary>
 		/// <param name="assetPath"></param>
 		void SelectAsset(string assetPath);
+
+		/// <summary>
+		/// Opens the explorer and displays the file or folder located at <see cref="path"/>.
+		/// </summary>
+		/// <param name="path">The path of the file or folder</param>
+		void ShowLocation(string path);
 	}
 }
