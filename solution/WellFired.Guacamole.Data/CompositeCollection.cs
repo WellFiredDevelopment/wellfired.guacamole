@@ -431,7 +431,6 @@ namespace WellFired.Guacamole.Data
 					throw new ArgumentOutOfRangeException();
 			}
 			
-			CalculateGroupMapping((ICollection)sender);
 			data.ForEach(o => CollectionChanged?.Invoke(this, o));
 		}
 

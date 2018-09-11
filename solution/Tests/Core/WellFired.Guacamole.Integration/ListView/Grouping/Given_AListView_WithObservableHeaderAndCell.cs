@@ -77,7 +77,38 @@ namespace WellFired.Guacamole.Integration.ListView.Grouping
 			_data[0].Insert(0, new LabelCellBindingContext("Adele"));
 
 			Assert.That(_listView.TotalContentSize, Is.EqualTo(260));
-			Assert.That(_listView.ScrollOffset, Is.EqualTo(120));
+			Assert.That(_listView.ScrollOffset, Is.EqualTo(100));
+		}
+		
+		[Test]
+		public void When_AddItem_In_The_Middle_Then_ScrollOffset_And_TotalContentSize_Are_Correct()
+		{
+			//We display the list in an available space of 140, and set up scroll offset to 100
+			//in order to display only items from Archie to Ben
+
+			ViewSizingExtensions.DoSizingAndLayout(_listView, UIRect.With(140, 500));
+			_listView.ScrollOffset = 100;
+			
+			Assert.That(((LabelCell)_listView.Children[0]).Text, Is.EqualTo("Archie"));
+			Assert.That(((HeaderCell)_listView.Children[1]).Text, Is.EqualTo("B"));
+			Assert.That(((LabelCell)_listView.Children[2]).Text, Is.EqualTo("Brooke"));
+			Assert.That(((LabelCell)_listView.Children[3]).Text, Is.EqualTo("Bobby"));
+			Assert.That(((LabelCell)_listView.Children[4]).Text, Is.EqualTo("Bella"));
+			Assert.That(((LabelCell)_listView.Children[5]).Text, Is.EqualTo("Ben"));
+			
+			//We add an item in the middle of the displayed elements
+			_data[0].Insert(1, new LabelCellBindingContext("Amelie"));
+			_data[0].Insert(3, new LabelCellBindingContext("Arakiri"));
+
+			Assert.That(_listView.TotalContentSize, Is.EqualTo(280));
+			Assert.That(_listView.ScrollOffset, Is.EqualTo(100));
+			
+			Assert.That(((LabelCell)_listView.Children[0]).Text, Is.EqualTo("Arakiri"));
+			Assert.That(((LabelCell)_listView.Children[1]).Text, Is.EqualTo("Ava"));
+			Assert.That(((LabelCell)_listView.Children[2]).Text, Is.EqualTo("Archie"));
+			Assert.That(((HeaderCell)_listView.Children[3]).Text, Is.EqualTo("B"));
+			Assert.That(((LabelCell)_listView.Children[4]).Text, Is.EqualTo("Brooke"));
+			Assert.That(((LabelCell)_listView.Children[5]).Text, Is.EqualTo("Bobby"));
 		}
 		
 		[Test]
@@ -105,8 +136,9 @@ namespace WellFired.Guacamole.Integration.ListView.Grouping
 
 			Assert.That(_listView.TotalContentSize, Is.EqualTo(340));
 			
-			//The scrolloffset was increased to ensure we stay at the same position in the list
-			Assert.That(_listView.ScrollOffset, Is.EqualTo(200));
+			//The scrolloffset does not change. We could also modify scrolloffset to ensure that the list item at the top of the
+			//visible space stays at the top, but this imply more calculation and is not necessary for the moment.
+			Assert.That(_listView.ScrollOffset, Is.EqualTo(100));
 		}
 		
 		[Test]

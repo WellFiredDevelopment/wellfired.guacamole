@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+﻿﻿using System.ComponentModel;
 using System.Linq;
 using NUnit.Framework;
 using WellFired.Guacamole.Cells;
@@ -139,8 +139,13 @@ namespace WellFired.Guacamole.Integration.ListView.SelectedObjectModification
 			boundObject.SelectedItems = new ObservableCollection<INotifyPropertyChanged> {data[1][0], data[1][1]};
 			Assert.That(listView.Children.Cast<Cell>().Count(o => o.IsSelected), Is.EqualTo(2));
 			
+			boundObject.SelectedItem = data[1][1];
 			boundObject.SelectedItems.Clear();
 			Assert.That(listView.Children.Cast<Cell>().Count(o => o.IsSelected), Is.EqualTo(0));
+			Assert.That(boundObject.SelectedItem, Is.Null);
+			
+			boundObject.SelectedItem = data[1][1];
+			Assert.That(listView.Children.Cast<Cell>().Count(o => o.IsSelected), Is.EqualTo(1));
 		}
 	}
 

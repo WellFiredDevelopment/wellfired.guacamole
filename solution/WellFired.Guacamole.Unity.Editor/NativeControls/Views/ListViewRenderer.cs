@@ -45,7 +45,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			
 			EditorGUI.LabelField(scrollBarRect, string.Empty, ScrollBarStyle);
 
-			if (UnityEngine.Event.current.type == EventType.MouseDown && scrollBarRect.Contains(UnityEngine.Event.current.mousePosition))
+			if (UnityEngine.Event.current.LeftMouseDown() && scrollBarRect.Contains(UnityEngine.Event.current.mousePosition))
 			{
 				_draggingScrollBar = true;
 				_previousMousePosition = UnityEngine.Event.current.mousePosition;

@@ -31,7 +31,7 @@ namespace WellFired.Guacamole.Views
 
         private static bool DoesPass(IBindableObject view, IEnumerable<IConditional> conditionals)
         {
-            return (from conditional in conditionals let sourceValue = view.GetValue(conditional.Property) select !sourceValue.Equals(conditional.Value)).All(rejected => !rejected);
+            return (from conditional in conditionals let sourceValue = view.GetValue(conditional.Property) select sourceValue.Equals(conditional.Value)).All(accepted => accepted);
         }
     }
 }
