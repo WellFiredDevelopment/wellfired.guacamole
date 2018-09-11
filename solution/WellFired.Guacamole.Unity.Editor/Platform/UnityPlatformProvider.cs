@@ -59,5 +59,10 @@ namespace WellFired.Guacamole.Unity.Editor.Platform
 			if (objectToSelect != null)
 				Selection.activeObject = objectToSelect;
 		}
+
+		public void ShowLocation(string path)
+		{
+			EditorUtility.RevealInFinder(path);
+		}
 	}
 }
