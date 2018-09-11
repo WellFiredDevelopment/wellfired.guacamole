@@ -74,6 +74,7 @@
     <Compile Include="Extensions\UITextClippingExtensions.cs" />
     <Compile Include="Extensions\UITextureExtensions.cs" />
     <Compile Include="Extensions\UnityColorExtensions.cs" />
+    <Compile Include="Extensions\UnityEventExtension.cs" />
     <Compile Include="Extensions\UnityRectExtensions.cs" />
     <Compile Include="Extensions\UnityVector2Extensions.cs" />
     <Compile Include="GuacamoleWindow.cs" />

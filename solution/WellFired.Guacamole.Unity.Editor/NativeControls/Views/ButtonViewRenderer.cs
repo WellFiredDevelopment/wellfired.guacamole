@@ -46,6 +46,9 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 
 			if (!GUI.Button(UnityRect, button.Text, Style))
 				return;
+
+			if (UnityEngine.Event.current.button != 0)
+				return;
 			
 			MainThreadRunner.ExecuteBeforeLayout(() => button.Click(0));
 		}
