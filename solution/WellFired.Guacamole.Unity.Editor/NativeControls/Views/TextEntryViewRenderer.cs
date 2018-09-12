@@ -50,6 +50,8 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			base.Render(renderRect);
 
 			var entry = (TextEntryView)Control;
+			
+			int textEditorControlID = GUIUtility.GetControlID(FocusType.Passive) + 1;
 			var textResult = EditorGUI.TextField(UnityRect, _textToDisplay, Style);
 
 			if (ShouldShowPlaceholder())
@@ -72,9 +74,14 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 					var delta = textResult.Length - entry.PlaceholderText.Length;
 					entry.Text = textResult.Substring(0, delta);
 					_textToDisplay = entry.Text;
-					
+
 					if (EditorGUIExtensions.ActiveEditor is TextEditor textEditor)
+					{
+						if (textEditor.controlID != textEditorControlID)
+							return;
+						
 						textEditor.text = _textToDisplay;
+					}
 				}
 			}
 			else
@@ -100,8 +107,12 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			{
 				// In this instance, if this is ever not an TextEditor it's a bug, so we leave this to throw an exception
 				var textEditor = (TextEditor)EditorGUIExtensions.ActiveEditor;
+				
 				if (textEditor != null && isFocused)
 				{
+					if (textEditor.controlID != textEditorControlID)
+						return;
+					
 					textEditor.SelectNone();
 					textEditor.MoveTextStart();
 					textEditor.text = _textToDisplay;
