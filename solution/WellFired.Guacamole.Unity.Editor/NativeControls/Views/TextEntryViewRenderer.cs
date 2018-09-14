@@ -63,7 +63,6 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			else
 				SetupWithNonePlaceholderStyle(entry, Style);
 
-			// entry.Id is a named string, it doesn't represent Unity's ControlId
 			var controlId = GUIUtility.GetControlID(FocusType.Keyboard) - 1;
 			var isFocused = controlId == textEditorControlId;
 
