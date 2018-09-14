@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+﻿﻿using System.ComponentModel;
 using UnityEditor;
 using UnityEngine;
 using WellFired.Guacamole.Attributes;
@@ -47,11 +47,15 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 
 		public override void Render(UIRect renderRect)
 		{
+			var activeTextEditor = (TextEditor)EditorGUIExtensions.ActiveEditor;
+			var textEditorControlId = int.MaxValue;
+			if (activeTextEditor != null)
+				textEditorControlId = activeTextEditor.controlID;
+			
 			base.Render(renderRect);
 
 			var entry = (TextEntryView)Control;
 			
-			int textEditorControlID = GUIUtility.GetControlID(FocusType.Passive) + 1;
 			var textResult = EditorGUI.TextField(UnityRect, _textToDisplay, Style);
 
 			if (ShouldShowPlaceholder())
@@ -59,8 +63,8 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			else
 				SetupWithNonePlaceholderStyle(entry, Style);
 
-			// entry.Id is a named string, it doesn't represent Unity's ControlId
-			var isFocused = GUI.GetNameOfFocusedControl() == entry.Id;
+			var controlId = GUIUtility.GetControlID(FocusType.Keyboard) - 1;
+			var isFocused = controlId == textEditorControlId;
 
 			if (ShouldShowPlaceholder())
 			{
@@ -75,13 +79,8 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 					entry.Text = textResult.Substring(0, delta);
 					_textToDisplay = entry.Text;
 
-					if (EditorGUIExtensions.ActiveEditor is TextEditor textEditor)
-					{
-						if (textEditor.controlID != textEditorControlID)
-							return;
-						
-						textEditor.text = _textToDisplay;
-					}
+					if (isFocused && activeTextEditor != null)
+						activeTextEditor.text = _textToDisplay;
 				}
 			}
 			else
@@ -105,17 +104,11 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			// the caret stays at index 0.
 			if (ShouldShowPlaceholder())
 			{
-				// In this instance, if this is ever not an TextEditor it's a bug, so we leave this to throw an exception
-				var textEditor = (TextEditor)EditorGUIExtensions.ActiveEditor;
-				
-				if (textEditor != null && isFocused)
+				if (activeTextEditor != null && isFocused)
 				{
-					if (textEditor.controlID != textEditorControlID)
-						return;
-					
-					textEditor.SelectNone();
-					textEditor.MoveTextStart();
-					textEditor.text = _textToDisplay;
+					activeTextEditor.SelectNone();
+					activeTextEditor.MoveTextStart();
+					activeTextEditor.text = _textToDisplay;
 				}
 			}
 
