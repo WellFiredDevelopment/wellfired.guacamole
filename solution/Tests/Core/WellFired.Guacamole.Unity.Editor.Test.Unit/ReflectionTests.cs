@@ -12,5 +12,12 @@ namespace WellFired.Guacamole.Unity.Editor.Test.Unit
 			var activeEditor = EditorGUIExtensions.ActiveEditorFieldInfo;
 			Assert.That(activeEditor, Is.Not.Null);
 		}
+		
+		[Test]
+		public void TestThatUnityDidntRemoveLastControlID()
+		{
+			var lastControlId = EditorGUIUtilityExtensions.LastControlIDFieldInfo;
+			Assert.That(lastControlId, Is.Not.Null);
+		}
 	}
 }
