@@ -63,6 +63,7 @@
     <Compile Include="DataBinding\ObservableScriptableObjectEditor.cs" />
     <Compile Include="Diagnostics\Logger.cs" />
     <Compile Include="Extensions\EditorGUIExtensions.cs" />
+    <Compile Include="Extensions\EditorGUIUtilityExtensions.cs" />
     <Compile Include="Extensions\IImageSourceExtensions.cs" />
     <Compile Include="Extensions\ShapeParameters.cs" />
     <Compile Include="Extensions\TextViewExtensions.cs" />

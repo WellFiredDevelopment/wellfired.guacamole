@@ -1,16 +1,16 @@
 ﻿﻿using System.ComponentModel;
-using UnityEditor;
+ using UnityEditor;
 using UnityEngine;
 using WellFired.Guacamole.Attributes;
 using WellFired.Guacamole.Data;
-using WellFired.Guacamole.Unity.Editor.Extensions;
+ using WellFired.Guacamole.Unity.Editor.Extensions;
 using WellFired.Guacamole.Unity.Editor.NativeControls.Views;
 using WellFired.Guacamole.Views;
 
 [assembly: CustomRenderer(typeof(TextEntryView), typeof(TextEntryViewRenderer))]
 
 namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
-{
+{	
 	public class TextEntryViewRenderer : BaseRenderer
 	{
 		private string _textToDisplay;
@@ -47,11 +47,6 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 
 		public override void Render(UIRect renderRect)
 		{
-			var activeTextEditor = (TextEditor)EditorGUIExtensions.ActiveEditor;
-			var textEditorControlId = int.MaxValue;
-			if (activeTextEditor != null)
-				textEditorControlId = activeTextEditor.controlID;
-			
 			base.Render(renderRect);
 
 			var entry = (TextEntryView)Control;
@@ -63,8 +58,10 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			else
 				SetupWithNonePlaceholderStyle(entry, Style);
 
-			var controlId = GUIUtility.GetControlID(FocusType.Keyboard) - 1;
-			var isFocused = controlId == textEditorControlId;
+			var isFocused = false;
+			var activeTextEditor = (TextEditor)EditorGUIExtensions.ActiveEditor;
+			if (activeTextEditor != null)
+				isFocused = EditorGUIUtilityExtensions.LastControlId == activeTextEditor.controlID;
 
 			if (ShouldShowPlaceholder())
 			{
@@ -79,7 +76,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 					entry.Text = textResult.Substring(0, delta);
 					_textToDisplay = entry.Text;
 
-					if (isFocused && activeTextEditor != null)
+					if (isFocused)
 						activeTextEditor.text = _textToDisplay;
 				}
 			}
@@ -104,7 +101,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Views
 			// the caret stays at index 0.
 			if (ShouldShowPlaceholder())
 			{
-				if (activeTextEditor != null && isFocused)
+				if (isFocused)
 				{
 					activeTextEditor.SelectNone();
 					activeTextEditor.MoveTextStart();
