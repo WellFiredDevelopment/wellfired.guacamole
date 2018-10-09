@@ -33,9 +33,7 @@ namespace WellFired.Guacamole.Unity.Editor.NativeControls.Cells
 					{
 						MainThreadRunner.ExecuteBeforeLayout(() =>
 						{
-							//we first set to null otherwise if we select the same cell, the binding will not execute
-							//the logic that unselect other cells.
-							cell.Container.SelectedItem = null;
+							cell.Container.SelectedItems?.Clear();
 							cell.Container.SelectedItem = cell.BindingContext;
 						});
 					}
