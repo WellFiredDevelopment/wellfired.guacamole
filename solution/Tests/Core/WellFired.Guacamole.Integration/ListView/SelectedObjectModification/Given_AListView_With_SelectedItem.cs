@@ -147,6 +147,43 @@ namespace WellFired.Guacamole.Integration.ListView.SelectedObjectModification
 			boundObject.SelectedItem = data[1][1];
 			Assert.That(listView.Children.Cast<Cell>().Count(o => o.IsSelected), Is.EqualTo(1));
 		}
+
+		[Test]
+		[NUnit.Framework.Description("Regression test : Selecting an item when several items were selected should not trigger" +
+		                             "a reentrancy exception in ObservableCollection")]
+		public void RegressionTest()
+		{
+			var data = new ObservableCollection<Group> {
+				new Group("A") {
+					new LabelCellBindingContext("Amelia"),
+					new LabelCellBindingContext("Alfie")
+				},
+				new Group("B") {
+					new LabelCellBindingContext("Brooke"),
+					new LabelCellBindingContext("Bobby")
+				}
+			};
+
+			var listView = new Views.ListView {
+				HorizontalLayout = LayoutOptions.Fill,
+				VerticalLayout = LayoutOptions.Expand,
+				Orientation = OrientationOptions.Horizontal,
+				EntrySize = 20,
+				HeaderSize = 40,
+				ItemSource = data
+			};
+			
+			var boundObject = new ListBoundObject();
+			listView.BindingContext = boundObject;
+			listView.Bind(Views.ListView.SelectedItemsProperty, "SelectedItems");
+			
+			ViewSizingExtensions.DoSizingAndLayout(listView, UIRect.With(1000, 1000));
+
+			Assert.That(listView.Children.Cast<Cell>().Count(o => o.IsSelected), Is.EqualTo(0));
+			
+			listView.SelectedItem = data[0][0];
+			listView.SelectedItems.Clear();	
+		}
 	}
 
 	public class ListBoundObject : ObservableBase, IDefaultCellContext
@@ -165,7 +202,16 @@ namespace WellFired.Guacamole.Integration.ListView.SelectedObjectModification
 		public ObservableCollection<INotifyPropertyChanged> SelectedItems
 		{
 			get => _selectedItems;
-			set => SetProperty(ref _selectedItems, value);
+			set
+			{
+				value.CollectionChanged += ValueOnCollectionChanged;
+				SetProperty(ref _selectedItems, value);
+			}
+		}
+
+		private void ValueOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			
 		}
 
 		public bool IsSelected { 
