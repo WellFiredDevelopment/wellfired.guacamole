@@ -204,7 +204,9 @@ namespace WellFired.Guacamole.Integration.ListView.SelectedObjectModification
 			get => _selectedItems;
 			set
 			{
-				value.CollectionChanged += ValueOnCollectionChanged;
+				if(value != null)
+					value.CollectionChanged += ValueOnCollectionChanged;
+				
 				SetProperty(ref _selectedItems, value);
 			}
 		}
