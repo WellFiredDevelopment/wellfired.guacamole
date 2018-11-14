@@ -23,8 +23,14 @@ namespace WellFired.Guacamole.DataBinding.Exceptions
 
 		public override string UserFacingError()
 		{
+			var exception = _exception;
+			if (_exception.InnerException != null)
+			{
+				exception = _exception.InnerException;
+			}
+			
 			return $"An error occured when trying to assign the value {_value} of the destination property {_propertyPropertyName} to the property {_targetProperty} of " +
-			       $"the bindable object of type {_bindableObject.GetType()}. Details : \n{_exception.Message}\n{_exception.StackTrace}";
+			       $"the bindable object of type {_bindableObject.GetType()}. Details : \n{exception.Message}\n{exception.StackTrace}";
 		}
 	}
 }
