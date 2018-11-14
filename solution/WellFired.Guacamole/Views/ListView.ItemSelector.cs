@@ -29,7 +29,10 @@ namespace WellFired.Guacamole.Views
 		public void SelectItem()
 		{
 			_itemBeingSelected = true;
-			_listView.SelectedItems?.Clear();
+			
+			if(_listView.SelectedItems != null && _listView.SelectedItems.Count > 0)
+				_listView.SelectedItems?.Clear();
+			
 			_itemBeingSelected = false;
 
 			if (_listView.SelectedItem == null)
