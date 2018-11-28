@@ -78,7 +78,7 @@ namespace WellFired.Guacamole.Drawing.Algorithms
 			int dx = Math.Abs(x1-x0), sx = x0 < x1 ? 1 : -1;
 			int dy = Math.Abs(y1-y0), sy = y0 < y1 ? 1 : -1;
 			int err = dx-dy, e2, x2, y2;                          /* error value e_xy */
-			var ed = dx + dy == 0 ? 1 : (float)Math.Sqrt((float)dx * dx+(float)dy * dy);
+			float ed = dx + dy == 0 ? 1 : (float)Math.Sqrt((float)dx * dx+(float)dy * dy);
 			for (wd = (wd+1)/2; ; ) {                                   /* pixel loop */
 				plot(x0, y0, (byte)Math.Max(0,255*(Math.Abs(err-dx+dy)/ed-wd+1)));
 				e2 = err; x2 = x0;
@@ -101,7 +101,7 @@ namespace WellFired.Guacamole.Drawing.Algorithms
 		    int dx = Math.Abs(x1-x0), sx = x0 < x1 ? 1 : -1;
 		    int dy = Math.Abs(y1-y0), sy = y0 < y1 ? 1 : -1;
 		    int err = dx-dy, e2, x2, y2;                          /* error value e_xy */
-		    var ed = dx + dy == 0 ? 1 : (float)Math.Sqrt((float)dx * dx+(float)dy * dy);
+		    float ed = dx + dy == 0 ? 1 : (float)Math.Sqrt((float)dx * dx+(float)dy * dy);
 		    for (wd = (wd+1)/2; ; ) {                                   /* pixel loop */
 			    plot(x0, y0);
 			    e2 = err; x2 = x0;

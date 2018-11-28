@@ -75,12 +75,11 @@
     <Compile Include="DataBinding\Exceptions\PropertyNotFoundException.cs" />
     <Compile Include="DataBinding\GetterInfo.cs" />
     <Compile Include="DataStorage\Exceptions\AlreadyInitializeException.cs" />
-    <Compile Include="DataStorage\Types\FileStorageService.cs" />
     <Compile Include="DataStorage\Synchronization\IKeyBasedReadWriteLock.cs" />
     <Compile Include="DataStorage\Synchronization\KeyBasedReadWriteLock.cs" />
-    <Compile Include="DataStorage\Types\ComputerDataStorage.cs" />
-    <Compile Include="DataStorage\Types\IsolatedFileStorageService.cs" />
-    <Compile Include="DataStorage\Types\IDataStorageService.cs" />
+    <Compile Include="DataStorage\Storages\ComputerDataStorage.cs" />
+    <Compile Include="DataStorage\Storages\FileStorageService.cs" />
+    <Compile Include="DataStorage\Storages\IDataStorageService.cs" />
     <Compile Include="DataStorage\Synchronization\ThreadSynchronizer.cs" />
     <Compile Include="Diagnostics\ConsoleLogger.cs" />
     <Compile Include="Pages\MasterDetailPage\ListViewMasterDetailPage.cs" />

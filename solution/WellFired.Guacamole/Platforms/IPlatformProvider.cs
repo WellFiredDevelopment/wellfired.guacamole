@@ -1,4 +1,4 @@
-﻿using WellFired.Guacamole.DataStorage.Types;
+﻿using WellFired.Guacamole.DataStorage.Storages;
 
 namespace WellFired.Guacamole.Platforms
 {

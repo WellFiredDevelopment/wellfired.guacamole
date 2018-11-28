@@ -1,7 +1,7 @@
 ﻿using NSubstitute;
 using NUnit.Framework;
 using WellFired.Guacamole.DataStorage.Data.Serialization;
-using WellFired.Guacamole.DataStorage.Types;
+using WellFired.Guacamole.DataStorage.Storages;
 using WellFired.Guacamole.WindowContext;
 
 namespace WellFired.Guacamole.Unit.WindowContext

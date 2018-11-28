@@ -2,28 +2,28 @@
 using System.IO;
 using NSubstitute;
 using NUnit.Framework;
+using WellFired.Guacamole.DataStorage.Storages;
 using WellFired.Guacamole.DataStorage.Synchronization;
-using WellFired.Guacamole.DataStorage.Types;
 
-namespace WellFired.Guacamole.Integration.DataStorage.Regular
+namespace WellFired.Guacamole.Integration.DataStorage
 {
 	[TestFixture]
 	public class GivenAFileStorageService
 	{
 		[Test]
-		public void When_Instantiate_With_Non_Existent_Directory_Then_Create_Directory_And_Successfully_Save_Data_Inside()
+		public void When_Instantiate_With_Unexisting_Directory_Then_Create_Directory_And_Successfully_Save_Data_Inside()
 		{
 			var dllPath = Utils.GetTestDllRepository();
 
 			try
 			{
-				var fileStorageService = new FileStorageService(dllPath + "/NonExistentFolder");
+				var fileStorageService = new FileStorageService(dllPath + "/UnexistingFolder");
 				fileStorageService.Write("some data", "Options");
 				Assert.That(fileStorageService.Read("Options"), Is.EqualTo("some data"));
 			}
 			finally
 			{
-				Directory.Delete(dllPath + "/NonExistentFolder", true);
+				Directory.Delete(dllPath + "/UnexistingFolder", true);
 			}
 		}
 

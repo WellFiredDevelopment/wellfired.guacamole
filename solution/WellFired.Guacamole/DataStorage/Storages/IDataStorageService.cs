@@ -1,4 +1,4 @@
-﻿namespace WellFired.Guacamole.DataStorage.Types
+﻿namespace WellFired.Guacamole.DataStorage.Storages
 {
 	/// <summary>
 	/// This interface defines a simple key value store.

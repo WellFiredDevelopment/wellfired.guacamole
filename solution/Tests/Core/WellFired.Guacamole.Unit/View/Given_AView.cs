@@ -45,7 +45,7 @@ namespace WellFired.Guacamole.Unit.View
         {
             const int viewCount = 1000;
             var hashset = new HashSet<string>();
-            for (var i = 0; i < viewCount; i++)
+            for (int i = 0; i < viewCount; i++)
             {
                 hashset.Add(new Views.View().Id);
             }

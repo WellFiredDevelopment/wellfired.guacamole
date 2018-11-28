@@ -108,5 +108,4 @@
 	<s:String x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=F084D692A4C07D48AD5323177F556493/Pattern/@EntryValue">(?&lt;=\W|^)(?&lt;TAG&gt;TODO)(\W|$)(.*)</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=F084D692A4C07D48AD5323177F556493/TodoIconStyle/@EntryValue">Edit</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Bindable/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/UserDictionary/Words/=Storages/@EntryIndexedValue">True</s:Boolean>
 </wpf:ResourceDictionary>

@@ -38,7 +38,7 @@ namespace WellFired.Guacamole.Unit
             var oldContext = SynchronizationContext.Current;
             var synch = new ExclusiveSynchronizationContext();
             SynchronizationContext.SetSynchronizationContext(synch);
-            var ret = default(T);
+            T ret = default(T);
             synch.Post(async _ =>
             {
                 try

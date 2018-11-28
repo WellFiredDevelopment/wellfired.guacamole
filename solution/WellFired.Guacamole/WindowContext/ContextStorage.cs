@@ -1,5 +1,5 @@
 ﻿using WellFired.Guacamole.DataStorage.Data.Serialization;
-using WellFired.Guacamole.DataStorage.Types;
+using WellFired.Guacamole.DataStorage.Storages;
 
 namespace WellFired.Guacamole.WindowContext
 {

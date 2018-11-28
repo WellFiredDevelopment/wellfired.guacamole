@@ -2,7 +2,7 @@
 using WellFired.Guacamole.DataStorage.Exceptions;
 using WellFired.Guacamole.DataStorage.Synchronization;
 
-namespace WellFired.Guacamole.DataStorage.Types
+namespace WellFired.Guacamole.DataStorage.Storages
 {
 	/// <summary>
 	/// Store textual data in a key/value fashion, key being the file and value the data saved inside. This file is saved a the path

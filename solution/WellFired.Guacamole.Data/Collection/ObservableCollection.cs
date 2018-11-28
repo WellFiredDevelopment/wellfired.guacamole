@@ -153,7 +153,7 @@ namespace WellFired.Guacamole.Data.Collection
         protected override void RemoveItem(int index)
         {
             CheckReentrancy();
-            var item = base[index];
+            T item = base[index];
             base.RemoveItem(index);
             OnPropertyChanged("Count");
             OnPropertyChanged("Item[]");
@@ -163,7 +163,7 @@ namespace WellFired.Guacamole.Data.Collection
         protected override void SetItem(int index, T item)
         {
             CheckReentrancy();
-            var oldItem = base[index];
+            T oldItem = base[index];
             base.SetItem(index, item);
             OnPropertyChanged("Item[]");
             OnCollectionChanged(NotifyCollectionChangedAction.Replace, oldItem, item, index);
@@ -392,7 +392,7 @@ namespace WellFired.Guacamole.Data.Collection
             {
                 throw new ArgumentException("IndexCannotBeNegative", nameof(index));
             }
-            var newItems = new[] { changedItem };
+            object[] newItems = new[] { changedItem };
             InitializeMoveOrReplace(action, newItems, newItems, index, oldIndex);
         }
 

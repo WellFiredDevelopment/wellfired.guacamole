@@ -109,7 +109,7 @@ namespace WellFired.Guacamole.DataStorage.Synchronization
 		{
 			lock (_readWriteLocks)
 			{
-				foreach (var writerLockSlim in _readWriteLocks)
+				foreach (KeyValuePair<string, ReaderWriterLockSlim> writerLockSlim in _readWriteLocks)
 				{
 					writerLockSlim.Value.Dispose();
 				}
