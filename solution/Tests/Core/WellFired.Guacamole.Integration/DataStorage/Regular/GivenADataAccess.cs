@@ -5,9 +5,9 @@ using NUnit.Framework;
 using WellFired.Guacamole.DataStorage.Data;
 using WellFired.Guacamole.DataStorage.Data.Synchronization;
 using WellFired.Guacamole.DataStorage.Data.VersionUpdater;
-using WellFired.Guacamole.DataStorage.Storages;
+using WellFired.Guacamole.DataStorage.Types;
 
-namespace WellFired.Guacamole.Integration.DataStorage
+namespace WellFired.Guacamole.Integration.DataStorage.Regular
 {
 	[TestFixture]
 	public class GivenADataAccess
