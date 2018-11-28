@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using WellFired.Guacamole.DataStorage.Storages;
+using WellFired.Guacamole.DataStorage.Types;
 using WellFired.Guacamole.Platforms;
 
 namespace WellFired.Guacamole.Unity.Editor.Platform

@@ -10,7 +10,7 @@ using WellFired.Guacamole.Data;
 using JetBrains.Annotations;
 using WellFired.Guacamole.DataBinding;
 using WellFired.Guacamole.DataStorage.Data.Serialization;
-using WellFired.Guacamole.DataStorage.Storages;
+using WellFired.Guacamole.DataStorage.Types;
 using WellFired.Guacamole.Exceptions;
 using WellFired.Guacamole.InitializationContext;
 using WellFired.Guacamole.Platforms;
@@ -105,7 +105,7 @@ namespace WellFired.Guacamole.Unity.Editor
 		public void OnEnable()
 		{
 			_contextStorage = new ContextStorage(
-				new ComputerDataStorage(GuamoleApplicationName, GuamoleApplicationName, Platforms.Platform.Unity),
+				new IsolatedFileStorageService(GuamoleApplicationName), 
 				new JSONSerializer(new ContextCustomSerialization())
 			);
 

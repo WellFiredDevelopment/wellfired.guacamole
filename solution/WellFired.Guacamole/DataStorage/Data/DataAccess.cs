@@ -1,10 +1,11 @@
 ﻿using System;
+using System.IO;
 using JetBrains.Annotations;
 using WellFired.Guacamole.DataStorage.Data.Synchronization;
 using WellFired.Guacamole.DataStorage.Data.VersionUpdater;
 using WellFired.Guacamole.DataStorage.Exceptions;
-using WellFired.Guacamole.DataStorage.Storages;
 using WellFired.Guacamole.DataStorage.Synchronization;
+using WellFired.Guacamole.DataStorage.Types;
 using WellFired.Guacamole.Diagnostics;
 
 namespace WellFired.Guacamole.DataStorage.Data
@@ -84,7 +85,8 @@ namespace WellFired.Guacamole.DataStorage.Data
 		/// <param name="dataProxy">Your data proxy. An implementation of the proxy is provided by <see cref="DataProxy{T}"/></param>
 		public void Track(string key, IDataProxy dataProxy)
 		{
-			SharedThreadLock.EnterReadLock(key + _synchronizeID);
+			var lockKey = Path.Combine(key, _synchronizeID);
+			SharedThreadLock.EnterReadLock(lockKey);
 			SharedThreadLock.EnterReadLock(_synchronizeID);
 
 			try
@@ -93,16 +95,14 @@ namespace WellFired.Guacamole.DataStorage.Data
 
 				string storedData = null;
 				if (_dataStorageService.Exists(key))
-				{
 					storedData = _dataStorageService.Read(key);
-				}
 			
 				_dataCacher.UpdateData(key, storedData);
 				_storedDataWatcher?.Watch(key);
 			}
 			finally 
 			{
-				SharedThreadLock.ExitReadLock(key + _synchronizeID);
+				SharedThreadLock.ExitReadLock(lockKey);
 				SharedThreadLock.ExitReadLock(_synchronizeID);
 			}
 		}
@@ -113,7 +113,8 @@ namespace WellFired.Guacamole.DataStorage.Data
 		/// <param name="key">The key where is located the data</param>
 		public void Save(string key)
 		{
-			SharedThreadLock.EnterWriteLock(key + _synchronizeID);
+			var lockKey = Path.Combine(key, _synchronizeID);
+			SharedThreadLock.EnterWriteLock(lockKey);
 			SharedThreadLock.EnterReadLock(_synchronizeID);
 		
 			try
@@ -131,7 +132,7 @@ namespace WellFired.Guacamole.DataStorage.Data
 			}
 			finally 
 			{
-				SharedThreadLock.ExitWriteLock(key + _synchronizeID);
+				SharedThreadLock.ExitWriteLock(lockKey);
 				SharedThreadLock.ExitReadLock(_synchronizeID);
 			}
 		}

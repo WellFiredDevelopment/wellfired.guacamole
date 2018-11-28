@@ -1,12 +1,13 @@
 ﻿using System;
+using System.IO;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using NUnit.Framework;
 using WellFired.Guacamole.DataStorage.Data;
 using WellFired.Guacamole.DataStorage.Data.Synchronization;
 using WellFired.Guacamole.DataStorage.Data.VersionUpdater;
-using WellFired.Guacamole.DataStorage.Storages;
 using WellFired.Guacamole.DataStorage.Synchronization;
+using WellFired.Guacamole.DataStorage.Types;
 
 namespace WellFired.Guacamole.Unit.StoredData
 {
@@ -163,8 +164,8 @@ namespace WellFired.Guacamole.Unit.StoredData
 			dataAccess.Track("Options", proxy);
 
 			//We block access to other threads that wants to save the same data, but allows several thread to read the data.
-			Assert.That(() => keyBasedLocker.Received(1).EnterReadLock("OptionssynchroID"), Throws.Nothing);
-			Assert.That(() => keyBasedLocker.Received(1).ExitReadLock("OptionssynchroID"), Throws.Nothing);
+			Assert.That(() => keyBasedLocker.Received(1).EnterReadLock(Path.Combine("Options", "synchroID")), Throws.Nothing);
+			Assert.That(() => keyBasedLocker.Received(1).ExitReadLock(Path.Combine("Options", "synchroID")), Throws.Nothing);
 
 			//We block access to other threads that wants to update the data
 			Assert.That(() => keyBasedLocker.Received(1).EnterReadLock("synchroID"), Throws.Nothing);
@@ -180,8 +181,8 @@ namespace WellFired.Guacamole.Unit.StoredData
 			dataAccess.Save("Options");
 
 			//We block access to other threads that wants to save the same data.
-			Assert.That(() => keyBasedLocker.Received(1).EnterWriteLock("OptionssynchroID"), Throws.Nothing);
-			Assert.That(() => keyBasedLocker.Received(1).ExitWriteLock("OptionssynchroID"), Throws.Nothing);
+			Assert.That(() => keyBasedLocker.Received(1).EnterWriteLock(Path.Combine("Options", "synchroID")), Throws.Nothing);
+			Assert.That(() => keyBasedLocker.Received(1).ExitWriteLock(Path.Combine("Options", "synchroID")), Throws.Nothing);
 
 			//We block access to other threads that wants to update the data
 			Assert.That(() => keyBasedLocker.Received(1).EnterReadLock("synchroID"), Throws.Nothing);
