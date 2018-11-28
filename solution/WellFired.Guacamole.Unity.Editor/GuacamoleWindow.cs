@@ -131,7 +131,7 @@ namespace WellFired.Guacamole.Unity.Editor
 			if (cancellationToken.IsCancellationRequested)
 				return;
 			
-			_contextStorage.CleanUpStoredContexts();
+			MainThreadRunner.ExecuteOnMainThread(_contextStorage.CleanUpStoredContexts);
 		}
 
 		[UsedImplicitly]
