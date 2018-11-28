@@ -61,6 +61,7 @@
     <Compile Include="DataBinding\ExposePropertyAttribute.cs" />
     <Compile Include="DataBinding\ObservableScriptableObject.cs" />
     <Compile Include="DataBinding\ObservableScriptableObjectEditor.cs" />
+    <Compile Include="DataStorage\UnityDataStorage.cs" />
     <Compile Include="Diagnostics\Logger.cs" />
     <Compile Include="Extensions\EditorGUIExtensions.cs" />
     <Compile Include="Extensions\EditorGUIUtilityExtensions.cs" />
