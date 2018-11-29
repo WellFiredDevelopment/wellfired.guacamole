@@ -65,7 +65,7 @@ object ContinuousBuildAndTest : BuildType({
 
     params {
         param("ProjectName", "WellFired.Guacamole")
-        param("AssemblyVersion", "2018.0.0")
+        param("AssemblyVersion", "2018.2.0")
     }
 
     vcs {
@@ -95,7 +95,7 @@ object ReleaseBuildTestAndDeploy : BuildType({
 
     params {
         param("ProjectName", "WellFired.Guacamole")
-        param("AssemblyVersion", "2018.0.0")
+        param("AssemblyVersion", "2018.2.0")
     }
 
     vcs {
@@ -116,7 +116,7 @@ object ManualBuildTestRelease : Template({
 
     params {
         param("ProjectName", "WellFired.Guacamole")
-        param("AssemblyVersion", "2018.0.0")
+        param("AssemblyVersion", "2018.2.0")
     }
 
     steps {
