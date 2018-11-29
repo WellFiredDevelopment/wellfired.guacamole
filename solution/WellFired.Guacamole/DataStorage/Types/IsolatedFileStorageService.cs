@@ -71,10 +71,14 @@ namespace WellFired.Guacamole.DataStorage.Types
 		public void Write(string data, string key)
 		{
 			var storageKey = Path.Combine(Location, key);
+			
+			if(Exists(key))
+				Delete(key);
+			
 			SharedThreadLock.EnterWriteLock(storageKey);
 			try
 			{
-				using (var isoStream = new IsolatedStorageFileStream(storageKey, FileMode.OpenOrCreate, _isoStore))
+				using (var isoStream = new IsolatedStorageFileStream(storageKey, FileMode.CreateNew, _isoStore))
 				using (var writer = new StreamWriter(isoStream))
 					writer.Write(data);
 			}

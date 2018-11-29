@@ -38,7 +38,7 @@ namespace WellFired.Guacamole.Unit.WindowContext
 			
 			var storedContext = new StoredContexts();
 			serializer.Unserialize<StoredContexts>("serialized stored context").Returns(storedContext);
-			storage.Read("StoredContexts").Returns("serialized stored context");
+			storage.Read("Contexts").Returns("serialized stored context");
 			serializer.Serialize(storedContext).Returns("serialized updated stored context");
 			
 			var contextStorage = new ContextStorage(storage, serializer);
@@ -50,7 +50,7 @@ namespace WellFired.Guacamole.Unit.WindowContext
 			
 			Assert.That(() => storage.Received(1).Write("serialized data", "oij32"), Throws.Nothing);
 			Assert.IsTrue(storedContext.ContextIds.Contains("oij32"));
-			Assert.That(() => storage.Received(1).Write("serialized updated stored context", "StoredContexts"), Throws.Nothing);
+			Assert.That(() => storage.Received(1).Write("serialized updated stored context", "Contexts"), Throws.Nothing);
 		}
 
 		[Test]
@@ -64,7 +64,7 @@ namespace WellFired.Guacamole.Unit.WindowContext
 			serializer.Serialize(storedContext).Returns("serialized updated stored context");
 			
 			var storage = Substitute.For<IDataStorageService>();
-			storage.Read("StoredContexts").Returns("serialized stored context");
+			storage.Read("Contexts").Returns("serialized stored context");
 			
 			var contextStorage = new ContextStorage(storage, serializer);
 			
@@ -75,7 +75,7 @@ namespace WellFired.Guacamole.Unit.WindowContext
 			
 			Assert.That(() => storage.Received(1).Delete("oij32"), Throws.Nothing);
 			Assert.IsTrue(storedContext.ContextIds.Count == 0);
-			Assert.That(() => storage.Received(1).Write("serialized updated stored context", "StoredContexts"), Throws.Nothing);
+			Assert.That(() => storage.Received(1).Write("serialized updated stored context", "Contexts"), Throws.Nothing);
 		}
 	}
 }
