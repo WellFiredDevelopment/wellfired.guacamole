@@ -1,5 +1,6 @@
 ﻿using WellFired.Guacamole.DataStorage.Data.Serialization;
 using WellFired.Guacamole.DataStorage.Types;
+using WellFired.Guacamole.Diagnostics;
 
 namespace WellFired.Guacamole.WindowContext
 {
@@ -12,7 +13,7 @@ namespace WellFired.Guacamole.WindowContext
 	/// </summary>
 	public class ContextStorage
 	{
-		private const string StoredContextsKey = "StoredContexts";
+		private const string StoredContextsKey = "Contexts";
 		
 		private readonly IDataStorageService _storage;
 		private readonly ISerializer _serializer;
@@ -32,7 +33,8 @@ namespace WellFired.Guacamole.WindowContext
 
 		public void Save(string windowID, Context context)
 		{
-			_storage.Write(_serializer.Serialize(context), windowID);
+			var data = _serializer.Serialize(context);
+			_storage.Write(data, windowID);
 			AddToStoredContexts(windowID);
 		}
 
@@ -62,6 +64,7 @@ namespace WellFired.Guacamole.WindowContext
 
 		private void AddToStoredContexts(string windowID)
 		{
+			var fileContents = _storage.Read(StoredContextsKey);
 			var storedContexts = _serializer.Unserialize<StoredContexts>(_storage.Read(StoredContextsKey)) ?? new StoredContexts();
 
 			storedContexts.ContextIds.Add(windowID);
