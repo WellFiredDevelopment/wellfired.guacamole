@@ -37,7 +37,6 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2018.1"
 
 project {
-
     vcsRoot(WellFiredGuacamoleMaster)
 
     buildType(ReleaseBuildTestAndDeploy)
@@ -46,6 +45,13 @@ project {
     template(ManualBuildTestRelease)
 
     subProject(Documentation)
+    
+    params {
+        param("ProjectName", "WellFired.Guacamole")
+        param("system.BuildSolution", "WellFired.Guacamole.sln")
+        param("system.ReleaseBuildConfiguration", "Release")
+        param("system.DebugBuildConfiguration", "Debug")
+    }
 }
 
 object ContinuousBuildAndTest : BuildType({
@@ -53,7 +59,6 @@ object ContinuousBuildAndTest : BuildType({
     name = "Continuous Build And Test"
 
     params {
-        param("ProjectName", "WellFired.Guacamole")
         param("AssemblyVersion", "2018.2.0")
     }
 
@@ -129,7 +134,6 @@ object ReleaseBuildTestAndDeploy : BuildType({
     buildNumberPattern = "%AssemblyVersion%.%build.counter%"
 
     params {
-        param("ProjectName", "WellFired.Guacamole")
         param("AssemblyVersion", "2018.2.0")
     }
 

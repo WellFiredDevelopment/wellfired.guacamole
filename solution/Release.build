@@ -1,0 +1,14 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <Configuration>$(ReleaseBuildConfiguration)</Configuration>
+        <SolutionFile>$(BuildSolution)</SolutionFile>
+    </PropertyGroup>
+
+    <Target Name="BuildAll" DependsOnTargets="Compile" />
+
+    <Target Name="Compile">
+        <Message Text="=== COMPILING $(Configuration) configuration ===" />
+        <MSBuild Projects="$(SolutionFile)"
+                 Properties="Configuration=$(Configuration)" />
+    </Target>
+</Project>
