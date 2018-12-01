@@ -1,9 +1,10 @@
 import jetbrains.buildServer.configs.kotlin.v2018_1.*
+import jetbrains.buildServer.configs.kotlin.v2018_1.buildFeatures.commitStatusPublisher
+import jetbrains.buildServer.configs.kotlin.v2018_1.buildFeatures.nuGetPackagesIndexer
 import jetbrains.buildServer.configs.kotlin.v2018_1.buildFeatures.swabra
 import jetbrains.buildServer.configs.kotlin.v2018_1.buildFeatures.vcsLabeling
 import jetbrains.buildServer.configs.kotlin.v2018_1.buildSteps.MSBuildStep
 import jetbrains.buildServer.configs.kotlin.v2018_1.buildSteps.msBuild
-import jetbrains.buildServer.configs.kotlin.v2018_1.buildFeatures.nuGetPackagesIndexer
 import jetbrains.buildServer.configs.kotlin.v2018_1.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2018_1.failureConditions.BuildFailureOnMetric
 import jetbrains.buildServer.configs.kotlin.v2018_1.failureConditions.failOnMetricChange
@@ -44,18 +45,6 @@ project {
 
     template(ManualBuildTestRelease)
 
-    features {
-        feature {
-            id = "PROJECT_EXT_11"
-            type = "OAuthProvider"
-            param("clientId", "5c4d9fa26949f362c5f6")
-            param("secure:clientSecret", "credentialsJSON:c6257f53-15aa-479d-a746-1dd5daec390e")
-            param("displayName", "GitHub.com")
-            param("gitHubUrl", "https://github.com/")
-            param("providerType", "GitHub")
-        }
-    }
-
     subProject(Documentation)
 }
 
@@ -72,6 +61,26 @@ object ContinuousBuildAndTest : BuildType({
         root(DslContext.settingsRoot)
     }
 
+    steps {
+        step {
+            name = "NuGet Pack"
+            id = "RUNNER_45"
+            type = "jb.nuget.pack"
+            param("nuget.pack.specFile", """
+                solution/WellFired.Guacamole.Data/WellFired.Guacamole.Data.csproj
+                solution/WellFired.Guacamole.Drawing/WellFired.Guacamole.Drawing.csproj
+                solution/WellFired.Guacamole/WellFired.Guacamole.csproj
+                solution/WellFired.Guacamole.Unity.Editor/WellFired.Guacamole.Unity.Editor.csproj
+            """.trimIndent())
+            param("nuget.pack.include.sources", "true")
+            param("nuget.pack.output.directory", "build/packages")
+            param("nuget.pack.commandline", "-MsbuildPath /usr/lib/mono/msbuild/15.0/bin/ -verbosity detailed -IncludeReferencedProjects")
+            param("nuget.path", "%teamcity.tool.NuGet.CommandLine.DEFAULT%")
+            param("nuget.pack.as.artifact", "true")
+        }
+        stepsOrder = arrayListOf("RUNNER_15", "RUNNER_2", "RUNNER_17", "RUNNER_18", "RUNNER_5", "RUNNER_19", "RUNNER_41", "RUNNER_42", "RUNNER_43", "RUNNER_45", "RUNNER_26")
+    }
+
     triggers {
         vcs {
             id = "vcsTrigger"
@@ -79,6 +88,32 @@ object ContinuousBuildAndTest : BuildType({
                 -:user=wellfiredbuildmachine:**
                 -:user=admin:**
             """.trimIndent()
+        }
+    }
+
+    features {
+        commitStatusPublisher {
+            id = "BUILD_EXT_9"
+            vcsRootExtId = "${DslContext.settingsRoot.id}"
+            publisher = github {
+                githubUrl = "https://api.github.com"
+                authType = personalToken {
+                    token = "credentialsJSON:9d67b277-229c-4c57-adec-246955cf14d3"
+                }
+            }
+            param("secure:github_password", "credentialsJSON:52839beb-c983-4802-a59e-e0a9e155617c")
+            param("github_username", "buildmachine@wellfired.com")
+            param("github_oauth_user", "WellFiredDevelopment")
+        }
+        nuGetPackagesIndexer {
+            id = "BUILD_EXT_10"
+            feed = "WellFiredUnityProduct/default"
+        }
+        feature {
+            id = "JetBrains.AssemblyInfo"
+            type = "JetBrains.AssemblyInfo"
+            param("file-format", "%system.build.number%")
+            param("info-format", "%system.build.number%")
         }
     }
 })
@@ -116,7 +151,7 @@ object ManualBuildTestRelease : Template({
 
     params {
         param("ProjectName", "WellFired.Guacamole")
-        param("AssemblyVersion", "2018.2.0")
+        param("AssemblyVersion", "2018.0.0")
     }
 
     steps {
@@ -165,6 +200,11 @@ object ManualBuildTestRelease : Template({
             name = "Process Shared Tools"
             id = "RUNNER_24"
             scriptContent = "jake unity:processSharedTools -c"
+        }
+        script {
+            name = "Copy Changelog file"
+            id = "RUNNER_39"
+            scriptContent = "jake unity:updateChangelog -c"
         }
         script {
             name = "Build Unity Package"
@@ -242,15 +282,15 @@ object ManualBuildTestRelease : Template({
     }
 })
 
-
 object WellFiredGuacamoleMaster : GitVcsRoot({
     name = "WellFired.Guacamole (+master)"
     url = "https://github.com/WellFiredDevelopment/wellfired.guacamole.git"
     branchSpec = "+:refs/heads/(master)"
+    userForTags = "wellfiredbuildmachine"
     agentCleanPolicy = GitVcsRoot.AgentCleanPolicy.ALWAYS
     authMethod = password {
-        userName = "buildmachine@wellfired.com"
-        password = "credentialsJSON:99549e2f-03cb-476e-91d7-154304817f5e"
+        userName = "wellfiredbuildmachine"
+        password = "credentialsJSON:fb813fbf-f069-48eb-94fa-4fbc35911b3c"
     }
 })
 
